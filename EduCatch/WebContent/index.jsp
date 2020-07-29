@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>에듀캐치</title>
+<title>에듀캐치12</title>
 </head>
 <body>
 에듀캐치
