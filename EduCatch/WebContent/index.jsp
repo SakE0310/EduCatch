@@ -7,6 +7,10 @@
 <title>에듀캐치12</title>
 </head>
 <body>
-에듀캐치aa
+<<<<<<< HEAD
+에듀캐치_혜미
+=======
+에듀캐치11111
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 </body>
 </html>
