@@ -4,6 +4,9 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+<<<<<<< HEAD
+	
+=======
 @Controller
 public class TestController {
 	Logger log = Logger.getLogger(TestController.class);
@@ -15,4 +18,5 @@ public class TestController {
 		
 		return null;
 	}
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 }
