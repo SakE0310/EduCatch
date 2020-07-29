@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class TestController {
-	Logger log = Logger.getLogger(TestController.class);
 	
+	Logger log = Logger.getLogger(TestController.class);
 	
 	@RequestMapping("1")
 	public String a() {
