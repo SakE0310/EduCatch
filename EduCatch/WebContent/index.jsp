@@ -7,6 +7,6 @@
 <title>에듀캐치12</title>
 </head>
 <body>
-에듀캐치
+에듀캐치aa
 </body>
 </html>
