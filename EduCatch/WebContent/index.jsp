@@ -8,5 +8,6 @@
 </head>
 <body>
 에듀캐치
+<a href="searchMain.ec">학원찾기</a>
 </body>
 </html>
