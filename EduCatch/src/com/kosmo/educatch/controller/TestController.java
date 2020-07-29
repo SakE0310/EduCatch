@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class TestController {
+public class TestControllers {
 	Logger log = Logger.getLogger(TestController.class);
 	
 	
