@@ -1,11 +1,11 @@
 package com.kosmo.educatch.vo;
 
 public class SearchVO {
-	//ºÐ¾ß
-	private String cno;		//ºÐ¾ß¹øÈ£
-	private String cmajor;	//ºÐ¾ß±¸ºÐ
-	private String cminor;	//º¸½À°úÁ¤
-	//Áö¿ª
-	private String district;	//½Ãµµ
-	private String city;		//½Ã±º±¸
+	//ï¿½Ð¾ï¿½
+	private String cno;		
+	private String cmajor;	
+	private String cminor;	
+	//ï¿½ï¿½ï¿½ï¿½
+	private String district;	
+	private String city;		
 }

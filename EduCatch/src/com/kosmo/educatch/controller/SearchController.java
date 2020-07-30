@@ -10,7 +10,6 @@ public class SearchController {
 	private final String FILE_PATH = "search/";
 	Logger log = Logger.getLogger(SearchController.class);
 	
-	//학원검색 메인가기
 	@RequestMapping("searchMain")
 	public ModelAndView searchMain() {
 		log.info("search controller searchMain start >>> ");
@@ -21,7 +20,6 @@ public class SearchController {
 		return mv;
 	}//end searchMain
 	
-	//지역/카테고리 입력
 	public ModelAndView searchInsert() {
 		ModelAndView mv = new ModelAndView();
 		return mv;

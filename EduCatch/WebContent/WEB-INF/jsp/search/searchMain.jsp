@@ -32,11 +32,11 @@
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
-<!--                 <div class="preloader-circle"></div> -->
-<!--                 <div class="preloader-img pere-text"> -->
-<!--                     //로고 바꿔야함 -->
-<!--                     <img src="assets/img/logo/loder.png" alt=""> -->
-<!--                 </div> -->
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    //로고 바꿔야함
+                    <img src="assets/img/logo/loder.png" alt="">
+                </div>
             </div>
         </div>
     </div>
