@@ -9,6 +9,7 @@
 <jsp:include page="../../../top.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>
+<main>
 <canvas id="myChart"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script type="text/javascript">
@@ -75,6 +76,7 @@ var chart = new Chart(ctx, {
     }
 });
 </script>
+</main>
 <jsp:include page="../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>
