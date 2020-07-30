@@ -27,7 +27,6 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<a href="searchMain.ec">학원찾기</a>
     <!-- ? Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
@@ -61,7 +60,7 @@
                                         <nav> 
                                             <ul id="navigation">                                                                                          
                                                 <li class="active"><a href="index.html">홈</a></li>
-                                                <li><a href="searchMain.ec">학원검색</a></li>
+                                                <li><a href="searchMain.ec">학원찾기</a></li>
                                                 <li><a href="services.html">커뮤니티</a>
                                                     <ul class="submenu">
                                                         <li><a href="blog.html">자유게시판</a></li>
