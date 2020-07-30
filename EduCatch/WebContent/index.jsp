@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
@@ -28,6 +31,16 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<<<<<<< HEAD
+<<<<<<< HEAD
+에듀캐치
+<a href="searchMain.ec">학원찾기</a>
+=======
+<<<<<<< HEAD
+에듀캐치_혜미
+=======
+에듀캐치11111
+=======
     <!-- ? Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
@@ -648,7 +661,12 @@
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
     </div>
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
+</body>
+=======
     <!-- JS here -->
 
     <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
@@ -694,4 +712,5 @@
 
     
     </body>
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 </html>
