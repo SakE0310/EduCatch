@@ -36,8 +36,8 @@ html, body {
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	overflow: hidden;
-	width: 130px;
+	/* overflow: hidden; */
+	/* width: 130px; */
 	height: 30px;
 	margin: 0;
 	padding: 0;
@@ -102,7 +102,7 @@ html, body {
 
 .custom_zoomcontrol1 span img {
 	width: 15px;
-	height: 15px;
+	/* height: 15px; */
 	padding: 12px 0;
 	border: none;
 	z-index: 10;
