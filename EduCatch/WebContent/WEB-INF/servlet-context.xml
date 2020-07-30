@@ -27,14 +27,14 @@
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/jdbc/Oracle11g"/>
 	</bean>
-	<!-- 
-	 Mybatis Setting
+	 <!-- Mybatis Setting -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:com.kosmo/educatch/query/config/mybatis-config.xml"/>
 		<property name="mapperLocations" value="classpath:com/kosmo/educatch/query/*.xml"/>
 	</bean>
 	
-	a PlatFormTransactionManager is still required
+	<!-- a PlatFormTransactionManager is still required -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
@@ -43,6 +43,6 @@
 		<property name="basePackage">
 			<value>com.kosmo.**.dao</value>
 		</property>
-	</bean> -->
+	</bean>
 	
 </beans>
