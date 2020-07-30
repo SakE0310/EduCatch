@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html class="no-js" lang="zxx">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Industrial | Teamplate</title>
+    <title>EduCatch</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -28,13 +27,14 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<a href="searchMain.ec">학원찾기</a>
     <!-- ? Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <!-- ë¡ë©ì°½ ë¡ê³  -->
+                    //로고 바꿔야함
                     <img src="assets/img/logo/loder.png" alt="">
                 </div>
             </div>
@@ -51,7 +51,6 @@
                             <!-- Logo -->
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                <!-- ë¡ê³  ë°ê¹ì¼í¨ -->
                                     <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
                                 </div>
                             </div>
@@ -61,21 +60,21 @@
                                     <div class="main-menu d-none d-lg-block">
                                         <nav> 
                                             <ul id="navigation">                                                                                          
-                                                <li class="active"><a href="index.html">í</a></li>
-                                                <li><a href="about.html">íìê²ì</a></li>
-                                                <li><a href="services.html">ì»¤ë®¤ëí°</a>
+                                                <li class="active"><a href="index.html">홈</a></li>
+                                                <li><a href="about.html">학원검색</a></li>
+                                                <li><a href="services.html">커뮤니티</a>
                                                     <ul class="submenu">
-                                                        <li><a href="blog.html">ìì ê²ìí</a></li>
-                                                        <li><a href="blog_details.html">íê¸°ê²ìí</a></li>
-                                                        <li><a href="blog_details.html">ìë´ê²ìí</a></li>
-                                                        <li><a href="blog_details.html">íìë±ë¡ìì²­</a></li>
+                                                        <li><a href="blog.html">자유게시판</a></li>
+                                                        <li><a href="blog_details.html">후기게시판</a></li>
+                                                        <li><a href="blog_details.html">상담게시판</a></li>
+                                                        <li><a href="blog_details.html">학원등록요청</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="project.html">íµê³íì´ì§</a></li>
-                                                <li><a href="blog.html">ê³µì§ì¬í­</a>
+                                                <li><a href="project.html">통계페이지</a></li>
+                                                <li><a href="blog.html">공지사항</a>
                                                     <ul class="submenu">
-                                                        <li><a href="blog.html">ê³µì§ì¬í­</a></li>
-                                                        <li><a href="blog_details.html">ì´ë²¤í¸</a></li>
+                                                        <li><a href="blog.html">공지사항</a></li>
+                                                        <li><a href="blog_details.html">이벤트</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -84,12 +83,12 @@
                                 </div>
                             </div> 
                             <div class="col-xl-1 col-lg-4">
-                                <!-- ë¡ê·¸ì¸ë²í¼ ìì  -->
+                                <!-- 로그인버튼 예정 -->
                                 <div class="search d-none d-lg-block">
                                     <ul>
                                         <li>
                                             <div class="nav-log login">
-                                                <span class="fas fa-search">ë¡ê·¸ì¸</span>
+                                                <span class="fas fa-search">로그인</span>
                                             </div>
                                         </li>
                                     </ul>
@@ -626,7 +625,7 @@
                         <div class="col-xl-9 col-lg-8">
                             <div class="footer-copy-right">
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                                <p>Copyright Â©2020 All rights reserved | íìì°¾5ì¡°</p>
+                                <p>Copyright ©2020 All rights reserved | 학원찾5조</p>
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-4">
@@ -649,7 +648,12 @@
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
     </div>
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
+</body>
+=======
     <!-- JS here -->
 
     <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
