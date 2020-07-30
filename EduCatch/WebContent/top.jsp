@@ -73,6 +73,7 @@
                                                         <li><a href="listEvent.ec">이벤트</a></li>
                                                     </ul>
                                                 </li>
+                                                <li><a href="listDetailView.ec">남시현테스트용</a></li>
                                             </ul>
                                         </nav>
                                     </div>
