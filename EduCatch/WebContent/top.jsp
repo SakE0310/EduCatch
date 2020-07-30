@@ -9,20 +9,20 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
 	<!-- CSS here -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="assets/css/slicknav.css">
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/progressbar_barfiller.css">
-    <link rel="stylesheet" href="assets/css/gijgo.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/animated-headline.css">
-	<link rel="stylesheet" href="assets/css/magnific-popup.css">
-	<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-	<link rel="stylesheet" href="assets/css/themify-icons.css">
-	<link rel="stylesheet" href="assets/css/slick.css">
-	<link rel="stylesheet" href="assets/css/nice-select.css">
-	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="/EduCatch/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/EduCatch/assets/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="/EduCatch/assets/css/slicknav.css">
+    <link rel="stylesheet" href="/EduCatch/assets/css/flaticon.css">
+    <link rel="stylesheet" href="/EduCatch/assets/css/progressbar_barfiller.css">
+    <link rel="stylesheet" href="/EduCatch/assets/css/gijgo.css">
+    <link rel="stylesheet" href="/EduCatch/assets/css/animate.min.css">
+    <link rel="stylesheet" href="/EduCatch/assets/css/animated-headline.css">
+	<link rel="stylesheet" href="/EduCatch/assets/css/magnific-popup.css">
+	<link rel="stylesheet" href="/EduCatch/assets/css/fontawesome-all.min.css">
+	<link rel="stylesheet" href="/EduCatch/assets/css/themify-icons.css">
+	<link rel="stylesheet" href="/EduCatch/assets/css/slick.css">
+	<link rel="stylesheet" href="/EduCatch/assets/css/nice-select.css">
+	<link rel="stylesheet" href="/EduCatch/assets/css/style.css">
 </head>
 <!-- ? Preloader Start -->
     <div id="preloader-active">
@@ -31,7 +31,7 @@
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
                     //로고 바꿔야함
-                    <img src="assets/img/logo/loder.png" alt="">
+                    <img src="/EduCatch/assets/img/logo/loder.png" alt="">
                 </div>
             </div>
         </div>
