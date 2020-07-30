@@ -66,7 +66,7 @@
                                                         <li><a href="blog_details.html">학원등록요청</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="project.html">통계페이지</a></li>
+                                                <li><a href="statics.ec">통계페이지</a></li>
                                                 <li><a href="listNotice.ec">공지사항</a>
                                                     <ul class="submenu">
                                                         <li><a href="listNotice.ec">공지사항</a></li>
