@@ -19,7 +19,7 @@ public class LoginController {
 		log.info("NoticeController listNotice 시작 >>>");
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(CONTEXT_PATH+"/login_insert");
+		mav.setViewName(CONTEXT_PATH+"/loginInsert");
 		
 		log.info("LoginController login 끝 >>>");
 		return mav;
