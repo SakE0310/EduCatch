@@ -17,10 +17,5 @@ public class ReviewController {
 	
 	@Requ
 
-
-@Controller
-public class ReviewController {
-	private static Logger log = Logger.getLogger(ReviewController.class);
-	private static final String CONTEXT_PATH="Serach";
 	
 }
