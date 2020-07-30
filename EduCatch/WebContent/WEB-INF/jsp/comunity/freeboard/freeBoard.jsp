@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
 <script type="text/javascript"
-	src="../webedit/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+	src="../assets/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 
 <!-- jQuery를 사용하기위해 jQuery라이브러리 추가 -->
 <script type="text/javascript"
@@ -51,6 +51,9 @@
 </style>
 </head>
 <body>
+	<jsp:include page="../../../../top.jsp" flush="true">
+	<jsp:param value="" name=""/>
+	</jsp:include>
 	<!-- action/document/location -->
 	<form id="edit" action="#" method="post" enctype="multipart/form-data">
 		<table style="width: 50%" border="1">
@@ -85,11 +88,14 @@
 			<tr>
 				<td colspan="3" align="right">
 				 <input type="button" id="save" value="삭제" />
-				 <input type="reset" value="수정" /> 
+				 <input type="button" value="수정" /> 
 				 <input type="button" value="목록" />
 				</td>
 			</tr>
 		</table>
 	</form>
+	<jsp:include page="../../../../footer.jsp" flush="true">
+	<jsp:param value="" name=""/>
+	</jsp:include>
 </body>
 </html>

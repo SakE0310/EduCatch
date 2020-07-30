@@ -3,5 +3,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.kosmo.educatch.vo.TestVO" alias="test"/>
+		<typeAlias type="com.kosmo.educatch.vo.FreeVO" alias="freeboard"/>
 	</typeAliases>
 </configuration>
