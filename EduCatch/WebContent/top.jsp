@@ -70,7 +70,7 @@
                                                 <li><a href="listNotice.ec">공지사항</a>
                                                     <ul class="submenu">
                                                         <li><a href="listNotice.ec">공지사항</a></li>
-                                                        <li><a href="blog_details.html">이벤트</a></li>
+                                                        <li><a href="listEvent.ec">이벤트</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>

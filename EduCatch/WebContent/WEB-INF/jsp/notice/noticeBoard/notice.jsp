@@ -7,14 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="../../../top.jsp" flush="true">
+<jsp:include page="../../../../top.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>
 공지사항
 
 
 
-<jsp:include page="../../../footer.jsp" flush="true">
+<jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>
 </body>

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 //공지사항 게시판
 @Controller
 public class NoticeController {
-	private static String CONTEXT_PATH="notice";
+	private static String CONTEXT_PATH="notice/noticeBoard";
 	private static Logger log = Logger.getLogger(NoticeController.class);
 	
 	//private NoticeService noticeService;
