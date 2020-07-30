@@ -7,7 +7,6 @@
 <title>공지사항</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-  alert("공지사항");
   $(document).ready(function() {
 	
 	//관리자가 등록버튼을 누르면 실행
