@@ -25,14 +25,38 @@ public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
 
-	
+	//전체조회
 	@RequestMapping("/listReview.ec")
 	public ModelAndView listReview(@ModelAttribute ReviewVO param,
 									HttpServletRequest request) {
 		
-		log.info("ReviewController listReview >>> ȣ�⼺��");
+		log.info("ReviewController listReview >>> 호출성공");
 		
-		List<ReviewVO>
+		List<ReviewVO> list=reviewService.listReview(param);
+		
+		int listCnt=list.size();
+		
+		for(int i=0; i<listCnt; i++) {
+			ReviewVO rvo=(ReviewVO)list.get(i);
+			
+			log.info("rbno >>> "+rvo.getRbno());
+			log.info("rbsubject >>> "+rvo.getRbsubject());
+			log.info("rbname >>> "+rvo.getRbname());
+			log.info("rbimg >>> "+rvo.getRbimg());
+			log.info("rbcontent >>> "+rvo.getRbcontent());
+			log.info("academyano >>> "+rvo.getAcademyano());
+			log.info("membermno >>> "+rvo.getMembermno());
+			log.info("rbgrade >>> "+rvo.getRbgrade());
+			log.info("rbdeleteyn >>> "+rvo.getRbdeleteyn());
+			log.info("rbinsertdate >>> "+rvo.getRbinsertdate());
+			log.info("rbupdatedate >>> "+rvo.getRbupdatedate());
+		}
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("listReview", list);
+		mav.setViewName(CONTEXT_PATH+"/reviewBoard");
+		
+		return mav;
 	}
 	
 	
