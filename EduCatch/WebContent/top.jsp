@@ -56,13 +56,13 @@
                                     <div class="main-menu d-none d-lg-block">
                                         <nav> 
                                             <ul id="navigation">                                                                                          
-                                                <li><a href="index.html">홈</a></li>
+                                                <li><a href="index.jsp">홈</a></li>
                                                 <li><a href="searchMain.ec">학원찾기</a></li>
                                                 <li><a href="services.html">커뮤니티</a>
                                                     <ul class="submenu">
                                                         <li><a href="freeboard.ec">자유게시판</a></li>
                                                         <li><a href="listReview.ec">후기게시판</a></li>
-                                                        <li><a href="blog_details.html">상담게시판</a></li>
+                                                        <li><a href="listConsult.ec">상담게시판</a></li>
                                                         <li><a href="blog_details.html">학원등록요청</a></li>
                                                     </ul>
                                                 </li>
