@@ -30,7 +30,7 @@
 	 <!-- Mybatis Setting -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-		<property name="configLocation" value="classpath:com.kosmo/educatch/query/config/mybatis-config.xml"/>
+		<property name="configLocation" value="classpath:com/kosmo/educatch/query/config/mybatis-config.xml"/>
 		<property name="mapperLocations" value="classpath:com/kosmo/educatch/query/*.xml"/>
 	</bean>
 	
