@@ -71,9 +71,9 @@
                                                     </ul>
                                                 </li>
                                                 <li><a href="project.html">통계페이지</a></li>
-                                                <li><a href="blog.html">공지사항</a>
+                                                <li><a href="listNotice.ec">공지사항</a>
                                                     <ul class="submenu">
-                                                        <li><a href="blog.html">공지사항</a></li>
+                                                        <li><a href="listNotice.ec">공지사항</a></li>
                                                         <li><a href="blog_details.html">이벤트</a></li>
                                                     </ul>
                                                 </li>
