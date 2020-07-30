@@ -56,7 +56,7 @@
                                     <div class="main-menu d-none d-lg-block">
                                         <nav> 
                                             <ul id="navigation">                                                                                          
-                                                <li class="active"><a href="index.html">홈</a></li>
+                                                <li><a href="index.html">홈</a></li>
                                                 <li><a href="searchMain.ec">학원찾기</a></li>
                                                 <li><a href="services.html">커뮤니티</a>
                                                     <ul class="submenu">
