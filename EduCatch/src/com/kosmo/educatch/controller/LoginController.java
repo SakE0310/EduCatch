@@ -7,10 +7,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
-	private static String CONTEXT_PATH="login";
 	private static Logger log = Logger.getLogger(LoginController.class);
 	
-	//private NoticeService noticeService;
+
+	//@AutiWired
+	//@private LoginService loginservice
 	
 	
 	//공지사항 게시판 목록 조회
@@ -19,7 +20,7 @@ public class LoginController {
 		log.info("NoticeController listNotice 시작 >>>");
 
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(CONTEXT_PATH+"/loginInsert");
+		mav.setViewName("login/loginInsert");
 		
 		log.info("LoginController login 끝 >>>");
 		return mav;
