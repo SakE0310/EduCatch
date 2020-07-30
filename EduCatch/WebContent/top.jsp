@@ -60,7 +60,7 @@
                                                 <li><a href="searchMain.ec">학원찾기</a></li>
                                                 <li><a href="services.html">커뮤니티</a>
                                                     <ul class="submenu">
-                                                        <li><a href="blog.html">자유게시판</a></li>
+                                                        <li><a href="freeboard.ec">자유게시판</a></li>
                                                         <li><a href="blog_details.html">후기게시판</a></li>
                                                         <li><a href="blog_details.html">상담게시판</a></li>
                                                         <li><a href="blog_details.html">학원등록요청</a></li>

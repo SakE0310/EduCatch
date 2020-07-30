@@ -20,9 +20,9 @@
 	$(function() {
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
-			elPlaceHolder : "context", //textarea에서 지정한 id와 일치해야 합니다. 
+			elPlaceHolder : "fbcontent", //textarea에서 지정한 id와 일치해야 합니다. 
 			//SmartEditor2Skin.html 파일이 존재하는 경로
-			sSkinURI : "../webedit/dist/SmartEditor2Skin.html",
+			sSkinURI : "../assets/dist/SmartEditor2Skin.html",
 			htParams : {
 				// 툴바 사용 여부 (true:사용/ false:사용하지 않음),글씨체 포인트,정렬,색상등등
 				bUseToolbar : true,
@@ -55,28 +55,38 @@
 	<form id="edit" action="#" method="post" enctype="multipart/form-data">
 		<table style="width: 50%" border="1">
 			<tr>
+				<td style="width: 100px">글번호</td>
+				<td><input type="text" id="fbno" name="fbno"
+					style="width: 98%" readonly/></td>
+			</tr>
+			<tr>
 				<td style="width: 100px">제목</td>
-				<td><input type="text" id="title" name="title"
+				<td><input type="text" id="fbsubject" name="fbsubject"
+					style="width: 98%" /></td>
+			</tr>
+			<tr>
+				<td style="width: 100px">작성자</td>
+				<td><input type="text" id="fbname" name="fbname"
 					style="width: 98%" /></td>
 			</tr>
 
 			<tr>
 				<td>내용</td>
-				<td><textarea name="context" id="context" title="내용"
+				<td><textarea name="fbcontent" id="fbcontent" title="내용"
 						style="width: 50%; height: 400px; padding: 0; margin: 0;"></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>첨부파일</td>
 				<td>
-					<input type="file" value="찾아보기" id="filename1" name="filename1" /><br> 
+					<input type="file" value="찾아보기" id="fbimg" name="fbimg" /><br> 
 				</td>
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="save" value="저장" />
-				 <input type="reset" value="취소" /> 
-				 <input type="button" value="임시저장" />
+				 <input type="button" id="save" value="삭제" />
+				 <input type="reset" value="수정" /> 
+				 <input type="button" value="목록" />
 				</td>
 			</tr>
 		</table>
