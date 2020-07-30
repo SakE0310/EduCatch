@@ -25,4 +25,17 @@ public class NoticeController {
 		log.info("NoticeController listNotice 끝 >>>");
 		return mav;
 	}
+	
+	//공지사항 관리자모드 : 등록
+	@RequestMapping("/insertNotice.ec")
+	public ModelAndView insertNotice() {
+		log.info("NoticeController insertNotice 시작 >>>");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("notice/noticeBoard/noticeInsert");
+		
+		log.info("NoticeController insertNotice 끝 >>>");
+		return mav;
+	}
+			
 }

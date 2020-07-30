@@ -10,8 +10,8 @@
   alert("공지사항");
   $(document).ready(function() {
 	
-	  //등록버튼을 누르면 실행
-	  $("#insertData").click(function() {
+	//관리자가 등록버튼을 누르면 실행
+	$("#insertData").click(function() {
 		console.log("등록버튼 누름");
 		
 		$("#noticeForm").attr("action","insertNotice.ec");
@@ -19,6 +19,7 @@
 		$("#noticeForm").submit();
 		
 	})//end of insertData
+	
 	  
   });//end of ready()
 </script>
