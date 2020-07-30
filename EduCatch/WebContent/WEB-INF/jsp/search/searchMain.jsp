@@ -32,11 +32,11 @@
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    //로고 바꿔야함
-                    <img src="assets/img/logo/loder.png" alt="">
-                </div>
+<!--                 <div class="preloader-circle"></div> -->
+<!--                 <div class="preloader-img pere-text"> -->
+<!--                     //로고 바꿔야함 -->
+<!--                     <img src="assets/img/logo/loder.png" alt=""> -->
+<!--                 </div> -->
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
                                         <nav> 
                                             <ul id="navigation">                                                                                          
                                                 <li class="active"><a href="index.html">홈</a></li>
-                                                <li><a href="about.html">학원검색</a></li>
+                                                <li><a href="searchMain.ec">학원검색</a></li>
                                                 <li><a href="services.html">커뮤니티</a>
                                                     <ul class="submenu">
                                                         <li><a href="blog.html">자유게시판</a></li>
@@ -71,9 +71,9 @@
                                                     </ul>
                                                 </li>
                                                 <li><a href="project.html">통계페이지</a></li>
-                                                <li><a href="blog.html">공지사항</a>
+                                                <li><a href="listNotice.ec">공지사항</a>
                                                     <ul class="submenu">
-                                                        <li><a href="blog.html">공지사항</a></li>
+                                                        <li><a href="listNotice.ec">공지사항</a></li>
                                                         <li><a href="blog_details.html">이벤트</a></li>
                                                     </ul>
                                                 </li>
@@ -107,4 +107,3 @@
     </header>
   </body>
 </html>
-    
