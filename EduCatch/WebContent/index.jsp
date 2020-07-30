@@ -647,12 +647,7 @@
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
     </div>
->>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
-
-<<<<<<< HEAD
->>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 </body>
-=======
     <!-- JS here -->
 
     <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
