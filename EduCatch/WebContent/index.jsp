@@ -87,7 +87,10 @@
                                     <ul>
                                         <li>
                                             <div class="nav-log login">
-                                                <span class="fas fa-search">로그인</span>
+                                                <a href="login.ec"> <span class="fas fa-search">로그인</span></a>
+                                            
+                                            
+<!--                                                 <span class="fas fa-search">로그인</span> -->
                                             </div>
                                         </li>
                                     </ul>
