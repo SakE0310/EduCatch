@@ -36,7 +36,7 @@
 		        A.CMAJOR    AS CMAJOR,
 		        A.CMINOR    AS CMINOR
 		FROM    CATEGORY A
-		ORDER BY 1 DESC;
+		ORDER BY 1 DESC
 	</select> -->
 >>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 	  <!-- <selectKey keyProperty="cno" resultType="Search" order="BEFORE">

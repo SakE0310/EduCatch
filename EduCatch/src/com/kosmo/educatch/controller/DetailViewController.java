@@ -60,6 +60,13 @@ public class DetailViewController {
 			log.info("dvo.getAdeleteyn() >>>> " + dvo.getAdeleteyn());
 			log.info("dvo.getAinsertdate() >>>> " + dvo.getAinsertdate());
 			log.info("dvo.getAupdatedate() >>>> " + dvo.getAupdatedate());
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+			log.info("aaaa");
+=======
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 		}
 
 		mav.addObject("listDetailView", list);
