@@ -9,7 +9,7 @@
 	        A.DISTRICT    AS DISTRICT,
 	        A.CITY       AS CITY
 	FROM    AREA A
-	ORDER BY 1 DESC;
+	ORDER BY 1 DESC
 	</select>
 	<!-- 분야data
 	<select id="categoryData" parameterType="search" resultType="search">

@@ -19,7 +19,7 @@ public class SearchServiceImpl implements SearchService{
 	private SearchMapper searchMapper;
 	//지역데이터
 	@Override
-	public List<SearchVO> SearchAreaList(SearchVO param) {
+	public List<SearchVO> searchAreaList(SearchVO param) {
 		// TODO Auto-generated method stub
 		log.info("service start >>> ");
 		List<SearchVO> list = searchMapper.searchAreaList(param);

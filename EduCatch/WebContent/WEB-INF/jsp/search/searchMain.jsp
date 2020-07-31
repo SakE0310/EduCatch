@@ -8,7 +8,7 @@
 			function areaPopup(){
 				$("#search").val("");
 				window.open("","pop","width=600, height=500");
-				$("#popupForm").attr("action","searchPopup.ec");
+				$("#popupForm").attr("action","areaPopup.ec");
 				$("#popupForm").attr("method","POST");
 				$("#popupForm").attr("target","pop");
 				$("#popupForm").submit();
