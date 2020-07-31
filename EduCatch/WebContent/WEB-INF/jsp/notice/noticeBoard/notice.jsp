@@ -7,6 +7,24 @@
 <meta charset="UTF-8">
 <title>공지사항</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<style type="text/css">
+	#main{
+				width:960px;
+				height:600px;
+				background: #e4ebeb;
+				margin: 0 auto;
+		}
+		
+	/* #sideBanner{
+			position: absolute;
+			top:100px;
+			left:0px;
+			width:150px;
+			height:600px;
+			background: #aaa;
+		} */
+</style>
+
 <script type="text/javascript">
   $(document).ready(function() {
 	
@@ -30,10 +48,14 @@
 </jsp:include>
 
 	<form id="noticeForm" name="noticeForm">
+	<!-- <div id="sideBanner">
+		사이드 바
+	</div> -->
+	<div id="main">
 		<div>
 			<table border="0" cellpadding="1" cellspacing="1">
 			<tr>
-				<td width=900 colspan="10" align="center"><h2>공지사항 게시판 목록</h2></td>
+				<td align="center"><h1>공지사항 게시판 목록</h1></td>
 			</tr>
 			</table>
 		</div>
@@ -41,7 +63,7 @@
 			<table border="1">
 			<colgroup>
 				<col width="120px"/>
-				<col width="400px"/>
+				<col width="600px"/>
 				<col width="120px"/>
 				<col width="120px"/>
 			</colgroup>
@@ -61,25 +83,25 @@
 				</c:if>
 				
 				<c:forEach items ="${noticeList}" var ="row">
+				<tr align="center">
 					<td>${row.nno}</td>
 					<td>${row.nsubject}</td>
 					<td>${row.nname}</td>
 					<td>${row.nupdatedate}</td>
+				</tr>	
 				</c:forEach>
-			</tbody>	
-			</table>
-		</div>
-		<div>
-			<table>
-			<tr>
+				
+				<tr>
 				<td colspan="4" align="right">
 				<input type="button" value="등록" id="insertData">
 				<input type="button" value="수정" id="updateData">
 				<input type="button" value="삭제" id="deleteData">
 				</td>
 			</tr>
+			</tbody>	
 			</table>
 		</div>
+	</div>	
 	</form>
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>

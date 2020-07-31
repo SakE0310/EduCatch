@@ -47,7 +47,6 @@ public class NoticeController {
 		mav.setViewName("notice/noticeBoard/notice");
 		
 		log.info("NoticeController listNotice 끝 >>>");
-		log.info("NoticeController listNotice 끝 >>>");
 		return mav;
 	}
 	

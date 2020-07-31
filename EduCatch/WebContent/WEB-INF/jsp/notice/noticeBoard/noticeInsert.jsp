@@ -10,7 +10,9 @@
 
 <!-- jQuery를 사용하기위해 jQuery라이브러리 추가 -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-
+<style type="text/css">
+	
+</style>
 <script type="text/javascript">
 	var oEditors = [];
 	$(function() {
@@ -35,9 +37,14 @@
 			},
 			fCreator : "createSEditor2"
 		});
-		//저장버튼 클릭시 form 전송
-		$("#save").click(function() {
+		
+		//등록버튼 클릭시 form 전송
+		$("#insertData").click(function() {
+			console.log("등록버튼 누름");
 			oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+			$("#edit").attr("method","post");
+			$("#edit").attr("enctype","multipart/form-data");
+			$("#edit").attr("action","listNotice.ec");
 			$("#edit").submit();
 		});
 	});
@@ -46,8 +53,13 @@
 </head>
 <body>
 <!-- action/document/location -->
-	<form id="edit" action="#" method="post" enctype="multipart/form-data">
-		<table style="width: 50%" border="1">
+	<form id="edit">
+		<table align="center">
+			<tr>
+				<td><h2>공지사항 게시판 등록</h2></td>
+			</tr>
+		</table>
+		<table style="width: 50%" border="1" align="center">
 			<tr>
 				<td style="width: 100px">제목</td>
 				<td><input type="text" id="title" name="title"
@@ -61,25 +73,22 @@
 				</td>
 			</tr>
 			<tr>
-			<li><button type="button"><span style="margin-top:4px; margin-bottom:3px; margin-left:5px; font-size:7pt;">가나다라마바사<span style=" font-size:7pt;">(7pt)</span></span></button></li>
-																
-			<!-- 
 				<td>첨부파일</td>
 				<td>
 					<input type="file" value="찾아보기" id="filename1" name="filename1" /><br> 
-					<input type="file" value="찾아보기" id="filename2" name="filename2" /><br> 
-					<input type="file" value="찾아보기" id="filename3" name="filename3" />
+					<!-- <input type="file" value="찾아보기" id="filename2" name="filename2" /><br> 
+					<input type="file" value="찾아보기" id="filename3" name="filename3" /> -->
 				</td>
-				 -->
+				
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="save" value="저장" />
+				 <input type="button" id="insertData" value="등록" />
 				 <input type="reset" value="취소" /> 
-				 <input type="button" value="임시저장" />
 				</td>
 			</tr>
 		</table>
 	</form>
+
 </body>
 </html>
