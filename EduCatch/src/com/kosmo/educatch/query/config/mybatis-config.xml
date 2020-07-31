@@ -3,7 +3,12 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.kosmo.educatch.vo.TestVO" alias="test"/>
+<<<<<<< HEAD
 		<typeAlias type="com.kosmo.educatch.vo.FreeVO" alias="freeboard"/>
+=======
+		<typeAlias type="com.kosmo.educatch.vo.ReviewVO" alias="review"/>
+		<typeAlias alias="detailview" type="com.kosmo.educatch.vo.DetailViewVO"/>
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch.git
 		<typeAlias type="com.kosmo.educatch.vo.SearchVO" alias="search"/>
 	</typeAliases>
 </configuration>

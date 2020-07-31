@@ -7,8 +7,8 @@ public class ReviewVO {
 	private String rbname;
 	private String rbimg;
 	private String rbcontent;
-	private String academyano;
-	private String membermno;
+	private String academy_ano;
+	private String member_mno;
 	private String rbgrade;
 	private String rbdeleteyn;
 	private String rbinsertdate;
@@ -70,23 +70,25 @@ public class ReviewVO {
 	}
 
 
-	public String getAcademyano() {
-		return academyano;
+
+
+	public String getAcademy_ano() {
+		return academy_ano;
 	}
 
 
-	public void setAcademyano(String academyano) {
-		this.academyano = academyano;
+	public void setAcademy_ano(String academy_ano) {
+		this.academy_ano = academy_ano;
 	}
 
 
-	public String getMembermno() {
-		return membermno;
+	public String getMember_mno() {
+		return member_mno;
 	}
 
 
-	public void setMembermno(String membermno) {
-		this.membermno = membermno;
+	public void setMember_mno(String member_mno) {
+		this.member_mno = member_mno;
 	}
 
 
