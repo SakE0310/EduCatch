@@ -51,6 +51,7 @@ public class ReviewController {
 			log.info("rbdeleteyn >>> "+rvo.getRbdeleteyn());
 			log.info("rbinsertdate >>> "+rvo.getRbinsertdate());
 			log.info("rbupdatedate >>> "+rvo.getRbupdatedate());
+
 		}
 		
 		ModelAndView mav=new ModelAndView();
