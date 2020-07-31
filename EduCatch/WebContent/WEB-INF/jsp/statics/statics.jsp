@@ -17,27 +17,20 @@ var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
 	type: 'bar',
     data: {
-      labels: ["언어", "예체능", "보습"],
+      labels: ["언어","예체능","보습","평생교육"],
       datasets: [{
-        label: "올해 평균학원비",
-        backgroundColor: "#41d492",
-        borderColor: "#41d492",
-        hoverBackgroundColor: "#41d492",
-        hoverBorderColor: "#41d492",
-        data: ['50', '60', '70']
-      }, {
-        label: "작년 평균학원비",
-        backgroundColor: "#7b7b7b70",
-        borderColor: "#7b7b7b70",
-        hoverBackgroundColor: "#7b7b7b70",
-        hoverBorderColor: "#7b7b7b70",
-        data: ['45', '55', '65']
+        label: "평균학원비",
+        fill : false,
+        backgroundColor: ["rgba(255, 99, 132, 0.2)","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)"],
+        borderColor: ["rgb(255, 99, 132)","rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)"],
+        borderwidth : 1,
+        data: ['50', '60', '55', '70']
       }]
     },
     options: {
       maintainAspectRatio: false,
       legend: {
-        display: true
+        display: false
       },
       tooltips: {
         intersect: false,
@@ -57,25 +50,24 @@ var chart = new Chart(ctx, {
       scales: {
         yAxes: [{
           gridLines: {
-            display: false
+            display: true
           },
           stacked: false,
           ticks: {
-            stepSize: 500
+        	beginAtZero:true,
+            stepSize: 10
           }
         }],
         xAxes: [{
           barPercentage: .75,
           categoryPercentage: .5,
-          stacked: false,
-          gridLines: {
-            color: "transparent"
-          }
+          stacked: false
         }]
       }
     }
 });
 </script>
+<img src="/EduCatch/assets/img/favicon.ico" alt="이미지당" />
 </main>
 <jsp:include page="../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
