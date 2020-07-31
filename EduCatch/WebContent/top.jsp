@@ -63,7 +63,7 @@
                                                         <li><a href="freeboardlist.ec">자유게시판</a></li>
                                                         <li><a href="listReview.ec">후기게시판</a></li>
                                                         <li><a href="listConsult.ec">상담게시판</a></li>
-                                                        <li><a href="blog_details.html">학원등록요청</a></li>
+                                                        <li><a href="AcaReq.ec">학원등록요청</a></li>
                                                     </ul>
                                                 </li>
                                                 <li><a href="statics.ec">통계페이지</a></li>
