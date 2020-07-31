@@ -34,8 +34,8 @@ $(document).ready(function(){
 <div align="center">
 <c:forEach items="${avo }" var="avo">
 	로고 : ${avo.alogo } <br>
-	<h3>학원 이름 : ${avo.aname }</h3> <br>
-	학원주소 : ${avo.aaddr1 } ${avo.aaddr2 }<br>
+	<h3>학원 이름 : ${avo.aname }</h3>
+	학원주소 : ${avo.aaddr1 }<br>
 	전화번호 : ${avo.atel }<br>
 
 	평점 : REVIEWBOARD.RBGRADE<br>
@@ -431,9 +431,9 @@ html, body {
 		학원이름  : ${avo.aname }<br>
 		전화번호 : ${avo.atel }<br>
 		우편번호 : ${avo.aaddrno }<br>
-		주소 : aaddr1 + adddr2<br>
+		주소 : ${avo.aaddr1 }<br>
 		<br>
-		게시일 : ${avo.ainsertdate }<br><br>
+		게시일 : ${avo.ainsertdate }<br>
 		수정일 : ${avo.aupdatedate }<br>
 		
 	</c:forEach>
