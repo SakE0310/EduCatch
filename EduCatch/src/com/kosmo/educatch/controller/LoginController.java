@@ -18,7 +18,11 @@ public class LoginController {
 	@RequestMapping("/login.ec")
 	public ModelAndView listNotice( ) {
 		log.info("NoticeController listNotice 시작 >>>");
+<<<<<<< HEAD
 		log.info("aaa");
+=======
+
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("login/login");
 		
