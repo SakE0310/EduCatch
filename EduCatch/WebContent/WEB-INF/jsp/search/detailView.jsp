@@ -35,7 +35,7 @@ $(document).ready(function(){
 <body>
 <div align="center">
 로고 : alogo<br>
-<h3>학원이름 : ${detailViewVO.aname }</h3><br>
+<h3>학원이름 : ${DetailViewVO.aname }</h3><br>
 학원주소 : aaddr1 + adddr2<br>
 전화번호 : atel<br>
 평점 : REVIEWBOARD.RBGRADE<br>
