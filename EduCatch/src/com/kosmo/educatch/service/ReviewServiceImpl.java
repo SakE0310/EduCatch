@@ -32,6 +32,19 @@ public class ReviewServiceImpl implements ReviewService{
 		log.info("ReviewServiceImpl listReview >>> 끝");
 		return list;
 	}
+
+	//입력
+	@Override
+	public int insertReview(ReviewVO param) {
+		
+		return reviewMapper.insertReview(param);
+	}
+
+	@Override
+	public int insertDisplay(ReviewVO param) {
+		// TODO Auto-generated method stub
+		return reviewMapper.insertDisplay(param);
+	}
 	
 	
 }
