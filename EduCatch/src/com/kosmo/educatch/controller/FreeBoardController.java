@@ -28,6 +28,14 @@ public class FreeBoardController {
 		List<FreeVO> list = freeService.listFreeBoard(param);
 		int listSize = list.size();
 		log.info("list사이즈>>>"+listSize);
+		
+		for(int i=0; i<listSize; i++) {
+			log.info("글번호"+list.get(i).getFbno());
+			log.info("글번호"+list.get(i).getFbno());
+			log.info("글번호"+list.get(i).getFbno());
+			log.info("글번호"+list.get(i).getFbno());
+			log.info("글번호"+list.get(i).getFbno());
+		}
 		log.info("list.getname()"+list.get(0).getFbname());
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("freeboardlist",list);

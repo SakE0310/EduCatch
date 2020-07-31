@@ -4,5 +4,6 @@
 	<typeAliases>
 		<typeAlias type="com.kosmo.educatch.vo.TestVO" alias="test"/>
 		<typeAlias type="com.kosmo.educatch.vo.FreeVO" alias="freeboard"/>
+		<typeAlias type="com.kosmo.educatch.vo.SearchVO" alias="search"/>
 	</typeAliases>
 </configuration>

@@ -35,6 +35,7 @@
 				</tr>
 			</thead>
 			<tbody>
+			
 				<c:if test="${empty freeboardlist}">
 					<tr>
 						<td colspan="6" align="center">
