@@ -16,6 +16,10 @@
 <!-- function 함수 짜야함 -->
 
 <script type="text/javascript">
+	function insertCommit(){
+		
+	}
+	
 	var oEditors = [];
 	$(function() {
 		nhn.husky.EZCreator.createInIFrame({
@@ -87,9 +91,8 @@
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="save" value="삭제" />
-				 <input type="button" value="수정" /> 
-				 <input type="button" value="목록" />
+				 <input type="button" id="insertcommit" value="등록완료" onclick="insertCommit()" />
+				 <input type="button" id="save" value="임시저장" />
 				</td>
 			</tr>
 		</table>
