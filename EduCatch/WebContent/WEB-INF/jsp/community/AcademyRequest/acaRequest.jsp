@@ -24,8 +24,7 @@ input[type="file"] {
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	var fileTarget = $('#ex_filename');
-	fileTarget.on('change', function(){
+	$('#ex_filename').on('change', function(){
 		
 		var filename;
 		// 값이 변경되면 
@@ -48,30 +47,40 @@ $(document).ready(function(){
 		$('#alogo').val(filename);
 		
 	});
+	
+	$('#sendEmail').on('click', function(){
+		$('#academyInfo').attr("action", "sendAcademyInfo.ec");
+		$('#academyInfo').attr("method", "POST");
+		$('#academyInfo').attr("enctype", "multipart/form-data");
+		$('#academyInfo').submit();
+	});
 });
 
 function addrCheck(){
-	var width = 500;
-	var height = 600;
-	daum.postcode.load(function(){
-		new daum.Postcode({
-			oncomplete: function(data){
-				console.log("새우편번호 >>> : " + data.zonecode);
-				console.log("주소값 >>> : " + data.address);
-				console.log("빌딩값 >>> : " + data.buildingName);	
-				document.member.maddr.value = data.zonecode;	
-				document.member.maddr1.value = data.address;
-				document.member.maddr2.value = data.buildingName;
-			}
-		}).open({
-			left: (window.screen.width / 2) - (width / 2),
-			top: (window.screen.height / 2) - (height / 2)
-		});
-	});
+	new daum.Postcode({
+		oncomplete: function(data){
+			console.log("새우편번호 >>> : " + data.zonecode);
+			console.log("주소값 >>> : " + data.address);
+			console.log("빌딩값 >>> : " + data.buildingName);	
+			$('#aaddrno').val(data.zonecode);
+			$('#aaddr1').val(data.address);
+			$('#aaddr2').val(data.buildingName);
+		}
+	}).open();
 }
 </script>
 </head>
 <body>
+<%
+	Object obj = null;
+	obj = request.getAttribute("resultStr");
+	String str = (String)obj;
+	if(str != null && str != "null"){
+		out.println("<script>\n");
+		out.println("alert('" + str + "');");
+		out.println("</script>\n");
+	}
+%>
 	<jsp:include page="../../../../top.jsp" flush="true">
 		<jsp:param value="" name="" />
 	</jsp:include>
@@ -81,7 +90,7 @@ function addrCheck(){
 				<div class="row">
 					<div class="col-lg-8 col-md-8" id="form">
 						<h3 class="mb-30">학원정보 등록요청</h3>
-						<form action="#">
+						<form name="academyInfo" id="academyInfo">
 							<div class="mt-10">
 								<input type="email" name="EMAIL" placeholder="Email 주소"
 									onfocus="this.placeholder = ''"
@@ -118,7 +127,7 @@ function addrCheck(){
 							</div>
 							<div class="row">
 								<div class="mt-10 col">
-									<input type="text" name="addrno" placeholder="우편번호"
+									<input type="text" name="aaddrno" id="aaddrno" placeholder="우편번호"
 										onblur="this.placeholder = '우편번호'" required
 										class="single-input" readonly>
 								</div>
@@ -127,13 +136,13 @@ function addrCheck(){
 								</div>
 							</div>
 							<div class="mt-10">
-								<input type="text" name="aaddr1" placeholder="주소"
+								<input type="text" name="aaddr1" id="aaddr1" placeholder="주소"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '주소'" required class="single-input"
 									readonly>
 							</div>
 							<div class="mt-10">
-								<input type="text" name="aaddr2" placeholder="상세주소"
+								<input type="text" name="aaddr2" id="aaddr2" placeholder="상세주소"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = '상세주소'" required
 									class="single-input">
@@ -149,6 +158,9 @@ function addrCheck(){
 									<input type="file" id="ex_filename" class="upload-hidden">
 								</div>
 							</div>
+							<div class="form-group mt-3">
+                                <button type="button" id="sendEmail" class="genric-btn success-border">Send</button>
+                            </div>
 						</form>
 					</div>
 				</div>

@@ -19,4 +19,15 @@ public class AcademyRequestController {
 		
 		return mv;
 	}
+	
+	@RequestMapping("/sendAcademyInfo")
+	public ModelAndView sendMail() {
+		log.info("AcademyRequestController sendMail >>> ");
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("community/AcademyRequest/acaRequest");
+		mv.addObject("resultStr", "성공");
+		return mv;
+	};
 }
