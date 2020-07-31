@@ -5,7 +5,8 @@
 		<typeAlias type="com.kosmo.educatch.vo.TestVO" alias="test"/>
 		<typeAlias type="com.kosmo.educatch.vo.FreeVO" alias="freeboard"/>
 		<typeAlias type="com.kosmo.educatch.vo.ReviewVO" alias="review"/>
-		<typeAlias type="com.kosmo.educatch.vo.DetailViewVO" alias="detailview"/>
+		<typeAlias type="com.kosmo.educatch.vo.AcademyVO" alias="academyview"/>
+		<typeAlias type="com.kosmo.educatch.vo.SubjectVO" alias="subjectview"/>
 		<typeAlias type="com.kosmo.educatch.vo.SearchVO" alias="search"/>
 		<typeAlias type="com.kosmo.educatch.vo.NoticeVO" alias="notice"/>
 	</typeAliases>
