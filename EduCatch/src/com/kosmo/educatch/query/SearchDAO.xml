@@ -4,7 +4,7 @@
 
 <mapper namespace="com.kosmo.educatch.dao.SearchMapper">
 	<!-- 지역data -->
-	<select id="areaData" parameterType="search" resultType="search">
+	<select id="searchAreaList" parameterType="search" resultType="search">
 	SELECT 
 	        A.DISTRICT    AS DISTRICT,
 	        A.CITY       AS CITY
