@@ -21,7 +21,11 @@ public class NoticeController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("notice/noticeBoard/notice");
+<<<<<<< HEAD
 		log.info("NoticeController listNotice 끝 >>>");
+=======
+		
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 		log.info("NoticeController listNotice 끝 >>>");
 		return mav;
 	}

@@ -4,6 +4,7 @@
 
 <mapper namespace="com.kosmo.educatch.dao.SearchMapper">
 	<!-- 지역data -->
+<<<<<<< HEAD
 	<select id="areaData" parameterType="Search" resultMap="Search">
 	SELECT 
 	        A.DISTRICT    AS DISTRICT,
@@ -20,6 +21,24 @@
 		FROM    CATEGORY A
 		ORDER BY 1 DESC;
 	</select>
+=======
+	<select id="searchAreaList" parameterType="search" resultType="search">
+	SELECT 
+	        A.DISTRICT    AS DISTRICT,
+	        A.CITY       AS CITY
+	FROM    AREA A
+	ORDER BY 1 DESC
+	</select>
+	<!-- 분야data
+	<select id="categoryData" parameterType="search" resultType="search">
+		SELECT 
+		        A.CNO       AS CNO,
+		        A.CMAJOR    AS CMAJOR,
+		        A.CMINOR    AS CMINOR
+		FROM    CATEGORY A
+		ORDER BY 1 DESC
+	</select> -->
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 	  <!-- <selectKey keyProperty="cno" resultType="Search" order="BEFORE">
         SELECT 'C'||LPAD((SELECT /* +INDEX_DESC(A CATEGORY_PK) */              
         NVL(MAX(SUBSTR(A.CNO,-3)),0)+1 commNO

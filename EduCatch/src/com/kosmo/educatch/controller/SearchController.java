@@ -29,6 +29,7 @@ public class SearchController {
 		return mv;
 	}//end searchMain
 	
+<<<<<<< HEAD
 	//area select함수
 	//구를 선택하면 동 데이터를 가져오는 함수
 //	@RequestMapping("searchAreaList")
@@ -56,6 +57,19 @@ public class SearchController {
 			mv.addObject("search", "cate");
 			mv.setViewName("search/searchCategory_pop");
 		}
+=======
+	//지역/카테고리 팝업 선택
+	@RequestMapping("areaPopup")
+	public ModelAndView areaPopup(SearchVO param) {
+		log.info("search controller areaPopup start >>> ");
+		log.info("search controller areaPopup param >>> "+param);
+		List<SearchVO> list = searchService.searchAreaList(param);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("areaList", list);
+		mv.setViewName("search/searchArea_pop");
+		
+		log.info("search controller searchPopup list >>> "+list);
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 		log.info("search controller searchPopup end >>> ");
 		log.info("search controller searchPopup mv >>> "+mv);
 		return mv;
