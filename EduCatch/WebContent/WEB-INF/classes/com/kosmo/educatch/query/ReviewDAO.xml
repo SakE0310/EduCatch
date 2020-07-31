@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace = "com.kosmo.educatch.dao.ReviewMapper">
+	<select id="listReview" parameterType="review" resultType="review">
+		SELECT      A.RBNO              AS RBNO,
+		            A.RBSUBJECT         AS RBSUBJECT,
+		            A.RBNAME            AS RBNAME,
+		            A.RBIMG             AS RBIMG,
+		            A.RBCONTENT         AS RBCONTENT,
+		            A.ACADEMY_ANO       AS ACADEMY_ANO,
+		            A.MEMBER_MNO        AS MEMBER_MNO,
+		            A.RBGRADE           AS RBGRADE,
+		            A.RBDELETEYN        AS RBDELETEYN,
+		            TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD')      AS RBINSERTDATE,
+		            TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')      AS RBUPDATEDATE
+		FROM REVIEWBOARD A
+		ORDER BY 1 DESC
+	</select>
+</mapper>

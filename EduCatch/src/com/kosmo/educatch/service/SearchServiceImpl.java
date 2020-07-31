@@ -19,7 +19,15 @@ public class SearchServiceImpl implements SearchService{
 	private SearchMapper searchMapper;
 	//지역데이터
 	@Override
+<<<<<<< HEAD
 	public List<SearchVO> SearchAreaList(SearchVO param) {
+=======
+<<<<<<< HEAD
+	public List<SearchVO> SearchAreaList(SearchVO param) {
+=======
+	public List<SearchVO> searchAreaList(SearchVO param) {
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch.git
 		// TODO Auto-generated method stub
 		log.info("service start >>> ");
 		List<SearchVO> list = searchMapper.searchAreaList(param);
