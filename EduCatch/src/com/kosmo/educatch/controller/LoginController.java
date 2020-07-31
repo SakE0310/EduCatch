@@ -11,7 +11,6 @@ public class LoginController {
 	
 
 	//@AutiWired
-	//@private LoginService loginservice
 	
 	
 	//공지사항 게시판 목록 조회

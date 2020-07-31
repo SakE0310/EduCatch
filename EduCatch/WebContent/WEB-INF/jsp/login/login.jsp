@@ -52,7 +52,7 @@
   <form name = "loginForm" id = "loginForm"> 
   
 	<div align = "center" id = "login">로그인
-	<hr style="height:5px;border-width:1px;color:black;background-color:gray;width:350px"></div>
+	<hr style="height:4px;border-width:1px;color:black;background-color: #d9d9d9;width:350px"></div>
 	
 	<div class="js-form-message form-group" id ="ID">
           <label class="form-label" for="id_login">아이디</label>
@@ -75,7 +75,7 @@
     <button class="login__button login__button--submit _loginSubmitButton" type="submit" >로그인</button>
 	</div>
       <div align ="center" id = "LOIGN" class ="LOGIN"> 
-      <hr style="height:5px;border-width:1px;color:black;background-color:gray;width:350px"></div>
+      <hr style="height:4px;border-width:1px;color:black;background-color: #d9d9d9;width:350px"></div>
   </form>
 
 	<jsp:include page="../../../footer.jsp" flush="true">
