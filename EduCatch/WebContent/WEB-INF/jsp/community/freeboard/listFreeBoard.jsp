@@ -1,12 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>자유게시판 목록</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-
+<script type="text/javascript">
+	function insertPopup(){
+		console.log("insertPopup()들어옴");
+		$("#fbno").val("");
+		//window.open("","pop","width=480, height=250");
+		$("#freeBoardForm").attr("action","selectfreeboard.ec");
+		//$("#freeBoardForm").attr("target","pop");
+		$("#freeBoardForm").submit();
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="../../../../top.jsp" flush="true">
@@ -26,7 +36,7 @@
 				<col width="120px"/>
 				<col width="220px"/>
 				<col width="120px"/>
-				<col width="110px"/>
+				<col width="300px"/>
 				<col width="110px"/>
 			</colgroup>
 			<thead>
@@ -55,7 +65,7 @@
 					</tr>
 				</c:forEach>
 				<tr>
-					<td colspan="5" align="center">
+					<td colspan="4" align="center">
 					처리할 버튼을 선택하세요</td>
 					<td align="center">
 					<input type="button" onclick="insertPopup()"

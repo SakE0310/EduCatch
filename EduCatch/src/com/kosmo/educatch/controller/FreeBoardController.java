@@ -31,19 +31,37 @@ public class FreeBoardController {
 		
 		for(int i=0; i<listSize; i++) {
 			log.info("글번호"+list.get(i).getFbno());
-			log.info("글번호"+list.get(i).getFbno());
-			log.info("글번호"+list.get(i).getFbno());
-			log.info("글번호"+list.get(i).getFbno());
-			log.info("글번호"+list.get(i).getFbno());
+			log.info("제목"+list.get(i).getFbsubject());
+			log.info("작성자"+list.get(i).getFbname());
+			log.info("첨부파일"+list.get(i).getFbimg());
+			log.info("내용"+list.get(i).getFbcontent());
+			log.info("회원번호"+list.get(i).getMember_mno());
+			log.info("삭제여부"+list.get(i).getFbdeleteyn());
+			log.info("작성일"+list.get(i).getFbinsertdate());
+			log.info("수정일"+list.get(i).getFbupdatedate());
 		}
 		log.info("list.getname()"+list.get(0).getFbname());
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("freeboardlist",list);
-		mav.setViewName("comunity/freeboard/listFreeBoard");
+		mav.setViewName("community/freeboard/listFreeBoard");
 		
 		log.info("mav>>>"+mav);
 		log.info("freeBoard함수 끝>>>");
 		return mav;
-		
 	}
+	
+	//자유게시판 상세정보조회(등록일 경우,수정,삭제일경우)
+	@RequestMapping("selectfreeboard")
+	public ModelAndView selectFreeBoard(@ModelAttribute FreeVO param) {
+		log.info("selectFreeBoard함수 시작>>>");
+		ModelAndView mav = new ModelAndView();
+		log.info("fbno>>>"+param.getFbno());
+		if(param.getFbno().length()==0) {
+			mav.addObject("mode","insert");
+		}
+		mav.setViewName("community/freeboard/insertFreeBoard");
+		log.info("selectFreeBoard함수 끝>>>");
+		return mav;
+	}
+	
 }
