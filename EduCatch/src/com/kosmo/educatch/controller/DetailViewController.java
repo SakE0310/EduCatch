@@ -16,15 +16,15 @@ import com.kosmo.educatch.vo.DetailViewVO;
 public class DetailViewController {
 	private static Logger log = Logger.getLogger(DetailViewController.class);
 	
-	//@Autowired
-	//private DetailViewService detailViewService;
+	@Autowired
+	private DetailViewService detailViewService;
 
 	// 상세조회
 	@RequestMapping("listDetailView")
 	public ModelAndView listDetailView(@ModelAttribute DetailViewVO param) {
 		ModelAndView mav = new ModelAndView();
 		log.info("listDetailView listDetailView 시작 >>>> ");
-		/*
+		
 		log.info("listDetailView listDetailView param >>>> " + param);
 		log.info("param.getAno() >>>> " + param.getAno());
 		log.info("param.getAname() >>>> " + param.getAname());
@@ -61,8 +61,8 @@ public class DetailViewController {
 			log.info("dvo.getAinsertdate() >>>> " + dvo.getAinsertdate());
 			log.info("dvo.getAupdatedate() >>>> " + dvo.getAupdatedate());
 		}
+
 		mav.addObject("listDetailView", list);
-*/
 		mav.setViewName("search/detailView");
 		log.info("DepartmentController listDepartment mav >>> : " + mav);
 		
