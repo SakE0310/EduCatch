@@ -4,15 +4,15 @@
 
 <mapper namespace="com.kosmo.educatch.dao.SearchMapper">
 	<!-- 지역data -->
-	<select id="areaData" parameterType="Search" resultMap="Search">
+	<select id="searchAreaList" parameterType="search" resultType="search">
 	SELECT 
-	        A.DISTRICT    AS DISTRICT,
+	        A.DISTRICT   AS DISTRICT,
 	        A.CITY       AS CITY
 	FROM    AREA A
-	ORDER BY 1 DESC;
+	ORDER BY 1 DESC
 	</select>
 	<!-- 분야data -->
-	<select id="categoryData" parameterType="Search" resultMap="Search">
+	<select id="categoryData" parameterType="search" resultType="search">
 		SELECT 
 		        A.CNO       AS CNO,
 		        A.CMAJOR    AS CMAJOR,
