@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.kosmo.educatch.dao.NoticeMapper">
+
+	<!-- 공지사항 전체조회 -->
+	<select id="listNotice" parameterType="notice" resultType="notice">
+	SELECT 
+	        A.NNO                   AS NNO              					-- 공지사항 글번호
+	        ,A.NSUBJECT             AS NSUBJECT        						-- 공지사항 제목
+	        ,A.NNAME                AS NNAME            					-- 공지사항 작성자
+	        ,A.NIMG                 AS NIMG             					-- 공자사항 이미지
+	        ,A.NCONTENT             AS NCONTENT         					-- 공지사항 내용
+	        ,TO_CHAR(A.NUPDATEDATE,'YYYY-MM-DD')          AS NUPDATEDATE    -- 공지사항 등록일자
+	FROM
+	        NOTICE A
+	WHERE
+	        A.NDELETEYN ='N'
+	ORDER BY 1 DESC  
+	</select>
+
+</mapper>
+

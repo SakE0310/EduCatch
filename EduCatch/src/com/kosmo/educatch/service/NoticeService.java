@@ -1,5 +1,9 @@
 package com.kosmo.educatch.service;
 
-public class NoticeService {
+import java.util.List;
 
+import com.kosmo.educatch.vo.NoticeVO;
+
+public interface NoticeService {
+	public List<NoticeVO> listNotice(NoticeVO param);
 }
