@@ -51,6 +51,7 @@ public class SearchController {
 		if(search=="") {
 			List<SearchVO> list = searchService.SearchAreaList(param);
 			mv.addObject("areaList", list);
+			log.info("search controller searchPopup list >>> "+list);
 			mv.setViewName("search/searchArea_pop");
 		}else {
 			mv.addObject("search", "cate");
