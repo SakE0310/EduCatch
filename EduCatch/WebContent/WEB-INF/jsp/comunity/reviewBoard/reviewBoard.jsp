@@ -10,7 +10,6 @@
 <script type="text/javascript">
 	function insertPage(){
 		alert(">>>");
-		alert("<<<>>>");
 	}
 </script>
 
