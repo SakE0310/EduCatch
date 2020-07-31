@@ -5,5 +5,5 @@ import com.kosmo.educatch.vo.SearchVO;
 
 public interface SearchService {
 
-	public List<SearchVO> SearchAreaList(SearchVO param);
+	public List<SearchVO> searchAreaList(SearchVO param);
 }

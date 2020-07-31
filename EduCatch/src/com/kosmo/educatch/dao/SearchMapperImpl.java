@@ -16,7 +16,7 @@ public class SearchMapperImpl extends SqlSessionDaoSupport implements SearchMapp
 	public List<SearchVO> searchAreaList(SearchVO param) {
 		// TODO Auto-generated method stub
 		log.info("Mapper start >>> ");
-		List<SearchVO> list = getSqlSession().selectList("com.kosmo.educatch.dao.SearchDAO.areaData");
+		List<SearchVO> list = getSqlSession().selectList("searchAreaList");
 		log.info("Mapper end >>> ");
 		log.info("Mapper list >>> "+list);
 		return list;
