@@ -8,15 +8,7 @@
 			function areaPopup(){
 				$("#search").val("");
 				window.open("","pop","width=600, height=500");
-<<<<<<< HEAD
-				$("#popupForm").attr("action","searchPopup.ec");
-=======
-<<<<<<< HEAD
-				$("#popupForm").attr("action","searchPopup.ec");
-=======
-				$("#popupForm").attr("action","areaPopup.ec");
->>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
->>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch.git
+				$("#popupForm").attr("action","searchAreaList.ec");
 				$("#popupForm").attr("method","POST");
 				$("#popupForm").attr("target","pop");
 				$("#popupForm").submit();

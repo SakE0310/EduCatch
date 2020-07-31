@@ -30,20 +30,12 @@
 		</script>
 	</head>
 	<body>
-	<c:forEach items="${areaList}" var="row">
+	<c:forEach items="${searchAreaList}" var="row">
 						<tr align="center">
 							<td>${row.district}</td>
 							<td>${row.city}</td>
 						</tr>
 					</c:forEach>
-	<%
-// 		Object ob = request.getAttribute("areaList");
-// 		System.out.println("searchAreaPopup Object >>> "+ob);
-// 		ArrayList aList = (ArrayList)ob;
-// 		for(int i=0;i<aList.size();i++){
-			
-// 		}
-	%>
 	<a id="seoul" href="">서울</a><br>
 	<a id="kyunggi" href="">경기</a>
 	<!-- 서울 -->
