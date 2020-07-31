@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="com.kosmo.educatch.vo.DetailViewVO"%>
+<%@page import="com.kosmo.educatch.vo.SubjectVO"%>
+<%@page import="com.kosmo.educatch.vo.AcademyVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-
-
-
 <meta charset="utf-8" />
 <title>Kakao 지도 시작하기</title>
 
@@ -34,24 +32,14 @@ $(document).ready(function(){
 
 <body>
 <div align="center">
-로고 : alogo<br>
-<<<<<<< HEAD
-<h3>학원이름 : ${detailViewVO.aname }</h3><br>
-=======
-<<<<<<< HEAD
-<h3>학원이름 : ${detailViewVO.aname }</h3><br>
-=======
-<<<<<<< HEAD
-<h3>학원이름 : ${DetailViewVO.aname }</h3><br>
-=======
-<h3>학원이름 : ${detailViewVO.aname }</h3><br>
->>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
->>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
->>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch.git
-학원주소 : aaddr1 + adddr2<br>
-전화번호 : atel<br>
-평점 : REVIEWBOARD.RBGRADE<br>
-<br>
+<c:forEach items="${avo }" var="avo">
+	로고 : ${avo.alogo } <br>
+	<h3>학원 이름 : ${avo.aname }</h3> <br>
+	학원주소 : ${avo.aaddr1 } ${avo.aaddr2 }<br>
+	전화번호 : ${avo.atel }<br>
+
+	평점 : REVIEWBOARD.RBGRADE<br>
+</c:forEach>
 </div>
 
 <style>
@@ -437,33 +425,41 @@ html, body {
 	</ul>
 
 	<div id="tab-1" class="tab-content current">
+	<c:forEach items="${avo }" var="avo">
+	
 		ACADEMY<br>
-		학원이름 : aname<br>
-		전화번호 : atel<br>
-		우편번호 : aaddrno<br>
+		학원이름  : ${avo.aname }<br>
+		전화번호 : ${avo.atel }<br>
+		우편번호 : ${avo.aaddrno }<br>
 		주소 : aaddr1 + adddr2<br>
 		<br>
-		게시일 : ainsertdate<br>
-		수정일 : aupdatedate
+		게시일 : ${avo.ainsertdate }<br><br>
+		수정일 : ${avo.aupdatedate }<br>
+		
+	</c:forEach>
 	</div>
+	
 	<div id="tab-2" class="tab-content">
+	<c:forEach items="${svo }" var="svo">
+	
 		SUBJECT<br>
-		과목명 : sname<br>
-		수강 날짜 : sday<br>
-		수강시간 : stime<br>
-		수강인원 : speople<br>
-		수강료 : sprice<br>
+		과목명 : ${svo.sname }<br>
+		수강 날짜 : ${svo.sday }<br>
+		수강시간 : ${svo.stime }<br>
+		수강인원 : ${svo.speople }<br>
+		수강료 : ${svo.sprice }<br>
 		<br>
-		게시일 : sinsertdate<br>
-		수정일 : supdatedate
-
+		게시일 : ${svo.sinsertdate }<br>
+		수정일 : ${svo.supdatedate }
+		
+	</c:forEach>
 	</div>
+	
 	<div id="tab-3" class="tab-content">
 		REVIEWBOARD<br>
 		후기게시판 불러오기
 	</div>
 
 </div>
-	
 </body>
 </html>

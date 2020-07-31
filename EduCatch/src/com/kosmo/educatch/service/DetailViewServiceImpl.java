@@ -9,24 +9,38 @@ import org.springframework.transaction.annotation.Transactional;
 import org.apache.log4j.Logger;
 
 import com.kosmo.educatch.dao.DetailViewMapper;
-import com.kosmo.educatch.vo.DetailViewVO;
+import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.SubjectVO;
 
 @Service
 @Transactional
-public class DetailViewServiceImpl implements DetailViewService{
+public class DetailViewServiceImpl implements DetailViewService {
 	private static Logger log = Logger.getLogger(DetailViewServiceImpl.class);
 
 	@Autowired
 	private DetailViewMapper detailViewMapper;
-	
+
+	// 학원정보
 	@Override
-	public List<DetailViewVO> listDetailView(DetailViewVO param) {
-		List<DetailViewVO> list = new ArrayList<DetailViewVO>();
-		list = detailViewMapper.detailviewlist(param);
-		
-		log.info("DetailViewServiceImpl listDetailView >>>> ");
-		log.info("DetailViewServiceImpl listDetailView param >>>> " + param);
-		
+	public List<AcademyVO> academyviewlist(AcademyVO param) {
+		List<AcademyVO> list = new ArrayList<AcademyVO>();
+		list = detailViewMapper.academyviewlist(param);
+
+		log.info("DetailViewServiceImpl academyviewlist >>>> ");
+		log.info("DetailViewServiceImpl academyviewlist param >>>> " + param);
+
+		return list;
+	}
+
+	// 과목정보
+	@Override
+	public List<SubjectVO> subjectviewlist(SubjectVO param) {
+		List<SubjectVO> list = new ArrayList<SubjectVO>();
+		list = detailViewMapper.subjectviewlist(param);
+
+		log.info("DetailViewServiceImpl subjectviewlist >>>> ");
+		log.info("DetailViewServiceImpl subjectviewlist param >>>> " + param);
+
 		return list;
 	}
 

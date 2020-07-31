@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosmo.educatch.dao.DetailViewMapper">
+
+	<select resultType="academyview" parameterType="academyview" id="academyviewlist">
+		SELECT 
+			A.ANO AS ANO, 
+			A.ANAME AS ANAME, 
+			A.ATEL AS ATEL, 
+			A.AXPOINT AS AXPOINT,
+            A.AYPOINT AS AYPOINT,
+            A.AADDRNO AS AADDRNO,
+            A.AADDR1 AS AADDR1,
+            A.AADDR2 AS ADDR2,
+            A.ALOGO AS ALOGO,
+			TO_CHAR(AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
+			TO_CHAR(AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
+		FROM	ACADEMY A
+	</select>
+	
+	<select resultType="subjectview" parameterType="subjectview" id="subjectviewlist">
+		SELECT 
+			A.SNO AS SNO, 
+			A.SNAME AS SNAME, 
+			A.SDAY AS SDAY, 
+			A.STIME AS STIME,
+            A.SPEOPLE AS SPEOPLE,
+            A.SPRICE AS SPRICE,
+            A.ACADEMY_ANO AS ACADEMY_ANO,
+            A.SDELETEYN AS SDELETEYN,
+			TO_CHAR(SINSERTDATE,'YYYY-MM-DD') AS SINSERTDATE, 
+			TO_CHAR(SUPDATEDATE,'YYYY-MM-DD') AS SUPDATEDATE
+		FROM	SUBJECT A
+	</select>
+	
+</mapper>

@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.service.DetailViewService;
-import com.kosmo.educatch.vo.DetailViewVO;
+import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.SubjectVO;
 
 @Controller
 public class DetailViewController {
@@ -21,48 +22,50 @@ public class DetailViewController {
 
 	// 상세조회
 	@RequestMapping("listDetailView")
-	public ModelAndView listDetailView(@ModelAttribute DetailViewVO param) {
+	public ModelAndView listDetailView(@ModelAttribute AcademyVO avo, SubjectVO svo) {
 		ModelAndView mav = new ModelAndView();
 		log.info("listDetailView listDetailView 시작 >>>> ");
 		
-		log.info("listDetailView listDetailView param >>>> " + param);
-		log.info("param.getAno() >>>> " + param.getAno());
-		log.info("param.getAname() >>>> " + param.getAname());
-		log.info("param.getAtel() >>>> " + param.getAtel());
-		log.info("param.getAxpoint() >>>> " + param.getAxpoint());
-		log.info("param.getAypoint() >>>> " + param.getAypoint());
-		log.info("param.getAaddrno() >>>> " + param.getAaddrno());
-		log.info("param.getAaddr1() >>>> " + param.getAaddr1());
-		log.info("param.getAaddr2() >>>> " + param.getAaddr2());
-		log.info("param.getAlogo() >>>> " + param.getAlogo());
-		log.info("param.getCategory_cno() >>>> " + param.getCategory_cno());
-		log.info("param.getAdeleteyn() >>>> " + param.getAdeleteyn());
-		log.info("param.getAinsertdate() >>>> " + param.getAinsertdate());
-		log.info("param.getAupdatedate() >>>> " + param.getAupdatedate());
+		log.info("listDetailView listDetailView avo >>>> " + avo);
+		log.info("avo.getAno() >>>> " + avo.getAno());
+		log.info("avo.getAname() >>>> " + avo.getAname());
+		log.info("avo.getAtel() >>>> " + avo.getAtel());
+		log.info("avo.getAxpoint() >>>> " + avo.getAxpoint());
+		log.info("avo.getAypoint() >>>> " + avo.getAypoint());
+		log.info("avo.getAaddrno() >>>> " + avo.getAaddrno());
+		log.info("avo.getAaddr1() >>>> " + avo.getAaddr1());
+		log.info("avo.getAaddr2() >>>> " + avo.getAaddr2());
+		log.info("avo.getAlogo() >>>> " + avo.getAlogo());
+		log.info("avo.getCategory_cno() >>>> " + avo.getCategory_cno());
+		log.info("avo.getAdeleteyn() >>>> " + avo.getAdeleteyn());
+		log.info("avo.getAinsertdate() >>>> " + avo.getAinsertdate());
+		log.info("avo.getAupdatedate() >>>> " + avo.getAupdatedate());
+		/*
+		log.info("listDetailView listDetailView svo >>>> " + svo);
+		log.info("avo.getAno() >>>> " + avo.getAno());
+		log.info("avo.getAname() >>>> " + avo.getAname());
+		log.info("avo.getAtel() >>>> " + avo.getAtel());
+		log.info("avo.getAxpoint() >>>> " + avo.getAxpoint());
+		log.info("avo.getAypoint() >>>> " + avo.getAypoint());
+		log.info("avo.getAaddrno() >>>> " + avo.getAaddrno());
+		log.info("avo.getAaddr1() >>>> " + avo.getAaddr1());
+		log.info("avo.getAaddr2() >>>> " + avo.getAaddr2());
+		log.info("avo.getAlogo() >>>> " + avo.getAlogo());
+		log.info("avo.getCategory_cno() >>>> " + avo.getCategory_cno());
+		log.info("avo.getAdeleteyn() >>>> " + avo.getAdeleteyn());
+		log.info("avo.getAinsertdate() >>>> " + avo.getAinsertdate());
+		log.info("avo.getAupdatedate() >>>> " + avo.getAupdatedate());
+		*/
 
-		List<DetailViewVO> list = detailViewService.listDetailView(param);
-		log.info("DetailViewController listDetailView list >>> : " + list);
+		List<AcademyVO> academylist = detailViewService.academyviewlist(avo);
+		log.info("DetailViewController listDetailView list >>> : " + academylist);
+		
+		List<SubjectVO> subjectlist = detailViewService.subjectviewlist(svo);
+		log.info("DetailViewController listDetailView list >>> : " + subjectlist);
 
-		int listCnt = list.size();
 
-		for (int i = 0; i < listCnt; i++) {
-			DetailViewVO dvo = (DetailViewVO) list.get(i);
-			log.info("dvo.getAno() >>>> " + dvo.getAno());
-			log.info("dvo.getAname() >>>> " + dvo.getAname());
-			log.info("dvo.getAtel() >>>> " + dvo.getAtel());
-			log.info("dvo.getAxpoint() >>>> " + dvo.getAxpoint());
-			log.info("dvo.getAypoint() >>>> " + dvo.getAypoint());
-			log.info("dvo.getAaddrno() >>>> " + dvo.getAaddrno());
-			log.info("dvo.getAaddr1() >>>> " + dvo.getAaddr1());
-			log.info("dvo.getAaddr2() >>>> " + dvo.getAaddr2());
-			log.info("dvo.getAlogo() >>>> " + dvo.getAlogo());
-			log.info("dvo.getCategory_cno() >>>> " + dvo.getCategory_cno());
-			log.info("dvo.getAdeleteyn() >>>> " + dvo.getAdeleteyn());
-			log.info("dvo.getAinsertdate() >>>> " + dvo.getAinsertdate());
-			log.info("dvo.getAupdatedate() >>>> " + dvo.getAupdatedate());
-		}
-
-		mav.addObject("listDetailView", list);
+		mav.addObject("avo", academylist);
+		mav.addObject("svo", subjectlist);
 		mav.setViewName("search/detailView");
 		log.info("DepartmentController listDepartment mav >>> : " + mav);
 		
