@@ -3,5 +3,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.kosmo.educatch.vo.TestVO" alias="test"/>
+		<typeAlias alias="detailview" type="com.kosmo.educatch.vo.DetailViewVO"/>
+		<typeAlias type="com.kosmo.educatch.vo.SearchVO" alias="search"/>
 	</typeAliases>
 </configuration>
