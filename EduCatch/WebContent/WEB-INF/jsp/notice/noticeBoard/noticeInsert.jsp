@@ -57,16 +57,20 @@
 			<tr>
 				<td>내용</td>
 				<td><textarea name="context" id="context" title="내용"
-						style="width: 50%; height: 400px; padding: 0; margin: 0;"></textarea>
+						style="width: 100%; height: 400px; padding: 0; margin: 0;"></textarea>
 				</td>
 			</tr>
 			<tr>
+			<li><button type="button"><span style="margin-top:4px; margin-bottom:3px; margin-left:5px; font-size:7pt;">가나다라마바사<span style=" font-size:7pt;">(7pt)</span></span></button></li>
+																
+			<!-- 
 				<td>첨부파일</td>
 				<td>
 					<input type="file" value="찾아보기" id="filename1" name="filename1" /><br> 
 					<input type="file" value="찾아보기" id="filename2" name="filename2" /><br> 
 					<input type="file" value="찾아보기" id="filename3" name="filename3" />
 				</td>
+				 -->
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
