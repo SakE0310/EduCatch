@@ -33,7 +33,8 @@ public class FreeMapperImpl extends SqlSessionDaoSupport implements FreeMapper {
 	@Override
 	public int insertFreeBoard(FreeVO param) {
 		// TODO Auto-generated method stub
-		return 0;
+		int ins =(int)getSqlSession().insert("insertFreeBoard");
+		return ins;
 	}
 
 
