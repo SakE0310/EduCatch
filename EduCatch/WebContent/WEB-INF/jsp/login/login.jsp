@@ -4,6 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <title>로그인</title>
 <style type="text/css">
 		#login{
@@ -24,9 +28,9 @@
 			margin : auto;
 			font-weight: bold;
 		}
-		.LOGIN{
+		 #LOGIN{
 			background-image: #007bff;
-		}
+		} 
 		
 		 
 		
@@ -58,7 +62,8 @@
                  aria-label="********">
           
         </div> 
-      <div align ="center" id = "LOIGN" class ="LOGIN"> 	
+		<!-- 로그인버튼 -->
+      <div align ="center"  class ="container"> 	
       <button type="button" class="btn btn-primary" style ="width: 350px">로그인</button>
       </div>  
       
