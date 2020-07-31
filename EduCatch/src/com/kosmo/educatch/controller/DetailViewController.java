@@ -60,6 +60,7 @@ public class DetailViewController {
 			log.info("dvo.getAdeleteyn() >>>> " + dvo.getAdeleteyn());
 			log.info("dvo.getAinsertdate() >>>> " + dvo.getAinsertdate());
 			log.info("dvo.getAupdatedate() >>>> " + dvo.getAupdatedate());
+			log.info("aaaa");
 		}
 
 		mav.addObject("listDetailView", list);
