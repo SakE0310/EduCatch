@@ -18,4 +18,32 @@
 		FROM REVIEWBOARD A
 		ORDER BY 1 DESC
 	</select>
+	
+	
+	<insert id="insertReview" parameterType="review">
+		<selectKey keyProperty="rbno" resultType="String" order="BEFORE">
+			SELECT 'R'||LPAD((SELECT /* +INDEX_DESC(A SYS_C0011581) */              
+			NVL(MAX(SUBSTR(A.RBNO,-5)),0)+1 commNO
+			FROM    REVIEWBOARD A), 5,'0') 
+			FROM DUAL
+		</selectKey>
+		INSERT INTO REVIEWBOARD
+		(
+		    RBNO, 
+		    RBSUBJECT, 
+		    RBNAME,
+		    RBIMG,
+		    RBCONTENT,
+		    ACADEMY_ANO,
+		    MEMBER_MNO,
+		    RBGRADE,
+		    RBDELETEYN,
+		    RBINSERTDATE,
+		    RBUPDATEDATE
+		)
+		VALUES(#{rbno, jdbcType=VARCHAR},#{rbsubject,jdbcType=VARCHAR},#{rbname, jdbcType=VARCHAR},
+			   #{rbimg, jdbcType=VARCHAR},#{rbcontent, jdbcType=VARCHAR},#{academy_ano, jdbcType=VARCHAR},
+			   #{member_mno, jdbcType=VARCHAR},#{rbgrade, jdbcType=VARCHAR},'N',
+			   SYSDATE,SYSDATE)
+	</insert>
 </mapper>

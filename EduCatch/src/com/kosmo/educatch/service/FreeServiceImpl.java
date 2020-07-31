@@ -35,13 +35,17 @@ public class FreeServiceImpl implements FreeService {
 	@Override
 	public FreeVO selectFreeBoard(FreeVO param) {
 		// TODO Auto-generated method stub
+		log.info("selectFreeBoard서비스 진입");
 		return null;
 	}
 
 	@Override
 	public int insertFreeBoard(FreeVO param) {
 		// TODO Auto-generated method stub
-		return 0;
+		log.info("insertFreeBoard서비스 진입");
+		int ins = freeMapper.insertFreeBoard(param);
+		log.info("selectFreeBoard서비스 끝");
+		return ins;
 	}
 
 	@Override

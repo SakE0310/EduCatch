@@ -17,4 +17,28 @@
 	FROM FREEBOARD A
 	ORDER BY 1 DESC
 </select>
+
+<insert id="insertFreeBoard" parameterType="freeboard">
+	INSERT INTO FREEBOARD(
+		FBNO,
+		FBSUBJECT,
+		FBNAME,
+		FBIMG,
+		FBCONTENT,
+		MEMBER_MNO,
+		FBDELETEYN,
+		FBINSERTDATE,
+		FBUPDATEDATE
+	)VALUES(
+		#{fbno, jdbcType=VARCHAR},
+		#{fbsubject, jdbcType=VARCHAR},
+		#{fbname, jdbcType=VARCHAR},
+		#{fbimg, jdbcType=VARCHAR},
+		#{fbcontent, jdbcType=VARCHAR},
+		#{member_mno, jdbcType=VARCHAR},
+		'Y',
+		SYSDATE,
+		SYSDATE
+	)
+</insert>
 </mapper>		

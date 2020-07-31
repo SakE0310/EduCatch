@@ -63,5 +63,29 @@ public class FreeBoardController {
 		log.info("selectFreeBoard함수 끝>>>");
 		return mav;
 	}
+	//자유게시판 등록
+	@RequestMapping("insertfreeboard")
+	public ModelAndView insertFreeBoard(@ModelAttribute FreeVO param) {
+		log.info("insertFreeBoard 함수 진입");
+		log.info("글번호"+param.getFbno());
+		log.info("제목"+param.getFbsubject());
+		log.info(param.getFbname());
+		log.info(param.getFbcontent());
+		log.info(param.getFbimg());
+		log.info(param.getFbdeleteyn());
+		log.info(param.getFbinsertdate());
+		log.info(param.getFbupdatedate());
+		String resultStr="";
+		int result=freeService.insertFreeBoard(param);
+		log.info("result>>>"+result);
+		if(result>0) resultStr="등록완료가 되었습니다";
+		else resultStr="등록에 문제가 있어서 완료하지 못했습니다.";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result",resultStr);
+		mav.setViewName("community/freeboard/insertresult");
+		log.info("mav>>>"+mav);
+		return mav;
+	}
 	
 }

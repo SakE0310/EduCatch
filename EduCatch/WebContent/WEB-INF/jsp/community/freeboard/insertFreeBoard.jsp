@@ -17,7 +17,9 @@
 
 <script type="text/javascript">
 	function insertCommit(){
-		
+		console.log("insertCommit함수 진입");
+		$("#edit").attr("action","insertfreeboard.ec");
+		$("#edit").submit();
 	}
 	
 	var oEditors = [];
@@ -26,7 +28,7 @@
 			oAppRef : oEditors,
 			elPlaceHolder : "fbcontent", //textarea에서 지정한 id와 일치해야 합니다. 
 			//SmartEditor2Skin.html 파일이 존재하는 경로
-			sSkinURI : "../assets/dist/SmartEditor2Skin.html",
+			sSkinURI : "/EduCatch/WebContent/assets/dist/SmartEditor2Skin.html",
 			htParams : {
 				// 툴바 사용 여부 (true:사용/ false:사용하지 않음),글씨체 포인트,정렬,색상등등
 				bUseToolbar : true,
@@ -39,7 +41,7 @@
 			},
 			fOnAppLoad : function() {
 				//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-				oEditors.getById["context"].exec("PASTE_HTML", [ "" ]);
+				oEditors.getById["fbcontext"].exec("PASTE_HTML", [ "" ]);
 			},
 			fCreator : "createSEditor2"
 		});
@@ -59,12 +61,13 @@
 	<jsp:param value="" name=""/>
 	</jsp:include>
 	<!-- action/document/location -->
-	<form id="edit" action="#" method="post" enctype="multipart/form-data">
+	<!-- enctype="multipart/form-data" -->
+	<form id="edit" name="edit" action="#" method="post">
 		<table style="width: 50%" border="1">
 			<tr>
 				<td style="width: 100px">글번호</td>
 				<td><input type="text" id="fbno" name="fbno"
-					style="width: 98%" readonly/></td>
+					style="width: 98%"/></td>
 			</tr>
 			<tr>
 				<td style="width: 100px">제목</td>

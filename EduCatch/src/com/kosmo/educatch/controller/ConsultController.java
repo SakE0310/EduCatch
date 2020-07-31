@@ -21,7 +21,7 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		log.info("ConsultController listConsult >>> 호출성공");
 
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("comunity/consultBoard/consultBoard");
+		mav.setViewName("community/consultBoard/consultBoard");
 		
 		log.info("mav >>> "+mav);
 		log.info("ConsultController listConsult >>> 끝");

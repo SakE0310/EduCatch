@@ -57,6 +57,7 @@
 				</c:if>
 				<c:forEach items="${freeboardlist}" var="row">
 					<tr>				
+						<!-- td align="center"><a href="selectfreeboard.ec?fbno=${row.fbno}">${row.fbno}</a></td -->
 						<td align="center">${row.fbno}</td>
 						<td align="center">${row.fbsubject}</td>
 						<td align="center">${row.fbname}</td>
