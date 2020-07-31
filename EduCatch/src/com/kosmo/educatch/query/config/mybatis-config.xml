@@ -7,5 +7,6 @@
 		<typeAlias type="com.kosmo.educatch.vo.ReviewVO" alias="review"/>
 		<typeAlias type="com.kosmo.educatch.vo.DetailViewVO" alias="detailview"/>
 		<typeAlias type="com.kosmo.educatch.vo.SearchVO" alias="search"/>
+		<typeAlias type="com.kosmo.educatch.vo.NoticeVO" alias="notice"/>
 	</typeAliases>
 </configuration>
