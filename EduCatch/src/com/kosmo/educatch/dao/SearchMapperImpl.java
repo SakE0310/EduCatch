@@ -21,6 +21,4 @@ public class SearchMapperImpl extends SqlSessionDaoSupport implements SearchMapp
 		log.info("Mapper list >>> "+list);
 		return list;
 	}
-	
-	
 }
