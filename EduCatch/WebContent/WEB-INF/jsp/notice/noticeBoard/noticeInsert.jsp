@@ -18,7 +18,7 @@
 	$(function() {
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
-			elPlaceHolder : "context", //textarea에서 지정한 id와 일치해야 합니다. 
+			elPlaceHolder : "ncontent", //textarea에서 지정한 id와 일치해야 합니다. 
 			//SmartEditor2Skin.html 파일이 존재하는 경로
 			sSkinURI : "/EduCatch/assets/dist/SmartEditor2Skin.html",
 			htParams : {
@@ -33,7 +33,7 @@
 			},
 			fOnAppLoad : function() {
 				//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-				oEditors.getById["context"].exec("PASTE_HTML", [ "" ]);
+				//	oEditors.getById["context"].exec("PASTE_HTML", [ "" ]);
 			},
 			fCreator : "createSEditor2"
 		});
@@ -41,10 +41,10 @@
 		//등록버튼 클릭시 form 전송
 		$("#insertData").click(function() {
 			console.log("등록버튼 누름");
-			oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+			//oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 			$("#edit").attr("method","post");
-			$("#edit").attr("enctype","multipart/form-data");
-			$("#edit").attr("action","listNotice.ec");
+			//$("#edit").attr("enctype","multipart/form-data");
+			$("#edit").attr("action","insertNotice.ec");
 			$("#edit").submit();
 		});
 	});
@@ -62,20 +62,20 @@
 		<table style="width: 50%" border="1" align="center">
 			<tr>
 				<td style="width: 100px">제목</td>
-				<td><input type="text" id="title" name="title"
+				<td><input type="text" id="nsubject" name="nsubject"
 					style="width: 98%" /></td>
 			</tr>
 
 			<tr>
 				<td>내용</td>
-				<td><textarea name="context" id="context" title="내용"
+				<td><textarea name="ncontent" id="ncontent" title="내용"
 						style="width: 100%; height: 400px; padding: 0; margin: 0;"></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>첨부파일</td>
 				<td>
-					<input type="file" value="찾아보기" id="filename1" name="filename1" /><br> 
+					<input type="file" value="찾아보기" id="nimg" name="nimg" /><br> 
 					<!-- <input type="file" value="찾아보기" id="filename2" name="filename2" /><br> 
 					<input type="file" value="찾아보기" id="filename3" name="filename3" /> -->
 				</td>

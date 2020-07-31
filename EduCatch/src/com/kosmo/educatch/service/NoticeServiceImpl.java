@@ -31,6 +31,19 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		log.info("NoticeServiceImpl listNotice 끝>>>");
 		return list;
-	}
+	}//end of listNotice
+
+	//=============== 공지사항 등록=============================
+	@Override
+	public int insertNotice(NoticeVO param) {
+		log.info("NoticeServiceImpl insertNotice 시작>>>");
+		
+		int nCnt = 0;
+		nCnt = noticeMapper.insertNotice(param);
+		log.info("nCnt>>>"+nCnt);
+		
+		log.info("NoticeServiceImpl insertNotice 끝>>>");
+		return nCnt;
+	}//end of insertNotice
 
 }

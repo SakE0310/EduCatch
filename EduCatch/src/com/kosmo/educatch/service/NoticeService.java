@@ -6,4 +6,5 @@ import com.kosmo.educatch.vo.NoticeVO;
 
 public interface NoticeService {
 	public List<NoticeVO> listNotice(NoticeVO param);
+	public int insertNotice(NoticeVO param);
 }

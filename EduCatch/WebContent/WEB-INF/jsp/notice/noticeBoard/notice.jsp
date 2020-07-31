@@ -32,7 +32,7 @@
 	$("#insertData").click(function() {
 		console.log("등록버튼 누름");
 		
-		$("#noticeForm").attr("action","insertNotice.ec");
+		$("#noticeForm").attr("action","insertDisplay.ec");
 		$("#noticeForm").attr("method","POST");
 		$("#noticeForm").submit();
 		

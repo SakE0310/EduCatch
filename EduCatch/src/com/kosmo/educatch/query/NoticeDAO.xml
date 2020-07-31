@@ -19,5 +19,37 @@
 	ORDER BY 1 DESC  
 	</select>
 
+
+	<!-- 공지사항 등록 -->
+	<insert id="insertNotice" parameterType="notice">
+	<selectKey keyProperty="nno" resultType="String" order="BEFORE">
+	SELECT 	/*+ INDEX_DESC(SYS_C0011455) */ 		 
+		    'N'||LPAD(
+		    (NVL(MAX(SUBSTR(NNO,-4)),0)+1),5,'0' 
+		    )COMMNO  
+	FROM NOTICE A
+	</selectKey>
+	INSERT INTO NOTICE
+					(
+					         NNO                
+					        ,NSUBJECT       
+					        ,NNAME            
+					        ,NIMG             
+					        ,NCONTENT  
+					        ,NDELETEYN
+					        ,NINSERTDATE
+					        ,NUPDATEDATE   
+					)
+	VALUES(
+					         #{nno, jdbcType=VARCHAR}
+					        ,#{nsubject, jdbcType=VARCHAR}             
+					        ,'관리자'             
+					        ,#{nimg, jdbcType=VARCHAR}             
+					        ,#{ncontent, jdbcType=VARCHAR}             
+					        ,'N'
+					        ,SYSDATE
+					        ,SYSDATE   
+					)
+	</insert>
 </mapper>
 
