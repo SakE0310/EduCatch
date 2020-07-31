@@ -9,6 +9,9 @@
 
 </head>
 <body>
+	<jsp:include page="../../../../top.jsp" flush="true">
+		<jsp:param value="" name=""/>
+	</jsp:include>
 <form id="freeBoardForm" name="freeBoardForm" method="post">
 		<input type="hidden" name="fbno" id="fbno"/>
 	</form>
@@ -24,6 +27,7 @@
 				<col width="220px"/>
 				<col width="120px"/>
 				<col width="110px"/>
+				<col width="110px"/>
 			</colgroup>
 			<thead>
 				<tr>
@@ -35,7 +39,6 @@
 				</tr>
 			</thead>
 			<tbody>
-			
 				<c:if test="${empty freeboardlist}">
 					<tr>
 						<td colspan="6" align="center">
@@ -49,10 +52,6 @@
 						<td align="center">${row.fbname}</td>
 						<td align="center">${row.fbcontent}</td>
 						<td align="center">${row.fbimg}</td>
-						<!-- td align="center">
-							<input type="button" value="[수정/삭제 ]"
-							onclick="updatePopup('${row.fbno}')"/>
-						</td> -->
 					</tr>
 				</c:forEach>
 				<tr>
@@ -60,10 +59,13 @@
 					처리할 버튼을 선택하세요</td>
 					<td align="center">
 					<input type="button" onclick="insertPopup()"
-					value="[등록]"/></td>
+					value="[글쓰기]"/></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+	<jsp:include page="../../../../footer.jsp" flush="true">
+	<jsp:param value="" name=""/>
+	</jsp:include>
 </body>
 </html>

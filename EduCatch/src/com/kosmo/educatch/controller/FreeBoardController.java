@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.educatch.service.FreeService;
 import com.kosmo.educatch.vo.FreeVO;
 
+
+
 @Controller
 public class FreeBoardController {
 	private static Logger log=
@@ -36,7 +38,7 @@ public class FreeBoardController {
 			log.info("글번호"+list.get(i).getFbno());
 			log.info("글번호"+list.get(i).getFbno());
 		}
-		log.info("list.getname()"+list.get(0).getFbname());
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("freeboardlist",list);
 		mav.setViewName("comunity/freeboard/listFreeBoard");
