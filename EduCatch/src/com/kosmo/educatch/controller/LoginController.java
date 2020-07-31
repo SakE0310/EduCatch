@@ -18,7 +18,7 @@ public class LoginController {
 	@RequestMapping("/login.ec")
 	public ModelAndView listNotice( ) {
 		log.info("NoticeController listNotice 시작 >>>");
-
+		log.info("aaa");
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("login/login");
 		
