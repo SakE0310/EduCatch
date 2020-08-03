@@ -49,9 +49,13 @@ $(document).ready(function(){
 	});
 	
 	$('#sendEmail').on('click', function(){
+		if($('#alogo').val() != null && $('#alogo').val() != ""){
+			$('#academyInfo').attr("enctype", "multipart/form-data");
+		}else{
+		
+		}
 		$('#academyInfo').attr("action", "sendAcademyInfo.ec");
 		$('#academyInfo').attr("method", "POST");
-		$('#academyInfo').attr("enctype", "multipart/form-data");
 		$('#academyInfo').submit();
 	});
 });
@@ -92,7 +96,7 @@ function addrCheck(){
 						<h3 class="mb-30">학원정보 등록요청</h3>
 						<form name="academyInfo" id="academyInfo">
 							<div class="mt-10">
-								<input type="email" name="EMAIL" placeholder="Email 주소"
+								<input type="email" name="email" placeholder="Email 주소"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = 'Email 주소'" required
 									class="single-input">
@@ -155,7 +159,7 @@ function addrCheck(){
 								</div>
 								<div class="mt-10 col">
 									<label for="ex_filename" class="genric-btn primary">찾기</label>
-									<input type="file" id="ex_filename" class="upload-hidden">
+									<input type="file" id="ex_filename" name="file" class="upload-hidden">
 								</div>
 							</div>
 							<div class="form-group mt-3">
