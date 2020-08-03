@@ -77,11 +77,10 @@ function addrCheck(){
 
 function ajaxGetMajor(){
 	$.ajax({
-		type : 'GET',
 		url : "getCmajor.ec",
-		dataType : "json",
 	}).done(function(resultParam){
-		alert("resultParam >>> " + resultParam);
+		console.log("resultParam >>> " + resultParam);
+		var a = resultParam.major;
 	}).fail(function(resultParam){
 		
 	});

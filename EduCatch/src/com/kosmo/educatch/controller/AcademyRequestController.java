@@ -14,8 +14,9 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.service.CategoryService;
@@ -165,13 +166,16 @@ public class AcademyRequestController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/getCmajor", method = RequestMethod.GET)
+	@ResponseBody
+	@RequestMapping(value = "/getCmajor")
 	public Map<String,List<SearchVO>> getCmajor(){
 		log.info("getCmajor >>> ");
 		
 		List<SearchVO> list = categoryService.getCmajorList();
 		
 		log.info(list.get(0).getCmajor());
+		
+		
 		
 		Map<String, List<SearchVO>> map = new HashMap<String, List<SearchVO>>();
 		map.put("major", list);
