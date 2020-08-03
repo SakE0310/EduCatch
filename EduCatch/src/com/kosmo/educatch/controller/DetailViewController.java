@@ -35,7 +35,7 @@ public class DetailViewController {
 
 		mav.addObject("avo", academylist);
 		mav.addObject("svo", subjectlist);
-		mav.setViewName("search/detailView");
+		mav.setViewName("search/fuck");
 		log.info("DepartmentController listDepartment mav >>> : " + mav);
 		
 		log.info("listDetailView listDetailView 끝 >>>> ");

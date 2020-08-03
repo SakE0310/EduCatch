@@ -10,6 +10,24 @@
 <meta charset="utf-8" />
 <title>Kakao 지도 시작하기</title>
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		$('ul.tabs li').click(function(){
+			var tab_id = $(this).attr('data-tab');
+	
+			$('ul.tabs li').removeClass('current');
+			$('.tab-content').removeClass('current');
+	
+			$(this).addClass('current');
+			$("#"+tab_id).addClass('current');
+		})
+	});
+	</script>
+
+
 
 <style type="text/css">
 <!-- 이곳은 탭 메뉴 -->
@@ -23,7 +41,6 @@ body{
 	width: 1000px;
 	margin: 0 auto;
 }
-
 
 
 ul.tabs{
@@ -53,7 +70,6 @@ ul.tabs li.current{
 .tab-content.current{
 	display: inherit;
 }
-
 
 
 <!-- 이곳은 카카오맵 API-->
@@ -266,36 +282,9 @@ html, body {
 }
 
 </style>
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript">
-
-$(document).ready(function(){
-	
-	$('ul.tabs li').click(function(){
-		var tab_id = $(this).attr('data-tab');
-
-		$('ul.tabs li').removeClass('current');
-		$('.tab-content').removeClass('current');
-
-		$(this).addClass('current');
-		$("#"+tab_id).addClass('current');
-	})
-
-})
-
-
-$('.starRev span').click(function(){
-  $(this).parent().children('span').removeClass('on');
-  $(this).addClass('on').prevAll('span').addClass('on');
-  return false;
-});
-
-
-
-	</script>
 </head>
 <body>
+
 <!--  학원정보  -->
 <div align="center">
 <c:forEach items="${avo }" var="avo">
