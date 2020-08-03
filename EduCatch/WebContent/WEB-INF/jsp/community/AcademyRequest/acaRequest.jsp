@@ -60,6 +60,11 @@ $(document).ready(function(){
 		$('#academyInfo').attr("method", "POST");
 		$('#academyInfo').submit();
 	});
+	
+	$(".form-select").on('change', 'select', function() {
+		  var setMajor = $("#cmajor").val();
+		  console.log('setmajor >>> ' + setMajor);
+	});
 });
 
 function addrCheck(){
@@ -80,10 +85,40 @@ function ajaxGetMajor(){
 		url : "getCmajor.ec",
 	}).done(function(resultParam){
 		console.log("resultParam >>> " + resultParam);
+		var str="";
+		for(i in resultParam.major){
+			console.log(i);
+			var cmajor = resultParam.major[i].cmajor;
+			str += "<option value='"+cmajor+"'>"+cmajor+"</option>\n";
+		}
+		$('select#cmajor').html(str);
+		$('select#cmajor').niceSelect('update');
 		var a = resultParam.major;
 	}).fail(function(resultParam){
-		
+		alert("초기화에 문제가 발생하였습니다.");
 	});
+
+}
+
+function ajaxGetMinor(param){
+	$.ajax({
+		url : "getCminor.ec",
+		data : param
+	}).done(function(resultParam){
+		console.log("resultParam >>> " + resultParam);
+		var str="";
+		for(i in resultParam.major){
+			console.log(i);
+			var cmajor = resultParam.major[i].cmajor;
+			str += "<option value='"+cmajor+"'>"+cmajor+"</option>\n";
+		}
+		$('select#cmajor').html(str);
+		$('select#cmajor').niceSelect('update');
+		var a = resultParam.major;
+	}).fail(function(resultParam){
+		alert("초기화에 문제가 발생하였습니다.");
+	});
+
 }
 </script>
 </head>
@@ -95,6 +130,7 @@ function ajaxGetMajor(){
 	if(str != null && str != "null"){
 		out.println("<script>\n");
 		out.println("alert('" + str + "');");
+		out.println("location.href='AcaReq.ec'");
 		out.println("</script>\n");
 	}
 %>
@@ -129,7 +165,7 @@ function ajaxGetMajor(){
 							<div class="row">
 								<div class="mt-10 col">
 									<div class="form-select" id="default-select">
-										<select>
+										<select id="cmajor">
 											<option value="">분야구분</option>
 											<option value="2">2</option>
 										</select>
