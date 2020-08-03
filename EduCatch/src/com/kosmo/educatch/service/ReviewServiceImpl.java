@@ -40,10 +40,31 @@ public class ReviewServiceImpl implements ReviewService{
 		return reviewMapper.insertReview(param);
 	}
 
+	//목록페이지에서 글쓰기 페이지로 넘어가기 위한 함수
 	@Override
 	public int insertDisplay(ReviewVO param) {
 		// TODO Auto-generated method stub
 		return reviewMapper.insertDisplay(param);
+	}
+
+	@Override
+	public ReviewVO selectReview(String rbno) {
+		// TODO Auto-generated method stub
+		return reviewMapper.selectReview(rbno);
+	}
+
+	
+	@Override
+	public ReviewVO selectUpdate(String rbno) {
+		// TODO Auto-generated method stub
+		return reviewMapper.selectUpdate(rbno);
+	}
+	
+	
+	@Override
+	public int updateReview(ReviewVO param) {
+		// TODO Auto-generated method stub
+		return reviewMapper.updateReview(param);
 	}
 	
 	

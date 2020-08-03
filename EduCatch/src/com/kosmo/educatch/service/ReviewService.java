@@ -8,5 +8,8 @@ public interface ReviewService {
 	
 	public List<ReviewVO> listReview(ReviewVO param);
 	public int insertReview(ReviewVO param);
+	public int updateReview(ReviewVO param);
 	public int insertDisplay(ReviewVO param);
+	public ReviewVO selectReview(String rbno);
+	public ReviewVO selectUpdate(String rbno);
 }

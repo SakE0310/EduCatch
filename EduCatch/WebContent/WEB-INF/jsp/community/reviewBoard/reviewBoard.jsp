@@ -1,31 +1,52 @@
+<%@page import="com.kosmo.educatch.vo.ReviewVO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>후기 게시판</title>
+<style type="text/css">
+	.tt{	
+			text-align:center;
+			font-size: xx-large;
+			font-weight: bold;
+			
+		}		
+		
+	#aa{	
+			color:black;
+		
+		}
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 
-	
-  $(document).ready(function() {
-	
-	
-	$("#insertPage").click(function() {
-		console.log("insertPage >>> ");
+  	
+ 	 $(document).ready(function() {
+		//글쓰기 버튼 눌렀을 때 실행
+		$("#insertPage").click(function() {
+			console.log("insertPage >>> ");
+			//글쓰기 에디터 화면으로 이동
+			$("#pageForm").attr("action","insertDisplay.ec");
+			$("#pageForm").attr("method","POST");
+			$("#pageForm").submit();	
+		})
+  	});
+ 	 
+ 	 /*
+ 	function updatePopup(rbno){
+		alert(">>>");
+		$("#rbno").val(rbno);
+		$("#pageForm").attr("action","selectReview.ec");
+		$("#pageForm").attr("method","POST");
+		$("#pageForm").submit();
 		
-		$("#reviewForm").attr("action","insertDisplay.ec");
-		$("#reviewForm").attr("method","POST");
-		$("#reviewForm").submit();
-		
-	})
-
-	  
-  });
-  
-  
+	}
+	*/
+  	//검색
 	function listSearch(){
 		console.log("listSearch");
 		
@@ -36,25 +57,26 @@
   
 	
 </script>
-
 <body>
 <jsp:include page="../../../../top.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>
+	<form id="pageForm" name="pageForm">
+		<input type="hidden" id="rbno" name="rbno"/>
+	</form>
 	<br><br><br><br>
-	<form id="reviewForm" name="reviewForm">
 	<div>
 		<table style="margin-left: auto; margin-right: auto;" border="0" cellpadding="1" cellspacing="1">
 			<tr>
-				<th width="650"><h4>후기 게시판</h4></th>
+				<th><h4 class="tt">후기 게시판</h4><br><br><br></th>
 			</tr>
 		</table>
 		<table  style="margin-left: auto; margin-right: auto;" border="1">
 			<colgroup>
 				<col width="120px"/>
-				<col width="220px"/>
-				<col width="120px"/>
 				<col width="110px"/>
+				<col width="120px"/>
+				<col width="220px"/>
 			</colgroup>
 			<thead>	
 				<tr>
@@ -79,22 +101,25 @@
 						</td>
 					</tr>
 				</c:if>
-				<c:forEach items="${listReview}" var="row">
+			<c:forEach items="${listReview}" var="row">
 					<tr align="center">
 						<td>${row.rbno }</td>
 						<td>${row.rbname }</td>
 						<td>${row.academy_ano }</td>
-						<td>${row.rbsubject }</td>
+						<td><a href="selectReview.ec?rbno=${row.rbno }"  id="aa">${row.rbsubject }</a></td>
 						<td>${row.rbinsertdate }</td>
+						<!-- 
+						<td><input type="button" value="[수정/삭제]"
+						onclick="updatePopup('${row.rbno}')"/></td>
+						-->
 					</tr>
 				</c:forEach>			
 			</tbody>
 		</table>
 	</div>
-	</form>
-		<div>
+	<div>
 		<form id="searchForm" name="searchForm">
-			<table border="1" cellpadding="1" cellspacing="1">
+			<table style="margin-left: auto; margin-right: auto;" border="1" cellpadding="1" cellspacing="1">
 				<tr>
 					<th>검색</th>
 					<td>

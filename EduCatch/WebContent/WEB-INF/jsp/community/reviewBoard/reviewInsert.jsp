@@ -3,19 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="-1"/>
 <title>후기 게시판 입력</title>
 <style type="text/css">
-		.starR{
-		  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-		  background-size: auto 100%;
-		  width: 30px;
-		  height: 30px;
-		  display: inline-block;
-		  text-indent: -9999px;
-		  cursor: pointer;
-		}
-		.starR.on{background-position:0 0;}
+
 </style>
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
 <script src ="/EduCatch/assets/js/service/HuskyEZCreator.js"></script>
@@ -50,18 +43,13 @@
 		//저장버튼 클릭시 form 전송
 		$("#save").click(function() {
 			alert("<<<>>>");
-			//oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+			oEditors.getById["rbcontent"].exec("UPDATE_CONTENTS_FIELD", []);
 			$("#edit").attr("action","insertReview.ec");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
 		});
 	});
-	
-	$('.starRev span').click(function(){
-		  $(this).parent().children('span').removeClass('on');
-		  $(this).addClass('on').prevAll('span').addClass('on');
-		  return false;
-		});
+
 </script>
 	
 </head>
@@ -80,7 +68,7 @@
 			<tr>
 				<td style="width: 100px">평점</td>
 				<td>
-
+					
 				</td>
 			</tr>
 			<tr>
@@ -97,14 +85,10 @@
 				</td>
 			</tr>
 			<tr>
-			
-																
-				 
 				<td>첨부파일</td>
 				<td>
 					<input type="file" value="찾아보기" id="rbimg" name="rbimg" /><br> 
 				</td>
-
 			</tr>
 			<tr>
 				<td colspan="3" align="right">

@@ -46,4 +46,36 @@
 			   #{member_mno, jdbcType=VARCHAR},#{rbgrade, jdbcType=VARCHAR},'N',
 			   SYSDATE,SYSDATE)
 	</insert>
+	<!-- 게시물 상세 보기 -->
+	<select id="selectReview" parameterType="String" resultType="review">
+		SELECT 
+				RBNO,
+		        RBSUBJECT,
+		        RBNAME,
+		        RBIMG,
+		        RBCONTENT,
+		        RBGRADE,
+		        TO_CHAR(RBINSERTDATE, 'YYYY-MM-DD') AS RBINSERTDATE
+		FROM REVIEWBOARD
+		WHERE RBNO=#{rbno, jdbcType=VARCHAR}
+	</select>
+	<!-- 수정 상세 보기 -->
+	<select id="selectUpdate" parameterType="String" resultType="review">
+		SELECT 
+				RBNO,
+		        RBSUBJECT,
+		        RBNAME,
+		        RBIMG,
+		        RBCONTENT,
+		        RBGRADE,
+		        TO_CHAR(RBINSERTDATE, 'YYYY-MM-DD') AS RBINSERTDATE
+		FROM REVIEWBOARD
+		WHERE RBNO=#{rbno, jdbcType=VARCHAR}
+	</select>
+	<update id="updateReview" parameterType="review">
+		UPDATE REVIEWBOARD
+		SET RBSUBJECT =#{rbsubject, jdbcType=VARCHAR},
+		    RBCONTENT =#{rbcontent, jdbcType=VARCHAR}
+		WHERE RBNO=#{rbno, jdbcType=VARCHAR}
+	</update>
 </mapper>

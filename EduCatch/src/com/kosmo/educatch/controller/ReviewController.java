@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.service.ReviewService;
@@ -79,10 +80,10 @@ public class ReviewController {
 	
 	//등록 버튼 눌렀을 때
 	@RequestMapping("insertReview.ec")
-	public ModelAndView insertReview(@ModelAttribute ReviewVO param) {
+	public ModelAndView insertReview(@ModelAttribute ReviewVO param,
+									 HttpServletRequest request) {
 		log.info("ReviewController insertReview >>> 호출 성공 ");
-		log.info("param.getRbcontent() >> "+param.getRbcontent());
-		log.info("param.getRbsubject() >> "+param.getRbsubject());
+
 		String resultStr="";
 		int result=reviewService.insertReview(param);
 		
@@ -91,8 +92,12 @@ public class ReviewController {
 		else
 			resultStr = "등록 실패";
 		
-		log.info("param.getRbcontent() >> "+param.getRbcontent());
+		log.info("param.getRbno() >> "+param.getRbno());
 		log.info("param.getRbsubject() >> "+param.getRbsubject());
+		log.info("param.getRbgrade() >> "+param.getRbgrade());
+		log.info("param.getAcademy_ano() >> "+param.getAcademy_ano());
+		log.info("param.getRbcontent() >> "+param.getRbcontent());
+		log.info("param.getRbimg() >> "+param.getRbimg());
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result", resultStr);
@@ -100,6 +105,61 @@ public class ReviewController {
 		log.info("ReviewController insertReview >>> 끝 ");
 		return mav;
 	
+	}
+	
+	//상세 조회
+	@RequestMapping("/selectReview.ec")
+	public ModelAndView selectReview(@RequestParam(value="rbno", required=false) String rbno) {
+		//value="rbno", required=false
+		log.info("ReviewController selectReview >>> 호출 성공");
+		
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("ReviewVO", reviewService.selectReview(rbno));
+		mav.setViewName("community/reviewBoard/detailReview");
+
+		
+		log.info("ReviewController selectReview >>> 끝");
+		
+		return mav;
+	}
+	
+	//업데이트 상세 조회
+	@RequestMapping("/selectUpdate.ec")
+	public ModelAndView selectUpdate(@RequestParam(value="rbno", required=false) String rbno) {
+		//value="rbno", required=false
+		log.info("ReviewController selectUpdate >>> 호출 성공");
+		
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("ReviewVOO", reviewService.selectUpdate(rbno));
+		mav.setViewName("community/reviewBoard/updateReview");
+		
+		
+		log.info("ReviewController selectUpdate >>> 끝");
+		
+		return mav;
+	}
+	
+	//수정 버튼 눌렀을 때
+	@RequestMapping("/updateReview.ec")
+	public ModelAndView updateReview(@ModelAttribute ReviewVO param) {
+		log.info("ReviewController updateReview >>> 호출 성공");
+		String resultStr="";
+		int result=reviewService.updateReview(param);
+		
+		if(result>0)
+			resultStr="수정 성공";
+		else
+			resultStr="수정 실패";
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("result",resultStr);
+		mav.setViewName("community/reviewBoard/updateReview");
+		
+		return mav;
 	}
 	
 	
