@@ -1,96 +1,86 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>ê³µì§€ì‚¬í•­</title>
-<!-- SmartEditorë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ì„œ ë‹¤ìŒ jsíŒŒì¼ì„ ì¶”ê°€ (ê²½ë¡œ í™•ì¸) -->
-<script src ="/EduCatch/assets/js/service/HuskyEZCreator.js"></script>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<!-- SmartEditor¸¦ »ç¿ëÇÏ±â À§ÇØ¼­ ´ÙÀ½ jsÆÄÀÏÀ» Ãß°¡ (°æ·Î È®ÀÎ) -->
+<script type="text/javascript"
+	src="/EduCatch/assets/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 
-<!-- jQueryë¥¼ ì‚¬ìš©í•˜ê¸°ìœ„í•´ jQueryë¼ì´ë¸ŒëŸ¬ë¦¬ ì¶”ê°€ -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<style type="text/css">
-	
-</style>
+<!-- jQuery¸¦ »ç¿ëÇÏ±âÀ§ÇØ jQuery¶óÀÌºê·¯¸® Ãß°¡ -->
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+
+<!-- function ÇÔ¼ö Â¥¾ßÇÔ -->
+
 <script type="text/javascript">
 	var oEditors = [];
 	$(function() {
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
-			elPlaceHolder : "ncontent", //textareaì—ì„œ ì§€ì •í•œ idì™€ ì¼ì¹˜í•´ì•¼ í•©ë‹ˆë‹¤. 
-			//SmartEditor2Skin.html íŒŒì¼ì´ ì¡´ì¬í•˜ëŠ” ê²½ë¡œ
+			elPlaceHolder : "context", //textarea¿¡¼­ ÁöÁ¤ÇÑ id¿Í ÀÏÄ¡ÇØ¾ß ÇÕ´Ï´Ù. 
+			//SmartEditor2Skin.html ÆÄÀÏÀÌ Á¸ÀçÇÏ´Â °æ·Î
 			sSkinURI : "/EduCatch/assets/dist/SmartEditor2Skin.html",
 			htParams : {
-				// íˆ´ë°” ì‚¬ìš© ì—¬ë¶€ (true:ì‚¬ìš©/ false:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ),ê¸€ì”¨ì²´ í¬ì¸íŠ¸,ì •ë ¬,ìƒ‰ìƒë“±ë“±
+				// Åø¹Ù »ç¿ë ¿©ºÎ (true:»ç¿ë/ false:»ç¿ëÇÏÁö ¾ÊÀ½),±Û¾¾Ã¼ Æ÷ÀÎÆ®,Á¤·Ä,»ö»óµîµî
 				bUseToolbar : true,
-				// ì…ë ¥ì°½ í¬ê¸° ì¡°ì ˆë°” ì‚¬ìš© ì—¬ë¶€ (true:ì‚¬ìš©/ false:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
+				// ÀÔ·ÂÃ¢ Å©±â Á¶Àı¹Ù »ç¿ë ¿©ºÎ (true:»ç¿ë/ false:»ç¿ëÇÏÁö ¾ÊÀ½)
 				bUseVerticalResizer : true,
-				// ëª¨ë“œ íƒ­(Editor | HTML | TEXT) ì‚¬ìš© ì—¬ë¶€ (true:ì‚¬ìš©/ false:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
+				// ¸ğµå ÅÇ(Editor | HTML | TEXT) »ç¿ë ¿©ºÎ (true:»ç¿ë/ false:»ç¿ëÇÏÁö ¾ÊÀ½)
 				bUseModeChanger : true,
 				fOnBeforeUnload : function() {
 				}
 			},
 			fOnAppLoad : function() {
-				//ê¸°ì¡´ ì €ì¥ëœ ë‚´ìš©ì˜ text ë‚´ìš©ì„ ì—ë””í„°ìƒì— ë¿Œë ¤ì£¼ê³ ì í• ë•Œ ì‚¬ìš©
-				oEditors.getById["ir1"].exec("PASTE_HTML", ["ê¸°ì¡´ DBì— ì €ì¥ëœ ë‚´ìš©ì„ ì—ë””í„°ì— ì ìš©í•  ë¬¸êµ¬"]);
-
-				//oEditors.getById["context"].exec("PASTE_HTML", [ "" ]);
+				//±âÁ¸ ÀúÀåµÈ ³»¿ëÀÇ text ³»¿ëÀ» ¿¡µğÅÍ»ó¿¡ »Ñ·ÁÁÖ°íÀÚ ÇÒ¶§ »ç¿ë
+				oEditors.getById["context"].exec("PASTE_HTML", [ "" ]);
 			},
 			fCreator : "createSEditor2"
 		});
-		
-		//ë“±ë¡ë²„íŠ¼ í´ë¦­ì‹œ form ì „ì†¡
-		$("#insertData").click(function() {
-			console.log("ë“±ë¡ë²„íŠ¼ ëˆ„ë¦„");
-			oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
-			$("#edit").attr("method","post");
-			//$("#edit").attr("enctype","multipart/form-data");
-			$("#edit").attr("action","insertNotice.ec");
+		//ÀúÀå¹öÆ° Å¬¸¯½Ã form Àü¼Û
+		$("#save").click(function() {
+			//oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 			$("#edit").submit();
 		});
 	});
 </script>
-	
-</head>
+
+<style type="text/css">
+</style>
 <body>
-<!-- action/document/location -->
-	<form id="edit">
-		<table align="center">
+	<!-- action/document/location -->
+	<form id="edit" action="insertNotice.ec" method="post">
+		<table style="width: 50%" border="1">
 			<tr>
-				<td><h2>ê³µì§€ì‚¬í•­ ê²Œì‹œíŒ ë“±ë¡</h2></td>
-			</tr>
-		</table>
-		<table style="width: 50%" border="1" align="center">
-			<tr>
-				<td style="width: 100px">ì œëª©</td>
+				<td style="width: 100px">Á¦¸ñ</td>
 				<td><input type="text" id="nsubject" name="nsubject"
 					style="width: 98%" /></td>
 			</tr>
 
 			<tr>
-				<td>ë‚´ìš©</td>
-				<td><textarea name="ncontent" id="ncontent" title="ë‚´ìš©"
-						style="width: 100%; height: 400px; padding: 0; margin: 0;"></textarea>
+				<td>³»¿ë</td>
+				<td><textarea name="context" id="context" title="³»¿ë"
+						style="width: 50%; height: 400px; padding: 0; margin: 0;"></textarea>
 				</td>
 			</tr>
 			<tr>
-				<td>ì²¨ë¶€íŒŒì¼</td>
+				<td>Ã·ºÎÆÄÀÏ</td>
 				<td>
-					<input type="file" value="ì°¾ì•„ë³´ê¸°" id="nimg" name="nimg" /><br> 
-					<!-- <input type="file" value="ì°¾ì•„ë³´ê¸°" id="filename2" name="filename2" /><br> 
-					<input type="file" value="ì°¾ì•„ë³´ê¸°" id="filename3" name="filename3" /> -->
+					<input type="file" value="Ã£¾Æº¸±â" id="nimg" name="nimg" /><br> 
+						<!-- <input type="file" value="Ã£¾Æº¸±â" id="filename2" name="filename2" /><br> 
+						<input type="file" value="Ã£¾Æº¸±â" id="filename3" name="filename3" />	 -->
 				</td>
-				
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="insertData" value="ë“±ë¡" />
-				 <input type="reset" value="ì·¨ì†Œ" /> 
+				 <input type="button" id="save" value="ÀúÀå" />
+				 <input type="reset" value="Ãë¼Ò" /> 
+				 <input type="button" value="ÀÓ½ÃÀúÀå" />
 				</td>
 			</tr>
 		</table>
 	</form>
-
 </body>
 </html>
