@@ -32,7 +32,22 @@ public class NoticeServiceImpl implements NoticeService {
 		log.info("NoticeServiceImpl listNotice 끝>>>");
 		return list;
 	}//end of listNotice
-
+	
+	//=============== 공지사항 조회=============================
+	@Override
+	public NoticeVO selectNotice(String nno) {
+		log.info("NoticeServiceImpl selectNotice 시작>>>");
+		
+		log.info("nno>>>"+nno);
+		NoticeVO nvo = new NoticeVO();
+		nvo = noticeMapper.selectNotice(nno);
+		log.info("nvo>>>"+nvo);
+		
+		log.info("NoticeServiceImpl selectNotice 끝>>>");
+		return nvo;
+	}
+	
+	
 	//=============== 공지사항 등록=============================
 	@Override
 	public int insertNotice(NoticeVO param) {
@@ -45,5 +60,18 @@ public class NoticeServiceImpl implements NoticeService {
 		log.info("NoticeServiceImpl insertNotice 끝>>>");
 		return nCnt;
 	}//end of insertNotice
+
+	//=============== 공지사항 수정=============================
+	@Override
+	public int updateNotice(NoticeVO param) {
+		log.info("NoticeServiceImpl updateNotice 시작>>>");
+		
+		int nCnt =noticeMapper.updateNotice(param);
+		log.info("nCnt>>>"+nCnt);
+		
+		log.info("NoticeServiceImpl updateNotice 끝>>>");
+		return nCnt;
+	}
+
 
 }

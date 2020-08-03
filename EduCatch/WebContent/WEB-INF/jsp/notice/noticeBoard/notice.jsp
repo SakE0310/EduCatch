@@ -8,12 +8,17 @@
 <title>공지사항</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style type="text/css">
-	#main{
+	#nno_color{
+		color: black;
+	}
+	
+	
+	/* #main{
 				width:960px;
 				height:600px;
 				background: #e4ebeb;
 				margin: 0 auto;
-		}
+		} */
 		
 	/* #sideBanner{
 			position: absolute;
@@ -53,14 +58,14 @@
 	</div> -->
 	<div id="main">
 		<div>
-			<table border="0" cellpadding="1" cellspacing="1">
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
 				<td align="center"><h1>공지사항 게시판 목록</h1></td>
 			</tr>
 			</table>
 		</div>
 		<div>
-			<table border="1">
+			<table border="1" align="center">
 			<colgroup>
 				<col width="120px"/>
 				<col width="600px"/>
@@ -84,7 +89,9 @@
 				
 				<c:forEach items ="${noticeList}" var ="row">
 				<tr align="center">
-					<td>${row.nno}</td>
+					<td>
+					<a href="selectNotice.ec?nno=${row.nno }" id="nno_color">${row.nno}</a>
+					</td>
 					<td>${row.nsubject}</td>
 					<td>${row.nname}</td>
 					<td>${row.nupdatedate}</td>
@@ -94,8 +101,8 @@
 				<tr>
 				<td colspan="4" align="right">
 				<input type="button" value="등록" id="insertData">
-				<input type="button" value="수정" id="updateData">
-				<input type="button" value="삭제" id="deleteData">
+				<!-- <input type="button" value="수정" id="updateData">
+				<input type="button" value="삭제" id="deleteData"> -->
 				</td>
 			</tr>
 			</tbody>	

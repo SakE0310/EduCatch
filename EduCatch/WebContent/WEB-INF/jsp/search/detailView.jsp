@@ -10,40 +10,8 @@
 <meta charset="utf-8" />
 <title>Kakao 지도 시작하기</title>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript">
 
-$(document).ready(function(){
-	
-	$('ul.tabs li').click(function(){
-		var tab_id = $(this).attr('data-tab');
-
-		$('ul.tabs li').removeClass('current');
-		$('.tab-content').removeClass('current');
-
-		$(this).addClass('current');
-		$("#"+tab_id).addClass('current');
-	})
-
-})
-
-	</script>
-</head>
-
-<body>
-<div align="center">
-<c:forEach items="${avo }" var="avo">
-	로고 : ${avo.alogo } <br>
-	<h3>학원 이름 : ${avo.aname }</h3>
-	학원주소 : ${avo.aaddr1 }<br>
-	전화번호 : ${avo.atel }<br>
-
-	평점 : REVIEWBOARD.RBGRADE<br>
-</c:forEach>
-</div>
-
-<style>
-
+<style type="text/css">
 <!-- 이곳은 탭 메뉴 -->
 
 body{
@@ -296,8 +264,48 @@ html, body {
 .info .link {
 	color: #5085BB;
 }
+
 </style>
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	$('ul.tabs li').click(function(){
+		var tab_id = $(this).attr('data-tab');
+
+		$('ul.tabs li').removeClass('current');
+		$('.tab-content').removeClass('current');
+
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+	})
+
+})
+
+
+$('.starRev span').click(function(){
+  $(this).parent().children('span').removeClass('on');
+  $(this).addClass('on').prevAll('span').addClass('on');
+  return false;
+});
+
+
+
+	</script>
+</head>
+<body>
+<!--  학원정보  -->
+<div align="center">
+<c:forEach items="${avo }" var="avo">
+	<h3>학원 이름 : ${avo.aname }</h3>
+	학원주소 : ${avo.aaddr1 } ${avo.aaddr2 }<br>
+	전화번호 : ${avo.atel }<br>
+
+	평점 : REVIEWBOARD.RBGRADE<br>
+</c:forEach>
+</div>
 	<div align="center">
 		<div class="map_wrap">
 			<div id="map"
@@ -320,9 +328,26 @@ html, body {
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>
 		<script>
+		<%
+		Object obj = request.getAttribute("avo");
+	
+		if(obj != null){
+			ArrayList aList = (ArrayList)obj;
+			int nCnt = aList.size();
+			
+			if(aList !=null && nCnt > 0 ){
+				
+				for(int i=0; i < nCnt; i++){
+					AcademyVO avo = (AcademyVO)aList.get(i);
+					
+					double AXPOINT = Double.parseDouble(avo.getAxpoint());
+					double AYPOINT = Double.parseDouble(avo.getAypoint());
+					
+		%>
+		
 			var container = document.getElementById('map');
 			var options = {
-				center : new kakao.maps.LatLng(37.478651, 126.878658),
+				center : new kakao.maps.LatLng(<%= AXPOINT %>, <%= AYPOINT %>),
 				level : 3
 			};
 	
@@ -332,15 +357,10 @@ html, body {
 			// markers 배열로 두어 marker 들을 넣음
 			var markers = [];
 			var marker = new kakao.maps.Marker({
-				position : new kakao.maps.LatLng(37.478651, 126.878658)
-			});
-			
-			var marker1 = new kakao.maps.Marker({
-				position : new kakao.maps.LatLng(37.479051, 126.879919)
+				position : new kakao.maps.LatLng(<%= AXPOINT %>, <%= AYPOINT %>)
 			});
 			
 			markers.push(marker);
-			markers.push(marker1);
 			
 			// markers를 map에 세팅
 			for (var i = 0; i < markers.length; i++) {
@@ -374,25 +394,32 @@ html, body {
 			// 커스텀 오버레이에 표시할 컨텐츠 입니다
 			// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
 			// 별도의 이벤트 메소드를 제공하지 않습니다 
+			
+			
+			
 			var content = '<div class="wrap">' + 
 			            '    <div class="info">' + 
 			            '        <div class="title">' + 
-			            '          	한국소프트웨어인재개발원' + 
+			            '          <%= avo.getAname()%>  ' + 
 			            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
 			            '        </div>' + 
 			            '        <div class="body">' + 
 			            '            <div class="img">' +
-			            '                <img src="http://www.ikosmo.co.kr/images/common/logo_center_v2.jpg" width="73" height="70">' +
+			            '                <img src="/EduCatch/assets/img/<%= avo.getAlogo() %>" border=0 width="73" height="70" >' +
 			            '           </div>' + 
 			            '            <div class="desc">' + 
-			            '                <div class="ellipsis">서울특별시 금천구 가산동 426-5 월드 메르디앙 벤처 센터 2 차 410 호</div>' + 
-			            '                <div class="jibun ellipsis">(우) 08505 (지번) 가산동 426-5</div>' + 
-			            '                <div><a href="http://www.ikosmo.co.kr/" target="_blank" class="link">홈페이지</a></div>' + 
+			            '                <div class="ellipsis"><%= avo.getAaddr1()%><%= avo.getAaddr2() %> </div>' + 
+			            '                <div class="jibun ellipsis">(우)<%= avo.getAaddrno()%> </div> '+ 
 			            '            </div>' + 
 			            '        </div>' + 
 			            '    </div>' +    
 			            '</div>';
-	
+			
+			<%
+							}
+						}
+					}
+			%>
 			// 마커 위에 커스텀오버레이를 표시합니다
 			// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
 			var overlay = new kakao.maps.CustomOverlay({
@@ -412,6 +439,8 @@ html, body {
 			}
 		</script>
 	</div>
+	
+	
 	<br><br><br><br><br>
 	<hr align="center" style="border: solid 5px black;">
 	<br><br><br><br><br>
@@ -423,7 +452,9 @@ html, body {
 		<li class="tab-link" data-tab="tab-2">수업정보</li>
 		<li class="tab-link" data-tab="tab-3">후기</li>
 	</ul>
-
+	
+	
+	<!-- 학원정보 -->
 	<div id="tab-1" class="tab-content current">
 	<c:forEach items="${avo }" var="avo">
 	
@@ -431,7 +462,7 @@ html, body {
 		학원이름  : ${avo.aname }<br>
 		전화번호 : ${avo.atel }<br>
 		우편번호 : ${avo.aaddrno }<br>
-		주소 : ${avo.aaddr1 }<br>
+		주소 : ${avo.aaddr1 } ${avo.aaddr2 }<br>
 		<br>
 		게시일 : ${avo.ainsertdate }<br>
 		수정일 : ${avo.aupdatedate }<br>
@@ -439,6 +470,7 @@ html, body {
 	</c:forEach>
 	</div>
 	
+	<!-- 과목정보 -->
 	<div id="tab-2" class="tab-content">
 	<c:forEach items="${svo }" var="svo">
 	
