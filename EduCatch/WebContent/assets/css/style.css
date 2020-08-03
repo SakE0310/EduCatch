@@ -8581,7 +8581,7 @@ del {
   border-radius: 0px;
   height: 40px;
   background: #f9f9ff;
-  padding-left: 45px;
+  /* padding-left: 0px; */
   padding-right: 40px;
   width: 100%;
 }

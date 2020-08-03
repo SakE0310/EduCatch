@@ -24,6 +24,8 @@ input[type="file"] {
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	ajaxGetMajor();
+	
 	$('#ex_filename').on('change', function(){
 		
 		var filename;
@@ -72,6 +74,18 @@ function addrCheck(){
 		}
 	}).open();
 }
+
+function ajaxGetMajor(){
+	$.ajax({
+		type : 'GET',
+		url : "getCmajor.ec",
+		dataType : "json",
+	}).done(function(resultParam){
+		alert("resultParam >>> " + resultParam);
+	}).fail(function(resultParam){
+		
+	});
+}
 </script>
 </head>
 <body>
@@ -115,12 +129,12 @@ function addrCheck(){
 							</div>
 							<div class="row">
 								<div class="mt-10 col">
-									<input type="text" name="cmajor" placeholder="분야구분"
-										onblur="this.placeholder = '분야구분'" required
-										class="single-input" readonly>
-								</div>
-								<div class="mt-10 col">
-									<a href="#" class="genric-btn primary">찾기</a>
+									<div class="form-select" id="default-select">
+										<select>
+											<option value="">분야구분</option>
+											<option value="2">2</option>
+										</select>
+									</div>
 								</div>
 							</div>
 							<div class="mt-10">

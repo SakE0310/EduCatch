@@ -1,6 +1,9 @@
 package com.kosmo.educatch.controller;
 
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -12,13 +15,19 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosmo.educatch.service.CategoryService;
+import com.kosmo.educatch.vo.SearchVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 public class AcademyRequestController {
+	
+	@Autowired
+	private CategoryService categoryService;
 	
 	Logger log = Logger.getLogger(AcademyRequestController.class);
 	@Autowired
@@ -154,5 +163,19 @@ public class AcademyRequestController {
 		
 		mv.setViewName("community/AcademyRequest/acaRequest");
 		return mv;
+	}
+	
+	@RequestMapping(value = "/getCmajor", method = RequestMethod.GET)
+	public Map<String,List<SearchVO>> getCmajor(){
+		log.info("getCmajor >>> ");
+		
+		List<SearchVO> list = categoryService.getCmajorList();
+		
+		log.info(list.get(0).getCmajor());
+		
+		Map<String, List<SearchVO>> map = new HashMap<String, List<SearchVO>>();
+		map.put("major", list);
+		
+		return map;
 	}
 }
