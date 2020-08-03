@@ -15,11 +15,31 @@ public class NoticeMapperImpl extends SqlSessionDaoSupport implements NoticeMapp
 		return list;
 	}//end of listNotice
 	
+	//=============== 공지사항 조회=============================
+	@Override
+	public NoticeVO selectNotice(String nno) {
+		NoticeVO nvo= new NoticeVO();
+		nvo=getSqlSession().selectOne("selectNotice");
+		return nvo;
+	}//end of selectNotice
+
 	//=============== 공지사항 등록 =============================
 	@Override
 	public int insertNotice(NoticeVO param) {
 		int nCnt = getSqlSession().insert("insertNotice");
 		return nCnt;
 	}//end of insertNotice
+
+	
+	//=============== 공지사항 수정 =============================
+	@Override
+	public int updateNotice(NoticeVO param) {
+		int nCnt = getSqlSession().update("updateNotice");
+		return nCnt;
+	}//end of updateNotice
+
+
+	
+	
 
 }

@@ -18,7 +18,23 @@
 	        A.NDELETEYN ='N'
 	ORDER BY 1 DESC  
 	</select>
-
+	
+	<!-- 공지사항 조회 -->
+	<select id="selectNotice" parameterType="String" resultType="notice">
+		SELECT
+		        A.NNO                                   AS NNO
+		        ,A.NSUBJECT                             AS NSUBJECT
+		        ,A.NNAME                                AS NNAME
+		        ,A.NIMG                                 AS NIMG
+		        ,A.NCONTENT                             AS NCONTENT
+		        ,TO_CHAR(A.NINSERTDATE,'YYYY-MM-DD')    AS NINSERTDATE
+		        ,TO_CHAR(A.NUPDATEDATE,'YYYY-MM-DD')    AS NUPDATEDATE
+		FROM
+        		 NOTICE A
+		WHERE
+		        NDELETEYN='N'
+		        AND NNO=#{nno, jdbcType=VARCHAR}
+	</select>
 
 	<!-- 공지사항 등록 -->
 	<insert id="insertNotice" parameterType="notice">
@@ -51,5 +67,18 @@
 					        ,SYSDATE   
 					)
 	</insert>
+	
+	
+	<!-- 공지사항 수정 -->
+	<update id="updateNotice" parameterType="notice">
+		UPDATE NOTICE
+		SET 
+			    NSUBJECT =  #{nsubject, jdbcType=VARCHAR}
+			    ,NCONTENT = #{ncontent, jdbcType=VARCHAR} 
+			    ,NUPDATEDATE=SYSDATE
+			    
+		WHERE
+				 NNO=#{nno, jdbcType=VARCHAR}
+	</update>
 </mapper>
 

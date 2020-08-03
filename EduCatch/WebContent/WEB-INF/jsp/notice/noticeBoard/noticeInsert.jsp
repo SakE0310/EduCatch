@@ -1,47 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8"">
 <title>Insert title here</title>
-<!-- SmartEditor¸¦ »ç¿ëÇÏ±â À§ÇØ¼­ ´ÙÀ½ jsÆÄÀÏÀ» Ãß°¡ (°æ·Î È®ÀÎ) -->
+<!-- SmartEditorë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•´ì„œ ë‹¤ìŒ jsíŒŒì¼ì„ ì¶”ê°€ (ê²½ë¡œ í™•ì¸) -->
 <script type="text/javascript"
 	src="/EduCatch/assets/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 
-<!-- jQuery¸¦ »ç¿ëÇÏ±âÀ§ÇØ jQuery¶óÀÌºê·¯¸® Ãß°¡ -->
+<!-- jQueryë¥¼ ì‚¬ìš©í•˜ê¸°ìœ„í•´ jQueryë¼ì´ë¸ŒëŸ¬ë¦¬ ì¶”ê°€ -->
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 
-<!-- function ÇÔ¼ö Â¥¾ßÇÔ -->
+<!-- function í•¨ìˆ˜ ì§œì•¼í•¨ -->
 
 <script type="text/javascript">
 	var oEditors = [];
 	$(function() {
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
-			elPlaceHolder : "context", //textarea¿¡¼­ ÁöÁ¤ÇÑ id¿Í ÀÏÄ¡ÇØ¾ß ÇÕ´Ï´Ù. 
-			//SmartEditor2Skin.html ÆÄÀÏÀÌ Á¸ÀçÇÏ´Â °æ·Î
+			elPlaceHolder : "context", //textareaì—ì„œ ì§€ì •í•œ idì™€ ì¼ì¹˜í•´ì•¼ í•©ë‹ˆë‹¤. 
+			//SmartEditor2Skin.html íŒŒì¼ì´ ì¡´ì¬í•˜ëŠ” ê²½ë¡œ
 			sSkinURI : "/EduCatch/assets/dist/SmartEditor2Skin.html",
 			htParams : {
-				// Åø¹Ù »ç¿ë ¿©ºÎ (true:»ç¿ë/ false:»ç¿ëÇÏÁö ¾ÊÀ½),±Û¾¾Ã¼ Æ÷ÀÎÆ®,Á¤·Ä,»ö»óµîµî
+				// íˆ´ë°” ì‚¬ìš© ì—¬ë¶€ (true:ì‚¬ìš©/ false:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ),ê¸€ì”¨ì²´ í¬ì¸íŠ¸,ì •ë ¬,ìƒ‰ìƒë“±ë“±
 				bUseToolbar : true,
-				// ÀÔ·ÂÃ¢ Å©±â Á¶Àı¹Ù »ç¿ë ¿©ºÎ (true:»ç¿ë/ false:»ç¿ëÇÏÁö ¾ÊÀ½)
+				// ì…ë ¥ì°½ í¬ê¸° ì¡°ì ˆë°” ì‚¬ìš© ì—¬ë¶€ (true:ì‚¬ìš©/ false:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
 				bUseVerticalResizer : true,
-				// ¸ğµå ÅÇ(Editor | HTML | TEXT) »ç¿ë ¿©ºÎ (true:»ç¿ë/ false:»ç¿ëÇÏÁö ¾ÊÀ½)
+				// ëª¨ë“œ íƒ­(Editor | HTML | TEXT) ì‚¬ìš© ì—¬ë¶€ (true:ì‚¬ìš©/ false:ì‚¬ìš©í•˜ì§€ ì•ŠìŒ)
 				bUseModeChanger : true,
 				fOnBeforeUnload : function() {
 				}
 			},
 			fOnAppLoad : function() {
-				//±âÁ¸ ÀúÀåµÈ ³»¿ëÀÇ text ³»¿ëÀ» ¿¡µğÅÍ»ó¿¡ »Ñ·ÁÁÖ°íÀÚ ÇÒ¶§ »ç¿ë
+				//ê¸°ì¡´ ì €ì¥ëœ ë‚´ìš©ì˜ text ë‚´ìš©ì„ ì—ë””í„°ìƒì— ë¿Œë ¤ì£¼ê³ ì í• ë•Œ ì‚¬ìš©
 				oEditors.getById["context"].exec("PASTE_HTML", [ "" ]);
 			},
 			fCreator : "createSEditor2"
 		});
-		//ÀúÀå¹öÆ° Å¬¸¯½Ã form Àü¼Û
+		//ì €ì¥ë²„íŠ¼ í´ë¦­ì‹œ form ì „ì†¡
 		$("#save").click(function() {
-			//oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+			oEditors.getById["context"].exec("UPDATE_CONTENTS_FIELD", []);
 			$("#edit").submit();
 		});
 	});
@@ -54,30 +54,29 @@
 	<form id="edit" action="insertNotice.ec" method="post">
 		<table style="width: 50%" border="1">
 			<tr>
-				<td style="width: 100px">Á¦¸ñ</td>
+				<td style="width: 100px">ì œëª©</td>
 				<td><input type="text" id="nsubject" name="nsubject"
 					style="width: 98%" /></td>
 			</tr>
 
 			<tr>
-				<td>³»¿ë</td>
-				<td><textarea name="context" id="context" title="³»¿ë"
+				<td>ë‚´ìš©</td>
+				<td><textarea name="context" id="context" title="ë‚´ìš©"
 						style="width: 50%; height: 400px; padding: 0; margin: 0;"></textarea>
 				</td>
 			</tr>
 			<tr>
-				<td>Ã·ºÎÆÄÀÏ</td>
+				<td>ì²¨ë¶€íŒŒì¼</td>
 				<td>
-					<input type="file" value="Ã£¾Æº¸±â" id="nimg" name="nimg" /><br> 
-						<!-- <input type="file" value="Ã£¾Æº¸±â" id="filename2" name="filename2" /><br> 
-						<input type="file" value="Ã£¾Æº¸±â" id="filename3" name="filename3" />	 -->
+					<input type="file" value="ì°¾ì•„ë³´ê¸°" id="nimg" name="nimg" /><br> 
+						<!-- <input type="file" value="ì°¾ì•„ë³´ê¸°" id="filename2" name="filename2" /><br> 
+						<input type="file" value="ì°¾ì•„ë³´ê¸°" id="filename3" name="filename3" />	 -->
 				</td>
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="save" value="ÀúÀå" />
-				 <input type="reset" value="Ãë¼Ò" /> 
-				 <input type="button" value="ÀÓ½ÃÀúÀå" />
+				 <input type="button" id="save" value="ë“±ë¡" />
+				 <input type="reset" value="ì·¨ì†Œ" /> 
 				</td>
 			</tr>
 		</table>

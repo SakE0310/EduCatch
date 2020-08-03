@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.service.NoticeService;
@@ -56,8 +57,25 @@ public class NoticeController {
 		return mav;
 	}//end of listNotice
 	
+	
+	//===============공지사항 관리자모드 : 조회================================
+	@RequestMapping("selectNotice.ec")
+	public ModelAndView selectNotice(@ModelAttribute NoticeVO param) {
+		 String nno= (String)param.getNno(); 
+		 log.info("nno>>>"+nno);
+		 
+		
+		NoticeVO nvo= noticeService.selectNotice(nno);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("NoticeVO", nvo);
+		mav.setViewName("notice/noticeBoard/noticeSelect");
+		
+		log.info("NoticeController selectNotice 끝 >>>");
+		return mav;
+	}
+	
 	//===============공지사항 등록페이지 이동================================
-	@RequestMapping("insertDisplayNotice")
+	@RequestMapping("insertDisplayNotice.ec")
 	public ModelAndView insertDisplay() {
 		log.info("NoticeController insertDisplay 시작 >>>");
 		
@@ -68,12 +86,20 @@ public class NoticeController {
 		return mav;
 	}//end of insertDisplay
 	
+	
 	//===============공지사항 관리자모드 : 등록================================
 	@RequestMapping("/insertNotice.ec")
 	public ModelAndView insertNotice(HttpServletRequest request
 									,@ModelAttribute NoticeVO param) {
 		log.info("NoticeController insertNotice 시작 >>>");
 		
+		String context = request.getParameter("context");
+		String subject = request.getParameter("nsubject");
+		
+		log.info("context>>>"+context);
+		log.info("subject>>>"+subject);
+		
+		param.setNcontent(context);
 		log.info("param.getNno()>>>"+param.getNno());
 		log.info("param.getNsubject()>>>"+param.getNsubject());
 		log.info("param.getNname()>>>"+param.getNname());
