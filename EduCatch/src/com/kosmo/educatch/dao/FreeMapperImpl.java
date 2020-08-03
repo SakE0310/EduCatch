@@ -25,11 +25,12 @@ public class FreeMapperImpl extends SqlSessionDaoSupport implements FreeMapper {
 	@Override
 	public FreeVO selectFreeBoard(FreeVO param) {
 		// TODO Auto-generated method stub
-		return null;
+		FreeVO freevo =(FreeVO)getSqlSession().selectOne("selectFreeBoard");
+		return freevo;
 	}
 
 
-
+	//입력 mapper
 	@Override
 	public int insertFreeBoard(FreeVO param) {
 		// TODO Auto-generated method stub
@@ -38,19 +39,21 @@ public class FreeMapperImpl extends SqlSessionDaoSupport implements FreeMapper {
 	}
 
 
-
+	//수정 mapper
 	@Override
 	public int updateFreeBoard(FreeVO param) {
 		// TODO Auto-generated method stub
-		return 0;
+		int upd =(int)getSqlSession().update("updateFreeBoard");
+		return upd;
 	}
 
 
-
+	//삭제 mapper
 	@Override
 	public int deleteFreeBoard(FreeVO param) {
 		// TODO Auto-generated method stub
-		return 0;
+		int del =(int)getSqlSession().delete("deleteFreeBoard");
+		return del;
 	}
 
 }

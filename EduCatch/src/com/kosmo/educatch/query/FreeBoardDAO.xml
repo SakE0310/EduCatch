@@ -15,7 +15,10 @@
 		A.FBINSERTDATE AS FBINSERTDATE,
 		A.FBUPDATEDATE AS FBUPDATEDATE	
 	FROM FREEBOARD A
-	ORDER BY 1 DESC
+	<where>
+		A.FBDELETEYN ='Y'
+		ORDER BY 1 DESC
+	</where>
 </select>
 
 <insert id="insertFreeBoard" parameterType="freeboard">
@@ -41,4 +44,31 @@
 		SYSDATE
 	)
 </insert>
+
+<select id="selectFreeBoard" parameterType="freeboard" resultType="freeboard">
+	SELECT 		FBNO,
+				FBSUBJECT,
+				FBNAME,
+				FBIMG,
+				FBCONTENT,
+				MEMBER_MNO,
+				FBDELETEYN,
+				TO_CHAR(FBINSERTDATE,'YYYYMMDD') FBINSERTDATE,
+				TO_CHAR(FBUPDATEDATE,'YYYYMMDD') FBUPDATEDATE
+		FROM FREEBOARD
+		<![CDATA[
+		WHERE FBNO=#{fbno}
+		]]>
+</select>
+<update id="updateFreeBoard" parameterType="freeboard">
+	UPDATE FREEBOARD
+	SET FBSUBJECT=#{fbsubject},
+		FBCONTENT=#{fbcontent}
+	<![CDATA[
+	WHERE FBDELETEYN='Y' AND 
+	FBNO=#{fbno}
+	]]>
+</update>
+<update id="deleteFreeBoard" parameterType="freeboard">
+</update>
 </mapper>		

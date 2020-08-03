@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kosmo.educatch.vo.FreeVO"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,12 +17,17 @@
 <!-- function 함수 짜야함 -->
 
 <script type="text/javascript">
-	function insertCommit(){
-		console.log("insertCommit함수 진입");
-		$("#edit").attr("action","insertfreeboard.ec");
+	function updateCommit(){
+		console.log("updateCommit함수 진입");
+		$("#edit").attr("action","updatefreeboard.ec");
 		$("#edit").submit();
 	}
-	
+	function deleteCommit(){
+		console.log("deleteCommit함수 진입");
+		alert("삭제하시겠습니까??");
+		$("#edit").attr("action","deletefreeboard.ec");
+		$("#edit").submit();
+	}
 	var oEditors = [];
 	$(function() {
 		nhn.husky.EZCreator.createInIFrame({
@@ -62,28 +68,33 @@
 	</jsp:include>
 	<!-- action/document/location -->
 	<!-- enctype="multipart/form-data" -->
-	<form id="edit" name="edit" method="post">
+	<form id="edit" name="edit" action="#" method="post">
 		<table style="width: 50%" border="1">
+		<% 
+			Object obj = request.getAttribute("freevo"); 
+			if(obj!=null){
+				FreeVO freevo = (FreeVO)obj;
+			%>
 			<tr>
 				<td style="width: 100px">글번호</td>
 				<td><input type="text" id="fbno" name="fbno"
-					style="width: 98%"/></td>
+					style="width: 98%"/ value=<%=freevo.getFbno() %>></td>
 			</tr>
 			<tr>
 				<td style="width: 100px">제목</td>
 				<td><input type="text" id="fbsubject" name="fbsubject"
-					style="width: 98%" /></td>
+					style="width: 98%" value=<%=freevo.getFbsubject() %> /></td>
 			</tr>
 			<tr>
 				<td style="width: 100px">작성자</td>
 				<td><input type="text" id="fbname" name="fbname"
-					style="width: 98%" /></td>
+					style="width: 98%" value=<%=freevo.getFbname() %>/></td>
 			</tr>
 
 			<tr>
 				<td>내용</td>
 				<td><textarea name="fbcontent" id="fbcontent" title="내용"
-						style="width: 50%; height: 400px; padding: 0; margin: 0;"></textarea>
+						style="width: 50%; height: 400px; padding: 0; margin: 0;"><%=freevo.getFbcontent() %></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -94,10 +105,14 @@
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="insertcommit" value="등록완료" onclick="insertCommit()" />
-				 <input type="button" id="save" value="임시저장" />
+				 <input type="button" id="updatecommit" value="수정" onclick="updateCommit()" />
+				 <input type="button" id="deletecommit" value="삭제" onclick="deleteCommit()" />
+				 <!-- input type="button" id="save" value="임시저장" / -->
 				</td>
 			</tr>
+			<%
+			} 
+			%>
 		</table>
 	</form>
 	<jsp:include page="../../../../footer.jsp" flush="true">

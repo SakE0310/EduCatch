@@ -19,6 +19,7 @@ public class FreeServiceImpl implements FreeService {
 	@Autowired
 	private FreeMapper freeMapper;
 
+	//조회서비스
 	@Override
 	public List<FreeVO> listFreeBoard(FreeVO param) {
 		// TODO Auto-generated method stub
@@ -31,14 +32,16 @@ public class FreeServiceImpl implements FreeService {
 		log.info("listFreeBoard함수 진입 끝(목록)");
 		return list;
 	}
-
+	//selectFreeBoard서비스
 	@Override
 	public FreeVO selectFreeBoard(FreeVO param) {
 		// TODO Auto-generated method stub
 		log.info("selectFreeBoard서비스 진입");
-		return null;
+		FreeVO freevo = freeMapper.selectFreeBoard(param);
+		return freevo;
 	}
 
+	//입력 서비스
 	@Override
 	public int insertFreeBoard(FreeVO param) {
 		// TODO Auto-generated method stub
@@ -47,17 +50,23 @@ public class FreeServiceImpl implements FreeService {
 		log.info("selectFreeBoard서비스 끝");
 		return ins;
 	}
-
+	//수정 서비스
 	@Override
 	public int updateFreeBoard(FreeVO param) {
 		// TODO Auto-generated method stub
-		return 0;
+		log.info("updateFreeBoard서비스 진입");
+		int upd = freeMapper.updateFreeBoard(param);
+		log.info("updateFreeBoard서비스 진입 끝");
+		return upd;
 	}
-
+	//삭제 서비스
 	@Override
 	public int deleteFreeBoard(FreeVO param) {
 		// TODO Auto-generated method stub
-		return 0;
+		log.info("deleteFreeBoard서비스 진입");
+		int del = freeMapper.deleteFreeBoard(param);
+		log.info("deleteFreeBoard서비스 진입 끝");
+		return del;
 	}
 
 }
