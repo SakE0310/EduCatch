@@ -57,7 +57,7 @@ public class NoticeController {
 	}//end of listNotice
 	
 	//===============공지사항 등록페이지 이동================================
-	@RequestMapping("insertDisplay")
+	@RequestMapping("insertDisplayNotice")
 	public ModelAndView insertDisplay() {
 		log.info("NoticeController insertDisplay 시작 >>>");
 		
