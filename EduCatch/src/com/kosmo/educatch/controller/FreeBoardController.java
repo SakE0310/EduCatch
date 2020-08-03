@@ -57,28 +57,42 @@ public class FreeBoardController {
 		ModelAndView mav = new ModelAndView();
 		log.info("fbno>>>"+param.getFbno());
 		if(param.getFbno().length()==0) {
-			mav.addObject("mode","insert");
+			mav.setViewName("community/freeboard/insertFreeBoard");
 		}
-		mav.setViewName("community/freeboard/insertFreeBoard");
 		log.info("selectfreeboardI함수 끝>>>");
 		return mav;
 	}
-	//자유게시판 상세정보조회(수정,삭제일경우)
-	@RequestMapping("selectfreeboardUD")
-	public ModelAndView selectFreeBoardUD(@ModelAttribute FreeVO param) {
-		log.info("selectfreeboardUD함수 시작>>>");
+	//자유게시판 상세정보조회(수정,삭제일경우->상세정보조회)
+	@RequestMapping("selectfreeboardDetail")
+	public ModelAndView selectfreeboarddDetail(@ModelAttribute FreeVO param) {
+		log.info("selectfreeboarddDetail함수 시작>>>");
 		ModelAndView mav = new ModelAndView();
 		log.info("fbno>>>"+param.getFbno());
 		
 		if(param.getFbno().length()>0 && param.getFbno()!=null) {
 			FreeVO freevo = freeService.selectFreeBoard(param);
 			mav.addObject("freevo", freevo);
-			mav.addObject("mode", "update");
 		}
-		mav.setViewName("community/freeboard/updateFreeBoard");
-		log.info("selectfreeboardUD함수 끝>>>");
+		mav.setViewName("community/freeboard/freeDetail");
+		log.info("selectfreeboarddDetail함수 끝>>>");
 		return mav;
 	}
+	
+	//자유게시판 상세정보조회(수정,삭제일경우->수정게시판으로 이동)
+		@RequestMapping("selectfreeboardUD")
+		public ModelAndView selectFreeBoardUD(@ModelAttribute FreeVO param) {
+			log.info("selectfreeboardUD함수 시작>>>");
+			ModelAndView mav = new ModelAndView();
+			log.info("fbno>>>"+param.getFbno());
+			
+			if(param.getFbno().length()>0 && param.getFbno()!=null) {
+				FreeVO freevo = freeService.selectFreeBoard(param);
+				mav.addObject("freevo", freevo);
+			}
+			mav.setViewName("community/freeboard/updateFreeBoard");
+			log.info("selectfreeboardUD함수 끝>>>");
+			return mav;
+		}
 	//자유게시판 등록
 	@RequestMapping("insertfreeboard")
 	public ModelAndView insertFreeBoard(@ModelAttribute FreeVO param) {
@@ -91,7 +105,7 @@ public class FreeBoardController {
 		log.info("삭제여부"+param.getFbdeleteyn());
 		log.info("입력일"+param.getFbinsertdate());
 		log.info("수정일"+param.getFbupdatedate());
-		log.info("updateFreeBoard함수 끝");
+		log.info("insertFreeBoard함수 끝");
 		String resultStr="";
 		int result=freeService.insertFreeBoard(param);
 		log.info("result>>>"+result);
@@ -101,7 +115,7 @@ public class FreeBoardController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",resultStr);
-		mav.setViewName("community/freeboard/insertResult");
+		mav.setViewName("community/freeboard/result");
 		log.info("mav>>>"+mav);
 		return mav;
 	}
@@ -126,7 +140,7 @@ public class FreeBoardController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result", updateStr);
-		mav.setViewName("community/freeboard/updateResult");
+		mav.setViewName("community/freeboard/result");
 		
 		log.info("updateFreeBoard함수 끝");
 		return mav;

@@ -18,6 +18,7 @@
 <script type="text/javascript">
 	function insertCommit(){
 		console.log("insertCommit함수 진입");
+		alert("글쓰기 등록을 완료하시겠습니까??");
 		$("#edit").attr("action","insertfreeboard.ec");
 		$("#edit").submit();
 	}
@@ -28,7 +29,7 @@
 			oAppRef : oEditors,
 			elPlaceHolder : "fbcontent", //textarea에서 지정한 id와 일치해야 합니다. 
 			//SmartEditor2Skin.html 파일이 존재하는 경로
-			sSkinURI : "/EduCatch/WebContent/assets/dist/SmartEditor2Skin.html",
+			sSkinURI : "/EduCatch/assets/dist/SmartEditor2Skin.html",
 			htParams : {
 				// 툴바 사용 여부 (true:사용/ false:사용하지 않음),글씨체 포인트,정렬,색상등등
 				bUseToolbar : true,
@@ -46,8 +47,8 @@
 			fCreator : "createSEditor2"
 		});
 		//저장버튼 클릭시 form 전송
-		$("#save").click(function() {
-			oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+		$("#insertcommit").click(function() {
+			oEditors.getById["fbcontent"].exec("UPDATE_CONTENTS_FIELD", []);
 			$("#edit").submit();
 		});
 	});
@@ -63,7 +64,7 @@
 	<!-- action/document/location -->
 	<!-- enctype="multipart/form-data" -->
 	<form id="edit" name="edit" method="post">
-		<table style="width: 50%" border="1">
+		<table style="margin-left: auto; margin-right: auto;" border="1" >
 			<tr>
 				<td style="width: 100px">글번호</td>
 				<td><input type="text" id="fbno" name="fbno"
@@ -95,7 +96,6 @@
 			<tr>
 				<td colspan="3" align="right">
 				 <input type="button" id="insertcommit" value="등록완료" onclick="insertCommit()" />
-				 <input type="button" id="save" value="임시저장" />
 				</td>
 			</tr>
 		</table>

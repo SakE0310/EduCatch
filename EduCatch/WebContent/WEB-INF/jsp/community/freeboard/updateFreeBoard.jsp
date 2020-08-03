@@ -19,6 +19,7 @@
 <script type="text/javascript">
 	function updateCommit(){
 		console.log("updateCommit함수 진입");
+		alert("수정을 완료하시겠습니까??");
 		$("#edit").attr("action","updatefreeboard.ec");
 		$("#edit").submit();
 	}
@@ -34,7 +35,7 @@
 			oAppRef : oEditors,
 			elPlaceHolder : "fbcontent", //textarea에서 지정한 id와 일치해야 합니다. 
 			//SmartEditor2Skin.html 파일이 존재하는 경로
-			sSkinURI : "/EduCatch/WebContent/assets/dist/SmartEditor2Skin.html",
+			sSkinURI : "/EduCatch/assets/dist/SmartEditor2Skin.html",
 			htParams : {
 				// 툴바 사용 여부 (true:사용/ false:사용하지 않음),글씨체 포인트,정렬,색상등등
 				bUseToolbar : true,
@@ -52,8 +53,8 @@
 			fCreator : "createSEditor2"
 		});
 		//저장버튼 클릭시 form 전송
-		$("#save").click(function() {
-			oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+		$("#updatecommit").click(function() {
+			oEditors.getById["fbcontent"].exec("UPDATE_CONTENTS_FIELD", []);
 			$("#edit").submit();
 		});
 	});
@@ -69,7 +70,7 @@
 	<!-- action/document/location -->
 	<!-- enctype="multipart/form-data" -->
 	<form id="edit" name="edit" action="#" method="post">
-		<table style="width: 50%" border="1">
+		<table style="margin-left: auto; margin-right: auto;" border="1" >
 		<% 
 			Object obj = request.getAttribute("freevo"); 
 			if(obj!=null){
@@ -88,7 +89,7 @@
 			<tr>
 				<td style="width: 100px">작성자</td>
 				<td><input type="text" id="fbname" name="fbname"
-					style="width: 98%" value=<%=freevo.getFbname() %>/></td>
+					style="width: 98%" value=<%=freevo.getFbname() %> /></td>
 			</tr>
 
 			<tr>
@@ -105,8 +106,8 @@
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="updatecommit" value="수정" onclick="updateCommit()" />
-				 <input type="button" id="deletecommit" value="삭제" onclick="deleteCommit()" />
+				 <input type="button" id="updatecommit" value="수정완료" onclick="updateCommit()" />
+				 <input type="button" id="deletecommit" value="삭제완료" onclick="deleteCommit()" />
 				 <!-- input type="button" id="save" value="임시저장" / -->
 				</td>
 			</tr>

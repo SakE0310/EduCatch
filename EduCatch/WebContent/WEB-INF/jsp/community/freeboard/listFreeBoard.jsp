@@ -60,7 +60,7 @@
 			%>
 					<tr>			
 						<td align="center"><%=freevo.getFbno() %></td>					
-						<td align="center"><a href="selectfreeboardUD.ec?fbno=<%=freevo.getFbno() %>" style="color:black;"><%=freevo.getFbsubject() %></a></td>
+						<td align="center"><a href="selectfreeboardDetail.ec?fbno=<%=freevo.getFbno() %>" style="color:black;"><%=freevo.getFbsubject() %></a></td>
 						<td align="center"><%=freevo.getFbname() %></td>
 						<td align="center"><%=freevo.getFbcontent() %></td>
 						<td align="center"><%=freevo.getFbimg() %></td>
