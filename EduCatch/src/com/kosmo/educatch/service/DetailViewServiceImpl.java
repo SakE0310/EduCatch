@@ -22,9 +22,9 @@ public class DetailViewServiceImpl implements DetailViewService {
 
 	// 학원정보
 	@Override
-	public List<AcademyVO> academyviewlist(AcademyVO param) {
+	public List<AcademyVO> academyViewList(AcademyVO param) {
 		List<AcademyVO> list = new ArrayList<AcademyVO>();
-		list = detailViewMapper.academyviewlist(param);
+		list = detailViewMapper.academyViewList(param);
 
 		log.info("DetailViewServiceImpl academyviewlist >>>> ");
 		log.info("DetailViewServiceImpl academyviewlist param >>>> " + param);
@@ -34,9 +34,9 @@ public class DetailViewServiceImpl implements DetailViewService {
 
 	// 과목정보
 	@Override
-	public List<SubjectVO> subjectviewlist(SubjectVO param) {
+	public List<SubjectVO> subjectViewList(SubjectVO param) {
 		List<SubjectVO> list = new ArrayList<SubjectVO>();
-		list = detailViewMapper.subjectviewlist(param);
+		list = detailViewMapper.subjectViewList(param);
 
 		log.info("DetailViewServiceImpl subjectviewlist >>>> ");
 		log.info("DetailViewServiceImpl subjectviewlist param >>>> " + param);

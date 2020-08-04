@@ -6,7 +6,7 @@ import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.SubjectVO;
 
 public interface DetailViewMapper {
-	public List<AcademyVO> academyviewlist(AcademyVO param);
-	public List<SubjectVO> subjectviewlist(SubjectVO param);
+	public List<AcademyVO> academyViewList(AcademyVO param);
+	public List<SubjectVO> subjectViewList(SubjectVO param);
 
 }

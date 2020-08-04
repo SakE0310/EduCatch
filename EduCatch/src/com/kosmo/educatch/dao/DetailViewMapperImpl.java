@@ -15,16 +15,16 @@ public class DetailViewMapperImpl extends SqlSessionDaoSupport implements Detail
 
 	//학원정보
 	@Override
-	public List<AcademyVO> academyviewlist(AcademyVO param) {
+	public List<AcademyVO> academyViewList(AcademyVO param) {
 		log.info("DetailViewMapperImpl.academyviewlist >>>> ");
-		return getSqlSession().selectList("DetailViewMapper.academyviewlist",param);
+		return getSqlSession().selectList("DetailViewMapper.academyViewList",param);
 	}
 	
 	//과목정보
 	@Override
-	public List<SubjectVO> subjectviewlist(SubjectVO param){
+	public List<SubjectVO> subjectViewList(SubjectVO param){
 		log.info("DetailViewMapperImpl.subjectviewlist >>>> ");
-		return getSqlSession().selectList("DetailViewMapper.subjectviewlist",param);
+		return getSqlSession().selectList("DetailViewMapper.subjectViewList",param);
 	}
 
 }

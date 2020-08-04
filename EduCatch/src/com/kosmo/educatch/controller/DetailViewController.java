@@ -26,10 +26,10 @@ public class DetailViewController {
 		ModelAndView mav = new ModelAndView();
 		log.info("listDetailView listDetailView 시작 >>>> ");
 
-		List<AcademyVO> academylist = detailViewService.academyviewlist(avo);
+		List<AcademyVO> academylist = detailViewService.academyViewList(avo);
 		log.info("DetailViewController listDetailView list >>> : " + academylist);
 		
-		List<SubjectVO> subjectlist = detailViewService.subjectviewlist(svo);
+		List<SubjectVO> subjectlist = detailViewService.subjectViewList(svo);
 		log.info("DetailViewController listDetailView list >>> : " + subjectlist);
 
 
