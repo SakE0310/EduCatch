@@ -10,48 +10,18 @@
 		<title>Insert title here</title>
 		<script type="text/javascript">
 		$(document).ready(function(){
-			$('#button').click(function(){
-				var st = $('#cityForm');
-				console.log("st >>> "+st);
-				callAjax(st);
-			});
  			
 			$('#complete').click(function(){
- 				var city = document.getElementById("city").value;
+ 				var city = document.getElementsByName("city");
+ 				var arr = [].slice.call(city);
  				console.log("city >>> "+city);
+ 				console.log("arr >>> "+arr);
  				var urls = "searchMainAgain.ec?city="+city;
  				console.log("urls >>> "+urls);
  				opener.window.location = urls;
- 				close();
+//				close();
  			});
-			
-// 			$('#complete').click(function(){
-// 				$('#cityForm').attr("action","searchMainAgain.ec");
-// 				$('#cityForm').attr("method","post");
-// 				$('#cityForm').submit();
-// 			});
 		});
-		
-		function callAjax(st){
-			urls = "searchAreaList.ec";
-			datas = {district : $(st).val()};
-			console.log(urls);
-			console.log(datas);
-			$.ajax({
-				type : "post",
-				url : urls,
-				data : datas,
-				success : whenSuccess,
-				error : whenError
-			});
-			function whenSuccess(resData){
-				$('#areaData').html(resData);
-			}
-			function whenError(){
-				alert("error");
-			}
-		}
-		
 		</script>
 <%
 	String district = request.getParameter("district");
@@ -64,6 +34,9 @@
 		System.out.println("areaData object >>> "+ob);
 	ArrayList aList = (ArrayList)ob;
 		System.out.println("areaData aList >>> "+aList);
+		%>
+		
+		<%
 	for(int i=0;i<aList.size();i++){
 	SearchVO param = (SearchVO)aList.get(i);
 		System.out.println("areaData param >>> "+param);
@@ -77,6 +50,6 @@
 	</form>
 	<br>
 	<br>
-	<input type="button" id="complete" value="설정완료" onclick="completeFuc()">
+	<input type="button" id="complete" value="설정완료" >
 	</body>
 </html>

@@ -16,7 +16,6 @@
 	<!-- district select data -->
 	<select id="selectArea" parameterType="search" resultType="search">
 	SELECT 
-	        A.DISTRICT   AS DISTRICT,
 	        A.CITY       AS CITY
 	FROM    AREA A
 	WHERE	A.DISTRICT = #{district}
@@ -57,5 +56,15 @@
 	        A.CMAJOR    AS CMAJOR,
 	        A.CMINOR    AS CMINOR
 	FROM    CATEGORY A
+	</select>
+
+	<select id="selectCate" parameterType="search" resultType="search">
+	SELECT 
+	        A.CNO       AS CNO,
+	        A.CMAJOR    AS CMAJOR,
+	        A.CMINOR    AS CMINOR
+	FROM    CATEGORY A
+	WHERE	A.CMAJOR = #{cmajor}
+	ORDER BY 1 DESC
 	</select>
 </mapper>

@@ -19,10 +19,10 @@ public class SearchServiceImpl implements SearchService{
 	private SearchMapper searchMapper;
 	//지역 list
 	@Override
-	public List<SearchVO> selectArea(SearchVO param) {
+	public List<SearchVO> selectArea(String district) {
 		// TODO Auto-generated method stub
 		log.info("service selectArea start >>> ");
-		List<SearchVO> list = searchMapper.selectArea(param);
+		List<SearchVO> list = searchMapper.selectArea(district);
 		log.info("service selectArea end >>> ");
 		log.info("service selectArea list >>> "+list);
 		return list;
@@ -57,6 +57,16 @@ public class SearchServiceImpl implements SearchService{
 		List<SearchVO> list = searchMapper.searchCateList(param);
 		log.info("service searchCateList end >>> ");
 		log.info("service searchCateList list >>> "+list);
+		return list;
+	}
+
+	@Override
+	public List<SearchVO> selectCate(SearchVO param) {
+		// TODO Auto-generated method stub
+		log.info("service selectCate start >>> ");
+		List<SearchVO> list = searchMapper.selectCate(param);
+		log.info("service selectCate end >>> ");
+		log.info("service selectCate list >>> "+list);
 		return list;
 	}
 }

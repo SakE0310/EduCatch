@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 <%@ page import="com.kosmo.educatch.vo.SearchVO" %>
 <!DOCTYPE html>
 <html>
@@ -43,16 +44,34 @@
 		<input type="button" name="category" value="카테고리선택" onclick="catePopup()">
 	</h2>
 	</div>
-<%
+<%	
 	Object ob = request.getAttribute("cityForm");
 	if(ob!=null){
-		System.out.println("main.jsp object >>> "+ob);
-	String city = (String)ob;
-		System.out.println("main.jsp city>>> "+city);
+		System.out.println("main.jsp cityForm object >>> "+ob);
+	
+	String city = ob.toString();
+		System.out.println("main.jsp cityForm city >>> "+city);
 %>
+
 	<div>
 		<h4 align="center">
 			<input type="button" id="city" name="city" value="#<%=city%>">
+		</h4>
+	</div>
+<%
+	}
+%>
+<%
+	Object obc = request.getAttribute("cateForm");
+	if(obc!=null){
+		System.out.println("main.jsp cateForm object >>> "+obc);
+	
+	String cmajor = obc.toString();
+		System.out.println("main.jsp cateForm city >>> "+cmajor);
+%>
+	<div>
+		<h4 align="center">
+			<input type="button" id="cmajor" name="cmajor" value="#<%=cmajor%>">
 		</h4>
 	</div>
 	<div>
