@@ -93,7 +93,7 @@
 					</td>
 					<td>${row.nsubject}</td>
 					<td>${row.nname}</td>
-					<td>${row.nupdatedate}</td>
+					<td>${row.ninsertdate}</td>
 				</tr>	
 				</c:forEach>
 				
