@@ -1,6 +1,6 @@
 package com.kosmo.educatch.vo;
 
-public class LoginVO {
+public class MemberVO {
 
 		//로그인
 		private String mid;
@@ -18,7 +18,7 @@ public class LoginVO {
 
 
 
-		public LoginVO(String mid, String mpw, String mname, String mtel, String maddrno, String maddr1, String maddr2,
+		public MemberVO(String mid, String mpw, String mname, String mtel, String maddrno, String maddr1, String maddr2,
 				String mauth, String memailchk, String mdeleteyn, String mupdatedate) {
 			this.mid = mid;
 			this.mpw = mpw;

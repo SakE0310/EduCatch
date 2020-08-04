@@ -1,10 +1,13 @@
 package com.kosmo.educatch.dao;
 
-public class LoginMapper {
+import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.AMemberVO;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+public interface LoginMapper {
+	
+		MemberVO loginCheck(MemberVO mvo);
+		
+		AMemberVO aLoginCheck(AMemberVO avo);
+	
 	}
 
-}
