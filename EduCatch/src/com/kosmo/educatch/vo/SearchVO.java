@@ -12,7 +12,7 @@ public class SearchVO {
 	
 	public SearchVO(){
 		
-	};
+	}
 	
 	public SearchVO(String cno, String cmajor, String cminor, String district, String city) {
 		super();
