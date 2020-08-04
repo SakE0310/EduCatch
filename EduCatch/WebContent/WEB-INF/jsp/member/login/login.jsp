@@ -47,7 +47,7 @@
 		
 </head>
 <body>
-	<jsp:include page="../../../top.jsp" flush="true">
+	<jsp:include page="../../../../top.jsp" flush="true">
 	<jsp:param value="" name=""/>
 	</jsp:include>
  		 <form name = "loginForm" id = "loginForm" method ="post"> 
@@ -80,7 +80,7 @@
      			 <hr style="height:4px;border-width:1px;color:black;background-color: #d9d9d9;width:350px"></div>
  			 </form>
 
-	<jsp:include page="../../../footer.jsp" flush="true">
+	<jsp:include page="../../../../footer.jsp" flush="true">
 	<jsp:param value="" name=""/>
 	</jsp:include>
 </body>

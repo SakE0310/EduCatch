@@ -22,17 +22,21 @@ public class LoginController {
 	@RequestMapping("/login.ec")
 	public ModelAndView listNotice( ) {
 		log.info("NoticeController listNotice 시작 >>>");
-		log.info("aaa");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("login/login");
+		mav.setViewName("member/login/login");
 		
 		log.info("LoginController login 끝 >>>");
 		return mav;
 	
 	}//end  of login.jsp
+	
+	
+	
+	
+	
 }
 
-    // 로그인
+  
 
 
 
