@@ -27,18 +27,12 @@
 			font-weight: bold;
 		}
 	
-	   .login__button.login__button--submit {
-	    background-color: #0074e9;
+		.genric-btn.primary {
 	    color: #fff;
-	    padding: 16px 17px;
-	    font-family: apple sd gothic neo,malgun gothic,nanumbarungothic,nanumgothic,dotum,sans-serif;
-	    font-size: 17px;
-	    line-height: 1px;
-	    display: block;
-	    padding-left: 0;
-	    padding-right: 0;
+	    background: #140C40;
+	    border: 1px solid transparent;
 	    width: 350px;
-    }
+		}
 		
 		
 		 
@@ -74,7 +68,7 @@
      		   </div> 
 
 				<div align ="center">
-    			<button class="login__button login__button--submit _loginSubmitButton" type="submit" >로그인</button>
+    			<button class="genric-btn primary" type="submit" >로그인</button>
 				</div>
     			  <div align ="center" id = "LOIGN" class ="LOGIN"> 
      			 <hr style="height:4px;border-width:1px;color:black;background-color: #d9d9d9;width:350px"></div>

@@ -13,13 +13,14 @@ public class MemberVO {
 		private String mauth;
 		private String memailchk;
 		private String mdeleteyn;
+		private String minsertdate;
 		private String mupdatedate;
 		
 
 
 
 		public MemberVO(String mid, String mpw, String mname, String mtel, String maddrno, String maddr1, String maddr2,
-				String mauth, String memailchk, String mdeleteyn, String mupdatedate) {
+				String mauth, String memailchk, String mdeleteyn,String minsertdate, String mupdatedate) {
 			this.mid = mid;
 			this.mpw = mpw;
 			this.mname = mname;
@@ -30,6 +31,7 @@ public class MemberVO {
 			this.mauth = mauth;
 			this.memailchk = memailchk;
 			this.mdeleteyn = mdeleteyn;
+			this.minsertdate = minsertdate;
 			this.mupdatedate = mupdatedate;
 		}
 
@@ -151,6 +153,17 @@ public class MemberVO {
 
 		public void setMdeleteyn(String mdeleteyn) {
 			this.mdeleteyn = mdeleteyn;
+		}
+		
+		
+		public String getMinsertdate() {
+			return minsertdate;
+			
+		}
+		
+		public void setMinsertdate(String minserdate) {
+			this.minsertdate = minserdate;
+			
 		}
 
 
