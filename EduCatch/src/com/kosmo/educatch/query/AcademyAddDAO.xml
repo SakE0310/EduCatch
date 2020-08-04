@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosmo.educatch.dao.DetailViewMapper">
+
+	<insert id="insertAcademy" parameterType="academyview">
+		<selectKey keyProperty="ano" resultType="String" order="BEFORE">
+		SELECT 	/*+ INDEX_DESC(SYS_C0011497) */ 		 
+			    'A'||LPAD(
+			    (NVL(MAX(SUBSTR(ANO,-4)),0)+1),5,'0' 
+			    )COMMNO  
+		FROM ACADEMY A
+		</selectKey>
+		INSERT INTO ACADEMY
+					(
+					        ANO, 
+						    ANAME, 
+						    ATEL,
+						    AADDRNO,
+						    AADDR1,
+						    AADDR2,
+						    ALOGO,
+						    ADELETEYN,
+				            AINSERTDATE,
+				            AUPDATEDATE   
+					)
+		VALUES(
+					        #{ano, jdbcType=VARCHAR},
+					        #{aname, jdbcType=VARCHAR},
+					        #{atel, jdbcType=VARCHAR},
+					        #{aaddrno, jdbcType=VARCHAR},
+					        #{aaddr1, jdbcType=VARCHAR},
+					        #{aaddr2, jdbcType=VARCHAR},
+					        #{alogo, jdbcType=VARCHAR},
+					        'N',
+					        SYSDATE,
+					        SYSDATE
+					)
+	</insert>
+</mapper>

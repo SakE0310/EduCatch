@@ -19,7 +19,7 @@ public class LoginController {
 	
 	//====로그인 페이지로 =======
 	
-	@RequestMapping("/login.ec")
+	@RequestMapping("/login")
 	public ModelAndView listNotice( ) {
 		log.info("NoticeController listNotice 시작 >>>");
 		ModelAndView mav = new ModelAndView();

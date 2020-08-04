@@ -100,49 +100,68 @@ public class NoticeController {
 	public ModelAndView insertNotice(HttpServletRequest request
 									,@ModelAttribute NoticeVO param) {
 		log.info("NoticeController insertNotice 시작 >>>");
+		log.info("contenttype >>> " + request.getContentType());
 		
-		String context = request.getParameter("context");
-		String subject = request.getParameter("nsubject");
+		String nsubject=null;
+		String nimg=null;
+		String ncontent=null;
 		
-		log.info("context>>>"+context);
-		log.info("subject>>>"+subject);
-		
-		param.setNcontent(context);
-		log.info("param.getNno()>>>"+param.getNno());
-		log.info("param.getNsubject()>>>"+param.getNsubject());
-		log.info("param.getNname()>>>"+param.getNname());
-		log.info("param.getNimg()>>>"+param.getNimg());
-		log.info("param.getNcontent()>>>"+param.getNcontent());
-		log.info("param.getNdeleteyn()>>>"+param.getNdeleteyn());
-		log.info("param.getNinsertdate()>>>"+param.getNinsertdate());
-		log.info("param.getNupdatedate()>>>"+param.getNupdatedate());
-		
-		int size = 10*1024*1024;
-		String path = "C://Users//kosmo_02//git//EduCatch//EduCatch//WebContent//assets//img//notice";
-		
-		String resultStr="";
 		ModelAndView mav = new ModelAndView();
+		String resultStr="";
 		
-		try {
-			MultipartRequest multi = new MultipartRequest(request 
-														 ,path
-														 ,size
-														 ,"UTF-8"
-														 ,new DefaultFileRenamePolicy());
+		if(request.getContentType().toLowerCase().startsWith("multipart/form-data")) {
+			log.info("multipart/form-data true");
 			
-			Enumeration<String> et = multi.getFileNames();
-			List<String> list = new ArrayList<String>();
+			int size = 10*1024*1024;
+			String path = "C://Users//kosmo_02//git//EduCatch//EduCatch//WebContent//assets//img//notice";
 			
 			
-			while(et.hasMoreElements()){
-				String file = et.nextElement();
-				list.add(multi.getFilesystemName(file));
-			}//end of while
+			try {
+				MultipartRequest multi = new MultipartRequest(request 
+															 ,path
+															 ,size
+															 ,"UTF-8"
+															 ,new DefaultFileRenamePolicy());
+				
+				nsubject=multi.getParameter("nsubject");
+				nimg=multi.getParameter("nimg");
+				ncontent=multi.getParameter("ncontent");
+				log.info("multi >>> " + multi);
+				
+				log.info("nsubject>>>"+nsubject);
+				log.info("nimg>>>"+nimg);
+				log.info("ncontent>>>"+ncontent);
+				
+				Enumeration<String> et = multi.getFileNames();
+				List<String> list = new ArrayList<String>();
+				
+				
+				while(et.hasMoreElements()){
+					String file = et.nextElement();
+					list.add(multi.getFilesystemName(file));
+					log.info("fileName >>> " + file);
+				}//end of while
+				
+				param.setNsubject(nsubject);
+				param.setNimg(list.get(0));
+				param.setNcontent(ncontent);
+				
+			} catch (Exception e) {
+				log.info("에러>>>>"+e.getMessage());
+			}//end of try-catch
 			
+			// 멀티파트 폼데이터가 아닐경우 파일 전송없이 매핑
+		}else {
+			log.info("multipart/form-data false");
 			
-		} catch (Exception e) {
-			log.info("에러>>>>"+e.getMessage());
+			nsubject = request.getParameter("nsubject");
+			ncontent = request.getParameter("ncontent");
+			
+			param.setNsubject(nsubject);
+			param.setNcontent(ncontent);
+			
 		}
+		
 		int nCnt = noticeService.insertNotice(param);
 		log.info("nCnt>>>"+nCnt);
 		
@@ -191,6 +210,7 @@ public class NoticeController {
 	public ModelAndView updateNotice(@ModelAttribute NoticeVO param) {
 		log.info("NoticeController updateNotice 시작 >>>");
 		String resultStr="";
+		String isSuccess="";
 		
 		int nCnt = noticeService.updateNotice(param);
 		log.info("nCnt>>>"+nCnt);
@@ -198,6 +218,7 @@ public class NoticeController {
 		
 		if(nCnt > 0) {
 			resultStr = "update";
+			isSuccess="true";
 			log.info("수정완료");
 			mav.addObject("NoticeVO", param);
 		
@@ -207,6 +228,8 @@ public class NoticeController {
 		}//end of if-else
 		
 		mav.addObject("result", resultStr);
+		mav.addObject("isSuccess", isSuccess);
+		
 		//수정완료되면 수정된 상세보기조회페이지로 이동
 		mav.setViewName("notice/noticeBoard/noticeForm");
 		log.info("NoticeController updateNotice 끝 >>>");

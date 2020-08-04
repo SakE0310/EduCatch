@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
 	#nno_color{
 		color: black;
@@ -93,7 +93,7 @@
 					</td>
 					<td>${row.nsubject}</td>
 					<td>${row.nname}</td>
-					<td>${row.nupdatedate}</td>
+					<td>${row.ninsertdate}</td>
 				</tr>	
 				</c:forEach>
 				

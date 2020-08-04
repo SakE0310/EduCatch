@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 상세보기</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
 	#contnent{
 		width : 600px;
@@ -63,15 +63,16 @@
 		<table align="center" width="700" height="100" border="1">
 		 <thead>
              <tr>
-                 <th><div id ="nsubject" name="nsubject">${NoticeVO.nsubject }</div></th>
+                 <th><div>${NoticeVO.nsubject }</div></th>
              </tr>
          </thead>
          <tbody>
          	<tr>
          		<td>
          			<div>
-         				<div id ="nupdatedate1" name="nupdatedate1" >
-                             <span><em>작성일 :</em>${NoticeVO.nupdatedate}</span>                                                </div>
+         				<div>
+                             <span><em>작성일자 :</em>${NoticeVO.ninsertdate}</span>                                                </div>
+                             <span><em>수정일자 :</em>${NoticeVO.nupdatedate}</span>                                                </div>
                          <div>
                          <div id ="nname1" name="nname1" align="right" >
                          	<span><em>작성자 :</em>${NoticeVO.nname}</span>
@@ -81,8 +82,9 @@
          	</tr>
          	<tr>
          		<td>
-         			<div id ="ncontnent" name="ncontnent" align="center">
+         			<div align="center">
          				${NoticeVO.ncontent }
+         				<img src="/EduCatch/assets/img/notice/${NoticeVO.nimg}" alt="사진업음"/><br>
          			</div>
          		</td>
          	</tr>
