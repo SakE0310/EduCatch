@@ -8,8 +8,8 @@
 </head>
 <body>
 <script type="text/javascript">
-	alert("${reslut}");
-	if("${reslut}".indexOf("문제") > -1){
+	alert("${result}");
+	if("${result}".indexOf("문제") > -1){
 		history.go(-1);
 	}else{
 		location.href="listNotice.ec";

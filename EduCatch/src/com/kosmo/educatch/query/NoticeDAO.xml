@@ -11,7 +11,9 @@
 	        ,A.NNAME                AS NNAME            					-- 공지사항 작성자
 	        ,A.NIMG                 AS NIMG             					-- 공자사항 이미지
 	        ,A.NCONTENT             AS NCONTENT         					-- 공지사항 내용
-	        ,TO_CHAR(A.NUPDATEDATE,'YYYY-MM-DD')          AS NUPDATEDATE    -- 공지사항 등록일자
+	        ,A.NDELETEYN							AS NDELETEYN			-- 공지사항 삭제여부
+		    ,TO_CHAR(A.NINSERTDATE,'YYYY-MM-DD')    AS NINSERTDATE			-- 공비사항 등록일자
+	        ,TO_CHAR(A.NUPDATEDATE,'YYYY-MM-DD')          AS NUPDATEDATE    -- 공지사항 수정일자
 	FROM
 	        NOTICE A
 	WHERE
@@ -27,6 +29,7 @@
 		        ,A.NNAME                                AS NNAME
 		        ,A.NIMG                                 AS NIMG
 		        ,A.NCONTENT                             AS NCONTENT
+		        ,A.NDELETEYN							AS NDELETEYN
 		        ,TO_CHAR(A.NINSERTDATE,'YYYY-MM-DD')    AS NINSERTDATE
 		        ,TO_CHAR(A.NUPDATEDATE,'YYYY-MM-DD')    AS NUPDATEDATE
 		FROM
@@ -79,6 +82,16 @@
 			    
 		WHERE
 				 NNO=#{nno, jdbcType=VARCHAR}
+	</update>
+	
+	
+	<!-- 공지사항 삭제 -->
+	<update id="deleteNotice" parameterType="notice">
+	UPDATE NOTICE
+	SET 
+		     NDELETEYN='Y'
+		    ,NUPDATEDATE=SYSDATE
+	WHERE NNO=#{nno, jdbcType=VARCHAR}
 	</update>
 </mapper>
 

@@ -64,8 +64,16 @@ public class NoticeController {
 		 String nno= (String)param.getNno(); 
 		 log.info("nno>>>"+nno);
 		 
-		
 		NoticeVO nvo= noticeService.selectNotice(nno);
+		log.info("nvo.getNno()>>>"+nvo.getNno());
+		log.info("nvo.getNsubject()>>>"+nvo.getNsubject());
+		log.info("nvo.getNname()>>>"+nvo.getNname());
+		log.info("nvo.getNimg()>>>"+nvo.getNimg());
+		log.info("nvo.getNcontent()>>>"+nvo.getNcontent());
+		log.info("nvo.getNdeleteyn()>>>"+nvo.getNdeleteyn());
+		log.info("nvo.getNinsertdate()>>>"+nvo.getNinsertdate());
+		log.info("nvo.getNupdatedate()>>>"+nvo.getNupdatedate());
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("NoticeVO", nvo);
 		mav.setViewName("notice/noticeBoard/noticeSelect");
@@ -76,7 +84,7 @@ public class NoticeController {
 	
 	//===============공지사항 등록페이지 이동================================
 	@RequestMapping("insertDisplayNotice.ec")
-	public ModelAndView insertDisplay() {
+	public ModelAndView insertDisplayNotice() {
 		log.info("NoticeController insertDisplay 시작 >>>");
 		
 		ModelAndView mav = new ModelAndView();
@@ -113,6 +121,7 @@ public class NoticeController {
 		String path = "C://Users//kosmo_02//git//EduCatch//EduCatch//WebContent//assets//img//notice";
 		
 		String resultStr="";
+		ModelAndView mav = new ModelAndView();
 		
 		try {
 			MultipartRequest multi = new MultipartRequest(request 
@@ -143,12 +152,92 @@ public class NoticeController {
 			resultStr="등록 실패";
 		}//end of if-else
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("reslut", resultStr);
+		mav.addObject("result", resultStr);
 		mav.setViewName("notice/noticeBoard/noticeinsertForm");
 		
 		log.info("NoticeController insertNotice 끝 >>>");
 		return mav;
 	}//end of insertNotice
+	
+	//===============공지사항 수정페이지 이동================================
+		@RequestMapping("updateDisplayNotice.ec")
+		public ModelAndView updateDisplayNotice(@ModelAttribute NoticeVO param) {
+			log.info("NoticeController updateDisplayNotice 시작 >>>");
+			log.info("param.getNno()>>>"+param.getNno());
 			
+			String nno= (String)param.getNno(); 
+			NoticeVO nvo= noticeService.selectNotice(nno);
+			
+			log.info("nvo.getNno()>>>"+nvo.getNno());
+			log.info("nvo.getNsubject()>>>"+nvo.getNsubject());
+			log.info("nvo.getNname()>>>"+nvo.getNname());
+			log.info("nvo.getNimg()>>>"+nvo.getNimg());
+			log.info("nvo.getNcontent()>>>"+nvo.getNcontent());
+			log.info("nvo.getNdeleteyn()>>>"+nvo.getNdeleteyn());
+			log.info("nvo.getNinsertdate()>>>"+nvo.getNinsertdate());
+			log.info("nvo.getNupdatedate()>>>"+nvo.getNupdatedate());
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("NoticeVO", nvo);
+			
+			mav.setViewName("notice/noticeBoard/noticeUpdate");
+			
+			log.info("NoticeController updateDisplayNotice 끝 >>>");
+			return mav;
+		}//end of insertDisplay
+	
+	
+	//===============공지사항 관리자모드 : 수정================================
+	@RequestMapping("updateNotice.ec")
+	public ModelAndView updateNotice(@ModelAttribute NoticeVO param) {
+		log.info("NoticeController updateNotice 시작 >>>");
+		String resultStr="";
+		
+		int nCnt = noticeService.updateNotice(param);
+		log.info("nCnt>>>"+nCnt);
+		ModelAndView mav = new ModelAndView();
+		
+		if(nCnt > 0) {
+			resultStr = "update";
+			log.info("수정완료");
+			mav.addObject("NoticeVO", param);
+		
+		}else {
+			resultStr = "update";
+			log.info("수정실패");
+		}//end of if-else
+		
+		mav.addObject("result", resultStr);
+		//수정완료되면 수정된 상세보기조회페이지로 이동
+		mav.setViewName("notice/noticeBoard/noticeForm");
+		log.info("NoticeController updateNotice 끝 >>>");
+		return mav;
+	}//end of updateNotice
+	
+	//===============공지사항 관리자모드 : 삭제================================
+	@RequestMapping("deleteNotice.ec")
+	public ModelAndView deleteNotice(@ModelAttribute NoticeVO param) {
+		log.info("NoticeController deleteNotice 시작 >>>");
+		String resultStr="";
+		String isSuccess="";
+		
+		int nCnt = noticeService.deleteNotice(param);
+		log.info("nCnt>>>"+nCnt);
+		ModelAndView mav = new ModelAndView();
+		
+		if(nCnt > 0) {
+			resultStr = "delete";
+			isSuccess="true";
+			log.info("삭제완료");
+		}else {
+			resultStr = "delete";
+			isSuccess="false";
+			log.info("삭제실패");
+		}
+		mav.addObject("result", resultStr);
+		mav.addObject("isSuccess", isSuccess);
+		
+		mav.setViewName("notice/noticeBoard/noticeForm");
+		log.info("NoticeController deleteNotice 끝 >>>");
+		return mav;
+	}
 }

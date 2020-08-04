@@ -51,7 +51,6 @@
 <jsp:include page="../../../../top.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>
-
 	<form id="noticeForm" name="noticeForm">
 	<!-- <div id="sideBanner">
 		사이드 바

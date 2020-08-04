@@ -37,6 +37,13 @@ public class NoticeMapperImpl extends SqlSessionDaoSupport implements NoticeMapp
 		int nCnt = getSqlSession().update("updateNotice");
 		return nCnt;
 	}//end of updateNotice
+	
+	//=============== 공지사항 삭제 =============================
+	@Override
+	public int deleteNotice(NoticeVO param) {
+		int nCnt = getSqlSession().update("deleteNotice");
+		return nCnt;
+	}
 
 
 	

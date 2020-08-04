@@ -9,4 +9,5 @@ public interface NoticeService {
 	public NoticeVO selectNotice(String nno);
 	public int insertNotice(NoticeVO param);
 	public int updateNotice(NoticeVO param);
+	public int deleteNotice(NoticeVO param);
 }

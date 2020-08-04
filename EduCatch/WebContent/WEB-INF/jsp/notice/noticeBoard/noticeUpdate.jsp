@@ -20,7 +20,7 @@
 	$(function() {
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
-			elPlaceHolder : "context", //textarea에서 지정한 id와 일치해야 합니다. 
+			elPlaceHolder : "ncontent", //textarea에서 지정한 id와 일치해야 합니다. 
 			//SmartEditor2Skin.html 파일이 존재하는 경로
 			sSkinURI : "/EduCatch/assets/dist/SmartEditor2Skin.html",
 			htParams : {
@@ -35,15 +35,15 @@
 			},
 			fOnAppLoad : function() {
 				//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-				oEditors.getById["context"].exec("PASTE_HTML", [ "" ]);
+				oEditors.getById["ncontent"].exec("PASTE_HTML", [ '${NoticeVO.ncontent}' ]);
 			},
 			fCreator : "createSEditor2"
 		});
-		//==관리자가 저장버튼 클릭시 form 전송========
-		$("#save").click(function() {
-			oEditors.getById["context"].exec("UPDATE_CONTENTS_FIELD", []);
+		//==관리자가 수정버튼 클릭시 form 전송========
+		$("#updateData").click(function() {
+			oEditors.getById["ncontent"].exec("UPDATE_CONTENTS_FIELD", []);
 			
-			$("#edit").attr("action","insertNotice.ec");
+			$("#edit").attr("action","updateNotice.ec");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
 		});
@@ -66,29 +66,31 @@
 	<!-- action/document/location -->
 	<form id="edit">
 		<table style="width: 50%" border="1">
+		<input type="text" id="nno" name="nno" value="${NoticeVO.nno}" />
 			<tr>
 				<td style="width: 100px">제목</td>
-				<td><input type="text" id="nsubject" name="nsubject"
+				<td><input type="text" id="nsubject" name="nsubject" value="${NoticeVO.nsubject}"
 					style="width: 98%" /></td>
 			</tr>
 
 			<tr>
 				<td>내용</td>
-				<td><textarea name="context" id="context" title="내용"
+				<td><textarea name="ncontent" id="ncontent" title="내용" 
 						style="width: 100%; height: 400px; padding: 0; margin: 0;"></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>첨부파일</td>
 				<td>
+					<img src="/EduCatch/assets/img/notice/${NoticeVO.nimg}" alt="사진업음"/><br>
 					<input type="file" value="찾아보기" id="nimg" name="nimg" /><br> 
-						<!-- <input type="file" value="찾아보기" id="filename2" name="filename2" /><br> 
-						<input type="file" value="찾아보기" id="filename3" name="filename3" />	 -->
+						
 				</td>
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="save" value="등록" />
+				 <input type="button" id="updateData" value="수정" />
+				 <input type="button" id="deleteData" value="삭제" />
 				 <input type="button" id="listData" value="취소" /> 
 				</td>
 			</tr>

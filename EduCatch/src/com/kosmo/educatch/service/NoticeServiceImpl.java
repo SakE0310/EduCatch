@@ -72,6 +72,18 @@ public class NoticeServiceImpl implements NoticeService {
 		log.info("NoticeServiceImpl updateNotice 끝>>>");
 		return nCnt;
 	}
+	
+	//=============== 공지사항 수정=============================
+	@Override
+	public int deleteNotice(NoticeVO param) {
+		log.info("NoticeServiceImpl deleteNotice 시작>>>");
+		
+		int nCnt =noticeMapper.deleteNotice(param);
+		log.info("nCnt>>>"+nCnt);
+				
+		log.info("NoticeServiceImpl deleteNotice 끝>>>");
+		return nCnt;
+	}
 
 
 }
