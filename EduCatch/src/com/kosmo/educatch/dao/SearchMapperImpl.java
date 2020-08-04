@@ -10,15 +10,45 @@ import com.kosmo.educatch.vo.SearchVO;
 public class SearchMapperImpl extends SqlSessionDaoSupport implements SearchMapper{
 
 	private static Logger log = Logger.getLogger(SearchMapperImpl.class);
-
-	//지역데이터
+	
+	//지역list
+	@Override
+	public List<SearchVO> selectArea(SearchVO param) {
+		// TODO Auto-generated method stub
+		log.info("Mapper searchPopup start >>> ");
+		List<SearchVO> list = getSqlSession().selectList("selectArea");
+		log.info("Mapper searchPopup list>>> "+list);
+		log.info("Mapper searchPopup end >>> ");
+		return list;
+	}//end searchPopup
+	
+	//지역select 
 	@Override
 	public List<SearchVO> searchAreaList(SearchVO param) {
 		// TODO Auto-generated method stub
-		log.info("Mapper start >>> ");
+		log.info("Mapper searchAreaList start >>> ");
 		List<SearchVO> list = getSqlSession().selectList("searchAreaList");
-		log.info("Mapper end >>> ");
-		log.info("Mapper list >>> "+list);
+		log.info("Mapper searchAreaList list >>> "+list);
+		log.info("Mapper searchAreaList end >>> ");
+		return list;
+	}//end searchAreaList
+	
+	//전체선택완료
+	@Override
+	public List<SearchVO> selectComplete(SearchVO param){
+		List<SearchVO> list = getSqlSession().selectList("selectComplete");
+		return list;
+	}//end selectCompelete
+//-------------------------------------------------------------------------
+	//cate list
+	@Override
+	public List<SearchVO> searchCateList(SearchVO param) {
+		// TODO Auto-generated method stub
+		log.info("Mapper searchCateList start >>> ");
+		List<SearchVO> list = getSqlSession().selectList("searchCateList");
+		log.info("Mapper searchCateList list >>> "+list);
+		log.info("Mapper searchCateList end >>> ");
 		return list;
 	}
+	
 }

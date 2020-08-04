@@ -10,44 +10,41 @@
 		<title>에듀캐치</title>
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<style type="text/css">
-		div{
-			display:none;
-			margin:0px 0px 0px 50px;
-		}
 		</style>
-		<script type="text/javascript">
-		$(function(){
-			$("#seoul").click(function(){
-				$("#divseoul:not(:animated)").toggle("fast");
-			});
-			$("#kyunggi").click(function(){
-				$("#divkyunggi:not(:animated)").toggle("fast");
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.district').click(function(){
+				console.log(this.value);
+				var st = this;
+				console.log("st >>> "+st);
+				callAjax(st);
 			});
 		});
-		function seoulFuc(st){
-			
+		
+		function callAjax(st){
+			urls = "searchAreaList.ec";
+			datas = {district : $(st).val()};
+			console.log(urls);
+			console.log(datas);
+			$.ajax({
+				type : "post",
+				url : urls,
+				data : datas,
+				success : whenSuccess,
+				error : whenError
+			});
+			function whenSuccess(resData){
+				$('#areaData').html(resData);
+			}
+			function whenError(){
+				alert("error");
+			}
 		}
-		</script>
-	</head>
-	<body>
-	<c:forEach items="${searchAreaList}" var="row">
-						<tr align="center">
-							<td>${row.district}</td>
-							<td>${row.city}</td>
-						</tr>
-					</c:forEach>
-	<a id="seoul" href="">서울</a><br>
-	<a id="kyunggi" href="">경기</a>
-	<!-- 서울 -->
-	<div id="divseoul">
-	<input type="button" id="district" name="district" value="강남" onclick="seoulFuc('A')"><br>
-	<input type="button" id="district" name="district" value="가산" onclick="seoulFuc('B')"><br>
-	</div>
-	
-	<!-- 경기 -->
-	<div id="divkyunggi">
-	<input type="button" id="district" name="district" value="부천" onclick="kyunggiFuc('A')"><br>
-	<input type="button" id="district" name="district" value="안산" onclick="kyunggiFuc('B')"><br>
-	</div>
-	</body>
+	</script>	  
+</head>
+<body>
+	<input type="button" class="district" id="seoul" value="서울">
+	<input type="button" class="district" id="kyunggi" value="경기">
+
+	<div id="areaData"></div>
 </html>
