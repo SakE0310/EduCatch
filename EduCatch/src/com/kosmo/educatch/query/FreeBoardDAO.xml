@@ -16,7 +16,7 @@
 		A.FBUPDATEDATE AS FBUPDATEDATE	
 	FROM FREEBOARD A
 	<where>
-		A.FBDELETEYN ='Y'
+		A.FBDELETEYN ='N'
 		ORDER BY 1 DESC
 	</where>
 </select>
@@ -39,7 +39,7 @@
 		#{fbimg, jdbcType=VARCHAR},
 		#{fbcontent, jdbcType=VARCHAR},
 		#{member_mno, jdbcType=VARCHAR},
-		'Y',
+		'N',
 		SYSDATE,
 		SYSDATE
 	)
@@ -65,7 +65,7 @@
 	SET FBSUBJECT=#{fbsubject},
 		FBCONTENT=#{fbcontent}
 	<![CDATA[
-	WHERE FBDELETEYN='Y' AND 
+	WHERE FBDELETEYN='N' AND 
 	FBNO=#{fbno}
 	]]>
 </update>
