@@ -14,6 +14,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -210,6 +211,21 @@ public class AcademyRequestController {
 		// map이 jackson-databind라이브러리에 의해 json으로 변환되어 리턴이 된다. 
 		// ajax에서 해당 url호출시 html형식으로반환이 되는것이아닌 JSON타입의 객체로 반환이 된다.
 		// 궁금하면 http://localhost:8088/EduCatch/getCmajor.ec 접근바람
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getCminor")
+	public Map<String, List<SearchVO>> getCminor(HttpServletRequest request){
+		log.info("getCminor >>> ");
+		log.info("parameter major >>> " + request.getParameter("major"));
+		
+		String major = request.getParameter("major");
+		
+		List<SearchVO> list = categoryService.getCminorList(major);
+		
+		Map<String, List<SearchVO>> map = new HashMap<String, List<SearchVO>>();
+		map.put("minor", list);
 		return map;
 	}
 }

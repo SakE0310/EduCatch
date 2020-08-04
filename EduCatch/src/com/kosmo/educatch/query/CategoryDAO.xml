@@ -11,13 +11,13 @@
 		GROUP BY A.CMAJOR
 	</select>
 	
-	<select id="getCminorList" parameterType="search" resultType="search">
+	<select id="getCminorList" parameterType="java.lang.String" resultType="search">
 		SELECT
 			A.CMINOR
 		FROM
 			CATEGORY A
 		WHERE 
-			CMAJOR = #{cmajor}
+			CMAJOR = #{major}
 	</select>
 	
 </mapper>

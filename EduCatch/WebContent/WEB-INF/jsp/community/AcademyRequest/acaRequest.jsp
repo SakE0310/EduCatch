@@ -61,9 +61,10 @@ $(document).ready(function(){
 		$('#academyInfo').submit();
 	});
 	
-	$(".form-select").on('change', 'select', function() {
+	$(".form-select.major").on('change', 'select', function() {
 		  var setMajor = $("#cmajor").val();
 		  console.log('setmajor >>> ' + setMajor);
+		  ajaxGetMinor(setMajor);
 	});
 });
 
@@ -84,7 +85,6 @@ function ajaxGetMajor(){
 	$.ajax({
 		url : "getCmajor.ec",
 	}).done(function(resultParam){
-		console.log("resultParam >>> " + resultParam);
 		var str="";
 		for(i in resultParam.major){
 			console.log(i);
@@ -93,6 +93,7 @@ function ajaxGetMajor(){
 		}
 		$('select#cmajor').html(str);
 		$('select#cmajor').niceSelect('update');
+		ajaxGetMinor(resultParam.major[0].cmajor);
 		var a = resultParam.major;
 	}).fail(function(resultParam){
 		alert("초기화에 문제가 발생하였습니다.");
@@ -101,20 +102,23 @@ function ajaxGetMajor(){
 }
 
 function ajaxGetMinor(param){
+	console.log("param >>> " + param);
 	$.ajax({
 		url : "getCminor.ec",
-		data : param
+		data : {
+			"major" : param
+		}
+		
 	}).done(function(resultParam){
-		console.log("resultParam >>> " + resultParam);
+		console.log("getMinor >>> ");
 		var str="";
-		for(i in resultParam.major){
+		for(i in resultParam.minor){
 			console.log(i);
-			var cmajor = resultParam.major[i].cmajor;
+			var cmajor = resultParam.minor[i].cminor;
 			str += "<option value='"+cmajor+"'>"+cmajor+"</option>\n";
 		}
-		$('select#cmajor').html(str);
-		$('select#cmajor').niceSelect('update');
-		var a = resultParam.major;
+		$('select#cminor').html(str);
+		$('select#cminor').niceSelect('update');
 	}).fail(function(resultParam){
 		alert("초기화에 문제가 발생하였습니다.");
 	});
@@ -162,21 +166,20 @@ function ajaxGetMinor(param){
 									onblur="this.placeholder = '학원 전화번호'" required
 									class="single-input">
 							</div>
-							<div class="row">
-								<div class="mt-10 col">
-									<div class="form-select" id="default-select">
-										<select id="cmajor">
-											<option value="">분야구분</option>
-											<option value="2">2</option>
-										</select>
-									</div>
+							<div class="mt-10">
+								<div class="form-select major" id="default-select">
+									<select id="cmajor">
+										<option value="">분야구분</option>
+										<option value="2">2</option>
+									</select>
 								</div>
 							</div>
 							<div class="mt-10">
-								<input type="text" name="cminor" placeholder="보습과정"
-									onfocus="this.placeholder = ''"
-									onblur="this.placeholder = '보습과정'" required
-									class="single-input" readonly>
+								<div class="form-select minor" id="default-select">
+									<select id="cminor">
+										<option value=""></option>
+									</select>
+								</div>
 							</div>
 							<div class="row">
 								<div class="mt-10 col">

@@ -18,9 +18,10 @@ public class CategoryMapperImpl extends SqlSessionDaoSupport implements Category
 	}
 
 	@Override
-	public List<SearchVO> getCminorList(SearchVO svo) {
-		log.info("CategoryMapperImpl.getCmajor >>>> ");
-		return getSqlSession().selectList("CategoryMapper.getCminorList", svo);
+	public List<SearchVO> getCminorList(String major) {
+		
+		return getSqlSession().selectList("CategoryMapper.getCminorList", major);
 	}
+
 
 }

@@ -31,11 +31,11 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public List<SearchVO> getCminorList(SearchVO svo) {
+	public List<SearchVO> getCminorList(String major) {
 		log.info("CategoryServiceImpl getCminor >>> ");
 		List<SearchVO> list = null;
 		list = new ArrayList<SearchVO>();
-		list = categoryMapper.getCminorList(svo);
+		list = categoryMapper.getCminorList(major);
 		
 		return list;
 	}
