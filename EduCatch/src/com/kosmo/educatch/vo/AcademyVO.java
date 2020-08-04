@@ -1,6 +1,7 @@
 package com.kosmo.educatch.vo;
 
-public class AcademyVO {
+public class AcademyVO extends SearchVO{
+	
 	// 학원정보
 	private String ano;
 	private String aname;
