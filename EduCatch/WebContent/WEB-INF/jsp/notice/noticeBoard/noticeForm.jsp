@@ -13,10 +13,15 @@
 	console.log("result>>>"+result);
 	
 	if(result=="update"){
-		alert("수정완료");
-		//공지사항 상세보기
-		location.href="selectNotice.ec?nno=${NoticeVO.nno }";
-		
+		if(isSuccess=="true"){
+			alert("수정완료");
+			//공지사항 상세보기
+			location.href="selectNotice.ec?nno=${NoticeVO.nno }";
+		}else{
+			alert("수정실패");
+			//공지사항 상세보기
+			location.href="selectNotice.ec?nno=${NoticeVO.nno }";
+		}
 	}else if(result=="delete"){
 		if(isSuccess=="true"){
 			alert("삭제완료");

@@ -11,7 +11,7 @@
 
 <!-- jQuery를 사용하기위해 jQuery라이브러리 추가 -->
 <script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <!-- function 함수 짜야함 -->
 
@@ -20,7 +20,7 @@
 	$(function() {
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
-			elPlaceHolder : "context", //textarea에서 지정한 id와 일치해야 합니다. 
+			elPlaceHolder : "ncontent", //textarea에서 지정한 id와 일치해야 합니다. 
 			//SmartEditor2Skin.html 파일이 존재하는 경로
 			sSkinURI : "/EduCatch/assets/dist/SmartEditor2Skin.html",
 			htParams : {
@@ -35,14 +35,15 @@
 			},
 			fOnAppLoad : function() {
 				//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-				oEditors.getById["context"].exec("PASTE_HTML", [ "" ]);
+				oEditors.getById["ncontent"].exec("PASTE_HTML", [ "" ]);
 			},
 			fCreator : "createSEditor2"
 		});
-		//==관리자가 저장버튼 클릭시 form 전송========
+		//==관리자가 등록버튼 클릭시 form 전송========
 		$("#save").click(function() {
-			oEditors.getById["context"].exec("UPDATE_CONTENTS_FIELD", []);
+			oEditors.getById["ncontent"].exec("UPDATE_CONTENTS_FIELD", []);
 			
+			$("#edit").attr("enctype","multipart/form-data");
 			$("#edit").attr("action","insertNotice.ec");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
@@ -74,7 +75,7 @@
 
 			<tr>
 				<td>내용</td>
-				<td><textarea name="context" id="context" title="내용"
+				<td><textarea name="ncontent" id="ncontent" title="내용"
 						style="width: 100%; height: 400px; padding: 0; margin: 0;"></textarea>
 				</td>
 			</tr>

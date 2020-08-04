@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 상세보기</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
 	#contnent{
 		width : 600px;
@@ -83,6 +83,7 @@
          		<td>
          			<div id ="ncontnent" name="ncontnent" align="center">
          				${NoticeVO.ncontent }
+         				<img src="/EduCatch/assets/img/notice/${NoticeVO.nimg}" alt="사진업음"/><br>
          			</div>
          		</td>
          	</tr>
