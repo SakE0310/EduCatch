@@ -14,6 +14,7 @@ public class TestController {
 		log.info("Logger");
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		log.info("Logger");
 		log.info("Logger");
 =======
@@ -22,6 +23,8 @@ public class TestController {
 >>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 =======
 		log.info("Logger1");
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
+=======
 >>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 		return null;
 	}
