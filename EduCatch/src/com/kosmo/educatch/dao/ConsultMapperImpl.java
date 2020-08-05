@@ -7,7 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.kosmo.educatch.service.ConsultService;
 import com.kosmo.educatch.vo.ConsultVO;
 
-public class ConsultMapperImpl extends SqlSessionDaoSupport implements ConsultService{
+public class ConsultMapperImpl extends SqlSessionDaoSupport implements ConsultMapper{
 
 	//상담 전체 조회
 	@Override
