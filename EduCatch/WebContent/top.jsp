@@ -31,8 +31,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    //로고 바꿔야함
-                    <img src="/EduCatch/assets/img/logo/loder.png" alt="">
+                    <img src="/EduCatch/assets/img/logo/Eduloder.png" alt="">
                 </div>
             </div>
         </div>
