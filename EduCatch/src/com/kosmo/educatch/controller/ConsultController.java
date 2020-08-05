@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosmo.educatch.service.ConsultService;
 import com.kosmo.educatch.vo.ConsultVO;
 
 @Controller
@@ -25,7 +26,7 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		
 		log.info("ConsultController listConsult >>> 호출성공");
 
-		List<ConsultVO> list=consultService.listConsult;
+		List<ConsultVO> list=consultService.listConsult(param);
 		log.info("list.size() >>> "+list.size());
 		
 		int listCnt=list.size();
