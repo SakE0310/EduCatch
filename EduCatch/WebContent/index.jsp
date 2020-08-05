@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
-<body>
+<head>
 <jsp:include page="top.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>
+</head>
+<body>
     <main>
         <!--? slider Area Start-->
         <div class="slider-area position-relative">
