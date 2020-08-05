@@ -3,21 +3,35 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<jsp:include page="../../../../top.jsp" flush="true">
+	<jsp:param value="" name=""/>
+	</jsp:include>
+</head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="-1"/>
 <title>후기 게시판 입력</title>
 <style type="text/css">
-.starR{
-  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-  background-size: auto 100%;
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-  text-indent: -9999px;
-  cursor: pointer;
-}
-.starR.on{background-position:0 0;}
+	.starR1{
+	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
+	    background-size: auto 100%;
+	    width: 15px;
+	    height: 30px;
+	    float:left;
+	    text-indent: -9999px;
+	    cursor: pointer;
+	}
+	.starR2{
+	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+	    background-size: auto 100%;
+	    width: 15px;
+	    height: 30px;
+	    float:left;
+	    text-indent: -9999px;
+	    cursor: pointer;
+	}
+	.starR1.on{background-position:0 0;}
+	.starR2.on{background-position:-15px 0;}
 </style>
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
 <script src ="/EduCatch/assets/js/service/HuskyEZCreator.js"></script>
@@ -54,6 +68,7 @@
 			alert("<<<>>>");
 			oEditors.getById["rbcontent"].exec("UPDATE_CONTENTS_FIELD", []);
 			$("#edit").attr("action","insertReview.ec");
+			$("#edit").attr("enctype","multipart/form-data");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
 		});
@@ -62,16 +77,11 @@
 			  $(this).parent().children('span').removeClass('on');
 			  $(this).addClass('on').prevAll('span').addClass('on');
 			  return false;
-			});
+		});
 	});
 
 </script>
-	
-</head>
 <body>
-<jsp:include page="../../../../top.jsp" flush="true">
-<jsp:param value="" name=""/>
-</jsp:include>
 <!-- action/document/location -->
 	<form id="edit">
 		<table style="margin-left: auto; margin-right: auto; width: 50%" border="1">
@@ -84,12 +94,17 @@
 				<td style="width: 100px">평점</td>
 				<td>
 					<div class="starRev">
-				  <span class="starR on">별1</span>
-				  <span class="starR">별2</span>
-				  <span class="starR">별3</span>
-				  <span class="starR">별4</span>
-				  <span class="starR">별5</span>
-				</div>
+					  <span class="starR1 on">별1_왼쪽</span>
+					  <span class="starR2">별1_오른쪽</span>
+					  <span class="starR1">별2_왼쪽</span>
+					  <span class="starR2">별2_오른쪽</span>
+					  <span class="starR1">별3_왼쪽</span>
+					  <span class="starR2">별3_오른쪽</span>
+					  <span class="starR1">별4_왼쪽</span>
+					  <span class="starR2">별4_오른쪽</span>
+					  <span class="starR1">별5_왼쪽</span>
+					  <span class="starR2">별5_오른쪽</span>
+					</div>
 				</td>
 			</tr>
 			<tr>

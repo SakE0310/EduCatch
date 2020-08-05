@@ -9,5 +9,6 @@
 		<typeAlias type="com.kosmo.educatch.vo.SubjectVO" alias="subjectview"/>
 		<typeAlias type="com.kosmo.educatch.vo.SearchVO" alias="search"/>
 		<typeAlias type="com.kosmo.educatch.vo.NoticeVO" alias="notice"/>
+		<typeAlias type="com.kosmo.educatch.vo.ConsultVO" alias="consult"/>
 	</typeAliases>
 </configuration>

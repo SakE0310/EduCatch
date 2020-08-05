@@ -6,6 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<jsp:include page="../../../../top.jsp" flush="true">
+	<jsp:param value="" name=""/>
+	</jsp:include>
+</head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>후기 게시판</title>
 <style type="text/css">
@@ -58,10 +62,7 @@
 	
 </script>
 <body>
-<jsp:include page="../../../../top.jsp" flush="true">
-<jsp:param value="" name=""/>
-</jsp:include>
-	<form id="pageForm" name="pageForm">
+<form id="pageForm" name="pageForm">
 		<input type="hidden" id="rbno" name="rbno"/>
 	</form>
 	<br><br><br><br>

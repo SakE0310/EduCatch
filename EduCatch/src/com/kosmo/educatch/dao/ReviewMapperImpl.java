@@ -47,5 +47,11 @@ public class ReviewMapperImpl extends SqlSessionDaoSupport implements ReviewMapp
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("selectUpdate");
 	}
+
+	@Override
+	public int deleteReview(String rbno) {
+		// TODO Auto-generated method stub
+		return getSqlSession().update("deleteReview");
+	}
 	
 }

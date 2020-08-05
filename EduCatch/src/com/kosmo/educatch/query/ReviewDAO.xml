@@ -16,6 +16,7 @@
 		            TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD')      AS RBINSERTDATE,
 		            TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')      AS RBUPDATEDATE
 		FROM REVIEWBOARD A
+		WHERE RBDELETEYN = 'N'
 		ORDER BY 1 DESC
 	</select>
 	
@@ -77,5 +78,11 @@
 		SET RBSUBJECT =#{rbsubject, jdbcType=VARCHAR},
 		    RBCONTENT =#{rbcontent, jdbcType=VARCHAR}
 		WHERE RBNO=#{rbno, jdbcType=VARCHAR}
+	</update>
+	<update id="deleteReview" parameterType="review">
+		UPDATE REVIEWBOARD
+		    SET RBDELETEYN = 'Y'
+		WHERE RBNO=#{rbno, jdbcType=VARCHAR}
+	    AND RBDELETEYN = 'N'
 	</update>
 </mapper>

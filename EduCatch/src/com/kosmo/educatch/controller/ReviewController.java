@@ -1,5 +1,7 @@
 package com.kosmo.educatch.controller;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.service.ReviewService;
 import com.kosmo.educatch.vo.ReviewVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 public class ReviewController {
@@ -80,28 +84,96 @@ public class ReviewController {
 	
 	//등록 버튼 눌렀을 때
 	@RequestMapping("insertReview.ec")
-	public ModelAndView insertReview(@ModelAttribute ReviewVO param,
-									 HttpServletRequest request) {
+	public ModelAndView insertReview(HttpServletRequest request,
+									@ModelAttribute ReviewVO param) {
 		log.info("ReviewController insertReview >>> 호출 성공 ");
-
+		
+		String rbno=null;
+		String rbsubject=null;
+		String rbname=null;
+		String rbimg=null;
+		String rbcontent=null;
+		String academy_ano=null;
+		String member_mno=null;
+		String rbgrade=null;
+		String rbdeleteyn=null;
+		String rbinsertdate=null;
+		String rbupdatedate=null;
 		String resultStr="";
-		int result=reviewService.insertReview(param);
 		
-		if(result>0) 
-			resultStr = "등록 페이지 ";
-		else
-			resultStr = "등록 실패";
 		
-		log.info("param.getRbno() >> "+param.getRbno());
-		log.info("param.getRbsubject() >> "+param.getRbsubject());
-		log.info("param.getRbgrade() >> "+param.getRbgrade());
-		log.info("param.getAcademy_ano() >> "+param.getAcademy_ano());
-		log.info("param.getRbcontent() >> "+param.getRbcontent());
-		log.info("param.getRbimg() >> "+param.getRbimg());
 		
 		ModelAndView mav = new ModelAndView();
+		if(request.getContentType().toLowerCase().startsWith("multipart/form-data")) {
+			log.info("multipart/form-data true");
+			
+			int size=10*1024*1024;
+			//파일 경로
+			String uploadPath="C://Users//chemi//git//EduCatch//EduCatch//WebContent//assets//img//reviewImg";
+			
+			
+			
+			try {
+				MultipartRequest mr = new MultipartRequest(request, 
+														   uploadPath, 
+														   size, 
+														   "UTF-8", 
+														   new DefaultFileRenamePolicy());
+				
+				rbno=mr.getParameter("rbno");
+				rbsubject=mr.getParameter("rbsubject");
+				rbname=mr.getParameter("rbname");
+				rbimg=mr.getParameter("rbimg");
+				rbcontent=mr.getParameter("rbcontent");
+				academy_ano=mr.getParameter("academy_ano");
+				member_mno=mr.getParameter("member_mno");
+				rbgrade=mr.getParameter("rbgrade");
+				rbdeleteyn=mr.getParameter("rbdeleteyn");
+				rbinsertdate=mr.getParameter("rbinsertdate");
+				rbupdatedate=mr.getParameter("rbupdatedate");
+				
+				Enumeration<String> en = mr.getFileNames();
+				List<String> list = new ArrayList<String>();
+				
+				while(en.hasMoreElements()) {
+					String file1 = en.nextElement();
+					list.add(mr.getFilesystemName(file1));
+
+					log.info("fileName >>> " + rbimg);
+				}
+				
+				param.setRbno(rbno);
+				param.setRbsubject(rbsubject);
+				param.setRbname(rbname);
+				param.setRbimg(list.get(0));
+				param.setRbcontent(rbcontent);
+				param.setAcademy_ano(academy_ano);
+				param.setMember_mno(member_mno);
+				param.setRbgrade(rbgrade);
+				param.setRbdeleteyn(rbdeleteyn);
+				param.setRbinsertdate(rbinsertdate);
+				param.setRbupdatedate(rbupdatedate);
+				
+			}catch(Exception e) {
+				log.info("Exception >>> "+e);
+			}
+		}else {
+			log.info("multipart/form-data true");
+			
+		}
+		
+
+		int nCnt = reviewService.insertReview(param);
+		if(nCnt > 0) {
+			resultStr="등록 완료";
+		}else {
+			resultStr="등록 실패";
+		}//end of if-else
+		
 		mav.addObject("result", resultStr);
-		mav.setViewName("community/reviewBoard/result");
+		mav.setViewName("community/reviewBoard/reviewInsertForm");
+
+		
 		log.info("ReviewController insertReview >>> 끝 ");
 		return mav;
 	
@@ -127,11 +199,11 @@ public class ReviewController {
 	
 	//업데이트 상세 조회
 	@RequestMapping("/selectUpdate.ec")
-	public ModelAndView selectUpdate(@RequestParam(value="rbno", required=false) String rbno) {
+	public ModelAndView selectUpdate(@ModelAttribute ReviewVO param) {
 		//value="rbno", required=false
 		log.info("ReviewController selectUpdate >>> 호출 성공");
 		
-		
+		String rbno=(String)param.getRbno();
 		ModelAndView mav=new ModelAndView();
 		
 		mav.addObject("ReviewVOO", reviewService.selectUpdate(rbno));
@@ -148,16 +220,54 @@ public class ReviewController {
 	public ModelAndView updateReview(@ModelAttribute ReviewVO param) {
 		log.info("ReviewController updateReview >>> 호출 성공");
 		String resultStr="";
-		int result=reviewService.updateReview(param);
-		
-		if(result>0)
-			resultStr="수정 성공";
-		else
-			resultStr="수정 실패";
+		int nCnt=reviewService.updateReview(param);
 		
 		ModelAndView mav=new ModelAndView();
+		if(nCnt>0) {
+			resultStr="update";
+			log.info("수정완료");
+			mav.addObject("ReviewVOO", param);
+		}
+		else {
+			resultStr = "update";
+			log.info("수정실패");
+		}
 		mav.addObject("result",resultStr);
-		mav.setViewName("community/reviewBoard/updateReview");
+		mav.setViewName("community/reviewBoard/result");
+		log.info("ReviewController updateReview >>> 끝");
+		
+		return mav;
+	}
+	
+	//삭제 버튼 눌렀을 때
+	@RequestMapping("/deleteReview.ec")
+	public ModelAndView deleteReview(@ModelAttribute ReviewVO param) {
+		log.info("ReviewController deleteReview >>> 호출 성공");
+		
+		String resultStr="";
+		String isSuccess="";
+		String rbno=(String)param.getRbno();
+		
+		int nCnt=reviewService.deleteReview(rbno);
+		
+		ModelAndView mav=new ModelAndView();
+		if(nCnt>0) {
+			resultStr = "delete";
+			isSuccess="true";
+			log.info("삭제완료");
+			
+		}else {
+			resultStr = "delete";
+			isSuccess="false";
+			log.info("삭제실패");
+		}
+		
+		
+		mav.addObject("result", resultStr);
+		mav.addObject("isSuccess", isSuccess);
+		mav.setViewName("community/reviewBoard/result");
+		
+		log.info("ReviewController deleteReview >>> 끝");
 		
 		return mav;
 	}
