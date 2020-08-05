@@ -13,7 +13,7 @@ public class TestController {
 	public String nnn() {
 		log.info("Logger");
 		log.info("Logger1");
-		log.info("Logger");
+		log.info("Logger2");
 		return null;
 	}
 }
