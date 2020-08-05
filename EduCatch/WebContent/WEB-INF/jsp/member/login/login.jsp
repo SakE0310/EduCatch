@@ -139,7 +139,7 @@
         		   <input type="password" class="form-control" name="password" id="id_password" placeholder="********"
                	   aria-label="********">
                	   
-               	  <div style = "" >
+               	  <div style = "color : black" >
           		   <a class="link-muted text-capitalize font-weight-normal" href="/accounts/password/reset/" >비밀번호를 잊으셨나요?</a>
           		  </div> 
           			
