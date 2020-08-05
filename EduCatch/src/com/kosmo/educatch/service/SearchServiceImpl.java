@@ -17,56 +17,69 @@ public class SearchServiceImpl implements SearchService{
 	
 	@Autowired
 	private SearchMapper searchMapper;
-	//지역 list
-	@Override
-	public List<SearchVO> selectArea(String district) {
-		// TODO Auto-generated method stub
-		log.info("service selectArea start >>> ");
-		List<SearchVO> list = searchMapper.selectArea(district);
-		log.info("service selectArea end >>> ");
-		log.info("service selectArea list >>> "+list);
-		return list;
-	}//end searchPopup
-	
-	//지역 select
-	@Override
-	public List<SearchVO> searchAreaList(SearchVO param) {
-		log.info("service searchAreaList start >>> ");
-		List<SearchVO> list = searchMapper.searchAreaList(param);
-		log.info("service searchAreaList end >>> ");
-		log.info("service searchAreaList list >>> "+list);
-		return list;
-	}//end searchAreaList
-	
-	//전체선택완료
-	@Override
-	public List<SearchVO> selectComplete(SearchVO param) {
-		// TODO Auto-generated method stub
-		log.info("service searchCateList start >>> ");
-		List<SearchVO> list = searchMapper.selectComplete(param);
-		log.info("service searchCateList end >>> ");
-		log.info("service searchCateList list >>> "+list);
-		return list;
-	}//end selectCompelete
-//-----------------------------------------------------------------------------	
-	//카테 list
-	@Override
-	public List<SearchVO> searchCateList(SearchVO param) {
-		// TODO Auto-generated method stub
-		log.info("service searchCateList start >>> ");
-		List<SearchVO> list = searchMapper.searchCateList(param);
-		log.info("service searchCateList end >>> ");
-		log.info("service searchCateList list >>> "+list);
-		return list;
-	}
 
+	//지역 대분류
 	@Override
-	public List<SearchVO> selectCate(SearchVO param) {
+	public List<SearchVO> getDistrict(SearchVO param) {
+		log.info("service getDistrict start >>> ");
+		List<SearchVO> list = searchMapper.getDistrict(param);
+		log.info("service getDistrict end >>> ");
+		log.info("service getDistrict list >>> "+list);
+		return list;
+	}//getDistrict
+
+	//지역 소분류
+	@Override
+	public List<SearchVO> getCity(SearchVO param) {
 		// TODO Auto-generated method stub
-		log.info("service selectCate start >>> ");
-		List<SearchVO> list = searchMapper.selectCate(param);
-		log.info("service selectCate end >>> ");
-		log.info("service selectCate list >>> "+list);
+		log.info("service getCity start >>> ");
+		List<SearchVO> list = searchMapper.getCity(param);
+		log.info("service getCity end >>> ");
+		log.info("service getCity list >>> "+list);
 		return list;
 	}
+	
+//	//지역 list
+//	@Override
+//	public List<SearchVO> selectArea(String district) {
+//		// TODO Auto-generated method stub
+//		log.info("service selectArea start >>> ");
+//		List<SearchVO> list = searchMapper.selectArea(district);
+//		log.info("service selectArea end >>> ");
+//		log.info("service selectArea list >>> "+list);
+//		return list;
+//	}//end searchPopup
+	
+	
+//	//전체선택완료
+//	@Override
+//	public List<SearchVO> selectComplete(SearchVO param) {
+//		// TODO Auto-generated method stub
+//		log.info("service searchCateList start >>> ");
+//		List<SearchVO> list = searchMapper.selectComplete(param);
+//		log.info("service searchCateList end >>> ");
+//		log.info("service searchCateList list >>> "+list);
+//		return list;
+//	}//end selectCompelete
+//-----------------------------------------------------------------------------	
+//	//카테 list
+//	@Override
+//	public List<SearchVO> searchCateList(SearchVO param) {
+//		// TODO Auto-generated method stub
+//		log.info("service searchCateList start >>> ");
+//		List<SearchVO> list = searchMapper.searchCateList(param);
+//		log.info("service searchCateList end >>> ");
+//		log.info("service searchCateList list >>> "+list);
+//		return list;
+//	}
+
+//	@Override
+//	public List<SearchVO> selectCate(SearchVO param) {
+//		// TODO Auto-generated method stub
+//		log.info("service selectCate start >>> ");
+//		List<SearchVO> list = searchMapper.selectCate(param);
+//		log.info("service selectCate end >>> ");
+//		log.info("service selectCate list >>> "+list);
+//		return list;
+//	}
 }

@@ -11,28 +11,14 @@
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
+				//대분류를 보낸다
 				$('.cmajor').click(function(){
 					console.log(this.value);
 					var st = this.value;
 					console.log("st >>> "+st);
 					ajaxGetCmajor(st);
 				});
-				$('#complete').click(function(){
-					console.log("complete >>> ");
-					var cked = [];
-					$('.ck:checked').each(function(){
-						cked.push($(this).val());
-						console.log("cked >>> "+cked);
-					});
-					if(cked.length<2){
-						var urls = "searchMainAgain.ec?cmajor="+cked;
-						console.log("urls >>> "+urls);
-						opener.window.location = urls;
-						close();
-					}else{
-						alert("한개만 선택 가능합니다");
-					}
-				});
+				//대분류를 받아서 ajax로 중분류 체크박스 출력
 				function ajaxGetCmajor(param){
 					console.log("param >>> "+param);
 					$.ajax({
@@ -50,7 +36,38 @@
 					}).fail(function(resParam){
 						alert("선택중 오류가 발생했습니다");
 					});
-				}
+				}//체크박스 기능
+				
+				//설정완료 기능
+				$('#complete').click(function(){
+					console.log("complete >>> ");
+					var cked = [];
+					$('.ck:checked').each(function(){
+						cked.push($(this).val());
+						console.log("cked >>> "+cked);
+					});
+					if(cked.length<2){
+// 						var urls = "searchMainAgain.ec?cmajor="+cked;
+						var datas = {"cmajor" : cked};
+						var urls = "searchMainAgain.ec";
+						console.log("data >>> "+datas);
+						console.log("url >>> "+urls);
+						$.ajax({
+							type : "post",
+							url : urls,
+							data : datas
+						}).done(function(resParam){
+							console.log("cateForm");
+							console.log("resParam >>> "+resParam);
+							$("div#cateView").html(resParam);
+						}).fail(function(){
+							alert("설정완료후 오류가 발생했습니다")
+						});
+// 						close();
+					}else{
+						alert("한개만 선택 가능합니다");
+					}
+				});
 			});
 		</script>
 	</head>

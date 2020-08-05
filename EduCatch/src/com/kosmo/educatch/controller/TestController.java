@@ -12,8 +12,13 @@ public class TestController {
 	@RequestMapping("1")
 	public String nnn() {
 		log.info("Logger");
+<<<<<<< HEAD
 		log.info("Logger");
 		log.info("Logger");
+=======
+		log.info("Logger1");
+		log.info("Logger2");
+>>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 		return null;
 	}
 }
