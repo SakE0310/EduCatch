@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosmo.educatch.dao.SearchMapper">
+	
+	<!-- 지역data -->
+	<select id="searchAreaList" parameterType="search" resultType="search">
+	SELECT 
+	        A.DISTRICT   AS DISTRICT,
+	        A.CITY       AS CITY
+	FROM    AREA A
+	ORDER BY 1 DESC
+	</select>
+	
+	<!-- district select data -->
+	<select id="selectArea" parameterType="search" resultType="search">
+	SELECT 
+	        A.CITY       AS CITY
+	FROM    AREA A
+	WHERE	A.DISTRICT = #{district}
+	ORDER BY 1 DESC
+	</select>
+	
+	<select id="selectComplete" parameterType="search" resultType="search">
+	SELECT A.ANO        AS ANO
+	      ,A.ANAME      AS ANAME
+	      ,A.ATEL       AS ATEL
+	      ,A.AXPOINT    AS AXPOINT
+	      ,A.AYPOINT    AS AYPOINT
+	      ,A.AADDRNO    AS AADDRNO
+	      ,A.AADDR1     AS AADDR1
+	      ,A.AADDR2     AS AADDR2
+	      ,A.ALOGO      AS ALOGO
+	      ,A.CATEGORY_CNO   AS CATEGORY_CNO
+	      ,A.ADELETEYN      AS ADELETEYN
+	      ,A.AINSERTDATE    AS AINSERTDATE
+	      ,A.AUPDATEDATE    AS AUPDATEDATE
+	FROM ACADEMY A
+	<where>
+		<if test="city!=null and city!=''">
+	    A.AADDR1 LIKE '%'||#{city}||'%'
+		</if>
+	</where>
+	<where>
+		<if test="cno!=null and cno!=''">
+		A.CATEGORY_CNO = #{cno}
+		</if>
+	</where>
+	</select>
+	<!-- /////////////////////////////////////////////////////////////////// -->
+	<!-- 분야data -->
+	<select id="searchCateList" parameterType="search" resultType="search">
+	SELECT 
+	        A.CNO       AS CNO,
+	        A.CMAJOR    AS CMAJOR,
+	        A.CMINOR    AS CMINOR
+	FROM    CATEGORY A
+	</select>
+
+	<select id="selectCate" parameterType="search" resultType="search">
+	SELECT 
+	        A.CNO       AS CNO,
+	        A.CMAJOR    AS CMAJOR,
+	        A.CMINOR    AS CMINOR
+	FROM    CATEGORY A
+	WHERE	A.CMAJOR = #{cmajor}
+	ORDER BY 1 DESC
+	</select>
+</mapper>

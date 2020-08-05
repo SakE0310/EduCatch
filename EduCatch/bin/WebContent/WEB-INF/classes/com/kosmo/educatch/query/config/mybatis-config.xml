@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.kosmo.educatch.vo.TestVO" alias="test"/>
+		<typeAlias type="com.kosmo.educatch.vo.FreeVO" alias="freeboard"/>
+		<typeAlias type="com.kosmo.educatch.vo.ReviewVO" alias="review"/>
+		<typeAlias type="com.kosmo.educatch.vo.AcademyVO" alias="academyview"/>
+		<typeAlias type="com.kosmo.educatch.vo.SubjectVO" alias="subjectview"/>
+		<typeAlias type="com.kosmo.educatch.vo.SearchVO" alias="search"/>
+		<typeAlias type="com.kosmo.educatch.vo.NoticeVO" alias="notice"/>
+		<typeAlias type="com.kosmo.educatch.vo.ConsultVO" alias="consult"/>
+	</typeAliases>
+</configuration>

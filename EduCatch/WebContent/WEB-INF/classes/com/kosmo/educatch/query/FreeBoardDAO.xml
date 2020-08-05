@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosmo.educatch.dao.FreeMapper">
+<select id="listFreeBoard" parameterType="freeboard" resultType="freeboard">
+	SELECT 
+		A.FBNO AS FBNO,
+		A.FBSUBJECT AS FBSUBJECT,
+		A.FBNAME AS FBNAME,
+		A.FBIMG AS FBIMG,
+		A.FBCONTENT AS FBCONTENT,
+		A.MEMBER_MNO AS MEMBER_MNO,
+		A.FBDELETEYN AS FBDELETEYN,
+		A.FBINSERTDATE AS FBINSERTDATE,
+		A.FBUPDATEDATE AS FBUPDATEDATE	
+	FROM FREEBOARD A
+	<where>
+		A.FBDELETEYN ='N'
+		ORDER BY 1 DESC
+	</where>
+</select>
+
+<insert id="insertFreeBoard" parameterType="freeboard">
+	INSERT INTO FREEBOARD(
+		FBNO,
+		FBSUBJECT,
+		FBNAME,
+		FBIMG,
+		FBCONTENT,
+		MEMBER_MNO,
+		FBDELETEYN,
+		FBINSERTDATE,
+		FBUPDATEDATE
+	)VALUES(
+		#{fbno, jdbcType=VARCHAR},
+		#{fbsubject, jdbcType=VARCHAR},
+		#{fbname, jdbcType=VARCHAR},
+		#{fbimg, jdbcType=VARCHAR},
+		#{fbcontent, jdbcType=VARCHAR},
+		#{member_mno, jdbcType=VARCHAR},
+		'N',
+		SYSDATE,
+		SYSDATE
+	)
+</insert>
+
+<select id="selectFreeBoard" parameterType="freeboard" resultType="freeboard">
+	SELECT 		FBNO,
+				FBSUBJECT,
+				FBNAME,
+				FBIMG,
+				FBCONTENT,
+				MEMBER_MNO,
+				FBDELETEYN,
+				TO_CHAR(FBINSERTDATE,'YYYYMMDD') FBINSERTDATE,
+				TO_CHAR(FBUPDATEDATE,'YYYYMMDD') FBUPDATEDATE
+		FROM FREEBOARD
+		<![CDATA[
+		WHERE FBNO=#{fbno}
+		]]>
+</select>
+<update id="updateFreeBoard" parameterType="freeboard">
+	UPDATE FREEBOARD
+	SET FBSUBJECT=#{fbsubject},
+		FBCONTENT=#{fbcontent}
+	<![CDATA[
+	WHERE FBDELETEYN='N' AND 
+	FBNO=#{fbno}
+	]]>
+</update>
+<update id="deleteFreeBoard" parameterType="freeboard">
+</update>
+</mapper>		
