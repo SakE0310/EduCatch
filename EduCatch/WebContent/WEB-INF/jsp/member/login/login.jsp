@@ -49,26 +49,31 @@
 <style type="text/css">
 		
 		
-		#Subject{
+		#subject{
 			font-size :23px;
 			font-weight: bold; 
 			margin-top:20px;
 			margin-bottom:40px;
 		}
 		
-		#ID{
+		#id{
 			font-size :13px;
 			width:350px;
 			margin : auto;
 			font-weight: bold;
 		}
 	
-		#PW{
+		#pw{
 			font-size :13px;
 			width:350px;
 			margin : auto;
 			font-weight: bold;
 		}
+		#fgpw{
+			color : black;
+			text-decoration: underline;
+		}
+		
 	
 		.genric-btn {
 	   		color: #fff;
@@ -96,12 +101,12 @@
 
 
 		
-</head>
-<body>
+	</head>
+		<body>
  		
  		 <form name = "loginForm" id = "loginForm" method ="post"> 
   				
-				<div align = "center" id = "Subject">로그인
+				<div align = "center" id = "subject">로그인
 				<hr style=" height:3.5px;
 							border-width:1px;
 							color:black;
@@ -118,7 +123,7 @@
 				
 			
 	
-				<div class="js-form-message form-group"  id ="ID">
+				<div class="js-form-message form-group"  id ="id">
      		   		<label class="form-label" for="id_login">아이디</label>
         			<input type="email" class="form-control" name="login" id="id_login" placeholder="이메일을 입력해주세요"
        	         	 aria-label="Email address" data-error-class="u-has-error" data-success-class="u-has-success">
@@ -126,14 +131,18 @@
     		
  
     		
-    			<div class="js-form-message form-group mb-5" id ="PW">
+    			<div class="js-form-message form-group mb-5" id ="pw">
       			   <label class="form-label" for="id_password">
        			   <span class="d-flex justify-content-between align-items-center">비밀번호
           		   </span></label>
         
         		   <input type="password" class="form-control" name="password" id="id_password" placeholder="********"
                	   aria-label="********">
-          
+               	   
+               	  <div id = "fgpw">
+          		   <a class="link-muted text-capitalize font-weight-normal" href="/accounts/password/reset/" >비밀번호를 잊으셨나요?</a>
+          		  </div> 
+          			
      		    </div> 
 
 				<div align ="center">
