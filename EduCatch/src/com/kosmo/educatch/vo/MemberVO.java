@@ -20,22 +20,7 @@ public class MemberVO {
 
 
 
-		public MemberVO(String mno, String mid, String mpw, String mname, String mtel, String maddrno, String maddr1, String maddr2,
-				String mauth, String memailchk, String mdeleteyn,String minsertdate, String mupdatedate) {
-			
-			this.mno = mno;
-			this.mid = mid;
-			this.mpw = mpw;
-			this.mname = mname;
-			this.mtel = mtel;
-			this.maddrno = maddrno;
-			this.maddr1 = maddr1;
-			this.maddr2 = maddr2;
-			this.mauth = mauth;
-			this.memailchk = memailchk;
-			this.mdeleteyn = mdeleteyn;
-			this.minsertdate = minsertdate;
-			this.mupdatedate = mupdatedate;
+		public MemberVO() {
 		}
 
 		public String getMno() {

@@ -14,25 +14,24 @@
 <script type ="text/javascript">
 	
 	$(document).ready(function(){
-		$("#Join").click(function(){
-			$("#loginForm")
-			alert("회원가입")
-			.attr("action","#")
-			.submit();
+		$("#join").click(function(){
+			
+			alert("회원가입");
+			$("#loginForm").attr("action","joinCheckForm.ec")
+			$("#loginForm").submit();
 			
 		});
 		
 		// 회원 타입선택 안할 시 alert
-		$("#Login").click(function(){
+		$("#login").click(function(){
 			if($("input[name='auth']:checked").val() == null){
 				alert("회원타입을 선택해주세요.");
 				
 			}else{
 				
 				alert("로그인");
-				$("#loginForm")
-				.attr("action","loginCheck.ec")
-				.submit();
+				$("#loginForm").attr("action","loginCheck.ec")
+				$("#loginForm").submit();
 			}
 			
 			
@@ -113,8 +112,8 @@
 				</div>
 				
 				<div class="radio" align = "center">
- 				 <label><input type="radio" name="auth" id = "authMember1"  value ="1">  일반회원</label>
-  				 <label><input type="radio" name="auth" id = "authMember2" value ="2">  학원회원</label>
+ 				 <label><input type="radio" name="auth" id = "auth1"  value ="1" checked>  일반회원</label>
+  				 <label><input type="radio" name="auth" id = "auth2" value ="2">  학원회원</label>
 				</div>
 				
 			
@@ -138,11 +137,11 @@
      		    </div> 
 
 				<div align ="center">
-    				<button class="genric-btn primary" type="submit" name ="Login" id ="Login">로그인</button>	
+    				<button class="genric-btn primary" type="submit" name ="login" id ="login">로그인</button>	
 				</div><br>
     
     			<div align = "center">
-    				<button class="genric-btn success" type="submit" name ="Join" id ="Join">회원가입</button>
+    				<button class="genric-btn success" type="submit" name ="join" id ="join">회원가입</button>
    				</div>
    				
     			<div align ="center"> 

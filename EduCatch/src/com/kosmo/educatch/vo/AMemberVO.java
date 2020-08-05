@@ -21,25 +21,7 @@ public class AMemberVO {
 	 private String amupdatedate;
 	
 	 
-	 public AMemberVO(String amno, String amid, String ampw, String amname, String amtel, String amaddrno,
-			String amaddr1, String amaddr2, String amimg, String amauth, String academy_ano, String ampermission,
-			String memailchk, String amdeleteyn, String aminsertdate, String amupdatedate) {
-		this.amno = amno;
-		this.amid = amid;
-		this.ampw = ampw;
-		this.amname = amname;
-		this.amtel = amtel;
-		this.amaddrno = amaddrno;
-		this.amaddr1 = amaddr1;
-		this.amaddr2 = amaddr2;
-		this.amimg = amimg;
-		this.amauth = amauth;
-		this.academy_ano = academy_ano;
-		this.ampermission = ampermission;
-		this.memailchk = memailchk;
-		this.amdeleteyn = amdeleteyn;
-		this.aminsertdate = aminsertdate;
-		this.amupdatedate = amupdatedate;
+	 public AMemberVO() {
 	}
 
 
