@@ -12,6 +12,7 @@ public class TestController {
 	@RequestMapping("1")
 	public String nnn() {
 		log.info("Logger");
+		log.info("Logger1");
 		log.info("Logger");
 		return null;
 	}
