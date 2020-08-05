@@ -7,10 +7,10 @@
 <html>
 <head>
 	<jsp:include page="../../../../top.jsp" flush="true">
-	<jsp:param value="" name=""/>
+		<jsp:param value="" name=""/>
 	</jsp:include>
 </head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>후기 게시판</title>
 <style type="text/css">
 	.tt{	

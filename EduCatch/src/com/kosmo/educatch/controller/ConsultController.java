@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.service.ConsultService;
 import com.kosmo.educatch.vo.ConsultVO;
+import com.kosmo.educatch.vo.ReviewVO;
 
 @Controller
 public class ConsultController {
@@ -52,6 +53,22 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		log.info("ConsultController listConsult >>> 끝");
 		
 		return mav;
+	}
+	
+	
+	//글쓰기 버튼 눌렀을때
+	@RequestMapping("/cinsertDisplay.ec")
+	public ModelAndView cinsertDisplay(@ModelAttribute ReviewVO param) {
+		
+		log.info("ConsultController cinsertDisplay >>> 호출 성공 ");
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("community/consultBoard/consultInsert");
+		
+		log.info("ConsultController cinsertDisplay >>> 끝 ");
+		return mav;
+	
 	}
 
 }
