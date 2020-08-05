@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<jsp:include page="../../../../top.jsp" flush="true">
+	<jsp:param value="" name="" />
+</jsp:include>
 <style type="text/css">
 #form {
 	margin: auto;
@@ -138,9 +141,6 @@ function ajaxGetMinor(param){
 		out.println("</script>\n");
 	}
 %>
-	<jsp:include page="../../../../top.jsp" flush="true">
-		<jsp:param value="" name="" />
-	</jsp:include>
 	<main>
 		<div class="container box_1170">
 			<div class="section-top-border">
