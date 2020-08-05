@@ -3,6 +3,7 @@ package com.kosmo.educatch.vo;
 public class MemberVO {
 
 		//로그인
+		private String mno;
 		private String mid;
 		private String mpw;
 		private String mname;
@@ -19,8 +20,10 @@ public class MemberVO {
 
 
 
-		public MemberVO(String mid, String mpw, String mname, String mtel, String maddrno, String maddr1, String maddr2,
+		public MemberVO(String mno, String mid, String mpw, String mname, String mtel, String maddrno, String maddr1, String maddr2,
 				String mauth, String memailchk, String mdeleteyn,String minsertdate, String mupdatedate) {
+			
+			this.mno = mno;
 			this.mid = mid;
 			this.mpw = mpw;
 			this.mname = mname;
@@ -35,8 +38,20 @@ public class MemberVO {
 			this.mupdatedate = mupdatedate;
 		}
 
-
-
+		public String getMno() {
+			return mno;
+			
+		}
+		
+		
+		public void setMno(String mno) {
+			this.mno = mno;
+			
+		}
+		
+		
+		
+		
 		public String getMid() {
 			return mid;
 		}
