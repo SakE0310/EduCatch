@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kosmo.educatch.dao.ConsultMapper;
 import com.kosmo.educatch.vo.ConsultVO;
 
 @Service

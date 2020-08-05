@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.kosmo.educatch.vo.ConsultVO;
 
-public class ConsultMapper {
+public interface ConsultMapper {
 
 	public List<ConsultVO> listConsult(ConsultVO param);
 }
