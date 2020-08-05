@@ -23,6 +23,22 @@
 	<link rel="stylesheet" href="/EduCatch/assets/css/slick.css">
 	<link rel="stylesheet" href="/EduCatch/assets/css/nice-select.css">
 	<link rel="stylesheet" href="/EduCatch/assets/css/style.css">
+	<style type="text/css">
+	.login{
+		color: #0d2d3e;
+		font-weight: 600;
+		display: block;
+		font-size: 16px;
+		-webkit-transition: 0.3s;
+		-moz-transition: 0.3s;
+		-o-transition: 0.3s;
+		transition: 0.3s;
+		text-transform: capitalize;
+	}
+	.login:hover{
+		color: #FF3514;
+	}
+	</style>
 </head>
 <!-- ? Preloader Start -->
     <div id="preloader-active">
@@ -85,10 +101,7 @@
                                     <ul>
                                         <li>
                                             <div class="nav-log login">
-                                                <a href="login.ec"> <span class="fas fa-search">로그인</span></a>
-                                            
-                                            
-<!--                                                 <span class="fas fa-search">로그인</span> -->
+                                                <a href="login.ec" class="login">로그인</a>
                                             </div>
                                         </li>
                                     </ul>
