@@ -19,6 +19,7 @@ public class MemberJoinController {
 	
 	@Autowired
 	private MemberJoinService memberjoinservice;
+	
 	//일반회원, 학원회원을 선택하는 페이지로 이동
 	@RequestMapping("/memberjoingo")
 	public ModelAndView memlberJoinGo(@ModelAttribute MemberVO param) {
