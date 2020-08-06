@@ -23,7 +23,7 @@ public class SearchController {
 	
 	Logger log = Logger.getLogger(SearchController.class);
 	
-	//Search메인페이지 이동
+	//검색페이지 이동
 	@RequestMapping("searchMain")
 	public ModelAndView searchMain() {
 		log.info("search controller searchMain start >>> ");
@@ -34,85 +34,6 @@ public class SearchController {
 		return mv;
 	}//end searchMain
 	
-	//선택완료버튼 클릭후 메인으로 돌아오는 기능
-//	@ResponseBody
-//	@RequestMapping("searchCateList")
-//	public Map<String,List<SearchVO>>searchCateList(SearchVO param, 
-//			HttpServletRequest req) {
-//		log.info("search controller searchCateList start >>> ");
-//		String cmajor = req.getParameter("cmajor");
-//		param.setCmajor(cmajor);
-//		log.info("search controller searchCateList cmajor >>> "+cmajor);
-//		log.info("search controller searchCateList param >>> "+param);
-//		List<SearchVO> list = searchService.selectCate(param);
-//		Map<String,List<SearchVO>>map = new HashMap<String,List<SearchVO>>();
-//		map.put("minorList",list);
-//		log.info("search controller searchCateList list >>> "+list);
-//		log.info("search controller searchCateList map >>> "+map);
-//		log.info("search controller searchCateList end >>> ");
-//		return map;
-//	}
-//	
-//	@RequestMapping("searchMainAgain")
-//	public ModelAndView searchMainAgain(SearchVO param,
-//										HttpServletRequest req) {
-//		log.info("search controller searchMain_again start >>> ");
-//		String city = req.getParameter("city");
-//		String cmajor = req.getParameter("cmajor");
-//		log.info("search controller searchMain_again city >>> "+city);
-//		log.info("search controller searchMain_again cmajor >>> "+cmajor);
-//		ModelAndView mv = new ModelAndView();
-//		mv.addObject("cityForm", city);
-//		mv.addObject("cateForm", cmajor);
-//		mv.setViewName("search/searchMain");
-//		log.info("search controller searchMain_again mv >>> "+mv);
-//		log.info("search controller searchMain_again end >>> ");
-//		return mv;
-//	}//end searchMain
-//	
-//	//지역select
-//	@ResponseBody
-//	@RequestMapping("searchAreaList")
-//	public Map<String,List<SearchVO>>searchAreaList(HttpServletRequest req) {
-//		log.info("search controller searchAreaList start >>> ");
-//		String district = req.getParameter("district");
-//		log.info("search controller searchAreaList district >>> "+district);
-//		List<SearchVO> list = searchService.selectArea(district);
-//		Map<String,List<SearchVO>>map = new HashMap<String,List<SearchVO>>();
-//		map.put("cityList",list);
-//		log.info("search controller searchAreaList list >>> "+list);
-//		log.info("search controller searchAreaList map >>> "+map);
-//		log.info("search controller searchAreaList end >>> ");
-//		return map;
-//	}//end searchAreaList
-//	
-////	@RequestMapping("selectComplete")
-////	public ModelAndView selectComplete() {
-////		log.info("search controller selectComplete start >>> ");
-////		
-////		ModelAndView mv = new ModelAndView();
-////		log.info("search controller selectComplete mv >>> "+mv);
-////		log.info("search controller selectComplete end >>> ");
-////		return mv;
-////	}//end selectComplete
-//	@ResponseBody
-//	@RequestMapping("searchCateList")
-//	public Map<String,List<SearchVO>>searchCateList(SearchVO param, 
-//													HttpServletRequest req) {
-//		log.info("search controller searchCateList start >>> ");
-//		String cmajor = req.getParameter("cmajor");
-//		param.setCmajor(cmajor);
-//		log.info("search controller searchCateList cmajor >>> "+cmajor);
-//		log.info("search controller searchCateList param >>> "+param);
-//		List<SearchVO> list = searchService.selectCate(param);
-//		Map<String,List<SearchVO>>map = new HashMap<String,List<SearchVO>>();
-//		map.put("minorList",list);
-//		log.info("search controller searchCateList list >>> "+list);
-//		log.info("search controller searchCateList map >>> "+map);
-//		log.info("search controller searchCateList end >>> ");
-//		return map;
-//	}
-
 	//지역 대분류
 	@ResponseBody
 	@RequestMapping("getDistrict")
@@ -145,4 +66,29 @@ public class SearchController {
 		return map;
 	}//getCity
 	
+	//학원리스트 받아오기
+	@ResponseBody
+	@RequestMapping("getAcaList")
+	public Map<String,List<SearchVO>>getAcaList(SearchVO param,
+											   HttpServletRequest req){
+		log.info("search controller getAcaList start >>> ");
+		log.info("search controller getAcaList param >>> "+param);
+		String district = req.getParameter("district");
+		String city = req.getParameter("city");
+		String cmajor = req.getParameter("cmajor");
+		String cminor = req.getParameter("cminor");
+		log.info("search controller getCity district >>> "+district);
+		log.info("search controller getCity city >>> "+city);
+		log.info("search controller getCity cmajor >>> "+cmajor);
+		log.info("search controller getCity cminor >>> "+cminor);
+		Map<String,List<SearchVO>>map = new HashMap<String,List<SearchVO>>();
+		List<SearchVO>list = searchService.getAcaList(param);
+		map.put("acaList",list);
+		log.info("search controller getAcaList list >>> "+list);
+		log.info("search controller getAcaList map >>> "+map);
+		log.info("search controller getAcaList end >>> ");
+		return map;
+	}//getAcaList
+	
 }//end controller
+

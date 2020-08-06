@@ -8,7 +8,6 @@ public interface SearchService {
 	public List<SearchVO> getDistrict(SearchVO param);
 	//지역 소분류
 	public List<SearchVO> getCity(SearchVO param);
-//	public List<SearchVO> selectComplete(SearchVO param);
-//	public List<SearchVO> searchCateList(SearchVO param);
-//	public List<SearchVO> selectCate(SearchVO param);
+	//학원리스트 가져오기
+	public List<SearchVO> getAcaList(SearchVO param);
 }
