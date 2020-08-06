@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosmo.educatch.dao.MemberJoinMapper">
+<insert id="memberInsert" parameterType="member">
+	INSERT INTO MEMBER(
+		MNO,
+		MID,
+		MPW,             
+        MNAME,            
+        MTEL,             
+        MADDRNO,          
+        MADDR1,           
+        MADDR2,          
+        MAUTH,            
+        MEMAILCHK,        
+        MDELETEYN,       
+        MINSERTDATE,    
+        MUPDATEDATE      
+	)VALUES(
+		#{mno, jdbcType=VARCHAR},
+		#{mid, jdbcType=VARCHAR},
+		#{mpw, jdbcType=VARCHAR},
+		#{mname, jdbcType=VARCHAR},
+		#{mtel, jdbcType=VARCHAR},
+		#{maddrno, jdbcType=VARCHAR},
+		#{maddr1, jdbcType=VARCHAR},
+		#{maddr2, jdbcType=VARCHAR},
+		'1',
+		#{memailchk, jdbcType=VARCHAR},
+		'N',
+		SYSDATE,
+		SYSDATE
+	)
+</insert>
+</mapper>

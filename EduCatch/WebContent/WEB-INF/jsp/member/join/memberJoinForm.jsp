@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 폼</title>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 <script type="text/javascript">
 function joinCommit(){
 	console.log("joinCommit함수 진입");
@@ -16,18 +18,25 @@ function joinCommit(){
 </script>
 </head>
 <body>
-<form name="memberjoin" id="memberjoin">
+<form name="memberjoin" id="memberjoin" method="get">
 		<table border=1>
 			<tr>
 				<td class="mem">회원번호:</td>
 				<td>
-					<input type="text" id="mno" name="mno" disabled/></br>
+					<input type="text" id="mno" name="mno" /></br>
 				</td>
 			</tr>
 			<tr>
 				<td class="mem">회원아이디:</td>
 				<td>
-					<input type="text" id="mid" name="mid">
+					<input type="text" id="memail0" name="memail0" value="이메일"size=10 onfocus="this.value=";"/> @
+					<input type="text" id="memail1" name="memail1" value="" size=10  /> 
+					<select name="lemail" onchange="emailCheck()">
+						<option value="0">선택하세요</option>
+						<option value="9">직접입력</option>
+						<option>naver.com</option>
+						<option>gmail.com</option>
+					</select>
 					<input type="button" value="아이디 중복확인" onclick="idCheck()"/></br>
 				</td>
 			</tr>
@@ -71,7 +80,7 @@ function joinCommit(){
 			
 			<tr>						
 				<td colspan=2 align="center">
-					<input type="button" value="등록" onclick="joinCommit()">
+					<input type="button" id="joincommit" value="등록" onclick="joinCommit()">
 					<input type="reset" value="다시">
 				</td>
 			</tr>	

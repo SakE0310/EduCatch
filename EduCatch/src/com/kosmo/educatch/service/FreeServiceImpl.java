@@ -8,13 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kosmo.educatch.controller.AcademyRequestController;
 import com.kosmo.educatch.dao.FreeMapper;
+import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.vo.FreeVO;
 
 @Service
 @Transactional
 public class FreeServiceImpl implements FreeService {
-	private static Logger log = Logger.getLogger(FreeServiceImpl.class);
+	private Logger log = LoggerManager.getInstance().getLogger(FreeServiceImpl.class);
 	
 	@Autowired
 	private FreeMapper freeMapper;

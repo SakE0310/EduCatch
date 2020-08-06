@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.FreeService;
 import com.kosmo.educatch.vo.FreeVO;
 
 @Controller
 public class FreeBoardController {
-	private static Logger log=
-			Logger.getLogger(FreeBoardController.class);
+	private Logger log = LoggerManager.getInstance().getLogger(FreeBoardController.class);
 	
 	@Autowired
 	private FreeService freeService;

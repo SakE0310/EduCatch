@@ -9,6 +9,13 @@ public class MemberJoinMapperImpl extends SqlSessionDaoSupport implements Member
 	@Override
 	public int memberInsert(MemberVO param) {
 		// TODO Auto-generated method stub
+		int ins =(int)getSqlSession().insert("memberInsert");
+		return ins;
+	}
+
+	@Override
+	public int memberUpdeate(MemberVO param) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 

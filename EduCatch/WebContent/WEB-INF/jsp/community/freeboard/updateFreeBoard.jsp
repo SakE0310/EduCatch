@@ -59,14 +59,11 @@
 		});
 	});
 </script>
-
-<style type="text/css">
-</style>
-</head>
-<body>
 	<jsp:include page="../../../../top.jsp" flush="true">
 	<jsp:param value="" name=""/>
 	</jsp:include>
+</head>
+<body>
 	<!-- action/document/location -->
 	<!-- enctype="multipart/form-data" -->
 	<form id="edit" name="edit" action="#" method="post">

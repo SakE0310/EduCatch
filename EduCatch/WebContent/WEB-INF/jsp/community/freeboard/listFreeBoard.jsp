@@ -19,11 +19,11 @@
 		$("#freeBoardForm").submit();
 	}
 </script>
-</head>
-<body>
 	<jsp:include page="../../../../top.jsp" flush="true">
 		<jsp:param value="" name=""/>
 	</jsp:include>
+</head>
+<body>
 <form id="freeBoardForm" name="freeBoardForm" method="get">
 		<input type="hidden" name="fbno" id="fbno"/>
 	</form>
