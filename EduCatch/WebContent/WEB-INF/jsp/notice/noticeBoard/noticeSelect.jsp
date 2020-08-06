@@ -66,9 +66,7 @@
 %>
 	<div>
 	<form id="noticeSelForm" name="noticeSelForm" >
-		 <input type="text" name="nno" id="nno" value="<%=nvo.getNno() %>" >
-		 <input type="text" name="nname" id="nname" value="<%=nvo.getNname() %>" >
-		 <input type="text" name="nupdatedate" id="nupdatedate" value="<%=nvo.getNupdatedate()%>" >
+		 <input type="hidden" name="nno" id="nno" value="<%=nvo.getNno() %>" >
 		<table align="center" width="700" height="100" border="1">
 		 <thead>
              <tr>
@@ -93,7 +91,14 @@
          		<td>
          			<div align="center">
          				<%=nvo.getNcontent()%>
-         				<img src="/EduCatch/assets/img/notice/<%=nvo.getNimg()%>" alt="사진업음"/><br>
+<%
+							String img = nvo.getNimg();
+							if(img != null){
+%>
+         						<img src="/EduCatch/assets/img/notice/<%=nvo.getNimg()%>" alt="사진업음"/><br>
+<%								
+							}//end of if(img)
+%>         				
          			</div>
          		</td>
          	</tr>

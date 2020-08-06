@@ -63,9 +63,9 @@
 			$("#edit").submit();
 		});
 		
-		//===관리자가 취소버튼을 누르면 실행========
+		//===관리자가 목록버튼을 누르면 실행========
 		$("#listData").click(function() {
-			console.log("취소버튼 누름");
+			console.log("목록버튼 누름");
 			
 			$("#edit").attr("action","listNotice.ec");
 			$("#edit").attr("method","POST");
@@ -82,7 +82,7 @@
 	<!-- action/document/location -->
 	<form id="edit">
 		<table style="width: 50%" border="1">
-		<input type="text" id="nno" name="nno" value="<%=nvo.getNno() %>" />
+		<input type="hidden" id="nno" name="nno" value="<%=nvo.getNno() %>" />
 			<tr>
 				<td style="width: 100px">제목</td>
 				<td><input type="text" id="nsubject" name="nsubject" value="<%=nvo.getNsubject() %>"
@@ -110,7 +110,7 @@
 				<td colspan="3" align="right">
 				 <input type="button" id="updateData" value="수정" />
 				 <input type="button" id="deleteData" value="삭제" />
-				 <input type="button" id="listData" value="취소" /> 
+				 <input type="button" id="listData" value="목록" /> 
 				</td>
 			</tr>
 		</table>
