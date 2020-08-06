@@ -43,7 +43,10 @@
 		$("#save").click(function() {
 			oEditors.getById["ncontent"].exec("UPDATE_CONTENTS_FIELD", []);
 			
-			$("#edit").attr("enctype","multipart/form-data");
+			if($('#nimg').val() != null && $('#nimg').val() != ""){
+				$("#edit").attr("enctype","multipart/form-data");
+			}
+			
 			$("#edit").attr("action","insertNotice.ec");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();

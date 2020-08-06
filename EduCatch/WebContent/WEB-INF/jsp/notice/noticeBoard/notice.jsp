@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.kosmo.educatch.vo.NoticeVO" %>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="../../../../top.jsp" flush="true">
+<jsp:param value="" name=""/>
+</jsp:include>
 <meta charset="UTF-8">
 <title>공지사항</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -48,9 +52,13 @@
 </script>
 </head>
 <body>
-<jsp:include page="../../../../top.jsp" flush="true">
-<jsp:param value="" name=""/>
-</jsp:include>
+<%
+	Object obj= request.getAttribute("noticeList");
+
+	if(obj != null){
+		ArrayList list = (ArrayList)obj;
+		int nCnt = list.size();
+%>
 	<form id="noticeForm" name="noticeForm">
 	<!-- <div id="sideBanner">
 		사이드 바
@@ -78,25 +86,38 @@
 				<td align="center">등록일자</td>
 			</thead>
 			<tbody>
-				<c:if test="${empty noticeList}">
+<%		
+		//공지사항 게시물이 1건이라도 있을 떄
+		if(list !=null && nCnt>0){
+			for(int i=0; i<nCnt; i++){
+				NoticeVO nvo = (NoticeVO)list.get(i);
+%>
+				
+				<tr align="center">
+					<td>
+					<a href="selectNotice.ec?nno=<%=nvo.getNno() %>" id="nno_color"><%=nvo.getNno() %></a>
+					</td>
+					<td><%=nvo.getNsubject() %></td>
+					<td><%=nvo.getNname() %></td>
+					<td><%=nvo.getNinsertdate()%></td>
+				</tr>	
+				
+<%			
+			}//end of for
+		
+		//공지사항 게시물이 0건 일 때
+		}else{
+%>
 				<tr>
 					<td colspan ="4" align="center">
 						등록된 글이 없습니다.
 					</td>
 				</tr>
-				</c:if>
-				
-				<c:forEach items ="${noticeList}" var ="row">
-				<tr align="center">
-					<td>
-					<a href="selectNotice.ec?nno=${row.nno }" id="nno_color">${row.nno}</a>
-					</td>
-					<td>${row.nsubject}</td>
-					<td>${row.nname}</td>
-					<td>${row.ninsertdate}</td>
-				</tr>	
-				</c:forEach>
-				
+<%			
+		}//end of if(list)
+	}//end of if(obj)
+		
+%>
 				<tr>
 				<td colspan="4" align="right">
 				<input type="button" value="등록" id="insertData">

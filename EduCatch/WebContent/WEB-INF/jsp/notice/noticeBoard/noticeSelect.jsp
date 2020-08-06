@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kosmo.educatch.vo.NoticeVO" %>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,15 +57,22 @@
 </script>
 </head>
 <body>
+<%
+	Object obj= request.getAttribute("NoticeVO");
+
+	if(obj != null){
+		NoticeVO nvo =(NoticeVO)obj;
+
+%>
 	<div>
 	<form id="noticeSelForm" name="noticeSelForm" >
-		 <input type="text" name="nno" id="nno" value="${NoticeVO.nno }" >
-		 <input type="text" name="nname" id="nname" value="${NoticeVO.nname }" >
-		 <input type="text" name="nupdatedate" id="nupdatedate" value="${NoticeVO.nupdatedate }" >
+		 <input type="text" name="nno" id="nno" value="<%=nvo.getNno() %>" >
+		 <input type="text" name="nname" id="nname" value="<%=nvo.getNname() %>" >
+		 <input type="text" name="nupdatedate" id="nupdatedate" value="<%=nvo.getNupdatedate()%>" >
 		<table align="center" width="700" height="100" border="1">
 		 <thead>
              <tr>
-                 <th><div>${NoticeVO.nsubject }</div></th>
+                 <th><div><%=nvo.getNsubject() %></div></th>
              </tr>
          </thead>
          <tbody>
@@ -71,11 +80,11 @@
          		<td>
          			<div>
          				<div>
-                             <span><em>작성일자 :</em>${NoticeVO.ninsertdate}</span>                                                </div>
-                             <span><em>수정일자 :</em>${NoticeVO.nupdatedate}</span>                                                </div>
+                             <span><em>작성일자 :</em><%=nvo.getNinsertdate()%></span>                                                </div>
+                             <span><em>수정일자 :</em><%=nvo.getNupdatedate()%></span>                                                </div>
                          <div>
                          <div id ="nname1" name="nname1" align="right" >
-                         	<span><em>작성자 :</em>${NoticeVO.nname}</span>
+                         	<span><em>작성자 :</em><%=nvo.getNupdatedate()%></span>
                          </div>
          			</div>
          		</td>
@@ -83,11 +92,14 @@
          	<tr>
          		<td>
          			<div align="center">
-         				${NoticeVO.ncontent }
-         				<img src="/EduCatch/assets/img/notice/${NoticeVO.nimg}" alt="사진업음"/><br>
+         				<%=nvo.getNcontent()%>
+         				<img src="/EduCatch/assets/img/notice/<%=nvo.getNimg()%>" alt="사진업음"/><br>
          			</div>
          		</td>
          	</tr>
+<%			
+	}//end of if(obj)	
+%>
 			<tr>
 			<td align="center">
 				<input type="button" value="수정" id="updateData">
@@ -102,3 +114,13 @@
 	</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
