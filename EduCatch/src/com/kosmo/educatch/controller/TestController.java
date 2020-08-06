@@ -12,20 +12,6 @@ public class TestController {
 	@RequestMapping("1")
 	public String nnn() {
 		log.info("Logger");
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-		log.info("Logger");
-		log.info("Logger");
-=======
-		log.info("Logger1");
-		log.info("Logger2");
->>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
-=======
-		log.info("Logger1");
->>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
-=======
->>>>>>> branch 'master' of https://github.com/SakE0310/EduCatch
 		return null;
 	}
 }
