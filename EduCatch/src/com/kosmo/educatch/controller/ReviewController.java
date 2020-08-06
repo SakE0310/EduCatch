@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.ReviewService;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.oreilly.servlet.MultipartRequest;
@@ -22,7 +23,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @Controller
 public class ReviewController {
 	
-	private static Logger log=Logger.getLogger(ReviewController.class);
+	private Logger log = LoggerManager.getInstance().getLogger(ReviewController.class);
 
 	@Autowired
 	private ReviewService reviewService;
@@ -30,12 +31,12 @@ public class ReviewController {
 	//전체조회
 	@RequestMapping("listReview.ec")
 	public ModelAndView listReview(@ModelAttribute ReviewVO param) {
-		
+
 		log.info("ReviewController listReview >>> 호출성공");
 		log.info(param);
 		log.info(param.getMember_mno());
 		log.info(param.getRbcontent());
-		
+
 		
 		List<ReviewVO> list=reviewService.listReview(param);
 		log.info("list.size() >>> "+list.size());

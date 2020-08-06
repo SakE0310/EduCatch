@@ -1,3 +1,4 @@
+<%@page import="com.kosmo.educatch.vo.ReviewVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,27 +8,45 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script type="text/javascript">
-	var result="${result}";
-	var isSuccess="${isSuccess}";
-	console.log("result>>>"+result);
+<%
+	Object obj=request.getAttribute("result");
+	Object obj1=request.getAttribute("isSuccess");
+	Object obj2=request.getAttribute("ReviewVOO");
 	
-	if(result=="update"){
-		alert("수정완료");
-		//공지사항 상세보기
-		location.href="selectReview.ec?rbno=${ReviewVOO.rbno }";
+	
+
+	if(obj !=null){
+		String result=(String)obj;
+		String isSuccess=(String)obj1;
 		
-	}else if(result=="delete"){
-		if(isSuccess=="true"){
-			alert("삭제완료");
-			//공지사항 전체목록으로 이동
-			location.href="listReview.ec";
-		}else{
-			alert("삭제실패");
-			//공지사항 전체목록으로 이동
-			location.href="listReview.ec";
+		ReviewVO rvo=(ReviewVO)obj2;
+		
+		if(result == "update"){
+%>
+	<script>
+		alert("수정완료");
+		location.href="selectReview.ec?rbno=<%= rvo.getRbno()%>";
+	</script>
+<% 
+		}else if(result == "delete"){
+			if(isSuccess=="true"){
+%>
+			<script>
+				alert("삭제완료");
+				location.href="listReview.ec";
+			</script>
+<%
+			}else{
+%>
+			<script>
+				alert("삭제실패");
+				//공지사항 전체목록으로 이동
+				location.href="listReview.ec";
+			</script>
+<%
+			}
 		}
 	}
-</script>
+%>
 </body>
 </html>

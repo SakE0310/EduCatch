@@ -62,6 +62,16 @@
 	
 </script>
 <body>
+<%
+
+	Object obj=request.getAttribute("listReview");
+
+	if(obj !=null){
+		ArrayList listReview=(ArrayList)obj;
+		
+		int nCnt=listReview.size();
+	
+%>
 <form id="pageForm" name="pageForm">
 		<input type="hidden" id="rbno" name="rbno"/>
 	</form>
@@ -102,19 +112,28 @@
 						</td>
 					</tr>
 				</c:if>
-			<c:forEach items="${listReview}" var="row">
+<%
+
+		for(int i=0; i<nCnt; i++){
+			ReviewVO rvo=(ReviewVO)listReview.get(i);
+		
+%>
+
 					<tr align="center">
-						<td>${row.rbno }</td>
-						<td>${row.rbname }</td>
-						<td>${row.academy_ano }</td>
-						<td><a href="selectReview.ec?rbno=${row.rbno }"  id="aa">${row.rbsubject }</a></td>
-						<td>${row.rbinsertdate }</td>
+						<td><%= rvo.getRbno() %></td>
+						<td><%= rvo.getRbname() %></td>
+						<td><%= rvo.getAcademy_ano() %></td>
+						<td><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>"  id="aa"><%= rvo.getRbsubject() %></a></td>
+						<td><%= rvo.getRbinsertdate() %></td>
 						<!-- 
 						<td><input type="button" value="[수정/삭제]"
 						onclick="updatePopup('${row.rbno}')"/></td>
 						-->
 					</tr>
-				</c:forEach>			
+<%
+		}
+	}
+%>			
 			</tbody>
 		</table>
 	</div>

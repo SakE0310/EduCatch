@@ -1,3 +1,4 @@
+<%@page import="com.kosmo.educatch.vo.ReviewVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -56,25 +57,30 @@
 
 </script>
 <body>
+<%
+	Object obj=request.getAttribute("ReviewVOO");
+	
+	ReviewVO rvo=(ReviewVO)obj;
+%>
 <!-- action/document/location -->
 	<form id="edit">
-	<input type="hidden" id="rbno" name="rbno" value="${ReviewVOO.rbno }"/>
+	<input type="hidden" id="rbno" name="rbno" value="<%= rvo.getRbno()%>"/>
 		<table style="margin-left: auto; margin-right: auto; width: 50%" border="1">
 			<tr>
 				<td style="width: 100px">제목</td>
-				<td><input type="text" id="rbsubject" name="rbsubject" value="${ReviewVOO.rbsubject}"
+				<td><input type="text" id="rbsubject" name="rbsubject" value="<%= rvo.getRbsubject() %>"
 					style="width: 98%" /></td>
 			</tr>
 			<tr>
 				<td style="width: 100px">평점</td>
 				<td>
-					<input type="text" id="rbgrade" name="rbgrade" value="${ReviewVOO.rbgrade}"
+					<input type="text" id="rbgrade" name="rbgrade" value="<%= rvo.getRbgrade() %>"
 					style="width: 98%" />
 				</td>
 			</tr>
 			<tr>
 				<td style="width: 100px">학원명</td>
-				<td><input type="text"  id="academy_ano" name="academy_ano"
+				<td><input type="text"  id="academy_ano" name="academy_ano" value="<%= rvo.getAcademy_ano() %>"
 					style="width: 98%" />
 				</td>
 			</tr>
@@ -82,15 +88,16 @@
 			<tr>
 				<td>내용</td>
 				<td><textarea name="rbcontent" id="rbcontent" title="내용" 
-						style="width: 100%; height: 400px; padding: 0; margin: 0;">${ReviewVOO.rbcontent}</textarea>
+						style="width: 100%; height: 400px; padding: 0; margin: 0;"><%= rvo.getRbcontent() %></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>첨부파일</td>
 				<td>
-					<input type="text" id="rbimg" name="rbimg" value="${ReviewVOO.rbimg}"/><br> 
+					<input type="text" id="rbimg" name="rbimg" value="<%= rvo.getRbimg()%>"/><br> 
 				</td>
 			</tr>
+
 			<tr>
 				<td colspan="3" align="right">
 				 <input type="button" id="save" value="수정" />

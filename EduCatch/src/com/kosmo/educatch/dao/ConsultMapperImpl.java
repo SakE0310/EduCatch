@@ -16,4 +16,10 @@ public class ConsultMapperImpl extends SqlSessionDaoSupport implements ConsultMa
 		return getSqlSession().selectList("listConsult");
 	}
 
+	@Override
+	public int insertConsult(ConsultVO param) {
+		// TODO Auto-generated method stub
+		return getSqlSession().insert("insertConsult");
+	}
+
 }

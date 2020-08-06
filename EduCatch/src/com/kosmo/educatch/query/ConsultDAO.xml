@@ -18,4 +18,36 @@
         WHERE   CDELETEYN = 'N'
         ORDER BY 1 DESC
 	</select>
+	<insert id="insertConsult" parameterType="consult">
+		<selectKey keyProperty="cbno" resultType="String" order="BEFORE">
+			SELECT 'C'||LPAD((SELECT /* +INDEX_DESC(A SYS_C0011684) */              
+			NVL(MAX(SUBSTR(A.CBNO,-5)),0)+1 commNO
+			FROM    CONSULTBOARD A), 5,'0') 
+			FROM DUAL
+		</selectKey>
+			INSERT INTO CONSULTBOARD
+			(
+			    CBNO,
+			    CBSUBJECT,
+			    CBNAME,
+			    CBCONTENT,
+			    ACADEMY_ANO,
+			    MEMBER_MNO,
+			    CDELETEYN,
+			    CINSERTDATE,
+			    CUPDATEDATE
+			)
+			VALUES
+			(
+			#{cbno, jdbcType=VARCHAR},
+			#{cbsubject, jdbcType=VARCHAR},
+			#{cbname, jdbcType=VARCHAR},
+			#{cbcontent, jdbcType=VARCHAR},
+			#{academy_ano, jdbcType=VARCHAR},
+			#{member_mno, jdbcType=VARCHAR},
+			'N',
+			SYSDATE, 
+			SYSDATE
+			)
+	</insert>
 </mapper>

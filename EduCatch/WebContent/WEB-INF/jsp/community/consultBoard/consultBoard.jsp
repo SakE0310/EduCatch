@@ -9,6 +9,19 @@
 	</jsp:include>
 <meta charset="UTF-8">
 </head>
+<style type="text/css">
+	.tt{	
+			text-align:center;
+			font-size: xx-large;
+			font-weight: bold;
+			
+		}		
+		
+	#aa{	
+			color:black;
+		
+		}
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	 $(document).ready(function() {
@@ -31,7 +44,7 @@
 	<div>
 		<table style="margin-left: auto; margin-right: auto;" border="0" cellpadding="1" cellspacing="1">
 			<tr>
-				<th><h4 class="tt">후기 게시판</h4><br><br><br></th>
+				<th><h4 class="tt">상담 게시판</h4><br><br><br></th>
 			</tr>
 		</table>
 		<table  style="margin-left: auto; margin-right: auto;" border="1">

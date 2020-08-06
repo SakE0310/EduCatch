@@ -47,6 +47,7 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		}
 		
 		ModelAndView mav=new ModelAndView();
+		mav.addObject("listConsult", list);
 		mav.setViewName("community/consultBoard/consultBoard");
 		
 		log.info("mav >>> "+mav);
@@ -56,9 +57,9 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 	}
 	
 	
-	//글쓰기 버튼 눌렀을때
-	@RequestMapping("/cinsertDisplay.ec")
-	public ModelAndView cinsertDisplay(@ModelAttribute ReviewVO param) {
+	//글쓰기 버튼 눌렀을 때
+	@RequestMapping("cinsertDisplay")
+	public ModelAndView cinsertDisplay(@ModelAttribute ConsultVO param) {
 		
 		log.info("ConsultController cinsertDisplay >>> 호출 성공 ");
 		
@@ -69,6 +70,28 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		log.info("ConsultController cinsertDisplay >>> 끝 ");
 		return mav;
 	
+	}
+	
+	//등록 버튼 눌렀을 때
+	@RequestMapping("insertConsult")
+	public ModelAndView insertConsult(@ModelAttribute ConsultVO param) {
+		log.info("ConsultController insertConsult >>> 호출 성공");
+		
+		String resultStr="";
+		int result=consultService.insertConsult(param);
+		
+		ModelAndView mav=new ModelAndView();
+		if(result>0) 
+			resultStr="등록 완료";
+		else
+			resultStr="등록 실패";
+		
+		mav.addObject("result", resultStr);
+		mav.setViewName("community/consultBoard/consultInsertForm");
+		
+		log.info("ConsultController insertConsult >>> 끝");
+		return mav;
+		
 	}
 
 }

@@ -38,5 +38,11 @@ public class ConsultServiceImpl implements ConsultService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public int insertConsult(ConsultVO param) {
+		// TODO Auto-generated method stub
+		return consultMapper.insertConsult(param);
+	}
 	
 }
