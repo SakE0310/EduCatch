@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kosmo.educatch.dao.DetailViewMapper">
+<mapper namespace="com.kosmo.educatch.dao.AcademyAddMapper">
+
+	<select id="selectCategory" parameterType="String" resultType="search">
+		SELECT
+			CNO
+		FROM	CATEGORY 
+		WHERE CMAJOR=#{cmajor, jdbcType=VARCHAR}
+		AND	  CMINOR=#{cminor, jdbcType=VARCHAR}
+	</select>
 
 	<insert id="insertAcademy" parameterType="academyview">
 		<selectKey keyProperty="ano" resultType="String" order="BEFORE">
@@ -11,15 +19,19 @@
 			    )COMMNO  
 		FROM ACADEMY A
 		</selectKey>
+		
 		INSERT INTO ACADEMY
 					(
 					        ANO, 
 						    ANAME, 
 						    ATEL,
+						    AXPOINT,
+						    AYPOINT,
 						    AADDRNO,
 						    AADDR1,
 						    AADDR2,
 						    ALOGO,
+						    CATEGORY_CNO,
 						    ADELETEYN,
 				            AINSERTDATE,
 				            AUPDATEDATE   
@@ -28,10 +40,13 @@
 					        #{ano, jdbcType=VARCHAR},
 					        #{aname, jdbcType=VARCHAR},
 					        #{atel, jdbcType=VARCHAR},
+					        #{axpoint, jdbcType=VARCHAR},
+					        #{aypoint, jdbcType=VARCHAR},
 					        #{aaddrno, jdbcType=VARCHAR},
 					        #{aaddr1, jdbcType=VARCHAR},
 					        #{aaddr2, jdbcType=VARCHAR},
 					        #{alogo, jdbcType=VARCHAR},
+					        #{category_cno, jdbcType=VARCHAR},
 					        'N',
 					        SYSDATE,
 					        SYSDATE

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.kosmo.educatch.vo.NoticeVO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,8 +35,15 @@
 				}
 			},
 			fOnAppLoad : function() {
+<%
+	Object obj= request.getAttribute("NoticeVO");
+
+	if(obj != null){
+		NoticeVO nvo =(NoticeVO)obj;
+
+%>
 				//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-				oEditors.getById["ncontent"].exec("PASTE_HTML", [ '${NoticeVO.ncontent}' ]);
+				oEditors.getById["ncontent"].exec("PASTE_HTML", [ '<%=nvo.getNcontent()%>' ]);
 			},
 			fCreator : "createSEditor2"
 		});
@@ -48,9 +56,16 @@
 			$("#edit").submit();
 		});
 		
-		//===관리자가 취소버튼을 누르면 실행========
+		//==관리자가 삭제버튼 클릭시 form 전송========
+		$("#deleteData").click(function() {
+			$("#edit").attr("action","deleteNotice.ec");
+			$("#edit").attr("method","POST");
+			$("#edit").submit();
+		});
+		
+		//===관리자가 목록버튼을 누르면 실행========
 		$("#listData").click(function() {
-			console.log("취소버튼 누름");
+			console.log("목록버튼 누름");
 			
 			$("#edit").attr("action","listNotice.ec");
 			$("#edit").attr("method","POST");
@@ -63,13 +78,14 @@
 <style type="text/css">
 </style>
 <body>
+
 	<!-- action/document/location -->
 	<form id="edit">
 		<table style="width: 50%" border="1">
-		<input type="text" id="nno" name="nno" value="${NoticeVO.nno}" />
+		<input type="hidden" id="nno" name="nno" value="<%=nvo.getNno() %>" />
 			<tr>
 				<td style="width: 100px">제목</td>
-				<td><input type="text" id="nsubject" name="nsubject" value="${NoticeVO.nsubject}"
+				<td><input type="text" id="nsubject" name="nsubject" value="<%=nvo.getNsubject() %>"
 					style="width: 98%" /></td>
 			</tr>
 
@@ -82,16 +98,19 @@
 			<tr>
 				<td>첨부파일</td>
 				<td>
-					<img src="/EduCatch/assets/img/notice/${NoticeVO.nimg}" alt="사진업음"/><br>
+					<img src="/EduCatch/assets/img/notice/<%=nvo.getNimg()%>" alt="사진업음"/><br>
 					<input type="file" value="찾아보기" id="nimg" name="nimg" /><br> 
 						
 				</td>
 			</tr>
+<%			
+	}//end of if(obj)	
+%>			
 			<tr>
 				<td colspan="3" align="right">
 				 <input type="button" id="updateData" value="수정" />
 				 <input type="button" id="deleteData" value="삭제" />
-				 <input type="button" id="listData" value="취소" /> 
+				 <input type="button" id="listData" value="목록" /> 
 				</td>
 			</tr>
 		</table>

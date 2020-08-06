@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.NoticeService;
 import com.kosmo.educatch.vo.NoticeVO;
 import com.oreilly.servlet.MultipartRequest;
@@ -22,7 +23,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 //공지사항 게시판
 @Controller
 public class NoticeController {
-	private static Logger log = Logger.getLogger(NoticeController.class);
+	private Logger log = LoggerManager.getInstance().getLogger(NoticeController.class);
 	
 	@Autowired
 	private NoticeService noticeService;
@@ -113,7 +114,7 @@ public class NoticeController {
 			log.info("multipart/form-data true");
 			
 			int size = 10*1024*1024;
-			String path = "C://Users//kosmo_02//git//EduCatch//EduCatch//WebContent//assets//img//notice";
+			String path = "C://Users//user//git//EduCatch//EduCatch//WebContent//assets//img//notice";
 			
 			
 			try {
@@ -167,10 +168,12 @@ public class NoticeController {
 		
 		if(nCnt > 0) {
 			resultStr="등록 완료";
+			
 		}else {
 			resultStr="등록 실패";
 		}//end of if-else
 		
+		log.info("resultStr>>>"+resultStr);
 		mav.addObject("result", resultStr);
 		mav.setViewName("notice/noticeBoard/noticeinsertForm");
 		
@@ -196,8 +199,8 @@ public class NoticeController {
 			log.info("nvo.getNinsertdate()>>>"+nvo.getNinsertdate());
 			log.info("nvo.getNupdatedate()>>>"+nvo.getNupdatedate());
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("NoticeVO", nvo);
 			
+			mav.addObject("NoticeVO", nvo);
 			mav.setViewName("notice/noticeBoard/noticeUpdate");
 			
 			log.info("NoticeController updateDisplayNotice 끝 >>>");
@@ -208,6 +211,7 @@ public class NoticeController {
 	//===============공지사항 관리자모드 : 수정================================
 	@RequestMapping("updateNotice.ec")
 	public ModelAndView updateNotice(@ModelAttribute NoticeVO param) {
+		log.info("NoticeController updateNotice 시작 >>>");
 		log.info("NoticeController updateNotice 시작 >>>");
 		String resultStr="";
 		String isSuccess="";
@@ -224,6 +228,7 @@ public class NoticeController {
 		
 		}else {
 			resultStr = "update";
+			isSuccess="false";
 			log.info("수정실패");
 		}//end of if-else
 		

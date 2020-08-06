@@ -23,6 +23,7 @@
 	<link rel="stylesheet" href="/EduCatch/assets/css/slick.css">
 	<link rel="stylesheet" href="/EduCatch/assets/css/nice-select.css">
 	<link rel="stylesheet" href="/EduCatch/assets/css/style.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<style type="text/css">
 	.login{
 		color: #0d2d3e;
@@ -39,6 +40,24 @@
 		color: #FF3514;
 	}
 	</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var windowWidth1 = $(window).width();
+		if(windowWidth1 < 992) {
+			$('.liLogin').show();
+		} else {
+			$('.liLogin').hide();
+		}
+		$(window).resize(function() {
+			var windowWidth = $(window).width();
+			if(windowWidth < 992) {
+				$('.liLogin').show();
+			} else {
+				$('.liLogin').hide();
+			}
+		});
+	});
+</script>
 </head>
 <!-- ? Preloader Start -->
     <div id="preloader-active">
@@ -86,19 +105,20 @@
                                                     <ul class="submenu">
                                                         <li><a href="listNotice.ec">공지사항</a></li>
                                                         <li><a href="listEvent.ec">이벤트</a></li>
+                                                        <li><a href="listDetailView.ec">남시현상세</a></li>
+                                                		<li><a href="academyPage.ec">남시현등록</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="listDetailView.ec">남시현상세</a></li>
-                                                <li><a href="academyPage.ec">남시현등록</a></li>
+                                                <li><a href="manage.ec">관리자</a></li>
                                             </ul>
                                         </nav>
                                     </div>
                                 </div>
                             </div> 
-                            <div class="col-xl-1 col-lg-4">
-                                <!-- 로그인버튼 예정 -->
+                           <div class="col-xl-1 col-lg-4">
+                                <!-- 로그인버튼 예정  -->
                                 <div class="search d-none d-lg-block">
-                                    <ul>
+                                    <ul class="login">
                                         <li>
                                             <div class="nav-log login">
                                                 <a href="login.ec" class="login">로그인</a>

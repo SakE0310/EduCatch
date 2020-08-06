@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.CategoryService;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.SearchVO;
@@ -29,7 +30,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @Controller
 public class AcademyRequestController {
 	
-	Logger log = Logger.getLogger(AcademyRequestController.class);
+	private Logger log = LoggerManager.getInstance().getLogger(AcademyRequestController.class);
 	
 	@Autowired
 	private CategoryService categoryService;

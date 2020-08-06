@@ -4,16 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8"">
-<title>Insert title here</title>
+<title>공지사항 등록페이지</title>
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
-<script type="text/javascript"
-	src="/EduCatch/assets/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="/EduCatch/assets/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 
 <!-- jQuery를 사용하기위해 jQuery라이브러리 추가 -->
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-<!-- function 함수 짜야함 -->
 
 <script type="text/javascript">
 	var oEditors = [];
@@ -43,7 +40,10 @@
 		$("#save").click(function() {
 			oEditors.getById["ncontent"].exec("UPDATE_CONTENTS_FIELD", []);
 			
-			$("#edit").attr("enctype","multipart/form-data");
+			if($('#nimg').val() != null && $('#nimg').val() != ""){
+				$("#edit").attr("enctype","multipart/form-data");
+			}
+			
 			$("#edit").attr("action","insertNotice.ec");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();

@@ -7,6 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-11
+<script type="text/javascript">
+	alert("${result}");
+	if("${result}".indexOf("문제") > -1){
+		history.go(-1);
+	}else{
+		location.href="listConsult.ec";
+	}
+	
+</script>
 </body>
 </html>

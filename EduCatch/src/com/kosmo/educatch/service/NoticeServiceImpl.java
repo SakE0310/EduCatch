@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kosmo.educatch.controller.NoticeController;
 import com.kosmo.educatch.dao.NoticeMapper;
+import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.vo.NoticeVO;
 import org.apache.log4j.Logger;
 
@@ -15,7 +17,7 @@ import org.apache.log4j.Logger;
 @Transactional
 public class NoticeServiceImpl implements NoticeService {
 
-	private static Logger log = Logger.getLogger(NoticeServiceImpl.class);
+	private Logger log = LoggerManager.getInstance().getLogger(NoticeServiceImpl.class);
 	
 	@Autowired
 	private NoticeMapper noticeMapper;

@@ -34,6 +34,7 @@
 /* 3. slick Nav */
 // mobile_menu
     var menu = $('ul#navigation');
+    menu.append('<li class="liLogin"><a href="login.ec">로그인</a></li>');
     if(menu.length){
       menu.slicknav({
         prependTo: ".mobile_menu",

@@ -31,5 +31,18 @@ public class ConsultServiceImpl implements ConsultService{
 		
 		return list;
 	}
+
+	//글쓰기 에디터 화면
+	@Override
+	public int cinsertDisplay(ConsultVO param) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insertConsult(ConsultVO param) {
+		// TODO Auto-generated method stub
+		return consultMapper.insertConsult(param);
+	}
 	
 }
