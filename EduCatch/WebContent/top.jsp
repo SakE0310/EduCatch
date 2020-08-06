@@ -90,6 +90,7 @@
                                                 </li>
                                                 <li><a href="listDetailView.ec">남시현상세</a></li>
                                                 <li><a href="academyPage.ec">남시현등록</a></li>
+                                                <li><a href="manage.ec">관리자</a></li>
                                             </ul>
                                         </nav>
                                     </div>
