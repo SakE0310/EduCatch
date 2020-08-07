@@ -1,15 +1,25 @@
 package com.kosmo.educatch.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.manager.LoggerManager;
+import com.kosmo.educatch.service.ManageService;
+import com.kosmo.educatch.vo.MemberVO;
 
 @Controller
 public class ManageController {
 	private Logger log = LoggerManager.getInstance().getLogger(ManageController.class);
+	
+	@Autowired
+	private ManageService manageService;
 	
 	@RequestMapping("manage")
 	public ModelAndView getManagePage() {
@@ -49,5 +59,15 @@ public class ManageController {
 		mv.setViewName("manage/academyMemberAccept");
 		
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping("getAcaMem")
+	public Map<String, MemberVO> getAcademyMember(){
+		Map<String, MemberVO> map = new HashMap<String, MemberVO>();
+		
+		MemberVO mvo = manageService.getAcaAccept();
+		map.put("vo", mvo);
+		return map;
 	}
 }

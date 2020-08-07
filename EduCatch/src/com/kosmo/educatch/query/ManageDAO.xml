@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosmo.educatch.dao.ManageMapper">
+
+	<select id="getAcaAccept" parameterType="member" resultType="member">
+		SELECT
+			MID, ANAME, ATEL, MIMG, MINSERTDATE
+		FROM
+			(SELECT * FROM MEMBER A, ACADEMY B WHERE A.ACADEMY_ANO = B.ANO)
+		WHERE MAUTH = 2
+		AND MPERMISSION = 'N'
+	</select>
+	
+</mapper>

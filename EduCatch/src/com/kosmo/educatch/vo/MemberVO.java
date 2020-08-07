@@ -1,6 +1,6 @@
 package com.kosmo.educatch.vo;
 
-public class MemberVO {
+public class MemberVO extends AcademyVO{
 
 		//로그인
 		private String mno;

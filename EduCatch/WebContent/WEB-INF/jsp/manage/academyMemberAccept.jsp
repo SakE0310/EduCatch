@@ -11,7 +11,7 @@
 	    <link rel="shortcut icon" href="/EduCatch/assets/img/favicon-96x96.png" type="image/x-icon">
 		<link rel="icon" href="/EduCatch/assets/img/favicon-96x96.png" type="image/x-icon">
         <link href="/EduCatch/assets/css/manageStyles.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.21/b-1.6.3/r-2.2.5/datatables.min.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
         <style type="text/css">
         	.sb-nav-link-icon{
@@ -63,26 +63,23 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">학원관리자로 등록한 회원들을 승인 할 수 있습니다.</li>
                         </ol>
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area mr-1"></i>
-                                        Area Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar mr-1"></i>
-                                        Bar Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                        </div>
+		                  <div class="col-xl-12">                               
+		                    <table class="acceptTable table table-striped" id="memberAccept" style="width:2000px">
+		                      <thead>
+		                        <tr>
+		                          <th>체크</th>
+		                          <th>아이디</th>
+		                          <th>학원번호</th>
+		                          <th>학원이름</th>
+		                          <th>학원연락처</th>
+		                          <th>이미지</th>
+		                          <th>가입일</th>
+		                        </tr>
+		                      </thead>
+		                    </table>
+		                    <div class="text-right container">
+		                    </div>
+		                  </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
@@ -99,8 +96,52 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/chart-area-demo.js"></script>
         <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/datatables-demo.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.21/b-1.6.3/r-2.2.5/datatables.min.js"></script>
+       	<script type="text/javascript">
+       	$(document).ready(function(){
+       		ajaxGetAcademyMember();
+       	});
+       	document.addEventListener("DOMContentLoaded", function(event) {
+            // Datatables with Buttons
+          var datatablesAcceptTable = $('.acceptTable').DataTable({
+              scrollX: true,
+              lengthChange: !1,
+              pageLength: 5,
+              "language": {
+                  "lengthMenu": "<h5 class='card-title'>회원정보</h5>",
+                  "search": "검색:",
+                  "zeroRecords": "요청중인 회원번호가 없습니다.",
+                  "info": "총 _PAGES_페이지 중 _PAGE_페이지",
+                  "infoEmpty": "",
+                  "infoFiltered": "검색결과가 없습니다.",
+                  "paginate":{
+                    "next" : "다음",
+                    "previous" : "이전"
+                  }
+              },
+              "columns": [
+                { "data": "체크","className" :"select-checkbox"},
+                { "data": "아이디","className" :"mid"},
+                { "data": "학원번호","className": "ano"},
+                { "data": "학원이름","className": "aname"},
+                { "data": "학원연락처","className": "atel"},
+                { "data": "이미지" ,"className": "mimg"},
+                { "data": "가입일", "className" :"minsertdate"}
+              ],
+              "order": [[ 1, "desc" ]]
+            });
+          	datatablesAcceptTable.buttons().container().appendTo(".acceptTable.col-xl-12:eq(0)");
+          });
+       	function ajaxGetAcademyMember(){
+       		$.ajax({
+       			url : "getAcaMem.ec",
+       		}).done(function(resultParam){
+       			var str=resultParam;
+       		}).fail(function(resultParam){
+       			alert("초기화에 문제가 발생하였습니다.");
+       		});
+       	}
+       	</script>
     </body>
 </html>
