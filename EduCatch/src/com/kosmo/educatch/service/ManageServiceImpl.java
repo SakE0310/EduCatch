@@ -1,5 +1,7 @@
 package com.kosmo.educatch.service;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,20 +13,20 @@ import com.kosmo.educatch.vo.MemberVO;
 
 @Service
 @Transactional
-public class ManagerServiceImpl implements ManageService {
+public class ManageServiceImpl implements ManageService {
 
-	private Logger log = LoggerManager.getInstance().getLogger(ManagerServiceImpl.class);
+	private Logger log = LoggerManager.getInstance().getLogger(ManageServiceImpl.class);
 	
 	@Autowired
 	private ManageMapper manageMapper;
 	
 	@Override
-	public MemberVO getAcaAccept() {
+	public List<MemberVO> getAcaAccept() {
 		log.info("ManagerServiceImpl getAcaAccept >>> ");
-		MemberVO mvo = null;
-		mvo = manageMapper.getAcaAccept();
+		List<MemberVO> list = null;
+		list = manageMapper.getAcaAccept();
 		log.info("ManagerServiceImpl getAcaAccept end >>> ");
-		return mvo;
+		return list;
 	}
 
 }

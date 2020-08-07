@@ -1,7 +1,9 @@
 package com.kosmo.educatch.service;
 
+import java.util.List;
+
 import com.kosmo.educatch.vo.MemberVO;
 
 public interface ManageService {
-	public MemberVO getAcaAccept();
+	public List<MemberVO> getAcaAccept();
 }

@@ -1,5 +1,7 @@
 package com.kosmo.educatch.dao;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -11,9 +13,9 @@ public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapp
 	private Logger log = LoggerManager.getInstance().getLogger(ManageMapperImpl.class);
 
 	@Override
-	public MemberVO getAcaAccept() {
+	public List<MemberVO> getAcaAccept() {
 		log.info("ManageMapperImpl getAcaAccept >>> ");
-		return getSqlSession().selectOne("ManageMapper.getAcaAccept");
+		return getSqlSession().selectList("ManageMapper.getAcaAccept");
 	}
 
 }

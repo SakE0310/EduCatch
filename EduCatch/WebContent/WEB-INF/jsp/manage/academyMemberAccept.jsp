@@ -94,9 +94,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="/EduCatch/assets/js/manageScripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="assets/demo/datatables-demo.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.21/b-1.6.3/r-2.2.5/datatables.min.js"></script>
        	<script type="text/javascript">
        	$(document).ready(function(){
@@ -137,7 +134,20 @@
        		$.ajax({
        			url : "getAcaMem.ec",
        		}).done(function(resultParam){
-       			var str=resultParam;
+       			var acceptTable = $('.acceptTable').DataTable();
+       			/* acceptTable.clear().draw(); */
+       			for(var index in resultParam.vo){
+       				var dataParam = {
+       						"체크" : '<label class="custom-control custom-checkbox ck-center"><input class="custom-control-input check" type="checkbox"><span class="custom-control-label"></span></label>',
+       	       				"아이디" : resultParam.vo[index].mid,
+       	       				"학원번호" : resultParam.vo[index].ano,
+       	       				"학원이름" : resultParam.vo[index].aname,
+       	       				"학원연락처" : resultParam.vo[index].atel,
+       	       				"이미지" : resultParam.vo[index].mimg,
+       	       				"가입일" : resultParam.vo[index].minsertdate
+       				};
+       				acceptTable.row.add(dataParam).draw();
+       			}
        		}).fail(function(resultParam){
        			alert("초기화에 문제가 발생하였습니다.");
        		});

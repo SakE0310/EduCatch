@@ -1,6 +1,7 @@
 package com.kosmo.educatch.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -63,11 +64,11 @@ public class ManageController {
 	
 	@ResponseBody
 	@RequestMapping("getAcaMem")
-	public Map<String, MemberVO> getAcademyMember(){
-		Map<String, MemberVO> map = new HashMap<String, MemberVO>();
+	public Map<String, List<MemberVO>> getAcademyMember(){
+		Map<String, List<MemberVO>> map = new HashMap<String, List<MemberVO>>();
 		
-		MemberVO mvo = manageService.getAcaAccept();
-		map.put("vo", mvo);
+		List<MemberVO> list = manageService.getAcaAccept();
+		map.put("vo", list);
 		return map;
 	}
 }
