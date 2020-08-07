@@ -75,7 +75,7 @@ $(document).ready(function(){
 		  ajaxGetMinor(setMajor);
 	});
 	
-	$("#aaddr2").on('change', function(){
+	$(document).on('keyup', '#aaddr2', function(){
 		var geocoder = new kakao.maps.services.Geocoder();
 
 		var callback = function(result, status) {
@@ -93,6 +93,7 @@ $(document).ready(function(){
 		geocoder.addressSearch(address, callback);
 		
 	});
+	
 });
 
 function addrCheck(){
@@ -104,6 +105,26 @@ function addrCheck(){
 			$('#aaddrno').val(data.zonecode);
 			$('#aaddr1').val(data.address);
 			$('#aaddr2').val(data.buildingName);
+			
+			
+			var geocoder = new kakao.maps.services.Geocoder();
+
+			var callback = function(result, status) {
+			    if (status === kakao.maps.services.Status.OK) {
+			        console.log(result);
+			        console.log(result[0].x);
+			        console.log(result[0].y);
+			        $('#axpoint').val(result[0].x);
+					$('#aypoint').val(result[0].y);
+			    }
+			};
+			
+			var address = $('#aaddr1').val() + " " + $('#aaddr2').val();
+			
+			geocoder.addressSearch(address, callback);
+					
+				
+				
 			
 		}
 	}).open();

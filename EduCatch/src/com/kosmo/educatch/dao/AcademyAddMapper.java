@@ -6,6 +6,6 @@ import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.SearchVO;
 
 public interface AcademyAddMapper {
-	public SearchVO selectCategory(SearchVO svo);
+	public AcademyVO selectCategory(AcademyVO avo);
 	public int insertAcademy(AcademyVO param);
 }

@@ -1,12 +1,9 @@
 package com.kosmo.educatch.dao;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.kosmo.educatch.vo.AcademyVO;
-import com.kosmo.educatch.vo.SearchVO;
 
 public class AcademyAddMapperImpl extends SqlSessionDaoSupport implements AcademyAddMapper {
 
@@ -22,7 +19,7 @@ public class AcademyAddMapperImpl extends SqlSessionDaoSupport implements Academ
 
 	//카테고리 정보
 	@Override
-	public SearchVO selectCategory(SearchVO svo) {
+	public AcademyVO selectCategory(AcademyVO avo) {
 		log.info("AcademyAddMapperImpl.selectCategory >>>");
 		return getSqlSession().selectOne("selectCategory");
 	}//end of selectCategory

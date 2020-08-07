@@ -3,12 +3,12 @@
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosmo.educatch.dao.AcademyAddMapper">
 
-	<select id="selectCategory" parameterType="String" resultType="search">
+	<select id="selectCategory" parameterType="String" resultType="academyview">
 		SELECT
 			CNO
 		FROM	CATEGORY 
-		WHERE CMAJOR=#{cmajor, jdbcType=VARCHAR}
-		AND	  CMINOR=#{cminor, jdbcType=VARCHAR}
+		WHERE CMAJOR=#{cmajor}
+		AND	  CMINOR=#{cminor}
 	</select>
 
 	<insert id="insertAcademy" parameterType="academyview">

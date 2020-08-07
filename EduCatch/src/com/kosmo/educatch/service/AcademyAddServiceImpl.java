@@ -37,10 +37,11 @@ public class AcademyAddServiceImpl implements AcademyAddService{
 	}//end of insertAcademy
 	
 	//카테고리 정보
-	public SearchVO selectCategory(SearchVO svo) {
+	public AcademyVO selectCategory(AcademyVO avo) {
 		log.info("AcademyAddServiceImpl.selectCategory >>> 시작");
 		log.info("AcademyAddServiceImpl.selectCategory >>> 끝");
-		return academyAddMapper.selectCategory(svo);
+		
+		return academyAddMapper.selectCategory(avo);
 	}
 	
 }
