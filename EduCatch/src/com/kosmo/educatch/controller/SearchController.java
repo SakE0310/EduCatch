@@ -73,14 +73,41 @@ public class SearchController {
 											   HttpServletRequest req){
 		log.info("search controller getAcaList start >>> ");
 		log.info("search controller getAcaList param >>> "+param);
+		
 		String district = req.getParameter("district");
 		String city = req.getParameter("city");
 		String cmajor = req.getParameter("cmajor");
 		String cminor = req.getParameter("cminor");
-		log.info("search controller getCity district >>> "+district);
-		log.info("search controller getCity city >>> "+city);
-		log.info("search controller getCity cmajor >>> "+cmajor);
-		log.info("search controller getCity cminor >>> "+cminor);
+		log.info("search controller getAcaList cminor >>> "+cminor);
+		
+		String[] cityArr = city.split(" ");
+		String cityStr = cityArr[0];
+		String cminorAdd = cminor+" "+"split";
+		log.info("search controller getAcaList cminorAdd >>> "+cminorAdd);
+		String[] cminorArr = cminorAdd.split(" ");
+		//언어  //국어
+		log.info("search controller getAcaList cminorArr[0] >>> "+cminorArr[0]);
+		//전체
+		log.info("search controller getAcaList cminorArr[1] >>> "+cminorArr[1]);
+		
+		if(cminorArr[1].equals("전체")) {
+			String cminorStr = cminorArr[1]; //전체
+			param.setCminor(cminorStr);
+			log.info("search controller getAcaList cminor >>> "+cminorStr);
+		}else {
+			String cminorStr = cminorArr[0]; //일본어
+			param.setCminor(cminorStr);
+			log.info("search controller getAcaList cminor >>> "+cminorStr);
+		}
+		
+		param.setDistrict(district);
+		param.setCity(cityStr);
+		param.setCmajor(cmajor);
+		
+		log.info("search controller getAcaList district >>> "+district);
+		log.info("search controller getAcaList city >>> "+cityStr);
+		log.info("search controller getAcaList cmajor >>> "+cmajor);
+		
 		Map<String,List<SearchVO>>map = new HashMap<String,List<SearchVO>>();
 		List<SearchVO>list = searchService.getAcaList(param);
 		map.put("acaList",list);

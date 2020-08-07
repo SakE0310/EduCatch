@@ -9,6 +9,7 @@
 	SELECT DISTINCT
 	        A.DISTRICT   AS DISTRICT
 	FROM    AREA A
+	ORDER BY 1 DESC
 	</select>
 	
 	<!-- 지역 소분류 -->
@@ -20,63 +21,38 @@
  	</select>
 	
 	<select id="getAcaList" parameterType="academyview" resultType="academyview">
-	SELECT A.ANO        AS ANO
-	      ,A.ANAME      AS ANAME
-	      ,A.ATEL       AS ATEL
-	      ,A.AXPOINT    AS AXPOINT
-	      ,A.AYPOINT    AS AYPOINT
-	      ,A.AADDRNO    AS AADDRNO
-	      ,A.AADDR1     AS AADDR1
-	      ,A.AADDR2     AS AADDR2
-	      ,A.ALOGO      AS ALOGO
-	      ,A.CATEGORY_CNO   AS CATEGORY_CNO
-	      ,A.ADELETEYN      AS ADELETEYN
-	      ,A.AINSERTDATE    AS AINSERTDATE
-	      ,A.AUPDATEDATE    AS AUPDATEDATE
-	      ,B.CMAJOR AS CMAJOR
-          ,B.CMINOR AS CMINOR
-	FROM ACADEMY A, CATEGORY B
-	<where>
-		<if test="district!=null or city!=null or cmajor!=null or cminor!=null">
-		A.AADDR1 LIKE '%'||#{district}||'%' 
+	SELECT 
+         A.ANO AS ANO, 
+         A.ANAME AS ANAME, 
+         A.ATEL AS ATEL, 
+         A.AXPOINT AS AXPOINT,
+         A.AYPOINT AS AYPOINT,
+         A.AADDRNO AS AADDRNO,
+         A.AADDR1 AS AADDR1,
+         A.AADDR2 AS AADDR2,
+         A.ALOGO AS ALOGO,
+         A.CATEGORY_CNO AS CATEGORY_CNO,
+         TO_CHAR(AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
+         TO_CHAR(AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE,
+         B.CMAJOR AS CMAJOR,
+         B.CMINOR AS CMINOR
+    FROM   ACADEMY A, CATEGORY B
+    WHERE  A.CATEGORY_CNO = B.CNO
+	<if test="district!=null or city!=null or cmajor!=null or cminor!=null">
+    AND
+    <![CDATA[ A.AADDR1 LIKE '%'||#{district}||'%' ]]>
 	AND
-		A.AADDR1 LIKE '%'||#{city}||'%'
+	<![CDATA[ A.AADDR1 LIKE '%'||#{city}||'%' ]]>
 	AND
-		B.CMAJOR LIKE '%'||#{cmajor}||'%'
+	<![CDATA[ B.CMAJOR LIKE '%'||#{cmajor}||'%' ]]>
+	<if test="!cminor.equals('전체')">
 	AND
-		B.CMINOR LIKE '%'||#{cminor}||'%'
-		</if>
-	</where>
-<!-- 	WHERE -->
-<!-- 		A.AADDR1 LIKE '%'||#{district}||'%' -->
-<!-- 	OR -->
-<!-- 		A.AADDR1 LIKE '%'||#{city}||'%' -->
-<!-- 	OR -->
-<!-- 		B.CMAJOR LIKE '%'||#{cmajor}||'%' -->
-<!-- 	OR -->
-<!-- 		B.CMINOR LIKE '%'||#{cminor}||'%' -->
+	<![CDATA[ B.CMINOR LIKE '%'||#{cminor}||'%' ]]>
+	</if>
+	AND
+ 	 	A.CATEGORY_CNO = B.CNO 
+	</if>
 
-<!-- 	<where> -->
-<!-- 		<if test="district!=null and district!=''"> -->
-<!-- 		A.AADDR1 LIKE '%'||#{district}||'%' -->
-<!-- 		</if> -->
-<!-- 	</where> -->
-<!-- 	<where> -->
-<!-- 		<if test="city!=null and city!=''"> -->
-<!-- 	    A.AADDR1 LIKE '%'||#{city}||'%' -->
-<!-- 		</if> -->
-<!-- 	</where> -->
-<!-- 	<where> -->
-<!-- 		<if test="cmajor!=null and cmajor!=''"> -->
-<!-- 		B.CMAJOR LIKE '%'||#{cmajor}||'%' -->
-<!-- 		</if> -->
-<!-- 	</where> -->
-<!-- 	<where> -->
-<!-- 		<if test="cmajor!=null and cmajor!=''"> -->
-<!-- 		B.CMINOR LIKE '%'||#{cminor}||'%' -->
-<!-- 		</if> -->
-<!-- 	</where> -->
 	</select>
-	
 	
 </mapper>

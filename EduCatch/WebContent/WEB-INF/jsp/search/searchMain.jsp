@@ -18,6 +18,15 @@
 		.acaList-table{
 			margin : auto;
 			align : center;
+			background: lightblue;
+		}
+		.acaList-data{
+			align : center;
+			width : 1000px;
+			height : 100px;
+		}
+		#acaList{
+			color : black;
 		}
 		</style>
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -27,8 +36,6 @@
 				ajaxGetDistrict();
 				//카테고리 함수
 				ajaxGetMajor();
-				//학원리스트 함수
-				ajaxGetAcaList();
 				
 				//지역 대분류 변경시 지역소 분류 자동 변경
 				$('.select-district').on('change','select',function(){
@@ -80,23 +87,37 @@
 						st = "";
 						console.log("acaList >>> "+resParam.acaList);
 						for(i in resParam.acaList){
-							var academy = resParam.acaList[i].ano 
-										+ resParam.acaList[i].aname
-										+ resParam.acaList[i].atel
-										+ resParam.acaList[i].axpoint
-										+ resParam.acaList[i].aypoint
-										+ resParam.acaList[i].aaddrno
-										+ resParam.acaList[i].aaddr1
-										+ resParam.acaList[i].aaddr2
-										+ resParam.acaList[i].alogo
-										+ resParam.acaList[i].category_cno
-										+ resParam.acaList[i].adeleteyn
-										+ resParam.acaList[i].ainsertdate
-										+ resParam.acaList[i].aupdatedate
-										+ resParam.acaList[i].cmajor
-										+ resParam.acaList[i].cminor;
-							st += academy+"<br>";
-// 							st += "<a href=''>"+academy+"</a><br>";
+// 							var academy = resParam.acaList[i].ano 
+// 										+ resParam.acaList[i].aname
+// 										+ resParam.acaList[i].atel
+// 										+ resParam.acaList[i].axpoint
+// 										+ resParam.acaList[i].aypoint
+// 										+ resParam.acaList[i].aaddrno
+// 										+ resParam.acaList[i].aaddr1
+// 										+ resParam.acaList[i].aaddr2
+// 										+ resParam.acaList[i].alogo
+// 										+ resParam.acaList[i].category_cno
+// 										+ resParam.acaList[i].adeleteyn
+// 										+ resParam.acaList[i].ainsertdate
+// 										+ resParam.acaList[i].aupdatedate
+// 										+ resParam.acaList[i].cmajor
+// 										+ resParam.acaList[i].cminor;
+							var ano = resParam.acaList[i].ano 
+							var aname = resParam.acaList[i].aname
+							var atel = resParam.acaList[i].atel
+							var axpoint	= resParam.acaList[i].axpoint
+							var aypoint	= resParam.acaList[i].aypoint
+							var aaddrno	= resParam.acaList[i].aaddrno
+							var aaddr1 = resParam.acaList[i].aaddr1
+							var aaddr2 = resParam.acaList[i].aaddr2
+							var alogo = resParam.acaList[i].alogo
+							var category_cno = resParam.acaList[i].category_cno
+							var adeletey = resParam.acaList[i].adeleteyn
+							var ainsertdate = resParam.acaList[i].ainsertdate
+							var aupdatedate = resParam.acaList[i].aupdatedate
+							var cmajor = resParam.acaList[i].cmajor
+							var	cminor = resParam.acaList[i].cminor;
+							st += ano+aname+atel+"<br>";
 						}
 						$('.acaList').html(st);
 						$('.acaList').niceSelect('update');
@@ -106,7 +127,6 @@
 					});					
 // 				});//search button click
 			}//ajaxGetAcaList
-				
 
 				//지역 대분류
 				function ajaxGetDistrict(){
@@ -239,8 +259,10 @@
 			</div>
 			<div class="acaList-div">
 				<table class="acaList-table">
-					<tr>
-						<td class="acaList"><a href=""></a></td>
+					<tr class="acaList-row">
+						<td class="acaList-data">
+							<a class="acaList" id="acaList" href="listDetailView.ec"></a>
+						</td>
 					</tr>
 				</table>
 			</div>
