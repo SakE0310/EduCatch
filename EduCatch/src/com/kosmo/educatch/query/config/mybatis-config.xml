@@ -11,5 +11,6 @@
 		<typeAlias type="com.kosmo.educatch.vo.SearchVO" alias="search"/>
 		<typeAlias type="com.kosmo.educatch.vo.NoticeVO" alias="notice"/>
 		<typeAlias type="com.kosmo.educatch.vo.ConsultVO" alias="consult"/>
+		<typeAlias type="com.kosmo.educatch.vo.EventVO" alias="event"/>
 	</typeAliases>
 </configuration>
