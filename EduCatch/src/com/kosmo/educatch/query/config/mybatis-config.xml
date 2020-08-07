@@ -12,5 +12,7 @@
 		<typeAlias type="com.kosmo.educatch.vo.NoticeVO" alias="notice"/>
 		<typeAlias type="com.kosmo.educatch.vo.ConsultVO" alias="consult"/>
 		<typeAlias type="com.kosmo.educatch.vo.EventVO" alias="event"/>
+		<typeAlias type="com.kosmo.educatch.vo.MemberVO" alias="login"/>
+		<typeAlias type="com.kosmo.educatch.vo.MemberVO" alias="view"/>
 	</typeAliases>
 </configuration>

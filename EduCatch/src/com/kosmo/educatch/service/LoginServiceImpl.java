@@ -55,7 +55,7 @@ public class LoginServiceImpl implements LoginService {
 	// ======= 로그인 정보 ===========
 	@Override
 	public MemberVO viewMember(MemberVO mvo) {
-			return LoginMapper.viewMember(mvo);
+			return loginMapper.viewMember(mvo);
 		
 	}
 

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,14 +35,13 @@ public class LoginController {
 
 	
 	
-//	// ================ 로그인 처리 ========================
-//	@
-//	RequestMapping("/loginCheck")
-//	public String loginCheck(@ModelAttribute MemberVO mvo, HttpSession session) {
-//		boolean result = LoginService.logincheck(mvo, session);
-//	}
-//		log.info("loginCheck() >>>>");
-//		
+	// ================ 로그인 처리 ========================
+	@RequestMapping("/loginCheck")
+	public String loginCheck(@ModelAttribute MemberVO mvo, HttpSession session) {
+		boolean result = LoginService.logincheck(mvo, session);
+		
+		}
+		log.info("loginCheck() >>>>");
 	
 	
 	

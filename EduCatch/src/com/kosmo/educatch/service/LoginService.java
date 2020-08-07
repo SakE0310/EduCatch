@@ -10,7 +10,7 @@ public interface LoginService {
 	// 일반 회원 로그인 체크
 	//public MemberVO loginCheck(MemberVO mvo);
 	
-	// 학원 회원 로그인 체크
+	//학원 회원 로그인 체크
 	public AMemberVO ALoginCheck(AMemberVO avo);
 
 	
