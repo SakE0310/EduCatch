@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kosmo.educatch.dao.EventMapper">
+
+	<!-- 이벤트  전제조회 -->
+	<select id="listEvent" parameterType="event" resultType="event">
+		SELECT
+		        A.ENO                                         AS ENO            -- 이벤트 글번호
+		        ,A.ESUBJECT                                   AS ESUBJECT       -- 이벤트 제목
+		        ,A.ENAME                                      AS ENAME          -- 이벤트 작성자
+		        ,A.EIMG                                       AS EIMG           -- 이벤트 이미지
+		        ,A.ECONTENT                                   AS ECONTENT       -- 이벤트 내용
+		        ,A.EDELETEYN                                  AS EDELETEYN      -- 이벤트 삭제여부
+		        ,TO_CHAR(A.EINSERTDATE,'YYYY-MM-DD')          AS EINSERTDATE    -- 이벤트 등록날짜
+		        ,TO_CHAR(A.EUPDATEDATE,'YYYY-MM-DD')          AS EUPDATEDATE    -- 이벤트 수정날짜
+		FROM
+		        EVENT A
+		WHERE
+		        A.EDELETEYN ='N'
+		ORDER BY  1 DESC
+	</select>
+	
+	<!-- 이벤트 상세조회 -->
+ 	<select id="selectEvent" parameterType="event" resultType="event">
+		SELECT
+		        A.ENO                                   AS ENO
+		        ,A.ESUBJECT                             AS ESUBJECT
+		        ,A.ENAME                                AS ENAME
+		        ,A.EIMG                                 AS EIMG
+		        ,A.ECONTENT                             AS ECONTENT
+		        ,TO_CHAR(A.EINSERTDATE,'YYYY-MM-DD')    AS EINSERTDATE
+		        ,TO_CHAR(A.EUPDATEDATE,'YYYY-MM-DD')    AS EUPDATEDATE
+		FROM
+		         EVENT A
+		WHERE
+		        EDELETEYN='N'
+	        	AND ENO=#{eno, jdbcType=VARCHAR}
+	</select> 
+	
+	<!-- 이벤트 등록 -->
+	<insert id="insertEvent" parameterType="event">
+	<selectKey keyProperty="eno" resultType="String" order="BEFORE">
+		SELECT /*+ INDEX_DESC(SYS_C0011069) */ 		 
+		    'E'||LPAD(
+					    (NVL(MAX(SUBSTR(ENO,-4)),0)+1),5,'0' 
+					    )COMMNO  
+		FROM EVENT A
+	</selectKey>
+		INSERT INTO EVENT(
+		                    ENO         
+		                    ,ESUBJECT    
+		                    ,ENAME       
+		                    ,EIMG        
+		                    ,ECONTENT    
+		                    ,EDELETEYN   
+		                    ,EINSERTDATE 
+		                    ,EUPDATEDATE 
+		                )
+		VALUES(
+		                    #{eno, jdbcType=VARCHAR}         
+		                    ,#{esubject, jdbcType=VARCHAR}    
+		                    ,'관리자'       
+		                    ,#{eimg, jdbcType=VARCHAR}        
+		                    ,#{econtent, jdbcType=VARCHAR}    
+		                    ,'N'   
+		                    ,SYSDATE 
+		                    ,SYSDATE 
+		
+		        )
+	
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>						

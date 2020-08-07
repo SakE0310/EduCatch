@@ -1,5 +1,11 @@
 package com.kosmo.educatch.dao;
 
-public class EventMapper {
+import java.util.List;
+import com.kosmo.educatch.vo.EventVO;
 
+public interface EventMapper {
+	
+	public List<EventVO> listEvent(EventVO param);
+	public EventVO selectEvent(EventVO param);
+	public int insertEvent(EventVO param);
 }

@@ -22,7 +22,7 @@
 	</select>
 	
 	<!-- 공지사항 조회 -->
-	<select id="selectNotice" parameterType="String" resultType="notice">
+	<select id="selectNotice" parameterType="notice" resultType="notice">
 		SELECT
 		        A.NNO                                   AS NNO
 		        ,A.NSUBJECT                             AS NSUBJECT

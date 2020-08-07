@@ -6,7 +6,7 @@ import com.kosmo.educatch.vo.NoticeVO;
 
 public interface NoticeService {
 	public List<NoticeVO> listNotice(NoticeVO param);
-	public NoticeVO selectNotice(String nno);
+	public NoticeVO selectNotice(NoticeVO param);
 	public int insertNotice(NoticeVO param);
 	public int updateNotice(NoticeVO param);
 	public int deleteNotice(NoticeVO param);

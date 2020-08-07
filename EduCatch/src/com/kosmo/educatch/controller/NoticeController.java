@@ -65,7 +65,7 @@ public class NoticeController {
 		 String nno= (String)param.getNno(); 
 		 log.info("nno>>>"+nno);
 		 
-		NoticeVO nvo= noticeService.selectNotice(nno);
+		NoticeVO nvo= noticeService.selectNotice(param);
 		log.info("nvo.getNno()>>>"+nvo.getNno());
 		log.info("nvo.getNsubject()>>>"+nvo.getNsubject());
 		log.info("nvo.getNname()>>>"+nvo.getNname());
@@ -187,8 +187,7 @@ public class NoticeController {
 			log.info("NoticeController updateDisplayNotice 시작 >>>");
 			log.info("param.getNno()>>>"+param.getNno());
 			
-			String nno= (String)param.getNno(); 
-			NoticeVO nvo= noticeService.selectNotice(nno);
+			NoticeVO nvo= noticeService.selectNotice(param);
 			
 			log.info("nvo.getNno()>>>"+nvo.getNno());
 			log.info("nvo.getNsubject()>>>"+nvo.getNsubject());

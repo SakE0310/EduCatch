@@ -17,7 +17,7 @@ public class NoticeMapperImpl extends SqlSessionDaoSupport implements NoticeMapp
 	
 	//=============== 공지사항 조회=============================
 	@Override
-	public NoticeVO selectNotice(String nno) {
+	public NoticeVO selectNotice(NoticeVO param) {
 		NoticeVO nvo= new NoticeVO();
 		nvo=getSqlSession().selectOne("selectNotice");
 		return nvo;
