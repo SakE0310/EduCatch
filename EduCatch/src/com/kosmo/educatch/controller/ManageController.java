@@ -20,4 +20,34 @@ public class ManageController {
 		
 		return mv;
 	}
+	
+	@RequestMapping("manageAca")
+	public ModelAndView getManageAcaPage() {
+		log.info("ManageController getManagePage >>> ");
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("manage/academyManage");
+		
+		return mv;
+	}
+	
+	@RequestMapping("manageReserChk")
+	public ModelAndView getManageReserChkPage() {
+		log.info("ManageController getManagePage >>> ");
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("manage/reservationCheck");
+		
+		return mv;
+	}
+	
+	@RequestMapping("manageAcaMem")
+	public ModelAndView getManageAcaMemPage() {
+		log.info("ManageController getManagePage >>> ");
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("manage/academyMemberAccept");
+		
+		return mv;
+	}
 }

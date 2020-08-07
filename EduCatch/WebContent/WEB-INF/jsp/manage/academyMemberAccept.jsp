@@ -59,9 +59,9 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">대시보드</h1>
+                        <h1 class="mt-4">학원회원 승인</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">여러 통계를 확인할 수 있습니다.</li>
+                            <li class="breadcrumb-item active">학원관리자로 등록한 회원들을 승인 할 수 있습니다.</li>
                         </ol>
                         <div class="row">
                             <div class="col-xl-6">

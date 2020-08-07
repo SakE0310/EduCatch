@@ -84,7 +84,7 @@
                                     <a href="index.jsp"><img src="assets/img/logo/Edulogo.png" alt=""></a>
                                 </div>
                             </div>
-                            <div class="col-xl-9 col-lg-8">
+                            <div class="col-xl-8 col-lg-7">
                                 <div class="menu-wrapper  d-flex align-items-center">
                                     <!-- Main-menu -->
                                     <div class="main-menu d-none d-lg-block">
@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
                             </div> 
-                           <div class="col-xl-1 col-lg-4">
+                           <div class="col-lg-2">
                                 <!-- 로그인버튼 예정  -->
                                 <div class="search d-none d-lg-block">
                                     <ul class="login">
