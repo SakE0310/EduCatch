@@ -22,25 +22,16 @@
 		
 		// 회원 타입선택 안할 시 alert
 		$("#login").click(function(){
-			if($("input[name='auth']:checked").val() == null){
-				alert("회원타입을 선택해주세요.");
 				
-			}else{
-				
-				alert("로그인");
-				$("#loginForm").attr("action","loginCheck.ec")
-				$("#loginForm").submit();
-			}
-			
-			
+			alert("로그인");
+			$("#loginForm").attr("action","loginCheck.ec")
+			$("#loginForm").submit();
+		
 		});
-		
-		
-
+			
+			
 	});
-	
 		
-
 
 
 </script>

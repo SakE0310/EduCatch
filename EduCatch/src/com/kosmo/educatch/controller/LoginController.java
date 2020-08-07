@@ -36,13 +36,14 @@ public class LoginController {
 	
 	
 	// ================ 로그인 처리 ========================
-	@RequestMapping("/loginCheck")
-	public String loginCheck(@ModelAttribute MemberVO mvo, HttpSession session) {
-		boolean result = LoginService.logincheck(mvo, session);
-		
-		}
-		log.info("loginCheck() >>>>");
-	
+//	@RequestMapping("/loginCheck")
+//	public String loginCheck(@ModelAttribute MemberVO mvo, HttpSession session) {
+//		boolean result = loginService.logincheck(mvo, session);
+//		log.info("loginCheck() >>>>");
+//		return null;
+//		
+//		}
+//	
 	
 	
 	// ====================회원가입 폼으로 ==========================

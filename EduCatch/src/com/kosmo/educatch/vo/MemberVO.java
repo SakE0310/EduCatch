@@ -12,6 +12,9 @@ public class MemberVO {
 		private String maddr1;
 		private String maddr2;
 		private String mauth;
+		private String mimg;
+		private String academy_ano;
+		private String mpermisson;
 		private String memailchk;
 		private String mdeleteyn;
 		private String minsertdate;
@@ -126,11 +129,39 @@ public class MemberVO {
 		}
 
 
-
 		public void setMauth(String mauth) {
 			this.mauth = mauth;
 		}
 
+	
+		public String getMimg() {
+			return mimg;
+		}
+
+		
+		public void setMimg(String mimg) {
+			this.mimg = mimg;
+		}
+
+		
+		public String getAcademy_ano() {
+			return academy_ano;
+		}
+
+		
+		public void setAcademy_ano(String academy_ano) {
+			this.academy_ano = academy_ano;
+		}
+
+		
+		public String getMpermisson() {
+			return mpermisson;
+		}
+
+	
+		public void setMpermisson(String mpermisson) {
+			this.mpermisson = mpermisson;
+		}
 
 
 		public String getMemailchk() {
