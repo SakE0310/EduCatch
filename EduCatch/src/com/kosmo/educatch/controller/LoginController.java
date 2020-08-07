@@ -1,5 +1,7 @@
 package com.kosmo.educatch.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.LoginService;
+import com.kosmo.educatch.vo.MemberVO;
 
 @Controller
 public class LoginController {
@@ -16,9 +19,9 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 
-	// ==================로그인 페이지로 =================
+	// =================== 로그인 화면으로  =================
 
-	@RequestMapping("/login")
+	@RequestMapping("/login.ec")
 	public ModelAndView listNotice() {
 		log.info("LoginController login 시작 >>>");
 		ModelAndView mav = new ModelAndView();
@@ -31,20 +34,15 @@ public class LoginController {
 
 	
 	
-//	로그인 하~~
-//	@RequestMapping("/loginCheck")
-//	public String loginCheck(@ModelAttribute MemberVO mbvo, Model model, HttpServletRequest req) {
+//	// ================ 로그인 처리 ========================
+//	@
+//	RequestMapping("/loginCheck")
+//	public String loginCheck(@ModelAttribute MemberVO mvo, HttpSession session) {
+//		boolean result = LoginService.logincheck(mvo, session);
+//	}
 //		log.info("loginCheck() >>>>");
-//		String url = "";
-//		String auth =  mbvo.getMauth();
-//
-//		// DB에 auth값이 1일 때
-//		if (auth.equals("1")) {
-//			MemberVO mvo = null;
-//			mvo = new MemberVO();
-//			String mid = mbvo.getMid();
-//			String mpw = mbvo.getMpw();
-			
+//		
+	
 	
 	
 	// ====================회원가입 폼으로 ==========================

@@ -76,15 +76,7 @@
 	   		border: 1px solid transparent;
 		}
 		
-		.radio{
-			font-size :13px;
-			width:350px;
-			margin : auto;
-			font-weight: bold;
-			margin-top : 22px;
-			margin-bottom : 10px;
-		
-		}
+	
 		
 		
 		 
@@ -110,10 +102,6 @@
 					</div>
 									
 					
-					<div class="radio" align = "center">
-	 					 <label><input type="radio" name="auth" id = "auth1"  value ="1" checked>  일반회원</label>
-	  					 <label><input type="radio" name="auth" id = "auth2" value ="2">  학원회원</label>
-					</div>
 					
 				
 		

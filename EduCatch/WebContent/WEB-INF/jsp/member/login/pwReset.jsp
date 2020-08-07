@@ -57,7 +57,7 @@
 	 	 	<form method ="post" action ="#" id = "pw_reset"> 
 	 			<div class ="content" align = "center">
 						
-				<input type="email" class="form-control input-lg"  id="mid" placeholder="이메일을 입력해주세요"
+				<input type="email" class="form-control input-lg"  id="mid" placeholder="회원가입 시 등록한 이메일을 입력해주세요."
 	       	         	 aria-label="Email address" data-error-class="u-has-error" data-success-class="u-has-success" required><br>
 			 	<button type = "submit" class = "genric-btn primary">전송</button>	
 			
