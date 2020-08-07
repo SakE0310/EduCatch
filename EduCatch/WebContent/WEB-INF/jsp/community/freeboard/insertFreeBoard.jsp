@@ -62,7 +62,7 @@
 	<!-- action/document/location -->
 	<!-- enctype="multipart/form-data" -->
 	<form id="edit" name="edit" method="post">
-		<table style="margin-left: auto; margin-right: auto;" border="1" >
+		<table style="margin-left: auto; margin-right: auto;" border="1" width="50%">
 			<tr>
 				<td style="width: 100px">글번호</td>
 				<td><input type="text" id="fbno" name="fbno"
@@ -82,7 +82,7 @@
 			<tr>
 				<td>내용</td>
 				<td><textarea name="fbcontent" id="fbcontent" title="내용"
-						style="width: 50%; height: 400px; padding: 0; margin: 0;"></textarea>
+						style="width: 100%; height: 400px; padding: 0; margin: 0;"></textarea>
 				</td>
 			</tr>
 			<tr>

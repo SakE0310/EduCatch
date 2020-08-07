@@ -28,9 +28,12 @@ public class MemberJoinServiceImpl implements MemberJoinService {
 	}
 
 	@Override
-	public int memberUpdeate(MemberVO param) {
+	public int memberUpdate(MemberVO param) {
 		// TODO Auto-generated method stub
-		return 0;
+		log.info("memberUpdate서비스 진입");
+		int ups = memberjoinmapper.memberUpdate(param);
+		log.info("memberUpdate서비스 끝");
+		return ups;
 	}
 
 }

@@ -4,7 +4,7 @@ import com.kosmo.educatch.vo.MemberVO;
 
 public interface MemberJoinMapper {
 	public int memberInsert(MemberVO param);
-	public int memberUpdeate(MemberVO param);
+	public int memberUpdate(MemberVO param);
 	
 
 }

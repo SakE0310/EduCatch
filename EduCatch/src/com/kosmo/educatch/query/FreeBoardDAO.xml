@@ -70,5 +70,9 @@
 	]]>
 </update>
 <update id="deleteFreeBoard" parameterType="freeboard">
+		UPDATE FREEBOARD
+		    SET FBDELETEYN = 'Y'
+		WHERE FBNO=#{fbno, jdbcType=VARCHAR}
+	    AND FBDELETEYN = 'N'
 </update>
 </mapper>		

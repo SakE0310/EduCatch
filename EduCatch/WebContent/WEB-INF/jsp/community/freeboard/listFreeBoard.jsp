@@ -28,12 +28,12 @@
 		<input type="hidden" name="fbno" id="fbno"/>
 	</form>
 	<div>
-		<table border="0">
+		<table border="0" style="margin-left: auto; margin-right: auto;">
 			<tr><th><h4>자유게시판 목록</h4></th></tr>
 		</table>
 	</div>	
 	<div>
-		<table border="1">
+		<table style="margin-left: auto; margin-right: auto;" border="1" >
 			<colgroup>
 				<col width="120px"/>
 				<col width="220px"/>

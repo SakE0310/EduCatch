@@ -4,5 +4,5 @@ import com.kosmo.educatch.vo.MemberVO;
 
 public interface MemberJoinService {
 	public int memberInsert(MemberVO param);
-	public int memberUpdeate(MemberVO param);
+	public int memberUpdate(MemberVO param);
 }

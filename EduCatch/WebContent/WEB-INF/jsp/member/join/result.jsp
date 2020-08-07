@@ -11,8 +11,7 @@
 		console.log("${result}".indexOf("문제"));
 		history.go(-1);
 	}else{
-		alert("DB에 등록을 성공");
-		location.href="#";
+		alert("이메일을 인증해주세요");
 	}
 </script>
 </head>
