@@ -51,6 +51,10 @@
 		$("#updateData").click(function() {
 			oEditors.getById["ncontent"].exec("UPDATE_CONTENTS_FIELD", []);
 			
+			if($('#nimg2').val() != null && $('#nimg2').val() != ""){
+				$("#edit").attr("enctype","multipart/form-data");
+			}
+			
 			$("#edit").attr("action","updateNotice.ec");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
@@ -64,10 +68,10 @@
 		});
 		
 		//===관리자가 목록버튼을 누르면 실행========
-		$("#listData").click(function() {
+		$("#selectData").click(function() {
 			console.log("목록버튼 누름");
 			
-			$("#edit").attr("action","listNotice.ec");
+			$("#edit").attr("action","selectNotice.ec");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
 			
@@ -81,8 +85,8 @@
 
 	<!-- action/document/location -->
 	<form id="edit">
-		<table style="width: 50%" border="1">
-		<input type="hidden" id="nno" name="nno" value="<%=nvo.getNno() %>" />
+		<table style="width: 50%" border="1" align="center">
+		<input type="text" id="nno" name="nno" value="<%=nvo.getNno() %>" />
 			<tr>
 				<td style="width: 100px">제목</td>
 				<td><input type="text" id="nsubject" name="nsubject" value="<%=nvo.getNsubject() %>"
@@ -96,10 +100,16 @@
 				</td>
 			</tr>
 			<tr>
-				<td>첨부파일</td>
+				<td>기존파일</td>
 				<td>
-					<img src="/EduCatch/assets/img/notice/<%=nvo.getNimg()%>" alt="사진업음"/><br>
-					<input type="file" value="찾아보기" id="nimg" name="nimg" /><br> 
+				<input type="text" id="nimg1" name="nimg1" value="<%=nvo.getNimg()%>" readOnly>
+					<%-- <img src="/EduCatch/assets/img/notice/<%=nvo.getNimg()%>" alt="사진업음"/><br> --%>
+				</td>
+			</tr>
+			<tr>
+				<td> 첨부파일</td>
+				<td>
+					<input type="file" value="찾아보기" id="nimg2" name="nimg2" /><br> 
 						
 				</td>
 			</tr>
@@ -110,7 +120,7 @@
 				<td colspan="3" align="right">
 				 <input type="button" id="updateData" value="수정" />
 				 <input type="button" id="deleteData" value="삭제" />
-				 <input type="button" id="listData" value="목록" /> 
+				 <input type="button" id="selectData" value="취소" /> 
 				</td>
 			</tr>
 		</table>

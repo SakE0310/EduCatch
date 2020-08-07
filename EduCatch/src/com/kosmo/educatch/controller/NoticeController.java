@@ -210,11 +210,73 @@ public class NoticeController {
 	
 	//===============공지사항 관리자모드 : 수정================================
 	@RequestMapping("updateNotice.ec")
-	public ModelAndView updateNotice(@ModelAttribute NoticeVO param) {
+	public ModelAndView updateNotice(HttpServletRequest request
+									,@ModelAttribute NoticeVO param) {
 		log.info("NoticeController updateNotice 시작 >>>");
-		log.info("NoticeController updateNotice 시작 >>>");
-		String resultStr="";
-		String isSuccess="";
+		String resultStr = "";
+		String isSuccess = "";
+		
+		String nsubject = null;
+		String ncontent = null;
+		String nno = null;
+		String nimg=null;
+		
+		//enctype가 multipart/form-data 일때 실행
+		if(request.getContentType().toLowerCase().startsWith("multipart/form-data")) {
+			log.info("multipart/form-data true");
+			
+			int size = 10*1024*1024;
+			String path = "C://Users//user//git//EduCatch//EduCatch//WebContent//assets//img//notice";
+			
+			try {
+				MultipartRequest multi = new MultipartRequest(request 
+															 ,path
+															 ,size
+															 ,"UTF-8"
+															 ,new DefaultFileRenamePolicy());
+
+				nno =  multi.getParameter("nno");
+				nsubject = multi.getParameter("nsubject");
+				nimg = multi.getParameter("nimg2");
+				ncontent = multi.getParameter("ncontent");
+				
+				log.info("nno>>>"+nno);
+				log.info("nsubject>>>"+nsubject);
+				log.info("nimg2>>>"+nimg);
+				log.info("ncontent>>>"+ncontent);
+				
+				Enumeration<String> et = multi.getFileNames();
+				List<String> list = new ArrayList<String>();
+				
+				while(et.hasMoreElements()){
+					String file = et.nextElement();
+					list.add(multi.getFilesystemName(file));
+					log.info("fileName >>> " + file);
+				}//end of while
+				
+				
+				param.setNno(nno);;
+				param.setNsubject(nsubject);
+				param.setNimg(list.get(0));
+				param.setNcontent(ncontent);
+				
+			} catch (Exception e) {
+				log.info("에러>>>>"+e.getMessage());
+			}//end of try-catch
+			
+			//enctype가 multipart/form-data가 아닐떄 실행
+			//파일을 포함하지 않고 수정할때 실행
+		}else {
+			log.info("multipart/form-data false");
+			
+			nimg = request.getParameter("nimg1");
+			nsubject = request.getParameter("nsubject");
+			ncontent = request.getParameter("ncontent");
+			
+			param.setNimg(nimg);
+			param.setNsubject(nsubject);
+			param.setNcontent(ncontent);
+		}//end of if-else
 		
 		int nCnt = noticeService.updateNotice(param);
 		log.info("nCnt>>>"+nCnt);

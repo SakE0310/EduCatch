@@ -66,7 +66,7 @@
 %>
 	<div>
 	<form id="noticeSelForm" name="noticeSelForm" >
-		 <input type="hidden" name="nno" id="nno" value="<%=nvo.getNno() %>" >
+		 <input type="text" name="nno" id="nno" value="<%=nvo.getNno() %>" >
 		<table align="center" width="700" height="100" border="1">
 		 <thead>
              <tr>
@@ -109,7 +109,7 @@
 			<td align="center">
 				<input type="button" value="수정" id="updateData">
 				<input type="button" value="삭제" id="deleteData">
-				<input type="button" value="취소" id="listData">
+				<input type="button" value="목록" id="listData">
 				
 			</td>	
 			</tr>

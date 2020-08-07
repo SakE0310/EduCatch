@@ -78,6 +78,7 @@
 		SET 
 			    NSUBJECT =  #{nsubject, jdbcType=VARCHAR}
 			    ,NCONTENT = #{ncontent, jdbcType=VARCHAR} 
+			    ,NIMG =#{nimg, jdbcType=VARCHAR} 
 			    ,NUPDATEDATE=SYSDATE
 			    
 		WHERE
