@@ -11,6 +11,7 @@
 	    <link rel="shortcut icon" href="/EduCatch/assets/img/favicon-96x96.png" type="image/x-icon">
 		<link rel="icon" href="/EduCatch/assets/img/favicon-96x96.png" type="image/x-icon">
         <link href="/EduCatch/assets/css/manageStyles.css" rel="stylesheet" />
+        <link href="/EduCatch/assets/css/media.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.21/b-1.6.3/r-2.2.5/datatables.min.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
         <style type="text/css">
@@ -66,17 +67,28 @@
                     <div class="container-fluid">
                         <h1 class="mt-4">학원회원 승인</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">학원관리자로 등록한 회원들을 승인 할 수 있습니다.</li>
+                            <li class="breadcrumb-item active">학원관리자로 등록한 회원들을 승인 할 수 있습니다. 거절시 해당 아이디는 삭제됩니다.</li>
                         </ol>
-		                  <div class="col-xl-12">  
-		                  <div class="text-right container" style="margin-right:0px;">
+		                  <div class="col-md-12">  
+		                  
+		                  </div>
+                  	</div>
+                  	<div class="col-md-12">
+                  	<div class="card mb-2">
+                            <div class="card-header">
+                                <i class="fas fa-table mr-1"></i>
+                                승인요청 목록
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="text-right container" style="margin-right:0px;">
 		                    	<button class="btn btn-danger reject" style="margin-right:5px;"><i class="fas fa-eraser"></i> 거절</button>
 		                    	<button class="btn btn-primary success"><i class="fas fa-edit"></i> 승인</button>
 		                    </div>                             
 		                    <table class="acceptTable table table-striped" id="memberAccept" style="width:100%">
 		                      <thead>
 		                        <tr>
-		                          <th><label class="custom-control custom-checkbox ck-center"><input class="custom-control-input check" type="checkbox"><span class="custom-control-label"></span></label></th>
+		                          <th><label class="custom-control custom-checkbox ck-center"><input class="custom-control-input check chkAll" type="checkbox"><span class="custom-control-label"></span></label></th>
 		                          <th>아이디</th>
 		                          <th>학원번호</th>
 		                          <th>학원이름</th>
@@ -87,7 +99,10 @@
 		                        </tr>
 		                      </thead>
 		                    </table>
-		                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
@@ -108,14 +123,34 @@
        		ajaxGetAcademyMember();
        		
        		$('.success').on('click',function(){
+       			var targetValue = $(this).parent().parent().children().find('.chk:checked').parents('tr');
+       			if(targetValue.length == 0){
+       				alert("항목을 선택하여 주세요.");
+       				return;
+       			}
+       			var dataTable = $(this).parent().parent().find('.acceptTable').DataTable();
        			console.log('>>');
+       			ajaxAcceptMember(targetValue, dataTable);
        		});
+       		
        		$('.reject').on('click',function(){
-       			var targetValue = $(this).parent().parent().children().find('input[type=checkbox]:checked').parents('tr');
+       			var targetValue = $(this).parent().parent().children().find('.chk:checked').parents('tr');
+       			if(targetValue.length == 0){
+       				alert("항목을 선택하여 주세요.");
+       				return;
+       			}
        			var dataTable = $(this).parent().parent().find('.acceptTable').DataTable();
        			console.log('<<');
        			ajaxRejectMember(targetValue, dataTable);
        		});
+       		
+       		$('.chkAll').on('click',function(){
+       			$('.chk').prop('checked', this.checked);
+       		});
+       		
+       		$('.chk').on('change', function(){
+       			$('.chkAll').prop('checked', false);
+       		})
        	});
        	document.addEventListener("DOMContentLoaded", function(event) {
             // Datatables with Buttons
@@ -145,7 +180,7 @@
                 { "data": "학원연락처","className": "atel"},
                 { "data": "이미지" ,"className": "mimg"},
                 { "data": "가입일", "className" :"minsertdate"},
-                { "data": "mno", 'visible': false, 'searchable': false}
+                { "data": "mno", 'visible': false}
               ],
               "order": [[ 1, "desc" ]]
             });
@@ -160,7 +195,7 @@
        			/* acceptTable.clear().draw(); */
        			for(var index in resultParam.vo){
        				var dataParam = {
-       						"체크" : '<label class="custom-control custom-checkbox ck-center"><input class="custom-control-input check" type="checkbox"><span class="custom-control-label"></span></label>',
+       						"체크" : '<label class="custom-control custom-checkbox ck-center"><input class="custom-control-input check chk" type="checkbox"><span class="custom-control-label"></span></label>',
        	       				"아이디" : resultParam.vo[index].mid,
        	       				"학원번호" : resultParam.vo[index].ano,
        	       				"학원이름" : resultParam.vo[index].aname,
@@ -192,8 +227,33 @@
        		
        		var rejData = JSON.stringify(rejectData);
        		console.log(rejData);
+       		$.ajax({
+       			url : "getAcaMem.ec",
+       			data : rejData
+       		}).done(function(resultParam){
+       			alert('정상적으로 승인되었습니다.');
+       			ajaxGetAcademyMember();
+       		}).fail(function(resultParam){
+       			alert("초기화에 문제가 발생하였습니다.");
+       		});
        	}
        	
+		function ajaxAcceptMember(targetValue, dataTable){
+       		
+       		var tdArr = new Array();
+       		var tdAcceptInfo = new Object();
+       		$(targetValue).each(function(index){
+       			tdAcceptInfo.mid = dataTable.rows(targetValue).data()[index].mno;
+       			tdArr.push(tdAcceptInfo);
+       			tdAcceptInfo={};
+       		})
+       		
+       		var acceptData = new Object();
+       		acceptData.data = tdArr;
+       		
+       		var accData = JSON.stringify(acceptData);
+       		console.log(accData);
+       	}
        	
        	</script>
     </body>

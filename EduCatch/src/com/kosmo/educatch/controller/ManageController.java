@@ -81,4 +81,10 @@ public class ManageController {
 		map.put("vo", list);
 		return map;
 	}
+	
+	@ResponseBody
+	@RequestMapping("acceptAca")
+	public Map<String, List<MemberVO>> acceptAcaMember(){
+		return null;
+	}
 }
