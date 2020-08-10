@@ -72,13 +72,27 @@
 	</insert>
 	
 	
+	<!-- 이벤트 수정 -->
+	<update id="updateEvent" parameterType="event">
+	UPDATE EVENT
+    SET     
+	        ESUBJECT = #{esubject, jdbcType=VARCHAR}
+	        ,ECONTENT= #{econtent, jdbcType=VARCHAR}
+	        ,EIMG= #{eimg, jdbcType=VARCHAR}
+	        ,EUPDATEDATE=SYSDATE
+	WHERE
+   			 ENO=#{eno, jdbcType=VARCHAR}
+	</update>
 	
 	
-	
-	
-	
-	
-	
-	
+	<!-- 이벤트 삭제 -->
+	<update id="deleteEvent" parameterType="event">
+	UPDATE EVENT
+	SET      
+		    EDELETEYN = 'Y'
+		    ,EUPDATEDATE = SYSDATE
+	WHERE
+	   		 ENO = #{eno, jdbcType=VARCHAR}
+	</update>
 	
 </mapper>						

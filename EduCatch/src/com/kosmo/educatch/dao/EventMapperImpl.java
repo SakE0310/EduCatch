@@ -30,4 +30,18 @@ public class EventMapperImpl extends SqlSessionDaoSupport implements EventMapper
 		return nCnt;
 	}//end of insertEvent
 
+	//=============== 이벤트 수정=============================
+	@Override
+	public int updateEvent(EventVO param) {
+		int nCnt = getSqlSession().update("updateEvent");
+		return nCnt;
+	}//end of updateEvent
+
+	//=============== 이벤트 삭제=============================
+	@Override
+	public int deleteEvent(EventVO param) {
+		int nCnt = getSqlSession().update("deleteEvent");
+		return nCnt;
+	}//end of deleteEvent
+
 }

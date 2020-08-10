@@ -9,4 +9,6 @@ public interface EventService {
 	public List<EventVO> listEvent(EventVO param);
 	public EventVO selectEvent(EventVO param);
 	public int insertEvent(EventVO param);
+	public int updateEvent(EventVO param);
+	public int deleteEvent(EventVO param);
 }

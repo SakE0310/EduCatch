@@ -43,10 +43,6 @@ public class NoticeMapperImpl extends SqlSessionDaoSupport implements NoticeMapp
 	public int deleteNotice(NoticeVO param) {
 		int nCnt = getSqlSession().update("deleteNotice");
 		return nCnt;
-	}
-
-
-	
-	
+	}//end of deleteNotice
 
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.kosmo.educatch.vo.NoticeVO" %>
+<%@ page import="com.kosmo.educatch.vo.EventVO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +21,7 @@
 	$(function() {
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
-			elPlaceHolder : "ncontent", //textarea에서 지정한 id와 일치해야 합니다. 
+			elPlaceHolder : "econtent", //textarea에서 지정한 id와 일치해야 합니다. 
 			//SmartEditor2Skin.html 파일이 존재하는 경로
 			sSkinURI : "/EduCatch/assets/dist/SmartEditor2Skin.html",
 			htParams : {
@@ -36,33 +36,33 @@
 			},
 			fOnAppLoad : function() {
 <%
-	Object obj= request.getAttribute("NoticeVO");
+	Object obj= request.getAttribute("EventVO");
 
 	if(obj != null){
-		NoticeVO nvo =(NoticeVO)obj;
+		EventVO evo =(EventVO)obj;
 
 %>
 				//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-				oEditors.getById["ncontent"].exec("PASTE_HTML", [ '<%=nvo.getNcontent()%>' ]);
+				oEditors.getById["econtent"].exec("PASTE_HTML", [ '<%=evo.getEcontent()%>' ]);
 			},
 			fCreator : "createSEditor2"
 		});
 		//==관리자가 수정버튼 클릭시 form 전송========
 		$("#updateData").click(function() {
-			oEditors.getById["ncontent"].exec("UPDATE_CONTENTS_FIELD", []);
+			oEditors.getById["econtent"].exec("UPDATE_CONTENTS_FIELD", []);
 			
-			if($('#nimg2').val() != null && $('#nimg2').val() != ""){
+			if($('#eimg2').val() != null && $('#nimg2').val() != ""){
 				$("#edit").attr("enctype","multipart/form-data");
 			}
 			
-			$("#edit").attr("action","updateNotice.ec");
+			$("#edit").attr("action","updateEvent.ec");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
 		});
 		
 		//==관리자가 삭제버튼 클릭시 form 전송========
 		$("#deleteData").click(function() {
-			$("#edit").attr("action","deleteNotice.ec");
+			$("#edit").attr("action",".ec");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
 		});
@@ -71,7 +71,7 @@
 		$("#selectData").click(function() {
 			console.log("취소버튼 누름");
 			
-			$("#edit").attr("action","selectNotice.ec");
+			$("#edit").attr("action","selectEvent.ec");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
 			
@@ -86,30 +86,30 @@
 	<!-- action/document/location -->
 	<form id="edit">
 		<table style="width: 50%" border="1" align="center">
-		<input type="text" id="nno" name="nno" value="<%=nvo.getNno() %>" />
+		<input type="text" id="eno" name="eno" value="<%=evo.getEno() %>" />
 			<tr>
 				<td style="width: 100px">제목</td>
-				<td><input type="text" id="nsubject" name="nsubject" value="<%=nvo.getNsubject() %>"
+				<td><input type="text" id="esubject" name="esubject" value="<%=evo.getEsubject() %>"
 					style="width: 98%" /></td>
 			</tr>
 
 			<tr>
 				<td>내용</td>
-				<td><textarea name="ncontent" id="ncontent" title="내용" 
+				<td><textarea name="econtent" id="econtent" title="내용" 
 						style="width: 100%; height: 400px; padding: 0; margin: 0;"></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>기존파일</td>
 				<td>
-				<input type="text" id="nimg1" name="nimg1" value="<%=nvo.getNimg()%>" readOnly>
+				<input type="text" id="eimg1" name="eimg1" value="<%=evo.getEimg()%>" readOnly>
 					<%-- <img src="/EduCatch/assets/img/notice/<%=nvo.getNimg()%>" alt="사진업음"/><br> --%>
 				</td>
 			</tr>
 			<tr>
 				<td> 첨부파일</td>
 				<td>
-					<input type="file" value="찾아보기" id="nimg2" name="nimg2" /><br> 
+					<input type="file" value="찾아보기" id="eimg2" name="eimg2" /><br> 
 						
 				</td>
 			</tr>

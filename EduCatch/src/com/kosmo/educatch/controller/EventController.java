@@ -30,7 +30,7 @@ public class EventController {
 	
 	
 	//============ 이벤트 게시판 목록 조회===================================
-	@RequestMapping("/listEvent.ec")
+	@RequestMapping("listEvent.ec")
 	public ModelAndView listEvent(@ModelAttribute EventVO param) {
 		log.info("EventController listEvent 시작 >>>");
 		
@@ -175,6 +175,152 @@ public class EventController {
 		log.info("EventController insertEvent 끝 >>>");
 		return mav;
 	}//end of insertEvent
+	
+	//===============이벤트 수정페이지 이동================================
+	@RequestMapping("updateDisplayEvent.ec")
+	public ModelAndView updateDisplayEvent(@ModelAttribute EventVO param) {
+		log.info("EventController updateDisplayEvent 시작 >>>");
+		log.info("param.getNno()>>>"+param.getEno());
+		
+		EventVO evo= eventService.selectEvent(param);
+		
+		log.info("evo.getEno()>>>"+evo.getEno());
+		log.info("evo.getEsubject()>>>"+evo.getEsubject());
+		log.info("evo.getEname()>>>"+evo.getEname());
+		log.info("evo.getEimg()>>>"+evo.getEimg());
+		log.info("evo.getEcontent()>>>"+evo.getEcontent());
+		log.info("evo.getEdeleteyn()>>>"+evo.getEdeleteyn());
+		log.info("evo.getEinsertdate()>>>"+evo.getEinsertdate());
+		log.info("evo.getEupdatedate()>>>"+evo.getEupdatedate());
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("EventVO", evo);
+		mav.setViewName("notice/eventBoard/eventUpdate");
+		
+		log.info("EventController updateDisplayEvent 끝 >>>");
+		return mav;
+	}//end of updateDisplayEvent
+	
+	//===============이벤트 관리자모드 : 수정================================
+	@RequestMapping("updateEvent.ec")
+	public ModelAndView updateEvent(HttpServletRequest request
+									,@ModelAttribute EventVO param) {
+		log.info("EventController updateEvent 시작 >>>");
+		String resultStr = "";
+		String isSuccess = "";
+		
+		String esubject = null;
+		String econtent = null;
+		String eno = null;
+		String eimg = null;
+		
+		//enctype가 multipart/form-data 일때 실행
+		if(request.getContentType().toLowerCase().startsWith("multipart/form-data")) {
+			log.info("multipart/form-data true");
+			
+			int size = 10*1024*1024;
+			String path = "C://Users//user//git//EduCatch//EduCatch//WebContent//assets//img//event";
+			
+			try {
+				MultipartRequest multi = new MultipartRequest(request 
+															 ,path
+															 ,size
+															 ,"UTF-8"
+															 ,new DefaultFileRenamePolicy());
+
+				eno =  multi.getParameter("eno");
+				esubject = multi.getParameter("esubject");
+				eimg = multi.getParameter("eimg2");
+				econtent = multi.getParameter("econtent");
+				
+				log.info("eno>>>"+eno);
+				log.info("esubject>>>"+esubject);
+				log.info("eimg2>>>"+eimg);
+				log.info("econtent>>>"+econtent);
+				
+				Enumeration<String> et = multi.getFileNames();
+				List<String> list = new ArrayList<String>();
+				
+				while(et.hasMoreElements()){
+					String file = et.nextElement();
+					list.add(multi.getFilesystemName(file));
+					log.info("fileName >>> " + file);
+				}//end of while
+				
+				param.setEno(eno);;
+				param.setEsubject(esubject);
+				param.setEimg(list.get(0));
+				param.setEcontent(econtent);
+				
+			} catch (Exception e) {
+				log.info("에러>>>>"+e.getMessage());
+			}//end of try-catch
+			
+			//enctype가 multipart/form-data가 아닐떄 실행
+			//파일을 포함하지 않고 수정할때 실행
+		}else {
+			log.info("multipart/form-data false");
+			
+			eimg = request.getParameter("eimg1");
+			esubject = request.getParameter("esubject");
+			econtent = request.getParameter("econtent");
+			
+			param.setEimg(eimg);
+			param.setEsubject(esubject);
+			param.setEcontent(econtent);
+		}//end of if-else
+		
+		int nCnt = eventService.updateEvent(param);
+		log.info("nCnt>>>"+nCnt);
+		ModelAndView mav = new ModelAndView();
+		
+		if(nCnt > 0){
+			resultStr = "update";
+			isSuccess="true";
+			log.info("수정완료");
+			mav.addObject("EventVO", param);
+		}else {
+			resultStr = "update";
+			isSuccess="false";
+			log.info("수정실패");
+		}//end of if-else
+
+		mav.addObject("result", resultStr);
+		mav.addObject("isSuccess", isSuccess);
+		//수정완료되면 수정된 상세보기조회페이지로 이동
+		mav.setViewName("notice/eventBoard/eventForm");
+		
+		log.info("EventController updateEvent 끝 >>>");
+		return mav;
+	}//end of updateEvent
+	
+	//===============이벤트 관리자모드 : 삭제================================
+	@RequestMapping("deleteEvent.ec")
+	public ModelAndView deleteEvent(@ModelAttribute EventVO param) {
+		log.info("EventController deleteEvent 시작 >>>");
+		String resultStr="";
+		String isSuccess="";
+		
+		int nCnt = eventService.deleteEvent(param);
+		log.info("nCnt>>>"+nCnt);
+		ModelAndView mav = new ModelAndView();
+		
+		if(nCnt > 0) {
+			resultStr = "delete";
+			isSuccess="true";
+			log.info("삭제완료");
+		}else {
+			resultStr = "delete";
+			isSuccess="false";
+			log.info("삭제실패");
+		}
+		mav.addObject("result", resultStr);
+		mav.addObject("isSuccess", isSuccess);
+		mav.setViewName("notice/eventBoard/eventForm");
+		
+		log.info("EventController deleteEvent 끝 >>>");
+		return mav;
+	}//end of deleteEvent
 	
 }
 
