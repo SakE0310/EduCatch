@@ -24,6 +24,11 @@
 	</jsp:include>
 </head>
 <body>
+<%
+	Object obj = request.getAttribute("freeboardlist"); 
+	if(obj!=null){
+		List<FreeVO> list = (List<FreeVO>)obj;
+%>
 <form id="freeBoardForm" name="freeBoardForm" method="get">
 		<input type="hidden" name="fbno" id="fbno"/>
 	</form>
@@ -48,15 +53,15 @@
 					<th>작성자</th>
 					<th>내용</th>
 					<th>첨부파일</th>
+					<th>작성일</th>
 				</tr>
 			</thead>
 			<tbody>
 			<% 
-			Object obj = request.getAttribute("freeboardlist"); 
-			if(obj!=null){
-				List<FreeVO> list = (List<FreeVO>)obj;
+			if(list.size()>0 && list !=null){
 				for(int i=0; i<list.size(); i++){
 					FreeVO freevo = (FreeVO)list.get(i);
+			
 			%>
 					<tr>			
 						<td align="center"><%=freevo.getFbno() %></td>					
@@ -64,27 +69,27 @@
 						<td align="center"><%=freevo.getFbname() %></td>
 						<td align="center"><%=freevo.getFbcontent() %></td>
 						<td align="center"><%=freevo.getFbimg() %></td>
+						<td align="center"><%=freevo.getFbinsertdate() %></td>
 					</tr>
 					<%
 				}
-					%>
+			}else{
+				%>
+					<tr>
+						<td colspan="6" align="center">
+						등록된 학과 정보가 존재하지 않습니다 </td>
+					</tr>				
+				<%
+			}
+	}
+				%>
 				<tr>
-					<td colspan="4" align="center">
+					<td colspan="5" align="center">
 					처리할 버튼을 선택하세요</td>
 					<td align="center">
 					<input type="button" onclick="insertPopup()"
 					value="[글쓰기]"/></td>
 				</tr>
-				<%
-			}else{
-				%>
-					<tr>
-						<td colspan="5" align="center">
-						등록된 학과 정보가 존재하지 않습니다 </td>
-					</tr>				
-				<%
-			}
-				%>
 			</tbody>
 		</table>
 	</div>

@@ -5,15 +5,15 @@
 <mapper namespace="com.kosmo.educatch.dao.FreeMapper">
 <select id="listFreeBoard" parameterType="freeboard" resultType="freeboard">
 	SELECT 
-		A.FBNO AS FBNO,
-		A.FBSUBJECT AS FBSUBJECT,
-		A.FBNAME AS FBNAME,
-		A.FBIMG AS FBIMG,
-		A.FBCONTENT AS FBCONTENT,
-		A.MEMBER_MNO AS MEMBER_MNO,
-		A.FBDELETEYN AS FBDELETEYN,
-		A.FBINSERTDATE AS FBINSERTDATE,
-		A.FBUPDATEDATE AS FBUPDATEDATE	
+		A.FBNO 			AS FBNO,
+		A.FBSUBJECT		AS FBSUBJECT,
+		A.FBNAME 		AS FBNAME,
+		A.FBIMG 		AS FBIMG,
+		A.FBCONTENT 	AS FBCONTENT,
+		A.MEMBER_MNO 	AS MEMBER_MNO,
+		A.FBDELETEYN 	AS FBDELETEYN,
+		TO_CHAR(A.FBINSERTDATE,'YYYY-MM-DD') 	AS FBINSERTDATE,
+		TO_CHAR(A.FBUPDATEDATE,'YYYY-MM-DD') 	AS FBUPDATEDATE	
 	FROM FREEBOARD A
 	<where>
 		A.FBDELETEYN ='N'
@@ -22,6 +22,12 @@
 </select>
 
 <insert id="insertFreeBoard" parameterType="freeboard">
+	<selectKey keyProperty="fbno" resultType="string" order="BEFORE">
+		SELECT 'F'||LPAD((
+		SELECT /*+INDEX_DESC(SYS_C0011539)*/
+		NVL(MAX(SUBSTR(A.FBNO,-5)),0)+1 commNO
+		FROM FREEBOARD A),5,'0') FROM DUAL
+	</selectKey>
 	INSERT INTO FREEBOARD(
 		FBNO,
 		FBSUBJECT,
@@ -63,7 +69,8 @@
 <update id="updateFreeBoard" parameterType="freeboard">
 	UPDATE FREEBOARD
 	SET FBSUBJECT=#{fbsubject},
-		FBCONTENT=#{fbcontent}
+		FBCONTENT=#{fbcontent},
+		FBIMG=#{fbimg}
 	<![CDATA[
 	WHERE FBDELETEYN='N' AND 
 	FBNO=#{fbno}

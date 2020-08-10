@@ -17,12 +17,7 @@
 <!-- function 함수 짜야함 -->
 
 <script type="text/javascript">
-	function updateCommit(){
-		console.log("updateCommit함수 진입");
-		alert("수정을 완료하시겠습니까??");
-		$("#edit").attr("action","updatefreeboard.ec");
-		$("#edit").submit();
-	}
+	
 	function deleteCommit(){
 		console.log("deleteCommit함수 진입");
 		alert("삭제하시겠습니까??");
@@ -55,6 +50,14 @@
 		//저장버튼 클릭시 form 전송
 		$("#updatecommit").click(function() {
 			oEditors.getById["fbcontent"].exec("UPDATE_CONTENTS_FIELD", []);
+			console.log("updateCommit함수 진입");
+			alert("수정을 완료하시겠습니까??");
+			
+			if($("#img").val()!=null && $("#img").val()!=""){
+				$("#edit").attr("enctype","multipart/form-data");
+			}
+			$("#edit").attr("action","updatefreeboard.ec");
+			$("#edit").attr("method","post");
 			$("#edit").submit();
 		});
 	});
@@ -66,8 +69,8 @@
 <body>
 	<!-- action/document/location -->
 	<!-- enctype="multipart/form-data" -->
-	<form id="edit" name="edit" action="#" method="post">
-		<table style="margin-left: auto; margin-right: auto;" border="1" >
+	<form id="edit" name="edit">
+		<table style="margin-left: auto; margin-right: auto;" border="1" width="50%">
 		<% 
 			Object obj = request.getAttribute("freevo"); 
 			if(obj!=null){
@@ -98,7 +101,9 @@
 			<tr>
 				<td>첨부파일</td>
 				<td>
-					<input type="file" value="찾아보기" id="fbimg" name="fbimg" /><br> 
+					현재 이미지:<img src = "/EduCatch/assets/img/freeImg/<%=freevo.getFbimg() %>" border=0 width="100" height="100"><br>
+					<input type="hidden" name="fbimg" id="fbimg" value=<%=freevo.getFbimg() %> />
+					수정할 이미지 파일:<input type="file" name="img" id="img" />
 				</td>
 			</tr>
 			<tr>

@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 폼</title>
+<style type="text/css">
+	.required{
+		color:red;
+	}
+</style>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 <script type="text/javascript">
@@ -21,13 +26,13 @@ function joinCommit(){
 <form name="memberjoin" id="memberjoin" method="get">
 		<table border=1>
 			<tr>
-				<td class="mem">회원번호:</td>
+				<td class="mem"><span class="required">*</span>회원번호:</td>
 				<td>
 					<input type="text" id="mno" name="mno" /></br>
 				</td>
 			</tr>
 			<tr>
-				<td class="mem">회원아이디:</td>
+				<td class="mem"><span class="required">*</span>회원아이디:</td>
 				<td>
 					<input type="text" id="memail0" name="memail0" value="이메일"size=10 onfocus="this.value=";"/> @
 					<input type="text" id="memail1" name="memail1" value="" size=10  /> 
@@ -41,7 +46,7 @@ function joinCommit(){
 				</td>
 			</tr>
 			<tr>
-				<td class="mem">회원비밀번호:</td>
+				<td class="mem"><span class="required">*</span>회원비밀번호:</td>
 				<td>
 					<input type="text" id="mpw" name="mpw"/></br>
 					<input type="text" id="mpw_r" name="mpw_r"/>
@@ -49,14 +54,14 @@ function joinCommit(){
 				</td>
 			</tr>
 			<tr>
-				<td class="mem">회원이름:</td>
+				<td class="mem"><span class="required">*</span>회원이름:</td>
 				<td>
 					<input type="text" id="mname" name="mname"/></br>
 				</td>
 			</tr>
 			
 			<tr>
-				<td class="mem">핸드폰</td>
+				<td class="mem"><span class="required">*</span>핸드폰</td>
 				<td>
 					<select name="mtel1">
 						<option value="010">010</option>
@@ -69,7 +74,7 @@ function joinCommit(){
 			</tr>
 			
 			<tr>
-				<td class="mem">주소</td>
+				<td class="mem"><span class="required">*</span>주소</td>
 				<td>
 					 <input type="text" id="maddrno" name="maddrno" size=6/>
 					 <input type="button" value="우편번호 찾기" onclick="addrCheck()"/>(도로명주소)<br/>

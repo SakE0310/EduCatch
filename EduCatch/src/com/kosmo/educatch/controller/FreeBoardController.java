@@ -1,6 +1,10 @@
 package com.kosmo.educatch.controller;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.FreeService;
 import com.kosmo.educatch.vo.FreeVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @Controller
 public class FreeBoardController {
@@ -30,17 +36,19 @@ public class FreeBoardController {
 		log.info("list사이즈>>>"+listSize);
 		
 		for(int i=0; i<listSize; i++) {
-			log.info("글번호"+list.get(i).getFbno());
-			log.info("제목"+list.get(i).getFbsubject());
-			log.info("작성자"+list.get(i).getFbname());
-			log.info("첨부파일"+list.get(i).getFbimg());
-			log.info("내용"+list.get(i).getFbcontent());
-			log.info("회원번호"+list.get(i).getMember_mno());
-			log.info("삭제여부"+list.get(i).getFbdeleteyn());
-			log.info("작성일"+list.get(i).getFbinsertdate());
-			log.info("수정일"+list.get(i).getFbupdatedate());
+			FreeVO fvo =(FreeVO)list.get(i);
+			
+			log.info("글번호"+fvo.getFbno());
+			log.info("제목"+fvo.getFbsubject());
+			log.info("작성자"+fvo.getFbname());
+			log.info("첨부파일"+fvo.getFbimg());
+			log.info("내용"+fvo.getFbcontent());
+			log.info("회원번호"+fvo.getMember_mno());
+			log.info("삭제여부"+fvo.getFbdeleteyn());
+			log.info("작성일"+fvo.getFbinsertdate());
+			log.info("수정일"+fvo.getFbupdatedate());
 		}
-		log.info("list.getname()"+list.get(0).getFbname());
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("freeboardlist",list);
 		mav.setViewName("community/freeboard/listFreeBoard");
@@ -78,35 +86,90 @@ public class FreeBoardController {
 		return mav;
 	}
 	
-	//자유게시판 상세정보조회(수정,삭제일경우->수정게시판으로 이동)
-		@RequestMapping("selectfreeboardUD")
-		public ModelAndView selectFreeBoardUD(@ModelAttribute FreeVO param) {
-			log.info("selectfreeboardUD함수 시작>>>");
-			ModelAndView mav = new ModelAndView();
-			log.info("fbno>>>"+param.getFbno());
+	//자유게시판 상세정보조회(수정,삭제일경우->수정,삭제 게시판으로 이동)
+	@RequestMapping("selectfreeboardUD")
+	public ModelAndView selectFreeBoardUD(@ModelAttribute FreeVO param) {
+		log.info("selectfreeboardUD함수 시작>>>");
+		ModelAndView mav = new ModelAndView();
+		log.info("fbno>>>"+param.getFbno());
 			
-			if(param.getFbno().length()>0 && param.getFbno()!=null) {
-				FreeVO freevo = freeService.selectFreeBoard(param);
-				mav.addObject("freevo", freevo);
-			}
-			mav.setViewName("community/freeboard/updateFreeBoard");
-			log.info("selectfreeboardUD함수 끝>>>");
-			return mav;
+		if(param.getFbno().length()>0 && param.getFbno()!=null) {
+			FreeVO freevo = freeService.selectFreeBoard(param);
+			mav.addObject("freevo", freevo);
 		}
+		mav.setViewName("community/freeboard/updateFreeBoard");
+		log.info("selectfreeboardUD함수 끝>>>");
+		return mav;
+	}
 	//자유게시판 등록
 	@RequestMapping("insertfreeboard")
-	public ModelAndView insertFreeBoard(@ModelAttribute FreeVO param) {
+	public ModelAndView insertFreeBoard(@ModelAttribute FreeVO param, HttpServletRequest request) {
 		log.info("insertFreeBoard 함수 진입");
+		
+		String fbno = null;
+		String fbsubject = null;
+		String fbname = null;
+		String fbcontent =null;
+		String fbimg = null;
+		String resultStr = "";
+		
+		if(request.getContentType().toLowerCase().startsWith("multipart/form-data")) {
+			log.info("multipart/form-data 파일 업로드");
+			
+			int size=10*1024*1024;
+			String uploadPath = "C://Users//ekfri//git//EduCatch//EduCatch//WebContent//assets//img//freeImg";
+			
+			ModelAndView mav = new ModelAndView();
+			try {
+				MultipartRequest mr = new MultipartRequest(request,
+															uploadPath,
+															size,
+															"UTF-8",
+															new DefaultFileRenamePolicy());
+				fbno = mr.getParameter("fbno");
+				fbsubject = mr.getParameter("fbsubject");
+				fbname =mr.getParameter("fbname");
+				fbcontent = mr.getParameter("fbcontent");
+				resultStr="";
+				
+				log.info("fbno>>>"+fbno);
+				log.info("fbsubject>>>"+fbsubject);
+				log.info("fbname>>>"+fbname);
+				log.info("fbcontent>>>"+fbcontent);
+				
+				Enumeration<String> en = mr.getFileNames();
+				List<String> list = new ArrayList<String>();
+				
+				while(en.hasMoreElements()) {
+					String file1 = en.nextElement();
+					String filename = mr.getFilesystemName(file1);
+					log.info("fileName>>>"+filename);
+					list.add(mr.getFilesystemName(file1));
+				}
+				fbimg = String.valueOf(list.get(0));
+				
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			log.info("파일이 없는 경우");
+		}
+		param.setFbno(fbno);
+		param.setFbsubject(fbsubject);
+		param.setFbname(fbname);
+		param.setFbcontent(fbcontent);
+		param.setFbimg(fbimg);
+		
 		log.info("글번호"+param.getFbno());
-		log.info("제목"+param.getFbsubject());
+		log.info("글제목"+param.getFbsubject());
 		log.info("작성자"+param.getFbname());
-		log.info("내용"+param.getFbcontent());
-		log.info("첨부파일"+param.getFbimg());
+		log.info("글내용"+param.getFbcontent());
+		log.info("이미지파일"+param.getFbimg());
 		log.info("삭제여부"+param.getFbdeleteyn());
 		log.info("입력일"+param.getFbinsertdate());
 		log.info("수정일"+param.getFbupdatedate());
-		log.info("insertFreeBoard함수 끝");
-		String resultStr="";
+		
 		int result=freeService.insertFreeBoard(param);
 		log.info("result>>>"+result);
 		
@@ -115,14 +178,71 @@ public class FreeBoardController {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",resultStr);
-		mav.setViewName("community/freeboard/result");
+		mav.setViewName("community/freeboard/insertFreeBoardForm");
 		log.info("mav>>>"+mav);
 		return mav;
+		
 	}
+
 	//자유게시판 수정
 	@RequestMapping("updatefreeboard")
-	public ModelAndView updateFreeBoard(@ModelAttribute FreeVO param) {
+	public ModelAndView updateFreeBoard(@ModelAttribute FreeVO param,HttpServletRequest request) {
 		log.info("updateFreeBoard함수 진입");
+		
+		String fbno = null;
+		String fbsubject = null;
+		String fbname = null;
+		String fbcontent=null;
+		String fbimg = null;
+		String resultStr = "";
+		
+		if(request.getContentType().toLowerCase().startsWith("multipart/form-data")) {
+			log.info("파일 업로드");
+			
+			int size=10*1024*1024;
+			String uploadPath = "C://Users//ekfri//git//EduCatch//EduCatch//WebContent//assets//img//freeImg";
+			
+			ModelAndView mav = new ModelAndView();
+			try {
+				MultipartRequest mr = new MultipartRequest(request,
+															uploadPath,
+															size,
+															"UTF-8",
+															new DefaultFileRenamePolicy());
+				
+				fbno = mr.getParameter("fbno");
+				fbsubject = mr.getParameter("fbsubject");
+				fbname =mr.getParameter("fbname");
+				fbcontent = mr.getParameter("fbcontent");
+				resultStr="";
+				
+				log.info("fbno>>>"+fbno);
+				log.info("fbsubject>>>"+fbsubject);
+				log.info("fbname>>>"+fbname);
+				log.info("fbcontent>>>"+fbcontent);
+				
+				Enumeration<String> en = mr.getFileNames();
+				List<String> list = new ArrayList<String>();
+				
+				while(en.hasMoreElements()) {
+					String file1 = en.nextElement();
+					String filename = mr.getFilesystemName(file1);
+					log.info("fileName>>>"+filename);
+					list.add(mr.getFilesystemName(file1));
+				}
+				fbimg = String.valueOf(list.get(0));
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			log.info("파일이 변하지 않은 경우");
+		}
+		param.setFbno(fbno);
+		param.setFbsubject(fbsubject);
+		param.setFbname(fbname);
+		param.setFbcontent(fbcontent);
+		param.setFbimg(fbimg);
+		
 		log.info("글번호"+param.getFbno());
 		log.info("제목"+param.getFbsubject());
 		log.info("작성자"+param.getFbname());
@@ -132,14 +252,21 @@ public class FreeBoardController {
 		log.info("입력일"+param.getFbinsertdate());
 		log.info("수정일"+param.getFbupdatedate());
 		
-		String updateStr ="";
 		int result = freeService.updateFreeBoard(param);
 		log.info("result"+result);
-		if(result>0) updateStr="수정을 완료하였습니다";
-		else updateStr="수정하는데 문제가 생겼습니다.";
-		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("result", updateStr);
+		
+		if(result>0) {
+			resultStr="update";
+			log.info("수정완료");
+			mav.addObject("freevo", param);
+		}
+		else {
+			resultStr="update";
+			log.info("수정 실패");
+		}
+		
+		mav.addObject("result", resultStr);
 		mav.setViewName("community/freeboard/result");
 		
 		log.info("updateFreeBoard함수 끝");
@@ -149,6 +276,30 @@ public class FreeBoardController {
 	//자유게시판 삭제
 	@RequestMapping("deletefreeboard")
 	public ModelAndView deleteFreeBoard(@ModelAttribute FreeVO param) {
-		return null;
+		log.info("deleteFreeBoard함수 시작");
+		log.info("글번호"+param.getFbno());
+		
+		String deleteStr = "";
+		String isSuccess="";
+		
+		int result = freeService.deleteFreeBoard(param);
+		
+		ModelAndView mav = new ModelAndView();
+		if(result>0) {
+			deleteStr = "delete";
+			isSuccess="true";
+			log.info("삭제완료");
+		}else {
+			deleteStr = "delete";
+			isSuccess="false";
+			log.info("삭제실패");
+		}
+		
+		mav.addObject("result", deleteStr);
+		mav.addObject("isSuccess", isSuccess);
+		mav.setViewName("community/freeboard/result");
+		
+		log.info("deleteFreeBoard함수 끝");
+		return mav;
 	}
 }

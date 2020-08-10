@@ -16,12 +16,6 @@
 <!-- function 함수 짜야함 -->
 
 <script type="text/javascript">
-	function insertCommit(){
-		console.log("insertCommit함수 진입");
-		alert("글쓰기 등록을 완료하시겠습니까??");
-		$("#edit").attr("action","insertfreeboard.ec");
-		$("#edit").submit();
-	}
 	
 	var oEditors = [];
 	$(function() {
@@ -49,6 +43,13 @@
 		//저장버튼 클릭시 form 전송
 		$("#insertcommit").click(function() {
 			oEditors.getById["fbcontent"].exec("UPDATE_CONTENTS_FIELD", []);
+			console.log("insertCommit함수 진입");
+			alert("글쓰기 등록을 완료하시겠습니까??");
+			if($("#fbimg").val()!=null && $("#fbimg").val() !=""){
+				$("#edit").attr("enctype","multipart/form-data");
+			}
+			$("#edit").attr("action","insertfreeboard.ec");
+			$("#edit").attr("method","post");
 			$("#edit").submit();
 		});
 	});
@@ -61,7 +62,7 @@
 	
 	<!-- action/document/location -->
 	<!-- enctype="multipart/form-data" -->
-	<form id="edit" name="edit" method="post">
+	<form id="edit" name="edit">
 		<table style="margin-left: auto; margin-right: auto;" border="1" width="50%">
 			<tr>
 				<td style="width: 100px">글번호</td>

@@ -29,7 +29,6 @@ public class FreeServiceImpl implements FreeService {
 		
 		List<FreeVO> list = new ArrayList<FreeVO>();
 		list = freeMapper.listFreeBoard(param);
-		log.info("service prarm>>>"+list.get(0).getFbname());
 		
 		log.info("listFreeBoard함수 진입 끝(목록)");
 		return list;

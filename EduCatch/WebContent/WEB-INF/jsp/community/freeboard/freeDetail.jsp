@@ -11,20 +11,23 @@
 <script type="text/javascript">
 function updateClick(){
 	console.log("updateClick함수 진입");
-	alert("수정??");
+	alert("수정");
 	$("#edit").attr("action","selectfreeboardUD.ec");
+	$("#edit").attr("method","POST");
 	$("#edit").submit();
 }
 function deleteClick(){
 	console.log("deleteClick함수 진입");
-	alert("삭제??");
+	alert("삭제");
 	$("#edit").attr("action","selectfreeboardUD.ec");
+	$("#edit").attr("method","POST");
 	$("#edit").submit();
 }
 function listClick(){
 	console.log("listClick함수 진입");
-	alert("목록??");
-	$("#edit").attr("action","listReview.ec");
+	alert("목록");
+	$("#edit").attr("action","freeboardlist.ec");
+	$("#edit").attr("method","POST");
 	$("#edit").submit();
 }
 </script>
@@ -35,7 +38,7 @@ function listClick(){
 	</jsp:include>
 	<!-- action/document/location -->
 	<!-- enctype="multipart/form-data" -->
-	<form id="edit" name="edit" method="get">
+	<form id="edit" name="edit">
 		<table style="margin-left: auto; margin-right: auto;" border="1" >
 		<% 
 			Object obj = request.getAttribute("freevo"); 
@@ -67,10 +70,14 @@ function listClick(){
 			<tr>
 				<td>첨부파일</td>
 				<td>
-					<input type="file" value="찾아보기" id="fbimg" name="fbimg" /><br> 
+					 <div id ="rbimg" name="rbimg" align="center">
+	         				<img src="/EduCatch/assets/img/freeImg/<%= freevo.getFbimg() %>" border=() width="100" height="100"/><br>
+	         		</div>
 				</td>
 			</tr>
-			<tr>
+		</table>
+		<table style="margin-left: auto; margin-right: auto;" border="0">
+			<tr align="center">
 				<td colspan="3" align="right">
 				 <input type="button" id="updateclick" value="수정" onclick="updateClick()" />
 				 <input type="button" id="deleteclick" value="삭제" onclick="deleteClick()" />
