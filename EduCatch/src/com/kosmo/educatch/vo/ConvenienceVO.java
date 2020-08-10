@@ -11,6 +11,7 @@ public class ConvenienceVO {
 	private String acstudyroom;
 	private String aclounge;
 	private String aclocker;
+	
 	public String getAcademy_ano() {
 		return academy_ano;
 	}

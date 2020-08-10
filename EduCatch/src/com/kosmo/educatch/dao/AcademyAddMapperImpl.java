@@ -10,6 +10,13 @@ public class AcademyAddMapperImpl extends SqlSessionDaoSupport implements Academ
 
 	private static Logger log = Logger.getLogger(AcademyAddMapperImpl.class);
 	
+	//카테고리 정보
+	@Override
+	public AcademyVO selectCategory(AcademyVO avo) {
+		log.info("AcademyAddMapperImpl.selectCategory >>>");
+		return getSqlSession().selectOne("selectCategory");
+	}//end of selectCategory
+	
 	// 학원 등록
 	@Override
 	public int insertAcademy(AcademyVO param) {
@@ -18,12 +25,6 @@ public class AcademyAddMapperImpl extends SqlSessionDaoSupport implements Academ
 		return nCnt;
 	}// end of insertAcademy
 
-	//카테고리 정보
-	@Override
-	public AcademyVO selectCategory(AcademyVO avo) {
-		log.info("AcademyAddMapperImpl.selectCategory >>>");
-		return getSqlSession().selectOne("selectCategory");
-	}//end of selectCategory
 	
 	//학원 편의 기능
 	public int insertConveniece(ConvenienceVO param) {

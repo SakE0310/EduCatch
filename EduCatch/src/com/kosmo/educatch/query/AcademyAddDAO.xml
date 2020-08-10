@@ -52,5 +52,37 @@
 					        SYSDATE
 					)
 	</insert>
+	
+	
+	<insert id="insertConveniece" parameterType="convenience">
+		<selectKey keyProperty="academy_ano" resultType="String" order="BEFORE">
+		SELECT 	/*+ INDEX_DESC(SYS_C0011497) */ 		 
+			    'A'||LPAD(
+			    (NVL(MAX(SUBSTR(ACADEMY_ANO,-4)),0)+1),5,'0' 
+			    )COMMNO  
+		FROM ACADEMY_CONVENIENCE A
+		</selectKey>
+		INSERT INTO ACADEMY_CONVENIENCE
+					(
+					        ACADEMY_ANO, 
+						    ACPARKING, 
+						    ACSTORE,
+						    ACBUS,
+						    ACELEVATOR,
+						    ACSTUDYROOM,
+						    ACLOUNGE,
+						    ACLOCKER
+					)
+		VALUES(
+					        #{academy_ano, jdbcType=VARCHAR},
+					        #{acparking, jdbcType=VARCHAR},
+					        #{acstore, jdbcType=VARCHAR},
+					        #{acbus, jdbcType=VARCHAR},
+					        #{acelevator, jdbcType=VARCHAR},
+					        #{acstudyroom, jdbcType=VARCHAR},
+					        #{aclounge, jdbcType=VARCHAR},
+					        #{aclocker, jdbcType=VARCHAR}
+					)
+	</insert>
 
 </mapper>

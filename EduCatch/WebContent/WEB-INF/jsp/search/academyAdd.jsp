@@ -7,10 +7,14 @@
 <jsp:include page="../../../top.jsp" flush="true">
 	<jsp:param value="" name="" />
 </jsp:include>
+
 <style type="text/css">
 #form {
 	margin: auto;
 }
+
+
+
 
 input[type="file"] {
 	position: absolute;
@@ -23,6 +27,8 @@ input[type="file"] {
 	border: 0;
 }
 </style>
+
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript"
@@ -223,8 +229,14 @@ function ajaxGetMinor(param){
 							</div>
 							
 							<div class="mt-10">
-									<input type="checkbox" id="jb-checkbox" class="custom-control-input">
-									<label class="custom-control-label" for="jb-checkbox"></label>
+								 <h2>편의기능 </h2>
+								 <input type="checkbox" id="acparking" name="acparking" value="Y">주차장
+								 <input type="checkbox" id="acstore" name="acstore" value="Y">편의점
+								 <input type="checkbox" id="acbus" name="acbus" value="Y">셔틀버스
+								 <input type="checkbox" id="acelevator" name="acelevator" value="Y">엘리베이터
+								 <input type="checkbox" id="acstudyroom" name="acstudyroom" value="Y">자습실
+								 <input type="checkbox" id="aclounge" name="aclounge" value="Y">휴게실
+								 <input type="checkbox" id="aclocker" name="aclocker" value="Y">사물함
 							</div>
 							
 							
