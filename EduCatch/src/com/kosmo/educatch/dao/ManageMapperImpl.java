@@ -18,4 +18,16 @@ public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapp
 		return getSqlSession().selectList("ManageMapper.getAcaAccept");
 	}
 
+	@Override
+	public int setAcceptAcaMem(MemberVO vo) {
+		log.info("ManageMapperImpl setAcceptAcaMem >>> ");
+		return getSqlSession().update("ManagerMapper.setAcceptAcaMem", vo);
+	}
+
+	@Override
+	public int delAcaMem(MemberVO vo) {
+		log.info("ManageMapperImpl delAcaMem >>> ");
+		return getSqlSession().delete("ManagerMapper.delAcaMem", vo);
+	}
+
 }

@@ -134,14 +134,18 @@
        		});
        		
        		$('.reject').on('click',function(){
-       			var targetValue = $(this).parent().parent().children().find('.chk:checked').parents('tr');
-       			if(targetValue.length == 0){
-       				alert("항목을 선택하여 주세요.");
-       				return;
+       			if(confirm("정말 해당 정보를 거부하시겠습니까?\n(삭제가 됩니다)")){
+       				var targetValue = $(this).parent().parent().children().find('.chk:checked').parents('tr');
+           			if(targetValue.length == 0){
+           				alert("항목을 선택하여 주세요.");
+           				return;
+           			}
+           			var dataTable = $(this).parent().parent().find('.acceptTable').DataTable();
+           			console.log('<<');
+           			ajaxRejectMember(targetValue, dataTable);	
+       			}else{
+       				
        			}
-       			var dataTable = $(this).parent().parent().find('.acceptTable').DataTable();
-       			console.log('<<');
-       			ajaxRejectMember(targetValue, dataTable);
        		});
        		
        		$('.chkAll').on('click',function(){
@@ -211,13 +215,13 @@
        		});
        	}
        	
-       	
+       	// 거절버튼 ajax
        	function ajaxRejectMember(targetValue, dataTable){
        		
        		var tdArr = new Array();
        		var tdRejectInfo = new Object();
        		$(targetValue).each(function(index){
-       			tdRejectInfo.mid = dataTable.rows(targetValue).data()[index].mno;
+       			tdRejectInfo.mno = dataTable.rows(targetValue).data()[index].mno;
        			tdArr.push(tdRejectInfo);
        			tdRejectInfo={};
        		})
@@ -228,22 +232,31 @@
        		var rejData = JSON.stringify(rejectData);
        		console.log(rejData);
        		$.ajax({
-       			url : "getAcaMem.ec",
-       			data : rejData
+       			type : "DELETE",
+       			url : "rejectAca.ec",
+       			data : rejData,
+       			dataType : "json"
        		}).done(function(resultParam){
-       			alert('정상적으로 승인되었습니다.');
+       			if(resultParam.result == "success"){
+       				alert('정상적으로 거절되었습니다.');	
+       			}else{
+       				alert('일부 데이터에 문제가 있습니다.');
+       			}
+       			dataTable.clear().draw();
        			ajaxGetAcademyMember();
        		}).fail(function(resultParam){
-       			alert("초기화에 문제가 발생하였습니다.");
+       			alert("연결에 문제가 발생하였습니다.");
        		});
        	}
        	
+       	
+       	//승인버튼 ajax
 		function ajaxAcceptMember(targetValue, dataTable){
        		
        		var tdArr = new Array();
        		var tdAcceptInfo = new Object();
        		$(targetValue).each(function(index){
-       			tdAcceptInfo.mid = dataTable.rows(targetValue).data()[index].mno;
+       			tdAcceptInfo.mno = dataTable.rows(targetValue).data()[index].mno;
        			tdArr.push(tdAcceptInfo);
        			tdAcceptInfo={};
        		})
@@ -253,6 +266,23 @@
        		
        		var accData = JSON.stringify(acceptData);
        		console.log(accData);
+       		
+       		$.ajax({
+       			type : "PUT",
+       			url : "acceptAca.ec",
+       			data : accData,
+       			dataType : "json"
+       		}).done(function(resultParam){
+       			if(resultParam.result == "success"){
+       				alert('정상적으로 승인되었습니다.');	
+       			}else{
+       				alert('일부 데이터에 문제가 있습니다.');
+       			}
+       			dataTable.clear().draw();
+       			ajaxGetAcademyMember();
+       		}).fail(function(resultParam){
+       			alert("연결에 문제가 발생하였습니다.");
+       		});
        	}
        	
        	</script>

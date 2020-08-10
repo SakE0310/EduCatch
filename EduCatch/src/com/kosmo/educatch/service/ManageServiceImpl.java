@@ -29,4 +29,20 @@ public class ManageServiceImpl implements ManageService {
 		return list;
 	}
 
+	@Override
+	public int setAcceptAcaMem(MemberVO vo) {
+		log.info("ManagerserviceImpl setAcceptAcaMem >>> ");
+		int cnt = manageMapper.setAcceptAcaMem(vo);
+		log.info("ManagerserviceImpl setAcceptAcaMem end >>> ");
+		return cnt;
+	}
+
+	@Override
+	public int delAcaMem(MemberVO vo) {
+		log.info("ManagerserviceImpl delAcaMem >>> ");
+		int cnt = manageMapper.delAcaMem(vo);
+		log.info("ManagerserviceImpl delAcaMem end >>> ");
+		return cnt;
+	}
+
 }

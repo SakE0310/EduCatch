@@ -7,10 +7,13 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.ManageService;
 import com.kosmo.educatch.vo.MemberVO;
@@ -84,7 +87,72 @@ public class ManageController {
 	
 	@ResponseBody
 	@RequestMapping("acceptAca")
-	public Map<String, List<MemberVO>> acceptAcaMember(){
-		return null;
+	public Map<String, String> acceptAcaMember(@RequestBody String json){
+		log.info("ManageController acceptAca >>> ");
+		ObjectMapper objMapper = new ObjectMapper();
+		Map<String, List<Map<String,String>>> map = null;
+		
+		try {
+			map = objMapper.readValue(json, new TypeReference<Map<String,List<Map<String,String>>>>() {});
+		} catch (Exception e) {
+			log.info("json parse error >>> " + e.getMessage());
+		}
+		
+		
+		List<Map<String,String>> list = map.get("data");
+		int cnt = 0;
+		MemberVO mvo = null;
+		mvo = new MemberVO();
+		
+		for(int i = 0; i < list.size(); i++) {
+			Map<String,String> data = list.get(i);
+			mvo.setMno(data.get("mno"));
+			log.info(mvo.getMno());
+			cnt += manageService.setAcceptAcaMem(mvo);
+		}
+		
+		Map<String, String> rmap = new HashMap<String, String>();
+		if(cnt == list.size()) {
+			rmap.put("result", "success");
+		}
+		
+		log.info("ManageController acceptAca end >>> ");
+		return rmap;
+	}
+	
+	@ResponseBody
+	@RequestMapping("rejectAca")
+	public Map<String, String> rejectAcaMember(@RequestBody String json){
+		log.info("ManageController rejectAcaMember >>> ");
+		
+		ObjectMapper objMapper = new ObjectMapper();
+		Map<String, List<Map<String,String>>> map = null;
+		
+		try {
+			map = objMapper.readValue(json, new TypeReference<Map<String,List<Map<String,String>>>>() {});
+		} catch (Exception e) {
+			log.info("json parse error >>> " + e.getMessage());
+		}
+		
+		
+		List<Map<String,String>> list = map.get("data");
+		int cnt = 0;
+		MemberVO mvo = null;
+		mvo = new MemberVO();
+		
+		for(int i = 0; i < list.size(); i++) {
+			Map<String,String> data = list.get(i);
+			mvo.setMno(data.get("mno"));
+			log.info(mvo.getMno());
+			cnt += manageService.delAcaMem(mvo);
+		}
+		
+		Map<String, String> rmap = new HashMap<String, String>();
+		if(cnt == list.size()) {
+			rmap.put("result", "success");
+		}
+		
+		log.info("ManageController rejectAcaMember end >>> ");
+		return rmap;
 	}
 }

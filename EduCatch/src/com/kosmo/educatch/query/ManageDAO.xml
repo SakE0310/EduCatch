@@ -18,4 +18,19 @@
 		AND MPERMISSION = 'N'
 	</select>
 	
+	<update id="setAcceptAcaMem" parameterType="member">
+		UPDATE 
+				MEMBER
+		SET 
+				MPERMISSION = 'Y'
+		WHERE
+				MNO = #{mno}
+	</update>
+	
+	<delete id="delAcaMem" parameterType="member">
+		DELETE FROM
+				MEMBER
+		WHERE
+				MNO = #{mno}
+	</delete>
 </mapper>
