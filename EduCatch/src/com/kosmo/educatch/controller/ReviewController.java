@@ -51,6 +51,10 @@ public class ReviewController {
 			curpage=request.getParameter("curpage");
 		}
 
+		param.setPagesize(pagesize);
+		param.setGroupsize(groupsize);
+		param.setCurpage(curpage);
+		param.setTotalcount(totalcount);
 		
 		List<ReviewVO> list=reviewService.listReview(param);
 		log.info("list.size() >>> "+list.size());
@@ -71,6 +75,11 @@ public class ReviewController {
 			log.info("rbdeleteyn >>> "+rvo.getRbdeleteyn());
 			log.info("rbinsertdate >>> "+rvo.getRbinsertdate());
 			log.info("rbupdatedate >>> "+rvo.getRbupdatedate());
+			
+			log.info("pagesize >>> "+rvo.getPagesize());
+			log.info("groupsize >>> "+rvo.getGroupsize());
+			log.info("curpage >>> "+rvo.getCurpage());
+			log.info("totalcount >>> "+rvo.getTotalcount());
 		}
 		
 		ModelAndView mav=new ModelAndView();

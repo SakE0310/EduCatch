@@ -16,14 +16,17 @@
 		            A.RBDELETEYN        AS RBDELETEYN,
 		            TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD')      AS RBINSERTDATE,
 		            TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')      AS RBUPDATEDATE,
-		            CEIL(ROW_NUMBER() OVER(ORDER BY A.RBNO DESC)/P.PAGESIZE) PAGENO,
-		            COUNT(A.RBNO) OVER() AS TOTALCOUNT
+		            CEIL(ROW_NUMBER() OVER(ORDER BY A.RBNO DESC)/#{pagesize, jdbcType=VARCHAR}) PAGENO,
+		            COUNT(A.RBNO) OVER() AS TOTALCOUNT,
+		            #{curpage, jdbcType=VARCHAR}		AS CURPAGE,
+               		#{pagesize, jdbcType=VARCHAR}		AS PAGESIZE,
+                	#{groupsize, jdbcType=VARCHAR}		AS GROUPSIZE
 		FROM REVIEWBOARD A, PAGING P
 		WHERE RBDELETEYN = 'N'
 		AND   PNO='P002'
 		ORDER BY 1 DESC
 		)
-		WHERE PAGENO=1
+		WHERE PAGENO=#{curpage, jdbcType=VARCHAR}
 	</select>
 	
 	
