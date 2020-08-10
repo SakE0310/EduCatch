@@ -48,6 +48,11 @@
                               	학원회원 승인
                             </a>
                             
+                            <a class="nav-link" href="addAca.ec">
+                                <div class="sb-nav-link-icon"><i class="fas fa-plus-square"></i></div>
+                              	학원정보 등록
+                            </a>
+                            
                             <a class="nav-link" href="tables.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
                                 로그아웃
@@ -63,22 +68,25 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">학원관리자로 등록한 회원들을 승인 할 수 있습니다.</li>
                         </ol>
-		                  <div class="col-xl-12">                               
-		                    <table class="acceptTable table table-striped" id="memberAccept" style="width:2000px">
+		                  <div class="col-xl-12">  
+		                  <div class="text-right container" style="margin-right:0px;">
+		                    	<button class="btn btn-danger reject" style="margin-right:5px;"><i class="fas fa-eraser"></i> 거절</button>
+		                    	<button class="btn btn-primary success"><i class="fas fa-edit"></i> 승인</button>
+		                    </div>                             
+		                    <table class="acceptTable table table-striped" id="memberAccept" style="width:100%">
 		                      <thead>
 		                        <tr>
-		                          <th>체크</th>
+		                          <th><label class="custom-control custom-checkbox ck-center"><input class="custom-control-input check" type="checkbox"><span class="custom-control-label"></span></label></th>
 		                          <th>아이디</th>
 		                          <th>학원번호</th>
 		                          <th>학원이름</th>
 		                          <th>학원연락처</th>
 		                          <th>이미지</th>
 		                          <th>가입일</th>
+		                          <th>mno</th>
 		                        </tr>
 		                      </thead>
 		                    </table>
-		                    <div class="text-right container">
-		                    </div>
 		                  </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -98,12 +106,24 @@
        	<script type="text/javascript">
        	$(document).ready(function(){
        		ajaxGetAcademyMember();
+       		
+       		$('.success').on('click',function(){
+       			console.log('>>');
+       		});
+       		$('.reject').on('click',function(){
+       			var targetValue = $(this).parent().parent().children().find('input[type=checkbox]:checked').parents('tr');
+       			var dataTable = $(this).parent().parent().find('.acceptTable').DataTable();
+       			console.log('<<');
+       			ajaxRejectMember(targetValue, dataTable);
+       		});
        	});
        	document.addEventListener("DOMContentLoaded", function(event) {
             // Datatables with Buttons
           var datatablesAcceptTable = $('.acceptTable').DataTable({
               scrollX: true,
               lengthChange: !1,
+              searching: false,
+              ordering: false,
               pageLength: 5,
               "language": {
                   "lengthMenu": "<h5 class='card-title'>회원정보</h5>",
@@ -124,12 +144,14 @@
                 { "data": "학원이름","className": "aname"},
                 { "data": "학원연락처","className": "atel"},
                 { "data": "이미지" ,"className": "mimg"},
-                { "data": "가입일", "className" :"minsertdate"}
+                { "data": "가입일", "className" :"minsertdate"},
+                { "data": "mno", 'visible': false, 'searchable': false}
               ],
               "order": [[ 1, "desc" ]]
             });
           	datatablesAcceptTable.buttons().container().appendTo(".acceptTable.col-xl-12:eq(0)");
           });
+       	
        	function ajaxGetAcademyMember(){
        		$.ajax({
        			url : "getAcaMem.ec",
@@ -144,7 +166,8 @@
        	       				"학원이름" : resultParam.vo[index].aname,
        	       				"학원연락처" : resultParam.vo[index].atel,
        	       				"이미지" : resultParam.vo[index].mimg,
-       	       				"가입일" : resultParam.vo[index].minsertdate
+       	       				"가입일" : resultParam.vo[index].minsertdate,
+       	       				"mno" : resultParam.vo[index].mno
        				};
        				acceptTable.row.add(dataParam).draw();
        			}
@@ -152,6 +175,26 @@
        			alert("초기화에 문제가 발생하였습니다.");
        		});
        	}
+       	
+       	
+       	function ajaxRejectMember(targetValue, dataTable){
+       		
+       		var tdArr = new Array();
+       		var tdRejectInfo = new Object();
+       		$(targetValue).each(function(index){
+       			tdRejectInfo.mid = dataTable.rows(targetValue).data()[index].mno;
+       			tdArr.push(tdRejectInfo);
+       			tdRejectInfo={};
+       		})
+       		
+       		var rejectData = new Object;
+       		rejectData.data = tdArr;
+       		
+       		var rejData = JSON.stringify(rejectData);
+       		console.log(rejData);
+       	}
+       	
+       	
        	</script>
     </body>
 </html>

@@ -5,9 +5,15 @@
 
 	<select id="getAcaAccept" parameterType="member" resultType="member">
 		SELECT
-			MID, ANO, ANAME, ATEL, MIMG, MINSERTDATE
+				MNO, 
+				MID, 
+				ANO, 
+				ANAME, 
+				ATEL, 
+				MIMG, 
+				TO_CHAR(MINSERTDATE,'YYYY-MM-DD') AS MINSERTDATE
 		FROM
-			(SELECT * FROM MEMBER A, ACADEMY B WHERE A.ACADEMY_ANO = B.ANO)
+				(SELECT * FROM MEMBER A, ACADEMY B WHERE A.ACADEMY_ANO = B.ANO)
 		WHERE MAUTH = 2
 		AND MPERMISSION = 'N'
 	</select>

@@ -48,6 +48,11 @@
                               	학원회원 승인
                             </a>
                             
+                            <a class="nav-link" href="addAca.ec">
+                                <div class="sb-nav-link-icon"><i class="fas fa-plus-square"></i></div>
+                              	학원정보 등록
+                            </a>
+                            
                             <a class="nav-link" href="tables.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
                                 로그아웃

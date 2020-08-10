@@ -64,9 +64,9 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">학원관리</h1>
+                        <h1 class="mt-4">학원정보 등록</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">학원에 대한 정보를 수정할 수 있습니다.</li>
+                            <li class="breadcrumb-item active">등록요청된 학원정보를 토대로 DB에 입력할 수 있습니다.</li>
                         </ol>
                         <div class="row">
                             <div class="col-xl-6">

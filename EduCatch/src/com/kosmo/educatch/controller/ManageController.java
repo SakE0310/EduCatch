@@ -62,6 +62,16 @@ public class ManageController {
 		return mv;
 	}
 	
+	@RequestMapping("addAca")
+	public ModelAndView getAddAcaPage() {
+		log.info("ManageController getAddAcaPage >>> ");
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("manage/addAcademy");
+		
+		return mv;
+	}
+	
 	@ResponseBody
 	@RequestMapping("getAcaMem")
 	public Map<String, List<MemberVO>> getAcademyMember(){
