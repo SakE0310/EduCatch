@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kosmo.educatch.dao.AcademyAddMapper;
 import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.ConvenienceVO;
 import com.kosmo.educatch.vo.SearchVO;
 
 @Service
@@ -21,6 +22,15 @@ public class AcademyAddServiceImpl implements AcademyAddService{
 	
 	@Autowired
 	private AcademyAddMapper academyAddMapper;
+	
+	
+	//카테고리 정보
+	public AcademyVO selectCategory(AcademyVO avo) {
+		log.info("AcademyAddServiceImpl.selectCategory >>> 시작");
+		log.info("AcademyAddServiceImpl.selectCategory >>> 끝");
+		
+		return academyAddMapper.selectCategory(avo);
+	}
 	
 	//학원 등록
 	@Override
@@ -36,12 +46,20 @@ public class AcademyAddServiceImpl implements AcademyAddService{
 		return nCnt;
 	}//end of insertAcademy
 	
-	//카테고리 정보
-	public AcademyVO selectCategory(AcademyVO avo) {
-		log.info("AcademyAddServiceImpl.selectCategory >>> 시작");
-		log.info("AcademyAddServiceImpl.selectCategory >>> 끝");
+
+	//학원 편의 기능
+	@Override
+	public int insertConveniece(ConvenienceVO param) {
+		log.info("AcademyAddServiceImpl insertConveniece >>> 시작 ");
 		
-		return academyAddMapper.selectCategory(avo);
+		int nCnt = 0;
+		
+		nCnt = academyAddMapper.insertConveniece(param);
+		log.info("nCnt >>> " + nCnt);
+		
+		log.info("AcademyAddServiceImpl insertConveniece >>> 끝 ");
+		return nCnt;
 	}
+	
 	
 }

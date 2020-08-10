@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.service.AcademyAddService;
 import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.ConvenienceVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -37,7 +38,8 @@ public class AcademyAddController {
 
 	// ----------------학원등록 페이지에서 학원등록 버튼 눌렀을때
 	@RequestMapping("insertAcademy")
-	public ModelAndView insertAcademy(@ModelAttribute AcademyVO avo, HttpServletRequest request) {
+	public ModelAndView insertAcademy(@ModelAttribute AcademyVO avo, ConvenienceVO cvo,
+			HttpServletRequest request) {
 		log.info("AcademyAddController insertAcademy >>> 시작");
 		
 		String ano = null;
@@ -54,6 +56,15 @@ public class AcademyAddController {
 		String cmajor = null;
 		String cminor = null;
 		String file = null;
+		
+		String academy_ano = null;
+		String acparking = null;
+		String acstore = null;
+		String acbus = null;
+		String acelevator = null;
+		String acstudyroom = null;
+		String aclounge = null;
+		String aclocker = null;
 		
 		
 		ModelAndView mav = new ModelAndView();
@@ -84,6 +95,15 @@ public class AcademyAddController {
 				cno=multi.getParameter("cno");
 				cmajor=multi.getParameter("cmajor");
 				cminor=multi.getParameter("cminor");
+				
+				academy_ano = multi.getParameter("academy_ano");
+				acparking = multi.getParameter("acparking");
+				acstore = multi.getParameter("acstore");
+				acbus = multi.getParameter("acbus");
+				acelevator = multi.getParameter("acelevator");
+				acstudyroom = multi.getParameter("acstudyroom");
+				aclounge = multi.getParameter("aclounge");
+				aclocker = multi.getParameter("aclocker");
 				
 				log.info("cmajor >>> " + cmajor);
 				log.info("cminor >>> " + cminor);
@@ -119,10 +139,27 @@ public class AcademyAddController {
 			cno = request.getParameter("cno");
 			cmajor = request.getParameter("cmajor");
 			cminor = request.getParameter("cminor");
+			
+			academy_ano = request.getParameter("academy_ano");
+			acparking = request.getParameter("acparking");
+			acstore = request.getParameter("acstore");
+			acbus = request.getParameter("acbus");
+			acelevator = request.getParameter("acelevator");
+			acstudyroom = request.getParameter("acstudyroom");
+			aclounge = request.getParameter("aclounge");
+			aclocker = request.getParameter("aclocker");
 		}
 		
 		log.info("cmajor >>> " + cmajor);
 		log.info("cminor >>> " + cminor);
+		log.info("academy_ano" + academy_ano);
+		log.info("acparking >>> " + acparking);
+		log.info("acstore >>> " + acstore);
+		log.info("acbus >>> " + acbus);
+		log.info("acelevator >>> " + acelevator);
+		log.info("acstudyroom >>> " + acstudyroom);
+		log.info("aclounge >>> " + aclounge);
+		log.info("aclocker >>> " + aclocker);
 
 		avo.setAno(ano);
 		avo.setAname(aname);
@@ -138,12 +175,31 @@ public class AcademyAddController {
 		avo.setCmajor(cmajor);
 		avo.setCminor(cminor);
 		
+		if(acparking !=null) {
+			cvo.setAcparking(acparking);
+		}else {
+			acparking = "N";
+			cvo.setAcparking(acparking);
+		}
+		cvo.setAcstore(acstore);
+		cvo.setAcbus(acbus);
+		cvo.setAcelevator(acelevator);
+		cvo.setAcstudyroom(acstudyroom);
+		cvo.setAclounge(aclounge);
+		cvo.setAclocker(aclocker);
+		
+		
 		AcademyVO vovo = academyAddService.selectCategory(avo);
 		
 		cno = vovo.getCno();
 		avo.setCategory_cno(cno);
 
 		int result = academyAddService.insertAcademy(avo);
+		cvo.setAcademy_ano(ano);
+		log.info("ano >>> " + ano);
+		log.info("academy_ano >>> " + academy_ano);
+		
+		int result2 = academyAddService.insertConveniece(cvo);
 		
 		if (result > 0) {
 			mav.addObject("resultStr", "등록 성공");
