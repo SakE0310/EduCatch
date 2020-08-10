@@ -44,5 +44,29 @@ public class ConsultServiceImpl implements ConsultService{
 		// TODO Auto-generated method stub
 		return consultMapper.insertConsult(param);
 	}
+
+	@Override
+	public ConsultVO selectConsult(String cbno) {
+		// TODO Auto-generated method stub
+		return consultMapper.selectConsult(cbno);
+	}
+
+	@Override
+	public ConsultVO selectUpdate1(String cbno) {
+		// TODO Auto-generated method stub
+		return consultMapper.selectUpdate1(cbno);
+	}
+
+	@Override
+	public int updateConsult(ConsultVO param) {
+		// TODO Auto-generated method stub
+		return consultMapper.updateConsult(param);
+	}
+
+	@Override
+	public int deleteConsult(String cbno) {
+		// TODO Auto-generated method stub
+		return consultMapper.deleteConsult(cbno);
+	}
 	
 }

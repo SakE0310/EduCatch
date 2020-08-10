@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.manager.LoggerManager;
+import com.kosmo.educatch.service.AcademyAddService;
 import com.kosmo.educatch.service.ReviewService;
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -27,6 +29,7 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
+
 
 	//전체조회
 	@RequestMapping("listReview.ec")
@@ -71,11 +74,11 @@ public class ReviewController {
 	
 	//글쓰기 버튼 눌렀을때
 	@RequestMapping("/insertDisplay.ec")
-	public ModelAndView insertDisplay(@ModelAttribute ReviewVO param) {
+	public ModelAndView insertDisplay(@ModelAttribute ReviewVO param,
+									  @ModelAttribute AcademyVO param1) {
 		
 		log.info("ReviewController insertDisplay >>> 호출 성공 ");
-		
-		
+		log.info(param1.getAname());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("community/reviewBoard/reviewInsert");
 		
@@ -182,11 +185,11 @@ public class ReviewController {
 	
 	//상세 조회
 	@RequestMapping("/selectReview.ec")
-	public ModelAndView selectReview(@RequestParam(value="rbno", required=false) String rbno) {
+	public ModelAndView selectReview(@ModelAttribute ReviewVO param) {
 		//value="rbno", required=false
 		log.info("ReviewController selectReview >>> 호출 성공");
 		
-		
+		String rbno=(String)param.getRbno();
 		ModelAndView mav=new ModelAndView();
 		
 		mav.addObject("ReviewVO", reviewService.selectReview(rbno));
@@ -272,8 +275,35 @@ public class ReviewController {
 		
 		return mav;
 	}
-	
-	
+
+	//학원리스트 조회
+	@RequestMapping("academyList.ec")
+	public ModelAndView academyList(@ModelAttribute AcademyVO param) {
+
+		log.info("ReviewController academyList >>> 호출성공");
+
+		
+		List<AcademyVO> list=reviewService.academyList(param);
+		log.info("list.size() >>> "+list.size());
+		
+		int listCnt = list.size();
+		
+		for(int i=0; i<listCnt; i++) {
+			AcademyVO avo=(AcademyVO)list.get(i);
+			
+			log.info("avo.getAno()		>>"+avo.getAno());
+			log.info("avo.getAname()	>>"+avo.getAname());
+		}
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("academyList", list);
+		mav.setViewName("community/reviewBoard/search_pop");
+		
+		log.info("mav >>> "+mav);
+		log.info("ReviewController academyList >>> 끝");
+		
+		return mav;
+	}
 
 	
 }

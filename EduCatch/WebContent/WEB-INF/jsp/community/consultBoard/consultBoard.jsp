@@ -1,3 +1,5 @@
+<%@page import="com.kosmo.educatch.vo.ConsultVO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -37,6 +39,15 @@
 	 
 </script>
 <body>
+<%
+	Object obj=request.getAttribute("listConsult");
+
+	if(obj !=null){
+		ArrayList listConsult=(ArrayList)obj;
+		
+		int nCnt=listConsult.size();
+	
+%>
 	<form id="consultForm" name="consultForm">
 		<input type="hidden" id="cbno" name="cbno"/>
 	</form>
@@ -70,22 +81,36 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:if test="${empty listConsult }">
+<%
+	for(int i=0; i<nCnt; i++){
+		ConsultVO cvo=(ConsultVO)listConsult.get(i);
+		
+		if(nCnt>0){
+	
+%>
+					<tr align="center">
+						<td><%= cvo.getCbno() %></td>
+						<td><%= cvo.getCbname() %></td>
+						<td><%= cvo.getAcademy_ano() %></td>
+						<td><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
+						<td><%= cvo.getCinsertdate() %></td>
+					</tr>
+<%
+				}	
+		}if(nCnt==0){
+		
+%>	
 					<tr>
 						<td colspan="7" align="center">
 						등록된 게시물이 없습니다.
 						</td>
 					</tr>
-				</c:if>
-			<c:forEach items="${listConsult}" var="row">
-					<tr align="center">
-						<td>${row.cbno }</td>
-						<td>${row.cbname }</td>
-						<td>${row.academy_ano }</td>
-						<td><a href="selectReview.ec?rbno=${row.cbno }"  id="aa">${row.cbsubject }</a></td>
-						<td>${row.cinsertdate }</td>
-					</tr>
-				</c:forEach>			
+<%
+		}
+			
+		}	
+	
+%>			
 			</tbody>
 		</table>
 	</div>

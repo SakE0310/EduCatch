@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.service.ConsultService;
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConsultVO;
 import com.kosmo.educatch.vo.ReviewVO;
 
@@ -91,6 +93,104 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		
 		log.info("ConsultController insertConsult >>> 끝");
 		return mav;
+		
+	}
+	
+	//상담 상세 조회
+	@RequestMapping("selectConsult")
+	public ModelAndView selectConsult(@ModelAttribute ConsultVO param) {
+		
+		log.info("ConsultController selectConsult >>> 호출 성공");
+		
+		String cbno=(String)param.getCbno();
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("ConsultVO", consultService.selectConsult(cbno));
+		mav.setViewName("community/consultBoard/detailConsult");
+		
+		log.info("ConsultController selectConsult >>> 끝");
+		
+		return mav;
+		
+	}
+	
+	
+	//상담 수정 조회
+	@RequestMapping("selectUpdate1")
+	public ModelAndView selectUpdate1(@ModelAttribute ConsultVO param) {
+		
+		log.info("ConsultController selectUpdate1 >>> 호출 성공");
+		
+		String cbno=(String)param.getCbno();
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("ConsultVOO", consultService.selectUpdate1(cbno));
+		mav.setViewName("community/consultBoard/updateConsult");
+		
+		log.info("ConsultController selectUpdate1 >>> 끝");
+		
+		return mav;
+		
+	}
+	
+	//수정 버튼 눌렀을 떄
+	@RequestMapping("updateConsult")
+	public ModelAndView updateConsult(@ModelAttribute ConsultVO param) {
+		log.info("ConsultController updateConsult >>> 호출 성공");
+		String resultStr="";
+		int nCnt=consultService.updateConsult(param);
+		
+		ModelAndView mav=new ModelAndView();
+		if(nCnt>0) {
+			resultStr="update";
+			log.info("수정 완료");
+			mav.addObject("ConsultVOO", param);
+		}else {
+			resultStr="update";
+			log.info("수정 실패");
+		}
+		mav.addObject("result", resultStr);
+		mav.setViewName("community/consultBoard/result");
+		
+		log.info("ConsultController updateConsult >>> 끝");
+		
+		return mav;
+	}
+		
+		
+	//삭제 버튼 눌렀을 때
+	@RequestMapping("deleteConsult")
+	public ModelAndView deleteConsult(@ModelAttribute ConsultVO param) {
+		
+		log.info("ConsultController deleteConsult >>> 호출 성공");		
+		
+		String resultStr="";
+		String isSuccess="";
+		String cbno=(String)param.getCbno();
+		
+		int nCnt=consultService.deleteConsult(cbno);
+		
+		ModelAndView mav=new ModelAndView();
+		
+		if(nCnt>0) {
+			resultStr = "delete";
+			isSuccess="true";
+			log.info("삭제완료");
+			
+		}else {
+			resultStr = "delete";
+			isSuccess="false";
+			log.info("삭제실패");
+		}
+		
+		mav.addObject("result", resultStr);
+		mav.addObject("isSuccess", isSuccess);
+		mav.setViewName("community/consultBoard/result");
+		
+		log.info("ConsultController deleteConsult >>> 끝");	
+		
+		return mav;
+		
 		
 	}
 

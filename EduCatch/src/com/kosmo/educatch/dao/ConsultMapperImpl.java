@@ -22,4 +22,28 @@ public class ConsultMapperImpl extends SqlSessionDaoSupport implements ConsultMa
 		return getSqlSession().insert("insertConsult");
 	}
 
+	@Override
+	public ConsultVO selectConsult(String cbno) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("selectConsult");
+	}
+
+	@Override
+	public ConsultVO selectUpdate1(String cbno) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("selectUpdate1");
+	}
+
+	@Override
+	public int updateConsult(ConsultVO param) {
+		// TODO Auto-generated method stub
+		return getSqlSession().update("updateConsult");
+	}
+
+	@Override
+	public int deleteConsult(String cbno) {
+		// TODO Auto-generated method stub
+		return getSqlSession().update("deleteConsult");
+	}
+
 }

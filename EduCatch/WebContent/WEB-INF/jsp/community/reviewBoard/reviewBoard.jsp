@@ -105,17 +105,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:if test="${empty listReview }">
-					<tr>
-						<td colspan="7" align="center">
-						등록된 게시물이 없습니다.
-						</td>
-					</tr>
-				</c:if>
 <%
 
 		for(int i=0; i<nCnt; i++){
 			ReviewVO rvo=(ReviewVO)listReview.get(i);
+			
+			if(nCnt>0){
 		
 %>
 
@@ -129,6 +124,15 @@
 						<td><input type="button" value="[수정/삭제]"
 						onclick="updatePopup('${row.rbno}')"/></td>
 						-->
+					</tr>
+<%
+		}
+	}if(nCnt==0){
+%>
+					<tr>
+						<td colspan="7" align="center">
+						등록된 게시물이 없습니다.
+						</td>
 					</tr>
 <%
 		}

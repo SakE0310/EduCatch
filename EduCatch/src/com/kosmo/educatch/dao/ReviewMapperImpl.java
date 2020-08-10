@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ReviewVO;
 
 public class ReviewMapperImpl extends SqlSessionDaoSupport implements ReviewMapper{
@@ -52,6 +53,12 @@ public class ReviewMapperImpl extends SqlSessionDaoSupport implements ReviewMapp
 	public int deleteReview(String rbno) {
 		// TODO Auto-generated method stub
 		return getSqlSession().update("deleteReview");
+	}
+
+	@Override
+	public List<AcademyVO> academyList(AcademyVO param) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("academyList");
 	}
 	
 }

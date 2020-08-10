@@ -1,3 +1,4 @@
+<%@page import="com.kosmo.educatch.vo.ConsultVO"%>
 <%@page import="com.kosmo.educatch.vo.ReviewVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -26,7 +27,7 @@
 	$(function() {
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
-			elPlaceHolder : "rbcontent", //textarea에서 지정한 id와 일치해야 합니다. 
+			elPlaceHolder : "cbcontent", //textarea에서 지정한 id와 일치해야 합니다. 
 			//SmartEditor2Skin.html 파일이 존재하는 경로
 			sSkinURI : "/EduCatch/assets/dist/SmartEditor2Skin.html",
 			htParams : {
@@ -41,15 +42,15 @@
 			},
 			fOnAppLoad : function() {
 				//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-				oEditors.getById["rbcontent"].exec("PASTE_HTML", [ "" ]);
+				oEditors.getById["cbcontent"].exec("PASTE_HTML", [ "" ]);
 			},
 			fCreator : "createSEditor2"
 		});
 		//저장버튼 클릭시 form 전송
 		$("#save").click(function() {
-			alert("<<<>>>");
-			oEditors.getById["rbcontent"].exec("UPDATE_CONTENTS_FIELD", []);
-			$("#edit").attr("action","updateReview.ec");
+			alert("수정하시겠습니까?");
+			oEditors.getById["cbcontent"].exec("UPDATE_CONTENTS_FIELD", []);
+			$("#edit").attr("action","updateConsult.ec");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
 		});
@@ -58,43 +59,29 @@
 </script>
 <body>
 <%
-	Object obj=request.getAttribute("ReviewVOO");
+	Object obj=request.getAttribute("ConsultVOO");
 	
-	ReviewVO rvo=(ReviewVO)obj;
+	ConsultVO cvo=(ConsultVO)obj;
 %>
 <!-- action/document/location -->
 	<form id="edit">
-	<input type="hidden" id="rbno" name="rbno" value="<%= rvo.getRbno()%>"/>
+	<input type="hidden" id="cbno" name="cbno" value="<%= cvo.getCbno()%>"/>
 		<table style="margin-left: auto; margin-right: auto; width: 50%" border="1">
 			<tr>
 				<td style="width: 100px">제목</td>
-				<td><input type="text" id="rbsubject" name="rbsubject" value="<%= rvo.getRbsubject() %>"
+				<td><input type="text" id="cbsubject" name="cbsubject" value="<%= cvo.getCbsubject() %>"
 					style="width: 98%" /></td>
 			</tr>
 			<tr>
-				<td style="width: 100px">평점</td>
-				<td>
-					<input type="text" id="rbgrade" name="rbgrade" value="<%= rvo.getRbgrade() %>"
-					style="width: 98%" />
-				</td>
-			</tr>
-			<tr>
 				<td style="width: 100px">학원명</td>
-				<td><input type="text"  id="academy_ano" name="academy_ano" value="<%= rvo.getAcademy_ano() %>"
+				<td><input type="text"  id="academy_ano" name="academy_ano" value="<%= cvo.getAcademy_ano() %>"
 					style="width: 98%" />
 				</td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea name="rbcontent" id="rbcontent" title="내용" 
-						style="width: 100%; height: 400px; padding: 0; margin: 0;"><%= rvo.getRbcontent() %></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td>첨부파일</td>
-				<td>
-					<img src="/EduCatch/assets/img/reviewImg/<%= rvo.getRbimg() %>" border=() width="100" height="100"/><br>
-					<input type="file" value="찾아보기" id="rbimg" name="rbimg" /><br> 
+				<td><textarea name="cbcontent" id="cbcontent" title="내용" 
+						style="width: 100%; height: 400px; padding: 0; margin: 0;"><%= cvo.getCbcontent() %></textarea>
 				</td>
 			</tr>
 			<tr>

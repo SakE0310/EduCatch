@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kosmo.educatch.dao.ReviewMapper;
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ReviewVO;
 
 @Service
@@ -71,6 +72,16 @@ public class ReviewServiceImpl implements ReviewService{
 	public int deleteReview(String rbno) {
 		// TODO Auto-generated method stub
 		return reviewMapper.deleteReview(rbno);
+	}
+
+	//학원명 조회
+	@Override
+	public List<AcademyVO> academyList(AcademyVO param) {
+		// TODO Auto-generated method stub
+		List<AcademyVO> list=new ArrayList<AcademyVO>();
+		list=reviewMapper.academyList(param);
+
+		return list;
 	}
 	
 	

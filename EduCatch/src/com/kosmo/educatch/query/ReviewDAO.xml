@@ -4,6 +4,7 @@
 						
 <mapper namespace = "com.kosmo.educatch.dao.ReviewMapper">
 	<select id="listReview" parameterType="review" resultType="review">
+		SELECT * FROM(
 		SELECT      A.RBNO              AS RBNO,
 		            A.RBSUBJECT         AS RBSUBJECT,
 		            A.RBNAME            AS RBNAME,
@@ -14,10 +15,15 @@
 		            A.RBGRADE           AS RBGRADE,
 		            A.RBDELETEYN        AS RBDELETEYN,
 		            TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD')      AS RBINSERTDATE,
-		            TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')      AS RBUPDATEDATE
-		FROM REVIEWBOARD A
+		            TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')      AS RBUPDATEDATE,
+		            CEIL(ROW_NUMBER() OVER(ORDER BY A.RBNO DESC)/P.PAGESIZE) PAGENO,
+		            COUNT(A.RBNO) OVER() AS TOTALCOUNT
+		FROM REVIEWBOARD A, PAGING P
 		WHERE RBDELETEYN = 'N'
+		AND   PNO='P002'
 		ORDER BY 1 DESC
+		)
+		WHERE PAGENO=1
 	</select>
 	
 	
@@ -42,41 +48,57 @@
 		    RBINSERTDATE,
 		    RBUPDATEDATE
 		)
-		VALUES(#{rbno, jdbcType=VARCHAR},#{rbsubject,jdbcType=VARCHAR},#{rbname, jdbcType=VARCHAR},
-			   #{rbimg, jdbcType=VARCHAR},#{rbcontent, jdbcType=VARCHAR},#{academy_ano, jdbcType=VARCHAR},
-			   #{member_mno, jdbcType=VARCHAR},#{rbgrade, jdbcType=VARCHAR},'N',
-			   SYSDATE,SYSDATE)
+		VALUES(#{rbno, jdbcType=VARCHAR},
+			   #{rbsubject,jdbcType=VARCHAR},
+			   #{rbname, jdbcType=VARCHAR},
+			   #{rbimg, jdbcType=VARCHAR},
+			   #{rbcontent, jdbcType=VARCHAR},
+			   #{academy_ano, jdbcType=VARCHAR},
+			   #{member_mno, jdbcType=VARCHAR},
+			   #{rbgrade, jdbcType=VARCHAR},
+			   'N',
+			   SYSDATE,
+			   SYSDATE)
 	</insert>
 	<!-- 게시물 상세 보기 -->
 	<select id="selectReview" parameterType="String" resultType="review">
-		SELECT 
-				RBNO,
-		        RBSUBJECT,
-		        RBNAME,
-		        RBIMG,
-		        RBCONTENT,
-		        RBGRADE,
-		        TO_CHAR(RBINSERTDATE, 'YYYY-MM-DD') AS RBINSERTDATE
-		FROM REVIEWBOARD
-		WHERE RBNO=#{rbno, jdbcType=VARCHAR}
+		SELECT      A.RBNO              AS RBNO,
+		            A.RBSUBJECT         AS RBSUBJECT,
+		            A.RBNAME            AS RBNAME,
+		            A.RBIMG             AS RBIMG,
+		            A.RBCONTENT         AS RBCONTENT,
+		            A.ACADEMY_ANO       AS ACADEMY_ANO,
+		            A.MEMBER_MNO        AS MEMBER_MNO,
+		            A.RBGRADE           AS RBGRADE,
+		            A.RBDELETEYN        AS RBDELETEYN,
+		            TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD')      AS RBINSERTDATE,
+		            TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')      AS RBUPDATEDATE
+		FROM REVIEWBOARD A
+        WHERE   RBNO=#{rbno, jdbcType=VARCHAR}	
 	</select>
 	<!-- 수정 상세 보기 -->
 	<select id="selectUpdate" parameterType="String" resultType="review">
-		SELECT 
-				RBNO,
-		        RBSUBJECT,
-		        RBNAME,
-		        RBIMG,
-		        RBCONTENT,
-		        RBGRADE,
-		        TO_CHAR(RBINSERTDATE, 'YYYY-MM-DD') AS RBINSERTDATE
-		FROM REVIEWBOARD
-		WHERE RBNO=#{rbno, jdbcType=VARCHAR}
+		SELECT      A.RBNO              AS RBNO,
+		            A.RBSUBJECT         AS RBSUBJECT,
+		            A.RBNAME            AS RBNAME,
+		            A.RBIMG             AS RBIMG,
+		            A.RBCONTENT         AS RBCONTENT,
+		            A.ACADEMY_ANO       AS ACADEMY_ANO,
+		            A.MEMBER_MNO        AS MEMBER_MNO,
+		            A.RBGRADE           AS RBGRADE,
+		            A.RBDELETEYN        AS RBDELETEYN,
+		            TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD')      AS RBINSERTDATE,
+		            TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')      AS RBUPDATEDATE
+		FROM REVIEWBOARD A
+		WHERE   RBNO=#{rbno, jdbcType=VARCHAR}	
 	</select>
 	<update id="updateReview" parameterType="review">
 		UPDATE REVIEWBOARD
 		SET RBSUBJECT =#{rbsubject, jdbcType=VARCHAR},
-		    RBCONTENT =#{rbcontent, jdbcType=VARCHAR}
+		    RBCONTENT =#{rbcontent, jdbcType=VARCHAR},
+		    RBGRADE=#{rbgrade, jdbcType=VARCHAR}, 
+		    ACADEMY_ANO=#{academy_ano, jdbcType=VARCHAR},
+		    RBIMG=#{rbimg, jdbcType=VARCHAR}
 		WHERE RBNO=#{rbno, jdbcType=VARCHAR}
 	</update>
 	<update id="deleteReview" parameterType="review">
@@ -85,4 +107,12 @@
 		WHERE RBNO=#{rbno, jdbcType=VARCHAR}
 	    AND RBDELETEYN = 'N'
 	</update>
+	<select id="academyList" parameterType="academyview" resultType="academyview">
+		SELECT
+		     ANO,
+		     ANAME 
+		FROM 
+		      ACADEMY
+		WHERE ANAME LIKE '%' ||#{aname, jdbcType=VARCHAR}||'%'
+	</select>
 </mapper>

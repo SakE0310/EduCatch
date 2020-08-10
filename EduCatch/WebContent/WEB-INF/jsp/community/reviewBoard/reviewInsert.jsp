@@ -1,3 +1,4 @@
+<%@page import="com.kosmo.educatch.vo.AcademyVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -72,6 +73,19 @@
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
 		});
+
+		
+		
+		$("#searchAcademy").click(function(){
+			
+			alert("searchAcademy >>>");
+			window.open("","pop","width=480 height=250");
+			$("#edit").attr("action","academyList.ec");
+			$("#edit").attr("target","pop");
+			$("#edit").attr("method","POST");
+			$("#edit").submit();
+			
+		});
 		
 		$('.starRev span').click(function(){
 			  $(this).parent().children('span').removeClass('on');
@@ -109,11 +123,11 @@
 			</tr>
 			<tr>
 				<td style="width: 100px">학원명</td>
-				<td><input type="text"  id="academy_ano" name="academy_ano"
-					style="width: 98%" />
+				<td><input type="text"  id="aname" name="aname"
+					style="width: 90%" />
+					<input type="button" id="searchAcademy" value="검색" />
 				</td>
 			</tr>
-
 			<tr>
 				<td>내용</td>
 				<td><textarea name="rbcontent" id="rbcontent" title="내용"

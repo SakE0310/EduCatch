@@ -1,5 +1,6 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.kosmo.educatch.vo.ReviewVO"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.kosmo.educatch.vo.ReviewVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,6 +33,15 @@
 			
 			alert("deleteData >>>");
 			$("#ReviewForm").attr("action","deleteReview.ec");
+			$("#ReviewForm").attr("method","POST");
+			$("#ReviewForm").submit();
+			
+		});
+	
+		$("#listData").click(function(){
+			
+			alert("listData >>>");
+			$("#ReviewForm").attr("action","listReview.ec");
 			$("#ReviewForm").attr("method","POST");
 			$("#ReviewForm").submit();
 			
@@ -69,6 +79,9 @@
 					<th><span class="required">*</span>작성자</th>
 					<td><div><%= rvo.getRbname() %></div></td>
 				</tr>
+<%
+			if(rvo.getRbimg() !=null && rvo.getRbimg().length()>0){
+%>
 				<tr>
 					<th><span class="required">*</span>사진</th>
 					<td>
@@ -77,6 +90,18 @@
 	         		</div>
 					</td>
 				</tr>
+<%
+			}else{
+%>	
+				<tr>
+					<th><span class="required">*</span>사진</th>
+					<td>
+					<div id ="rbimg" name="rbimg" align="center"></div>
+					</td>
+				</tr>
+<% 			
+		}
+%>
 				<tr>
 					<th><span class="required">*</span>내용</th>
 					<td><div><%= rvo.getRbcontent() %></div></td>
@@ -104,6 +129,9 @@
 				<td>
 					<input type="button" id="deleteData" value="삭제" />
 				</td>
+				<td>
+					<input type="button" id="listData" value="목록" />
+				</td>
 
 			</tr>
 <%
@@ -111,6 +139,7 @@
 	}
 %>
 		</table>
+
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>
