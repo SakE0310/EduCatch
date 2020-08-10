@@ -52,4 +52,5 @@
 					        SYSDATE
 					)
 	</insert>
+
 </mapper>

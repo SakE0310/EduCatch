@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.kosmo.educatch.vo.SubjectVO"%>
-<%@page import="com.kosmo.educatch.vo.AcademyVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -284,16 +283,26 @@ html, body {
 </style>
 </head>
 <body>
+<%
+		Object obj = request.getAttribute("svo");
+	
+		if(obj != null){
+
+			SubjectVO svo = (SubjectVO)obj;
+					
+			double AXPOINT = Double.parseDouble(svo.getAxpoint());
+			double AYPOINT = Double.parseDouble(svo.getAypoint());
+			String address = svo.getAaddr1() + "" + svo.getAaddr2();
+					
+%>
 
 <!--  학원정보  -->
 <div align="center">
-<c:forEach items="${avo }" var="avo">
-	<h3>학원 이름 : ${avo.aname }</h3>
-	학원주소 : ${avo.aaddr1 } ${avo.aaddr2 }<br>
-	전화번호 : ${avo.atel }<br>
+	<h3>학원 이름 : <%=svo.getAname() %></h3>
+	학원주소 : <%=address %><br>
+	전화번호 : <%=svo.getAtel() %><br>
 
 	평점 : REVIEWBOARD.RBGRADE<br>
-</c:forEach>
 </div>
 	<div align="center">
 		<div class="map_wrap">
@@ -317,26 +326,9 @@ html, body {
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>
 		<script>
-		<%
-		Object obj = request.getAttribute("avo");
-	
-		if(obj != null){
-			ArrayList aList = (ArrayList)obj;
-			int nCnt = aList.size();
-			
-			if(aList !=null && nCnt > 0 ){
-				
-				for(int i=0; i < nCnt; i++){
-					AcademyVO avo = (AcademyVO)aList.get(i);
-					
-					double AXPOINT = Double.parseDouble(avo.getAxpoint());
-					double AYPOINT = Double.parseDouble(avo.getAypoint());
-					
-		%>
-		
 			var container = document.getElementById('map');
 			var options = {
-				center : new kakao.maps.LatLng(<%= AXPOINT %>, <%= AYPOINT %>),
+				center : new kakao.maps.LatLng(<%= AYPOINT %>, <%= AXPOINT %>),
 				level : 3
 			};
 	
@@ -346,7 +338,7 @@ html, body {
 			// markers 배열로 두어 marker 들을 넣음
 			var markers = [];
 			var marker = new kakao.maps.Marker({
-				position : new kakao.maps.LatLng(<%= AXPOINT %>, <%= AYPOINT %>)
+				position : new kakao.maps.LatLng(<%= AYPOINT %>, <%= AXPOINT %>)
 			});
 			
 			markers.push(marker);
@@ -389,26 +381,20 @@ html, body {
 			var content = '<div class="wrap">' + 
 			            '    <div class="info">' + 
 			            '        <div class="title">' + 
-			            '          <%= avo.getAname()%>  ' + 
+			            '          <%= svo.getAname()%>  ' + 
 			            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
 			            '        </div>' + 
 			            '        <div class="body">' + 
 			            '            <div class="img">' +
-			            '                <img src="/EduCatch/assets/img/<%= avo.getAlogo() %>" border=0 width="73" height="70" >' +
+			            '                <img src="/EduCatch/assets/img/academyLogo/<%= svo.getAlogo() %>" border=0 width="73" height="70" >' +
 			            '           </div>' + 
 			            '            <div class="desc">' + 
-			            '                <div class="ellipsis"><%= avo.getAaddr1()%><%= avo.getAaddr2() %> </div>' + 
-			            '                <div class="jibun ellipsis">(우)<%= avo.getAaddrno()%> </div> '+ 
+			            '                <div class="ellipsis"><%= svo.getAaddr1()%><%= svo.getAaddr2() %> </div>' + 
+			            '                <div class="jibun ellipsis">(우)<%= svo.getAaddrno()%> </div> '+ 
 			            '            </div>' + 
 			            '        </div>' + 
 			            '    </div>' +    
 			            '</div>';
-			
-			<%
-							}
-						}
-					}
-			%>
 			// 마커 위에 커스텀오버레이를 표시합니다
 			// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
 			var overlay = new kakao.maps.CustomOverlay({
@@ -445,42 +431,38 @@ html, body {
 	
 	<!-- 학원정보 -->
 	<div id="tab-1" class="tab-content current">
-	<c:forEach items="${avo }" var="avo">
 	
 		ACADEMY<br>
-		학원이름  : ${avo.aname }<br>
-		전화번호 : ${avo.atel }<br>
-		우편번호 : ${avo.aaddrno }<br>
-		주소 : ${avo.aaddr1 } ${avo.aaddr2 }<br>
+		학원이름  : <%= svo.getAname()%> <br>
+		전화번호 : <%=svo.getAtel() %> <br>
+		우편번호 : <%=svo.getAaddrno() %> <br>
+		주소 : <%= address%> <br>
 		<br>
-		게시일 : ${avo.ainsertdate }<br>
-		수정일 : ${avo.aupdatedate }<br>
+		게시일 : <%= svo.getAinsertdate()%><br>
+		수정일 : <%= svo.getAupdatedate()%><br>
 		
-	</c:forEach>
 	</div>
 	
 	<!-- 과목정보 -->
 	<div id="tab-2" class="tab-content">
-	<c:forEach items="${svo }" var="svo">
-	
 		SUBJECT<br>
-		과목명 : ${svo.sname }<br>
-		수강 날짜 : ${svo.sday }<br>
-		수강시간 : ${svo.stime }<br>
-		수강인원 : ${svo.speople }<br>
-		수강료 : ${svo.sprice }<br>
+		과목명 : <%=svo.getSname() %><br>
+		수강 날짜 : <%=svo.getSday() %><br>
+		수강시간 : <%=svo.getStime() %><br>
+		수강인원 : <%=svo.getSpeople() %><br>
+		수강료 : <%=svo.getSprice() %><br>
 		<br>
-		게시일 : ${svo.sinsertdate }<br>
-		수정일 : ${svo.supdatedate }
-		
-	</c:forEach>
+		게시일 : <%= svo.getSinsertdate()%><br>
+		수정일 : <%= svo.getSupdatedate()%>
 	</div>
 	
 	<div id="tab-3" class="tab-content">
 		REVIEWBOARD<br>
 		후기게시판 불러오기
 	</div>
-
+<%
+		}
+%>
 </div>
 </body>
 </html>

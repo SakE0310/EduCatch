@@ -2,36 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosmo.educatch.dao.DetailViewMapper">
-
-	<select id="academyViewList" parameterType="academyview" resultType="academyview">
-		SELECT 
-			A.ANO AS ANO, 
-			A.ANAME AS ANAME, 
-			A.ATEL AS ATEL, 
-			A.AXPOINT AS AXPOINT,
-            A.AYPOINT AS AYPOINT,
-            A.AADDRNO AS AADDRNO,
-            A.AADDR1 AS AADDR1,
-            A.AADDR2 AS AADDR2,
-            A.ALOGO AS ALOGO,
-			TO_CHAR(AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
-			TO_CHAR(AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
-		FROM	ACADEMY A
-	</select>
 	
-	<select id="subjectViewList" parameterType="subjectview" resultType="subjectview">
-		SELECT 
-			A.SNO AS SNO, 
-			A.SNAME AS SNAME, 
-			A.SDAY AS SDAY, 
-			A.STIME AS STIME,
-            A.SPEOPLE AS SPEOPLE,
-            A.SPRICE AS SPRICE,
-            A.ACADEMY_ANO AS ACADEMY_ANO,
-            A.SDELETEYN AS SDELETEYN,
-			TO_CHAR(SINSERTDATE,'YYYY-MM-DD') AS SINSERTDATE, 
-			TO_CHAR(SUPDATEDATE,'YYYY-MM-DD') AS SUPDATEDATE
-		FROM	SUBJECT A
+	<select id="DetailViewList" parameterType="String" resultType="subjectview">
+		
+		SELECT
+			    A.SNO,
+			    A.SNAME,
+			    A.SDAY,
+			    A.STIME,
+			    A.SPEOPLE,
+			    A.SPRICE,
+			    A.ACADEMY_ANO,
+			    A.SDELETEYN,
+			    TO_CHAR(A.SINSERTDATE,'YYYY-MM-DD') AS SINSERTDATE, 
+			    TO_CHAR(A.SUPDATEDATE,'YYYY-MM-DD') AS SUPDATEDATE,
+			    B.ANO,
+			    B.ANAME,
+			    B.ATEL,
+			    B.AXPOINT,
+			    B.AYPOINT,
+			    B.AADDRNO,
+			    B.AADDR1,
+			    B.AADDR2,
+			    B.ALOGO,
+			    B.CATEGORY_CNO,
+			    B.ADELETEYN,
+			    TO_CHAR(B.AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
+			    TO_CHAR(B.AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
+		FROM 
+				SUBJECT A , ACADEMY B
+		WHERE A.ACADEMY_ANO = B.ANO
+		AND A.SDELETEYN = 'N'
+		AND B.ADELETEYN = 'N'
+		AND ANO='A00001'
+		ORDER BY 1 DESC
 	</select>
 	
 </mapper>

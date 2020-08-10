@@ -22,19 +22,18 @@ public class DetailViewController {
 
 	// 상세조회
 	@RequestMapping("listDetailView")
-	public ModelAndView listDetailView(@ModelAttribute AcademyVO avo, SubjectVO svo) {
+	public ModelAndView listDetailView(@ModelAttribute SubjectVO param) {
 		ModelAndView mav = new ModelAndView();
-		log.info("listDetailView listDetailView 시작 >>>> ");
-
-		List<AcademyVO> academylist = detailViewService.academyViewList(avo);
-		log.info("DetailViewController listDetailView list >>> : " + academylist);
 		
-		List<SubjectVO> subjectlist = detailViewService.subjectViewList(svo);
-		log.info("DetailViewController listDetailView list >>> : " + subjectlist);
+		//String sno = param.getSno();
+		String sno = "1";
+		log.info("sno >>> " + sno);
+		
+		SubjectVO svo = detailViewService.DetailViewList(sno);
+		
 
 
-		mav.addObject("avo", academylist);
-		mav.addObject("svo", subjectlist);
+		mav.addObject("svo", svo);
 		mav.setViewName("search/detailView");
 		log.info("DepartmentController listDepartment mav >>> : " + mav);
 		

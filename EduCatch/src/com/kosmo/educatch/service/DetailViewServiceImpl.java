@@ -20,28 +20,17 @@ public class DetailViewServiceImpl implements DetailViewService {
 	@Autowired
 	private DetailViewMapper detailViewMapper;
 
-	// 학원정보
+	// 학원정보,과목정보
 	@Override
-	public List<AcademyVO> academyViewList(AcademyVO param) {
-		List<AcademyVO> list = new ArrayList<AcademyVO>();
-		list = detailViewMapper.academyViewList(param);
+	public SubjectVO DetailViewList(String sno) {
+		log.info("DetailViewServiceImpl DetailViewList 시작 >>>> ");
+		SubjectVO svo = new SubjectVO();
+		svo = detailViewMapper.DetailViewList(sno);
+		log.info("svo >>> " + svo);
 
-		log.info("DetailViewServiceImpl academyviewlist >>>> ");
-		log.info("DetailViewServiceImpl academyviewlist param >>>> " + param);
+		log.info("DetailViewServiceImpl DetailViewList 끝 >>>> ");
 
-		return list;
-	}
-
-	// 과목정보
-	@Override
-	public List<SubjectVO> subjectViewList(SubjectVO param) {
-		List<SubjectVO> list = new ArrayList<SubjectVO>();
-		list = detailViewMapper.subjectViewList(param);
-
-		log.info("DetailViewServiceImpl subjectviewlist >>>> ");
-		log.info("DetailViewServiceImpl subjectviewlist param >>>> " + param);
-
-		return list;
+		return svo;
 	}
 
 }

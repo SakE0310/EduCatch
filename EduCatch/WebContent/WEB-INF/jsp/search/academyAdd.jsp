@@ -221,6 +221,13 @@ function ajaxGetMinor(param){
 									</select>
 								</div>
 							</div>
+							
+							<div class="mt-10">
+									<input type="checkbox" id="jb-checkbox" class="custom-control-input">
+									<label class="custom-control-label" for="jb-checkbox"></label>
+							</div>
+							
+							
 							<div class="row">
 								<div class="mt-10 col">
 									<input type="text" name="aaddrno" id="aaddrno" placeholder="우편번호(도로명주소)"

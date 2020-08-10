@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.ConvenienceVO;
 
 public class AcademyAddMapperImpl extends SqlSessionDaoSupport implements AcademyAddMapper {
 
@@ -23,6 +24,12 @@ public class AcademyAddMapperImpl extends SqlSessionDaoSupport implements Academ
 		log.info("AcademyAddMapperImpl.selectCategory >>>");
 		return getSqlSession().selectOne("selectCategory");
 	}//end of selectCategory
+	
+	//학원 편의 기능
+	public int insertConveniece(ConvenienceVO param) {
+		int nCnt = getSqlSession().insert("AcademyAddMapper.insertConveniece", param);
+		return nCnt;
+	}
 	
 	
 
