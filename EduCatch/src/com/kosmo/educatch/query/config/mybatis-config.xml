@@ -13,5 +13,6 @@
 		<typeAlias type="com.kosmo.educatch.vo.ConsultVO" alias="consult"/>
 		<typeAlias type="com.kosmo.educatch.vo.EventVO" alias="event"/>
 		<typeAlias type="com.kosmo.educatch.vo.ConvenienceVO" alias="convenience"/>
+		<typeAlias type="com.kosmo.educatch.vo.PagingVO" alias="paging"/>
 	</typeAliases>
 </configuration>
