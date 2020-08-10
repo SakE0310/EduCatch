@@ -1,3 +1,4 @@
+<%@page import="com.kosmo.educatch.vo.PagingVO"%>
 <%@page import="com.kosmo.educatch.vo.ReviewVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

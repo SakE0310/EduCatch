@@ -1,6 +1,6 @@
 package com.kosmo.educatch.vo;
 
-public class ReviewVO {
+public class ReviewVO extends PagingVO{
 	
 	private String rbno;
 	private String rbsubject;

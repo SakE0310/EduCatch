@@ -18,6 +18,7 @@ import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.AcademyAddService;
 import com.kosmo.educatch.service.ReviewService;
 import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.PagingVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -33,12 +34,22 @@ public class ReviewController {
 
 	//전체조회
 	@RequestMapping("listReview.ec")
-	public ModelAndView listReview(@ModelAttribute ReviewVO param) {
+	public ModelAndView listReview(@ModelAttribute ReviewVO param,
+								   HttpServletRequest request) {
 
 		log.info("ReviewController listReview >>> 호출성공");
 		log.info(param);
 		log.info(param.getMember_mno());
 		log.info(param.getRbcontent());
+
+		String pagesize="5";
+		String groupsize="5";
+		String curpage="1";
+		String totalcount="0";
+		
+		if(request.getParameter("curpage") !=null) {
+			curpage=request.getParameter("curpage");
+		}
 
 		
 		List<ReviewVO> list=reviewService.listReview(param);
