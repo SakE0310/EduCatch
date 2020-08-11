@@ -27,7 +27,8 @@
 			$("#loginForm").submit();
 		
 		});
-			
+		
+
 			
 	});
 		
@@ -135,13 +136,13 @@
 	     				
 	     			<div class = "snslogin" align = "center">	
 	     			 		
-	     			 		<img src = "/EduCatch/assets/img/login/naver.png" alt = "naver">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	     			 		<a href ="https://www.naver.com"><img src = "/EduCatch/assets/img/login/naver.png" alt = "naver" id = "naver"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								
-							<img src = "/EduCatch/assets/img/login/facebook.png" alt = "facebook">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href ="https://www.facebook.com"><img src = "/EduCatch/assets/img/login/facebook.png" alt = "facebook" id ="facebook"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								
-							<img src = "/EduCatch/assets/img/login/kakao.png" alt = "kakao">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href ="#"><img src = "/EduCatch/assets/img/login/kakao.png" alt = "kakao" id = "kakao"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								
-							<img src = "/EduCatch/assets/img/login/google.png" alt = "goole">
+							<a href ="https://www.google.co.kr"><img src = "/EduCatch/assets/img/login/google.png" alt = "google" id= "google"></a>
 							
 	     			
 	     			</div>
