@@ -3,22 +3,78 @@
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "com.kosmo.educatch.dao.NoticeMapper">
 
+	<!-- 공지사항 검색 + 페이징 -->
+	<select id="searchNotice" parameterType="notice" resultType="notice">
+	SELECT * FROM(
+            SELECT 
+                        A.NNO                   AS NNO              					-- 공지사항 글번호
+                        ,A.NSUBJECT             AS NSUBJECT        						-- 공지사항 제목
+                        ,A.NNAME                AS NNAME            					-- 공지사항 작성자
+                        ,A.NIMG                 AS NIMG             					-- 공자사항 이미지
+                        ,A.NCONTENT             AS NCONTENT         					-- 공지사항 내용
+                        ,A.NDELETEYN							AS NDELETEYN			-- 공지사항 삭제여부
+                        ,TO_CHAR(A.NINSERTDATE,'YYYY-MM-DD')    AS NINSERTDATE			-- 공비사항 등록일자
+                        ,TO_CHAR(A.NUPDATEDATE,'YYYY-MM-DD')          AS NUPDATEDATE    -- 공지사항 수정일자
+                        
+                        ,CEIL(ROW_NUMBER() OVER(ORDER BY A.NNO DESC)/#{pagesize, jdbcType=VARCHAR})  AS PAGENO
+                        ,COUNT(A.NNO) OVER() AS TOTALCOUNT
+                        ,#{curpage, jdbcType=VARCHAR}		AS CURPAGE
+               			,#{pagesize, jdbcType=VARCHAR}		AS PAGESIZE
+                		,#{groupsize, jdbcType=VARCHAR}		AS GROUPSIZE
+                	
+            FROM
+                        NOTICE A,  PAGING  B
+            WHERE
+                        A.NDELETEYN ='N'  
+                        AND PNO='P004'
+			<if test="startDate!=null and startDate!='' and startDate!='null' and endDate!=null and endDate!='' and endDate!='null'">
+				<![CDATA[AND TO_CHAR(A.NINSERTDATE,'YYYY-MM-DD') >= #{startDate,jdbcType=VARCHAR}]]>
+				<![CDATA[AND TO_CHAR(A.NINSERTDATE,'YYYY-MM-DD') <= #{endDate,jdbcType=VARCHAR}]]>
+			</if>
+			<if test = "searchFilter=='제목'">
+				<![CDATA[AND NSUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>	
+			</if>
+			<if test="searchFilter=='내용'">
+				<![CDATA[AND NCONTENT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+			</if>
+			<if test="searchFilter=='제목+내용'">
+				<![CDATA[AND NSUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+			<![CDATA[OR NCONTENT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>			
+			</if>                  
+            ORDER BY 1 DESC       
+        )
+	WHERE PAGENO =#{curpage, jdbcType=VARCHAR}
+	</select>
+	
 	<!-- 공지사항 전체조회 + 페이징-->
 	<select id="listNotice" parameterType="notice" resultType="notice">
-	SELECT 
-	        A.NNO                   AS NNO              					-- 공지사항 글번호
-	        ,A.NSUBJECT             AS NSUBJECT        						-- 공지사항 제목
-	        ,A.NNAME                AS NNAME            					-- 공지사항 작성자
-	        ,A.NIMG                 AS NIMG             					-- 공자사항 이미지
-	        ,A.NCONTENT             AS NCONTENT         					-- 공지사항 내용
-	        ,A.NDELETEYN							AS NDELETEYN			-- 공지사항 삭제여부
-		    ,TO_CHAR(A.NINSERTDATE,'YYYY-MM-DD')    AS NINSERTDATE			-- 공비사항 등록일자
-	        ,TO_CHAR(A.NUPDATEDATE,'YYYY-MM-DD')          AS NUPDATEDATE    -- 공지사항 수정일자
-	FROM
-	        NOTICE A
-	WHERE
-	        A.NDELETEYN ='N'
-	<if test="startDate!=null and startDate!='' and startDate!='null' and endDate!=null and endDate!='' and endDate!='null'">
+	SELECT * FROM(
+            SELECT 
+                        A.NNO                   AS NNO              					-- 공지사항 글번호
+                        ,A.NSUBJECT             AS NSUBJECT        						-- 공지사항 제목
+                        ,A.NNAME                AS NNAME            					-- 공지사항 작성자
+                        ,A.NIMG                 AS NIMG             					-- 공자사항 이미지
+                        ,A.NCONTENT             AS NCONTENT         					-- 공지사항 내용
+                        ,A.NDELETEYN							AS NDELETEYN			-- 공지사항 삭제여부
+                        ,TO_CHAR(A.NINSERTDATE,'YYYY-MM-DD')    AS NINSERTDATE			-- 공비사항 등록일자
+                        ,TO_CHAR(A.NUPDATEDATE,'YYYY-MM-DD')          AS NUPDATEDATE    -- 공지사항 수정일자
+                        
+                        ,CEIL(ROW_NUMBER() OVER(ORDER BY A.NNO DESC)/#{pagesize, jdbcType=VARCHAR})  AS PAGENO
+                        ,COUNT(A.NNO) OVER() AS TOTALCOUNT
+                        ,#{curpage, jdbcType=VARCHAR}		AS CURPAGE
+               			,#{pagesize, jdbcType=VARCHAR}		AS PAGESIZE
+                		,#{groupsize, jdbcType=VARCHAR}		AS GROUPSIZE
+                	
+            FROM
+                        NOTICE A,  PAGING  B
+            WHERE
+                        A.NDELETEYN ='N'  
+                        AND PNO='P004'
+            ORDER BY 1 DESC       
+        )
+	WHERE PAGENO =#{curpage, jdbcType=VARCHAR}
+	        
+	<!-- <if test="startDate!=null and startDate!='' and startDate!='null' and endDate!=null and endDate!='' and endDate!='null'">
 		<![CDATA[AND TO_CHAR(A.NINSERTDATE,'YYYY-MM-DD') >= #{startDate,jdbcType=VARCHAR}]]>
 		<![CDATA[AND TO_CHAR(A.NINSERTDATE,'YYYY-MM-DD') <= #{endDate,jdbcType=VARCHAR}]]>
 	</if>
@@ -31,9 +87,8 @@
 	<if test="searchFilter=='제목+내용'">
 		<![CDATA[AND NSUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
 		<![CDATA[OR NCONTENT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>			
-	</if>        
+	</if>       -->  
 	        
-	ORDER BY 1 DESC  
 	</select>
 	
 	<!-- 공지사항 조회 -->

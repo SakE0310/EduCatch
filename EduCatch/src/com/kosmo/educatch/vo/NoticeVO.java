@@ -1,6 +1,6 @@
 package com.kosmo.educatch.vo;
 
-public class NoticeVO {
+public class NoticeVO extends PagingVO{
 
 	private String nno;
 	private String nsubject;

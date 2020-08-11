@@ -8,6 +8,13 @@ import com.kosmo.educatch.vo.NoticeVO;
 
 public class NoticeMapperImpl extends SqlSessionDaoSupport implements NoticeMapper{
 
+	//=============== 공지사항 검색=============================
+	@Override
+	public List<NoticeVO> searchNotice(NoticeVO param) {
+		List<NoticeVO>list = getSqlSession().selectList("searchNotice");
+		return list;
+	}
+	
 	//=============== 공지사항 전제조회=============================
 	@Override
 	public List<NoticeVO> listNotice(NoticeVO param) {
@@ -44,5 +51,6 @@ public class NoticeMapperImpl extends SqlSessionDaoSupport implements NoticeMapp
 		int nCnt = getSqlSession().update("deleteNotice");
 		return nCnt;
 	}//end of deleteNotice
+
 
 }

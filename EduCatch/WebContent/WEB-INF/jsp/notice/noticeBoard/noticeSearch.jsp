@@ -124,7 +124,7 @@
 			 alert("종료일이 시작일보다 이 전 일수는 없습니다.\n다시 선택하여 주시기 바랍니다.");
 		}
 		
-		$("#searchForm").attr("action","searchNotice.ec");
+		$("#searchForm").attr("action","listNotice.ec");
 		$("#searchForm").attr("method","POST");
 		$("#searchForm").submit();
 		
@@ -147,7 +147,7 @@
 		var sVal = document.searchForm.searchFilter.options[document.searchForm.searchFilter.selectedIndex].value;
 		console.log("sVal>>>"+sVal);
 		 
-		$("#searchForm").attr("action","searchNotice.ec");
+		$("#searchForm").attr("action","listNotice.ec");
 		$("#searchForm").attr("method","POST");
 		$("#searchForm").submit();
 		 
@@ -250,7 +250,7 @@
 			<tr>
 			<td colspan="18">
 			<jsp:include page="noticePaging.jsp" flush="true">
-				<jsp:param name="url" value="listNotice.ec"/>
+				<jsp:param name="url" value="searchNotice.ec"/>
 				<jsp:param name="str" value=""/>
 				
 				
