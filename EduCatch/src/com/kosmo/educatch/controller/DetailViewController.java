@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.service.DetailViewService;
 import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.ConvenienceVO;
 import com.kosmo.educatch.vo.SubjectVO;
 
 @Controller
@@ -27,13 +28,13 @@ public class DetailViewController {
 		
 		//String sno = param.getSno();
 		String sno = "1";
-		log.info("sno >>> " + sno);
 		
 		SubjectVO svo = detailViewService.DetailViewList(sno);
-		
+		ConvenienceVO cvo = detailViewService.conViewList(sno);
 
 
 		mav.addObject("svo", svo);
+		mav.addObject("cvo", cvo);
 		mav.setViewName("search/detailView");
 		log.info("DepartmentController listDepartment mav >>> : " + mav);
 		

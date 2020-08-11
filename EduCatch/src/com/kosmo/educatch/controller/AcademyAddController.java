@@ -181,12 +181,56 @@ public class AcademyAddController {
 			acparking = "N";
 			cvo.setAcparking(acparking);
 		}
-		cvo.setAcstore(acstore);
-		cvo.setAcbus(acbus);
-		cvo.setAcelevator(acelevator);
-		cvo.setAcstudyroom(acstudyroom);
-		cvo.setAclounge(aclounge);
-		cvo.setAclocker(aclocker);
+		
+		
+		if(acstore !=null) {
+			cvo.setAcstore(acstore);
+		}else {
+			acstore = "N";
+			cvo.setAcstore(acstore);
+		}
+		
+		
+		if(acbus !=null) {
+			cvo.setAcbus(acbus);
+		}else {
+			acbus = "N";
+			cvo.setAcbus(acbus);
+		}
+		
+		
+		if(acelevator !=null) {
+			cvo.setAcelevator(acelevator);
+		}else {
+			acelevator = "N";
+			cvo.setAcelevator(acelevator);
+		}
+		
+		
+		if(acstudyroom !=null) {
+			cvo.setAcstudyroom(acstudyroom);
+		}else {
+			acstudyroom = "N";
+			cvo.setAcstudyroom(acstudyroom);
+		}
+		
+		
+		if(aclounge !=null) {
+			cvo.setAclounge(aclounge);
+		}else {
+			aclounge = "N";
+			cvo.setAclounge(aclounge);
+		}
+		
+		
+		if(aclocker !=null) {
+			cvo.setAclocker(aclocker);
+		}else {
+			aclocker = "N";
+			cvo.setAclocker(aclocker);
+		}
+		
+		
 		
 		
 		AcademyVO vovo = academyAddService.selectCategory(avo);

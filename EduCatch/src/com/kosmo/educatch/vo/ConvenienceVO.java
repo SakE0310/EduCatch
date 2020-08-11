@@ -1,8 +1,7 @@
 package com.kosmo.educatch.vo;
 
-public class ConvenienceVO {
+public class ConvenienceVO extends AcademyVO{
 	//학원 편의기능
-	
 	private String academy_ano;
 	private String acparking;
 	private String acstore;
