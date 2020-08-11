@@ -23,6 +23,7 @@
 	int pagecount = 0;
 	
 	
+
 	String pno=request.getParameter("pno");
 
 	
@@ -64,8 +65,8 @@
 	// 첫번째 그룹인 아닌경우
 	if(curGroup > 0) {
 %>
-	<a href="<%=url%>?&curPage=1&pno=P002">◁◁</a>&nbsp;&nbsp;&nbsp;
-	<a href="<%=url%>?&curPage=<%=linkPage%>&pno=P002">◀</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?&curPage=1&pno=P003">◁◁</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?&curPage=<%=linkPage%>&pno=P003">◀</a>&nbsp;&nbsp;&nbsp;
 <%
 	}
 	else
@@ -91,7 +92,7 @@
 		else
 		{
 %>
-	[<a href="<%=url%>?curpage=<%=linkPage%>&pno=P002"><%=linkPage%></a>]&nbsp;
+	[<a href="<%=url%>?curpage=<%=linkPage%>&pno=P003"><%=linkPage%></a>]&nbsp;
 <%
 		}
 		
@@ -103,8 +104,8 @@
 	if(linkPage <= pagecount)
 	{
 %>
-	<a href="<%=url%>?curpage=<%=linkPage%>&pno=P002">▶</a>&nbsp;&nbsp;&nbsp;
-	<a href="<%=url%>?curpage=<%=pagecount%>&pno=P002">▷▷</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?curpage=<%=linkPage%>&pno=P003">▶</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?curpage=<%=pagecount%>&pno=P003">▷▷</a>&nbsp;&nbsp;&nbsp;
 <%
 	}
 	else

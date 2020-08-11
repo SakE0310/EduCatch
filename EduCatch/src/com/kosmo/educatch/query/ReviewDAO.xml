@@ -5,7 +5,8 @@
 <mapper namespace = "com.kosmo.educatch.dao.ReviewMapper">
 	<select id="listReview" parameterType="review" resultType="review">
 		SELECT * FROM(
-		SELECT      A.RBNO              AS RBNO,
+					SELECT      
+					A.RBNO              AS RBNO,
 		            A.RBSUBJECT         AS RBSUBJECT,
 		            A.RBNAME            AS RBNAME,
 		            A.RBIMG             AS RBIMG,
@@ -20,7 +21,8 @@
 		            COUNT(A.RBNO) OVER() AS TOTALCOUNT,
 		            #{curpage, jdbcType=VARCHAR}		AS CURPAGE,
                		#{pagesize, jdbcType=VARCHAR}		AS PAGESIZE,
-                	#{groupsize, jdbcType=VARCHAR}		AS GROUPSIZE
+                	#{groupsize, jdbcType=VARCHAR}		AS GROUPSIZE,
+                	#{pno, jdbcType=VARCHAR}			AS PNO
 		FROM REVIEWBOARD A, PAGING P
 		WHERE RBDELETEYN = 'N'
 		AND   PNO='P002'
