@@ -14,6 +14,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+*.classpath
 EduCatch/WebContent/WEB-INF/classes/
 
 # External tool builders
