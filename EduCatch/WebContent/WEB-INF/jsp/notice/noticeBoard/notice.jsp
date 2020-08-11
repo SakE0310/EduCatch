@@ -22,6 +22,9 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="/EduCatch/assets/datepicker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <script src="/EduCatch/assets/datepicker/jquery-ui-1.12.1/datepicker-ko.js"></script>
+
+<!-- 날짜 형식변환 -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <style type="text/css">
 	#nno_color{
 		color: black;
@@ -51,6 +54,17 @@
 	}
 	.bbs-link {
    	 position: relative;
+	}
+	
+	#sForm{
+    width: 350px;
+  	height: 100px;
+  	margin: auto;
+	}
+	#dForm{
+	 width: 350px;
+  	height: 100px;
+  	margin: auto;
 	}
 	
 		
@@ -93,6 +107,14 @@
 		
 		console.log("startVal>>>"+startVal);
 		console.log("endVal>>>"+endVal);
+		
+		startVal = moment(startVal).format("YYYY-MM-DD");
+		endVal = moment(endVal).format("YYYY-MM-DD");
+		console.log("startVal_1>>>"+startVal);
+		console.log("endVal_1>>>"+endVal);
+		
+		$("#startDate").val(startVal);
+		$("#endDate").val(endVal);
 		
 		if(startVal == ""){
 			  alert("시작일이 입력되지 않았습니다.\n시작일을 먼저 입력해주세요");
@@ -217,9 +239,9 @@
 	</div>	
 	</form>
 	<!-- 검색 폼  -->
-	<div>
+	<div >
 		<form id="searchForm" name="searchForm">
-		<div>
+		<div align = "center" id="sForm">
 		
 			<select name="searchFilter">
 				<option value="제목">제목</option>
@@ -229,7 +251,8 @@
 			<input type="text" name="keyword" id = "keyword">
 			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 			<hr>
-			
+		</div>
+		<div align = "center" id="dForm">	
 			<div style="width: 200px">
 			<input type="text" name="startDate" id="startDate"> - <input type="text" name="endDate" id="endDate"> 
 			<input type="button" id="searchPiker" value="검색">
@@ -238,6 +261,11 @@
 		</div>
 		</form>
 	</div>
+	
+<br>
+<br>
+<br>
+<br>
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

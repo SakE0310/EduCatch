@@ -20,7 +20,6 @@
 			
 		});
 		
-		// 회원 타입선택 안할 시 alert
 		$("#login").click(function(){
 				
 			alert("로그인");
@@ -42,7 +41,7 @@
 			
 			font-size :23px;
 			font-weight: bold; 
-			margin:20px 280px 10px 0px;
+			margin:50px 280px 10px 0px;
 		}
 		
 		#id{
@@ -98,7 +97,7 @@
 		
 					<div class="js-form-message form-group"  id ="id">
 	     		   		<label class="form-label" for="id_login">아이디</label>
-	        			<input type="email" class="form-control" name="login" id="id_login" placeholder="이메일을 입력해주세요"
+	        			<input type="email" class="form-control" name="mid" id="mid" placeholder="이메일을 입력해주세요"
 	       	         	 aria-label="Email address" data-error-class="u-has-error" data-success-class="u-has-success">
 	           		</div><br>
 	    		
@@ -109,7 +108,7 @@
 	       			    <span class="d-flex justify-content-between align-items-center">비밀번호
 	          		  	 </span></label>
 	        
-	        			   <input type="password" class="form-control" name="password" id="id_password" placeholder="********"
+	        			   <input type="password" class="form-control" name="mpw" id="mpw" placeholder="********"
 	               	 			  aria-label="********">
 	               	   
 			               	<div style= "width : 350px" align = "right">
@@ -128,15 +127,37 @@
 	    			<!-- 회원가입 버튼  -->
 	    			<div align = "center">
 	    				<button class="genric-btn success" type="submit" name ="join" id ="join">회원가입</button>
-	   				</div>
-	   				
-	    			<div align ="center"> 
-	     			 	<hr style=" height:4px;
-	     			 				border-width:1px;
-	     			 				color:black;
-	     			 				background-color: #d9d9d9;
-	     			 				width:350px">
-     			</div>
+	   				</div><br>
+	
+	  				
+	     				<p align = "center"><img src="https://ssl.nx.com/S2/p3/login/2016/img_tpa.gif" width="350" height="10" alt="또는"/>
+	     				
+	     				
+	     			<div class = "snslogin" align = "center">	
+	     			 		
+	     			 		<img src = "/EduCatch/assets/img/login/naver.png" alt = "naver">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								
+							<img src = "/EduCatch/assets/img/login/facebook.png" alt = "facebook">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								
+							<img src = "/EduCatch/assets/img/login/kakao.png" alt = "kakao">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								
+							<img src = "/EduCatch/assets/img/login/google.png" alt = "goole">
+							
+	     			
+	     			</div>
+	     			
+	     			
+	     			<div align = "center">	
+							<hr style=" 
+									height:3.5px;
+									border-width:1px;
+									color:black;
+									background-color: #d9d9d9;
+									width:350px;
+									margin-top:20px; 
+									margin-bottom:80px;">
+					</div>
+	     	     			
  		 </form>
 
 	<jsp:include page="../../../../footer.jsp" flush="true">

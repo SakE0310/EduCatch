@@ -2,6 +2,8 @@ package com.kosmo.educatch.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,9 +27,26 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 
 	//전체조회
 	@RequestMapping("listConsult")
-	public ModelAndView listConsult(@ModelAttribute ConsultVO param) {
+	public ModelAndView listConsult(@ModelAttribute ConsultVO param,
+									HttpServletRequest request) {
 		
 		log.info("ConsultController listConsult >>> 호출성공");
+		
+		String pno="P003";
+		String pagesize="5";
+		String groupsize="5";
+		String curpage="1";
+		String totalcount="0";
+		
+		if(request.getParameter("curpage") !=null) {
+			curpage=request.getParameter("curpage");
+		}
+		
+		param.setPno(pno);
+		param.setPagesize(pagesize);
+		param.setGroupsize(groupsize);
+		param.setCurpage(curpage);
+		param.setTotalcount(totalcount);
 
 		List<ConsultVO> list=consultService.listConsult(param);
 		log.info("list.size() >>> "+list.size());
@@ -46,6 +65,12 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 			log.info(cvo.getCdeleteyn());
 			log.info(cvo.getCinsertdate());
 			log.info(cvo.getCupdatedate());
+			
+			log.info("pno >>> "+cvo.getPno());
+			log.info("pagesize >>> "+cvo.getPagesize());
+			log.info("groupsize >>> "+cvo.getGroupsize());
+			log.info("curpage >>> "+cvo.getCurpage());
+			log.info("totalcount >>> "+cvo.getTotalcount());
 		}
 		
 		ModelAndView mav=new ModelAndView();

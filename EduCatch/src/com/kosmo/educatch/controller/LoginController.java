@@ -1,12 +1,14 @@
 package com.kosmo.educatch.controller;
 
-import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.manager.LoggerManager;
@@ -22,7 +24,7 @@ public class LoginController {
 
 	// =================== 로그인 화면으로  =================
 
-	@RequestMapping("/login.ec")
+	@RequestMapping(value = "/login.ec", method = RequestMethod.GET)
 	public ModelAndView listNotice() {
 		log.info("LoginController login 시작 >>>");
 		ModelAndView mav = new ModelAndView();
@@ -36,14 +38,24 @@ public class LoginController {
 	
 	
 	// ================ 로그인 처리 ========================
-//	@RequestMapping("/loginCheck")
-//	public String loginCheck(@ModelAttribute MemberVO mvo, HttpSession session) {
-//		boolean result = loginService.logincheck(mvo, session);
-//		log.info("loginCheck() >>>>");
-//		return null;
-//		
-//		}
-//	
+	
+	@RequestMapping("/loginCheck")
+	public ModelAndView  loginCheck(@ModelAttribute MemberVO param) {
+		log.info("LoginController loginCheck 시작 >>>");
+		ModelAndView mav = new ModelAndView();
+		
+		
+		MemberVO mvo = loginService.loginCheck(param);
+		mav.addObject("mvo", mvo);
+		mav.setViewName("member/login/result");
+				
+		log.info("loginCheck() >>>>");
+		return mav;
+		
+	}
+		
+		
+
 	
 	
 	// ====================회원가입 폼으로 ==========================

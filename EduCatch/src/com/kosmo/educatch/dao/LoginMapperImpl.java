@@ -1,5 +1,7 @@
 package com.kosmo.educatch.dao;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -23,9 +25,9 @@ public class LoginMapperImpl implements LoginMapper{
 
 	// ======== 로그인 체크 ==========
 	@Override
-	public boolean loginCheck(MemberVO mvo) {
+	public List<MemberVO> loginCheck(MemberVO parma) {
 		String name = session.selectOne("loginCheck");
-		return (name == null) ? false : true;
+		return null;
 				
 	}
 

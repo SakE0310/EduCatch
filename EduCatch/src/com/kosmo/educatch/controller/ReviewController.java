@@ -42,6 +42,7 @@ public class ReviewController {
 		log.info(param.getMember_mno());
 		log.info(param.getRbcontent());
 
+		String pno="P002";
 		String pagesize="5";
 		String groupsize="5";
 		String curpage="1";
@@ -51,6 +52,7 @@ public class ReviewController {
 			curpage=request.getParameter("curpage");
 		}
 
+		param.setPno(pno);
 		param.setPagesize(pagesize);
 		param.setGroupsize(groupsize);
 		param.setCurpage(curpage);
@@ -76,6 +78,7 @@ public class ReviewController {
 			log.info("rbinsertdate >>> "+rvo.getRbinsertdate());
 			log.info("rbupdatedate >>> "+rvo.getRbupdatedate());
 			
+			log.info("pno >>> "+rvo.getPno());
 			log.info("pagesize >>> "+rvo.getPagesize());
 			log.info("groupsize >>> "+rvo.getGroupsize());
 			log.info("curpage >>> "+rvo.getCurpage());

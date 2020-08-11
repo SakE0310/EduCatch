@@ -10,12 +10,14 @@ public interface LoginService {
 	// 일반 회원 로그인 체크
 	//public MemberVO loginCheck(MemberVO mvo);
 	
+
 	//학원 회원 로그인 체크
 	public AMemberVO ALoginCheck(AMemberVO avo);
 
 	
 	// 로그인 체크
-	public boolean logincheck(MemberVO mvo, HttpSession session);
+	public MemberVO loginCheck(MemberVO param);
+	
 	
 	// 로그인 정보
 	public MemberVO viewMember(MemberVO mvo);

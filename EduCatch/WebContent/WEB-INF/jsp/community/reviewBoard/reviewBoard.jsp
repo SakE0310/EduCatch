@@ -65,6 +65,7 @@
 <body>
 <%
 
+	String pno="0";
 	String pagesize="0";
 	String groupsize="0";
 	String curpage="0";
@@ -116,12 +117,13 @@
 		for(int i=0; i<nCnt; i++){
 			ReviewVO rvo=(ReviewVO)listReview.get(i);
 			
+			pno=rvo.getPno();
 			pagesize=rvo.getPagesize();
 			groupsize=rvo.getGroupsize();
 			curpage=rvo.getCurpage();
 			totalcount=rvo.getTotalcount();
 			
-			System.out.println("rvo.getPagesize()"+rvo.getPagesize());
+			System.out.println("rvo.getPno()"+rvo.getPno());
 			System.out.println("rvo.getGroupsize()"+rvo.getGroupsize());
 			System.out.println("rvo.getCurpage()"+rvo.getCurpage());
 			System.out.println("rvo.getTotalcount()"+rvo.getTotalcount());

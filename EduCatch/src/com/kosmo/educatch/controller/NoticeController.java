@@ -1,5 +1,6 @@
 package com.kosmo.educatch.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -30,20 +31,29 @@ public class NoticeController {
 
 	// ============ 공지사항 게시판 목록 조회===================================
 	@RequestMapping("/listNotice.ec")
-	public ModelAndView listNotice(HttpServletRequest request, @ModelAttribute NoticeVO param) {
+	public ModelAndView listNotice(@ModelAttribute NoticeVO param) {
 		log.info("NoticeController listNotice 시작 >>>");
 
-	    log.info("param.getKeyword()>>"+param.getKeyword());
-	    log.info("param.getSearchFilter()>>>"+param.getSearchFilter());
-	    log.info("param.getStartDate()>>>"+param.getStartDate());
-	    log.info("param.getEndDate()>>>"+param.getEndDate());
-		 
-	    String startDate= null;
-	    startDate = param.getStartDate();
-	    startDate= startDate.replace("/", "-");
-	    
-	    log.info("startDate>>>"+startDate);
-	    
+		log.info("param.getKeyword()>>" + param.getKeyword());
+		log.info("param.getSearchFilter()>>>" + param.getSearchFilter());
+
+		log.info("param.getStartDate()>>>" + param.getStartDate());
+		log.info("param.getEndDate()>>>" + param.getEndDate());
+
+		String startDate = param.getStartDate();
+		String endDate = param.getEndDate();
+		
+		//시작일 종료일 날짜형식 변환
+		if(startDate == null && endDate == null) {
+			startDate = "";
+			endDate ="";
+		}else {
+			startDate = startDate.replace("/", "-");
+			endDate = endDate.replace("/", "-");
+			log.info("startDate>>>"+startDate);
+			log.info("endDate>>>"+endDate);
+		}
+
 		List<NoticeVO> list = noticeService.listNotice(param);
 		log.info("NoticeController listNotice list.size()>>>" + list.size());
 

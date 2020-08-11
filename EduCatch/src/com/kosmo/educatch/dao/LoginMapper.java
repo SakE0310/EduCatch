@@ -1,5 +1,7 @@
 package com.kosmo.educatch.dao;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import com.kosmo.educatch.vo.AMemberVO;
@@ -11,10 +13,10 @@ public interface LoginMapper {
 		AMemberVO aLoginCheck(AMemberVO avo);
 		
 		// 로그인 체크
-		public boolean loginCheck(MemberVO mvo);
+		public List<MemberVO> loginCheck(MemberVO param);
 		
 		// 로그인 정보
-		public MemberVO viewMember(MemberVO mvo); 
+		public MemberVO viewMember(MemberVO param); 
 			
 		
 		// 로그아웃

@@ -40,6 +40,13 @@
 </script>
 <body>
 <%
+
+	String pno="0";
+	String pagesize="0";
+	String groupsize="0";
+	String curpage="0";
+	String totalcount="0";	
+
 	Object obj=request.getAttribute("listConsult");
 
 	if(obj !=null){
@@ -85,6 +92,18 @@
 	for(int i=0; i<nCnt; i++){
 		ConsultVO cvo=(ConsultVO)listConsult.get(i);
 		
+		pno=cvo.getPno();
+		pagesize=cvo.getPagesize();
+		groupsize=cvo.getGroupsize();
+		curpage=cvo.getCurpage();
+		totalcount=cvo.getTotalcount();
+		
+		System.out.println("cvo.getPno()"+cvo.getPno());
+		System.out.println("cvo.getPagesize()"+cvo.getPagesize());
+		System.out.println("cvo.getGroupsize()"+cvo.getGroupsize());
+		System.out.println("cvo.getCurpage()"+cvo.getCurpage());
+		System.out.println("cvo.getTotalcount()"+cvo.getTotalcount());
+		
 		if(nCnt>0){
 	
 %>
@@ -106,12 +125,27 @@
 						</td>
 					</tr>
 <%
-		}
+			}
 			
 		}	
 	
 %>			
 			</tbody>
+			<tr>
+			<td colspan="18">
+			<jsp:include page="memberPaging.jsp" flush="true">
+				<jsp:param name="url" value="listConsult.ec"/>
+				<jsp:param name="str" value=""/>
+				
+				
+					<jsp:param name="pagesize" value='<%= pagesize %>'/>
+					<jsp:param name="groupsize" value="<%= groupsize %>"/>
+					<jsp:param name="curpage" value="<%= curpage %>"/>
+					<jsp:param name="totalcount" value="<%= totalcount %>"/>
+					
+			</jsp:include>
+			</td>
+			</tr>
 		</table>
 	</div>
 	<div>

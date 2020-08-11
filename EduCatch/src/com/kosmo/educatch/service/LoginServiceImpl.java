@@ -35,22 +35,22 @@ public class LoginServiceImpl implements LoginService {
 
 	
 	// ========= 일반 회원 로그인 ======================
-	@Override
-	public boolean logincheck(MemberVO mvo, HttpSession session) {
-		boolean result = loginMapper.loginCheck(mvo);
-		
-		if(result) {//true 일 경우 세션에 등록 
-			MemberVO mvo2 = viewMember(mvo);
-			
-			//세션 변수 등록
-			session.setAttribute("mid", mvo2.getMid());
-			session.setAttribute("mname", mvo2.getMname());
-			
-			
-		}
-		
-		return result;
-	}
+//	@Override
+//	public boolean loginCheck(MemberVO mvo, HttpSession session) {
+//		boolean result = loginMapper.loginCheck(mvo);
+//		
+//		if(result) {//true 일 경우 세션에 등록 
+//			MemberVO mvo2 = viewMember(mvo);
+//			
+//			//세션 변수 등록
+//			session.setAttribute("mid", mvo2.getMid());
+//			session.setAttribute("mname", mvo2.getMname());
+//			
+//			
+//		}
+//		
+//		return result;
+//	}
 	
 	// ======= 로그인 정보 ===========
 	@Override
@@ -68,6 +68,13 @@ public class LoginServiceImpl implements LoginService {
 			
 			session.invalidate();
 		
+	}
+
+
+	@Override
+	public MemberVO loginCheck(MemberVO param) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
