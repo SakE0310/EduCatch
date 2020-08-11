@@ -7,29 +7,13 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-			<jsp:include page="../../../top.jsp" flush="true">
-				<jsp:param value="" name=""/>
-			</jsp:include>
-		<style type="text/css">
-		.search-table{
-			margin : auto;
-			align : center;
-		}
-		.acaList-table{
-			margin : auto;
-			align : center;
-			background: lightblue;
-		}
-		.acaList-data{
-			align : center;
-			width : 1000px;
-			height : 100px;
-		}
-		#acaList{
-			color : black;
-		}
-		</style>
+		<jsp:include page="../../../top.jsp" flush="true">
+			<jsp:param value="" name=""/>
+		</jsp:include>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				//지역 함수
@@ -62,7 +46,7 @@
 					console.log("click setCmajor >>> "+setCmajor);
 					console.log("click setCminor >>> "+setCminor);
 					ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor);
-				});
+				});//search button function
 				
 				//call 함수호출 
 				function ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor){
@@ -85,47 +69,46 @@
 					}).done(function(resParam){
 						console.log("done start >>> "+resParam);
 						st = "";
+						str = "";
 						console.log("acaList >>> "+resParam.acaList);
 						for(i in resParam.acaList){
-// 							var academy = resParam.acaList[i].ano 
-// 										+ resParam.acaList[i].aname
-// 										+ resParam.acaList[i].atel
 // 										+ resParam.acaList[i].axpoint
 // 										+ resParam.acaList[i].aypoint
-// 										+ resParam.acaList[i].aaddrno
-// 										+ resParam.acaList[i].aaddr1
-// 										+ resParam.acaList[i].aaddr2
-// 										+ resParam.acaList[i].alogo
 // 										+ resParam.acaList[i].category_cno
 // 										+ resParam.acaList[i].adeleteyn
-// 										+ resParam.acaList[i].ainsertdate
 // 										+ resParam.acaList[i].aupdatedate
-// 										+ resParam.acaList[i].cmajor
+// 										+ resParam.acaList[i].aaddrno
+// 										+ resParam.acaList[i].ainsertdate;
+// 										+ resParam.acaList[i].cmajor;
 // 										+ resParam.acaList[i].cminor;
-							var ano = resParam.acaList[i].ano 
-							var aname = resParam.acaList[i].aname
-							var atel = resParam.acaList[i].atel
-							var axpoint	= resParam.acaList[i].axpoint
-							var aypoint	= resParam.acaList[i].aypoint
-							var aaddrno	= resParam.acaList[i].aaddrno
+//				 						+ resParam.acaList[i].atel;
+							var ano = resParam.acaList[i].ano;
+							var aname = resParam.acaList[i].aname;
+							var	alogo = resParam.acaList[i].alogo;
+										
 							var aaddr1 = resParam.acaList[i].aaddr1
 							var aaddr2 = resParam.acaList[i].aaddr2
-							var alogo = resParam.acaList[i].alogo
-							var category_cno = resParam.acaList[i].category_cno
-							var adeletey = resParam.acaList[i].adeleteyn
-							var ainsertdate = resParam.acaList[i].ainsertdate
-							var aupdatedate = resParam.acaList[i].aupdatedate
-							var cmajor = resParam.acaList[i].cmajor
-							var	cminor = resParam.acaList[i].cminor;
-							st += ano+aname+atel+"<br>";
+							st += "<div class='panel panel-default'>";
+							st += "<div class='media'>";
+							st += "<div class='media-left'>";
+							st += "<img src='"+alogo+"' class='media-object' style='width:100px; height:100px'>";
+							st += "</div>";
+							st += "<div class='media-body'>";
+							st += "<h4 class='media-heading'><a href='listDetailView.ec'>"+aname+"</a>";
+							st += "<nav align='right'><input type='button' class='toggle' value='즐겨찾기'></nav>";
+							st += "</h4>";
+							st += "<p>"+aaddr1+"</p>";
+							st += "</div>";
+							st += "</div>";
+							st += "</div>";
 						}
 						$('.acaList').html(st);
 						$('.acaList').niceSelect('update');
 						console.log("done end >>> "+resParam);
+						toggle();
 					}).fail(function(resParam){
 						alert("에러");
 					});					
-// 				});//search button click
 			}//ajaxGetAcaList
 
 				//지역 대분류
@@ -222,9 +205,43 @@
 						alert("에러");
 					});
 				}//getMinor
-			
+				
 			});//document function
+			
+			//즐겨찾기 토글버튼
+			function toggle(){
+				$('.toggle').click(function(){
+					console.log("toggle");
+					$(this).toggleClass("toggleBtn");
+					$(document).attr("action","bookMark.ec");
+					$(document).attr("method","post");
+					$(document).submit();
+				});//toggle click
+			}// toggle function
+			
 		</script>
+		
+		<style type="text/css">
+		.search-table{
+			margin : auto;
+			align : center;
+		}
+		.genric-btn {
+	   		color: #fff;
+	   		background: #140C40;
+	   		width: 100px;
+	   		border: 1px solid transparent;
+		}
+		#show{
+			margin : 0 auto;
+			text-align : center;
+			padding : 50px 20px;
+		}
+		.toggleBtn{
+			color : red;
+			border : 1px solid bule;
+		}
+		</style>
 	</head>
 	<body>
 		<main>
@@ -252,19 +269,13 @@
 							</select>
 						</td>
 						<td class="button-search">
-							<input type="button" id="search" value="검색">
+							<input type="button" id="search" class="genric-btn primary" value="검색">
 						</td>
 					</tr>
 				</table>
 			</div>
-			<div class="acaList-div">
-				<table class="acaList-table">
-					<tr class="acaList-row">
-						<td class="acaList-data">
-							<a class="acaList" id="acaList" href="listDetailView.ec"></a>
-						</td>
-					</tr>
-				</table>
+			<div class="container">
+				<div class="acaList"><p id="show">검색조건을 입력하세요<p></div>
 			</div>
 		</main>
 		<jsp:include page="../../../footer.jsp" flush="true">

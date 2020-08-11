@@ -117,5 +117,16 @@ public class SearchController {
 		return map;
 	}//getAcaList
 	
+	//즐겨찾기 insert
+	@RequestMapping("bookMark")
+	public ModelAndView bookMark(){
+		log.info("search controller bookMark start >>> ");
+		
+		ModelAndView mv = new ModelAndView();
+		log.info("search controller bookMark mv >>> "+mv);
+		log.info("search controller bookMark end >>> ");
+		return mv;
+	}//bookMark
+	
 }//end controller
 
