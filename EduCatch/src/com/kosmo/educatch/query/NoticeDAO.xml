@@ -3,7 +3,7 @@
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "com.kosmo.educatch.dao.NoticeMapper">
 
-	<!-- 공지사항 전체조회 -->
+	<!-- 공지사항 전체조회 + 페이징-->
 	<select id="listNotice" parameterType="notice" resultType="notice">
 	SELECT 
 	        A.NNO                   AS NNO              					-- 공지사항 글번호
@@ -19,10 +19,10 @@
 	WHERE
 	        A.NDELETEYN ='N'
 	<if test="startDate!=null and startDate!='' and startDate!='null' and endDate!=null and endDate!='' and endDate!='null'">
-		<![CDATA[AND NINSERTDATE >= TO_CHAR(#{startDate,jdbcType=VARCHAR},'YYYY-MM-DD')]]>
-		<![CDATA[AND NINSERTDATE <= TO_CHAR(#{endDate,jdbcType=VARCHAR},'YYYY-MM-DD')]]>
+		<![CDATA[AND TO_CHAR(A.NINSERTDATE,'YYYY-MM-DD') >= #{startDate,jdbcType=VARCHAR}]]>
+		<![CDATA[AND TO_CHAR(A.NINSERTDATE,'YYYY-MM-DD') <= #{endDate,jdbcType=VARCHAR}]]>
 	</if>
-				        
+	
 	<if test = "searchFilter=='제목'">
 		<![CDATA[AND NSUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>	
 	</if>
