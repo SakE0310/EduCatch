@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kosmo.educatch.dao.SearchMapper;
+import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SearchVO;
 
 @Service
@@ -23,8 +24,8 @@ public class SearchServiceImpl implements SearchService{
 	public List<SearchVO> getDistrict(SearchVO param) {
 		log.info("service getDistrict start >>> ");
 		List<SearchVO> list = searchMapper.getDistrict(param);
-		log.info("service getDistrict end >>> ");
 		log.info("service getDistrict list >>> "+list);
+		log.info("service getDistrict end >>> ");
 		return list;
 	}//getDistrict
 
@@ -34,8 +35,8 @@ public class SearchServiceImpl implements SearchService{
 		// TODO Auto-generated method stub
 		log.info("service getCity start >>> ");
 		List<SearchVO> list = searchMapper.getCity(param);
-		log.info("service getCity end >>> ");
 		log.info("service getCity list >>> "+list);
+		log.info("service getCity end >>> ");
 		return list;
 	}//getCity
 
@@ -45,9 +46,20 @@ public class SearchServiceImpl implements SearchService{
 		// TODO Auto-generated method stub
 		log.info("service getAcaList start >>> ");
 		List<SearchVO> list = searchMapper.getAcaList(param);
-		log.info("service getAcaList end >>> ");
 		log.info("service getAcaList list >>> "+list);
+		log.info("service getAcaList end >>> ");
 		return list;
 	}//getAcaList
-	
+
+	//평점가져오기
+	@Override
+	public List<SearchVO> getReview(SearchVO param) {
+		// TODO Auto-generated method stub
+		log.info("service getReview start >>> ");
+		List<SearchVO> list = searchMapper.getReview(param);
+		log.info("service getReview list >>> "+list);
+		log.info("service getReview end >>> ");
+		return list;
+	}//getReview
+
 }

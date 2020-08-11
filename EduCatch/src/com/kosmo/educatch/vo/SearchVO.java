@@ -1,6 +1,6 @@
 package com.kosmo.educatch.vo;
 
-public class SearchVO {
+public class SearchVO extends ReviewVO{
 	//분야
 	private String cno;		 //C001
 	private String cmajor;	 //언어

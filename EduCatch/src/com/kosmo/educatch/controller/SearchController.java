@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.service.SearchService;
+import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SearchVO;
 
 @Controller
@@ -110,23 +111,15 @@ public class SearchController {
 		
 		Map<String,List<SearchVO>>map = new HashMap<String,List<SearchVO>>();
 		List<SearchVO>list = searchService.getAcaList(param);
+		List<SearchVO>_list = searchService.getReview(param);
 		map.put("acaList",list);
+		map.put("reviewList",_list);
 		log.info("search controller getAcaList list >>> "+list);
+		log.info("search controller getAcaList list >>> "+_list);
 		log.info("search controller getAcaList map >>> "+map);
 		log.info("search controller getAcaList end >>> ");
 		return map;
 	}//getAcaList
-	
-	//즐겨찾기 insert
-	@RequestMapping("bookMark")
-	public ModelAndView bookMark(){
-		log.info("search controller bookMark start >>> ");
-		
-		ModelAndView mv = new ModelAndView();
-		log.info("search controller bookMark mv >>> "+mv);
-		log.info("search controller bookMark end >>> ");
-		return mv;
-	}//bookMark
 	
 }//end controller
 

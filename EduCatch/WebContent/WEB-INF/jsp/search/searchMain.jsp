@@ -78,34 +78,38 @@
 // 										+ resParam.acaList[i].adeleteyn
 // 										+ resParam.acaList[i].aupdatedate
 // 										+ resParam.acaList[i].aaddrno
-// 										+ resParam.acaList[i].ainsertdate;
-// 										+ resParam.acaList[i].cmajor;
-// 										+ resParam.acaList[i].cminor;
-//				 						+ resParam.acaList[i].atel;
+// 				 			var atel = resParam.acaList[i].atel;
+// 							var aaddr2 = resParam.acaList[i].aaddr2;
+
+							var ainsertdate = resParam.acaList[i].ainsertdate;
+							var cmajor = resParam.acaList[i].cmajor;
+							var cminor = resParam.acaList[i].cminor;
 							var ano = resParam.acaList[i].ano;
 							var aname = resParam.acaList[i].aname;
 							var	alogo = resParam.acaList[i].alogo;
-										
-							var aaddr1 = resParam.acaList[i].aaddr1
-							var aaddr2 = resParam.acaList[i].aaddr2
+							var aaddr1 = resParam.acaList[i].aaddr1;
+							st += "<p>";
 							st += "<div class='panel panel-default'>";
+							st += "<a href='listDetailView.ec'>";
 							st += "<div class='media'>";
 							st += "<div class='media-left'>";
-							st += "<img src='"+alogo+"' class='media-object' style='width:100px; height:100px'>";
+							st += "<img src='/Users/son/git/EduCatch/EduCatch/WebContent/assets/img/sendMail/"+alogo+"' class='media-object' style='width:140px; height:140px'>";
 							st += "</div>";
 							st += "<div class='media-body'>";
-							st += "<h4 class='media-heading'><a href='listDetailView.ec'>"+aname+"</a>";
-							st += "<nav align='right'><input type='button' class='toggle' value='즐겨찾기'></nav>";
-							st += "</h4>";
-							st += "<p>"+aaddr1+"</p>";
+							st += "<p><h3 class='media-heading'>"+aname+"</p>";
+							st += "</h3>";
+							st += "<p>"+aaddr1+"&nbsp;&nbsp;("+cmajor+"&nbsp;"+cminor+")</p>";
+							st += "<p align='right'>등록일 : "+ainsertdate+"&nbsp;&nbsp;</p>";
 							st += "</div>";
 							st += "</div>";
+							st += "</a>";
 							st += "</div>";
+							st += "</p>";
 						}
 						$('.acaList').html(st);
 						$('.acaList').niceSelect('update');
 						console.log("done end >>> "+resParam);
-						toggle();
+// 						toggle();
 					}).fail(function(resParam){
 						alert("에러");
 					});					
@@ -208,16 +212,16 @@
 				
 			});//document function
 			
-			//즐겨찾기 토글버튼
-			function toggle(){
-				$('.toggle').click(function(){
-					console.log("toggle");
-					$(this).toggleClass("toggleBtn");
-					$(document).attr("action","bookMark.ec");
-					$(document).attr("method","post");
-					$(document).submit();
-				});//toggle click
-			}// toggle function
+// 			//즐겨찾기 토글버튼
+// 			function toggle(){
+// 				$('.toggle').click(function(){
+// 					console.log("toggle");
+// 					$(this).toggleClass("toggleBtn");
+// 					$(document).attr("action","bookMark.ec");
+// 					$(document).attr("method","post");
+// 					$(document).submit();
+// 				});//toggle click
+// 			}// toggle function
 			
 		</script>
 		
@@ -269,7 +273,7 @@
 							</select>
 						</td>
 						<td class="button-search">
-							<input type="button" id="search" class="genric-btn primary" value="검색">
+						&nbsp;<input type="button" id="search" class="genric-btn primary" value="검색">
 						</td>
 					</tr>
 				</table>
