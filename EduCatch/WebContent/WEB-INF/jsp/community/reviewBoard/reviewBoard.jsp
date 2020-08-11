@@ -1,3 +1,4 @@
+<%@page import="com.kosmo.educatch.vo.PagingVO"%>
 <%@page import="com.kosmo.educatch.vo.ReviewVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -64,6 +65,12 @@
 <body>
 <%
 
+	String pno="0";
+	String pagesize="0";
+	String groupsize="0";
+	String curpage="0";
+	String totalcount="0";
+
 	Object obj=request.getAttribute("listReview");
 
 	if(obj !=null){
@@ -110,6 +117,17 @@
 		for(int i=0; i<nCnt; i++){
 			ReviewVO rvo=(ReviewVO)listReview.get(i);
 			
+			pno=rvo.getPno();
+			pagesize=rvo.getPagesize();
+			groupsize=rvo.getGroupsize();
+			curpage=rvo.getCurpage();
+			totalcount=rvo.getTotalcount();
+			
+			System.out.println("rvo.getPno()"+rvo.getPno());
+			System.out.println("rvo.getGroupsize()"+rvo.getGroupsize());
+			System.out.println("rvo.getCurpage()"+rvo.getCurpage());
+			System.out.println("rvo.getTotalcount()"+rvo.getTotalcount());
+			
 			if(nCnt>0){
 		
 %>
@@ -139,6 +157,21 @@
 	}
 %>			
 			</tbody>
+			<tr>
+			<td colspan="18">
+			<jsp:include page="memberPaging.jsp" flush="true">
+				<jsp:param name="url" value="listReview.ec"/>
+				<jsp:param name="str" value=""/>
+				
+				
+					<jsp:param name="pagesize" value='<%= pagesize %>'/>
+					<jsp:param name="groupsize" value="<%= groupsize %>"/>
+					<jsp:param name="curpage" value="<%= curpage %>"/>
+					<jsp:param name="totalcount" value="<%= totalcount %>"/>
+					
+			</jsp:include>
+			</td>
+			</tr>
 		</table>
 	</div>
 	<div>

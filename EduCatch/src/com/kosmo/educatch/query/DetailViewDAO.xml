@@ -38,4 +38,23 @@
 		ORDER BY 1 DESC
 	</select>
 	
+	<select id="conViewList" parameterType="String" resultType="convenience">
+		
+		SELECT
+			    A.ACADEMY_ANO,
+                A.ACPARKING,
+                A.ACSTORE,
+                A.ACBUS,
+                A.ACELEVATOR,
+                A.ACSTUDYROOM,
+                A.ACLOUNGE,
+                A.ACLOCKER,
+                B.ANO
+		FROM 
+				ACADEMY_CONVENIENCE A , ACADEMY B
+		WHERE A.ACADEMY_ANO = B.ANO
+		AND ANO='A00001'
+		ORDER BY 1 DESC
+	</select>
+	
 </mapper>

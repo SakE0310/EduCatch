@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.kosmo.educatch.vo.SubjectVO"%>
+<%@page import="com.kosmo.educatch.vo.ConvenienceVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -285,11 +286,12 @@ html, body {
 <body>
 <%
 		Object obj = request.getAttribute("svo");
+		Object obj2 = request.getAttribute("cvo");
 	
 		if(obj != null){
 
 			SubjectVO svo = (SubjectVO)obj;
-					
+			ConvenienceVO cvo = (ConvenienceVO)obj2;
 			double AXPOINT = Double.parseDouble(svo.getAxpoint());
 			double AYPOINT = Double.parseDouble(svo.getAypoint());
 			String address = svo.getAaddr1() + "" + svo.getAaddr2();
@@ -301,6 +303,8 @@ html, body {
 	<h3>학원 이름 : <%=svo.getAname() %></h3>
 	학원주소 : <%=address %><br>
 	전화번호 : <%=svo.getAtel() %><br>
+	주차장 : <%=cvo.getAcparking() %>
+	휴게실 : <%=cvo.getAclounge() %>
 
 	평점 : REVIEWBOARD.RBGRADE<br>
 </div>
@@ -427,7 +431,6 @@ html, body {
 		<li class="tab-link" data-tab="tab-2">수업정보</li>
 		<li class="tab-link" data-tab="tab-3">후기</li>
 	</ul>
-	
 	
 	<!-- 학원정보 -->
 	<div id="tab-1" class="tab-content current">

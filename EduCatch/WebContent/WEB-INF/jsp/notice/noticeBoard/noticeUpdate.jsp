@@ -67,9 +67,9 @@
 			$("#edit").submit();
 		});
 		
-		//===관리자가 목록버튼을 누르면 실행========
+		//===관리자가 취소버튼을 누르면 실행========
 		$("#selectData").click(function() {
-			console.log("목록버튼 누름");
+			console.log("취소버튼 누름");
 			
 			$("#edit").attr("action","selectNotice.ec");
 			$("#edit").attr("method","POST");

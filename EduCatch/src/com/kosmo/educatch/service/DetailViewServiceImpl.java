@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 
 import com.kosmo.educatch.dao.DetailViewMapper;
 import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.ConvenienceVO;
 import com.kosmo.educatch.vo.SubjectVO;
 
 @Service
@@ -31,6 +32,19 @@ public class DetailViewServiceImpl implements DetailViewService {
 		log.info("DetailViewServiceImpl DetailViewList 끝 >>>> ");
 
 		return svo;
+	}
+	
+	// 학원 편의기능 정보
+	@Override
+	public ConvenienceVO conViewList(String ano) {
+		log.info("DetailViewServiceImpl conViewList 시작 >>>> ");
+		ConvenienceVO cvo = new ConvenienceVO();
+		cvo = detailViewMapper.conViewList(ano);
+		log.info("svo >>> " + cvo);
+
+		log.info("DetailViewServiceImpl conViewList 끝 >>>> ");
+		
+		return cvo;
 	}
 
 }

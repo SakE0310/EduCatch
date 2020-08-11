@@ -7,11 +7,19 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 상세보기</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
 	#contnent{
 		width : 600px;
 		height: 600px;
+	}
+	#table_head{
+		border-collapse: collapse;
+		background-color: #F5F5F5;
 	}
 </style>
 <script type="text/javascript">
@@ -22,6 +30,7 @@
 			$("#updateData").click(function() {
 				console.log("수정버튼 누름");
 				
+				//수정페이지로 이동
 				$("#nsubject").val();
 				$("#noticeSelForm").attr("action","updateDisplayNotice.ec");
 				$("#noticeSelForm").attr("method","POST");
@@ -40,9 +49,9 @@
 				
 			})//end of deleteData
 			
-			//===관리자가 취소버튼을 누르면 실행========
+			//===관리자가 목록버튼을 누르면 실행========
 			$("#listData").click(function() {
-				console.log("취소버튼 누름");
+				console.log("목록버튼 누름");
 				
 				$("#noticeSelForm").attr("action","listNotice.ec");
 				$("#noticeSelForm").attr("method","POST");
@@ -64,13 +73,13 @@
 		NoticeVO nvo =(NoticeVO)obj;
 
 %>
-	<div>
+	<div class="container">
 	<form id="noticeSelForm" name="noticeSelForm" >
 		 <input type="text" name="nno" id="nno" value="<%=nvo.getNno() %>" >
-		<table align="center" width="700" height="100" border="1">
-		 <thead>
+		<table align="center" width="700" height="100" class="table">
+		 <thead id="table_head">
              <tr>
-                 <th><div><%=nvo.getNsubject() %></div></th>
+                 <th><div align="center"><%=nvo.getNsubject() %></div></th>
              </tr>
          </thead>
          <tbody>
@@ -82,7 +91,7 @@
                              <span><em>수정일자 :</em><%=nvo.getNupdatedate()%></span>                                                </div>
                          <div>
                          <div id ="nname1" name="nname1" align="right" >
-                         	<span><em>작성자 :</em><%=nvo.getNupdatedate()%></span>
+                         	<span><em>작성자 :</em><%=nvo.getNname()%></span>
                          </div>
          			</div>
          		</td>

@@ -57,6 +57,22 @@ public class EventServiceImpl implements EventService{
 		return nCnt;
 	}//end of insertEvent
 
-	
+	//=============== 이벤트 수정=============================
+	@Override
+	public int updateEvent(EventVO param) {
+		log.info("EventServiceImpl updateEvent 시작>>>");
+		int nCnt = eventMapper.updateEvent(param);
+		log.info("EventServiceImpl updateEvent 끝>>>");
+		return nCnt;
+	}//end of updateEvent
+
+	//=============== 이벤트 삭제=============================
+	@Override
+	public int deleteEvent(EventVO param) {
+		log.info("EventServiceImpl updateEvent 시작>>>");
+		int nCnt = eventMapper.deleteEvent(param);
+		log.info("EventServiceImpl updateEvent 끝>>>");
+		return nCnt;
+	}//end of deleteEvent
 	
 }
