@@ -213,6 +213,13 @@
 				groupsize = nvo.getGroupsize();
 				curpage = nvo.getCurpage();
 				totalcount = nvo.getTotalcount();
+				
+				System.out.println("pagesize >>>"+pagesize);
+				System.out.println("groupsize >>>"+groupsize);
+				System.out.println("curpage >>>"+curpage);
+				System.out.println("totalcount >>>"+totalcount);
+				System.out.println("==============================");
+				
 %>
 				
 				<tr align="center">

@@ -22,9 +22,20 @@
 	// 전체 페이지의 개수
 	int pagecount = 0;
 	
+	String startDate=request.getParameter("startDate");
+	String endDate=request.getParameter("endDate");
+	String searchFilter=request.getParameter("searchFilter");
+	String keyword=request.getParameter("keyword");
 	
-	String pno=request.getParameter("pno");
-
+	pagesize = Integer.parseInt(request.getParameter("pagesize"));
+	groupsize = Integer.parseInt(request.getParameter("groupsize"));
+	curpage = Integer.parseInt(request.getParameter("curpage"));
+	totalcount = Integer.parseInt(request.getParameter("totalcount"));
+	
+	System.out.println("pagesize222 >>> : " + pagesize);
+	System.out.println("groupsize222 >>> : " + groupsize);
+	System.out.println("curpage222 >>> : " + curpage);
+	System.out.println("totalcount2222 >>> : " + totalcount);
 	
 	if(request.getParameter("pagesize") != null)
 	{
@@ -64,8 +75,8 @@
 	// 첫번째 그룹인 아닌경우
 	if(curGroup > 0) {
 %>
-	<a href="<%=url%>?&curPage=1&pno=P002">◁◁</a>&nbsp;&nbsp;&nbsp;
-	<a href="<%=url%>?&curPage=<%=linkPage%>&pno=P002">◀</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?&curPage=1&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>">◁◁</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?&curPage=<%=linkPage%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>">◀</a>&nbsp;&nbsp;&nbsp;
 <%
 	}
 	else
@@ -91,7 +102,7 @@
 		else
 		{
 %>
-	[<a href="<%=url%>?curpage=<%=linkPage%>&pno=P002"><%=linkPage%></a>]&nbsp;
+	[<a href="<%=url%>?curpage=<%=linkPage%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>"><%=linkPage%></a>]&nbsp;
 <%
 		}
 		
@@ -103,8 +114,8 @@
 	if(linkPage <= pagecount)
 	{
 %>
-	<a href="<%=url%>?curpage=<%=linkPage%>&pno=P002">▶</a>&nbsp;&nbsp;&nbsp;
-	<a href="<%=url%>?curpage=<%=pagecount%>&pno=P002">▷▷</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?curpage=<%=linkPage%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>">▶</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?curpage=<%=pagecount%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>">▷▷</a>&nbsp;&nbsp;&nbsp;
 <%
 	}
 	else

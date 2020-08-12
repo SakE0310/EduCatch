@@ -56,11 +56,17 @@ public class NoticeController {
 			startDate = "";
 			endDate ="";
 		}else {
-			startDate = startDate.replace("/", "-");
-			endDate = endDate.replace("/", "-");
-			log.info("startDate>>>"+startDate);
-			log.info("endDate>>>"+endDate);
+			/*
+			 * startDate = startDate.replace("/", "-"); endDate = endDate.replace("/", "-");
+			 * log.info("startDate>>>"+startDate); log.info("endDate>>>"+endDate);
+			 */
 		}
+		
+		/*
+		 * //페이징 변수 초기화..? if() {
+		 * 
+		 * }
+		 */
 		
 		if(request.getParameter("curpage") !=null) {
 			curpage=request.getParameter("curpage");
@@ -71,6 +77,11 @@ public class NoticeController {
 		param.setGroupsize(groupsize);
 		param.setCurpage(curpage);
 		param.setTotalcount(totalcount);
+		
+		log.info("param.getPno()>>>"+param.getPagesize());
+		log.info("getGroupsize>>>"+param.getGroupsize());
+		log.info("param.getCurpage()>>>"+param.getCurpage());
+		log.info("param.getTotalcount()>>>"+param.getTotalcount());
 
 		List<NoticeVO> list = noticeService.searchNotice(param);
 		log.info("NoticeController searchNotice list.size()>>>" + list.size());
@@ -123,6 +134,7 @@ public class NoticeController {
 		String curpage="1";
 		String totalcount="0";
 		
+		
 		//시작일 종료일 날짜형식 변환
 		if(startDate == null && endDate == null) {
 			startDate = "";
@@ -143,6 +155,11 @@ public class NoticeController {
 		param.setGroupsize(groupsize);
 		param.setCurpage(curpage);
 		param.setTotalcount(totalcount);
+
+		log.info("param.getPno()>>>"+param.getPagesize());
+		log.info("getGroupsize>>>"+param.getGroupsize());
+		log.info("param.getCurpage()>>>"+param.getCurpage());
+		log.info("param.getTotalcount()>>>"+param.getTotalcount());
 
 		List<NoticeVO> list = noticeService.listNotice(param);
 		log.info("NoticeController listNotice list.size()>>>" + list.size());
