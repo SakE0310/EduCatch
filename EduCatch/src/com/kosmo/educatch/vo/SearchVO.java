@@ -7,20 +7,12 @@ public class SearchVO extends ReviewVO{
 	private String cminor;	 //일본어
 	//지역
 	private String district; //강남구	
-	private String city;	 //개포동	
+	private String city;	 //개포동
+	
+	private String listcount;// 리스트 개수
 	
 	
 	public SearchVO(){
-		
-	}
-	
-	public SearchVO(String cno, String cmajor, String cminor, String district, String city) {
-		super();
-		this.cno = cno;
-		this.cmajor = cmajor;
-		this.cminor = cminor;
-		this.district = district;
-		this.city = city;
 	}
 	public String getCno() {
 		return cno;
@@ -52,6 +44,11 @@ public class SearchVO extends ReviewVO{
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
+	public String getListcount() {
+		return listcount;
+	}
+	public void setListcount(String listcount) {
+		this.listcount = listcount;
+	}
 	
 }

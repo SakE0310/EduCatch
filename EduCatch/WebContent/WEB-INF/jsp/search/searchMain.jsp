@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.kosmo.educatch.vo.SearchVO" %>
+<%@ page import="com.kosmo.educatch.vo.AcademyVO" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html>
@@ -20,6 +22,7 @@
 				ajaxGetDistrict();
 				//카테고리 함수
 				ajaxGetMajor();
+				
 				
 				//지역 대분류 변경시 지역소 분류 자동 변경
 				$('.select-district').on('change','select',function(){
@@ -71,6 +74,8 @@
 						st = "";
 						str = "";
 						console.log("acaList >>> "+resParam.acaList);
+							var listcount = resParam.acaList[0].listcount;
+							st = "<h5>"+listcount+"개의 학원이 조회됬습니다</h5>";
 						for(i in resParam.acaList){
 // 										+ resParam.acaList[i].axpoint
 // 										+ resParam.acaList[i].aypoint
@@ -79,7 +84,6 @@
 // 										+ resParam.acaList[i].aupdatedate
 // 										+ resParam.acaList[i].aaddrno
 // 				 			var atel = resParam.acaList[i].atel;
-// 							var aaddr2 = resParam.acaList[i].aaddr2;
 
 							var ainsertdate = resParam.acaList[i].ainsertdate;
 							var cmajor = resParam.acaList[i].cmajor;
@@ -88,17 +92,18 @@
 							var aname = resParam.acaList[i].aname;
 							var	alogo = resParam.acaList[i].alogo;
 							var aaddr1 = resParam.acaList[i].aaddr1;
+							var aaddr2 = resParam.acaList[i].aaddr2;
 							st += "<p>";
 							st += "<div class='panel panel-default'>";
 							st += "<a href='listDetailView.ec'>";
 							st += "<div class='media'>";
 							st += "<div class='media-left'>";
-							st += "<img src='/Users/son/git/EduCatch/EduCatch/WebContent/assets/img/sendMail/"+alogo+"' class='media-object' style='width:140px; height:140px'>";
+							st += "<img src='assets/img/sendMail/"+alogo+"' class='media-object' style='width:120px; height:120px'>";
 							st += "</div>";
 							st += "<div class='media-body'>";
 							st += "<p><h3 class='media-heading'>"+aname+"</p>";
 							st += "</h3>";
-							st += "<p>"+aaddr1+"&nbsp;&nbsp;("+cmajor+"&nbsp;"+cminor+")</p>";
+							st += "<p>"+aaddr1+"&nbsp;"+aaddr2+"&nbsp;&nbsp;("+cmajor+"&nbsp;"+cminor+")</p>";
 							st += "<p align='right'>등록일 : "+ainsertdate+"&nbsp;&nbsp;</p>";
 							st += "</div>";
 							st += "</div>";
@@ -109,7 +114,7 @@
 						$('.acaList').html(st);
 						$('.acaList').niceSelect('update');
 						console.log("done end >>> "+resParam);
-// 						toggle();
+						endlessScroll();
 					}).fail(function(resParam){
 						alert("에러");
 					});					
@@ -210,6 +215,21 @@
 					});
 				}//getMinor
 				
+				$(document).endlessScroll();
+				//무한 스크롤
+				function endlessScroll(){
+					$(document).ready(function(){
+					console.log("endless function in  >>> ");
+						$(window).endlessScroll({
+							inflowPixels : 300,
+							callback : function(){
+								var list = $('.media div:nth-last-child(5)').clone();
+								$('.media').append(list);
+							}
+						});
+					});
+				}
+				
 			});//document function
 			
 // 			//즐겨찾기 토글버튼
@@ -236,50 +256,53 @@
 	   		width: 100px;
 	   		border: 1px solid transparent;
 		}
+		#form {
+			margin: auto;
+		}
 		#show{
 			margin : 0 auto;
 			text-align : center;
-			padding : 50px 20px;
-		}
-		.toggleBtn{
-			color : red;
-			border : 1px solid bule;
+			padding : 200px 200px;
 		}
 		</style>
 	</head>
 	<body>
 		<main>
-			<div class="search-div">
-				<table class="search-table">
-					<tr class="search-header">
-						<td class="select-district">
-							<select id="district">
-								<option value=""></option>
-							</select>
-						</td>
-						<td class="select-city">
-							<select id="city">
-								<option value=""></option>
-							</select>
-						</td>
-						<td class="select-cmajor">
-							<select id="cmajor">
-								<option value=""></option>
-							</select>
-						</td>
-						<td class="select-cminor">
-							<select id="cminor">
-								<option value=""></option>
-							</select>
-						</td>
-						<td class="button-search">
-						&nbsp;<input type="button" id="search" class="genric-btn primary" value="검색">
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div class="container">
-				<div class="acaList"><p id="show">검색조건을 입력하세요<p></div>
+		<div class="container box_1170">
+			<div class="section-top-border">
+				<div class="row">
+					<div class="col-lg-10 col-md-10" id="form">
+							<table class="search-table">
+								<tr class="search-header">
+									<td class="select-district">
+										<select id="district">
+											<option value=""></option>
+										</select>
+									</td>
+									<td class="select-city">
+										<select id="city">
+											<option value=""></option>
+										</select>
+									</td>
+									<td class="select-cmajor">
+										<select id="cmajor">
+											<option value=""></option>
+										</select>
+									</td>
+									<td class="select-cminor">
+										<select id="cminor">
+											<option value=""></option>
+										</select>
+									</td>
+									<td class="button-search">
+									&nbsp;<input type="button" id="search" class="genric-btn primary" value="검색">
+									</td>
+								</tr>
+							</table>
+							<div class="acaList"><p id="show">검색조건을 입력하세요<p></div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</main>
 		<jsp:include page="../../../footer.jsp" flush="true">

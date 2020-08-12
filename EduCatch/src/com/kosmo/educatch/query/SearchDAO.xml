@@ -36,7 +36,8 @@
          TO_CHAR(AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
          TO_CHAR(AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE,
          B.CMAJOR AS CMAJOR,
-         B.CMINOR AS CMINOR
+         B.CMINOR AS CMINOR,
+         COUNT(A.ANO) OVER() AS LISTCOUNT
     FROM   ACADEMY A, CATEGORY B
     WHERE  A.CATEGORY_CNO = B.CNO
     AND    A.ADELETEYN = 'N'
@@ -56,11 +57,11 @@
 	</if>
 	</select>
 	
-	<select id="getReview" parameterType="search" resultType="search">
-	 SELECT 
-	 	AVG(A.RBGRADE) AS RBGRADE
-	 FROM REVIEWBOARD A, ACADEMY B 
-	 WHERE A.ACADEMY_ANO = B.ANO 
-	 GROUP BY ANO
-	</select>
+<!-- 	<select id="getReview" parameterType="search" resultType="search"> -->
+<!-- 	 SELECT  -->
+<!-- 	 	AVG(A.RBGRADE) AS RBGRADE -->
+<!-- 	 FROM REVIEWBOARD A, ACADEMY B  -->
+<!-- 	 WHERE A.ACADEMY_ANO = B.ANO  -->
+<!-- 	 GROUP BY ANO -->
+<!-- 	</select> -->
 </mapper>

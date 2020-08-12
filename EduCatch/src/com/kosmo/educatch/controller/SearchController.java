@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.service.SearchService;
-import com.kosmo.educatch.vo.ReviewVO;
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.SearchVO;
 
 @Controller
@@ -70,8 +70,8 @@ public class SearchController {
 	//학원리스트 받아오기
 	@ResponseBody
 	@RequestMapping("getAcaList")
-	public Map<String,List<SearchVO>>getAcaList(SearchVO param,
-											   HttpServletRequest req){
+	public Map<String,List<AcademyVO>>getAcaList(AcademyVO param,
+											     HttpServletRequest req){
 		log.info("search controller getAcaList start >>> ");
 		log.info("search controller getAcaList param >>> "+param);
 		
@@ -79,7 +79,7 @@ public class SearchController {
 		String city = req.getParameter("city");
 		String cmajor = req.getParameter("cmajor");
 		String cminor = req.getParameter("cminor");
-		log.info("search controller getAcaList cminor >>> "+cminor);
+		String curPage = "1";
 		
 		String[] cityArr = city.split(" ");
 		String cityStr = cityArr[0];
@@ -105,21 +105,20 @@ public class SearchController {
 		param.setCity(cityStr);
 		param.setCmajor(cmajor);
 		
-		log.info("search controller getAcaList district >>> "+district);
-		log.info("search controller getAcaList city >>> "+cityStr);
-		log.info("search controller getAcaList cmajor >>> "+cmajor);
+		log.info("search controller getAcaList param.getDistrict() >>> "+param.getDistrict());
+		log.info("search controller getAcaList param.getCity() >>> "+param.getCity());
+		log.info("search controller getAcaList param.getCmajor() >>> "+param.getCmajor());
+		log.info("search controller getAcaList param.getCminor() >>> "+param.getCminor());
 		
-		Map<String,List<SearchVO>>map = new HashMap<String,List<SearchVO>>();
-		List<SearchVO>list = searchService.getAcaList(param);
-		List<SearchVO>_list = searchService.getReview(param);
+		Map<String,List<AcademyVO>>map = new HashMap<String,List<AcademyVO>>();
+		List<AcademyVO>list = searchService.getAcaList(param);
 		map.put("acaList",list);
-		map.put("reviewList",_list);
 		log.info("search controller getAcaList list >>> "+list);
-		log.info("search controller getAcaList list >>> "+_list);
 		log.info("search controller getAcaList map >>> "+map);
 		log.info("search controller getAcaList end >>> ");
 		return map;
 	}//getAcaList
+	
 	
 }//end controller
 

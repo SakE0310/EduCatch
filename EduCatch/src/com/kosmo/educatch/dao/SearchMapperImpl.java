@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SearchVO;
 
@@ -36,24 +37,13 @@ public class SearchMapperImpl extends SqlSessionDaoSupport implements SearchMapp
 
 	//학원리스트 가져오기
 	@Override
-	public List<SearchVO> getAcaList(SearchVO param) {
+	public List<AcademyVO> getAcaList(AcademyVO param) {
 		// TODO Auto-generated method stub
 		log.info("Mapper getAcaList start >>> ");
-		List<SearchVO> list = getSqlSession().selectList("getAcaList");
+		List<AcademyVO> list = getSqlSession().selectList("getAcaList");
 		log.info("Mapper getAcaList list >>> "+list);
 		log.info("Mapper getAcaList end >>> ");
 		return list;
 	}//getAcaList
-
-	//평점 가져오기
-	@Override
-	public List<SearchVO> getReview(SearchVO param) {
-		// TODO Auto-generated method stub
-		log.info("Mapper getReview start >>> ");
-		List<SearchVO> list = getSqlSession().selectList("getReview");
-		log.info("Mapper getReview list >>> "+list);
-		log.info("Mapper getReview end >>> ");
-		return list;
-	}//getReview
 
 }
