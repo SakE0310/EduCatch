@@ -4,10 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<%-- -----------부트스크랩 상단------------- --%>
 <jsp:include page="../../../top.jsp" flush="true">
 	<jsp:param value="" name="" />
 </jsp:include>
 
+
+<%-- -----------CSS------------- --%>
 <style type="text/css">
 #form {
 	margin: auto;
@@ -29,92 +33,63 @@ input[type="file"] {
 </style>
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>
-<script type="text/javascript">
 
-$(document).ready(function(){
-	ajaxGetMajor();
-	
-	
-	$('#ex_filename').on('change', function(){
-		
-		var filename;
-		// 값이 변경되면 
-		if(window.FileReader){ 
-			// modern browser 
-			filename = $(this)[0].files[0].name; 
-		} else { 
-			// old IE 
-			filename = $(this).val().split('/').pop().split('\\').pop(); 
-			// 파일명만 추출 
-		} // 추출한 파일명 삽입
-		var fileType = filename.split(".")[1];
-		fileType = fileType.toLowerCase();
-		if(fileType=='jpg' || fileType == 'gif' || fileType == 'png' || fileType == 'jpeg' || fileType == 'bmp'){
-			
-		}else{
-			alert('이미지 파일만 선택할 수 있습니다.')
-			return false;
-		}
-		$('#alogo').val(filename);
-		
-	});
-	
-	$('#addAcademy').on('click', function(){
-		if($('#alogo').val() != null && $('#alogo').val() != ""){
-			$('#academyInfo').attr("enctype", "multipart/form-data");
-		}else{
-		
-		}
-		
-		$('#academyInfo').attr("action", "insertAcademy.ec");
-		$('#academyInfo').attr("method", "POST");
-		$('#academyInfo').submit();
-	});
-	
-	$(".form-select.major").on('change', 'select', function() {
-		  var setMajor = $("#cmajor").val();
-		  console.log('setmajor >>> ' + setMajor);
-		  ajaxGetMinor(setMajor);
-	});
-	
-	$(document).on('keyup', '#aaddr2', function(){
-		var geocoder = new kakao.maps.services.Geocoder();
+<%-- -----------스크립트------------- --%>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript">
 
-		var callback = function(result, status) {
-		    if (status === kakao.maps.services.Status.OK) {
-		        console.log(result);
-		        console.log(result[0].x);
-		        console.log(result[0].y);
-		        $('#axpoint').val(result[0].x);
-				$('#aypoint').val(result[0].y);
-		    }
-		};
+	$(document).ready(function(){
+		ajaxGetMajor();
 		
-		var address = $('#aaddr1').val() + " " + $('#aaddr2').val();
 		
-		geocoder.addressSearch(address, callback);
-		
-	});
-	
-});
-
-function addrCheck(){
-	new daum.Postcode({
-		oncomplete: function(data){
-			console.log("새우편번호 >>> : " + data.zonecode);
-			console.log("주소값 >>> : " + data.address);
-			console.log("빌딩값 >>> : " + data.buildingName);	
-			$('#aaddrno').val(data.zonecode);
-			$('#aaddr1').val(data.address);
-			$('#aaddr2').val(data.buildingName);
+		$('#ex_filename').on('change', function(){
 			
+			var filename;
+			// 값이 변경되면 
+			if(window.FileReader){ 
+				// modern browser 
+				filename = $(this)[0].files[0].name; 
+			} else { 
+				// old IE 
+				filename = $(this).val().split('/').pop().split('\\').pop(); 
+				// 파일명만 추출 
+			} // 추출한 파일명 삽입
+			var fileType = filename.split(".")[1];
+			fileType = fileType.toLowerCase();
+			if(fileType=='jpg' || fileType == 'gif' || fileType == 'png' || fileType == 'jpeg' || fileType == 'bmp'){
+				
+			}else{
+				alert('이미지 파일만 선택할 수 있습니다.')
+				return false;
+			}
+			$('#alogo').val(filename);
 			
+		});
+		
+		$('#addAcademy').on('click', function(){
+			if($('#alogo').val() != null && $('#alogo').val() != ""){
+				$('#academyInfo').attr("enctype", "multipart/form-data");
+			}else{
+			
+			}
+			
+			$('#academyInfo').attr("action", "insertAcademy.ec");
+			$('#academyInfo').attr("method", "POST");
+			$('#academyInfo').submit();
+		});
+		
+		$(".form-select.major").on('change', 'select', function() {
+			  var setMajor = $("#cmajor").val();
+			  console.log('setmajor >>> ' + setMajor);
+			  ajaxGetMinor(setMajor);
+		});
+		
+		//두번째 주소창값을 가지고 좌표찍기
+		$(document).on('keyup', '#aaddr2', function(){
 			var geocoder = new kakao.maps.services.Geocoder();
-
+	
 			var callback = function(result, status) {
 			    if (status === kakao.maps.services.Status.OK) {
 			        console.log(result);
@@ -128,60 +103,93 @@ function addrCheck(){
 			var address = $('#aaddr1').val() + " " + $('#aaddr2').val();
 			
 			geocoder.addressSearch(address, callback);
+			
+		});
+		
+	});
+	
+	function addrCheck(){
+		new daum.Postcode({
+			oncomplete: function(data){
+				console.log("새우편번호 >>> : " + data.zonecode);
+				console.log("주소값 >>> : " + data.address);
+				console.log("빌딩값 >>> : " + data.buildingName);	
+				$('#aaddrno').val(data.zonecode);
+				$('#aaddr1').val(data.address);
+				$('#aaddr2').val(data.buildingName);
+				
+				
+				//주소를 가져왔을때 좌표찍기 
+				var geocoder = new kakao.maps.services.Geocoder();
+	
+				var callback = function(result, status) {
+				    if (status === kakao.maps.services.Status.OK) {
+				        console.log(result);
+				        console.log(result[0].x);
+				        console.log(result[0].y);
+				        $('#axpoint').val(result[0].x);
+						$('#aypoint').val(result[0].y);
+				    }
+				};
+				
+				var address = $('#aaddr1').val() + " " + $('#aaddr2').val();
+				
+				geocoder.addressSearch(address, callback);
+						
+					
 					
 				
-				
+			}
+		}).open();
+	}
+	
+	function ajaxGetMajor(){
+		$.ajax({
+			url : "getCmajor.ec",
+		}).done(function(resultParam){
+			var str="";
+			for(i in resultParam.major){
+				console.log(i);
+				var cmajor = resultParam.major[i].cmajor;
+				str += "<option value='"+cmajor+"'>"+cmajor+"</option>\n";
+			}
+			$('select#cmajor').html(str);
+			$('select#cmajor').niceSelect('update');
+			ajaxGetMinor(resultParam.major[0].cmajor);
+			var a = resultParam.major;
+		}).fail(function(resultParam){
+			alert("초기화에 문제가 발생하였습니다.");
+		});
+	
+	}
+	
+	function ajaxGetMinor(param){
+		console.log("param >>> " + param);
+		$.ajax({
+			url : "getCminor.ec",
+			data : {
+				"major" : param
+			}
 			
-		}
-	}).open();
-}
-
-function ajaxGetMajor(){
-	$.ajax({
-		url : "getCmajor.ec",
-	}).done(function(resultParam){
-		var str="";
-		for(i in resultParam.major){
-			console.log(i);
-			var cmajor = resultParam.major[i].cmajor;
-			str += "<option value='"+cmajor+"'>"+cmajor+"</option>\n";
-		}
-		$('select#cmajor').html(str);
-		$('select#cmajor').niceSelect('update');
-		ajaxGetMinor(resultParam.major[0].cmajor);
-		var a = resultParam.major;
-	}).fail(function(resultParam){
-		alert("초기화에 문제가 발생하였습니다.");
-	});
-
-}
-
-function ajaxGetMinor(param){
-	console.log("param >>> " + param);
-	$.ajax({
-		url : "getCminor.ec",
-		data : {
-			"major" : param
-		}
-		
-	}).done(function(resultParam){
-		console.log("getMinor >>> ");
-		var str="";
-		for(i in resultParam.minor){
-			console.log(i);
-			var cmajor = resultParam.minor[i].cminor;
-			str += "<option value='"+cmajor+"'>"+cmajor+"</option>\n";
-		}
-		$('select#cminor').html(str);
-		$('select#cminor').niceSelect('update');
-	}).fail(function(resultParam){
-		alert("초기화에 문제가 발생하였습니다.");
-	});
-
-}
-</script>
+		}).done(function(resultParam){
+			console.log("getMinor >>> ");
+			var str="";
+			for(i in resultParam.minor){
+				console.log(i);
+				var cmajor = resultParam.minor[i].cminor;
+				str += "<option value='"+cmajor+"'>"+cmajor+"</option>\n";
+			}
+			$('select#cminor').html(str);
+			$('select#cminor').niceSelect('update');
+		}).fail(function(resultParam){
+			alert("초기화에 문제가 발생하였습니다.");
+		});
+	
+	}
+	</script>
 </head>
 <body>
+<%-- ----------- 바디 ------------- --%>
 <%
 	Object obj = null;
 	obj = request.getAttribute("resultStr");
@@ -227,19 +235,31 @@ function ajaxGetMinor(param){
 									</select>
 								</div>
 							</div>
-							
-							<div class="mt-10">
+							<div class="row">
 								 <h2>편의기능 </h2>
-								 <input type="checkbox" id="acparking" name="acparking" value="Y">주차장
-								 <input type="checkbox" id="acstore" name="acstore" value="Y">편의점
+								 <br>
+								 <div class="mt-10">
+									 <input type="checkbox" id="acparking" name="acparking" value="Y">주차장
+								 </div>
+								 <div class="mt-10">
+								 	<input type="checkbox" id="acstore" name="acstore" value="Y">편의점
+								 </div>
+								 	<div class="mt-10">
 								 <input type="checkbox" id="acbus" name="acbus" value="Y">셔틀버스
-								 <input type="checkbox" id="acelevator" name="acelevator" value="Y">엘리베이터
-								 <input type="checkbox" id="acstudyroom" name="acstudyroom" value="Y">자습실
-								 <input type="checkbox" id="aclounge" name="aclounge" value="Y">휴게실
-								 <input type="checkbox" id="aclocker" name="aclocker" value="Y">사물함
+								 </div>
+								 <div class="mt-10">
+								 	<input type="checkbox" id="acelevator" name="acelevator" value="Y">엘리베이터
+								 </div>
+								 <div class="mt-10">
+								 	<input type="checkbox" id="acstudyroom" name="acstudyroom" value="Y">자습실
+								 </div>
+								 <div class="mt-10">
+								 	<input type="checkbox" id="aclounge" name="aclounge" value="Y">휴게실
+								 </div>
+								 <div class="mt-10">
+									 <input type="checkbox" id="aclocker" name="aclocker" value="Y">사물함
+							   	 </div>
 							</div>
-							
-							
 							<div class="row">
 								<div class="mt-10 col">
 									<input type="text" name="aaddrno" id="aaddrno" placeholder="우편번호(도로명주소)"
@@ -284,6 +304,9 @@ function ajaxGetMinor(param){
 			</div>
 		</div>
 	</main>
+	
+	
+	<%-- -----------부트스크랩 하단------------- --%>
 	<jsp:include page="../../../footer.jsp" flush="true">
 		<jsp:param value="" name="" />
 	</jsp:include>

@@ -6,6 +6,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
+import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SubjectVO;
 
 import org.apache.log4j.Logger;
@@ -24,6 +25,12 @@ public class DetailViewMapperImpl extends SqlSessionDaoSupport implements Detail
 	@Override
 	public ConvenienceVO conViewList(String ano) {
 		return getSqlSession().selectOne("DetailViewMapper.conViewList");
+	}
+	
+	//리뷰 게시판 평점
+	@Override
+	public AcademyVO gradeSelect(String rno) {
+		return getSqlSession().selectOne("DetailViewMapper.gradeSelect");
 	}
 	
 	

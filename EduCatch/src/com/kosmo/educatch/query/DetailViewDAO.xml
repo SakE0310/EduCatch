@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosmo.educatch.dao.DetailViewMapper">
+
+
 	
 	<select id="DetailViewList" parameterType="String" resultType="subjectview">
 		
@@ -34,7 +36,7 @@
 		WHERE A.ACADEMY_ANO = B.ANO
 		AND A.SDELETEYN = 'N'
 		AND B.ADELETEYN = 'N'
-		AND ANO='A00001'
+		AND ANO= 'A00001'
 		ORDER BY 1 DESC
 	</select>
 	
@@ -55,6 +57,18 @@
 		WHERE A.ACADEMY_ANO = B.ANO
 		AND ANO='A00001'
 		ORDER BY 1 DESC
+	</select>
+	
+	
+	<select id="gradeSelect" parameterType="String" resultType="academyview">
+		SELECT
+            AVG(A.RBGRADE) AS RBGRADE
+        FROM 
+            REVIEWBOARD A, ACADEMY B
+        WHERE
+            A.ACADEMY_ANO = B.ANO
+            AND B.ANO = 'A00001'
+        GROUP BY B.ANO
 	</select>
 	
 </mapper>

@@ -9,4 +9,5 @@ import com.kosmo.educatch.vo.SubjectVO;
 public interface DetailViewService {
 	public SubjectVO DetailViewList(String sno);
 	public ConvenienceVO conViewList(String ano);
+	public AcademyVO gradeSelect(String rno);
 }

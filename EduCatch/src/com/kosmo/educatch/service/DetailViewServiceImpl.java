@@ -46,5 +46,18 @@ public class DetailViewServiceImpl implements DetailViewService {
 		
 		return cvo;
 	}
+	
+	// 리뷰 게시판 평점
+	@Override
+	public AcademyVO gradeSelect(String rno) {
+		log.info("DetailViewServiceImpl gradeSelect 시작 >>>> ");
+		AcademyVO rvo = new AcademyVO();
+		rvo = detailViewMapper.gradeSelect(rno);
+		log.info("rvo >>> " + rvo);
+
+		log.info("DetailViewServiceImpl gradeSelect 끝 >>>> ");
+		
+		return rvo;
+	}
 
 }

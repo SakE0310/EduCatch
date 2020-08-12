@@ -23,18 +23,21 @@ public class DetailViewController {
 
 	// 상세조회
 	@RequestMapping("listDetailView")
-	public ModelAndView listDetailView(@ModelAttribute SubjectVO param) {
+	public ModelAndView listDetailView(@ModelAttribute AcademyVO param) {
 		ModelAndView mav = new ModelAndView();
 		
 		//String sno = param.getSno();
-		String sno = "1";
+		String sno = "A00001";
 		
 		SubjectVO svo = detailViewService.DetailViewList(sno);
 		ConvenienceVO cvo = detailViewService.conViewList(sno);
+		AcademyVO rvo = detailViewService.gradeSelect(sno);
 
 
 		mav.addObject("svo", svo);
 		mav.addObject("cvo", cvo);
+		mav.addObject("rvo", rvo);
+		
 		mav.setViewName("search/detailView");
 		log.info("DepartmentController listDepartment mav >>> : " + mav);
 		

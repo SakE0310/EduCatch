@@ -2,36 +2,52 @@
 	pageEncoding="UTF-8"%>
 <%@page import="com.kosmo.educatch.vo.SubjectVO"%>
 <%@page import="com.kosmo.educatch.vo.ConvenienceVO"%>
+<%@page import="com.kosmo.educatch.vo.AcademyVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Kakao 지도 시작하기</title>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript">
-
-	$(document).ready(function(){
-		
-		$('ul.tabs li').click(function(){
-			var tab_id = $(this).attr('data-tab');
-	
-			$('ul.tabs li').removeClass('current');
-			$('.tab-content').removeClass('current');
-	
-			$(this).addClass('current');
-			$("#"+tab_id).addClass('current');
-		})
-	});
-	</script>
-
-
-
+<%-- -----------CSS------------- --%>
 <style type="text/css">
-<!-- 이곳은 탭 메뉴 -->
 
+#fontman{
+		font-weight: bold;
+}
+
+<%-- --전체,컨텐츠-- --%> 
+#all{
+		border-left:1px solid #f3f3f3;
+		border-right:1px solid #f3f3f3;
+		background:#f3f3f3;
+
+}
+
+#content{
+		width:1200px;
+		height:auto;
+		margin:0 auto;
+		border-left:1px solid #d8d8d8;
+		border-right:1px solid #d8d8d8;
+		border-top:1px solid #d8d8d8;
+		border-bottom:1px solid #d8d8d8;
+		background:#ffffff;
+}
+
+#linked{ 
+		color: black;
+
+}
+
+
+
+
+
+
+
+<!-- 이곳은 탭 메뉴 -->
 body{
 	margin-top: 1000px;
 	font-family: 'Trebuchet MS', serif;
@@ -70,6 +86,7 @@ ul.tabs li.current{
 .tab-content.current{
 	display: inherit;
 }
+
 
 
 <!-- 이곳은 카카오맵 API-->
@@ -282,190 +299,308 @@ html, body {
 }
 
 </style>
+
+
+<%-- -----------스크립트------------- --%>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		$('ul.tabs li').click(function(){
+			var tab_id = $(this).attr('data-tab');
+	
+			$('ul.tabs li').removeClass('current');
+			$('.tab-content').removeClass('current');
+	
+			$(this).addClass('current');
+			$("#"+tab_id).addClass('current');
+		});
+		
+	});
+	
+	</script>
 </head>
 <body>
+<%-- -----------부트스크랩 상단------------- --%>
+<jsp:include page="../../../top.jsp" flush="true">
+	<jsp:param value="" name="" />
+</jsp:include>
+
+<%-- ----------- 바디 ------------- --%>
 <%
 		Object obj = request.getAttribute("svo");
 		Object obj2 = request.getAttribute("cvo");
+		Object obj3 = request.getAttribute("rvo");
 	
 		if(obj != null){
 
 			SubjectVO svo = (SubjectVO)obj;
 			ConvenienceVO cvo = (ConvenienceVO)obj2;
+			AcademyVO rvo = (AcademyVO)obj3;
 			double AXPOINT = Double.parseDouble(svo.getAxpoint());
 			double AYPOINT = Double.parseDouble(svo.getAypoint());
 			String address = svo.getAaddr1() + "" + svo.getAaddr2();
 					
 %>
 
-<!--  학원정보  -->
-<div align="center">
-	<h3>학원 이름 : <%=svo.getAname() %></h3>
-	학원주소 : <%=address %><br>
-	전화번호 : <%=svo.getAtel() %><br>
-	주차장 : <%=cvo.getAcparking() %>
-	휴게실 : <%=cvo.getAclounge() %>
-
-	평점 : REVIEWBOARD.RBGRADE<br>
-</div>
-	<div align="center">
-		<div class="map_wrap">
-			<div id="map"
-				style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-			<!-- 지도타입 컨트롤 div 입니다 -->
-			<div class="custom_typecontrol1 radius_border1">
-				<span id="btnRoadmap" class="selected_btn10"
-					onclick="setMapType('roadmap')">지도</span> <span id="btnSkyview"
-					class="btn10" onclick="setMapType('skyview')">스카이뷰</span>
-			</div>
-			<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
-			<div class="custom_zoomcontrol1 radius_border1">
-				<span onclick="zoomIn()"><img
-					src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png"
-					alt="확대"></span> <span onclick="zoomOut()"><img
-					src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png"
-					alt="축소"></span>
+<div id="all">
+	<section id="content">
+		<div id="top">
+			<div id="topcon" align="center">
+			<table style="margin-left: auto; margin-right: auto;" border="0" cellpadding="1" cellspacing="1" id="fontman">
+				<tr>
+					<td>
+					<br><br><br><br>
+						<img src="/EduCatch/assets/img/academyLogo/<%= svo.getAlogo() %>" border=0 width="150" height="150" />
+					</td>
+					<td>
+					<br><br><br><br>
+						<h1 style="font-weight:bold;" align="center"><%=svo.getAname() %></h1>
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=address %><br>
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=svo.getAtel() %><br>
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 평점 : <%= rvo.getRbgrade() %><br>
+					</td>
+				</tr>
+			</table>
+			
+			<br><br>
+			<h4 align="right">업데이트 날짜 : <%= svo.getAupdatedate()%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>
+			
 			</div>
 		</div>
-		<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>
-		<script>
-			var container = document.getElementById('map');
-			var options = {
-				center : new kakao.maps.LatLng(<%= AYPOINT %>, <%= AXPOINT %>),
-				level : 3
-			};
-	
-			var map = new kakao.maps.Map(container, options);
 		
-			
-			// markers 배열로 두어 marker 들을 넣음
-			var markers = [];
-			var marker = new kakao.maps.Marker({
-				position : new kakao.maps.LatLng(<%= AYPOINT %>, <%= AXPOINT %>)
-			});
-			
-			markers.push(marker);
-			
-			// markers를 map에 세팅
-			for (var i = 0; i < markers.length; i++) {
-		        markers[i].setMap(map);
-		    }  
 	
-			function setMapType(maptype) {
-				var roadmapControl = document.getElementById('btnRoadmap');
-				var skyviewControl = document.getElementById('btnSkyview');
-				if (maptype === 'roadmap') {
-					map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
-					roadmapControl.className = 'selected_btn10';
-					skyviewControl.className = 'btn10';
-				} else {
-					map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
-					skyviewControl.className = 'selected_btn10';
-					roadmapControl.className = 'btn10';
+	
+		
+	
+		
+		<br>
+		<hr align="center" style="border: solid 4px black;">
+		<br>
+		
+		
+		
+		<%-- ----------- 카카오맵 API ------------- --%>
+		<div align="center">
+			<div class="map_wrap">
+				<div id="map"
+					style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+				<!-- 지도타입 컨트롤 div 입니다 -->
+				<div class="custom_typecontrol1 radius_border1">
+					<span id="btnRoadmap" class="selected_btn10"
+						onclick="setMapType('roadmap')">지도</span> <span id="btnSkyview"
+						class="btn10" onclick="setMapType('skyview')">스카이뷰</span>
+				</div>
+				<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+				<div class="custom_zoomcontrol1 radius_border1">
+					<span onclick="zoomIn()"><img
+						src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png"
+						alt="확대"></span> <span onclick="zoomOut()"><img
+						src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png"
+						alt="축소"></span>
+				</div>
+			</div>
+			<script>
+				var container = document.getElementById('map');
+				var options = {
+					center : new kakao.maps.LatLng(<%= AYPOINT %>, <%= AXPOINT %>),
+					level : 3
+				};
+		
+				var map = new kakao.maps.Map(container, options);
+			
+				
+				// markers 배열로 두어 marker 들을 넣음
+				var markers = [];
+				var marker = new kakao.maps.Marker({
+					position : new kakao.maps.LatLng(<%= AYPOINT %>, <%= AXPOINT %>)
+				});
+				
+				markers.push(marker);
+				
+				// markers를 map에 세팅
+				for (var i = 0; i < markers.length; i++) {
+			        markers[i].setMap(map);
+			    }  
+		
+				function setMapType(maptype) {
+					var roadmapControl = document.getElementById('btnRoadmap');
+					var skyviewControl = document.getElementById('btnSkyview');
+					if (maptype === 'roadmap') {
+						map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
+						roadmapControl.className = 'selected_btn10';
+						skyviewControl.className = 'btn10';
+					} else {
+						map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
+						skyviewControl.className = 'selected_btn10';
+						roadmapControl.className = 'btn10';
+					}
 				}
-			}
-	
-			// 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-			function zoomIn() {
-				map.setLevel(map.getLevel() - 1);
-			}
-	
-			// 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-			function zoomOut() {
-				map.setLevel(map.getLevel() + 1);
-			}
-			
-			// 커스텀 오버레이에 표시할 컨텐츠 입니다
-			// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
-			// 별도의 이벤트 메소드를 제공하지 않습니다 
-			
-			
-			
-			var content = '<div class="wrap">' + 
-			            '    <div class="info">' + 
-			            '        <div class="title">' + 
-			            '          <%= svo.getAname()%>  ' + 
-			            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-			            '        </div>' + 
-			            '        <div class="body">' + 
-			            '            <div class="img">' +
-			            '                <img src="/EduCatch/assets/img/academyLogo/<%= svo.getAlogo() %>" border=0 width="73" height="70" >' +
-			            '           </div>' + 
-			            '            <div class="desc">' + 
-			            '                <div class="ellipsis"><%= svo.getAaddr1()%><%= svo.getAaddr2() %> </div>' + 
-			            '                <div class="jibun ellipsis">(우)<%= svo.getAaddrno()%> </div> '+ 
-			            '            </div>' + 
-			            '        </div>' + 
-			            '    </div>' +    
-			            '</div>';
-			// 마커 위에 커스텀오버레이를 표시합니다
-			// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-			var overlay = new kakao.maps.CustomOverlay({
-			    content: content,
-			    map: map,
-			    position: markers[0].getPosition()       
-			});
-	
-			// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-			kakao.maps.event.addListener(markers[0], 'click', function() {
-			    overlay.setMap(map);
-			});
-	
-			// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-			function closeOverlay() {
-			    overlay.setMap(null);     
-			}
-		</script>
-	</div>
-	
-	
-	<br><br><br><br><br>
-	<hr align="center" style="border: solid 5px black;">
-	<br><br><br><br><br>
-	
-	<div class="container">
-
-	<ul class="tabs">
-		<li class="tab-link current" data-tab="tab-1">기본정보</li>
-		<li class="tab-link" data-tab="tab-2">수업정보</li>
-		<li class="tab-link" data-tab="tab-3">후기</li>
-	</ul>
-	
-	<!-- 학원정보 -->
-	<div id="tab-1" class="tab-content current">
-	
-		ACADEMY<br>
-		학원이름  : <%= svo.getAname()%> <br>
-		전화번호 : <%=svo.getAtel() %> <br>
-		우편번호 : <%=svo.getAaddrno() %> <br>
-		주소 : <%= address%> <br>
-		<br>
-		게시일 : <%= svo.getAinsertdate()%><br>
-		수정일 : <%= svo.getAupdatedate()%><br>
 		
-	</div>
+				// 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+				function zoomIn() {
+					map.setLevel(map.getLevel() - 1);
+				}
+		
+				// 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+				function zoomOut() {
+					map.setLevel(map.getLevel() + 1);
+				}
+				
+				// 커스텀 오버레이에 표시할 컨텐츠 입니다
+				// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
+				// 별도의 이벤트 메소드를 제공하지 않습니다 
+				
+				
+				
+				var content = '<div class="wrap">' + 
+				            '    <div class="info">' + 
+				            '        <div class="title">' + 
+				            '          <%= svo.getAname()%>  ' + 
+				            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+				            '        </div>' + 
+				            '        <div class="body">' + 
+				            '            <div class="img">' +
+				            '                <img src="/EduCatch/assets/img/academyLogo/<%= svo.getAlogo() %>" border=0 width="73" height="70" >' +
+				            '           </div>' + 
+				            '            <div class="desc">' + 
+				            '                <div class="ellipsis"><%= svo.getAaddr1()%><%= svo.getAaddr2() %> </div>' + 
+				            '                <div class="jibun ellipsis">(우)<%= svo.getAaddrno()%> </div> '+ 
+				            '            </div>' + 
+				            '        </div>' + 
+				            '    </div>' +    
+				            '</div>';
+				// 마커 위에 커스텀오버레이를 표시합니다
+				// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+				var overlay = new kakao.maps.CustomOverlay({
+				    content: content,
+				    map: map,
+				    position: markers[0].getPosition()       
+				});
+		
+				// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+				kakao.maps.event.addListener(markers[0], 'click', function() {
+				    overlay.setMap(map);
+				});
+		
+				// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+				function closeOverlay() {
+				    overlay.setMap(null);     
+				}
+			</script>
+		</div>
+		
 	
-	<!-- 과목정보 -->
-	<div id="tab-2" class="tab-content">
-		SUBJECT<br>
-		과목명 : <%=svo.getSname() %><br>
-		수강 날짜 : <%=svo.getSday() %><br>
-		수강시간 : <%=svo.getStime() %><br>
-		수강인원 : <%=svo.getSpeople() %><br>
-		수강료 : <%=svo.getSprice() %><br>
-		<br>
-		게시일 : <%= svo.getSinsertdate()%><br>
-		수정일 : <%= svo.getSupdatedate()%>
-	</div>
-	
-	<div id="tab-3" class="tab-content">
-		REVIEWBOARD<br>
-		후기게시판 불러오기
-	</div>
-<%
-		}
-%>
+		<div class="container">
+		<ul class="tabs">
+			<li class="tab-link current" data-tab="tab-1">기본정보</li>
+			<li class="tab-link" data-tab="tab-2">수업정보</li>
+			<li class="tab-link" data-tab="tab-3">후기</li>
+		</ul>
+		<!-- 학원정보 -->
+		<div id="tab-1" class="tab-content current">
+		
+			ACADEMY<br>
+			학원이름  : <%= svo.getAname()%> <br>
+			전화번호 : <%=svo.getAtel() %> <br>
+			우편번호 : <%=svo.getAaddrno() %> <br>
+			주소 : <%= address%> <br>
+			<br>
+			게시일 : <%= svo.getAinsertdate()%><br>
+			수정일 : <%= svo.getAupdatedate()%><br>
+			<br>
+			보유 편의 기능
+			<br><br>
+			<%
+				String acparking = cvo.getAcbus();
+				String acstore = cvo.getAcstore();
+				String acbus = cvo.getAcbus();
+				String acelevator = cvo.getAcelevator();
+				String acstudyroom = cvo.getAcstudyroom();
+				String aclounge = cvo.getAclounge();
+				String aclocker = cvo.getAclocker();
+				//주차장
+				if(acparking.equals("Y")){
+					%>
+					<img src="/EduCatch/assets/img/convenience/parking.png" border=0 width="150" height="150" />
+					<%
+				}
+				//편의점
+				if(acstore.equals("Y")){
+					%>
+					<img src="/EduCatch/assets/img/convenience/convenience.png" border=0 width="150" height="150" />
+					<%
+				}
+				//셔틀버스
+				if(acbus.equals("Y")){
+					%>
+					<img src="/EduCatch/assets/img/convenience/bus.png" border=0 width="150" height="150" />
+					<%
+				}
+				//엘레베이터
+				if(acelevator.equals("Y")){
+					%>
+					<img src="/EduCatch/assets/img/convenience/elevator.png" border=0 width="150" height="150" />
+					<%
+				}
+				//자습실
+				if(acstudyroom.equals("Y")){
+					%>
+					<img src="/EduCatch/assets/img/convenience/studyroom.png" border=0 width="150" height="150" />
+					<%
+				}
+				//휴게실
+				if(aclounge.equals("Y")){
+					%>
+					<img src="/EduCatch/assets/img/convenience/lounge.png" border=0 width="150" height="150" />
+					<%
+				}
+				//사물함
+				if(aclocker.equals("Y")){
+					%>
+					<img src="/EduCatch/assets/img/convenience/locker.png" border=0 width="150" height="150" />
+					<%
+				}
+			%>
+		</div>
+		
+		<!-- 과목정보 -->
+		<div id="tab-2" class="tab-content">
+			SUBJECT<br>
+			과목명 : <%=svo.getSname() %><br>
+			수강 날짜 : <%=svo.getSday() %><br>
+			수강시간 : <%=svo.getStime() %><br>
+			수강인원 : <%=svo.getSpeople() %><br>
+			수강료 : <%=svo.getSprice() %><br>
+			<br>
+			게시일 : <%= svo.getSinsertdate()%><br>
+			수정일 : <%= svo.getSupdatedate()%>
+		</div>
+		
+		<div id="tab-3" class="tab-content">
+			REVIEWBOARD<br>
+			후기게시판 불러오기
+		</div>
+		
+		
+		
+		
+		
+		
+	<%
+			}
+	%>
+		</div>
+	</section>
 </div>
+
+<%-- -----------부트스크랩 하단------------- --%>
+	<jsp:include page="../../../footer.jsp" flush="true">
+		<jsp:param value="" name="" />
+	</jsp:include>
 </body>
 </html>
