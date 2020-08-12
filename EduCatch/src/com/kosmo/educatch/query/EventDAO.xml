@@ -3,22 +3,68 @@
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosmo.educatch.dao.EventMapper">
 
-	<!-- 이벤트  전제조회 -->
+	<!-- 이벤트 검색 + 페이징 -->
+	<select id="searchEvent" parameterType="event" resultType="event">
+	SELECT * FROM(
+	           SELECT
+	                    A.ENO                                         AS ENO            -- 이벤트 글번호
+	                    ,A.ESUBJECT                                   AS ESUBJECT       -- 이벤트 제목
+	                    ,A.ENAME                                      AS ENAME          -- 이벤트 작성자
+	                    ,A.EIMG                                       AS EIMG           -- 이벤트 이미지
+	                    ,A.ECONTENT                                   AS ECONTENT       -- 이벤트 내용
+	                    ,A.EDELETEYN                                  AS EDELETEYN      -- 이벤트 삭제여부
+	                    ,TO_CHAR(A.EINSERTDATE,'YYYY-MM-DD')          AS EINSERTDATE    -- 이벤트 등록날짜
+	                    ,TO_CHAR(A.EUPDATEDATE,'YYYY-MM-DD')          AS EUPDATEDATE    -- 이벤트 수정날짜
+	                    ,CEIL(ROW_NUMBER() OVER(ORDER BY A.ENO DESC)/#{pagesize, jdbcType=VARCHAR})  AS PAGENO
+	                    ,COUNT(A.ENO) OVER() AS TOTALCOUNT
+	                    ,#{curpage, jdbcType=VARCHAR}		AS CURPAGE
+               			,#{pagesize, jdbcType=VARCHAR}		AS PAGESIZE
+                		,#{groupsize, jdbcType=VARCHAR}		AS GROUPSIZE
+	            FROM
+	                    EVENT A , PAGING  B
+	            WHERE
+	                    A.EDELETEYN ='N'
+	                    AND PNO='P005'
+	            <if test="startDate!=null and startDate!='' and startDate!='null' and endDate!=null and endDate!='' and endDate!='null'">
+				<![CDATA[AND TO_CHAR(TO_DATE(A.EINSERTDATE),'YYYY-MM-DD') >= TO_CHAR(TO_DATE(#{startDate,jdbcType=VARCHAR}),'YYYY-MM-DD')]]>
+				<![CDATA[AND TO_CHAR(A.EINSERTDATE,'YYYY-MM-DD') <= TO_CHAR(TO_DATE(#{endDate,jdbcType=VARCHAR}),'YYYY-MM-DD')]]>
+				</if>
+				<if test = "searchFilter=='제목'">
+					<![CDATA[AND ESUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>	
+				</if>
+				<if test="searchFilter=='내용'">
+					<![CDATA[AND ECONTENT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+				</if>
+	            ORDER BY  1 DESC
+	        )
+	WHERE PAGENO = #{curpage, jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 이벤트  전제조회  + 페이징-->
 	<select id="listEvent" parameterType="event" resultType="event">
-		SELECT
-		        A.ENO                                         AS ENO            -- 이벤트 글번호
-		        ,A.ESUBJECT                                   AS ESUBJECT       -- 이벤트 제목
-		        ,A.ENAME                                      AS ENAME          -- 이벤트 작성자
-		        ,A.EIMG                                       AS EIMG           -- 이벤트 이미지
-		        ,A.ECONTENT                                   AS ECONTENT       -- 이벤트 내용
-		        ,A.EDELETEYN                                  AS EDELETEYN      -- 이벤트 삭제여부
-		        ,TO_CHAR(A.EINSERTDATE,'YYYY-MM-DD')          AS EINSERTDATE    -- 이벤트 등록날짜
-		        ,TO_CHAR(A.EUPDATEDATE,'YYYY-MM-DD')          AS EUPDATEDATE    -- 이벤트 수정날짜
-		FROM
-		        EVENT A
-		WHERE
-		        A.EDELETEYN ='N'
-		ORDER BY  1 DESC
+	SELECT * FROM(
+	           SELECT
+	                    A.ENO                                         AS ENO            -- 이벤트 글번호
+	                    ,A.ESUBJECT                                   AS ESUBJECT       -- 이벤트 제목
+	                    ,A.ENAME                                      AS ENAME          -- 이벤트 작성자
+	                    ,A.EIMG                                       AS EIMG           -- 이벤트 이미지
+	                    ,A.ECONTENT                                   AS ECONTENT       -- 이벤트 내용
+	                    ,A.EDELETEYN                                  AS EDELETEYN      -- 이벤트 삭제여부
+	                    ,TO_CHAR(A.EINSERTDATE,'YYYY-MM-DD')          AS EINSERTDATE    -- 이벤트 등록날짜
+	                    ,TO_CHAR(A.EUPDATEDATE,'YYYY-MM-DD')          AS EUPDATEDATE    -- 이벤트 수정날짜
+	                    ,CEIL(ROW_NUMBER() OVER(ORDER BY A.ENO DESC)/B.PAGESIZE)  AS PAGENO
+	                    ,COUNT(A.ENO) OVER() AS TOTALCOUNT
+	                    ,B.CURPAGE		AS CURPAGE
+               			,B.PAGESIZE		AS PAGESIZE
+                		,B.GROUPSIZE	AS GROUPSIZE
+	            FROM
+	                    EVENT A , PAGING  B
+	            WHERE
+	                    A.EDELETEYN ='N'
+	                    AND PNO='P005'
+	            ORDER BY  1 DESC
+	        )
+	WHERE PAGENO = #{curpage, jdbcType=VARCHAR}
 	</select>
 	
 	<!-- 이벤트 상세조회 -->

@@ -29,12 +29,48 @@ public class EventController {
 	private EventService eventService;
 	
 	
-	//============ 이벤트 게시판 목록 조회===================================
-	@RequestMapping("listEvent.ec")
-	public ModelAndView listEvent(@ModelAttribute EventVO param) {
-		log.info("EventController listEvent 시작 >>>");
+	//============ 이벤트 게시판 검색 조회===================================
+	@RequestMapping("searchEvent.ec")
+	public ModelAndView searchEvent(HttpServletRequest request, @ModelAttribute EventVO param) {
+		log.info("EventController searchEvent 시작 >>>");
 		
-		List<EventVO> list = eventService.listEvent(param);
+		log.info("param.getKeyword()>>" + param.getKeyword());
+		log.info("param.getSearchFilter()>>>" + param.getSearchFilter());
+		log.info("param.getStartDate()>>>" + param.getStartDate());
+		log.info("param.getEndDate()>>>" + param.getEndDate());
+
+		//DatePicker 변수
+		String startDate = param.getStartDate();
+		String endDate = param.getEndDate();
+		
+		//페이징 변수
+		String pno="P004";
+		String pagesize="5";
+		String groupsize="5";
+		String curpage="1";
+		String totalcount="0";
+		
+		//시작일 종료일 날짜형식 변환
+		if(startDate == null && endDate == null) {
+			startDate = "";
+			endDate ="";
+		}
+		
+		if(request.getParameter("curpage") !=null) {
+			curpage=request.getParameter("curpage");
+		}
+
+		param.setPagesize(pagesize);
+		param.setGroupsize(groupsize);
+		param.setCurpage(curpage);
+		param.setTotalcount(totalcount);
+		
+		log.info("param.getPno()>>>"+param.getPagesize());
+		log.info("getGroupsize>>>"+param.getGroupsize());
+		log.info("param.getCurpage()>>>"+param.getCurpage());
+		log.info("param.getTotalcount()>>>"+param.getTotalcount());
+		
+		List<EventVO> list = eventService.searchEvent(param);
 		
 		for(int i=0; i<list.size(); i++) {
 			EventVO evo = (EventVO)list.get(i);
@@ -47,7 +83,83 @@ public class EventController {
 			log.info("evo.getEdeleteyn()>>>"+evo.getEdeleteyn());
 			log.info("evo.getEinsertdate()>>>"+evo.getEinsertdate());
 			log.info("evo.getEupdatedate()>>>"+evo.getEupdatedate());
+			
+			log.info("pagesize >>> "+evo.getPagesize());
+			log.info("groupsize >>> "+evo.getGroupsize());
+			log.info("curpage >>> "+evo.getCurpage());
+			log.info("totalcount >>> "+evo.getTotalcount());
 		}//end of for
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("eventList",list);
+		mav.setViewName("notice/eventBoard/eventSearch");
+		
+		log.info("EventController searchEvent 끝 >>>");
+		return mav;
+	}
+	//============ 이벤트 게시판 목록 조회===================================
+	@RequestMapping("listEvent.ec")
+	public ModelAndView listEvent(HttpServletRequest request, @ModelAttribute EventVO param) {
+		log.info("EventController listEvent 시작 >>>");
+		
+		//페이징 변수
+		String pno="P005";
+		String pagesize="5";
+		String groupsize="5";
+		String curpage="1";
+		String totalcount="0";
+		
+		if(request.getParameter("curpage") !=null) {
+			curpage=request.getParameter("curpage");
+		}
+		
+		param.setPno(pno);
+		param.setPagesize(pagesize);
+		param.setGroupsize(groupsize);
+		param.setCurpage(curpage);
+		param.setTotalcount(totalcount);
+		
+		log.info("param.getPagesize()>>>"+param.getPagesize());
+		log.info("param.getGroupsize>>>"+param.getGroupsize());
+		log.info("param.getCurpage()>>>"+param.getCurpage());
+		log.info("param.getTotalcount()>>>"+param.getTotalcount());
+		
+		List<EventVO> list = eventService.listEvent(param);
+		
+		log.info("param.getPno()>>>"+param.getPagesize());
+		log.info("pagesize_param >>> "+param.getPagesize());
+		log.info("groupsize_param >>> "+param.getGroupsize());
+		log.info("curpage_param >>> "+param.getCurpage());
+		log.info("totalcount_param >>> "+param.getTotalcount());
+		
+		for(int i=0; i<list.size(); i++) {
+			EventVO evo = (EventVO)list.get(i);
+			
+			log.info("evo.getEno()>>>"+evo.getEno());
+			log.info("evo.getEsubject()>>>"+evo.getEsubject());
+			log.info("evo.getEname()>>>"+evo.getEname());
+			log.info("evo.getEimg()>>>"+evo.getEimg());
+			log.info("evo.getEcontent()>>>"+evo.getEcontent());
+			log.info("evo.getEdeleteyn()>>>"+evo.getEdeleteyn());
+			log.info("evo.getEinsertdate()>>>"+evo.getEinsertdate());
+			log.info("evo.getEupdatedate()>>>"+evo.getEupdatedate());
+			
+			log.info("pagesize >>> "+evo.getPagesize());
+			log.info("groupsize >>> "+evo.getGroupsize());
+			log.info("curpage >>> "+evo.getCurpage());
+			log.info("totalcount >>> "+evo.getTotalcount());
+		}//end of for
+		
+		if(list.size() == 0) {
+			log.info("0");
+			/*
+			 * EventVO evo = (EventVO)list.get(0);
+			 * log.info("pagesize >>> "+evo.getPagesize());
+			 * log.info("groupsize >>> "+evo.getGroupsize());
+			 * log.info("curpage >>> "+evo.getCurpage());
+			 * log.info("totalcount >>> "+evo.getTotalcount());
+			 */
+		}
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("eventList",list);

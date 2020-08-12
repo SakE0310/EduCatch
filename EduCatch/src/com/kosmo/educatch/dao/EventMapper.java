@@ -6,6 +6,7 @@ import com.kosmo.educatch.vo.EventVO;
 public interface EventMapper {
 	
 	public List<EventVO> listEvent(EventVO param);
+	public List<EventVO> searchEvent(EventVO param);
 	public EventVO selectEvent(EventVO param);
 	public int insertEvent(EventVO param);
 	public int updateEvent(EventVO param);

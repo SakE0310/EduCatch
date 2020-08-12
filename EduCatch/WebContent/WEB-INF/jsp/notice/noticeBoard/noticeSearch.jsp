@@ -102,8 +102,8 @@
 	$("#searchPiker").click(function() {
 		console.log("날짜 검색버튼 누름");
 		
-		var startVal = document.searchForm.startDate.value;
-		var endVal = document.searchForm.endDate.value;
+		var startVal = document.searchFormNotice.startDate.value;
+		var endVal = document.searchFormNotice.endDate.value;
 		
 		console.log("startVal>>>"+startVal);
 		console.log("endVal>>>"+endVal);
@@ -116,17 +116,43 @@
 		$("#startDate").val(startVal);
 		$("#endDate").val(endVal);
 		
-		if(startVal == ""){
-			  alert("시작일이 입력되지 않았습니다.\n시작일을 먼저 입력해주세요");
+		if(startVal == "Invalid date" && endVal == "Invalid date"){
+			alert("시작일과 종료일이 입력되지 않았습니다.\n시작일을 먼저 입력해주세요");
+			startVal = moment(startVal).format("MM/DD/YYYY");
+			endVal = moment(endVal).format("MM/DD/YYYY");
+			$("#startDate").val();
+			  $("#endDate").val();
+			return;
 		}
+		
+		if(startVal == "Invalid date"){
+			  alert("시작일이 입력되지 않았습니다.\n시작일을 먼저 입력해주세요");
+			  startVal = moment(startVal).format("MM/DD/YYYY");
+			  endVal = moment(endVal).format("MM/DD/YYYY");
+			  $("#startDate").val(startVal);
+			  $("#endDate").val(endVal);
+			  return;
+		}
+		if(endVal == "Invalid date"){
+			  alert("종료일이 입력되지 않았습니다.\n종료일을 먼저 입력해주세요");
+			  $("#startDate").val("");
+			  $("#endDate").val("");
+			  return;
+		} 
 		
 		if(startVal > endVal){
-			 alert("종료일이 시작일보다 이 전 일수는 없습니다.\n다시 선택하여 주시기 바랍니다.");
+			alert("종료일이 시작일보다 이 전 일수는 없습니다.\n다시 선택하여 주시기 바랍니다.");
+			startVal = moment(startVal).format("MM/DD/YYYY");
+			endVal = moment(endVal).format("MM/DD/YYYY");
+			$("#startDate").val(startVal);
+			$("#endDate").val(endVal);
+			return;
+		}else if(startVal < endVal){
+			alert("으아아아아");
+			$("#searchFormNotice").attr("action","searchNotice.ec");
+			$("#searchFormNotice").attr("method","POST");
+			$("#searchFormNotice").submit();
 		}
-		
-		$("#searchForm").attr("action","listNotice.ec");
-		$("#searchForm").attr("method","POST");
-		$("#searchForm").submit();
 		
 	})//end of searchPiker
 	
@@ -147,9 +173,9 @@
 		var sVal = document.searchForm.searchFilter.options[document.searchForm.searchFilter.selectedIndex].value;
 		console.log("sVal>>>"+sVal);
 		 
-		$("#searchForm").attr("action","listNotice.ec");
-		$("#searchForm").attr("method","POST");
-		$("#searchForm").submit();
+		$("#searchFormNotice").attr("action","listNotice.ec");
+		$("#searchFormNotice").attr("method","POST");
+		$("#searchFormNotice").submit();
 		 
 		
 		alert("아직안만듬");
@@ -268,7 +294,7 @@
 	</form>
 	<!-- 검색 폼  -->
 	<div >
-		<form id="searchForm" name="searchForm">
+		<form id="searchFormNotice" name="searchFormNotice">
 		<div align = "center" id="sForm">
 		
 			<select name="searchFilter">

@@ -110,7 +110,7 @@
 				$("#searchFormEvent").attr("method","POST");
 				$("#searchFormEvent").submit();
 			}
-				
+			
 		})//end of searchPiker
 	//===관리자가 등록버튼을 누르면 실행========
 	$("#insertData").click(function() {
@@ -135,8 +135,6 @@
 		
 		alert("아직안만듬");
 	})//end of searchData
-	
-	  
   });//end of ready()
 </script>
 </head>
@@ -206,7 +204,7 @@
 <%				
 				}//end of for
 			
-			}else if(nCnt == 0){
+			}else{
 %>
 				<tr>
 					<td colspan ="4" align="center">
@@ -215,9 +213,14 @@
 				</tr>
 <%				
 			}//end of if(list)
-			
-			if(list !=null && nCnt>0){
+		}//end of if(obj)
 %>
+				<tr>
+				<td colspan="4" align="right">
+				<input type="button" value="등록" id="insertData">
+				</td>
+			</tr>
+			</tbody>	
 			<tr>
 			<td colspan="18">
 			<jsp:include page="eventPaging.jsp" flush="true">
@@ -233,18 +236,6 @@
 			</jsp:include>
 			</td>
 			</tr>	
-<%				
-			}//end of (list !=null && nCnt>0)
-				
-		}//end of if(obj)
-%>
-				<tr>
-				<td colspan="4" align="right">
-				<input type="button" value="등록" id="insertData">
-				</td>
-			</tr>
-			</tbody>	
-			
 			</table>
 		</div>
 	</form>

@@ -20,6 +20,19 @@ public class EventServiceImpl implements EventService{
 	@Autowired
 	private EventMapper eventMapper;
 	
+	//=============== 이벤트 검색=============================
+	@Override
+	public List<EventVO> searchEvent(EventVO param) {
+		log.info("EventServiceImpl searchEvent 시작>>>");
+		
+		List<EventVO> list = new ArrayList<EventVO>();
+		list = eventMapper.searchEvent(param);
+		log.info("EventServiceImpl searchEvent list.size() >>>"+list.size());
+		
+		log.info("EventServiceImpl searchEvent 끝>>>");
+		return list;
+	}//end of searchEvent
+	
 	//=============== 이벤트 전제조회=============================
 	@Override
 	public List<EventVO> listEvent(EventVO param) {
@@ -74,5 +87,6 @@ public class EventServiceImpl implements EventService{
 		log.info("EventServiceImpl updateEvent 끝>>>");
 		return nCnt;
 	}//end of deleteEvent
+
 	
 }

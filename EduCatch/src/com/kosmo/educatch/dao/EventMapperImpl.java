@@ -8,6 +8,13 @@ import com.kosmo.educatch.vo.EventVO;
 
 public class EventMapperImpl extends SqlSessionDaoSupport implements EventMapper{
 	
+	//=============== 이벤트 검색=============================
+	@Override
+	public List<EventVO> searchEvent(EventVO param) {
+		List<EventVO> list = getSqlSession().selectList("searchEvent");
+		return list;	
+	}//end of searchEvent
+	
 	//=============== 이벤트 전제조회=============================
 	@Override
 	public List<EventVO> listEvent(EventVO param) {
@@ -43,5 +50,6 @@ public class EventMapperImpl extends SqlSessionDaoSupport implements EventMapper
 		int nCnt = getSqlSession().update("deleteEvent");
 		return nCnt;
 	}//end of deleteEvent
+
 
 }
