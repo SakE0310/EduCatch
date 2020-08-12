@@ -6,6 +6,7 @@ import com.kosmo.educatch.vo.NoticeVO;
 public interface NoticeMapper {
 
 	public List<NoticeVO> listNotice(NoticeVO param);
+	public List<NoticeVO> searchNotice(NoticeVO param);
 	public NoticeVO selectNotice(NoticeVO param);
 	public int insertNotice(NoticeVO param);
 	public int updateNotice(NoticeVO param);

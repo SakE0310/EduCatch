@@ -22,6 +22,19 @@ public class NoticeServiceImpl implements NoticeService {
 	@Autowired
 	private NoticeMapper noticeMapper;
 	
+	//=============== 공지사항 검색=============================
+	@Override
+	public List<NoticeVO> searchNotice(NoticeVO param) {
+		log.info("NoticeServiceImpl searchNotice 시작>>>");
+		
+		List<NoticeVO> list = new ArrayList<NoticeVO>();
+		list = noticeMapper.searchNotice(param);
+		log.info("NoticeServiceImpl searchNotice list.size() >>>"+list.size());
+		
+		log.info("NoticeServiceImpl searchNotice 끝>>>");
+		return list;
+	}
+	
 	//=============== 공지사항 전제조회=============================
 	@Override
 	public List<NoticeVO> listNotice(NoticeVO param) {
@@ -86,6 +99,7 @@ public class NoticeServiceImpl implements NoticeService {
 		log.info("NoticeServiceImpl deleteNotice 끝>>>");
 		return nCnt;
 	}//end of deleteNotice
+
 
 
 }

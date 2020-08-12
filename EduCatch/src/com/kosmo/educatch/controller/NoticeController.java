@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.NoticeService;
 import com.kosmo.educatch.vo.NoticeVO;
+import com.kosmo.educatch.vo.PagingVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -29,19 +30,26 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 
-	// ============ 공지사항 게시판 목록 조회===================================
-	@RequestMapping("/listNotice.ec")
-	public ModelAndView listNotice(@ModelAttribute NoticeVO param) {
-		log.info("NoticeController listNotice 시작 >>>");
-
+	// ============ 공지사항 게시판 검색 조회===================================
+	@RequestMapping("searchNotice")
+	public ModelAndView searchNotice(HttpServletRequest request, @ModelAttribute NoticeVO param) {
+		log.info("NoticeController searchNotice 시작 >>>");
+		
 		log.info("param.getKeyword()>>" + param.getKeyword());
 		log.info("param.getSearchFilter()>>>" + param.getSearchFilter());
-
 		log.info("param.getStartDate()>>>" + param.getStartDate());
 		log.info("param.getEndDate()>>>" + param.getEndDate());
 
+		//DatePicker 변수
 		String startDate = param.getStartDate();
 		String endDate = param.getEndDate();
+		
+		//페이징 변수
+		String pno="P004";
+		String pagesize="5";
+		String groupsize="5";
+		String curpage="1";
+		String totalcount="0";
 		
 		//시작일 종료일 날짜형식 변환
 		if(startDate == null && endDate == null) {
@@ -53,6 +61,88 @@ public class NoticeController {
 			log.info("startDate>>>"+startDate);
 			log.info("endDate>>>"+endDate);
 		}
+		
+		if(request.getParameter("curpage") !=null) {
+			curpage=request.getParameter("curpage");
+		}
+
+		param.setPno(pno);
+		param.setPagesize(pagesize);
+		param.setGroupsize(groupsize);
+		param.setCurpage(curpage);
+		param.setTotalcount(totalcount);
+
+		List<NoticeVO> list = noticeService.searchNotice(param);
+		log.info("NoticeController searchNotice list.size()>>>" + list.size());
+
+		for (int i = 0; i < list.size(); i++) {
+			// list를 VO로 형변환해준다.
+			NoticeVO nvo = (NoticeVO) list.get(i);
+			log.info("nvo.getNno()>>>" + nvo.getNno());
+			log.info("nvo.getNsubject()>>>" + nvo.getNsubject());
+			log.info("nvo.getNname()>>>" + nvo.getNname());
+			log.info("nvo.getNimg()>>>" + nvo.getNimg());
+			log.info("nvo.getNcontent()>>>" + nvo.getNcontent());
+			log.info("nvo.getNdeleteyn()>>>" + nvo.getNdeleteyn());
+			log.info("nvo.getNinsertdate()>>>" + nvo.getNinsertdate());
+			log.info("nvo.getNupdatedate()>>>" + nvo.getNupdatedate());
+			
+			log.info("pno >>> "+nvo.getPno());
+			log.info("pagesize >>> "+nvo.getPagesize());
+			log.info("groupsize >>> "+nvo.getGroupsize());
+			log.info("curpage >>> "+nvo.getCurpage());
+			log.info("totalcount >>> "+nvo.getTotalcount());
+		}
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("noticeList", list);
+		mav.setViewName("notice/noticeBoard/noticeSearch");
+		
+		log.info("NoticeController searchNotice 끝 >>>");
+		return mav;
+	}
+	
+	// ============ 공지사항 게시판 목록 조회===================================
+	@RequestMapping("/listNotice.ec")
+	public ModelAndView listNotice(HttpServletRequest request, @ModelAttribute NoticeVO param) {
+		log.info("NoticeController listNotice 시작 >>>");
+
+		log.info("param.getKeyword()>>" + param.getKeyword());
+		log.info("param.getSearchFilter()>>>" + param.getSearchFilter());
+		log.info("param.getStartDate()>>>" + param.getStartDate());
+		log.info("param.getEndDate()>>>" + param.getEndDate());
+
+		//DatePicker 변수
+		String startDate = param.getStartDate();
+		String endDate = param.getEndDate();
+		
+		//페이징 변수
+		String pno="P004";
+		String pagesize="5";
+		String groupsize="5";
+		String curpage="1";
+		String totalcount="0";
+		
+		//시작일 종료일 날짜형식 변환
+		if(startDate == null && endDate == null) {
+			startDate = "";
+			endDate ="";
+		}else {
+			startDate = startDate.replace("/", "-");
+			endDate = endDate.replace("/", "-");
+			log.info("startDate>>>"+startDate);
+			log.info("endDate>>>"+endDate);
+		}
+		
+		if(request.getParameter("curpage") !=null) {
+			curpage=request.getParameter("curpage");
+		}
+
+		param.setPno(pno);
+		param.setPagesize(pagesize);
+		param.setGroupsize(groupsize);
+		param.setCurpage(curpage);
+		param.setTotalcount(totalcount);
 
 		List<NoticeVO> list = noticeService.listNotice(param);
 		log.info("NoticeController listNotice list.size()>>>" + list.size());
@@ -68,6 +158,12 @@ public class NoticeController {
 			log.info("nvo.getNdeleteyn()>>>" + nvo.getNdeleteyn());
 			log.info("nvo.getNinsertdate()>>>" + nvo.getNinsertdate());
 			log.info("nvo.getNupdatedate()>>>" + nvo.getNupdatedate());
+			
+			log.info("pno >>> "+nvo.getPno());
+			log.info("pagesize >>> "+nvo.getPagesize());
+			log.info("groupsize >>> "+nvo.getGroupsize());
+			log.info("curpage >>> "+nvo.getCurpage());
+			log.info("totalcount >>> "+nvo.getTotalcount());
 		}
 
 		ModelAndView mav = new ModelAndView();
