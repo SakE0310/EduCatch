@@ -67,7 +67,13 @@
 	   		border: 1px solid transparent;
 		}
 		
-	
+		.snslogin img{
+			border-radius: 20%;
+			width : 42px;
+			height : 42px;
+			
+		
+		}
 		
 		
 		 
@@ -134,18 +140,28 @@
 	     				<p align = "center"><img src="https://ssl.nx.com/S2/p3/login/2016/img_tpa.gif" width="350" height="10" alt="또는"/>
 	     				
 	     				
-	     			<div class = "snslogin" align = "center">	
+	     			<div class = "snslogin" align = "center"  >	
 	     			 		
-	     			 		<a href ="https://www.naver.com"><img src = "/EduCatch/assets/img/login/naver.png" alt = "naver" id = "naver"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	     			 		<a href ="https://www.naver.com">
+	     			 		<img src = "/EduCatch/assets/img/login/naver.png" alt = "naver" id = "naver" >
+	     			 		</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								
-							<a href ="https://www.facebook.com"><img src = "/EduCatch/assets/img/login/facebook.png" alt = "facebook" id ="facebook"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href ="https://www.facebook.com">
+							<img src = "/EduCatch/assets/img/login/facebook.png" alt = "facebook" id ="facebook" >
+							</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								
-							<a href ="#"><img src = "/EduCatch/assets/img/login/kakao.png" alt = "kakao" id = "kakao"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href ="#">
+							<img src = "/EduCatch/assets/img/login/kakao.png" alt = "kakao" id = "kakao" >
+							</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								
-							<a href ="https://www.google.co.kr"><img src = "/EduCatch/assets/img/login/google.png" alt = "google" id= "google"></a>
+							<a href ="https://www.google.co.kr">
+							<img src = "/EduCatch/assets/img/login/google.png" alt = "google" id= "google">
+							</a>
 							
 	     			
 	     			</div>
+	     			
+	     			
 	     			
 	     			
 	     			<div align = "center">	
