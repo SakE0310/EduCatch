@@ -38,6 +38,22 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		String curpage="1";
 		String totalcount="0";
 		
+		//날짜 조회
+		String startDate = param.getStartDate();
+		String endDate = param.getEndDate();
+		
+		//시작일 종료일 날짜형식 변환
+		if(startDate == null && endDate == null) {
+			startDate = "";
+			endDate ="";
+		}else {
+			startDate = startDate.replace("/", "-");
+			endDate = endDate.replace("/", "-");
+			log.info("startDate>>>"+startDate);
+			log.info("endDate>>>"+endDate);
+		}
+		
+		
 		if(request.getParameter("curpage") !=null) {
 			curpage=request.getParameter("curpage");
 		}

@@ -1,4 +1,5 @@
-<%@page import="com.kosmo.educatch.vo.ConsultVO"%>
+<%@page import="com.kosmo.educatch.vo.PagingVO"%>
+<%@page import="com.kosmo.educatch.vo.ReviewVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,12 +12,11 @@
 	</jsp:include>
 </head>
 
-<title>상담 게시판</title>
+<title>후기 게시판</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 
 <!-- 데이터피커 -->
 <link rel="stylesheet" href="/EduCatch/assets/datepicker/jquery-ui-1.12.1/jquery-ui.min.css">
@@ -24,7 +24,7 @@
 <script src="/EduCatch/assets/datepicker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <script src="/EduCatch/assets/datepicker/jquery-ui-1.12.1/datepicker-ko.js"></script>
 
-
+<!-- 날짜 형식변환 -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <style type="text/css">
 	#nno_color{
@@ -92,9 +92,11 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	 $(document).ready(function() {
-		 
-		//날짜 검색  
+
+  	
+ 	 $(document).ready(function() {
+ 		 
+	//날짜 검색  
 	  $("#startDate").datepicker({
 			showOn: "button",
 	        buttonImage: "images/calendar.gif",
@@ -137,8 +139,8 @@
 				 alert("종료일이 시작일보다 이 전 일수는 없습니다.\n다시 선택하여 주시기 바랍니다.");
 			}
 			
-			$("#searchForm").attr("action","listConsult.ec");
-			$("#searchForm").attr("method","POST");
+			$("#searchForm").attr("action","searchList.ec");
+			$("#searchForm").attr("method","GET");
 			$("#searchForm").submit();
 			
 		})//end of searchPiker
@@ -149,50 +151,64 @@
 			var sVal = document.searchForm.searchFilter.options[document.searchForm.searchFilter.selectedIndex].value;
 			console.log("sVal>>>"+sVal);
 			 
-			$("#searchForm").attr("action","listConsult.ec");
+			$("#searchForm").attr("action","searchList.ec");
 			$("#searchForm").attr("method","POST");
 			$("#searchForm").submit();
 			 
 			
 			alert("아직안만듬");
 		})//end of searchData
-		
+ 		 
+ 		 
 		//글쓰기 버튼 눌렀을 때 실행
 		$("#insertPage").click(function() {
 			console.log("insertPage >>> ");
 			//글쓰기 에디터 화면으로 이동
-			$("#consultForm").attr("action","cinsertDisplay.ec");
-			$("#consultForm").attr("method","POST");
-			$("#consultForm").submit();	
+			$("#pageForm").attr("action","insertDisplay.ec");
+			$("#pageForm").attr("method","POST");
+			$("#pageForm").submit();	
 		})
-	});
-	 
+  	});
+ 	 
+ 	 /*
+ 	function updatePopup(rbno){
+		alert(">>>");
+		$("#rbno").val(rbno);
+		$("#pageForm").attr("action","selectReview.ec");
+		$("#pageForm").attr("method","POST");
+		$("#pageForm").submit();
+		
+	}
+	*/
+  
+	
 </script>
 <body>
 <%
 
-	String pno="0";
+
 	String pagesize="0";
 	String groupsize="0";
 	String curpage="0";
-	String totalcount="0";	
+	String totalcount="0";
+	String rbinsertdate=request.getParameter("rbinsertdate");
 
-	Object obj=request.getAttribute("listConsult");
+	Object obj=request.getAttribute("searchList");
 
 	if(obj !=null){
-		ArrayList listConsult=(ArrayList)obj;
+		ArrayList searchList=(ArrayList)obj;
 		
-		int nCnt=listConsult.size();
+		int nCnt=searchList.size();
 	
 %>
-	<form id="consultForm" name="consultForm">
-		<input type="hidden" id="cbno" name="cbno"/>
+<form id="pageForm" name="pageForm">
+		<input type="hidden" id="rbno" name="rbno"/>
 	</form>
-		<br><br><br><br>
+	<br><br><br><br>
 	<div>
 		<table style="margin-left: auto; margin-right: auto;" border="0" cellpadding="1" cellspacing="1">
 			<tr>
-				<th><h4 class="tt">상담 게시판</h4><br><br><br></th>
+				<th><h4 class="tt">후기 게시판</h4><br><br><br></th>
 			</tr>
 		</table>
 		<table  style="margin-left: auto; margin-right: auto;" border="1">
@@ -219,55 +235,55 @@
 			</thead>
 			<tbody>
 <%
-	for(int i=0; i<nCnt; i++){
-		ConsultVO cvo=(ConsultVO)listConsult.get(i);
+
+		for(int i=0; i<nCnt; i++){
+			ReviewVO rvo=(ReviewVO)searchList.get(i);
+			
+			rbinsertdate=rvo.getRbinsertdate();
+			pagesize=rvo.getPagesize();
+			groupsize=rvo.getGroupsize();
+			curpage=rvo.getCurpage();
+			totalcount=rvo.getTotalcount();
+			
+			System.out.println("rvo.getRbinsertdate()"+rvo.getRbinsertdate());
+			System.out.println("rvo.getPno()"+rvo.getPagesize());
+			System.out.println("rvo.getGroupsize()"+rvo.getGroupsize());
+			System.out.println("rvo.getCurpage()"+rvo.getCurpage());
+			System.out.println("rvo.getTotalcount()"+rvo.getTotalcount());
+			
+			if(nCnt>0){
 		
-		pno=cvo.getPno();
-		pagesize=cvo.getPagesize();
-		groupsize=cvo.getGroupsize();
-		curpage=cvo.getCurpage();
-		totalcount=cvo.getTotalcount();
-		
-		System.out.println("cvo.getPno()"+cvo.getPno());
-		System.out.println("cvo.getPagesize()"+cvo.getPagesize());
-		System.out.println("cvo.getGroupsize()"+cvo.getGroupsize());
-		System.out.println("cvo.getCurpage()"+cvo.getCurpage());
-		System.out.println("cvo.getTotalcount()"+cvo.getTotalcount());
-		
-		if(nCnt>0){
-	
 %>
+
 					<tr align="center">
-						<td><%= cvo.getCbno() %></td>
-						<td><%= cvo.getCbname() %></td>
-						<td><%= cvo.getAcademy_ano() %></td>
-						<td><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
-						<td><%= cvo.getCinsertdate() %></td>
+						<td><%= rvo.getRbno() %></td>
+						<td><%= rvo.getRbname() %></td>
+						<td><%= rvo.getAcademy_ano() %></td>
+						<td><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>"  id="aa"><%= rvo.getRbsubject() %></a></td>
+						<td><%= rvo.getRbinsertdate() %></td>
+						<!-- 
+						<td><input type="button" value="[수정/삭제]"
+						onclick="updatePopup('${row.rbno}')"/></td>
+						-->
 					</tr>
 <%
-				}	
-		}if(nCnt==0){
-		
-%>	
+		}
+	}if(nCnt==0){
+%>
 					<tr>
 						<td colspan="7" align="center">
 						등록된 게시물이 없습니다.
 						</td>
 					</tr>
 <%
-			}
-			
-		}	
-	
+		}
+	}
 %>			
 			</tbody>
 			<tr>
 			<td colspan="18">
 			<jsp:include page="memberPaging.jsp" flush="true">
-				<jsp:param name="url" value="listConsult.ec"/>
-				<jsp:param name="str" value=""/>
-				
-				
+				<jsp:param name="url" value="searchList.ec"/>
 					<jsp:param name="pagesize" value='<%= pagesize %>'/>
 					<jsp:param name="groupsize" value="<%= groupsize %>"/>
 					<jsp:param name="curpage" value="<%= curpage %>"/>
@@ -300,8 +316,9 @@
 		</form>
 	</div>
 	<br><br><br><br><br><br>
-	<jsp:include page="../../../../footer.jsp" flush="true">
-		<jsp:param value="" name=""/>
-	</jsp:include>
+
+<jsp:include page="../../../../footer.jsp" flush="true">
+<jsp:param value="" name=""/>
+</jsp:include>
 </body>
 </html>

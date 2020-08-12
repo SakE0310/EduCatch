@@ -8,6 +8,7 @@ import com.kosmo.educatch.vo.ReviewVO;
 public interface ReviewService {
 	
 	public List<ReviewVO> listReview(ReviewVO param);
+	public List<ReviewVO> searchList(ReviewVO param);
 	public List<AcademyVO> academyList(AcademyVO param);
 	public int insertReview(ReviewVO param);
 	public int updateReview(ReviewVO param);

@@ -42,17 +42,18 @@ public class ReviewController {
 		log.info(param.getMember_mno());
 		log.info(param.getRbcontent());
 
-		String pno="P002";
+		
 		String pagesize="5";
 		String groupsize="5";
 		String curpage="1";
 		String totalcount="0";
 		
+		
 		if(request.getParameter("curpage") !=null) {
 			curpage=request.getParameter("curpage");
 		}
 
-		param.setPno(pno);
+
 		param.setPagesize(pagesize);
 		param.setGroupsize(groupsize);
 		param.setCurpage(curpage);
@@ -78,7 +79,7 @@ public class ReviewController {
 			log.info("rbinsertdate >>> "+rvo.getRbinsertdate());
 			log.info("rbupdatedate >>> "+rvo.getRbupdatedate());
 			
-			log.info("pno >>> "+rvo.getPno());
+
 			log.info("pagesize >>> "+rvo.getPagesize());
 			log.info("groupsize >>> "+rvo.getGroupsize());
 			log.info("curpage >>> "+rvo.getCurpage());
@@ -95,10 +96,90 @@ public class ReviewController {
 		return mav;
 	}
 	
+	//검색 페이징
+	@RequestMapping("searchList.ec")
+	public ModelAndView searchReview(@ModelAttribute ReviewVO param,
+									 HttpServletRequest request) {
+		
+		log.info("ReviewController searchList >>> 호출성공");
+		log.info(param);
+		log.info(param.getMember_mno());
+		log.info(param.getRbcontent());
+		
+		
+		String pagesize="5";
+		String groupsize="5";
+		String curpage="1";
+		String totalcount="0";
+		
+		//날짜 조회
+		String startDate = param.getStartDate();
+		String endDate = param.getEndDate();
+		
+		//시작일 종료일 날짜형식 변환
+		if(startDate == null && endDate == null) {
+			startDate = "";
+			endDate ="";
+		}else {
+			startDate = startDate.replace("/", "-");
+			endDate = endDate.replace("/", "-");
+			log.info("startDate>>>"+startDate);
+			log.info("endDate>>>"+endDate);
+		}
+		
+		if(request.getParameter("curpage") !=null) {
+			curpage=request.getParameter("curpage");
+		}
+		
+		
+		param.setPagesize(pagesize);
+		param.setGroupsize(groupsize);
+		param.setCurpage(curpage);
+		param.setTotalcount(totalcount);
+		
+		List<ReviewVO> list=reviewService.searchList(param);
+		log.info("list.size() >>> "+list.size());
+		
+		int listCnt = list.size();
+		
+		for(int i=0; i<listCnt; i++) {
+			ReviewVO rvo=(ReviewVO)list.get(i);
+			
+			log.info("rbno >>> "+rvo.getRbno());
+			log.info("rbsubject >>> "+rvo.getRbsubject());
+			log.info("rbname >>> "+rvo.getRbname());
+			log.info("rbimg >>> "+rvo.getRbimg());
+			log.info("rbcontent >>> "+rvo.getRbcontent());
+			log.info("academyano >>> "+rvo.getAcademy_ano());
+			log.info("membermno >>> "+rvo.getMember_mno());
+			log.info("rbgrade >>> "+rvo.getRbgrade());
+			log.info("rbdeleteyn >>> "+rvo.getRbdeleteyn());
+			log.info("rbinsertdate >>> "+rvo.getRbinsertdate());
+			log.info("rbupdatedate >>> "+rvo.getRbupdatedate());
+			
+			
+			log.info("pagesize >>> "+rvo.getPagesize());
+			log.info("groupsize >>> "+rvo.getGroupsize());
+			log.info("curpage >>> "+rvo.getCurpage());
+			log.info("totalcount >>> "+rvo.getTotalcount());
+		}
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("searchList", list);
+		mav.setViewName("community/reviewBoard/reviewBoard_search");
+		
+		log.info("mav >>> "+mav);
+		log.info("ReviewController searchList >>> 끝");
+		
+		return mav;
+	}
+	
+
+	
 	//글쓰기 버튼 눌렀을때
 	@RequestMapping("/insertDisplay.ec")
 	public ModelAndView insertDisplay(@ModelAttribute ReviewVO param,
-									  @ModelAttribute AcademyVO param1) {
+			@ModelAttribute AcademyVO param1) {
 		
 		log.info("ReviewController insertDisplay >>> 호출 성공 ");
 		log.info(param1.getAname());
@@ -106,7 +187,7 @@ public class ReviewController {
 		mav.setViewName("community/reviewBoard/reviewInsert");
 		
 		return mav;
-	
+		
 	}
 	
 	//등록 버튼 눌렀을 때
@@ -189,8 +270,11 @@ public class ReviewController {
 			
 		}
 		
-
+		
 		int nCnt = reviewService.insertReview(param);
+		log.info("getRbgrade >"+param.getRbgrade());
+		log.info("getRbsubject >"+param.getRbsubject());
+		
 		if(nCnt > 0) {
 			resultStr="등록 완료";
 		}else {

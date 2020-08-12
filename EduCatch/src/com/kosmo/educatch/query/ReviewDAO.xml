@@ -31,6 +31,49 @@
 		WHERE PAGENO=#{curpage, jdbcType=VARCHAR}
 	</select>
 	
+	<select id="searchList" parameterType="review" resultType="review">
+		SELECT * FROM(
+					SELECT      
+					A.RBNO              AS RBNO,
+		            A.RBSUBJECT         AS RBSUBJECT,
+		            A.RBNAME            AS RBNAME,
+		            A.RBIMG             AS RBIMG,
+		            A.RBCONTENT         AS RBCONTENT,
+		            A.ACADEMY_ANO       AS ACADEMY_ANO,
+		            A.MEMBER_MNO        AS MEMBER_MNO,
+		            A.RBGRADE           AS RBGRADE,
+		            A.RBDELETEYN        AS RBDELETEYN,
+		            TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD')      AS RBINSERTDATE,
+		            TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')      AS RBUPDATEDATE,
+		            CEIL(ROW_NUMBER() OVER(ORDER BY A.RBNO DESC)/#{pagesize, jdbcType=VARCHAR}) PAGENO,
+		            COUNT(A.RBNO) OVER() AS TOTALCOUNT,
+		            #{curpage, jdbcType=VARCHAR}		AS CURPAGE,
+               		#{pagesize, jdbcType=VARCHAR}		AS PAGESIZE,
+                	#{groupsize, jdbcType=VARCHAR}		AS GROUPSIZE,
+                	#{pno, jdbcType=VARCHAR}			AS PNO
+		FROM REVIEWBOARD A, PAGING P
+		WHERE RBDELETEYN = 'N'
+		AND   PNO='P002'
+		<if test="startDate!=null and startDate!='' and startDate!='null' and endDate!=null and endDate!='' and endDate!='null'">
+			<![CDATA[AND TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD') >= #{startDate,jdbcType=VARCHAR}]]>
+			<![CDATA[AND TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD') <= #{endDate,jdbcType=VARCHAR}]]>
+		</if>
+		
+		<if test = "searchFilter=='제목'">
+			<![CDATA[AND RBSUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>	
+		</if>
+		<if test="searchFilter=='내용'">
+			<![CDATA[AND RBCONTENT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+		</if>
+		<if test="searchFilter=='제목+내용'">
+			<![CDATA[AND RBSUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+			<![CDATA[OR RBCONTENT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>			
+		</if> 
+		ORDER BY 1 DESC
+		)
+		WHERE PAGENO=#{curpage, jdbcType=VARCHAR}
+	</select>
+	
 	
 	<insert id="insertReview" parameterType="review">
 		<selectKey keyProperty="rbno" resultType="String" order="BEFORE">

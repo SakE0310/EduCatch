@@ -90,9 +90,20 @@
 		$('.starRev span').click(function(){
 			  $(this).parent().children('span').removeClass('on');
 			  $(this).addClass('on').prevAll('span').addClass('on');
+			  $("#rbgrade").val($('.on').size()/2);
+			  console.log($('.on').size()/2);
+			
 			  return false;
 		});
 	});
+	
+	function setChildValue(aname){
+
+	      document.getElementById("aname").value = aname;
+
+	}
+
+
 
 </script>
 <body>
@@ -107,6 +118,7 @@
 			<tr>
 				<td style="width: 100px">평점</td>
 				<td>
+				 <input type="hidden" id="rbgrade" name="rbgrade" /> 
 					<div class="starRev">
 					  <span class="starR1 on">별1_왼쪽</span>
 					  <span class="starR2">별1_오른쪽</span>
@@ -125,7 +137,7 @@
 				<td style="width: 100px">학원명</td>
 				<td><input type="text"  id="aname" name="aname"
 					style="width: 90%" />
-					<input type="button" id="searchAcademy" value="검색" />
+					<input type="button" onclick="openChild()" id="searchAcademy" value="검색" />
 				</td>
 			</tr>
 			<tr>

@@ -25,7 +25,7 @@
 <script type="text/javascript">
 
 
-
+/*
  	$(document).ready(function() {
 
 
@@ -43,6 +43,16 @@
 	
 });	
 
+*/
+
+	function sendChildValue(aname){
+
+	opener.setChildValue(aname);
+
+	window.close();
+
+	}
+
 
 
 </script>
@@ -53,9 +63,7 @@
 	<input type="hidden" id="ano" name="ano" value="<%=avo.getAno() %>"/>
 		<tr align="center">
 			<td>
-				<a href="insertDisplay.ec?aname=<%= avo.getAname() %>"  id="checkAcademy">
-				<%= avo.getAname() %>
-				</a>
+				<a href="javascript:sendChildValue('<%= avo.getAname()%>')"><%= avo.getAname()%></a></td>				
 			</td>
 		</tr>
 </form>

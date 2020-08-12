@@ -60,5 +60,11 @@ public class ReviewMapperImpl extends SqlSessionDaoSupport implements ReviewMapp
 		// TODO Auto-generated method stub
 		return getSqlSession().selectList("academyList");
 	}
+
+	@Override
+	public List<ReviewVO> searchList(ReviewVO param) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("searchList");
+	}
 	
 }

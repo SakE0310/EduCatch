@@ -83,6 +83,15 @@ public class ReviewServiceImpl implements ReviewService{
 
 		return list;
 	}
+
+	@Override
+	public List<ReviewVO> searchList(ReviewVO param) {
+		// TODO Auto-generated method stub
+		List<ReviewVO> list=new ArrayList<ReviewVO>();
+		list=reviewMapper.searchList(param);
+		
+		return list;
+	}
 	
 	
 }

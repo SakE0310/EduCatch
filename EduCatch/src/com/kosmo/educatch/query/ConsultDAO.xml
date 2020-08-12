@@ -24,6 +24,21 @@
 		        FROM    CONSULTBOARD A, PAGING P
 		        WHERE   CDELETEYN = 'N'
 		        AND   PNO='P003'
+		        <if test="startDate!=null and startDate!='' and startDate!='null' and endDate!=null and endDate!='' and endDate!='null'">
+					<![CDATA[AND TO_CHAR(A.CINSERTDATE,'YYYY-MM-DD') >= #{startDate,jdbcType=VARCHAR}]]>
+					<![CDATA[AND TO_CHAR(A.CINSERTDATE,'YYYY-MM-DD') <= #{endDate,jdbcType=VARCHAR}]]>
+				</if>
+				
+				<if test = "searchFilter=='제목'">
+					<![CDATA[AND CBSUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>	
+				</if>
+				<if test="searchFilter=='내용'">
+					<![CDATA[AND CBCONTENT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+				</if>
+				<if test="searchFilter=='제목+내용'">
+					<![CDATA[AND CBSUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+					<![CDATA[OR CBCONTENT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>			
+				</if> 
 		        ORDER BY 1 DESC
 			)
 			WHERE PAGENO=#{curpage, jdbcType=VARCHAR}
