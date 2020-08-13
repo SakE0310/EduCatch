@@ -47,5 +47,18 @@
 	        MID =#{mid, jdbcType=VARCHAR}
 	        AND MPW = #{mpw, jdbcType=VARCHAR}
 	</select>
+	
+	<!-- 개인정보 수정 -->
+	<update id="editMyPage" parameterType="member">
+	UPDATE MEMBER
+	SET
+		    MNAME =#{mname, jdbcType=VARCHAR}
+		    ,MTEL =#{mtel, jdbcType=VARCHAR}
+		    ,MADDRNO=#{maddrno, jdbcType=VARCHAR}
+		    ,MADDR1=#{maddr1, jdbcType=VARCHAR}
+		    ,MADDR2=#{maddr2, jdbcType=VARCHAR}
+	WHERE
+	       MNO=#{mno, jdbcType=VARCHAR}
+	</update>
 
 </mapper>

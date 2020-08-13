@@ -14,7 +14,7 @@ public class MyPageMapperImpl extends SqlSessionDaoSupport implements MyPageMapp
 		return mvo;
 	}//end of selectMyPage
 
-	//=======프로필 수정 : 비밀번호 검사 : 조회
+	//=======프로필 수정 : 비밀번호 검사 : 조회============
 	@Override
 	public MemberVO selectPW(MemberVO param) {
 		MemberVO mvo = new MemberVO();
@@ -22,12 +22,19 @@ public class MyPageMapperImpl extends SqlSessionDaoSupport implements MyPageMapp
 		return mvo;
 	}//end of selectPW
 
-	//=======프로필 수정 : 비밀번호 검사 : 검사
+	//=======프로필 수정 : 비밀번호 검사 : 검사============
 	@Override
 	public MemberVO checkPW(MemberVO param) {
 		MemberVO mvo = new MemberVO();
 		mvo = getSqlSession().selectOne("checkPW");
 		return mvo;
 	}//end of checkPW
+
+	//======프로필 수정 : 수정===========================
+	@Override
+	public int editMyPage(MemberVO param) {
+		int nCnt = getSqlSession().update("editMyPage");
+		return nCnt;
+	}//end of editMyPage
 
 }

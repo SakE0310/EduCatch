@@ -72,9 +72,9 @@
 	<form id= "clickForm" name = "clickForm">
 		<div class ="sideBox">
 
-			<%=mvo.getMname() %>님 	&nbsp;&nbsp;<input type ="button" id="pwCheck" value="수정">
+			<%=mvo.getMname() %>님 	 &nbsp;&nbsp;
 			<br>
-			개인정보 변경<br>
+			<input type ="button" id="pwCheck" value="개인정보 변경"><br>
 			비밀번호 변경<br>
 			회원탈퇴
 			

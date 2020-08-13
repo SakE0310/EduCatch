@@ -72,6 +72,14 @@
 		document.getElementById("mtel2").value=tel[1];
 		document.getElementById("mtel3").value=tel[2];
 		
+		console.log("tel[0]>>>"+tel[0]);
+		console.log("tel[1]>>>"+tel[1]);
+		console.log("tel[2]>>>"+tel[2]);
+		
+		var tel_1 =tel[0];
+		console.log("tel_1>>>"+tel_1);
+		
+		
 		//주소
 		$("#addrCheck").click(function() {
 			console.log("addrCheck함수 들어옴");
@@ -178,9 +186,9 @@
 			}//end of addr	
 			
 			alert("수정");
-			/* $("#clickForm").attr("action",".ec");
-			$("#clickForm").attr("method","POST");
-			$("#clickForm").submit(); */
+			$("#mypageEditForm").attr("action","editMyPage.ec");
+			$("#mypageEditForm").attr("method","POST");
+			$("#mypageEditForm").submit();
 				
 		})
 			
@@ -216,6 +224,7 @@
 	<div class = "container-mypage ">
 		<div align="center">
 		<form id="mypageEditForm" name="mypageEditForm">
+		<input type="text" id="mno" name="mno" value="<%=mvo.getMno()%>">
 			<table border="1">
 				<tr>
 					<td class="mem">아이디</td>
@@ -236,15 +245,24 @@
 				</tr>
 				<tr>
 <%
-
+			String mtel1 = mvo.getMtel();
+			System.out.println("mtel1>>>"+mtel1);//010-5678-1234
+			String[] phone = mtel1.split("-");
+			String ret1 = phone[0];
+			String ret2 = phone[1];
+			String ret3 = phone[2];
+			
+			System.out.println("ret1>>>"+ret1);
+			System.out.println("ret2>>>"+ret2);
+			System.out.println("ret3>>>"+ret3);
 %>				
 				<td class="mem"><span class="required">*</span>핸드폰</td>
 				<td>
 				<input type ="hidden" id="tel" value="<%=mvo.getMtel()%>">
 					<select id="mtel1" name="mtel1">
-						<option value="010">010</option>
-						<option value="017">017</option>
-						<option value="016">016</option>
+						<option value="010"<%if(ret1.equals("010")){%>selected="selected"<%} %> >010</option>
+						<option value="017"<%if(ret1.equals("017")){%>selected="selected"<%} %>>017</option>
+						<option value="016"<%if(ret1.equals("016")){%>selected="selected"<%} %>>016</option>
 					</select>
 					<input type="text" id="mtel2" name="mtel2"/> - 
 					<input type="text" id="mtel3" name="mtel3"/>

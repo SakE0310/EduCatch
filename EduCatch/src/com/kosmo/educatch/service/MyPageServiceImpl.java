@@ -53,4 +53,15 @@ public class MyPageServiceImpl implements MyPageService{
 		log.info("MyPageServiceImpl checkPW 끝>>>");
 		return mvo;
 	}//end of checkPW
+
+	//======프로필 수정 : 수정===========================
+	@Override
+	public int editMyPage(MemberVO param) {
+		log.info("MyPageServiceImpl editMyPage 시작>>>");
+		
+		int nCnt = mypageMapper.editMyPage(param);
+		
+		log.info("MyPageServiceImpl editMyPage 끝>>>");
+		return nCnt;
+	}//end ofeditMyPage
 }

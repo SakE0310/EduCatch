@@ -117,4 +117,37 @@ public class MyPageController {
 		log.info("MyPageController EditDisplay 끝 >>>");
 		return mav;
 	}//end of EditDisplay
+	
+	//======프로필 수정 : 수정===========================
+	@RequestMapping("editMyPage.ec")
+	public ModelAndView editMyPage(HttpServletRequest request,@ModelAttribute MemberVO param) {
+		log.info("MyPageController editMyPage 시작 >>>");
+		
+		//휴대폰 
+		String mtel1 = request.getParameter("mtel1");
+		String mtel2 = request.getParameter("mtel2");
+		String mtel3 = request.getParameter("mtel3");
+		String mtel = mtel1+"-"+mtel2+"-"+mtel3;
+		param.setMtel(mtel);
+		log.info("mtel>>>"+mtel);
+
+		log.info("param.getMno()>>>"+param.getMno());
+		log.info("param.getMid()>>>"+param.getMid());
+		log.info("param.getMpw()>>>"+param.getMpw());
+		log.info("param.getMname()>>>"+param.getMname());
+		log.info("param.getMtel()>>>"+param.getMtel());
+		log.info("param.getMaddrno()>>>"+param.getMaddrno());
+		log.info("param.getMaddr1()>>>"+param.getMaddr1());
+		log.info("param.getMaddr2()>>>"+param.getMaddr2());
+
+		int nCnt  = mypageService.editMyPage(param);
+		log.info("nCnt>>>"+nCnt);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("MemberVO",param );
+		mav.setViewName("/mypage/mypageMain");
+		
+		log.info("MyPageController editMyPage 끝 >>>");
+		return mav;
+	}//end of editMyPage
 }
