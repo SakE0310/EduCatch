@@ -33,7 +33,7 @@ public class DetailViewServiceImpl implements DetailViewService {
 		log.info("DetailViewServiceImpl academyView 끝 >>>> ");
 
 		return avo;
-	}
+	}//end of academyView
 	
 	//----------학원 편의기능 정보 조회
 	@Override
@@ -46,7 +46,7 @@ public class DetailViewServiceImpl implements DetailViewService {
 		log.info("DetailViewServiceImpl conView 끝 >>>> ");
 		
 		return cvo;
-	}
+	}//end of conView
 	
 	//----------리뷰 평균 평점 조회
 	@Override
@@ -59,7 +59,7 @@ public class DetailViewServiceImpl implements DetailViewService {
 		log.info("DetailViewServiceImpl gradeView 끝 >>>> ");
 		
 		return gvo;
-	}
+	}//end of gradeView
 	
 	//----------과목정보 리스트조회
 	@Override
@@ -71,7 +71,7 @@ public class DetailViewServiceImpl implements DetailViewService {
 		
 		return list;
 		
-	}
+	}//end of subjectViewList
 
 	//----------리뷰 게시판 리스트
 	@Override
@@ -83,6 +83,32 @@ public class DetailViewServiceImpl implements DetailViewService {
 		log.info("DetailViewServiceImpl reviewList 끝 >>>> ");
 		
 		return list;
-	}
+	}//end of reviewList
+
+	//----------찜목록 추가
+	@Override
+	public int insertBookmark(AcademyVO param) {
+		log.info("DetailViewServiceImpl insertBookmark 시작 >>>> ");
+		
+		int nCnt = detailViewMapper.insertBookmark(param);
+		log.info("nCnt >>> " + nCnt);
+		
+		log.info("DetailViewServiceImpl insertBookmark 끝 >>>> ");
+		
+		return nCnt;
+	}//end of insertBookmark
+
+	//----------찜목록 삭제
+	@Override
+	public int deleteBookmark(AcademyVO param) {
+		log.info("DetailViewServiceImpl deleteBookmark 시작 >>>> ");
+		
+		int nCnt = detailViewMapper.deleteBookmark(param);
+		log.info("nCnt >>> " + nCnt);
+		
+		log.info("DetailViewServiceImpl deleteBookmark 끝 >>>> ");
+		
+		return nCnt;
+	}//end of deleteBookmark
 
 }

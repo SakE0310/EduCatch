@@ -44,6 +44,20 @@ public class DetailViewMapperImpl extends SqlSessionDaoSupport implements Detail
 	public List<ReviewVO> reviewList(ReviewVO param){
 		return getSqlSession().selectList("DetailViewMapper.reviewList");
 	}
+
+	//----------찜목록 추가
+	@Override
+	public int insertBookmark(AcademyVO param) {
+		return getSqlSession().insert("DetailViewMapper.insertBookmark");
+	}
+
+	//----------찜목록 삭제
+	@Override
+	public int deleteBookmark(AcademyVO param) {
+		return getSqlSession().delete("DetailViewMapper.deleteBookmark");
+	}
+	
+	
 	
 	
 

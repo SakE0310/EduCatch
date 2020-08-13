@@ -30,7 +30,7 @@ public class AcademyAddServiceImpl implements AcademyAddService{
 		log.info("AcademyAddServiceImpl.selectCategory >>> 끝");
 		
 		return academyAddMapper.selectCategory(avo);
-	}
+	}//end of selectCategory
 	
 	//학원 등록
 	@Override
@@ -59,7 +59,7 @@ public class AcademyAddServiceImpl implements AcademyAddService{
 		
 		log.info("AcademyAddServiceImpl insertConveniece >>> 끝 ");
 		return nCnt;
-	}
+	}//end of insertConveniece
 	
 	
 }
