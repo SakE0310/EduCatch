@@ -4,10 +4,13 @@ import java.util.List;
 
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
+import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SubjectVO;
 
 public interface DetailViewService {
-	public SubjectVO DetailViewList(String sno);
-	public ConvenienceVO conViewList(String ano);
-	public AcademyVO gradeSelect(String rno);
+	public AcademyVO academyView(String ano);
+	public ConvenienceVO conView(String ano);
+	public AcademyVO gradeView(String ano);
+	public List<SubjectVO> subjectViewList(SubjectVO param);
+	public List<ReviewVO> reviewList(ReviewVO param);
 }

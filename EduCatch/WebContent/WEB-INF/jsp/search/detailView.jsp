@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.kosmo.educatch.vo.AcademyVO"%>
 <%@page import="com.kosmo.educatch.vo.SubjectVO"%>
 <%@page import="com.kosmo.educatch.vo.ConvenienceVO"%>
-<%@page import="com.kosmo.educatch.vo.AcademyVO"%>
+<%@page import="com.kosmo.educatch.vo.ReviewVO"%>
 <%@page import="java.util.ArrayList"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +17,106 @@
 		font-weight: bold;
 }
 
-<%-- --전체,컨텐츠-- --%> 
+#hhr {
+    border-bottom: 5px solid #eceff8;
+    border-top: 0 none;
+    margin: 30px 0;
+    padding: 0;
+}
+
+.table{
+
+	color:black;
+}
+
+
+
+<%-- 스크롤스파이 --%>
+* {
+  margin: 0;
+  padding: 0;
+}
+.nav {
+  background-color: rgba(51, 51, 51, 0.9);
+  width: 100%;
+  height: 60px;
+  top: 0;
+}
+.nav-menu li {
+    display: inline-block;
+    margin-right: -6px;
+    line-height: 60px;
+}
+.nav-menu-item {
+    display: block;
+    padding: 0 90px;
+    color: #fff;
+    text-decoration: none;          
+}
+.nav-menu-item:hover,
+.isactive {
+    background-color: #222;
+    color: #fff;
+}
+
+.section {
+    margin-top: 60px;
+    line-height: 22px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.padding-top10 {
+    padding-top:10px;
+}
+
+#section-1 {
+    height: auto;
+    background-color: #ffffff;
+    color: #fff;
+    padding: 20px;
+}
+#section-2 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+#section-3 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+#section-4 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+
+
+
+<%-- 공유하기 --%>
+.sns-share {
+         text-align:right; 
+         padding: 20px 0;
+      
+      }
+      .sns-share li {
+         display:inline-block; 
+         margin: 0 5px; 
+         
+      }
+      
+      .sns-share img {
+         border-radius: 20%;
+         width : 42px;
+         height : 42px;
+         
+      }
+
+
+<%-- --전체,컨텐츠-- --%>  
 #all{
 		border-left:1px solid #f3f3f3;
 		border-right:1px solid #f3f3f3;
@@ -26,7 +125,7 @@
 }
 
 #content{
-		width:1200px;
+		width:1000px;
 		height:auto;
 		margin:0 auto;
 		border-left:1px solid #d8d8d8;
@@ -44,48 +143,6 @@
 
 
 
-
-
-
-<!-- 이곳은 탭 메뉴 -->
-body{
-	margin-top: 1000px;
-	font-family: 'Trebuchet MS', serif;
-	line-height: 1.6
-}
-.container{
-	width: 1000px;
-	margin: 0 auto;
-}
-
-
-ul.tabs{
-	margin: 0px;
-	padding: 0px;
-	list-style: none;
-}
-ul.tabs li{
-	background: none;
-	color: #222;
-	display: inline-block;
-	padding: 20px 25px;
-	cursor: pointer;
-}
-
-ul.tabs li.current{
-	background: #ededed;
-	color: #222;
-}
-
-.tab-content{
-	display: none;
-	background: #ededed;
-	padding: 15px;
-}
-
-.tab-content.current{
-	display: inherit;
-}
 
 
 
@@ -310,18 +367,52 @@ html, body {
 
 	$(document).ready(function(){
 		
-		$('ul.tabs li').click(function(){
-			var tab_id = $(this).attr('data-tab');
-	
-			$('ul.tabs li').removeClass('current');
-			$('.tab-content').removeClass('current');
-	
-			$(this).addClass('current');
-			$("#"+tab_id).addClass('current');
-		});
-		
-	});
-	
+		<%-- 스크롤사이드 --%>
+		var $menu = $(".nav-menu");
+	      var $menu_a = $("a", $menu);
+	      var id = false;
+	      var sections = [];
+	      var hash = function(h) {
+	        if (history.pushState) {
+	          history.pushState(null, null, h);
+	        } else {
+	          location.hash = h;
+	        }
+	      };
+
+	      $menu_a.click(function(event) {
+	        event.preventDefault();
+	        $("html, body").animate(
+	          {
+	            scrollTop: $($(this).attr("href")).offset().top - $(".nav").height()
+	          },
+	          {
+	            duration: 700,
+	            complete: hash($(this).attr("href"))
+	          }
+	        );
+	      });
+
+	      $menu_a.each(function() {
+	        sections.push($($(this).attr("href")));
+	      });
+
+	      $(window).scroll(function(event) {
+	        var scrolling = $(this).scrollTop() + $(this).height() / 3;
+	        var scroll_id;
+	        for (var i in sections) {
+	          var section = sections[i];
+	          if (scrolling > section.offset().top) {
+	            scroll_id = section.attr("id");
+	          }
+	        }
+	        if (scroll_id !== id) {
+	          id = scroll_id;
+	          $menu_a.removeClass("isactive");
+	          $("a[href='#" + id + "']", $menu).addClass("isactive");
+	        }
+	      });
+	    });
 	</script>
 </head>
 <body>
@@ -332,59 +423,88 @@ html, body {
 
 <%-- ----------- 바디 ------------- --%>
 <%
-		Object obj = request.getAttribute("svo");
+		Object obj1 = request.getAttribute("avo");
 		Object obj2 = request.getAttribute("cvo");
-		Object obj3 = request.getAttribute("rvo");
-	
-		if(obj != null){
+		Object obj3 = request.getAttribute("gvo");
+		Object listobj1 = request.getAttribute("subjectList"); 
+		Object listobj2 = request.getAttribute("reviewlist"); 
 
-			SubjectVO svo = (SubjectVO)obj;
-			ConvenienceVO cvo = (ConvenienceVO)obj2;
-			AcademyVO rvo = (AcademyVO)obj3;
-			double AXPOINT = Double.parseDouble(svo.getAxpoint());
-			double AYPOINT = Double.parseDouble(svo.getAypoint());
-			String address = svo.getAaddr1() + "" + svo.getAaddr2();
+		AcademyVO avo = (AcademyVO)obj1;
+		ConvenienceVO cvo = (ConvenienceVO)obj2;
+		AcademyVO gvo = (AcademyVO)obj3;
+		ArrayList subjectlist = (ArrayList)listobj1;
+		ArrayList reviewlist = (ArrayList)listobj2;
+		
+		int subjectnCnt = subjectlist.size();
+		int reivewnCnt = reviewlist.size();
+		
+		double AXPOINT = Double.parseDouble(avo.getAxpoint());
+		double AYPOINT = Double.parseDouble(avo.getAypoint());
+		String address = avo.getAaddr1() + " " + avo.getAaddr2();
 					
 %>
 
 <div id="all">
+
 	<section id="content">
+	
 		<div id="top">
 			<div id="topcon" align="center">
 			<table style="margin-left: auto; margin-right: auto;" border="0" cellpadding="1" cellspacing="1" id="fontman">
 				<tr>
 					<td>
 					<br><br><br><br>
-						<img src="/EduCatch/assets/img/academyLogo/<%= svo.getAlogo() %>" border=0 width="150" height="150" />
+						<img src="/EduCatch/assets/img/academyLogo/<%= avo.getAlogo() %>" border=0 width="150" height="150" />
 					</td>
 					<td>
 					<br><br><br><br>
-						<h1 style="font-weight:bold;" align="center"><%=svo.getAname() %></h1>
-						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=address %><br>
-						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=svo.getAtel() %><br>
-						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 평점 : <%= rvo.getRbgrade() %><br>
+						<h1 style="font-weight:bold;" align="center"><%=avo.getAname() %></h1>
+						 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=address %></h4>
+						 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=avo.getAtel() %></h4>
+						 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 학원 평가 : <%= gvo.getRbgrade() %>(점)</h4>
 					</td>
 				</tr>
 			</table>
 			
-			<br><br>
-			<h4 align="right">업데이트 날짜 : <%= svo.getAupdatedate()%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>
+			<h4 align="right">업데이트 날짜 : <%= avo.getAupdatedate()%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>
 			
 			</div>
 		</div>
 		
+		   <div class="sns-share">
+                 <ul>
+                   <li>
+                     <a href="#" onclick="javascript:window.open('http://share.naver.com/web/shareView.nhn?url=http://localhost:8088/EduCatch/listDetailView.ec' +encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title), 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Naver" ><img src="/EduCatch/assets/img/share/naver_blog.png" width="40" alt="네이버 블러그 공유하기"></a>
+                   </li>
+                   <li>
+                     <a href="#" onclick="javascript:window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Facebook" ><img src="/EduCatch/assets/img/share/facebook.png" width="40" alt="페이스북 공유하기"></a>
+                   </li>
+                   <li>
+                      <a href="#" onclick="javascript:window.open('https://story.kakao.com/s/share?url=http:' +encodeURIComponent(document.URL), 'kakaostorysharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes, height=400,width=600');return false;" target="_blank" alt="Share on kakaostory"><img src="/EduCatch/assets/img/share/kakao.png" width="40" alt="카카오스토리 공유하기"></a>
+                   </li>
+                   &nbsp;&nbsp;&nbsp;
+                  
+                 </ul>
+            </div>
 	
 	
 		
-	
 		
-		<br>
-		<hr align="center" style="border: solid 4px black;">
-		<br>
-		
-		
-		
-		<%-- ----------- 카카오맵 API ------------- --%>
+<div>
+    <nav class="nav clearfix">
+        <ul class="nav-menu">
+            <li><a class="nav-menu-item" href="#section-1">기본정보</a></li>
+            <li><a class="nav-menu-item" href="#section-2">수업정보</a></li>
+            <li><a class="nav-menu-item" href="#section-3">편의기능</a></li>
+            <li><a class="nav-menu-item" href="#section-4">수강후기</a></li>
+        </ul>
+    </nav>
+</div>
+
+
+
+<br><br><br>
+<%-- ----------- 카카오맵 API ------------- --%>
 		<div align="center">
 			<div class="map_wrap">
 				<div id="map"
@@ -460,16 +580,16 @@ html, body {
 				var content = '<div class="wrap">' + 
 				            '    <div class="info">' + 
 				            '        <div class="title">' + 
-				            '          <%= svo.getAname()%>  ' + 
+				            '          <%= avo.getAname()%>  ' + 
 				            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
 				            '        </div>' + 
 				            '        <div class="body">' + 
 				            '            <div class="img">' +
-				            '                <img src="/EduCatch/assets/img/academyLogo/<%= svo.getAlogo() %>" border=0 width="73" height="70" >' +
+				            '                <img src="/EduCatch/assets/img/academyLogo/<%= avo.getAlogo() %>" border=0 width="73" height="70" >' +
 				            '           </div>' + 
 				            '            <div class="desc">' + 
-				            '                <div class="ellipsis"><%= svo.getAaddr1()%><%= svo.getAaddr2() %> </div>' + 
-				            '                <div class="jibun ellipsis">(우)<%= svo.getAaddrno()%> </div> '+ 
+				            '                <div class="ellipsis"><%= avo.getAaddr1()%><%= avo.getAaddr2() %> </div>' + 
+				            '                <div class="jibun ellipsis">(우)<%= avo.getAaddrno()%> </div> '+ 
 				            '            </div>' + 
 				            '        </div>' + 
 				            '    </div>' +    
@@ -494,26 +614,74 @@ html, body {
 			</script>
 		</div>
 		
-	
-		<div class="container">
-		<ul class="tabs">
-			<li class="tab-link current" data-tab="tab-1">기본정보</li>
-			<li class="tab-link" data-tab="tab-2">수업정보</li>
-			<li class="tab-link" data-tab="tab-3">후기</li>
-		</ul>
-		<!-- 학원정보 -->
-		<div id="tab-1" class="tab-content current">
+	<br>
+	<br>
+    <hr id="hhr">
 		
-			ACADEMY<br>
-			학원이름  : <%= svo.getAname()%> <br>
-			전화번호 : <%=svo.getAtel() %> <br>
-			우편번호 : <%=svo.getAaddrno() %> <br>
-			주소 : <%= address%> <br>
-			<br>
-			게시일 : <%= svo.getAinsertdate()%><br>
-			수정일 : <%= svo.getAupdatedate()%><br>
-			<br>
-			보유 편의 기능
+
+<div class="section">
+    <section id="section-1">
+        <h1>학원 정보</h1><br><br>
+        <div class="container">
+			  <table class="table table-condensed">
+			    <tr>
+			        <td>학원명</td>
+			        <td><%=avo.getAname() %></td>
+			      </tr>
+			      <tr>
+			        <td>연락처</td>
+			        <td><%=avo.getAtel() %></td>
+			      </tr>
+			      <tr>
+			        <td>주소</td>
+			        <td><%=address %></td>
+			      </tr>
+			  </table>
+			</div>
+        
+    </section>
+
+    <section id="section-2">
+    	<hr id="hhr">
+    	<div class="container">
+			  <table class="table table-condensed">
+       			 <h1>수업 정보</h1><br><br>
+			    <thead>
+			      <tr>
+			        <th>과목명</th>
+			        <th>수강날짜</th>
+			        <th>수강시간</th>
+			        <th>수강금액</th>
+			        <th>수강인원</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+<%
+	for(int i=0; i<subjectnCnt; i++){
+		SubjectVO svo = (SubjectVO)subjectlist.get(i);
+		
+		if(subjectnCnt>0){
+%>
+			    <tr>
+			        <td><%=svo.getSname() %></td>
+			        <td><%=svo.getSday() %></td>
+			        <td><%=svo.getStime() %></td>
+			        <td><%=svo.getSprice() %></td>
+			        <td><%=svo.getSpeople() %></td>
+			    </tr>
+<%
+		}
+	}
+%>
+			      
+			    </tbody>
+			  </table>
+			</div>
+    </section>
+
+    <section id="section-3">
+    <hr id="hhr">
+        <h1>편의기능</h1>
 			<br><br>
 			<%
 				String acparking = cvo.getAcbus();
@@ -566,35 +734,45 @@ html, body {
 					<%
 				}
 			%>
-		</div>
+    </section>
+    <section id="section-4">
+    <hr id="hhr">
+    	<div class="container">
+			  <table class="table table-condensed">
+       			 <h1>수업 정보</h1><br><br>
+			    <thead>
+			      <tr>
+			        <th>제목</th>
+			        <th>작성자</th>
+			        <th>내용</th>
+			        <th>별점</th>
+			        <th>사진</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+<%
+	for(int i=0; i<reivewnCnt; i++){
+		ReviewVO rvo = (ReviewVO)reviewlist.get(i);
 		
-		<!-- 과목정보 -->
-		<div id="tab-2" class="tab-content">
-			SUBJECT<br>
-			과목명 : <%=svo.getSname() %><br>
-			수강 날짜 : <%=svo.getSday() %><br>
-			수강시간 : <%=svo.getStime() %><br>
-			수강인원 : <%=svo.getSpeople() %><br>
-			수강료 : <%=svo.getSprice() %><br>
-			<br>
-			게시일 : <%= svo.getSinsertdate()%><br>
-			수정일 : <%= svo.getSupdatedate()%>
-		</div>
-		
-		<div id="tab-3" class="tab-content">
-			REVIEWBOARD<br>
-			후기게시판 불러오기
-		</div>
-		
-		
-		
-		
-		
-		
-	<%
-			}
-	%>
-		</div>
+		if(reivewnCnt>0){
+%>
+			    <tr>
+			        <td><%=rvo.getRbsubject() %></td>
+			        <td><%=rvo.getRbname() %></td>
+			        <td><%=rvo.getRbcontent() %></td>
+			        <td><%=rvo.getRbgrade() %></td>
+			        <td><%=rvo.getRbimg() %></td>
+			    </tr>
+<%
+		}
+	}
+%>
+			      
+			    </tbody>
+			  </table>
+			</div>
+    </section>
+</div>
 	</section>
 </div>
 

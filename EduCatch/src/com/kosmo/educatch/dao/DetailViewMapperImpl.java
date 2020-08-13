@@ -15,22 +15,34 @@ public class DetailViewMapperImpl extends SqlSessionDaoSupport implements Detail
 	
 	private static Logger log = Logger.getLogger(DetailViewMapperImpl.class);
 
-	//학원정보,과목정보
+	//----------학원정보 조회 
 	@Override
-	public SubjectVO DetailViewList(String sno) {
-		return getSqlSession().selectOne("DetailViewMapper.DetailViewList");
+	public AcademyVO academyView(String ano) {
+		return getSqlSession().selectOne("DetailViewMapper.academyView");
 	}
 	
-	//학원 편의기능 정보
+	//----------학원 편의기능 정보 조회
 	@Override
-	public ConvenienceVO conViewList(String ano) {
-		return getSqlSession().selectOne("DetailViewMapper.conViewList");
+	public ConvenienceVO conView(String ano) {
+		return getSqlSession().selectOne("DetailViewMapper.conView");
 	}
 	
-	//리뷰 게시판 평점
+	//----------리뷰 평균 평점 조회
 	@Override
-	public AcademyVO gradeSelect(String rno) {
-		return getSqlSession().selectOne("DetailViewMapper.gradeSelect");
+	public AcademyVO gradeView(String ano) {
+		return getSqlSession().selectOne("DetailViewMapper.gradeView");
+	}
+	
+	//----------과목정보 리스트조회
+	@Override
+	public List<SubjectVO> subjectViewList(SubjectVO param){
+		return getSqlSession().selectList("DetailViewMapper.subjectViewList");
+	}
+	
+	//----------리뷰 게시판 리스트
+	@Override
+	public List<ReviewVO> reviewList(ReviewVO param){
+		return getSqlSession().selectList("DetailViewMapper.reviewList");
 	}
 	
 	

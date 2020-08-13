@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.educatch.service.DetailViewService;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
+import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SubjectVO;
 
 @Controller
@@ -21,22 +22,26 @@ public class DetailViewController {
 	@Autowired
 	private DetailViewService detailViewService;
 
-	// 상세조회
-	@RequestMapping("listDetailView")
-	public ModelAndView listDetailView(@ModelAttribute AcademyVO param) {
+	// ----------상세조회페이지
+	@RequestMapping("listDetailView.ec")
+	public ModelAndView listDetailView(@ModelAttribute SubjectVO param) {
 		ModelAndView mav = new ModelAndView();
 		
-		//String sno = param.getSno();
-		String sno = "A00001";
+		//String ano = (String)param.getAno();
+		String ano = "A00001";
 		
-		SubjectVO svo = detailViewService.DetailViewList(sno);
-		ConvenienceVO cvo = detailViewService.conViewList(sno);
-		AcademyVO rvo = detailViewService.gradeSelect(sno);
+		AcademyVO avo = detailViewService.academyView(ano);
+		ConvenienceVO cvo = detailViewService.conView(ano);
+		AcademyVO gvo = detailViewService.gradeView(ano);
+		List<SubjectVO> subjectlist = detailViewService.subjectViewList(param);
+		List<ReviewVO> reviewlist = detailViewService.reviewList(param);
+		
 
-
-		mav.addObject("svo", svo);
+		mav.addObject("avo", avo);
 		mav.addObject("cvo", cvo);
-		mav.addObject("rvo", rvo);
+		mav.addObject("gvo", gvo);
+		mav.addObject("subjectList", subjectlist);
+		mav.addObject("reviewlist", reviewlist);
 		
 		mav.setViewName("search/detailView");
 		log.info("DepartmentController listDepartment mav >>> : " + mav);

@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import com.kosmo.educatch.dao.DetailViewMapper;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
+import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SubjectVO;
 
 @Service
@@ -21,43 +22,67 @@ public class DetailViewServiceImpl implements DetailViewService {
 	@Autowired
 	private DetailViewMapper detailViewMapper;
 
-	// 학원정보,과목정보
+	//----------학원정보 조회 
 	@Override
-	public SubjectVO DetailViewList(String sno) {
-		log.info("DetailViewServiceImpl DetailViewList 시작 >>>> ");
-		SubjectVO svo = new SubjectVO();
-		svo = detailViewMapper.DetailViewList(sno);
-		log.info("svo >>> " + svo);
+	public AcademyVO academyView(String ano) {
+		log.info("DetailViewServiceImpl academyView 시작 >>>> ");
+		AcademyVO avo = new AcademyVO();
+		avo = detailViewMapper.academyView(ano);
+		log.info("avo >>> " + avo);
 
-		log.info("DetailViewServiceImpl DetailViewList 끝 >>>> ");
+		log.info("DetailViewServiceImpl academyView 끝 >>>> ");
 
-		return svo;
+		return avo;
 	}
 	
-	// 학원 편의기능 정보
+	//----------학원 편의기능 정보 조회
 	@Override
-	public ConvenienceVO conViewList(String ano) {
-		log.info("DetailViewServiceImpl conViewList 시작 >>>> ");
+	public ConvenienceVO conView(String ano) {
+		log.info("DetailViewServiceImpl conView 시작 >>>> ");
 		ConvenienceVO cvo = new ConvenienceVO();
-		cvo = detailViewMapper.conViewList(ano);
+		cvo = detailViewMapper.conView(ano);
 		log.info("svo >>> " + cvo);
 
-		log.info("DetailViewServiceImpl conViewList 끝 >>>> ");
+		log.info("DetailViewServiceImpl conView 끝 >>>> ");
 		
 		return cvo;
 	}
 	
-	// 리뷰 게시판 평점
+	//----------리뷰 평균 평점 조회
 	@Override
-	public AcademyVO gradeSelect(String rno) {
-		log.info("DetailViewServiceImpl gradeSelect 시작 >>>> ");
-		AcademyVO rvo = new AcademyVO();
-		rvo = detailViewMapper.gradeSelect(rno);
-		log.info("rvo >>> " + rvo);
+	public AcademyVO gradeView(String ano) {
+		log.info("DetailViewServiceImpl gradeView 시작 >>>> ");
+		AcademyVO gvo = new AcademyVO();
+		gvo = detailViewMapper.gradeView(ano);
+		log.info("gvo >>> " + gvo);
 
-		log.info("DetailViewServiceImpl gradeSelect 끝 >>>> ");
+		log.info("DetailViewServiceImpl gradeView 끝 >>>> ");
 		
-		return rvo;
+		return gvo;
+	}
+	
+	//----------과목정보 리스트조회
+	@Override
+	public List<SubjectVO> subjectViewList(SubjectVO param){
+		log.info("DetailViewServiceImpl subjectViewList 시작 >>>> ");
+		List<SubjectVO> list = new ArrayList<SubjectVO>();
+		list = detailViewMapper.subjectViewList(param);
+		log.info("DetailViewServiceImpl subjectViewList 끝 >>>> ");
+		
+		return list;
+		
+	}
+
+	//----------리뷰 게시판 리스트
+	@Override
+	public List<ReviewVO> reviewList(ReviewVO param) {
+		
+		log.info("DetailViewServiceImpl reviewList 시작 >>>> ");
+		List<ReviewVO> list = new ArrayList<ReviewVO>();
+		list = detailViewMapper.reviewList(param);
+		log.info("DetailViewServiceImpl reviewList 끝 >>>> ");
+		
+		return list;
 	}
 
 }

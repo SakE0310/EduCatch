@@ -3,10 +3,7 @@
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosmo.educatch.dao.DetailViewMapper">
 
-
-	
-	<select id="DetailViewList" parameterType="String" resultType="subjectview">
-		
+	<select id="subjectViewList" parameterType="subjectview" resultType="subjectview">
 		SELECT
 			    A.SNO,
 			    A.SNAME,
@@ -18,29 +15,43 @@
 			    A.SDELETEYN,
 			    TO_CHAR(A.SINSERTDATE,'YYYY-MM-DD') AS SINSERTDATE, 
 			    TO_CHAR(A.SUPDATEDATE,'YYYY-MM-DD') AS SUPDATEDATE,
-			    B.ANO,
-			    B.ANAME,
-			    B.ATEL,
-			    B.AXPOINT,
-			    B.AYPOINT,
-			    B.AADDRNO,
-			    B.AADDR1,
-			    B.AADDR2,
-			    B.ALOGO,
-			    B.CATEGORY_CNO,
-			    B.ADELETEYN,
-			    TO_CHAR(B.AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
+                B.ANO,
+                B.ADELETEYN,
+                TO_CHAR(B.AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
 			    TO_CHAR(B.AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
 		FROM 
 				SUBJECT A , ACADEMY B
 		WHERE A.ACADEMY_ANO = B.ANO
 		AND A.SDELETEYN = 'N'
 		AND B.ADELETEYN = 'N'
-		AND ANO= 'A00001'
 		ORDER BY 1 DESC
 	</select>
 	
-	<select id="conViewList" parameterType="String" resultType="convenience">
+	<select id="academyView" parameterType="String" resultType="academyview">
+		
+		SELECT
+			    A.ANO,
+			    A.ANAME,
+			    A.ATEL,
+			    A.AXPOINT,
+			    A.AYPOINT,
+			    A.AADDRNO,
+			    A.AADDR1,
+			    A.AADDR2,
+			    A.ALOGO,
+			    A.CATEGORY_CNO,
+			    A.ADELETEYN,
+			    TO_CHAR(A.AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
+			    TO_CHAR(A.AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
+		FROM 
+				ACADEMY A
+		WHERE A.ADELETEYN = 'N'
+		AND A.ANO= #{ano, jdbcType=VARCHAR}
+		ORDER BY 1 DESC
+		
+	</select>
+	
+	<select id="conView" parameterType="String" resultType="convenience">
 		
 		SELECT
 			    A.ACADEMY_ANO,
@@ -55,20 +66,44 @@
 		FROM 
 				ACADEMY_CONVENIENCE A , ACADEMY B
 		WHERE A.ACADEMY_ANO = B.ANO
-		AND ANO='A00001'
+		AND ANO=#{ano, jdbcType=VARCHAR}	
 		ORDER BY 1 DESC
+		
 	</select>
 	
 	
-	<select id="gradeSelect" parameterType="String" resultType="academyview">
+	<select id="gradeView" parameterType="String" resultType="academyview">
 		SELECT
             AVG(A.RBGRADE) AS RBGRADE
         FROM 
             REVIEWBOARD A, ACADEMY B
         WHERE
             A.ACADEMY_ANO = B.ANO
-            AND B.ANO = 'A00001'
+            AND B.ANO = #{ano, jdbcType=VARCHAR}
         GROUP BY B.ANO
 	</select>
+	
+	<select id="reviewList" parameterType="review" resultType="review">
+		SELECT
+			    	A.RBNO              AS RBNO,
+		            A.RBSUBJECT         AS RBSUBJECT,
+		            A.RBNAME            AS RBNAME,
+		            A.RBIMG             AS RBIMG,
+		            A.RBCONTENT         AS RBCONTENT,
+		            A.ACADEMY_ANO       AS ACADEMY_ANO,
+		            A.MEMBER_MNO        AS MEMBER_MNO,
+		            A.RBGRADE           AS RBGRADE,
+		            A.RBDELETEYN        AS RBDELETEYN,
+		            TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD')      AS RBINSERTDATE,
+		            TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')      AS RBUPDATEDATE,
+		            B.ANO				AS ANO
+		FROM 
+					REVIEWBOARD A, ACADEMY B
+		WHERE A.ACADEMY_ANO = B.ANO
+		AND A.RBDELETEYN = 'N'
+		AND B.ADELETEYN = 'N'
+		ORDER BY 1 DESC
+	</select>
+	
 	
 </mapper>
