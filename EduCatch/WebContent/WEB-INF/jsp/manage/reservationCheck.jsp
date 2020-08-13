@@ -309,7 +309,7 @@
 						}else{
 							showModal(info.dateStr,"select",time, people, ttno);							
 						}
-					}else if(info.dayEl.classList.contains('fc-day-future')){
+					}else if(!info.dayEl.classList.contains('fc-day-other')&&!info.dayEl.classList.contains('fc-day-today')){
 						showModal(info.dateStr,"insert");
 					}else if(info.dayEl.classList.contains('fc-day-today')){
 						alert("당일에 예약일정을 설정 할 수 없습니다.");
