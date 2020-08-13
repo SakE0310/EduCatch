@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosmo.educatch.dao.MyPageMapper">
+	
+	<!-- 마이페이지 조회 -->
+	<select id="selectMyPage" parameterType="member" resultType="member">
+		SELECT 
+		          A.MNO                  AS MNO
+		         ,A.MID                  AS MID
+		         ,A.MPW                	 AS MPW
+		         ,A.MNAME                AS MNAME
+		         ,A.MTEL                 AS MTEL
+		         ,A.MADDRNO              AS MADDRNO
+		         ,A.MADDR1               AS MADDR1
+		         ,A.MADDR2               AS MADDR2
+		         ,A.MIMG                 AS MIMG
+         
+		FROM
+		        MEMBER A
+		WHERE        
+		        MNO = '2' --세션넣고 고쳐야함
+		        AND MDELETEYN ='N'
+	</select>
+	
+	<!-- 비밀번호 검사조회 -->
+	<select id="selectPW" parameterType="member" resultType="member">
+	SELECT 
+	          A.MID                AS MID
+		      ,A.MPW                AS MPW
+	FROM
+	        MEMBER A
+	WHERE        
+	        MID = #{mid, jdbcType=VARCHAR}
+	        AND MDELETEYN ='N'
+	</select>
+	
+	<!-- 비밀번호 검사 -->
+	<select id="checkPW" parameterType="member" resultType="member">
+	SELECT
+       		  A.MID                AS MID
+	         ,A.MPW                AS MPW
+	FROM
+	        MEMBER A
+	WHERE        
+	        MID =#{mid, jdbcType=VARCHAR}
+	        AND MPW = #{mpw, jdbcType=VARCHAR}
+	</select>
+
+</mapper>
