@@ -14,14 +14,22 @@
 	$(document).ready(function(){
 		$("#join").click(function(){
 			
-			alert("회원가입");
+			alert("일반 회원가입");
 			$("#loginForm").attr("action","joinCheckForm.ec")
 			$("#loginForm").submit();
 			
 		});
 		
+		$("#academymem").click(function(){
+			
+			alert("관리자 회원가입");
+			$("#loginForm").attr("action","academyJoinForm.ec")
+			$("#loginForm").submit();
+			
+		});
+		
 		$("#login").click(function(){
-				
+	
 			alert("로그인");
 			$("#loginForm").attr("action","loginCheck.ec")
 			$("#loginForm").submit();
@@ -58,6 +66,18 @@
 			width:350px;
 			margin : auto;
 		}
+		#academymem{
+			width : 150px;
+			padding : 0px 0px;
+			margin-top: 10px;
+			margin-bottom : 76px;
+		
+		}
+		#question{
+			color : #808080;
+			font-size : 14px;
+		
+		}
 		
 	
 		.genric-btn {
@@ -74,6 +94,7 @@
 			
 		
 		}
+		
 		
 		
 		 
@@ -101,7 +122,7 @@
 					
 					
 				
-		
+					<!-- ================ 아이디  ================== -->		
 					<div class="js-form-message form-group"  id ="id">
 	     		   		<label class="form-label" for="id_login">아이디</label>
 	        			<input type="email" class="form-control" name="mid" id="mid" placeholder="이메일을 입력해주세요"
@@ -109,7 +130,7 @@
 	           		</div><br>
 	    		
 	 
-	    			<!--   -->
+	    			<!-- ================ 비밀번호 ================== -->
 	    			<div class="js-form-message form-group mb-5" id ="pw">
 	      			    <label class="form-label" for="id_password">
 	       			    <span class="d-flex justify-content-between align-items-center">비밀번호
@@ -126,12 +147,12 @@
 			          	</div> 
 	          		</div> 
 	
-					<!-- 로그인 버튼  -->
+					<!--===== 로그인 버튼 ======  -->
 					<div align ="center">
 	    				<button class="genric-btn primary" type="submit" name ="login" id ="login">로그인</button>	
 					</div><br>
 	    
-	    			<!-- 회원가입 버튼  -->
+	    			<!--===== 회원가입 버튼 ====== -->
 	    			<div align = "center">
 	    				<button class="genric-btn success" type="submit" name ="join" id ="join">회원가입</button>
 	   				</div><br>
@@ -140,6 +161,7 @@
 	     				<p align = "center"><img src="https://ssl.nx.com/S2/p3/login/2016/img_tpa.gif" width="350" height="10" alt="또는"/>
 	     				
 	     				
+				<!-- ============== 소셜 로그인	 ============== -->
 	     			<div class = "snslogin" align = "center"  >	
 	     			 		
 	     			 		<a href ="https://www.naver.com">
@@ -171,9 +193,19 @@
 									color:black;
 									background-color: #d9d9d9;
 									width:350px;
-									margin-top:20px; 
-									margin-bottom:80px;">
+									margin-top:20px;">
+						
 					</div>
+					
+					<!--======== 학원관리자 회원가입 ==========-->
+					
+					<div align = "center">
+							<a id ="question">일반 회원이 아니신가요?</a><br>
+							<button class="genric-btn success" id ="academymem" type = "submit">학원관리자 회원가입</button>
+					
+					</div>
+					
+					
 	     	     			
  		 </form>
 

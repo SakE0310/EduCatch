@@ -17,37 +17,18 @@ public class LoginMapperImpl implements LoginMapper{
 	@Autowired
 	private SqlSession session;
 
-	@Override
-	public AMemberVO aLoginCheck(AMemberVO avo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	// ======== 로그인 체크 ==========
 	@Override
 	public List<MemberVO> loginCheck(MemberVO parma) {
-		String name = session.selectOne("loginCheck");
-		return null;
+		return session.selectOne("loginCheck");
 				
 	}
-
-	// ======== 로그인 정보 ==========
-	@Override
-	public MemberVO viewMember(MemberVO mvo) {
-		
-		return session.selectOne("viewMember");
-	}
-
-	
-	@Override
-	public void logout(HttpSession session) {
-		
-	}
-	
-	
-
-	
-		
 }
+	
+	
+
+	
+		
 	
 

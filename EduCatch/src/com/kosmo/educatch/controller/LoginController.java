@@ -1,7 +1,8 @@
 package com.kosmo.educatch.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,36 +40,52 @@ public class LoginController {
 	
 	// ================ 로그인 처리 ========================
 	
-	@RequestMapping("/loginCheck")
-	public ModelAndView  loginCheck(@ModelAttribute MemberVO param) {
-		log.info("LoginController loginCheck 시작 >>>");
-		ModelAndView mav = new ModelAndView();
-		
-		
-		MemberVO mvo = loginService.loginCheck(param);
-		mav.addObject("mvo", mvo);
-		mav.setViewName("member/login/result");
-				
-		log.info("loginCheck() >>>>");
-		return mav;
-		
-	}
-		
-		
+//	@RequestMapping("/loginCheck")
+//	public ModelAndView  loginCheck(@ModelAttribute MemberVO param, HttpServletRequest request) {
+//		
+//		log.info("LoginController loginCheck 시작 >>>");
+//		log.info(param);
+//		log.info(param.getMid());
+//		log.info(param.getMpw());
+//		
+//		
+//		List<MemberVO> list = loginService.loginCheck(param);
+//		
+//		
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("loginCheck", list);
+//		mav.setViewName("member/login/result");
+//				
+//		log.info("loginCheck() >>>>");
+//		return mav;
+//		
+//	}
+//		
+//		
 
 	
 	
-	// ====================회원가입 폼으로 ==========================
+	// ====================일반 회원가입 폼으로 ==========================
 	
 	@RequestMapping("/joinCheckForm")
 	   public ModelAndView joinCheckForm(){
 	      log.info("joinCheckForm() start");
 	      ModelAndView mav  = new ModelAndView();
-	      mav.setViewName("member/join/memberButton");          
+	      mav.setViewName("member/join/agreeMember");          
 	      log.info("joinCheckForm() end");
 	      return mav;
 	   }// end of joinCheckForm()
 	
+	// ====================학원 회원가입 폼으로 ==========================
+	
+		@RequestMapping("/academyJoinForm")
+		   public ModelAndView academyJoinForm(){
+		      log.info("joinCheckForm() start");
+		      ModelAndView mav  = new ModelAndView();
+		      mav.setViewName("member/join/academyJoinForm");          
+		      log.info("academyJoinForm() end");
+		      return mav;
+		   }// end of academyJoinForm()
 	
 	// =======================비밀번호 찾기==========================
 	
@@ -76,7 +93,7 @@ public class LoginController {
 		public ModelAndView pwReset(){
 			log.info("pwRest() start");
 			ModelAndView mav = new ModelAndView();
-			mav.setViewName("member/login/pwReset");
+			mav.setViewName("member/login/pwUpdate");
 			 log.info("pwReset() end");
 			return mav;
 		
