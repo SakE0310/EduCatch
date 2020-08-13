@@ -18,6 +18,21 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
+				
+// 				//무한스크롤
+// 				$(document).scroll(function(){
+// 					console.log("scroll");
+// 					var maxHeight = $(document).height();
+// 					var currentScroll= $(window).scrollTop()+$(window).height();
+// 					if(maxHeight<=currentScroll+100){
+// 						$.ajax({
+// 							url : "searchMain.ec",
+// 							success : function(html,status){
+// 							}
+// 						});
+// 					}
+// 				});//scroll
+				
 				//지역 함수
 				ajaxGetDistrict();
 				//카테고리 함수
@@ -77,15 +92,7 @@
 							var listcount = resParam.acaList[0].listcount;
 							st = "<h5>"+listcount+"개의 학원이 조회됬습니다</h5>";
 						for(i in resParam.acaList){
-// 										+ resParam.acaList[i].axpoint
-// 										+ resParam.acaList[i].aypoint
-// 										+ resParam.acaList[i].category_cno
-// 										+ resParam.acaList[i].adeleteyn
-// 										+ resParam.acaList[i].aupdatedate
-// 										+ resParam.acaList[i].aaddrno
-// 				 			var atel = resParam.acaList[i].atel;
-
-							var ainsertdate = resParam.acaList[i].ainsertdate;
+							var aupdatedate = resParam.acaList[i].aupdatedate;
 							var cmajor = resParam.acaList[i].cmajor;
 							var cminor = resParam.acaList[i].cminor;
 							var ano = resParam.acaList[i].ano;
@@ -93,18 +100,18 @@
 							var	alogo = resParam.acaList[i].alogo;
 							var aaddr1 = resParam.acaList[i].aaddr1;
 							var aaddr2 = resParam.acaList[i].aaddr2;
+							var agrade = resParam.acaList[i].agrade;
 							st += "<p>";
 							st += "<div class='panel panel-default'>";
-							st += "<a href='listDetailView.ec'>";
+							st += "<a href='listDetailView.ec' style='text-decoration:none'>";
 							st += "<div class='media'>";
 							st += "<div class='media-left'>";
 							st += "<img src='assets/img/sendMail/"+alogo+"' class='media-object' style='width:120px; height:120px'>";
 							st += "</div>";
 							st += "<div class='media-body'>";
-							st += "<p><h3 class='media-heading'>"+aname+"</p>";
-							st += "</h3>";
-							st += "<p>"+aaddr1+"&nbsp;"+aaddr2+"&nbsp;&nbsp;("+cmajor+"&nbsp;"+cminor+")</p>";
-							st += "<p align='right'>등록일 : "+ainsertdate+"&nbsp;&nbsp;</p>";
+							st += "<p><h4 class='media-heading'>"+aname+"</h4></p>";
+							st += "<p>"+aaddr1+"&nbsp;"+aaddr2+"</p>#"+cmajor+"&nbsp;#"+cminor+"";
+							st += "<h5 align='right'>최근업데이트 : "+aupdatedate+"&nbsp;&nbsp;</h5></p>";
 							st += "</div>";
 							st += "</div>";
 							st += "</a>";
@@ -114,7 +121,6 @@
 						$('.acaList').html(st);
 						$('.acaList').niceSelect('update');
 						console.log("done end >>> "+resParam);
-						endlessScroll();
 					}).fail(function(resParam){
 						alert("에러");
 					});					
@@ -215,38 +221,15 @@
 					});
 				}//getMinor
 				
-				$(document).endlessScroll();
-				//무한 스크롤
-				function endlessScroll(){
-					$(document).ready(function(){
-					console.log("endless function in  >>> ");
-						$(window).endlessScroll({
-							inflowPixels : 300,
-							callback : function(){
-								var list = $('.media div:nth-last-child(5)').clone();
-								$('.media').append(list);
-							}
-						});
-					});
-				}
-				
 			});//document function
-			
-// 			//즐겨찾기 토글버튼
-// 			function toggle(){
-// 				$('.toggle').click(function(){
-// 					console.log("toggle");
-// 					$(this).toggleClass("toggleBtn");
-// 					$(document).attr("action","bookMark.ec");
-// 					$(document).attr("method","post");
-// 					$(document).submit();
-// 				});//toggle click
-// 			}// toggle function
 			
 		</script>
 		
 		<style type="text/css">
-		.search-table{
+		
+		table{
+			border-spacing : 10px;
+			border-collapse : separate;
 			margin : auto;
 			align : center;
 		}
@@ -295,7 +278,7 @@
 										</select>
 									</td>
 									<td class="button-search">
-									&nbsp;<input type="button" id="search" class="genric-btn primary" value="검색">
+									<input type="button" id="search" class="genric-btn primary" value="검색">
 									</td>
 								</tr>
 							</table>

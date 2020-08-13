@@ -16,6 +16,7 @@ public class AcademyVO extends SearchVO{
 	private String adeleteyn;
 	private String ainsertdate;
 	private String aupdatedate;
+	
 
 	public AcademyVO() {
 	}

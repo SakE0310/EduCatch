@@ -79,7 +79,6 @@ public class SearchController {
 		String city = req.getParameter("city");
 		String cmajor = req.getParameter("cmajor");
 		String cminor = req.getParameter("cminor");
-		String curPage = "1";
 		
 		String[] cityArr = city.split(" ");
 		String cityStr = cityArr[0];
@@ -118,7 +117,6 @@ public class SearchController {
 		log.info("search controller getAcaList end >>> ");
 		return map;
 	}//getAcaList
-	
 	
 }//end controller
 

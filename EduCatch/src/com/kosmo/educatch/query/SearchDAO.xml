@@ -33,8 +33,8 @@
          A.ALOGO AS ALOGO,
          A.CATEGORY_CNO AS CATEGORY_CNO,
          A.ADELETEYN AS ADELETEYN,
-         TO_CHAR(AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
-         TO_CHAR(AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE,
+         TO_CHAR(A.AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
+         TO_CHAR(A.AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE,
          B.CMAJOR AS CMAJOR,
          B.CMINOR AS CMINOR,
          COUNT(A.ANO) OVER() AS LISTCOUNT
@@ -57,11 +57,4 @@
 	</if>
 	</select>
 	
-<!-- 	<select id="getReview" parameterType="search" resultType="search"> -->
-<!-- 	 SELECT  -->
-<!-- 	 	AVG(A.RBGRADE) AS RBGRADE -->
-<!-- 	 FROM REVIEWBOARD A, ACADEMY B  -->
-<!-- 	 WHERE A.ACADEMY_ANO = B.ANO  -->
-<!-- 	 GROUP BY ANO -->
-<!-- 	</select> -->
 </mapper>
