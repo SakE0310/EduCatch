@@ -9,17 +9,18 @@
 </head>
 <%
 
-	String rbno = request.getParameter("rbno");
-	String reviewboard_rbno = request.getParameter("rbno");
+	String cbno = request.getParameter("cbno");
+	String consultboard_cbno = request.getParameter("cbno");
 	String member_mno = request.getParameter("member_mno");
 	String reno = request.getParameter("reno");
 	String recontent = request.getParameter("recontent");
 %>
+
 <script type="text/javascript"
 		src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 
-	var reviewboard_rbno = "<%=reviewboard_rbno%>";
+	var consultboard_cbno = "<%=consultboard_cbno%>";
 	var member_mno = "<%=member_mno%>";
 	var reno = "<%=reno%>";
 	var recontent = "<%=recontent%>";
@@ -40,7 +41,7 @@
 				dataType:"html",
 				data:{
 					//member_mno: member_mno,
-					reviewboard_rbno: reviewboard_rbno,
+					consultboard_cbno: consultboard_cbno,
 					recontent: recontent
 				},
 				success:function(insertResult){
@@ -164,20 +165,20 @@
 		$("#replyList_ul").html("");
 		
 		$.ajax({
-			url:"replyList.ec",
+			url:"creplyList.ec",
 			type:"post",
 			dataType:"JSON",
 			data:{
-				reviewboard_rbno: reviewboard_rbno,
+				consultboard_cbno: consultboard_cbno,
 				//member_mno: member_mno
 				reno: reno
 			},
 			success:function(map){
 				console.log('댓글전체목록조회 ajax 성공 >>> ' + map);
-				var replyList = map.replyList;
+				var creplyList = map.creplyList;
 				//var total = map.replyTotal;
 				//$(".total").html("댓글 총 " + total + "개");
-				addNewReply(replyList);
+				addNewReply(creplyList);
 			},
 			error:function(){
 				alert('댓글전체목록 조회 ajax 실패');
@@ -187,18 +188,18 @@
 	} // end of callReplyList
 	
 	// 새 댓글을 화면에 추가해서 출력하는 함수
-	function addNewReply(replyList){
-		console.log('addNewReply 함수 호출! >>> 조회된 댓글 갯수 replyList.length : ' + replyList.length);
+	function addNewReply(creplyList){
+		console.log('addNewReply 함수 호출! >>> 조회된 댓글 갯수 creplyList.length : ' + creplyList.length);
 		
 		
-		for(var i=0; i<replyList.length; i++){
-			var reno = replyList[i].reno;
-			var member_mno = replyList[i].member_mno;
-			var rewriter = replyList[i].rewriter;
-			var reinsertdate = replyList[i].reinsertdate;
-			var recontent = replyList[i].recontent;
+		for(var i=0; i<creplyList.length; i++){
+			var reno = creplyList[i].reno;
+			var member_mno = creplyList[i].member_mno;
+			var rewriter = creplyList[i].rewriter;
+			var reinsertdate = creplyList[i].reinsertdate;
+			var recontent = creplyList[i].recontent;
 			
-			console.log('replyList['+i+'] >>>\nreno : ' + reno + ', rewriter : ' + rewriter + ', reinsertdate : ' + reinsertdate + ', recontent : ' + recontent );
+			console.log('creplyList['+i+'] >>>\nreno : ' + reno + ', rewriter : ' + rewriter + ', reinsertdate : ' + reinsertdate + ', recontent : ' + recontent );
 			
 			//var replyWriterBool = replyWriterI_no == i_no;
 			//var replyMasterBool = i_no.indexOf("M") == 0;

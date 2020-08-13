@@ -30,4 +30,24 @@ public class ReplyServiceImpl implements ReplyService{
 		return replyMapper.replyInsert(rvo);
 	}
 
+	@Override
+	public int replyUpdate(ReplyVO rvo) {
+		// TODO Auto-generated method stub
+		return replyMapper.replyUpdate(rvo);
+	}
+
+	@Override
+	public int replyDelete(ReplyVO rvo) {
+		// TODO Auto-generated method stub
+		return replyMapper.replyDelete(rvo);
+	}
+
+	@Override
+	public List<ReplyVO> creplyList(ReplyVO rvo) {
+		// TODO Auto-generated method stub
+		List<ReplyVO> creplyList=replyMapper.creplyList(rvo);
+		
+		return creplyList;
+	}
+
 }

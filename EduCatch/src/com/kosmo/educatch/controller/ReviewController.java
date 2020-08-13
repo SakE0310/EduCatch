@@ -325,9 +325,10 @@ public class ReviewController {
 	
 	//업데이트 상세 조회
 	@RequestMapping("/selectUpdate.ec")
-	public ModelAndView selectUpdate(@ModelAttribute ReviewVO param) {
+	public ModelAndView selectUpdate(@ModelAttribute ReviewVO param, AcademyVO avo) {
 		//value="rbno", required=false
 		log.info("ReviewController selectUpdate >>> 호출 성공");
+
 		
 		String rbno=(String)param.getRbno();
 		ModelAndView mav=new ModelAndView();

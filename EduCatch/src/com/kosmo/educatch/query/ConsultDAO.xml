@@ -114,9 +114,12 @@
         A.MEMBER_MNO            AS MEMBER_MNO,
         A.CDELETEYN             AS CDELETEYN,
         TO_CHAR(A.CINSERTDATE, 'YYYY-MM-DD')         AS CINSERTDATE,
-        TO_CHAR(A.CUPDATEDATE, 'YYYY-MM-DD')         AS CUPDATEDATE
-        FROM    CONSULTBOARD A
+        TO_CHAR(A.CUPDATEDATE, 'YYYY-MM-DD')         AS CUPDATEDATE,
+        B.ANAME             AS ANAME,
+        B.ANO               AS ANO
+        FROM    CONSULTBOARD A, ACADEMY B
         WHERE   CBNO=#{cbno, jdbcType=VARCHAR}	
+        AND	  A.ACADEMY_ANO = B.ANO	
 	</select>
 	<select id="selectUpdate1" parameterType="String" resultType="consult">
 		SELECT
@@ -128,15 +131,17 @@
         A.MEMBER_MNO            AS MEMBER_MNO,
         A.CDELETEYN             AS CDELETEYN,
         TO_CHAR(A.CINSERTDATE, 'YYYY-MM-DD')         AS CINSERTDATE,
-        TO_CHAR(A.CUPDATEDATE, 'YYYY-MM-DD')         AS CUPDATEDATE
-        FROM    CONSULTBOARD A
+        TO_CHAR(A.CUPDATEDATE, 'YYYY-MM-DD')         AS CUPDATEDATE,
+        B.ANAME             AS ANAME,
+        B.ANO               AS ANO
+        FROM    CONSULTBOARD A, ACADEMY B
         WHERE   CBNO=#{cbno, jdbcType=VARCHAR}	
+        AND	  A.ACADEMY_ANO = B.ANO	
 	</select>
 	<update id="updateConsult" parameterType="consult">
 		UPDATE CONSULTBOARD
 		SET CBSUBJECT=#{cbsubject, jdbcType=VARCHAR},
-		    CBCONTENT=#{cbcontent, jdbcType=VARCHAR},
-		    ACADEMY_ANO=#{academy_ano, jdbcType=VARCHAR}
+		    CBCONTENT=#{cbcontent, jdbcType=VARCHAR}
 		WHERE CBNO=#{cbno, jdbcType=VARCHAR}
 		AND   CDELETEYN='N'
 	</update>

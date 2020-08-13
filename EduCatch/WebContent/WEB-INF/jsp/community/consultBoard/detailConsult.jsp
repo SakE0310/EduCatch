@@ -44,6 +44,8 @@
 </script>
 <body>
 <%
+
+	String consultboard_cbno = "";
 	Object obj=request.getAttribute("ConsultVO");
 	
 	if(obj !=null){
@@ -99,6 +101,10 @@
 	}
 %>
 		</table>
+		
+		<jsp:include page="consultReply.jsp">
+			<jsp:param name="consultboard_cbno" value="<%=consultboard_cbno %>"/>
+		</jsp:include>
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

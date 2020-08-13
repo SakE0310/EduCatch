@@ -69,7 +69,10 @@
 <p></p>
 	<div>
 		<form id="ReviewForm" name="ReviewForm">
-		 
+		 	<input type="hidden" id="ano" name="ano" value="<%= rvo.getAno()%>"/> 
+		 	<input type="hidden" id="aname" name="aname" value="<%= rvo.getAname()%>"/> 
+		 	<input type="hidden" id="academy_ano" name="academy_ano" value="<%= rvo.getAcademy_ano()%>"/> 
+		 	
 			<input type="hidden" id="rbno" name="rbno" value="<%= rvo.getRbno()%>"/>
 		
 			<table style="margin-left: auto; margin-right: auto;" border="1">

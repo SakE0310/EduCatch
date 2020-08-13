@@ -74,8 +74,9 @@
 			</tr>
 			<tr>
 				<td style="width: 100px">학원명</td>
-				<td><input type="text"  id="academy_ano" name="academy_ano" value="<%= cvo.getAcademy_ano() %>"
-					style="width: 98%" />
+				<td><div>
+					<%= cvo.getAname() %>
+					</div>
 				</td>
 			</tr>
 			<tr>

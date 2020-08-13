@@ -53,6 +53,18 @@
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
 		});
+		
+		$("#searchAcademy").click(function(){
+			
+			alert("searchAcademy >>>");
+			$("#ano").val(ano);
+			window.open("","pop","width=480 height=250");
+			$("#edit").attr("action","academyList.ec");
+			$("#edit").attr("target","pop");
+			$("#edit").attr("method","POST");
+			$("#edit").submit();
+			
+		});
 	});
 
 </script>
@@ -74,14 +86,16 @@
 			<tr>
 				<td style="width: 100px">평점</td>
 				<td>
-					<input type="text" id="rbgrade" name="rbgrade" value="<%= rvo.getRbgrade() %>"
-					style="width: 98%" />
+					<div>
+					<%= rvo.getRbgrade() %>
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td style="width: 100px">학원명</td>
-				<td><input type="text"  id="academy_ano" name="academy_ano" value="<%= rvo.getAcademy_ano() %>"
-					style="width: 98%" />
+				<td><div>
+					<%= rvo.getAname() %>
+					</div>
 				</td>
 			</tr>
 			<tr>

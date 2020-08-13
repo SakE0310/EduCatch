@@ -89,6 +89,24 @@
 			color:black;
 		
 		}
+
+	table {
+	  border-collapse: collapse;
+	  width: 70%;
+	}
+	
+	th, td {
+	  padding: 8px;
+	  text-align: left;
+	  border-bottom: 1px solid #ddd;
+	}
+	
+	tr:hover {background-color:#f5f5f5;}
+	
+	.cc{	
+			text-align:center;
+			table-layout:auto;
+		}
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -207,10 +225,10 @@
 	</form>
 	<br><br><br><br>
 	<div>
+		<h4 class="tt">후기 게시판</h4><br><br><br>
+		<input type="button" value="[글쓰기]"
+		id="insertPage"/>
 		<table style="margin-left: auto; margin-right: auto;" border="0" cellpadding="1" cellspacing="1">
-			<tr>
-				<th><h4 class="tt">후기 게시판</h4><br><br><br></th>
-			</tr>
 		</table>
 		<table  style="margin-left: auto; margin-right: auto;" border="1">
 			<colgroup>
@@ -218,14 +236,9 @@
 				<col width="110px"/>
 				<col width="120px"/>
 				<col width="220px"/>
+				<col width="150px"/>
 			</colgroup>
 			<thead>	
-				<tr>
-					<td colspan="6" align="right">
-						<input type="button" value="[글쓰기]"
-						id="insertPage"/>
-					</td>
-				</tr>
 				<tr>
 					<th>글번호</th>
 					<th>작성자</th>
@@ -256,11 +269,11 @@
 %>
 
 					<tr align="center">
-						<td><%= rvo.getRbno() %></td>
-						<td><%= rvo.getRbname() %></td>
-						<td><%= rvo.getAname() %></td>
-						<td><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>"  id="aa"><%= rvo.getRbsubject() %></a></td>
-						<td><%= rvo.getRbinsertdate() %></td>
+						<td class="cc"><%= rvo.getRbno() %></td>
+						<td class="cc"><%= rvo.getRbname() %></td>
+						<td class="cc"><%= rvo.getAname() %></td>
+						<td class="cc"><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>"  id="aa"><%= rvo.getRbsubject() %></a></td>
+						<td class="cc"><%= rvo.getRbinsertdate() %></td>
 						<!-- 
 						<td><input type="button" value="[수정/삭제]"
 						onclick="updatePopup('${row.rbno}')"/></td>
@@ -285,13 +298,10 @@
 			<jsp:include page="memberPaging.jsp" flush="true">
 				<jsp:param name="url" value="listReview.ec"/>
 				<jsp:param name="str" value=""/>
-				
-				
 					<jsp:param name="pagesize" value="<%= pagesize %>"/>
 					<jsp:param name="groupsize" value="<%= groupsize %>"/>
 					<jsp:param name="curpage" value="<%= curpage %>"/>
-					<jsp:param name="totalcount" value="<%= totalcount %>"/>
-					
+					<jsp:param name="totalcount" value="<%= totalcount %>"/>		
 			</jsp:include>
 			</td>
 			</tr>

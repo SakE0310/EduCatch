@@ -3,8 +3,16 @@
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 						
 <mapper namespace = "com.kosmo.educatch.dao.ReplyMapper">
+	<select id="creplyList" parameterType="reply" resultType="reply">
+		SELECT * FROM REPLY
+		WHERE CONSULTBOARD_CBNO = #{consultboard_cbno,jdbcType=VARCHAR}
+		AND   REDELETEYN = 'N'
+	</select>
+	
 	<select id="replyList" parameterType="reply" resultType="reply">
 		SELECT * FROM REPLY
+		WHERE REVIEWBOARD_RBNO = #{reviewboard_rbno,jdbcType=VARCHAR}
+		AND   REDELETEYN = 'N'
 	</select>
 	
 	<insert id="replyInsert" parameterType="reply">
@@ -16,6 +24,7 @@
 		</selectKey>
 			INSERT INTO REPLY(
 			    REVIEWBOARD_RBNO,
+			    CONSULTBOARD_CBNO,
 			    RENO,
 			    RECONTENT,
 			    REDELETEYN,
@@ -24,6 +33,7 @@
 			)
 			VALUES(
 			    #{reviewboard_rbno,jdbcType=VARCHAR},
+			    #{consultboard_cbno,jdbcType=VARCHAR},
 			    #{reno,jdbcType=VARCHAR},
 			    #{recontent,jdbcType=VARCHAR},
 			    'N',
@@ -31,4 +41,21 @@
 			    SYSDATE
 			)
 	</insert>
+	<update id="replyUpdate" parameterType="reply">
+		UPDATE  REPLY
+		SET     RECONTENT =  #{recontent, jdbcType=VARCHAR},
+		        REUPDATEDATE = SYSDATE
+		WHERE   REDELETEYN = 'N'
+		AND     RENO = #{reno, jdbcType=VARCHAR}
+	</update>
+	
+	<update id="replyDelete" parameterType="reply">
+		UPDATE  REPLY
+		SET     REDELETEYN = 'Y',
+		        REUPDATEDATE = SYSDATE
+		WHERE   REDELETEYN = 'N'
+		AND     RENO = #{reno,jdbcType=VARCHAR}
+	</update>
+	
+
 </mapper>

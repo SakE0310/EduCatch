@@ -123,9 +123,12 @@
 		            A.RBGRADE           AS RBGRADE,
 		            A.RBDELETEYN        AS RBDELETEYN,
 		            TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD')      AS RBINSERTDATE,
-		            TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')      AS RBUPDATEDATE
-		FROM REVIEWBOARD A
-        WHERE   RBNO=#{rbno, jdbcType=VARCHAR}	
+		            TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')      AS RBUPDATEDATE,
+		            B.ANAME             AS ANAME,
+                    B.ANO               AS ANO
+		FROM REVIEWBOARD A, ACADEMY B
+        WHERE   RBNO=#{rbno, jdbcType=VARCHAR}
+        AND	  A.ACADEMY_ANO = B.ANO	
 	</select>
 	<!-- 수정 상세 보기 -->
 	<select id="selectUpdate" parameterType="String" resultType="review">
@@ -139,16 +142,17 @@
 		            A.RBGRADE           AS RBGRADE,
 		            A.RBDELETEYN        AS RBDELETEYN,
 		            TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD')      AS RBINSERTDATE,
-		            TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')      AS RBUPDATEDATE
-		FROM REVIEWBOARD A
-		WHERE   RBNO=#{rbno, jdbcType=VARCHAR}	
+		            TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')      AS RBUPDATEDATE,
+		            B.ANAME             AS ANAME,
+                    B.ANO               AS ANO
+		FROM REVIEWBOARD A, ACADEMY B
+		WHERE   RBNO=#{rbno, jdbcType=VARCHAR}
+		AND	  A.ACADEMY_ANO = B.ANO	
 	</select>
 	<update id="updateReview" parameterType="review">
 		UPDATE REVIEWBOARD
 		SET RBSUBJECT =#{rbsubject, jdbcType=VARCHAR},
 		    RBCONTENT =#{rbcontent, jdbcType=VARCHAR},
-		    RBGRADE=#{rbgrade, jdbcType=VARCHAR}, 
-		    ACADEMY_ANO=#{academy_ano, jdbcType=VARCHAR},
 		    RBIMG=#{rbimg, jdbcType=VARCHAR}
 		WHERE RBNO=#{rbno, jdbcType=VARCHAR}
 	</update>
