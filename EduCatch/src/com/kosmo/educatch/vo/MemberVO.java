@@ -14,7 +14,7 @@ public class MemberVO extends AcademyVO{
 		private String mauth;
 		private String mimg;
 		private String academy_ano;
-		private String mpermisson;
+		private String mpermission;
 		private String memailchk;
 		private String mdeleteyn;
 		private String minsertdate;
@@ -154,13 +154,13 @@ public class MemberVO extends AcademyVO{
 		}
 
 		
-		public String getMpermisson() {
-			return mpermisson;
+		public String getMpermission() {
+			return mpermission;
 		}
 
 	
-		public void setMpermisson(String mpermisson) {
-			this.mpermisson = mpermisson;
+		public void setMpermisson(String mpermission) {
+			this.mpermission = mpermission;
 		}
 
 

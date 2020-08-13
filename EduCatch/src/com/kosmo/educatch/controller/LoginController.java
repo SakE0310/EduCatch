@@ -40,28 +40,33 @@ public class LoginController {
 	
 	// ================ 로그인 처리 ========================
 	
-//	@RequestMapping("/loginCheck")
-//	public ModelAndView  loginCheck(@ModelAttribute MemberVO param, HttpServletRequest request) {
-//		
-//		log.info("LoginController loginCheck 시작 >>>");
-//		log.info(param);
-//		log.info(param.getMid());
-//		log.info(param.getMpw());
-//		
-//		
-//		List<MemberVO> list = loginService.loginCheck(param);
-//		
-//		
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("loginCheck", list);
-//		mav.setViewName("member/login/result");
-//				
-//		log.info("loginCheck() >>>>");
-//		return mav;
-//		
-//	}
-//		
-//		
+	@RequestMapping("/loginCheck")
+	public ModelAndView  loginCheck(@ModelAttribute MemberVO param, HttpServletRequest request) {
+		
+		log.info("LoginController loginCheck 시작 >>>");
+		String mid = (String) param.getMid();
+		String mpw = (String) param.getMpw();
+		
+		log.info("mno >>>" + mid);
+		log.info("mpw >>>" + mpw);
+	
+		
+		MemberVO mvo = loginService.loginCheck(param);
+
+		log.info("mvo.getMid >>> " + mvo.getMid());
+		log.info("mvo.getMpw >>> " + mvo.getMpw());
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("loginCheck", mvo);
+		mav.setViewName("member/login/result");
+				
+		log.info("LoginController loginCheck() 끝>>>>");
+		return mav;
+		
+	}
+		
+		
 
 	
 	
@@ -82,7 +87,7 @@ public class LoginController {
 		   public ModelAndView academyJoinForm(){
 		      log.info("joinCheckForm() start");
 		      ModelAndView mav  = new ModelAndView();
-		      mav.setViewName("member/join/academyJoinForm");          
+		      mav.setViewName("member/join/agreeAmember");          
 		      log.info("academyJoinForm() end");
 		      return mav;
 		   }// end of academyJoinForm()

@@ -50,7 +50,11 @@
 			
 			font-size :23px;
 			font-weight: bold; 
-			margin:50px 280px 10px 0px;
+			color : black;
+			text-align : left;
+			width:350px;
+			
+			
 		}
 		
 		#id{
@@ -106,7 +110,8 @@
  		
  		 <form name = "loginForm" id = "loginForm" method ="post"> 
   				
-					<div align = "center" id = "subject" >로그인</div>
+					<div align = "center">
+					<h2 align = "center" id ="subject">로그인</h2></div>
 						
 					<div align = "center">	
 							<hr style=" 
@@ -201,7 +206,7 @@
 					
 					<div align = "center">
 							<a id ="question">일반 회원이 아니신가요?</a><br>
-							<button class="genric-btn success" id ="academymem" type = "submit">학원관리자 회원가입</button>
+							<button class="genric-btn success" id ="academymem" type = "submit">학원 관리자 등록</button>
 					
 					</div>
 					

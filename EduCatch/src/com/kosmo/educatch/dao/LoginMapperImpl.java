@@ -1,27 +1,21 @@
 package com.kosmo.educatch.dao;
 
-import java.util.List;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
 
-import javax.servlet.http.HttpSession;
-
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.kosmo.educatch.vo.AMemberVO;
 import com.kosmo.educatch.vo.MemberVO;
 
-public class LoginMapperImpl implements LoginMapper{
+public class LoginMapperImpl extends SqlSessionDaoSupport implements LoginMapper{
 
 	
 	
-	@Autowired
-	private SqlSession session;
 
 
 	// ======== 로그인 체크 ==========
 	@Override
-	public List<MemberVO> loginCheck(MemberVO parma) {
-		return session.selectOne("loginCheck");
+	public MemberVO loginCheck(MemberVO param) {
+		MemberVO mvo = new MemberVO();
+		mvo = getSqlSession().selectOne("loginCheck");
+		return mvo;
 				
 	}
 }
