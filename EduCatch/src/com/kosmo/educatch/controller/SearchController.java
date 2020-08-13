@@ -74,11 +74,13 @@ public class SearchController {
 											     HttpServletRequest req){
 		log.info("search controller getAcaList start >>> ");
 		log.info("search controller getAcaList param >>> "+param);
-		
 		String district = req.getParameter("district");
 		String city = req.getParameter("city");
 		String cmajor = req.getParameter("cmajor");
 		String cminor = req.getParameter("cminor");
+		String aname = req.getParameter("aname");
+		
+		if(district!=null && city!=null && cmajor!=null && cminor!=null) {
 		
 		String[] cityArr = city.split(" ");
 		String cityStr = cityArr[0];
@@ -108,7 +110,14 @@ public class SearchController {
 		log.info("search controller getAcaList param.getCity() >>> "+param.getCity());
 		log.info("search controller getAcaList param.getCmajor() >>> "+param.getCmajor());
 		log.info("search controller getAcaList param.getCminor() >>> "+param.getCminor());
+		log.info("search controller getAcaList param.getAgrade() >>> "+param.getAgrade());
+		}
+		if(aname!=null) {
+		param.setAname(aname);
 		
+		log.info("search controller getAcaList aname >>> "+aname);
+		log.info("search controller getAcaList param.getAname() >>> "+param.getAname());
+		}
 		Map<String,List<AcademyVO>>map = new HashMap<String,List<AcademyVO>>();
 		List<AcademyVO>list = searchService.getAcaList(param);
 		map.put("acaList",list);

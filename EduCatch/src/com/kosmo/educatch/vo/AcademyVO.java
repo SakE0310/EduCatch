@@ -16,7 +16,15 @@ public class AcademyVO extends SearchVO{
 	private String adeleteyn;
 	private String ainsertdate;
 	private String aupdatedate;
+	private String agrade;
 	
+	public String getAgrade() {
+		return agrade;
+	}
+
+	public void setAgrade(String agrade) {
+		this.agrade = agrade;
+	}
 
 	public AcademyVO() {
 	}

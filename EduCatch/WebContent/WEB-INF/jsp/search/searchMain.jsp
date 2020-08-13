@@ -18,21 +18,6 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				
-// 				//무한스크롤
-// 				$(document).scroll(function(){
-// 					console.log("scroll");
-// 					var maxHeight = $(document).height();
-// 					var currentScroll= $(window).scrollTop()+$(window).height();
-// 					if(maxHeight<=currentScroll+100){
-// 						$.ajax({
-// 							url : "searchMain.ec",
-// 							success : function(html,status){
-// 							}
-// 						});
-// 					}
-// 				});//scroll
-				
 				//지역 함수
 				ajaxGetDistrict();
 				//카테고리 함수
@@ -59,25 +44,29 @@
 					var setCity = $('#city').val(); //서울전체
 					var setCmajor = $('#cmajor').val(); //언어
 					var setCminor = $('#cminor').val(); //언어전체
+					var setAname = $('#aname').val(); //언어전체
 					console.log("click setDistrict >>> "+setDistrict);
 					console.log("click setCity >>> "+setCity);
 					console.log("click setCmajor >>> "+setCmajor);
 					console.log("click setCminor >>> "+setCminor);
-					ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor);
+					console.log("click setAname >>> "+setAname);
+					ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor,setAname);
 				});//search button function
 				
 				//call 함수호출 
-				function ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor){
+				function ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor,setAname){
 					console.log("ajaxGetAcaList setDistrict >>> "+setDistrict);
 					console.log("ajaxGetAcaList setCity >>> "+setCity);
 					console.log("ajaxGetAcaList setCmajor >>> "+setCmajor);
 					console.log("ajaxGetAcaList setCminor >>> "+setCminor);
+					console.log("ajaxGetAcaList setAname >>> "+setAname);
 					urls = "getAcaList.ec";
 					datas = {
 							 "district" : setDistrict
 							,"city" : setCity
 							,"cmajor" : setCmajor
 							,"cminor" : setCminor
+							,"aname" : setAname
 							};
 					console.log("urls >>> "+urls);
 					console.log("datas >>> "+datas);
@@ -85,9 +74,12 @@
 						url : urls,
 						data : datas
 					}).done(function(resParam){
+						if(resParam.acaList==""){
+							console.log("done error >>> ");
+								st = "<p style='margin:0 auto; text-align:center; padding:200px 200px;'>일치하는 학원이 없습니다</p>";
+							}else{
 						console.log("done start >>> "+resParam);
 						st = "";
-						str = "";
 						console.log("acaList >>> "+resParam.acaList);
 							var listcount = resParam.acaList[0].listcount;
 							st = "<h5>"+listcount+"개의 학원이 조회됬습니다</h5>";
@@ -110,7 +102,8 @@
 							st += "</div>";
 							st += "<div class='media-body'>";
 							st += "<p><h4 class='media-heading'>"+aname+"</h4></p>";
-							st += "<p>"+aaddr1+"&nbsp;"+aaddr2+"</p>#"+cmajor+"&nbsp;#"+cminor+"";
+							st += "<p><img src='assets/img/Icon_location.png' style='width:15px; height:15px'>"+aaddr1+"&nbsp;"+aaddr2+"</p>";
+							st += "<h4>"+agrade+"점&nbsp;&nbsp;&nbsp;#"+cmajor+"&nbsp;#"+cminor+"<h4>";
 							st += "<h5 align='right'>최근업데이트 : "+aupdatedate+"&nbsp;&nbsp;</h5></p>";
 							st += "</div>";
 							st += "</div>";
@@ -118,14 +111,84 @@
 							st += "</div>";
 							st += "</p>";
 						}
+						}//학원명이 없을시 if
 						$('.acaList').html(st);
 						$('.acaList').niceSelect('update');
 						console.log("done end >>> "+resParam);
 					}).fail(function(resParam){
 						alert("에러");
 					});					
-			}//ajaxGetAcaList
+				}//ajaxGetAcaList
 
+				//학원명으로 검색
+				$('#search-aname').click(function(){
+					var setAname = $('#aname').val();
+					if(setAname==""){
+						alert("학원명을 입력하세요");
+					}else{
+					console.log("aname >>> "+setAname);
+					ajaxGetAname(setAname);
+					}//학원명 입력 유무
+				});//search aname button function
+				
+				function ajaxGetAname(setAname){
+					console.log("ajaxGetAname setAname >>> "+setAname);
+					urls = "getAcaList.ec";
+					datas = {
+							"aname" : setAname
+							};
+					console.log("urls >>> "+urls);
+					console.log("datas >>> "+datas);
+					$.ajax({
+							url : urls,
+							data : datas
+					}).done(function(resParam){
+						if(resParam.acaList==""){
+						console.log("done error >>> ");
+							st = "<p style='margin:0 auto; text-align:center; padding:200px 200px;'>일치하는 학원이 없습니다</p>";
+						}else{
+						console.log("done start >>> "+resParam);
+						st = "";
+						console.log("acaList >>> "+resParam.acaList);
+							var listcount = resParam.acaList[0].listcount;
+							st = "<h5>"+listcount+"개의 학원이 조회됬습니다</h5>";
+						for(i in resParam.acaList){
+							var aupdatedate = resParam.acaList[i].aupdatedate;
+							var cmajor = resParam.acaList[i].cmajor;
+							var cminor = resParam.acaList[i].cminor;
+							var ano = resParam.acaList[i].ano;
+							var aname = resParam.acaList[i].aname;
+							var	alogo = resParam.acaList[i].alogo;
+							var aaddr1 = resParam.acaList[i].aaddr1;
+							var aaddr2 = resParam.acaList[i].aaddr2;
+							var agrade = resParam.acaList[i].agrade;
+							st += "<p>";
+							st += "<div class='panel panel-default'>";
+							st += "<a href='listDetailView.ec' style='text-decoration:none'>";
+							st += "<div class='media'>";
+							st += "<div class='media-left'>";
+							st += "<img src='assets/img/sendMail/"+alogo+"' class='media-object' style='width:120px; height:120px'>";
+							st += "</div>";
+							st += "<div class='media-body'>";
+							st += "<p><h4 class='media-heading'>"+aname+"</h4></p>";
+							st += "<p><img src='assets/img/Icon_location.png' style='width:15px; height:15px'>"+aaddr1+"&nbsp;"+aaddr2+"</p>";
+							st += "<h4>"+agrade+"점&nbsp;&nbsp;#"+cmajor+"&nbsp;#"+cminor+"<h4>";
+							st += "<h5 align='right'>최근업데이트 : "+aupdatedate+"&nbsp;&nbsp;</h5></p>";
+							st += "</div>";
+							st += "</div>";
+							st += "</a>";
+							st += "</div>";
+							st += "</p>";
+						}
+						}//검색한 학원이 있을때 if
+						$('.acaList').html(st);
+						$('.acaList').niceSelect('update');
+						console.log("done end >>> "+resParam);
+					}).fail(function(resParam){
+						alert("에러");
+					});
+				}//ajaxGetAname
+				
 				//지역 대분류
 				function ajaxGetDistrict(){
 					var urls = "getDistrict.ec"; //controller 지역 대분류
@@ -255,34 +318,40 @@
 			<div class="section-top-border">
 				<div class="row">
 					<div class="col-lg-10 col-md-10" id="form">
-							<table class="search-table">
-								<tr class="search-header">
-									<td class="select-district">
-										<select id="district">
-											<option value=""></option>
-										</select>
-									</td>
-									<td class="select-city">
-										<select id="city">
-											<option value=""></option>
-										</select>
-									</td>
-									<td class="select-cmajor">
-										<select id="cmajor">
-											<option value=""></option>
-										</select>
-									</td>
-									<td class="select-cminor">
-										<select id="cminor">
-											<option value=""></option>
-										</select>
-									</td>
-									<td class="button-search">
+						<table class="search-table">
+							<tr class="search-header">
+								<td class="search-aname">
+									<input type="text" id="aname" name="aname" size="60px" class="form-control" placeholder="학원명으로 입력해보세요">
+								</td>
+								<td>
+									<input type="button" id="search-aname" class="genric-btn primary" value="검색">
+								</td>
+								<td class="select-district">
+									<select id="district">
+										<option value=""></option>
+									</select>
+								</td>
+								<td class="select-city">
+									<select id="city">
+										<option value=""></option>
+									</select>
+								</td>
+								<td class="select-cmajor">
+									<select id="cmajor">
+										<option value=""></option>
+									</select>
+								</td>
+								<td class="select-cminor">
+									<select id="cminor">
+										<option value=""></option>
+									</select>
+								</td>
+								<td class="button-search">
 									<input type="button" id="search" class="genric-btn primary" value="검색">
-									</td>
-								</tr>
-							</table>
-							<div class="acaList"><p id="show">검색조건을 입력하세요<p></div>
+								</td>
+							</tr>
+						</table>
+						<div class="acaList"><p id="show">검색조건을 입력하세요<p></div>
 						</div>
 					</div>
 				</div>
