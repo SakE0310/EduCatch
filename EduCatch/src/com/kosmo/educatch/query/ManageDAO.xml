@@ -7,8 +7,8 @@
 		SELECT
 				MNO, 
 				MID, 
-				ANO, 
 				ANAME, 
+				MNAME, 
 				ATEL, 
 				MIMG, 
 				TO_CHAR(MINSERTDATE,'YYYY-MM-DD') AS MINSERTDATE

@@ -19,6 +19,9 @@
         		height: 20px;
         		width: 20px;
         	}
+        	.chkbtn{
+        		padding-left:20px;
+        	}
         </style>
     </head>
     <body class="sb-nav-fixed">
@@ -85,16 +88,16 @@
 		                    	<button class="btn btn-danger reject" style="margin-right:5px;"><i class="fas fa-eraser"></i> 거절</button>
 		                    	<button class="btn btn-primary success"><i class="fas fa-edit"></i> 승인</button>
 		                    </div>                             
-		                    <table class="acceptTable table table-striped" id="memberAccept" style="width:100%">
-		                      <thead>
-		                        <tr>
-		                          <th><label class="custom-control custom-checkbox ck-center"><input class="custom-control-input check chkAll" type="checkbox"><span class="custom-control-label"></span></label></th>
-		                          <th>아이디</th>
-		                          <th>학원번호</th>
+		                    <table class="acceptTable table table-striped" id="memberAccept" >
+		                      <thead align="center">
+		                        <tr align="center">
+		                          <th><label class="custom-control custom-checkbox ck-center"><input class="custom-control-input check chkAll chkbtn" type="checkbox"><span class="custom-control-label"></span></label></th>
+		                          <th class="d-none d-xl-table-cell">아이디</th>
 		                          <th>학원이름</th>
-		                          <th>학원연락처</th>
+		                          <th>이름</th>
+		                          <th class="d-none d-xl-table-cell">학원연락처</th>
 		                          <th>이미지</th>
-		                          <th>가입일</th>
+		                          <th class="d-none d-xl-table-cell">가입일</th>
 		                          <th>mno</th>
 		                        </tr>
 		                      </thead>
@@ -134,12 +137,12 @@
        		});
        		
        		$('.reject').on('click',function(){
+     			var targetValue = $(this).parent().parent().children().find('.chk:checked').parents('tr');
+         		if(targetValue.length == 0){
+         			alert("항목을 선택하여 주세요.");
+         			return;
+         		}
        			if(confirm("정말 해당 정보를 거부하시겠습니까?\n(삭제가 됩니다)")){
-       				var targetValue = $(this).parent().parent().children().find('.chk:checked').parents('tr');
-           			if(targetValue.length == 0){
-           				alert("항목을 선택하여 주세요.");
-           				return;
-           			}
            			var dataTable = $(this).parent().parent().find('.acceptTable').DataTable();
            			console.log('<<');
            			ajaxRejectMember(targetValue, dataTable);	
@@ -177,18 +180,18 @@
                   }
               },
               "columns": [
-                { "data": "체크","className" :"select-checkbox"},
-                { "data": "아이디","className" :"mid"},
-                { "data": "학원번호","className": "ano"},
-                { "data": "학원이름","className": "aname"},
-                { "data": "학원연락처","className": "atel"},
-                { "data": "이미지" ,"className": "mimg"},
-                { "data": "가입일", "className" :"minsertdate"},
+                { "data": "체크","className": "text-center chkbtn", "width":"30px",},
+                { "data": "아이디","className" : "text-center d-none d-xl-table-cell","width":"200px"},
+                { "data": "학원이름", "className": "text-center","width":"240px"},
+                { "data": "이름", "className": "text-center","width":"180px"},
+                { "data": "학원연락처","className" : "text-center d-none d-xl-table-cell","width":"180px"},
+                { "data": "이미지", "className": "text-center", "width":"270px"},
+                { "data": "가입일", "className" : "text-center d-none d-xl-table-cell","width":"270px"},
                 { "data": "mno", 'visible': false}
               ],
               "order": [[ 1, "desc" ]]
             });
-          	datatablesAcceptTable.buttons().container().appendTo(".acceptTable.col-xl-12:eq(0)");
+          	/* datatablesAcceptTable.buttons().container().appendTo(".acceptTable.col-xl-12:eq(0)"); */
           });
        	
        	function ajaxGetAcademyMember(){
@@ -201,8 +204,8 @@
        				var dataParam = {
        						"체크" : '<label class="custom-control custom-checkbox ck-center"><input class="custom-control-input check chk" type="checkbox"><span class="custom-control-label"></span></label>',
        	       				"아이디" : resultParam.vo[index].mid,
-       	       				"학원번호" : resultParam.vo[index].ano,
        	       				"학원이름" : resultParam.vo[index].aname,
+       	       				"이름" : resultParam.vo[index].mname,
        	       				"학원연락처" : resultParam.vo[index].atel,
        	       				"이미지" : resultParam.vo[index].mimg,
        	       				"가입일" : resultParam.vo[index].minsertdate,
