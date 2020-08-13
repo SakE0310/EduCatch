@@ -13,4 +13,6 @@ public interface DetailViewMapper {
 	public AcademyVO gradeView(String ano);
 	public List<SubjectVO> subjectViewList(SubjectVO param);
 	public List<ReviewVO> reviewList(ReviewVO param);
+	public int insertBookmark(AcademyVO param);
+	public int deleteBookmark(AcademyVO param);
 }

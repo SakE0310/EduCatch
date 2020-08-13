@@ -367,6 +367,63 @@ html, body {
 
 	$(document).ready(function(){
 		
+		<%-- 찜하기 버튼 클릭 --%>
+		$('#follow').click(function(){
+			
+			if($('#follow').val() == '찜추가')
+			{
+				var academy_ano = $('#academy_ano').val();
+				var member_mno = $('#member_mno').val();
+				var ano = $('#ano').val();
+				
+				$.ajax({
+					url : "insertBookmark.ec",
+					type : "post",
+					data : {
+						"academy_ano" : academy_ano,
+						"member_mno" : member_mno,
+						"ano" : ano,
+						},
+					dataType : "json"
+				}).done(function(resultParam){
+					if(resultParam.result=="success"){
+						$('#follow').val('찜제거');
+					}else{
+						alert('정상적으로 데이터가 등록되지 않았습니다.')
+					}
+				}).fail(function(resultParam){
+					alert("추가시 DB연결에 문제가 발생하였습니다.");
+				});
+			}
+			else
+			{
+				var academy_ano = $('#academy_ano').val();
+				var member_mno = $('#member_mno').val();
+				var ano = $('#ano').val();
+				
+				$.ajax({
+					url : "deleteBookmark.ec",
+					type : "post",
+					data : {
+						"academy_ano" : academy_ano,
+						"member_mno" : member_mno,
+						"ano" : ano,
+						},
+					dataType : "json"
+				}).done(function(resultParam){
+					if(resultParam.result=="success"){
+						$('#follow').val('찜추가');
+					}else{
+						alert('정상적으로 데이터가 등록되지 않았습니다.')
+					}
+				}).fail(function(resultParam){
+					alert("추가시 DB연결에 문제가 발생하였습니다.");
+				});
+			}
+			
+		});
+		
+		
 		<%-- 스크롤사이드 --%>
 		var $menu = $(".nav-menu");
 	      var $menu_a = $("a", $menu);
@@ -458,7 +515,11 @@ html, body {
 					</td>
 					<td>
 					<br><br><br><br>
-						<h1 style="font-weight:bold;" align="center"><%=avo.getAname() %></h1>
+					<input type="hidden" id="ano" name="ano" />
+					<input type="hidden" id="academy_ano" name="academy_ano" />
+					<input type="hidden" id="member_mno" name="member_mno" />
+						<h1 style="font-weight:bold;" align="center"><%=avo.getAname() %></h1> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="follow" name="follow" type="button" value="찜추가" style="margin-left:400px" />
 						 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=address %></h4>
 						 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=avo.getAtel() %></h4>
 						 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 학원 평가 : <%= gvo.getRbgrade() %>(점)</h4>
@@ -694,43 +755,44 @@ html, body {
 				//주차장
 				if(acparking.equals("Y")){
 					%>
-					<img src="/EduCatch/assets/img/convenience/parking.png" border=0 width="150" height="150" />
+					<img src="/EduCatch/assets/img/convenience/parking.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
+					
 				}
 				//편의점
 				if(acstore.equals("Y")){
 					%>
-					<img src="/EduCatch/assets/img/convenience/convenience.png" border=0 width="150" height="150" />
+					<img src="/EduCatch/assets/img/convenience/convenience.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
 				}
 				//셔틀버스
 				if(acbus.equals("Y")){
 					%>
-					<img src="/EduCatch/assets/img/convenience/bus.png" border=0 width="150" height="150" />
+					<img src="/EduCatch/assets/img/convenience/bus.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
 				}
 				//엘레베이터
 				if(acelevator.equals("Y")){
 					%>
-					<img src="/EduCatch/assets/img/convenience/elevator.png" border=0 width="150" height="150" />
+					<img src="/EduCatch/assets/img/convenience/elevator.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
 				}
 				//자습실
 				if(acstudyroom.equals("Y")){
 					%>
-					<img src="/EduCatch/assets/img/convenience/studyroom.png" border=0 width="150" height="150" />
+					<img src="/EduCatch/assets/img/convenience/studyroom.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
 				}
 				//휴게실
 				if(aclounge.equals("Y")){
 					%>
-					<img src="/EduCatch/assets/img/convenience/lounge.png" border=0 width="150" height="150" />
+					<img src="/EduCatch/assets/img/convenience/lounge.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
 				}
 				//사물함
 				if(aclocker.equals("Y")){
 					%>
-					<img src="/EduCatch/assets/img/convenience/locker.png" border=0 width="150" height="150" />
+					<img src="/EduCatch/assets/img/convenience/locker.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
 				}
 			%>
@@ -739,7 +801,7 @@ html, body {
     <hr id="hhr">
     	<div class="container">
 			  <table class="table table-condensed">
-       			 <h1>수업 정보</h1><br><br>
+       			 <h1>수강후기</h1><br><br>
 			    <thead>
 			      <tr>
 			        <th>제목</th>

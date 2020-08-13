@@ -74,7 +74,7 @@
 	
 	<select id="gradeView" parameterType="String" resultType="academyview">
 		SELECT
-            AVG(A.RBGRADE) AS RBGRADE
+            TRUNC(AVG(A.RBGRADE),2) AS RBGRADE
         FROM 
             REVIEWBOARD A, ACADEMY B
         WHERE
@@ -104,6 +104,25 @@
 		AND B.ADELETEYN = 'N'
 		ORDER BY 1 DESC
 	</select>
+	
+	<insert id="insertBookmark" parameterType="academyview">
+		INSERT INTO BOOKMARK
+					(
+					        ACADEMY_ANO, 
+						    MEMBER_MNO
+					)
+		VALUES(
+					        'A00001',
+					        'M202008130001'
+					)
+	</insert>
+	
+	<delete id="deleteBookmark" parameterType="academyview">
+		DELETE FROM BOOKMARK 
+		WHERE 
+				MEMBER_MNO='M202008130001' 
+		AND		ACADEMY_ANO='A00001'
+	</delete>
 	
 	
 </mapper>
