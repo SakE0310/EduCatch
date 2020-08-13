@@ -2,10 +2,18 @@ package com.kosmo.educatch.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.TimetableVO;
 
 public interface ManageMapper {
-	public List<MemberVO> getAcaAccept();
+	public List<MemberVO> getAcaAccept(MemberVO vo);
 	public int setAcceptAcaMem(MemberVO vo);
 	public int delAcaMem(MemberVO vo);
+	public List<TimetableVO> selectReservation(MemberVO vo);
+	public List<MemberVO> selectMemList(@Param("ttno")String str1, @Param("ano")String str2);
+	public int insertTimetable(TimetableVO tvo);
+	public int updateTimetable(TimetableVO tvo);
+	public int deleteTimetable(TimetableVO tvo);
 }

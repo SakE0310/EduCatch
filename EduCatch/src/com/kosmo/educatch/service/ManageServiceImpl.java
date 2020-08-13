@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kosmo.educatch.dao.ManageMapper;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.TimetableVO;
 
 @Service
 @Transactional
@@ -21,10 +22,10 @@ public class ManageServiceImpl implements ManageService {
 	private ManageMapper manageMapper;
 	
 	@Override
-	public List<MemberVO> getAcaAccept() {
+	public List<MemberVO> getAcaAccept(MemberVO vo) {
 		log.info("ManagerServiceImpl getAcaAccept >>> ");
 		List<MemberVO> list = null;
-		list = manageMapper.getAcaAccept();
+		list = manageMapper.getAcaAccept(vo);
 		log.info("ManagerServiceImpl getAcaAccept end >>> ");
 		return list;
 	}
@@ -42,6 +43,48 @@ public class ManageServiceImpl implements ManageService {
 		log.info("ManagerserviceImpl delAcaMem >>> ");
 		int cnt = manageMapper.delAcaMem(vo);
 		log.info("ManagerserviceImpl delAcaMem end >>> ");
+		return cnt;
+	}
+
+	@Override
+	public List<TimetableVO> selectReservation(MemberVO vo) {
+		log.info("ManagerServiceImpl selectReservation >>> ");
+		List<TimetableVO> list = null;
+		list = manageMapper.selectReservation(vo);
+		log.info("ManagerServiceImpl selectReservation end >>> ");
+		return list;
+	}
+
+	@Override
+	public List<MemberVO> selectMemList(String str1, String str2) {
+		log.info("ManagerServiceImpl selectMemList >>> ");
+		List<MemberVO> list = null;
+		list = manageMapper.selectMemList(str1, str2);
+		log.info("ManagerServiceImpl selectMemList end >>> ");
+		return list;
+	}
+
+	@Override
+	public int insertTimetable(TimetableVO tvo) {
+		log.info("ManagerserviceImpl insertTimetable >>> ");
+		int cnt = manageMapper.insertTimetable(tvo);
+		log.info("ManagerserviceImpl insertTimetable end >>> ");
+		return cnt;
+	}
+
+	@Override
+	public int updateTimetable(TimetableVO tvo) {
+		log.info("ManagerserviceImpl updateTimetable >>> ");
+		int cnt = manageMapper.updateTimetable(tvo);
+		log.info("ManagerserviceImpl updateTimetable end >>> ");
+		return cnt;
+	}
+
+	@Override
+	public int deleteTimetable(TimetableVO tvo) {
+		log.info("ManagerserviceImpl deleteTimetable >>> ");
+		int cnt = manageMapper.deleteTimetable(tvo);
+		log.info("ManagerserviceImpl deleteTimetable end >>> ");
 		return cnt;
 	}
 

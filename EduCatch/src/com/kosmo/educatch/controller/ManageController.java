@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.ManageService;
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.TimetableVO;
 
 @Controller
 public class ManageController {
@@ -79,8 +82,11 @@ public class ManageController {
 	@RequestMapping("getAcaMem")
 	public Map<String, List<MemberVO>> getAcademyMember(){
 		Map<String, List<MemberVO>> map = new HashMap<String, List<MemberVO>>();
+		MemberVO mvo = new MemberVO();
 		
-		List<MemberVO> list = manageService.getAcaAccept();
+		//세션 적용하면 바꿔야함
+		mvo.setAno("A00001");
+		List<MemberVO> list = manageService.getAcaAccept(mvo);
 		map.put("vo", list);
 		return map;
 	}
@@ -154,5 +160,94 @@ public class ManageController {
 		
 		log.info("ManageController rejectAcaMember end >>> ");
 		return rmap;
+	}
+	
+	@ResponseBody
+	@RequestMapping("selectReser")
+	public Map<String, List<TimetableVO>> selectReservation(HttpServletRequest request){
+		log.info("ManageController selectReservation >>> ");
+		log.info("requeset >>> " + request.getParameter("date"));
+		MemberVO mvo = new MemberVO();
+		
+		//세션 적용하면 바꿔야함
+		mvo.setAno("A00001");
+		mvo.setMinsertdate(request.getParameter("date"));
+		List<TimetableVO> list = manageService.selectReservation(mvo);
+		Map<String, List<TimetableVO>> map = new HashMap<String, List<TimetableVO>>();
+		map.put("data", list);
+		log.info("ManageController selectReservation end >>> ");
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("selectMemList")
+	public Map<String, List<MemberVO>> selectMemberList(HttpServletRequest request){
+		log.info("ManageController selectMemberList >>> ");
+		List<MemberVO> list = manageService.selectMemList(request.getParameter("ttno"), "A00001");
+		log.info(list);
+		Map<String, List<MemberVO>> map = new HashMap<String, List<MemberVO>>();
+		map.put("list", list);
+		log.info("ManageController selectMemberList end >>> ");
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("insertTimeTable")
+	public Map<String, String> insertTimeTable(HttpServletRequest request){
+		log.info("ManageController insertTimeTable >>> ");
+		
+		TimetableVO tvo = new TimetableVO();
+		tvo.setTtdate(request.getParameter("date"));
+		tvo.setTttime(request.getParameter("time"));
+		tvo.setTtpeople(request.getParameter("people"));
+		//세션 적용하면 바꿀부분
+		tvo.setAcademy_ano("A00001");
+		int i = manageService.insertTimetable(tvo);
+		Map<String, String> map = new HashMap<String, String>();
+		if(i > 0) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "failed");
+		}
+		log.info("ManageController insertTimeTable end >>> ");
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("updateTimeTable")
+	public Map<String, String> updateTimeTable(HttpServletRequest request){
+		log.info("ManageController updateTimeTable >>> ");
+		
+		TimetableVO tvo = new TimetableVO();
+		tvo.setTtno(request.getParameter("ttno"));
+		tvo.setTttime(request.getParameter("time"));
+		tvo.setTtpeople(request.getParameter("people"));
+		int i = manageService.updateTimetable(tvo);
+		Map<String, String> map = new HashMap<String, String>();
+		if(i > 0) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "failed");
+		}
+		log.info("ManageController updateTimeTable end >>> ");
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("deleteTimeTable")
+	public Map<String, String> deleteTimeTable(HttpServletRequest request){
+		log.info("ManageController deleteTimeTable >>> ");
+		
+		TimetableVO tvo = new TimetableVO();
+		tvo.setTtno(request.getParameter("ttno"));
+		int i = manageService.deleteTimetable(tvo);
+		Map<String, String> map = new HashMap<String, String>();
+		if(i > 0) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "failed");
+		}
+		log.info("ManageController deleteTimeTable end >>> ");
+		return map;
 	}
 }

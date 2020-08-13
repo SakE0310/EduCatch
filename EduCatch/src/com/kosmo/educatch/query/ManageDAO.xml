@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosmo.educatch.dao.ManageMapper">
-
+	<!-- 학원회원 승인 탭 학원가입 회원 조회 -->
 	<select id="getAcaAccept" parameterType="member" resultType="member">
 		SELECT
 				MNO, 
@@ -16,8 +16,9 @@
 				(SELECT * FROM MEMBER A, ACADEMY B WHERE A.ACADEMY_ANO = B.ANO)
 		WHERE MAUTH = 2
 		AND MPERMISSION = 'N'
+		AND ANO = #{ano}
 	</select>
-	
+	<!-- 학원회원 승인 탭 승인 -->
 	<update id="setAcceptAcaMem" parameterType="member">
 		UPDATE 
 				MEMBER
@@ -26,11 +27,77 @@
 		WHERE
 				MNO = #{mno}
 	</update>
-	
+	<!-- 학원회원 승인 탭 승인거절 -->
 	<delete id="delAcaMem" parameterType="member">
 		DELETE FROM
 				MEMBER
 		WHERE
 				MNO = #{mno}
+	</delete>
+	
+	<select id="selectReservation" parameterType="member" resultType="timetable">
+		SELECT  TTNO,
+		        ACADEMY_ANO,
+		        TO_CHAR(TTDATE, 'YYYY-MM-DD') AS TTDATE,
+		        TTTIME,
+		        TTPEOPLE
+		FROM 	TIMETABLE
+		WHERE 	ACADEMY_ANO = #{ano}
+		AND 	TO_CHAR(TTDATE, 'YYYY-MM') = #{minsertdate}
+	</select>
+	
+	<select id="selectMemList" parameterType="map" resultType="member">
+		SELECT  MNO,
+		        MNAME,
+		        MTEL
+		FROM 	(SELECT 
+			            ROW_NUMBER() OVER(ORDER BY RENO) AS MNO, 
+			            MNAME, 
+			            MTEL 
+			    FROM    RESERVATION A, 
+			            MEMBER B,
+			            TIMETABLE C
+			    WHERE   A.MEMBER_MNO = B.MNO 
+			    AND     A.TIME_TTNO = C.TTNO
+			    AND     A.TIME_TTNO = #{ttno}
+			    AND     C.ACADEMY_ANO = #{ano})
+	</select>
+	
+	<insert id="insertTimetable" parameterType="timetable">
+		<selectKey keyProperty="ttno" resultType="String" order="BEFORE">
+	      SELECT    /*+ INDEX_DESC(SYS_C007117) */        
+		          'TT'||LPAD(
+		              (NVL(MAX(SUBSTR(TTNO,-4)),0)+1),5,'0' 
+		          )TTNO
+		  FROM TIMETABLE A
+	    </selectKey>
+	    
+	    INSERT INTO TIMETABLE(
+		                TTNO,
+		                ACADEMY_ANO,
+		                TTDATE,
+		                TTTIME,
+		                TTPEOPLE
+		            )
+		VALUES (
+		            #{ttno},
+		            #{academy_ano},
+		            TO_DATE(#{ttdate},'YY/MM/DD'),
+		            #{tttime},
+		            #{ttpeople}
+		)
+	</insert>
+	
+	<update id="updateTimetable" parameterType="timetable">
+		UPDATE  TIMETABLE
+		SET     TTTIME = #{tttime},
+		        TTPEOPLE = #{ttpeople}
+		WHERE TTNO = #{ttno}
+	</update>
+	
+	<delete id="deleteTimetable" parameterType="timetable">
+		DELETE 
+		FROM    TIMETABLE
+		WHERE   TTNO = #{ttno}
 	</delete>
 </mapper>

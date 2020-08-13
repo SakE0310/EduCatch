@@ -42,7 +42,7 @@
                             </a>
                             <a class="nav-link" href="manageReserChk.ec">
                                 <div class="sb-nav-link-icon"><i class="fas fa-check"></i></div>
-                              	 상담예약 확인
+                              	 상담예약 관리
                             </a>
                             <a class="nav-link" href="manageAcaMem.ec">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
