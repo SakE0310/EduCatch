@@ -1,6 +1,6 @@
 package com.kosmo.educatch.vo;
 
-public class ConsultVO{
+public class ConsultVO extends AcademyVO{
 	
 	private String cbno;
 	private String cbsubject;

@@ -50,9 +50,27 @@
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
 		});
+		
+		$("#searchAcademy").click(function(){
+			
+			alert("searchAcademy >>>");
+			$("#ano").val(ano);
+			window.open("","pop","width=480 height=250");
+			$("#edit").attr("action","cacademyList.ec");
+			$("#edit").attr("target","pop");
+			$("#edit").attr("method","POST");
+			$("#edit").submit();
+			
+		});
 
 	});
 
+	function setChildValue(aname){
+
+	      document.getElementById("aname").value = aname;
+	      document.getElementById("ano").value = ano;
+
+	}
 </script>
 <body>
 <!-- action/document/location -->
@@ -65,8 +83,10 @@
 			</tr>
 			<tr>
 				<td style="width: 100px">학원명</td>
-				<td><input type="text"  id="academy_ano" name="academy_ano"
+				<td><input type="text"  id="aname" name="aname"
 					style="width: 98%" />
+					<input type="button"  id="searchAcademy" value="검색" />
+					<input type="hidden" id="ano" name="ano" />
 				</td>
 			</tr>
 			<tr>

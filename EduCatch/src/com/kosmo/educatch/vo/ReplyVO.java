@@ -2,17 +2,17 @@ package com.kosmo.educatch.vo;
 
 public class ReplyVO {
 
-	private String reno;
-	private String freeboard_fbno;
-	private String consultboard_cbno;
-	private String reviewboard_rbno;
+	private String reno;//댓글번호
+	private String freeboard_fbno;//자유 게시글 번호
+	private String consultboard_cbno;//상담 게시글 번호
+	private String reviewboard_rbno;//후기 게시글 번호
 	private String resubject;
 	private String rewriter;
-	private String recontent;
-	private String member_mno;
-	private String redeleteyn;
-	private String reinsertdate;
-	private String reupdatedate;
+	private String recontent;//댓글 내용
+	private String member_mno;//회원번호
+	private String redeleteyn;//댓글 삭제여부
+	private String reinsertdate;//댓글 작성일자
+	private String reupdatedate;//댓글 수정일자
 	
 	public ReplyVO() {
 		

@@ -22,10 +22,14 @@
 	// 전체 페이지의 개수
 	int pagecount = 0;
 	
-	
-
+	//&searchFilter=제목&keyword=&startDate=2020-08-08&endDate=2020-08-10
 	String pno=request.getParameter("pno");
+	String startDate=request.getParameter("startDate");
+	String endDate=request.getParameter("endDate");
+	String searchFilter=request.getParameter("searchFilter");
+	String keyword=request.getParameter("keyword");
 
+	
 	
 	if(request.getParameter("pagesize") != null)
 	{
@@ -46,7 +50,7 @@
 	{
 		totalcount = Integer.parseInt(request.getParameter("totalcount"));
 	}
-	
+
 	System.out.println("pagesize >>> : " + pagesize);
 	System.out.println("groupsize >>> : " + groupsize);
 	System.out.println("curpage >>> : " + curpage);
@@ -65,8 +69,8 @@
 	// 첫번째 그룹인 아닌경우
 	if(curGroup > 0) {
 %>
-	<a href="<%=url%>?&curPage=1&pno=P003">◁◁</a>&nbsp;&nbsp;&nbsp;
-	<a href="<%=url%>?&curPage=<%=linkPage%>&pno=P003">◀</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?curPage=1&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>">◁◁</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?curPage=<%=linkPage%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>">◀</a>&nbsp;&nbsp;&nbsp;
 <%
 	}
 	else
@@ -92,7 +96,7 @@
 		else
 		{
 %>
-	[<a href="<%=url%>?curpage=<%=linkPage%>&pno=P003"><%=linkPage%></a>]&nbsp;
+	[<a href="<%=url%>?curpage=<%=linkPage%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>"><%=linkPage%></a>]&nbsp;
 <%
 		}
 		
@@ -104,8 +108,8 @@
 	if(linkPage <= pagecount)
 	{
 %>
-	<a href="<%=url%>?curpage=<%=linkPage%>&pno=P003">▶</a>&nbsp;&nbsp;&nbsp;
-	<a href="<%=url%>?curpage=<%=pagecount%>&pno=P003">▷▷</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?curpage=<%=linkPage%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>">▶</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?curpage=<%=pagecount%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>">▷▷</a>&nbsp;&nbsp;&nbsp;
 <%
 	}
 	else

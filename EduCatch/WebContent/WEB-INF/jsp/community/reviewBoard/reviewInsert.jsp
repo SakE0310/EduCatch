@@ -79,6 +79,7 @@
 		$("#searchAcademy").click(function(){
 			
 			alert("searchAcademy >>>");
+			$("#ano").val(ano);
 			window.open("","pop","width=480 height=250");
 			$("#edit").attr("action","academyList.ec");
 			$("#edit").attr("target","pop");
@@ -100,6 +101,7 @@
 	function setChildValue(aname){
 
 	      document.getElementById("aname").value = aname;
+	      document.getElementById("ano").value = ano;
 
 	}
 
@@ -137,7 +139,8 @@
 				<td style="width: 100px">학원명</td>
 				<td><input type="text"  id="aname" name="aname"
 					style="width: 90%" />
-					<input type="button" onclick="openChild()" id="searchAcademy" value="검색" />
+					<input type="button"  id="searchAcademy" value="검색" />
+					<input type="hidden" id="ano" name="ano" /> 
 				</td>
 			</tr>
 			<tr>

@@ -92,6 +92,14 @@ public class ReviewServiceImpl implements ReviewService{
 		
 		return list;
 	}
+
+	@Override
+	public AcademyVO academyAno(String ano) {
+		AcademyVO avo = new AcademyVO();
+		avo = reviewMapper.academyAno(ano);
+		
+		return avo;
+	}
 	
 	
 }

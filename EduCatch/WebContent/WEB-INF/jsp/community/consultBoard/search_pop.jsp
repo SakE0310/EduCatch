@@ -7,43 +7,22 @@
 <html>
 <head>
 <%
-	Object obj=request.getAttribute("academyList");
+	Object obj=request.getAttribute("cacademyList");
 
 	
 	if(obj !=null){
 		
-		ArrayList academyList=(ArrayList)obj;
-		int nCnt=academyList.size();
+		ArrayList cacademyList=(ArrayList)obj;
+		int nCnt=cacademyList.size();
 		
 		for(int i=0; i<nCnt; i++){
-			AcademyVO avo=(AcademyVO)academyList.get(i);
+			AcademyVO avo=(AcademyVO)cacademyList.get(i);
 		
 %>
 <meta charset="UTF-8">
 <title>학원명 검색</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-
-
-/*
- 	$(document).ready(function() {
-
-
-	$("#checkAcademy").click(function(){
-		
-		//alert("checkAcademy >>>");
-		//$("#searchForm").attr("action","insertDisplay.ec");
-		//$("#searchForm").attr("method","POST");
-		
-		//$("#searchForm").submit();
-		window.close();
-		
-		
-	});
-	
-});	
-
-*/
 
 	function sendChildValue(aname){
 

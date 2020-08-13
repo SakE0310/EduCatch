@@ -34,7 +34,7 @@ public class ReviewController {
 
 	//전체조회
 	@RequestMapping("listReview.ec")
-	public ModelAndView listReview(@ModelAttribute ReviewVO param,
+	public ModelAndView listReview(@ModelAttribute ReviewVO param, AcademyVO avo,
 								   HttpServletRequest request) {
 
 		log.info("ReviewController listReview >>> 호출성공");
@@ -193,9 +193,13 @@ public class ReviewController {
 	//등록 버튼 눌렀을 때
 	@RequestMapping("insertReview.ec")
 	public ModelAndView insertReview(HttpServletRequest request,
-									@ModelAttribute ReviewVO param) {
+									@ModelAttribute ReviewVO param,
+									@ModelAttribute AcademyVO avo) {
 		log.info("ReviewController insertReview >>> 호출 성공 ");
 		
+
+		String ano=null;
+		String aname=null;
 		String rbno=null;
 		String rbsubject=null;
 		String rbname=null;
@@ -227,7 +231,8 @@ public class ReviewController {
 														   size, 
 														   "UTF-8", 
 														   new DefaultFileRenamePolicy());
-				
+				ano=mr.getParameter("ano");
+				aname=mr.getParameter("aname");
 				rbno=mr.getParameter("rbno");
 				rbsubject=mr.getParameter("rbsubject");
 				rbname=mr.getParameter("rbname");
@@ -250,6 +255,9 @@ public class ReviewController {
 					log.info("fileName >>> " + rbimg);
 				}
 				
+				
+				avo.setAno(ano);
+				avo.setAname(aname);
 				param.setRbno(rbno);
 				param.setRbsubject(rbsubject);
 				param.setRbname(rbname);
@@ -269,6 +277,13 @@ public class ReviewController {
 			log.info("multipart/form-data true");
 			
 		}
+		
+		
+		AcademyVO avov = reviewService.academyAno(aname);
+		
+		ano = avov.getAno();
+		
+		param.setAcademy_ano(ano);
 		
 		
 		int nCnt = reviewService.insertReview(param);

@@ -138,7 +138,7 @@
 			}
 			
 			$("#searchForm").attr("action","searchConsult.ec");
-			$("#searchForm").attr("method","POST");
+			$("#searchForm").attr("method","GET");
 			$("#searchForm").submit();
 			
 		})//end of searchPiker
@@ -177,12 +177,12 @@
 	String curpage="0";
 	String totalcount="0";	
 
-	Object obj=request.getAttribute("listConsult");
+	Object obj=request.getAttribute("searchConsult");
 
 	if(obj !=null){
-		ArrayList listConsult=(ArrayList)obj;
+		ArrayList searchConsult=(ArrayList)obj;
 		
-		int nCnt=listConsult.size();
+		int nCnt=searchConsult.size();
 	
 %>
 	<form id="consultForm" name="consultForm">
@@ -220,7 +220,7 @@
 			<tbody>
 <%
 	for(int i=0; i<nCnt; i++){
-		ConsultVO cvo=(ConsultVO)listConsult.get(i);
+		ConsultVO cvo=(ConsultVO)searchConsult.get(i);
 		
 		pno=cvo.getPno();
 		pagesize=cvo.getPagesize();
@@ -240,7 +240,7 @@
 					<tr align="center">
 						<td><%= cvo.getCbno() %></td>
 						<td><%= cvo.getCbname() %></td>
-						<td><%= cvo.getAname() %></td>
+						<td><%= cvo.getAcademy_ano() %></td>
 						<td><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
 						<td><%= cvo.getCinsertdate() %></td>
 					</tr>
@@ -264,11 +264,11 @@
 			<tr>
 			<td colspan="18">
 			<jsp:include page="memberPaging.jsp" flush="true">
-				<jsp:param name="url" value="listConsult.ec"/>
+				<jsp:param name="url" value="searchConsult.ec"/>
 				<jsp:param name="str" value=""/>
 				
 				
-					<jsp:param name="pagesize" value='<%= pagesize %>'/>
+					<jsp:param name="pagesize" value="<%= pagesize %>"/>
 					<jsp:param name="groupsize" value="<%= groupsize %>"/>
 					<jsp:param name="curpage" value="<%= curpage %>"/>
 					<jsp:param name="totalcount" value="<%= totalcount %>"/>

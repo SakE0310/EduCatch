@@ -52,6 +52,9 @@
 </script>
 <body>
 <%
+
+	String reviewboard_rbno = "";
+
 	Object obj=request.getAttribute("ReviewVO");
 	
 	if(obj !=null){
@@ -139,6 +142,10 @@
 	}
 %>
 		</table>
+		
+		<jsp:include page="reviewReply.jsp">
+			<jsp:param name="reviewboard_rbno" value="<%=reviewboard_rbno %>"/>
+		</jsp:include>
 
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>

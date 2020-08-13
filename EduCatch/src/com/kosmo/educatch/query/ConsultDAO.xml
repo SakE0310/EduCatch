@@ -20,6 +20,34 @@
 			     	#{curpage, jdbcType=VARCHAR}		AS CURPAGE,
                		#{pagesize, jdbcType=VARCHAR}		AS PAGESIZE,
                 	#{groupsize, jdbcType=VARCHAR}		AS GROUPSIZE,
+                	#{pno, jdbcType=VARCHAR}			AS PNO,
+                	B.ANO AS ANO,
+                	B.ANAME AS ANAME
+		        FROM    CONSULTBOARD A, PAGING P, ACADEMY B
+		        WHERE   CDELETEYN = 'N'
+		        AND   PNO='P003'
+		        AND A.ACADEMY_ANO = B.ANO
+		        ORDER BY 1 DESC
+			)
+			WHERE PAGENO=#{curpage, jdbcType=VARCHAR}
+	</select>
+	<select id="searchConsult" parameterType="consult" resultType="consult">
+			SELECT * FROM(
+				SELECT
+			        A.CBNO                  AS CBNO,
+			        A.CBSUBJECT             AS CBSUBJECT,
+			        A.CBNAME                AS CBNAME,
+			        A.CBCONTENT             AS CBCONTENT,
+			        A.ACADEMY_ANO           AS ACADEMY_ANO,
+			        A.MEMBER_MNO            AS MEMBER_MNO,
+			        A.CDELETEYN             AS CDELETEYN,
+			        TO_CHAR(A.CINSERTDATE, 'YYYY-MM-DD')         AS CINSERTDATE,
+			        TO_CHAR(A.CUPDATEDATE, 'YYYY-MM-DD')         AS CUPDATEDATE,
+			        CEIL(ROW_NUMBER() OVER(ORDER BY A.CBNO DESC)/#{pagesize, jdbcType=VARCHAR}) PAGENO,
+			        COUNT(A.CBNO) OVER() AS TOTALCOUNT,
+			     	#{curpage, jdbcType=VARCHAR}		AS CURPAGE,
+               		#{pagesize, jdbcType=VARCHAR}		AS PAGESIZE,
+                	#{groupsize, jdbcType=VARCHAR}		AS GROUPSIZE,
                 	#{pno, jdbcType=VARCHAR}			AS PNO
 		        FROM    CONSULTBOARD A, PAGING P
 		        WHERE   CDELETEYN = 'N'
@@ -118,4 +146,28 @@
 		WHERE CBNO=#{cbno, jdbcType=VARCHAR}
 		AND   CDELETEYN='N'
 	</update>
+	
+	<select id="cacademyList" parameterType="academyview" resultType="academyview">
+		SELECT
+		     ANO,
+		     ANAME 
+		FROM 
+		      ACADEMY
+		WHERE ANAME LIKE '%' ||#{aname, jdbcType=VARCHAR}||'%'
+	</select>
+	
+	
+	<select id="academyAno" parameterType="String" resultType="academyview">
+		SELECT
+		     ANO,
+		     ANAME 
+		FROM 
+		      ACADEMY A
+		WHERE ANAME = #{aname, jdbcType=VARCHAR}
+	</select>
+	
+	
+	
+	
+	
 </mapper>

@@ -27,7 +27,7 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 
 	//전체조회
 	@RequestMapping("listConsult")
-	public ModelAndView listConsult(@ModelAttribute ConsultVO param,
+	public ModelAndView listConsult(@ModelAttribute ConsultVO param, AcademyVO avo,
 									HttpServletRequest request) {
 		
 		log.info("ConsultController listConsult >>> 호출성공");
@@ -99,6 +99,80 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		return mav;
 	}
 	
+	//검색 페이징
+	@RequestMapping("searchConsult")
+	public ModelAndView searchConsult(@ModelAttribute ConsultVO param,
+			HttpServletRequest request) {
+		
+		log.info("ConsultController searchConsult >>> 호출성공");
+		
+		String pno="P003";
+		String pagesize="5";
+		String groupsize="5";
+		String curpage="1";
+		String totalcount="0";
+		
+		//날짜 조회
+		String startDate = param.getStartDate();
+		String endDate = param.getEndDate();
+		
+		//시작일 종료일 날짜형식 변환
+		if(startDate == null && endDate == null) {
+			startDate = "";
+			endDate ="";
+		}else {
+			startDate = startDate.replace("/", "-");
+			endDate = endDate.replace("/", "-");
+			log.info("startDate>>>"+startDate);
+			log.info("endDate>>>"+endDate);
+		}
+		
+		
+		if(request.getParameter("curpage") !=null) {
+			curpage=request.getParameter("curpage");
+		}
+		
+		param.setPno(pno);
+		param.setPagesize(pagesize);
+		param.setGroupsize(groupsize);
+		param.setCurpage(curpage);
+		param.setTotalcount(totalcount);
+		
+		List<ConsultVO> list=consultService.searchConsult(param);
+		log.info("list.size() >>> "+list.size());
+		
+		int listCnt=list.size();
+		
+		for(int i=0; i<listCnt; i++) {
+			ConsultVO cvo=(ConsultVO)list.get(i);
+			
+			log.info(cvo.getCbno());
+			log.info(cvo.getCbsubject());
+			log.info(cvo.getCbname());
+			log.info(cvo.getCbcontent());
+			log.info(cvo.getAcademy_ano());
+			log.info(cvo.getMember_mno());
+			log.info(cvo.getCdeleteyn());
+			log.info(cvo.getCinsertdate());
+			log.info(cvo.getCupdatedate());
+			
+			log.info("pno >>> "+cvo.getPno());
+			log.info("pagesize >>> "+cvo.getPagesize());
+			log.info("groupsize >>> "+cvo.getGroupsize());
+			log.info("curpage >>> "+cvo.getCurpage());
+			log.info("totalcount >>> "+cvo.getTotalcount());
+		}
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("searchConsult", list);
+		mav.setViewName("community/consultBoard/consultBoard_search");
+		
+		log.info("mav >>> "+mav);
+		log.info("ConsultController searchConsult >>> 끝");
+		
+		return mav;
+	}
+	
 	
 	//글쓰기 버튼 눌렀을 때
 	@RequestMapping("cinsertDisplay")
@@ -117,8 +191,16 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 	
 	//등록 버튼 눌렀을 때
 	@RequestMapping("insertConsult")
-	public ModelAndView insertConsult(@ModelAttribute ConsultVO param) {
+	public ModelAndView insertConsult(@ModelAttribute AcademyVO avo, ConsultVO param) {
 		log.info("ConsultController insertConsult >>> 호출 성공");
+		
+		String aname = avo.getAname();
+		AcademyVO avov = consultService.academyAno(aname);
+		
+		String ano = avov.getAno();
+		
+		param.setAcademy_ano(ano);
+		
 		
 		String resultStr="";
 		int result=consultService.insertConsult(param);
@@ -233,6 +315,35 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		return mav;
 		
 		
+	}
+	
+	//학원리스트 조회
+	@RequestMapping("cacademyList.ec")
+	public ModelAndView cacademyList(@ModelAttribute AcademyVO param) {
+
+		log.info("ReviewController cacademyList >>> 호출성공");
+
+		
+		List<AcademyVO> list=consultService.cacademyList(param);
+		log.info("list.size() >>> "+list.size());
+		
+		int listCnt = list.size();
+		
+		for(int i=0; i<listCnt; i++) {
+			AcademyVO avo=(AcademyVO)list.get(i);
+			
+			log.info("avo.getAno()		>>"+avo.getAno());
+			log.info("avo.getAname()	>>"+avo.getAname());
+		}
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("cacademyList", list);
+		mav.setViewName("community/consultBoard/search_pop");
+		
+		log.info("mav >>> "+mav);
+		log.info("ReviewController cacademyList >>> 끝");
+		
+		return mav;
 	}
 
 }

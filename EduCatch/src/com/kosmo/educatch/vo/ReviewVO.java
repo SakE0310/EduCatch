@@ -1,6 +1,6 @@
 package com.kosmo.educatch.vo;
 
-public class ReviewVO extends PagingVO{
+public class ReviewVO{
 	
 	private String rbno;
 	private String rbsubject;
@@ -20,6 +20,35 @@ public class ReviewVO extends PagingVO{
 	private String startDate;		// 검색기간 시작일
 	private String endDate;			// 검색기간 종료일
 	
+	private String pno;
+	private String pagesize;
+	private String groupsize;
+	private String curpage;
+	private String totalcount;
+	
+	private String ano;
+	private String aname;
+	
+	public String getAno() {
+		return ano;
+	}
+
+
+	public void setAno(String ano) {
+		this.ano = ano;
+	}
+
+
+	public String getAname() {
+		return aname;
+	}
+
+
+	public void setAname(String aname) {
+		this.aname = aname;
+	}
+
+
 	public ReviewVO() {
 		
 	}
@@ -174,6 +203,56 @@ public class ReviewVO extends PagingVO{
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+
+
+	public String getPno() {
+		return pno;
+	}
+
+
+	public void setPno(String pno) {
+		this.pno = pno;
+	}
+
+
+	public String getPagesize() {
+		return pagesize;
+	}
+
+
+	public void setPagesize(String pagesize) {
+		this.pagesize = pagesize;
+	}
+
+
+	public String getGroupsize() {
+		return groupsize;
+	}
+
+
+	public void setGroupsize(String groupsize) {
+		this.groupsize = groupsize;
+	}
+
+
+	public String getCurpage() {
+		return curpage;
+	}
+
+
+	public void setCurpage(String curpage) {
+		this.curpage = curpage;
+	}
+
+
+	public String getTotalcount() {
+		return totalcount;
+	}
+
+
+	public void setTotalcount(String totalcount) {
+		this.totalcount = totalcount;
 	}
 	
 	

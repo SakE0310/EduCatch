@@ -16,4 +16,5 @@ public interface ReviewService {
 	public int insertDisplay(ReviewVO param);
 	public ReviewVO selectReview(String rbno);
 	public ReviewVO selectUpdate(String rbno);
+	public AcademyVO academyAno(String ano);
 }

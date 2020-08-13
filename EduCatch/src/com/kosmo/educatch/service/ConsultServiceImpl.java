@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kosmo.educatch.dao.ConsultMapper;
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConsultVO;
 
 @Service
@@ -67,6 +68,33 @@ public class ConsultServiceImpl implements ConsultService{
 	public int deleteConsult(String cbno) {
 		// TODO Auto-generated method stub
 		return consultMapper.deleteConsult(cbno);
+	}
+
+	@Override
+	public List<ConsultVO> searchConsult(ConsultVO param) {
+		// TODO Auto-generated method stub
+		List<ConsultVO> list=new ArrayList<ConsultVO>();
+		list=consultMapper.searchConsult(param);
+		
+		return list;
+	}
+
+	@Override
+	public List<AcademyVO> cacademyList(AcademyVO param) {
+		// TODO Auto-generated method stub
+		List<AcademyVO> list=new ArrayList<AcademyVO>();
+		list=consultMapper.cacademyList(param);
+		
+		return list;
+	}
+	
+	@Override
+	public AcademyVO academyAno(String ano) {
+		AcademyVO avo = new AcademyVO();
+		avo = consultMapper.academyAno(ano);
+		
+		return avo;
+	
 	}
 	
 }

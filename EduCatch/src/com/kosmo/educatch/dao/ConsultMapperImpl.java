@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.kosmo.educatch.service.ConsultService;
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConsultVO;
 
 public class ConsultMapperImpl extends SqlSessionDaoSupport implements ConsultMapper{
@@ -44,6 +45,23 @@ public class ConsultMapperImpl extends SqlSessionDaoSupport implements ConsultMa
 	public int deleteConsult(String cbno) {
 		// TODO Auto-generated method stub
 		return getSqlSession().update("deleteConsult");
+	}
+
+	@Override
+	public List<ConsultVO> searchConsult(ConsultVO param) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("searchConsult");
+	}
+
+	@Override
+	public List<AcademyVO> cacademyList(AcademyVO param) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("cacademyList");
+	}
+	
+	@Override
+	public AcademyVO academyAno(String ano) {
+		return getSqlSession().selectOne("academyAno");
 	}
 
 }
