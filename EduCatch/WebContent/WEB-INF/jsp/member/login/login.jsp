@@ -53,6 +53,7 @@
 			color : black;
 			text-align : left;
 			width:350px;
+			margin-top : 80px;
 			
 			
 		}
@@ -74,7 +75,7 @@
 			width : 150px;
 			padding : 0px 0px;
 			margin-top: 10px;
-			margin-bottom : 76px;
+			margin-bottom : 139px;
 		
 		}
 		#question{
