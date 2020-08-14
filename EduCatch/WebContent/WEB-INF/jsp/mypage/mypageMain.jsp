@@ -52,6 +52,15 @@
 			$("#clickForm").submit();
 		})//end of myPageMemUpdate
 		
+		//=====비밀번호 변경 버튼 누르면 실행
+		$("#pwEdit").click(function() {
+			console.log("비밀번호 변경 버튼 누름");
+			
+			$("#clickForm").attr("action","editPW.ec");
+			$("#clickForm").attr("method","POST");
+			$("#clickForm").submit(); 
+		})
+		
 /* 			$("#clickForm").attr("action",".ec");
 			$("#clickForm").attr("method","POST");
 			$("#clickForm").submit(); */
@@ -75,7 +84,7 @@
 			<%=mvo.getMname() %>님 	 &nbsp;&nbsp;
 			<br>
 			<input type ="button" id="pwCheck" value="개인정보 변경"><br>
-			비밀번호 변경<br>
+			<input type ="button" id="pwEdit" value="비밀번호 변경"><br>
 			회원탈퇴
 			
 		<input type="hidden" id ="mid" name ="mid" value="<%=mvo.getMid()%>">

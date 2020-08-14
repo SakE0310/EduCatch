@@ -7,4 +7,5 @@ public interface MyPageService  {
 	public MemberVO selectPW(MemberVO param);
 	public MemberVO checkPW(MemberVO param);
 	public int editMyPage(MemberVO param);
+	public int updatePW(MemberVO param);
 }

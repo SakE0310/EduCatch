@@ -190,7 +190,16 @@
 			$("#mypageEditForm").attr("method","POST");
 			$("#mypageEditForm").submit();
 				
-		})
+		})//end of mypageEdit
+		
+		//=====비밀번호 변경 버튼 누르면 실행
+		$("#pwEdit").click(function() {
+			console.log("비밀번호 변경 버튼 누름");
+			
+			$("#mypageEditForm").attr("action","editPW.ec");
+			$("#mypageEditForm").attr("method","POST");
+			$("#mypageEditForm").submit(); 
+		})//end of pwEdit
 			
 	});//end of ready()
 </script>
@@ -206,10 +215,10 @@
 	<form id= "clickForm" name = "clickForm">
 		<div class ="sideBox">
 
-			<%=mvo.getMname() %>님 	&nbsp;&nbsp;<input type ="button" id="pwCheck" value="수정">
+			<%=mvo.getMname() %>님 	&nbsp;&nbsp;
 			<br>
-			개인정보변경<br>
-			비밀번호변경<br>
+			<input type ="button" id="pwCheck" value="개인정보 변경"><br>
+			<input type ="button" id="pwEdit" value="비밀번호 변경"><br>
 			회원탈퇴
 		<input type="hidden" id ="mid" name ="mid" value="<%=mvo.getMid()%>">
 		</div>

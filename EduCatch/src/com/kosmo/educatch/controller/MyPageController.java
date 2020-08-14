@@ -150,4 +150,63 @@ public class MyPageController {
 		log.info("MyPageController editMyPage 끝 >>>");
 		return mav;
 	}//end of editMyPage
+	
+	//=======비밀번호 변경페이지로 이동=======================
+	@RequestMapping("editPW")
+	public ModelAndView editPW(@ModelAttribute MemberVO param) {
+		log.info("MyPageController editPW 시작 >>>");
+		
+		
+		MemberVO mvo = mypageService.selectMyPage(param);
+		
+		log.info("mvo.getMno()>>>"+mvo.getMno());
+		log.info("mvo.getMid()>>>"+mvo.getMid());
+		log.info("mvo.getMpw()>>>"+mvo.getMpw());
+		log.info("mvo.getMname()>>>"+mvo.getMname());
+		log.info("mvo.getMtel()>>>"+mvo.getMtel());
+		log.info("mvo.getMaddrno()>>>"+mvo.getMaddrno());
+		log.info("mvo.getMaddr1()>>>"+mvo.getMaddr1());
+		log.info("mvo.getMaddr2()>>>"+mvo.getMaddr2());
+		log.info("mvo.getMimg()>>>"+mvo.getMimg());
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("MemberVO", mvo);
+		mav.setViewName("/mypage/mypagePwEdit");
+		
+		log.info("MyPageController editPW 끝 >>>");
+		return mav;
+	}//end of editPW
+	
+	//===비밀번호 변경 : 비밀번호 수정============
+	@RequestMapping("updatePW")
+	public ModelAndView updatePW(HttpServletRequest request,
+								@ModelAttribute MemberVO param) {
+		log.info("MyPageController updatePW 시작 >>>");
+		
+		String newPW = request.getParameter("mpw_new");
+		log.info("param.getMno()>>>"+param.getMno());
+		log.info("newPW>>>"+newPW);
+		
+		param.setMpw(newPW);
+		
+		int nCnt  = mypageService.updatePW(param);
+		log.info("nCnt>>>"+nCnt);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("MemberVO",param );
+		mav.setViewName("/mypage/mypageMain");
+		
+		log.info("MyPageController updatePW 끝 >>>");
+		return mav;
+	}//end of updatePW
+	
 }
+
+
+
+
+
+
+
+
+

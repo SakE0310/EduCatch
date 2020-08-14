@@ -64,4 +64,15 @@ public class MyPageServiceImpl implements MyPageService{
 		log.info("MyPageServiceImpl editMyPage 끝>>>");
 		return nCnt;
 	}//end ofeditMyPage
+
+	//===== 비밀번호 변경 : 수정 ==============
+	@Override
+	public int updatePW(MemberVO param) {
+		log.info("MyPageServiceImpl updatePW 시작>>>");
+		
+		int nCnt = mypageMapper.updatePW(param);
+		
+		log.info("MyPageServiceImpl updatePW 끝>>>");
+		return nCnt;
+	}//end updatePW
 }

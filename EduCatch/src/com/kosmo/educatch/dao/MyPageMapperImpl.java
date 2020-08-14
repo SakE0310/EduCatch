@@ -37,4 +37,11 @@ public class MyPageMapperImpl extends SqlSessionDaoSupport implements MyPageMapp
 		return nCnt;
 	}//end of editMyPage
 
+	//===== 비밀번호 변경 : 수정 ==============
+	@Override
+	public int updatePW(MemberVO param) {
+		int nCnt = getSqlSession().update("updatePW");
+		return nCnt;
+	}//end of updatePW
+
 }

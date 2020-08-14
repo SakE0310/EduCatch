@@ -15,7 +15,6 @@
 		         ,A.MADDRNO              AS MADDRNO
 		         ,A.MADDR1               AS MADDR1
 		         ,A.MADDR2               AS MADDR2
-		         ,A.MIMG                 AS MIMG
          
 		FROM
 		        MEMBER A
@@ -61,4 +60,12 @@
 	       MNO=#{mno, jdbcType=VARCHAR}
 	</update>
 
+	<!--  비밀번호 수정 -->
+	<update id="updatePW" parameterType="member">
+	UPDATE MEMBER
+	SET
+	        MPW=#{mpw, jdbcType=VARCHAR}
+	WHERE 
+	        MNO=#{mno, jdbcType=VARCHAR}	
+	</update>
 </mapper>
