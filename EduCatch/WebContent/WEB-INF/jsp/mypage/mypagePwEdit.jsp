@@ -75,7 +75,7 @@
 		$("#updatePW").click(function() {
 			console.log("비밀번호 변경버튼 누름");
 			
-			var DBpw = <%= mvo.getMpw()%>
+			var DBpw = "<%= mvo.getMpw()%>";
 			var NowPW = $("#mpw").val();
 			var NewPW = $("#mpw_new").val();
 			var NewPWRe = $("#mpw_new_R").val();
