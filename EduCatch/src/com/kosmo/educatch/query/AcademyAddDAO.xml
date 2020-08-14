@@ -7,8 +7,8 @@
 		SELECT
 			CNO
 		FROM	CATEGORY 
-		WHERE CMAJOR=#{cmajor}
-		AND	  CMINOR=#{cminor}
+		WHERE CMAJOR=#{cmajor, jdbcType=VARCHAR}
+		AND	  CMINOR=#{cminor,  jdbcType=VARCHAR}
 	</select>
 
 	<insert id="insertAcademy" parameterType="academyview">

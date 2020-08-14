@@ -35,7 +35,7 @@ public class DetailViewController {
 		ModelAndView mav = new ModelAndView();
 		
 		//String ano = (String)param.getAno();
-		String ano = "A00001";
+		String ano = "A00002";
 		
 		AcademyVO avo = detailViewService.academyView(ano);
 		ConvenienceVO cvo = detailViewService.conView(ano);
@@ -74,7 +74,7 @@ public class DetailViewController {
 		*/
 		
 		AcademyVO avo = new AcademyVO();
-		avo.setAcademy_ano("A00001");
+		avo.setAcademy_ano("A00002");
 		avo.setMember_mno("M202008130001");
 		
 		int i = detailViewService.insertBookmark(avo);
@@ -95,7 +95,7 @@ public class DetailViewController {
 		log.info("DetailViewController deleteBookmark >>> ");
 		
 		AcademyVO avo = new AcademyVO();
-		avo.setAcademy_ano("A00001");
+		avo.setAcademy_ano("A00002");
 		avo.setMember_mno("M202008130001");
 		int i = detailViewService.deleteBookmark(avo);
 		

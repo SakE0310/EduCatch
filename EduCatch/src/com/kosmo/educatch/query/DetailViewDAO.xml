@@ -102,6 +102,7 @@
 		WHERE A.ACADEMY_ANO = B.ANO
 		AND A.RBDELETEYN = 'N'
 		AND B.ADELETEYN = 'N'
+		AND B.ANO = #{ano, jdbcType=VARCHAR}
 		ORDER BY 1 DESC
 	</select>
 	
@@ -112,7 +113,7 @@
 						    MEMBER_MNO
 					)
 		VALUES(
-					        'A00001',
+					        'A00002',
 					        'M202008130001'
 					)
 	</insert>
@@ -121,7 +122,7 @@
 		DELETE FROM BOOKMARK 
 		WHERE 
 				MEMBER_MNO='M202008130001' 
-		AND		ACADEMY_ANO='A00001'
+		AND		ACADEMY_ANO='A00002'
 	</delete>
 	
 	
