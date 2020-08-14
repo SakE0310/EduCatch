@@ -28,8 +28,42 @@ public class FreeBoardController {
 	
 	//자유게시판 목록조회
 	@RequestMapping("/freeboardlist")
-	public ModelAndView listFreeBoard(@ModelAttribute FreeVO param) {
+	public ModelAndView listFreeBoard(@ModelAttribute FreeVO param, HttpServletRequest request) {
 		log.info("listFreeBoard함수 진입>>>");
+		
+		log.info("param.getKeyword()"+param.getKeyword());
+		log.info("param.getSearchFilter()"+param.getSearchFilter());
+		
+		log.info("param.getStartDate()"+param.getStartDate());
+		log.info("param.getEndDate()"+param.getEndDate());
+		
+		String startDate = param.getStartDate();
+		String endDate = param.getEndDate();
+		
+		if(startDate == null && endDate ==null) {
+			startDate ="";
+			endDate="";
+		}else {
+			startDate = startDate.replace("/", "-");
+			endDate = endDate.replace("/","-");
+			log.info("startDate>>>"+startDate);
+			log.info("endDate>>>"+endDate);
+					
+		}
+		
+		String papeSize = "5";
+		String curPage = "1";
+		String groupSize = "5";
+		String totalCount = "0"; 
+		
+		if(request.getParameter("curPage")!=null) {
+			curPage = request.getParameter("curPage");
+		}
+		
+		param.setPagesize(papeSize);
+		param.setCurpage(curPage);
+		param.setGroupsize(groupSize);
+		param.setTotalcount(totalCount);
 		
 		List<FreeVO> list = freeService.listFreeBoard(param);
 		int listSize = list.size();
@@ -47,6 +81,10 @@ public class FreeBoardController {
 			log.info("삭제여부"+fvo.getFbdeleteyn());
 			log.info("작성일"+fvo.getFbinsertdate());
 			log.info("수정일"+fvo.getFbupdatedate());
+			log.info("pagesize>>"+fvo.getPagesize());
+			log.info("curpage>>"+fvo.getCurpage());
+			log.info("groupsize>>"+fvo.getGroupsize());
+			log.info("totalcount>>"+fvo.getTotalcount());
 		}
 		
 		ModelAndView mav = new ModelAndView();
@@ -63,10 +101,7 @@ public class FreeBoardController {
 	public ModelAndView selectFreeBoardI(@ModelAttribute FreeVO param) {
 		log.info("selectfreeboardI함수 시작>>>");
 		ModelAndView mav = new ModelAndView();
-		log.info("fbno>>>"+param.getFbno());
-		if(param.getFbno().length()==0) {
-			mav.setViewName("community/freeboard/insertFreeBoard");
-		}
+		mav.setViewName("community/freeboard/insertFreeBoard");
 		log.info("selectfreeboardI함수 끝>>>");
 		return mav;
 	}
@@ -149,12 +184,19 @@ public class FreeBoardController {
 				fbimg = String.valueOf(list.get(0));
 				
 				
+				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
 		}else {
 			log.info("파일이 없는 경우");
+			fbno = request.getParameter("fbno");
+			fbsubject = request.getParameter("fbsubject");
+			fbname = request.getParameter("fbname");
+			fbcontent = request.getParameter("fbcontent");
+			fbimg = request.getParameter("fbimg");
 		}
+		
 		param.setFbno(fbno);
 		param.setFbsubject(fbsubject);
 		param.setFbname(fbname);
@@ -236,6 +278,11 @@ public class FreeBoardController {
 			}
 		}else {
 			log.info("파일이 변하지 않은 경우");
+			fbno = request.getParameter("fbno");
+			fbsubject = request.getParameter("fbsubject");
+			fbname = request.getParameter("fbname");
+			fbcontent = request.getParameter("fbcontent");
+			fbimg = request.getParameter("fbimg");
 		}
 		param.setFbno(fbno);
 		param.setFbsubject(fbsubject);

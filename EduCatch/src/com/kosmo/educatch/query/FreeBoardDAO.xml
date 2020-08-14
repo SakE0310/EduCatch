@@ -4,21 +4,43 @@
 
 <mapper namespace="com.kosmo.educatch.dao.FreeMapper">
 <select id="listFreeBoard" parameterType="freeboard" resultType="freeboard">
-	SELECT 
-		A.FBNO 			AS FBNO,
-		A.FBSUBJECT		AS FBSUBJECT,
-		A.FBNAME 		AS FBNAME,
-		A.FBIMG 		AS FBIMG,
-		A.FBCONTENT 	AS FBCONTENT,
-		A.MEMBER_MNO 	AS MEMBER_MNO,
-		A.FBDELETEYN 	AS FBDELETEYN,
-		TO_CHAR(A.FBINSERTDATE,'YYYY-MM-DD') 	AS FBINSERTDATE,
-		TO_CHAR(A.FBUPDATEDATE,'YYYY-MM-DD') 	AS FBUPDATEDATE	
-	FROM FREEBOARD A
-	<where>
-		A.FBDELETEYN ='N'
-		ORDER BY 1 DESC
-	</where>
+SELECT * FROM(
+	SELECT
+    A.FBNO 			AS FBNO,
+	A.FBSUBJECT		AS FBSUBJECT,
+	A.FBNAME 		AS FBNAME,
+	A.FBIMG 		AS FBIMG,
+    A.FBCONTENT 	AS FBCONTENT,
+	A.MEMBER_MNO 	AS MEMBER_MNO,
+	A.FBDELETEYN 	AS FBDELETEYN,
+	TO_CHAR(A.FBINSERTDATE,'YYYY-MM-DD') 	AS FBINSERTDATE,
+	TO_CHAR(A.FBUPDATEDATE,'YYYY-MM-DD') 	AS FBUPDATEDATE,
+    CEIL(ROW_NUMBER() OVER(ORDER BY A.FBNO DESC)/#{pagesize, jdbcType=VARCHAR}) PAGENO,
+	COUNT(A.FBNO) OVER() AS TOTALCOUNT,
+	#{curpage, jdbcType=VARCHAR}		AS CURPAGE,
+    #{pagesize, jdbcType=VARCHAR}		AS PAGESIZE,
+    #{groupsize, jdbcType=VARCHAR}		AS GROUPSIZE,
+    #{pno, jdbcType=VARCHAR}			AS PNO
+    FROM FREEBOARD A, PAGING B
+	WHERE A.FBDELETEYN ='N'
+    AND PNO='P001'
+    <if test="startDate!=null and startDate!='' and startDate!='null' and endDate!=null and endDate!='' and endDate!='null'">
+		<![CDATA[AND TO_CHAR(A.FBINSERTDATE,'YYYY-MM-DD') >= #{startDate,jdbcType=VARCHAR}]]>
+		<![CDATA[AND TO_CHAR(A.FBINSERTDATE,'YYYY-MM-DD') <= #{endDate,jdbcType=VARCHAR}]]>
+	</if>
+	<if test = "searchFilter=='제목'">
+		<![CDATA[AND FBSUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>	
+	</if>
+	<if test="searchFilter=='내용'">
+		<![CDATA[AND FBCONTENT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+	</if>
+	<if test="searchFilter=='제목+내용'">
+		<![CDATA[AND FBSUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+		<![CDATA[OR FBCONTENT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>			
+	</if>
+	ORDER BY 1 DESC
+)WHERE PAGENO=#{curpage, jdbcType=VARCHAR}
+	
 </select>
 
 <insert id="insertFreeBoard" parameterType="freeboard">

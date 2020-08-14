@@ -17,7 +17,7 @@ public class MemberJoinMapperImpl extends SqlSessionDaoSupport implements Member
 	public int memberUpdate(MemberVO param) {
 		// TODO Auto-generated method stub
 		int ups = (int)getSqlSession().update("memberUpdate");
-		return 0;
+		return ups;
 	}
 
 }

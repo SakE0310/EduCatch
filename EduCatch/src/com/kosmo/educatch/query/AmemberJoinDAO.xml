@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.kosmo.educatch.dao.MemberJoinMapper">
-<insert id="memberInsert" parameterType="member">
+<mapper namespace="com.kosmo.educatch.dao.AmemberJoinMapper">
+<insert id="aMemberInsert" parameterType="member">
 <selectKey keyProperty="mno" resultType="String" order="BEFORE">
 	SELECT 'M'||TO_CHAR(SYSDATE,'YYYYMMDD')||LPAD((
 	SELECT /*+INDEX_DESC(SYS_C0011646)*/
@@ -36,10 +36,10 @@
 		#{maddrno, jdbcType=VARCHAR},
 		#{maddr1, jdbcType=VARCHAR},
 		#{maddr2, jdbcType=VARCHAR},
-		'1',
-		'',
+		'2',
+		#{mimg, jdbcType=VARCHAR},
 		#{academy_ano, jdbcType=VARCHAR},
-		'',
+		'N',
 		#{memailchk, jdbcType=VARCHAR},
 		'N',
 		SYSDATE,
@@ -48,7 +48,7 @@
 	
 </insert>
 
-<update id="memberUpdate" parameterType="member">
+<update id="aMemberUpdate" parameterType="member">
 	UPDATE MEMBER
 	SET MEMAILCHK='Y'
 	<![CDATA[
