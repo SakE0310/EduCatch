@@ -219,6 +219,8 @@
 			</thead>
 			<tbody>
 <%
+
+if(listConsult !=null && nCnt>0){
 	for(int i=0; i<nCnt; i++){
 		ConsultVO cvo=(ConsultVO)listConsult.get(i);
 		
@@ -234,7 +236,6 @@
 		System.out.println("cvo.getCurpage()"+cvo.getCurpage());
 		System.out.println("cvo.getTotalcount()"+cvo.getTotalcount());
 		
-		if(nCnt>0){
 	
 %>
 					<tr align="center">
@@ -246,7 +247,7 @@
 					</tr>
 <%
 				}	
-		}if(nCnt==0){
+		}else{
 		
 %>	
 					<tr>
@@ -256,9 +257,9 @@
 					</tr>
 <%
 			}
-			
-		}	
-	
+
+		if(listConsult !=null && nCnt>0){
+
 %>			
 			</tbody>
 			<tr>
@@ -276,6 +277,12 @@
 			</jsp:include>
 			</td>
 			</tr>
+<%		
+		}//end of (list !=null && nCnt>0)
+	}//end of if(obj)
+		
+%>
+
 		</table>
 	</div>
 	<div>
