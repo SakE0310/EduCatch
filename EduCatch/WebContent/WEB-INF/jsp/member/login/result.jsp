@@ -1,55 +1,45 @@
 <%@ page import = "java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "com.kosmo.educatch.vo.MemberVO" %>  
-  
+<%@ page import = "com.kosmo.educatch.vo.MemberVO" %>    
+<%@ page import = "com.kosmo.educatch.vo.AMemberVO" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>Login</title>
+<script type="text/javascript">
+	window.location()
+</script>
 </head>
 <body>
 	<div align="center" class ="body">
+		<% 
+			MemberVO memVo = (MemberVO) request.getAttribute("MemberVO");			
+		%>
 			<h3>로그인 확인</h3>
-			<table width ="300" border="1">
+			<table  border="1">
 			
-			<% 
+
 				
- 				Object obj = request.getAttribute("loginCheck");
-			
-				if(obj != null){
- 				MemberVO mvo =(MemberVO)obj;		
-				System.out.println(mvo.getMid());	
-				System.out.println(mvo.getMpw());	
-			
-			
-				
-				
-//  				ArrayList aList = (ArrayList)request.getAttribute("aList");
-//  				if(aList != null && aList.size() > 0){
-//  					MemberVO mvo =(MemberVO)aList.get(0);
+				<%
+
+				if(memVo != null){
 					
-				
 				%>
-				
-				
-				
-				
-				<tr>
-						<td> ID :</td>
-						<td align ="center"><%=mvo.getMid()%></td>
-				</tr>
-				<tr>
-						<td> PW :</td>
-						<td align ="center"><%=mvo.getMpw()%></td>
-				</tr>
-	<%
-}
-	%>			
-	
-				
+					<tr>
+							<td> Member ID :</td>
+							<td align ="center"><b><%=memVo.getMid()%></b></td>
+					</tr>
+					<tr>
+							<td> PW :</td>
+							<td align ="center"><b><%=memVo.getMpw()%></b></td>
+					</tr>
+				<% } else {%>
+					<tr>
+							<td> login Fail </td>
+					</tr>
+				<% } %>
 			</table>
 	</div>
 </body>

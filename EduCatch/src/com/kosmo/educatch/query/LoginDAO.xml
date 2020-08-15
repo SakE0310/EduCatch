@@ -1,18 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "com.kosmo.educatch.dao.LoginMapper">
+<mapper namespace="com.kosmo.educatch.dao.LoginMapper">
 
-<select id = "loginCheck" parameterType="member" resultType="member">
-	SELECT 
-			A.MID		AS MID
-			,A.MPW		AS MPW
-			
-	FROM
-			MEMBER A
-	
-	WHERE 	MID=#{mid}
-	AND		MPW=#{mpw}				
-
+	<select id="memberLoginInfo" parameterType="member" resultType="member">
+		SELECT
+			A.MNO AS MNO,
+			A.MID AS MID,
+			A.MPW AS MPW,
+			A.MNAME AS MNAME,
+			A.MTEL AS MTEL,
+			A.MADDRNO AS MADDRNO,
+			A.MADDR1 AS MADDR1,
+			A.MADDR2 AS MADDR2,
+			A.MAUTH AS MAUTH,
+			A.MIMG AS MIMG,
+			A.ACADEMY_ANO AS ACADEMY_ANO,
+			A.MPERMISSION AS MPERMISSION,
+			A.MEMAILCHK AS MEMAILCHK,
+			A.MDELETEYN AS MDELETEYN,
+			A.MINSERTDATE AS MINSERTDATE,
+			A.MUPDATEDATE AS MUPDATEDATE
+							
+		FROM MEMBER A
+		WHERE A.MID = #{mid} and A.MPW = #{mpw}
 	</select>
+	
+	<select id="emailCheckID" parameterType="member" resultType="String">
+		SELECT
+			A.MID AS MID
+		FROM MEMBER A
+		WHERE A.MID = #{mid} and A.MEMAILCHK = 'Y'
+	</select>
+	
+	<update id="passwordChange" parameterType="member">
+		UPDATE 
+			MEMBER A
+		SET 
+			A.MPW = #{mpw}
+		WHERE 
+			A.MID = #{mid}
+	</update>
+
 </mapper>

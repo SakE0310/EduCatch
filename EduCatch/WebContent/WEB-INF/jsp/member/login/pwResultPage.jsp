@@ -9,21 +9,7 @@
 <jsp:include page="../../../../top.jsp" flush="true">
 	<jsp:param value="" name=""/>
 	</jsp:include>
-	<script type ="text/javascript">
-	
-	$(document).ready(function(){
-		
-		$("#pwReset").click(function(){
-				
-			$("#pw_reset").attr("action","passwordReset.ec")
-			$("#pw_reset").submit();
-		
-		});
-		
-
-			
-	});
-		
+<script type ="text/javascript">
 </script>
 
 		<style type="text/css">
@@ -54,6 +40,9 @@
 </style>
 </head>
 <body>
+		<% 
+			String resultMsg = (String) request.getAttribute("resultMsg");			
+		%>
 		<div align = "center" id = "fpw" >비밀번호 찾기</div>
 						
 		<div align = "center">	
@@ -65,12 +54,11 @@
 						margin-top:10px; 
 						margin-bottom:40px;">
 		</div>
-	 	 	<form method ="post" action ="#" id = "pw_reset"> 
+	 	 	<form method ="post" action ="#" id = "pwCheckLogin"> 
 	 			<div class ="content" align = "center">
-						
-				<input type="email" class="form-control input-lg"  id="mid" name="mid" placeholder="회원가입 시 등록한 이메일을 입력해주세요."
-	       	         	 aria-label="Email address" data-error-class="u-has-error" data-success-class="u-has-success" required><br>
-			 	<button type = "submit" name="pwReset" id="pwReset" class = "genric-btn primary">전송</button>	
+						<div><%=resultMsg%></div>
+					
+			 	<button type = "button" onclick = "location.href = 'login.ec' " class = "genric-btn primary">확인</button>	
 			
 			
 	     		<hr style=" height:4px;
