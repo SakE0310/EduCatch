@@ -64,11 +64,11 @@
 	<!-- enctype="multipart/form-data" -->
 	<form id="edit" name="edit">
 		<table style="margin-left: auto; margin-right: auto;" border="1" width="50%">
-			<tr>
+			<!--tr>
 				<td style="width: 100px">글번호</td>
 				<td><input type="text" id="fbno" name="fbno"
 					style="width: 98%"/></td>
-			</tr>
+			</tr -->
 			<tr>
 				<td style="width: 100px">제목</td>
 				<td><input type="text" id="fbsubject" name="fbsubject"

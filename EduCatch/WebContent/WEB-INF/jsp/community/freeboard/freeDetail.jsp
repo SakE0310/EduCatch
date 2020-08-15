@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.kosmo.educatch.vo.FreeVO"  %>
 <!DOCTYPE html>
 <html>
@@ -41,9 +42,12 @@ function listClick(){
 	<form id="edit" name="edit">
 		<table style="margin-left: auto; margin-right: auto;" border="1" >
 		<% 
+			String freeboard_fbno = "";
+			
 			Object obj = request.getAttribute("freevo"); 
 			if(obj!=null){
 				FreeVO freevo = (FreeVO)obj;
+				freeboard_fbno = freevo.getFbno();
 			%>
 			<tr>
 				<td style="width: 100px">글번호</td>
@@ -63,8 +67,7 @@ function listClick(){
 
 			<tr>
 				<td>내용</td>
-				<td><textarea name="fbcontent" id="fbcontent" title="내용"
-						style="width: 98%; height: 200px; padding: 0; margin: 0;" readonly><%=freevo.getFbcontent() %></textarea>
+				<td><div><%=freevo.getFbcontent() %></div>
 				</td>
 			</tr>
 			<tr>
@@ -84,10 +87,16 @@ function listClick(){
 				 <input type="button" id="listclick" value="목록" onclick="listClick()" />
 				</td>
 			</tr>
+			<!-- ========== 댓글 =========================================== -->
+				<jsp:include page="reply.jsp">
+					<jsp:param name="freeboard_fbno" value="<%=freeboard_fbno  %>"/>
+				</jsp:include>
+		
 			<%
 			} 
 			%>
 		</table>
+		
 	</form>
 	<jsp:include page="../../../../footer.jsp" flush="true">
 	<jsp:param value="" name=""/>
