@@ -1,8 +1,11 @@
 package com.kosmo.educatch.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.ConsultVO;
 
 public class MyPageMapperImpl extends SqlSessionDaoSupport implements MyPageMapper{
 
@@ -43,5 +46,12 @@ public class MyPageMapperImpl extends SqlSessionDaoSupport implements MyPageMapp
 		int nCnt = getSqlSession().update("updatePW");
 		return nCnt;
 	}//end of updatePW
+
+	//===== 학원문의 조회 ======================
+	@Override
+	public List<ConsultVO> consultQuestion(ConsultVO param) {
+		List<ConsultVO> list = getSqlSession().selectList("consultQuestion");
+		return list;
+	}//end of consultSearch
 
 }

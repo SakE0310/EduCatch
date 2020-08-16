@@ -1,5 +1,7 @@
 package com.kosmo.educatch.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.MyPageService;
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.ConsultVO;
 
 @Controller
 public class MyPageController {
@@ -152,7 +155,7 @@ public class MyPageController {
 	}//end of editMyPage
 	
 	//=======비밀번호 변경페이지로 이동=======================
-	@RequestMapping("editPW")
+	@RequestMapping("editPW.ec")
 	public ModelAndView editPW(@ModelAttribute MemberVO param) {
 		log.info("MyPageController editPW 시작 >>>");
 		
@@ -178,7 +181,7 @@ public class MyPageController {
 	}//end of editPW
 	
 	//===비밀번호 변경 : 비밀번호 수정============
-	@RequestMapping("updatePW")
+	@RequestMapping("updatePW.ec")
 	public ModelAndView updatePW(HttpServletRequest request,
 								@ModelAttribute MemberVO param) {
 		log.info("MyPageController updatePW 시작 >>>");
@@ -199,6 +202,45 @@ public class MyPageController {
 		log.info("MyPageController updatePW 끝 >>>");
 		return mav;
 	}//end of updatePW
+	
+	//===== 학원문의 조회 ======================
+	@RequestMapping("consultQuestion.ec")
+	public ModelAndView consultQuestion(HttpServletRequest request,
+										@ModelAttribute ConsultVO cvo, MemberVO param) {
+		log.info("MyPageController consultSearch 시작>>>");
+		
+		String mno = request.getParameter("mno");
+		log.info("mno>>>>"+mno);
+		
+		cvo.setMember_mno(mno);
+		List<ConsultVO> list = mypageService.consultQuestion(cvo);
+		log.info("MyPageController consultSearch list.size()>>>" + list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			// list를 VO로 형변환해준다.
+			ConsultVO cvo1 = (ConsultVO) list.get(i);
+			
+			log.info(cvo1.getCbno());
+			log.info(cvo1.getCbsubject());
+			log.info(cvo1.getCbname());
+			log.info(cvo1.getCbcontent());
+			log.info(cvo1.getAcademy_ano());
+			log.info(cvo1.getMember_mno());
+			log.info(cvo1.getCdeleteyn());
+			log.info(cvo1.getCinsertdate());
+			log.info(cvo1.getCupdatedate());
+		}
+		
+		MemberVO mvo = mypageService.selectMyPage(param);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("ConsultVO", list);
+		mav.addObject("MemberVO", mvo);
+		mav.setViewName("/mypage/mypageConsult");
+		
+		log.info("MyPageController consultSearch 끝 >>>");
+		return mav;
+	}//end of consultSearch
 	
 }
 

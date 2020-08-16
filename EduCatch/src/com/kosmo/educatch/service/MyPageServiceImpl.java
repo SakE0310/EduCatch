@@ -6,8 +6,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kosmo.educatch.dao.MyPageMapper;
 import com.kosmo.educatch.manager.LoggerManager;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.ConsultVO;
 
 @Service
 @Transactional
@@ -75,4 +80,17 @@ public class MyPageServiceImpl implements MyPageService{
 		log.info("MyPageServiceImpl updatePW 끝>>>");
 		return nCnt;
 	}//end updatePW
+
+	//===== 학원문의 조회 ======================
+	@Override
+	public List<ConsultVO> consultQuestion(ConsultVO param) {
+		log.info("MyPageServiceImpl consultSearch 시작>>>");
+		
+		List<ConsultVO> list = new ArrayList<ConsultVO>();
+		list = mypageMapper.consultQuestion(param);
+		log.info("MyPageServiceImpl consultSearch list.size() >>>"+list.size());
+		
+		log.info("MyPageServiceImpl consultSearch 끝>>>");
+		return list;
+	}//end of consultSearch
 }
