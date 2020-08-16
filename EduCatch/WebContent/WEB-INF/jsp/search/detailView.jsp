@@ -519,7 +519,7 @@ html, body {
 					<input type="hidden" id="academy_ano" name="academy_ano" />
 					<input type="hidden" id="member_mno" name="member_mno" />
 						<h1 style="font-weight:bold;" align="center"><%=avo.getAname() %></h1> 
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="follow" name="follow" type="button" value="찜추가" style="margin-left:400px" />
+						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="follow" name="follow" type="button" value="찜추가" style="margin-left:400px" />
 						 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=address %></h4>
 						 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=avo.getAtel() %></h4>
 						 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 학원 평가 : <%= gvo.getRbgrade() %>(점)</h4>

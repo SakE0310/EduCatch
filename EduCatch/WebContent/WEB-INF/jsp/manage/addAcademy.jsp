@@ -26,9 +26,26 @@
         	#form {
 			margin: auto;
 		}
-
-
-			
+		
+		
+		
+		select {
+		width: 500px;
+		padding: .8em .5em;
+		border: 1px solid #999;
+		font-family: inherit;
+		background: url('arrow.jpg') no-repeat 95% 50%;
+		border-radius: 0px;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		}
+		
+		
+		select::-ms-expand {
+		    display: none;
+		}
+		
 			
 		input[type="file"] {
 			position: absolute;
@@ -42,6 +59,8 @@
 			}
 		</style>
 		
+		
+		
 <%-- -----------스크립트------------- --%>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -50,7 +69,6 @@
 
 	$(document).ready(function(){
 		ajaxGetMajor();
-		
 		
 		$('#ex_filename').on('change', function(){
 			
@@ -272,18 +290,25 @@
 				<div class="row">
 					<div class="col-lg-8 col-md-8" id="form">
 						<form name="academyInfo" id="academyInfo">
-							<div class="mt-10">
-								<input type="text" name="aname" placeholder="학원이름"
-									onfocus="this.placeholder = ''"
-									onblur="this.placeholder = '학원이름'" required
-									class="single-input">
+						
+						<h1 align="center">학원 등록</h1>
+						
+						<hr>
+						<br>
+						
+							<div class="form-group">
+								<label for="exampleInputEmail1">
+									<h3>학원 이름</h3>
+								</label>
+								<input type="text" class="form-control" id="aname" name="aname">
 							</div>
-							<div class="mt-10">
-								<input type="text" name="atel" placeholder="학원 전화번호"
-									onfocus="this.placeholder = ''"
-									onblur="this.placeholder = '학원 전화번호'" required
-									class="single-input">
+							<div class="form-group">
+								<label for="exampleInputEmail1">
+									<h3>학원 전화번호</h3>
+								</label>
+								<input type="text" class="form-control" id="atel" name="atel">
 							</div>
+							<h3>학원 분야</h3>
 							<div class="mt-10">
 								<div class="form-select major" id="default-select">
 									<select id="cmajor" name="cmajor">
@@ -299,69 +324,70 @@
 									</select>
 								</div>
 							</div>
+							<br>
+							<h3>편의기능 </h3>
 							<div class="row">
-								 <h2>편의기능 </h2>
-								 <br>
+								 <br>&nbsp;&nbsp;&nbsp;&nbsp;
 								 <div class="mt-10">
-									 <input type="checkbox" id="acparking" name="acparking" value="Y">주차장
+									 <input type="checkbox" id="acparking" name="acparking" value="Y">주차장&nbsp;&nbsp;
 								 </div>
 								 <div class="mt-10">
-								 	<input type="checkbox" id="acstore" name="acstore" value="Y">편의점
+								 	<input type="checkbox" id="acstore" name="acstore" value="Y">편의점&nbsp;&nbsp;
 								 </div>
 								 	<div class="mt-10">
-								 <input type="checkbox" id="acbus" name="acbus" value="Y">셔틀버스
+								 <input type="checkbox" id="acbus" name="acbus" value="Y">셔틀버스&nbsp;&nbsp;
 								 </div>
 								 <div class="mt-10">
-								 	<input type="checkbox" id="acelevator" name="acelevator" value="Y">엘리베이터
+								 	<input type="checkbox" id="acelevator" name="acelevator" value="Y">엘리베이터&nbsp;&nbsp;
 								 </div>
 								 <div class="mt-10">
-								 	<input type="checkbox" id="acstudyroom" name="acstudyroom" value="Y">자습실
+								 	<input type="checkbox" id="acstudyroom" name="acstudyroom" value="Y">자습실&nbsp;&nbsp;
 								 </div>
 								 <div class="mt-10">
-								 	<input type="checkbox" id="aclounge" name="aclounge" value="Y">휴게실
+								 	<input type="checkbox" id="aclounge" name="aclounge" value="Y">휴게실&nbsp;&nbsp;
 								 </div>
 								 <div class="mt-10">
-									 <input type="checkbox" id="aclocker" name="aclocker" value="Y">사물함
+									 <input type="checkbox" id="aclocker" name="aclocker" value="Y">사물함&nbsp;&nbsp;
 							   	 </div>
 							</div>
+							<h3>우편번호(도로명주소)</h3>
 							<div class="row">
-								<div class="mt-10 col">
-									<input type="text" name="aaddrno" id="aaddrno" placeholder="우편번호(도로명주소)"
-										onblur="this.placeholder = '우편번호(도로명주소)'" required
-										class="single-input" readonly>
+								<div class="col-md-8">
+										<input type="text" class="form-control" id="aaddrno" name="aaddrno" readonly />
 								</div>
-								<div class="mt-10 col">
-									<a href="javascript:addrCheck();" class="genric-btn primary">찾기</a>
+								<div class="col-md-4">
+									<a href="javascript:addrCheck();" class="btn btn-primary">찾기</a>
 								</div>
 							</div>
-							<div class="mt-10">
-								<input type="text" name="aaddr1" id="aaddr1" placeholder="주소"
-									onfocus="this.placeholder = ''"
-									onblur="this.placeholder = '주소'" required class="single-input"
-									readonly>
+							<br>
+							<div class="form-group">
+								<label for="exampleInputEmail1">
+									<h3>주소</h3>
+								</label>
+								<input type="text" class="form-control" id="aaddr1" name="aaddr1" readonly >
 							</div>
-							<div class="mt-10">
-								<input type="text" name="aaddr2" id="aaddr2" placeholder="상세주소"
-									onfocus="this.placeholder = ''"
-									onblur="this.placeholder = '상세주소'" required
-									class="single-input">
-									<input type="hidden" name="axpoint" id="axpoint" >
-									<input type="hidden" name="aypoint" id="aypoint" >
+							<div class="form-group">
+								<label for="exampleInputEmail1">
+									<h3>상세주소</h3>
+								</label>
+								<input type="text" class="form-control" id="aaddr2" name="aaddr2">
+								<input type="hidden" name="axpoint" id="axpoint" >
+								<input type="hidden" name="aypoint" id="aypoint" >
 							</div>
+							<h3>로고이미지</h3>
 							<div class="row">
-								<div class="mt-10 col">
-									<input type="text" name="alogo" id="alogo" placeholder="로고이미지"
-										onblur="this.placeholder = '로고이미지'" required
-										class="single-input upload-name" readonly>
+								<div class="col-md-8">
+									<input type="text" class="form-control" id="alogo" name="alogo" readonly>
 								</div>
-								<div class="mt-10 col">
-									<label for="ex_filename" class="genric-btn primary">찾기</label>
+								<div class="col-md-4">
+									<label for="ex_filename" class="btn btn-primary">찾기</label>
 									<input type="file" id="ex_filename" name="file" class="upload-hidden">
 								</div>
 							</div>
-							<div class="form-group mt-3">
-                                <button type="button" id="addAcademy" class="genric-btn success-border">등록</button>
-                            </div>
+							<br>
+							<button type="button" id="addAcademy" class="btn btn-primary">
+								학원등록
+							</button>
 						</form>
 					</div>
 				</div>

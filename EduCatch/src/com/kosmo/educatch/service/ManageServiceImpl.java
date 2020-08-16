@@ -1,5 +1,6 @@
 package com.kosmo.educatch.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -9,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kosmo.educatch.dao.ManageMapper;
 import com.kosmo.educatch.manager.LoggerManager;
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.SubjectVO;
 import com.kosmo.educatch.vo.TimetableVO;
 
 @Service
@@ -86,6 +89,17 @@ public class ManageServiceImpl implements ManageService {
 		int cnt = manageMapper.deleteTimetable(tvo);
 		log.info("ManagerserviceImpl deleteTimetable end >>> ");
 		return cnt;
+	}
+	
+	// ---------- 학원관리 학원 전체조회
+	@Override
+	public List<AcademyVO> academyManageView(AcademyVO avo){
+		log.info("ManagerServiceImpl academyManageView >>> ");
+		List<AcademyVO> list = new ArrayList<AcademyVO>();
+		list = manageMapper.academyManageView(avo);
+		log.info("ManagerServiceImpl selectMemList end >>> ");
+		
+		return list;
 	}
 
 }

@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.SubjectVO;
 import com.kosmo.educatch.vo.TimetableVO;
 
 public interface ManageMapper {
@@ -16,4 +18,5 @@ public interface ManageMapper {
 	public int insertTimetable(TimetableVO tvo);
 	public int updateTimetable(TimetableVO tvo);
 	public int deleteTimetable(TimetableVO tvo);
+	public List<AcademyVO> academyManageView(AcademyVO param);
 }

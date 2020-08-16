@@ -2,7 +2,9 @@ package com.kosmo.educatch.service;
 
 import java.util.List;
 
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.SubjectVO;
 import com.kosmo.educatch.vo.TimetableVO;
 
 public interface ManageService {
@@ -14,4 +16,5 @@ public interface ManageService {
 	public int insertTimetable(TimetableVO tvo);
 	public int updateTimetable(TimetableVO tvo);
 	public int deleteTimetable(TimetableVO tvo);
+	public List<AcademyVO> academyManageView(AcademyVO avo);
 }

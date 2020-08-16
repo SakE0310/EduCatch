@@ -7,7 +7,9 @@ import org.apache.log4j.Logger;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.kosmo.educatch.manager.LoggerManager;
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.SubjectVO;
 import com.kosmo.educatch.vo.TimetableVO;
 
 public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapper {
@@ -60,6 +62,13 @@ public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapp
 	public int deleteTimetable(TimetableVO tvo) {
 		log.info("ManageMapperImpl deleteTimetable >>> ");
 		return getSqlSession().insert("ManagerMapper.deleteTimetable", tvo);
+	}
+	
+	// ---------- 학원관리 학원 전체조회
+	@Override
+	public List<AcademyVO> academyManageView(AcademyVO avo){
+		log.info("ManageMapperImpl academyManageView >>> ");
+		return getSqlSession().selectList("ManagerMapper.academyManageView");
 	}
 
 }

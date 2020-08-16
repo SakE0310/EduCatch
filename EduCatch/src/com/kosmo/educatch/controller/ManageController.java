@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.ManageService;
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.TimetableVO;
 
@@ -39,10 +41,15 @@ public class ManageController {
 	}
 	
 	@RequestMapping("manageAca")
-	public ModelAndView getManageAcaPage() {
+	public ModelAndView getManageAcaPage(@ModelAttribute AcademyVO avo) {
 		log.info("ManageController getManagePage >>> ");
 		
+		List<AcademyVO> academylist = manageService.academyManageView(avo);
+		
+		
+
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("academylist", academylist);
 		mv.setViewName("manage/academyManage");
 		
 		return mv;

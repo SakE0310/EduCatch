@@ -100,4 +100,31 @@
 		FROM    TIMETABLE
 		WHERE   TTNO = #{ttno}
 	</delete>
+	
+	
+	<!-- 학원관리 학원 전체조회 -->
+	<select id="academyManageView" parameterType="academyview" resultType="academyview">
+		
+		SELECT
+			    A.ANO,
+			    A.ANAME,
+			    A.ATEL,
+			    A.AXPOINT,
+			    A.AYPOINT,
+			    A.AADDRNO,
+			    A.AADDR1,
+			    A.AADDR2,
+			    A.ALOGO,
+			    A.CATEGORY_CNO,
+			    A.ADELETEYN,
+			    TO_CHAR(A.AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
+			    TO_CHAR(A.AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
+		FROM 
+				ACADEMY A
+		WHERE A.ADELETEYN = 'N'
+		ORDER BY 1 DESC
+		
+	</select>
+	
+	
 </mapper>

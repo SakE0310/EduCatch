@@ -31,7 +31,7 @@ public class AcademyAddController {
 	public ModelAndView pageAcademy() {
 		log.info("AcademyAddController pageAcademy >>> 시작");
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("search/academyAdd");
+		mav.setViewName("manage/addAcademy");
 		log.info("AcademyAddController pageAcademy >>> 끝");
 		return mav;
 	}
@@ -150,16 +150,21 @@ public class AcademyAddController {
 			aclocker = request.getParameter("aclocker");
 		}
 		
+		log.info("ano >>> " + ano);
+		log.info("aname >>> " + aname);
+		log.info("axpoint >>> " + axpoint);
+		log.info("aypoint >>> " + aypoint);
+		log.info("aaddrno >>> " + aaddrno);
+		log.info("aaddr1 >>> " + aaddr1);
+		log.info("aaddr2 >>> " + aaddr2);
+		log.info("academy_ano" + academy_ano);
+		log.info("category_cno >>> " + category_cno);
 		log.info("cmajor >>> " + cmajor);
 		log.info("cminor >>> " + cminor);
-		log.info("academy_ano" + academy_ano);
 		log.info("acparking >>> " + acparking);
-		log.info("acstore >>> " + acstore);
-		log.info("acbus >>> " + acbus);
-		log.info("acelevator >>> " + acelevator);
-		log.info("acstudyroom >>> " + acstudyroom);
-		log.info("aclounge >>> " + aclounge);
-		log.info("aclocker >>> " + aclocker);
+		log.info("acparking >>> " + acparking);
+		log.info("acparking >>> " + acparking);
+		log.info("acparking >>> " + acparking);
 
 		avo.setAno(ano);
 		avo.setAname(aname);
@@ -252,7 +257,7 @@ public class AcademyAddController {
 		}
 
 
-		mav.setViewName("search/academyAdd");
+		mav.setViewName("manage/addAcademy");
 		log.info("AcademyAddController insertAcademy >>> 끝");
 		return mav;
 	}// end of insertAcademy

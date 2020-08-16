@@ -1,3 +1,5 @@
+<%@page import="com.kosmo.educatch.vo.AcademyVO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -29,6 +31,15 @@
 </style>
 </head>
 <body class="sb-nav-fixed">
+<%-- ----------- 바디 ------------- --%>
+<%
+		Object listobj1 = request.getAttribute("academylist"); 
+
+		ArrayList academylist = (ArrayList)listobj1;
+		
+		int academynCnt = academylist.size();
+%>
+
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<a class="navbar-brand" href="index.jsp"><img alt="logo"
 			src="assets/img/favicon-32x32.png"> EduCatch</a>
@@ -93,19 +104,35 @@
 										id="memberAccept" style="width: 100%">
 										<thead>
 											<tr>
-												<th><label
-													class="custom-control custom-checkbox ck-center"><input
-														class="custom-control-input check chkAll" type="checkbox"><span
-														class="custom-control-label"></span></label></th>
-												<th>아이디</th>
-												<th>학원번호</th>
-												<th>학원이름</th>
-												<th>학원연락처</th>
-												<th>이미지</th>
-												<th>가입일</th>
-												<th>mno</th>
+												<th>학원 이름</th>
+												<th>학원 연락처</th>
+												<th>학원 주소</th>
+												<th>학원 로고</th>
+												<th>학원 가입일</th>
+												<th>마지막 수정일</th>
 											</tr>
 										</thead>
+										<tbody>
+										<%
+											for(int i=0; i<academynCnt; i++){
+												AcademyVO avo = (AcademyVO)academylist.get(i);
+												
+												if(academynCnt>0){
+													String address = avo.getAaddr1() + " " + avo.getAaddr2();
+										%>
+											<tr>
+												<th><%=avo.getAname() %></th>
+												<th><%=avo.getAtel() %></th>
+												<th><%=address %></th>
+												<th><img src="/EduCatch/assets/img/academyLogo/<%= avo.getAlogo() %>" border=0 width="50" height="50" /></th>
+												<th><%=avo.getAinsertdate() %></th>
+												<th><%=avo.getAupdatedate() %></th>
+											</tr>
+											<%
+												}
+											}
+										%>
+										</tbody>
 									</table>
 								</div>
 							</div>
