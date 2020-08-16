@@ -35,13 +35,15 @@
 		background-color: #F5F5F5;
 	}
 	.btn_light {
-	    display: inline-block;
+	     display: inline-block;
 	    text-align: center;
 	    background: #e5e5e5;
 	    color: #555;
 	    vertical-align: middle;
 	    cursor: pointer;
 	    border: 1px solid #e5e5e5;
+	    height: 40px;
+	    font-size: 15px;
 		}
 	.btn_box_01 {
 	    width: auto;
@@ -173,7 +175,7 @@
 		var sVal = document.searchForm.searchFilter.options[document.searchForm.searchFilter.selectedIndex].value;
 		console.log("sVal>>>"+sVal);
 		 
-		$("#searchFormNotice").attr("action","listNotice.ec");
+		$("#searchFormNotice").attr("action","searchNotice.ec");
 		$("#searchFormNotice").attr("method","POST");
 		$("#searchFormNotice").submit();
 		 
@@ -300,9 +302,8 @@
 			<select name="searchFilter">
 				<option value="제목">제목</option>
 				<option value="내용">내용</option>
-				<option value="제목+내용">제목+내용</option>
 			</select>
-			<input type="text" name="keyword" id = "keyword">
+			<input type="text" name="keyword" id = "keyword" style ="width:200px; height:40px;">
 			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 			<hr>
 		</div>

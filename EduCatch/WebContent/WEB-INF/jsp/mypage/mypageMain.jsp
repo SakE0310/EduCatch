@@ -12,20 +12,28 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
 
+	#full{
+		 margin :auto;
+		 align :center;
+		 width : 1200px;
+		 height: 1000px;
+	}
 	.container-mypage {
 	
-	    max-width: 840px;
+	    max-width: 900px;
 	    height: 500px;
-	    margin-left: 710px;
+	    margin :auto;
+	   /*  margin-left: 710px; */
 	    background-color: #f5f5f0;
 	}
 	#sideBanner-mypage{
 			position: absolute;
-			left:0px;
+			/* left:0px; */
 			width:225px;
 			height: 500px;
 			background: #eaeae1;
-			margin-left: 490px;
+			 margin :auto;
+			/* margin-left: 490px; */
 			padding-left: 12px;
 		} 
 		
@@ -84,6 +92,7 @@
 	if(obj != null){
 		MemberVO mvo = (MemberVO)obj;
 %>
+<div id ="full">
 	<div id="sideBanner-mypage">
 	<form id= "clickForm" name = "clickForm">
 		<div class ="sideBox">
@@ -116,6 +125,7 @@
 			 여긴 게시글 관리 부분
 		</div>
 	</div>
+</div>	
 <jsp:include page="../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

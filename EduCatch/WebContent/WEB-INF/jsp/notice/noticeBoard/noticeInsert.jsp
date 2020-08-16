@@ -3,6 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="../../../../top.jsp" flush="true">
+<jsp:param value="" name=""/>
+</jsp:include>
+
 <meta charset="UTF-8"">
 <title>공지사항 등록페이지</title>
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
@@ -11,6 +15,11 @@
 <!-- jQuery를 사용하기위해 jQuery라이브러리 추가 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+<!-- 테이블 부트스트랩 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 	var oEditors = [];
@@ -65,8 +74,17 @@
 </style>
 <body>
 	<!-- action/document/location -->
+	<div class="container">
 	<form id="edit">
-		<table style="width: 50%" border="1" align="center">
+		<div>
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+				<td align="center"><h1>Notice</h1></td>
+			</tr>
+			</table>
+			<hr>
+		</div>
+		<table style="width: 90%" border="1" align="center" class="table">
 			<tr>
 				<td style="width: 100px">제목</td>
 				<td><input type="text" id="nsubject" name="nsubject"
@@ -95,5 +113,13 @@
 			</tr>
 		</table>
 	</form>
+	</div>
+	<br>
+<br>
+<br>
+<br>
+<jsp:include page="../../../../footer.jsp" flush="true">
+<jsp:param value="" name=""/>
+</jsp:include>
 </body>
 </html>

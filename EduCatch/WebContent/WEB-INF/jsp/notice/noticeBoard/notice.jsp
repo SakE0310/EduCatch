@@ -25,6 +25,9 @@
 
 <!-- 날짜 형식변환 -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+<!-- 폰트 -->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet"> -->
 <style type="text/css">
 	#nno_color{
 		color: black;
@@ -42,6 +45,8 @@
 	    vertical-align: middle;
 	    cursor: pointer;
 	    border: 1px solid #e5e5e5;
+	    height: 40px;
+	    font-size: 15px;
 		}
 	.btn_box_01 {
 	    width: auto;
@@ -51,6 +56,7 @@
 	    float: right;
 	    margin: 20px 0px 0;
 	    text-align: left;
+	   
 	}
 	.bbs-link {
    	 position: relative;
@@ -67,6 +73,11 @@
   	margin: auto;
 	}
 	
+	/* body{
+	 	font-family: 'Hi Melody', cursive;
+		font-weight: 400;
+	} */
+	
 		
 	/* #sideBanner{
 			position: absolute;
@@ -75,7 +86,7 @@
 			width:150px;
 			height:600px;
 			background: #aaa;
-		} */
+		}  */
 </style>
 
 <script type="text/javascript">
@@ -201,9 +212,9 @@
 		int nCnt = list.size();
 %>
 	<form id="noticeForm" name="noticeForm">
-	<!-- <div id="sideBanner">
+	<!--  <div id="sideBanner">
 		사이드 바
-	</div> -->
+	</div>  -->
 	<div id="mainWrapper">
 		<div>
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
@@ -314,9 +325,8 @@
 			<select name="searchFilter">
 				<option value="제목">제목</option>
 				<option value="내용">내용</option>
-				<option value="제목+내용">제목+내용</option>
 			</select>
-			<input type="text" name="keyword" id = "keyword">
+			<input type="text" name="keyword" id = "keyword" style ="width:200px; height:40px;">
 			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 			<hr>
 		</div>
