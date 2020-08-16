@@ -68,4 +68,32 @@
 	WHERE 
 	        MNO=#{mno, jdbcType=VARCHAR}	
 	</update>
+	
+	<!-- 학원문의 조회 -->
+	<select id="consultQuestion" parameterType="consult" resultType="consult">
+	SELECT AAA.* FROM(
+     SELECT AA.* , B.MNO FROM(
+                SELECT 
+                         A.CBNO                                      AS  CBNO
+                        ,A.CBSUBJECT                                 AS  CBSUBJECT   
+                        ,A.CBNAME                                    AS  CBNAME
+                        ,A.CBCONTENT                                 AS  CBCONTENT
+                        ,A.ACADEMY_ANO                               AS  ACADEMY_ANO
+                        ,A.MEMBER_MNO                                AS  MEMBER_MNO
+                        ,A.CDELETEYN                                 AS  CDELETEYN
+                        ,TO_CHAR(A.CINSERTDATE,'YYYY-MM-DD')         AS  CINSERTDATE            
+                        ,TO_CHAR(A.CUPDATEDATE,'YYYY-MM-DD')         AS  CUPDATEDATE
+                        ,C.ANAME                                     AS  ANAME
+                        
+                FROM   
+                        CONSULTBOARD A ,ACADEMY C 
+                WHERE 
+                        C.ANO = A.ACADEMY_ANO
+                      ) AA , MEMBER B
+         WHERE
+                        AA.MEMBER_MNO = B.MNO
+                    
+     )AAA
+     WHERE AAA.MNO=#{member_mno, jdbcType=VARCHAR}
+	</select>
 </mapper>

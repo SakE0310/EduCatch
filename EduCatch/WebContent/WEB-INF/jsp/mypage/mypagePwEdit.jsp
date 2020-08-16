@@ -97,6 +97,7 @@
 								return false; 
 							}//end of if((length <6 || length >12))
 							console.log("새비밀번호 : 비밀번호  일치 \n 수정가능");
+							alert("비밀번호 수정 성공");
 							$("#pwEditForm").attr("action","updatePW.ec");
 							$("#pwEditForm").attr("method","POST");
 							$("#pwEditForm").submit(); 
