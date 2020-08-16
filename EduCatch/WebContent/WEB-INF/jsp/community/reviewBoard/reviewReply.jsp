@@ -4,7 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>Insert title here</title>
 </head>
 <%
@@ -15,6 +19,35 @@
 	String reno = request.getParameter("reno");
 	String recontent = request.getParameter("recontent");
 %>
+<style type="text/css">
+.btn_box_02 {
+    width: 100px;
+    padding: 17px 20px;
+    margin-bottom: 50px;
+}
+.btn_light {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    text-align: center;
+    background: #e5e5e5;
+    color: #555;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid #e5e5e5;
+    /* transition: all 0.3s ease-in-out; */
+}
+
+
+.table_wrap{
+	border-collapse: collapse;
+	background-color: #F5F5F5;
+}
+
+#list{
+	margin-left: 10px;
+}
+</style>
 <script type="text/javascript"
 		src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
@@ -267,8 +300,8 @@
 	}
 </script>
 <body>
-
-		<div class="table_wrap">
+		<div class="container">
+			<div class="table_wrap">
 			<!-- =================== 댓글 입력폼 ==================== -->						
 				<table>
 					<thead>
@@ -276,23 +309,26 @@
 							<th class="alignL total"></th>
 						</tr>
 					</thead>
+					<div id="list">
 					<tbody id="replyList_ul">	
 					
 						<!-- 동적생성요소 댓글리스트 들어갈 자리 -->	
 					
 					</tbody>
+					</div>
 				</table>
 			<form id="replyInsertForm">	
-				<table class="reply_insert_wrap">
+				<table class="reply_insert_wrap" align="center" width="1100" height="100">
 					<tr class="marT5 marL5 marB5">
 						<td>
-							<textarea name="recontent" id="recontent" style="padding:10px; width:80%;"placeHolder="댓글을 입력해주세요."></textarea>
-							<input type="button" class="blue_btn" id="replyInsert" value="등록" style="vertical-align:middle;"/>
+							<textarea name="recontent" id="recontent" style="padding:10px; width:90%;"placeHolder="댓글을 입력해주세요."></textarea>
+							<input type="button" class="btn_light btn_box_02" id="replyInsert" value="등록" style="vertical-align:middle;"/>
 							<input type="hidden" id="reno" name="reno"/>
 						</td>
 					</tr>
 				</table>
 			</form>
+			</div>
 		</div>
 
 </body>

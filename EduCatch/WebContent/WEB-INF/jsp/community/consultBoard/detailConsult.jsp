@@ -12,7 +12,37 @@
 </jsp:include>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<style type="text/css">
+	#contnent{
+		width : 600px;
+		height: 600px;
+	}
+	#table_head{
+		border-collapse: collapse;
+		background-color: #F5F5F5;
+	}
+	
+		.btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #e5e5e5;
+	    color: #555;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #e5e5e5;
+	}
+		
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	}
+</style>
 <script type="text/javascript">
 	
 	$(document).ready(function() {
@@ -53,46 +83,55 @@
 		ConsultVO cvo=(ConsultVO)obj;
 %>
 <p></p>
-	<div>
+	<div class="container">
 		<form id="ConsultForm" name="ConsultForm">
-		 
 			<input type="hidden" id="cbno" name="cbno" value="<%= cvo.getCbno()%>"/>
-		
-			<table style="margin-left: auto; margin-right: auto;" border="1">
+			<table align="center" width="700" height="100" class="table">
+			<thead id="table_head">
+				<tr>
+					<th><div align="center"><%= cvo.getCbsubject() %></div></th>
+				</tr>
+			</thead>
 			<tbody>
 				<tr>
-					<th><span class="required">*</span>제목</th>
-					<td><div><%= cvo.getCbsubject() %></div></td>
+					<td>
+						<div>
+							<div>
+								<span>
+								작성자 :<%= cvo.getCbname() %>&nbsp;&nbsp;&nbsp;
+								작성일자 :<%= cvo.getCinsertdate() %>&nbsp;&nbsp;&nbsp;
+								</span>
+							</div>
+						</div>
+					</td>
 				</tr>
 				<tr>
-					<th><span class="required">*</span>작성자</th>
-					<td><div><%= cvo.getCbname() %></div></td>
+					<td>
+						<div>
+						<%= cvo.getCbcontent() %>
+						</div>
+					</td>
 				</tr>
-				<tr>
-					<th><span class="required">*</span>내용</th>
-					<td><div><%= cvo.getCbcontent() %></div></td>
-				</tr>
-				<tr>
-					<th><span class="required">*</span>날짜</th>
-					<td><div><%= cvo.getCinsertdate() %></div></td>
-				</tr>	
 			</tbody>
 			</table>
 		</form>
 	</div>
 	<p></p>
+		<jsp:include page="consultReply.jsp">
+			<jsp:param name="consultboard_cbno" value="<%=consultboard_cbno %>"/>
+		</jsp:include>
 		<table style="margin-left: auto; margin-right: auto;" border="0">
 			<tr align="center">
 				<td>
 					<a href="selectUpdate1.ec?cbno=<%= cvo.getCbno()%>">
-					<input type="button" id="updateData" value="수정" />
+					<input type="button" id="updateData" value="수정" class=" btn_light btn_box_01"/>
 					</a>
 				</td>
 				<td>
-					<input type="button" id="deleteData" value="삭제" />
+					<input type="button" id="deleteData" value="삭제" class=" btn_light btn_box_01"/>
 				</td>
 				<td>
-					<input type="button" id="listData" value="목록" />
+					<input type="button" id="listData" value="목록" class=" btn_light btn_box_01"/>
 				</td>
 
 			</tr>
@@ -102,9 +141,6 @@
 %>
 		</table>
 		
-		<jsp:include page="consultReply.jsp">
-			<jsp:param name="consultboard_cbno" value="<%=consultboard_cbno %>"/>
-		</jsp:include>
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

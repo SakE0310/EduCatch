@@ -10,8 +10,38 @@
 <jsp:include page="../../../../top.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>
-<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>Insert title here</title>
+<style type="text/css">
+	#contnent{
+		width : 600px;
+		height: 600px;
+	}
+	
+	#table_head{
+		border-collapse: collapse;
+		background-color: #F5F5F5;
+	}
+	
+	.btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #e5e5e5;
+	    color: #555;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #e5e5e5;
+	}
+		
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	}
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	
@@ -58,16 +88,11 @@
 	Object obj=request.getAttribute("ReviewVO");
 	
 	if(obj !=null){
-		//ArrayList reviewVO=(ArrayList)obj;
 		
-		
-		//int nCnt=reviewVO.size();
-		
-		//for(int i=0; i<nCnt; i++){
 			ReviewVO rvo=(ReviewVO)obj;
 %>
 <p></p>
-	<div>
+	<div class="container">
 		<form id="ReviewForm" name="ReviewForm">
 		 	<input type="hidden" id="ano" name="ano" value="<%= rvo.getAno()%>"/> 
 		 	<input type="hidden" id="aname" name="aname" value="<%= rvo.getAname()%>"/> 
@@ -75,80 +100,71 @@
 		 	
 			<input type="hidden" id="rbno" name="rbno" value="<%= rvo.getRbno()%>"/>
 		
-			<table style="margin-left: auto; margin-right: auto;" border="1">
+			<table align="center" width="700" height="100" class="table">
+			<thead id="table_head">
+				<tr>
+					<th><div align="center"><%= rvo.getRbsubject() %></div></th>
+				</tr>
+			</thead>
 			<tbody>
 				<tr>
-					<th><span class="required">*</span>제목</th>
-					<td><div><%= rvo.getRbsubject() %></div></td>
-				</tr>
-				<tr>
-					<th><span class="required">*</span>작성자</th>
-					<td><div><%= rvo.getRbname() %></div></td>
-				</tr>
-<%
-			if(rvo.getRbimg() !=null && rvo.getRbimg().length()>0){
-%>
-				<tr>
-					<th><span class="required">*</span>사진</th>
 					<td>
-					 <div id ="rbimg" name="rbimg" align="center">
-	         				<img src="/EduCatch/assets/img/reviewImg/<%= rvo.getRbimg() %>" border=() width="100" height="100"/><br>
-	         		</div>
+						<div>
+							<div>
+								<span>
+								작성자 :<%= rvo.getRbname() %>&nbsp;&nbsp;&nbsp;
+								작성일자 :<%= rvo.getRbinsertdate() %>&nbsp;&nbsp;&nbsp;
+								★평점 :<%= rvo.getRbgrade() %>점&nbsp;&nbsp;&nbsp;						
+								</span>
+							</div>
+						</div>
 					</td>
 				</tr>
+				<tr>
+         			<td>
+         				<div>
+         				<%= rvo.getRbcontent() %>
 <%
-			}else{
-%>	
-				<tr>
-					<th><span class="required">*</span>사진</th>
-					<td>
-					<div id ="rbimg" name="rbimg" align="center"></div>
-					</td>
-				</tr>
-<% 			
-		}
+							String img = rvo.getRbimg();
+							if(img != null){
 %>
-				<tr>
-					<th><span class="required">*</span>내용</th>
-					<td><div><%= rvo.getRbcontent() %></div></td>
-				</tr>
-				<tr>
-					<th><span class="required">*</span>평점</th>
-					<td><div><%= rvo.getRbgrade() %></div></td>
-				</tr>
-				<tr>
-					<th><span class="required">*</span>날짜</th>
-					<td><div><%= rvo.getRbinsertdate() %></div></td>
-				</tr>	
+								<div align="center">
+         						<img src="/EduCatch/assets/img/reviewImg/<%= rvo.getRbimg() %>" border=() width="100" height="100"/>
+         						</div>
+<%								
+							}//end of if(img)
+%>
+         				</div>
+         			</td>
+         		</tr>
 			</tbody>
 			</table>
 		</form>
 	</div>
 	<p></p>
-		<table style="margin-left: auto; margin-right: auto;" border="0">
+		<jsp:include page="reviewReply.jsp">
+			<jsp:param name="reviewboard_rbno" value="<%=reviewboard_rbno %>"/>
+		</jsp:include>
+		<p></p>
+		<table style="margin-left: auto; margin-right: 400px;" border="0">
 			<tr align="center">
 				<td>
 					<a href="selectUpdate.ec?rbno=<%= rvo.getRbno()%>">
-					<input type="button" id="updateData" value="수정" />
+					<input type="button" id="updateData" value="수정" class=" btn_light btn_box_01"/>
 					</a>
-				</td>
+				</td>&nbsp;&nbsp;
 				<td>
-					<input type="button" id="deleteData" value="삭제" />
-				</td>
+					<input type="button" id="deleteData" value="삭제" class=" btn_light btn_box_01"/>
+				</td>&nbsp;&nbsp;
 				<td>
-					<input type="button" id="listData" value="목록" />
+					<input type="button" id="listData" value="목록"   class=" btn_light btn_box_01"/>
 				</td>
-
 			</tr>
 <%
-		//}
 	}
 %>
 		</table>
 		
-		<jsp:include page="reviewReply.jsp">
-			<jsp:param name="reviewboard_rbno" value="<%=reviewboard_rbno %>"/>
-		</jsp:include>
 
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
