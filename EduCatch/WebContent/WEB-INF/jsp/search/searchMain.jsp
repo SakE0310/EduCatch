@@ -165,7 +165,7 @@
 							var agrade = resParam.acaList[i].agrade;
 							st += "<p>";
 							st += "<div class='panel panel-default'>";
-							st += "<a href='listDetailView.ec' style='text-decoration:none'>";
+							st += "<a href='listDetailView.ec?ano="+ano+"' style='text-decoration:none'>";
 							st += "<div class='media'>";
 							st += "<div class='media-left'>";
 							st += "<img src='assets/img/academyLogo/"+alogo+"' class='media-object' style='width:135px; height:135px'>";
