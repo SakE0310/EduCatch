@@ -4,6 +4,7 @@ public class MemberVO extends AcademyVO{
 
 		//로그인
 		private String mno;
+		private String msnstype;
 		private String mid;
 		private String mpw;
 		private String mname;
@@ -31,13 +32,20 @@ public class MemberVO extends AcademyVO{
 			
 		}
 		
-		
+	
+
 		public void setMno(String mno) {
 			this.mno = mno;
 			
 		}
 		
-		
+		public String getMsnstype() {
+			return msnstype;
+		}
+
+		public void setMsnstype(String msnstype) {
+			this.msnstype = msnstype;
+		}
 		
 		
 		public String getMid() {
