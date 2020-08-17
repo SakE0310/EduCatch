@@ -103,7 +103,7 @@
 							st += "<div class='media-body'>";
 							st += "<p><h4 class='media-heading'>"+aname+"</h4></p>";
 							st += "<p><img src='assets/img/Icon_location.png' style='width:15px; height:15px'>"+aaddr1+"&nbsp;"+aaddr2+"</p>";
-							st += "<h4>"+agrade+"점&nbsp;&nbsp;&nbsp;#"+cmajor+"&nbsp;#"+cminor+"<h4>";
+							st += "<h4><img src='assets/img/Icon_star.png' style='width:15px; height:15px'>"+agrade+"점&nbsp;&nbsp;&nbsp;#"+cmajor+"&nbsp;#"+cminor+"<h4>";
 							st += "<h5 align='right'>최근업데이트 : "+aupdatedate+"&nbsp;&nbsp;</h5></p>";
 							st += "</div>";
 							st += "</div>";
@@ -172,7 +172,7 @@
 							st += "<div class='media-body'>";
 							st += "<p><h4 class='media-heading'>"+aname+"</h4></p>";
 							st += "<p><img src='assets/img/Icon_location.png' style='width:15px; height:15px'>"+aaddr1+"&nbsp;"+aaddr2+"</p>";
-							st += "<h4>"+agrade+"점&nbsp;&nbsp;#"+cmajor+"&nbsp;#"+cminor+"<h4>";
+							st += "<h4><img src='assets/img/Icon_star.png' style='width:15px; height:15px'>"+agrade+"점&nbsp;&nbsp;&nbsp;#"+cmajor+"&nbsp;#"+cminor+"<h4>";
 							st += "<h5 align='right'>최근업데이트 : "+aupdatedate+"&nbsp;&nbsp;</h5></p>";
 							st += "</div>";
 							st += "</div>";
