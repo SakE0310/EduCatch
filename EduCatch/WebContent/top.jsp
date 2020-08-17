@@ -92,7 +92,7 @@
                                             <ul id="navigation">                                                                                          
                                                 <li><a href="index.jsp">홈</a></li>
                                                 <li><a href="searchMain.ec">학원찾기</a></li>
-                                                <li><a href="services.html">커뮤니티</a>
+                                                <li><a href="freeboardlist.ec">커뮤니티</a>
                                                     <ul class="submenu">
                                                         <li><a href="freeboardlist.ec">자유게시판</a></li>
                                                         <li><a href="listReview.ec">후기게시판</a></li>

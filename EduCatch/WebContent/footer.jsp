@@ -29,9 +29,6 @@
 </footer>
 <!-- Search model end -->
 <!-- Scroll Up -->
-<div id="back-top">
-	<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
-</div>
 <!-- JS here -->
 
 <script src="/EduCatch/assets/js/vendor/modernizr-3.5.0.min.js"></script>
