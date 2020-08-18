@@ -100,12 +100,16 @@
 		
 		}
 		
-		
-		
-		 
-		
 </style>
-
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript">
+	// init 부분의 key값은 kakao developer에서 발급받아 변경
+	Kakao.init('6b4dabec7bbdb2661fd8591e728271ce');
+	Kakao.isInitialized();
+	// SDK 초기화 여부를 판단합니다.
+	console.log(Kakao.isInitialized());
+	// @breif 카카오 로그인 버튼을 생성합니다.
+</script>
 	</head>
 		<body>
  		
@@ -178,9 +182,8 @@
 							<img src = "/EduCatch/assets/img/login/facebook.png" alt = "facebook" id ="facebook" >
 							</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								
-							<a href ="#">
-							<img src = "/EduCatch/assets/img/login/kakao.png" alt = "kakao" id = "kakao" >
-							</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a> <img
+							src="/EduCatch/assets/img/login/kakao.png" alt="kakao" id="kakao">
 								
 							<a href ="https://www.google.co.kr">
 							<img src = "/EduCatch/assets/img/login/google.png" alt = "google" id= "google">
@@ -210,10 +213,74 @@
 							<button class="genric-btn success" id ="academymem" type = "submit">학원 관리자 등록</button>
 					
 					</div>
-					
-					
-	     	     			
  		 </form>
+ 		 <script type="text/javascript">
+			var email = "";
+			var name = "";
+			Kakao.Auth
+					.createLoginButton({
+						container : '#kakao',
+						success : function(authObj) {
+							Kakao.API
+									.request({
+										url : '/v2/user/me',
+										success : function(res) {
+											alert(JSON.stringify(res))
+											console.log(res.properties.nickname);
+											console.log(res.kakao_account.email);
+											name = res.properties.nickname;
+											email = res.kakao_account.email;
+											$
+													.ajax({
+														url : "./memberCheck.ec",
+														type : "GET",
+														dataType : "JSON",
+														data : {
+															mid : email
+														},
+														success : function(data) {
+															console.log(data);
+															if (data > 0) {
+																//이미 회원이 있음
+															} else {
+																// 회원이 없음
+																var emailSplit = email
+																		.split('@');
+																location.href = "http://localhost:8088/EduCatch/memberjoinform.ec?mname="
+																		+ name
+																		+ "&emailname="
+																		+ emailSplit[0]
+																		+ "&emailaddr="
+																		+ emailSplit[1]
+																		+"&snstype=k"
+															}
+														},
+														error : function(request,
+																status, error) {
+															alert('실패했습니다.');
+															alert("code : "
+																	+ request.status
+																	+ "\n"
+																	+ "message : "
+																	+ request.responseText
+																	+ "\n"
+																	+ "error : "
+																	+ error);
+														}
+													});
+										},
+										fail : function(error) {
+											alert('login success, but failed to request user information: '
+													+ JSON.stringify(error))
+										},
+									})
+						},
+						fail : function(err) {
+							alert('failed to login: ' + JSON.stringify(err))
+						},
+
+					});
+	</script>
 
 	<jsp:include page="../../../../footer.jsp" flush="true">
 	<jsp:param value="" name=""/>

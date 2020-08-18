@@ -57,4 +57,10 @@
 	AND MID=#{mid}
 	]]>
 </update>
+
+<select id="memberCheck" parameterType="member" resultType="member">
+	SELECT * FROM MEMBER
+		WHERE MID = #{mid,jdbcType=VARCHAR}
+		AND   MDELETEYN = 'N'
+</select>
 </mapper>

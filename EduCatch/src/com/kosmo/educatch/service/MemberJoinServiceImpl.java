@@ -1,5 +1,7 @@
 package com.kosmo.educatch.service;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,15 @@ public class MemberJoinServiceImpl implements MemberJoinService {
 		int ups = memberjoinmapper.memberUpdate(param);
 		log.info("memberUpdate서비스 끝");
 		return ups;
+	}
+	
+	@Override
+	public List<MemberVO> memberCheck(MemberVO param) {
+		// TODO Auto-generated method stub
+		log.info("memberCheck서비스 함수 호출");
+		List<MemberVO> mcList = memberjoinmapper.memberCheck(param);
+		
+		return mcList;
 	}
 
 }

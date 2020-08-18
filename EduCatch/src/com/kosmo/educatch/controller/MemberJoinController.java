@@ -1,5 +1,8 @@
 package com.kosmo.educatch.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.AddressException;
@@ -15,6 +18,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.manager.LoggerManager;
@@ -171,5 +175,20 @@ public class MemberJoinController {
 		log.info("memberupdate함수 끝");
 		return mav;
 	}
+	//카카오 로그인 시 아이디 중복체크
+	@RequestMapping("/memberCheck")
+	@ResponseBody
+	public int memberCheck(@ModelAttribute MemberVO param) {
+		log.info("memberCheck함수 진입");
+		log.info("email/mid>>>" + param.getMid());
+		List<MemberVO> mcList = memberjoinservice.memberCheck(param);
+		log.info("조회된 개수>>>" + mcList.size());
+		Map<String, Object> m = new HashMap<String, Object>();
+		int num = mcList.size();
+		m.put("result", num);
+		log.info("memberCheck함수 진입 끝");
+		return num;
+	}
 	
+	//자체 가입시 아이디 중복체크
 }
