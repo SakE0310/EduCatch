@@ -19,7 +19,7 @@
 		FROM
 		        MEMBER A
 		WHERE        
-		        MNO = '2' --세션넣고 고쳐야함
+		        MNO = 'M202008170001' --세션넣고 고쳐야함
 		        AND MDELETEYN ='N'
 	</select>
 	

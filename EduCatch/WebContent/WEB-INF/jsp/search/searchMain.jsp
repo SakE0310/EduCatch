@@ -38,6 +38,7 @@
 					ajaxGetMinor(setCmajor);
 				});//setDistrict
 				
+				
 				//검색시 AcaList호출
 				$('#search').click(function(){
 					var setDistrict = $('#district').val(); //서울
@@ -95,7 +96,7 @@
 							var agrade = resParam.acaList[i].agrade;
 							st += "<p>";
 							st += "<div class='panel panel-default'>";
-							st += "<a href='listDetailView.ec' style='text-decoration:none'>";
+							st += "<a href='listDetailView.ec?ano="+ano+"' style='text-decoration:none'>";
 							st += "<div class='media'>";
 							st += "<div class='media-left'>";
 							st += "<img src='assets/img/academyLogo/"+alogo+"' class='media-object' style='width:135px; height:135px'>";
@@ -164,7 +165,7 @@
 							var agrade = resParam.acaList[i].agrade;
 							st += "<p>";
 							st += "<div class='panel panel-default'>";
-							st += "<a href='listDetailView.ec' style='text-decoration:none'>";
+							st += "<a href='listDetailView.ec?ano="+ano+"' style='text-decoration:none'>";
 							st += "<div class='media'>";
 							st += "<div class='media-left'>";
 							st += "<img src='assets/img/academyLogo/"+alogo+"' class='media-object' style='width:135px; height:135px'>";
@@ -351,7 +352,9 @@
 								</td>
 							</tr>
 						</table>
-						<div class="acaList"><p id="show">검색조건을 입력하세요<p></div>
+							<form id="detailViewForm" name="detailViewForm">
+								<div class="acaList"><p id="show">검색조건을 입력하세요<p></div>
+							</form>
 						</div>
 					</div>
 				</div>

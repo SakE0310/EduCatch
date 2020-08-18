@@ -11,28 +11,58 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!-- 데이터피커 -->
-<link rel="stylesheet" href="/EduCatch/assets/datepicker/jquery-ui-1.12.1/jquery-ui.min.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="/EduCatch/assets/datepicker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
-<script src="/EduCatch/assets/datepicker/jquery-ui-1.12.1/datepicker-ko.js"></script>
+<!-- 테이블 부트스트랩 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<!-- 날짜 형식변환 -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <style type="text/css">
 	#eno_color{
 		color: black;
 	}
 	#sForm{
-    width: 350px;
-  	height: 100px;
-  	margin: auto;
+	    width: 350px;
+	  	height: 100px;
+	  	margin: auto;
 	}
 	#dForm{
-	 width: 350px;
-  	height: 100px;
-  	margin: auto;
+		width: 350px;
+	  	height: 100px;
+	  	margin: auto;
 	}
+	#table-header{
+		align : center;
+		margin : 0 auto;
+		cellpadding : 1; 
+		cellspacing : 1;
+	}
+	.table_head{
+		border-collapse: collapse;
+		background-color: #F5F5F5;
+	}
+	.table-data{
+		align : center;
+		margin : 0 auto;
+	}
+	.btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #e5e5e5;
+	    color: #555;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #e5e5e5;
+	    height: 40px;
+	    font-size: 15px;
+		}
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	    }
+ 	#form {
+		margin: auto;
+	}  
 </style>
 
 <script type="text/javascript">
@@ -155,27 +185,35 @@
 		ArrayList list = (ArrayList)obj;
 		int nCnt = list.size();
 %>
+<main>
+	<div class="container box_1170">
+		<div class="section-top-border">
+			<div class="row">
+				<div class="col-lg-10 col-md-10" id="form">
 	<form id="eventForm" name="eventForm">
-		<div>
-			<table border="0" cellpadding="1" cellspacing="1" align="center">
-			<tr>
-				<td align="center"><h1>이벤트 게시판 목록</h1></td>
-			</tr>
+		<div id="div-header">
+			<table id="table-header">
+				<tr>
+					<td align="center"><h1>이벤트 게시판 목록</h1></td>
+				</tr>
 			</table>
+			<hr>
 		</div>
-		<div>
-			<table border="1" align="center">
-			<colgroup>
-				<col width="120px"/>
-				<col width="600px"/>
-				<col width="120px"/>
-				<col width="120px"/>
-			</colgroup>
-			<thead>
-				<td align="center">글번호</td>
-				<td align="center">제목</td>
-				<td align="center">작성자</td>
-				<td align="center">등록일자</td>
+		<div class="div-body">
+			<table class="table">
+				<colgroup>
+					<col width="120px"/>
+					<col width="600px"/>
+					<col width="120px"/>
+					<col width="120px"/>
+				</colgroup>
+			<thead class="table_head">
+				<tr class="table-row">
+					<td align="center">글번호</td>
+					<td align="center">제목</td>
+					<td align="center">작성자</td>
+					<td align="center">등록일자</td>
+				</tr>
 			</thead>
 			<tbody>			
 <%		
@@ -240,11 +278,10 @@
 %>
 				<tr>
 				<td colspan="4" align="right">
-				<input type="button" value="등록" id="insertData">
+				<input type="button" value="등록" id="insertData" class=" btn_light btn_box_01">
 				</td>
 			</tr>
 			</tbody>	
-			
 			</table>
 		</div>
 	</form>
@@ -252,29 +289,20 @@
 	<div >
 		<form id="searchFormEvent" name="searchFormEvent">
 		<div align = "center" id="sForm">
-		
 			<select name="searchFilter">
 				<option value="제목">제목</option>
 				<option value="내용">내용</option>
 			</select>
-			<input type="text" name="keyword" id = "keyword">
-			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
-			<hr>
-		</div>
-		<div align = "center" id="dForm">	
-			<div style="width: 200px">
-			<input type="text" name="startDate" id="startDate"> - <input type="text" name="endDate" id="endDate"> 
-			<input type="button" id="searchPiker" value="검색">
-			</div>
-			
+				<input type="text" name="keyword" id="keyword" style ="width:200px; height:40px;">
+				<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 		</div>
 		</form>
+		</div>
+		</div>
+		</div>
+		</div>
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+</main>
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

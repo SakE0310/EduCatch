@@ -2,6 +2,7 @@ package com.kosmo.educatch.dao;
 
 import java.util.List;
 import com.kosmo.educatch.vo.NoticeVO;
+import com.kosmo.educatch.vo.EventVO;
 
 public interface NoticeMapper {
 
@@ -11,4 +12,6 @@ public interface NoticeMapper {
 	public int insertNotice(NoticeVO param);
 	public int updateNotice(NoticeVO param);
 	public int deleteNotice(NoticeVO param);
+	
+	public EventVO eventPop(EventVO param);
 }
