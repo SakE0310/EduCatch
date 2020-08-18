@@ -174,12 +174,6 @@
 						if(list !=null && nCnt>0){
 			%>
 							<tr>
-								<td colspan="4" align="right">
-									<input type="button" value="등록" id="insertData" class=" btn_light btn_box_01">
-								</td>
-							</tr>
-						</tbody>
-							<tr>
 								<td colspan="18">
 								<jsp:include page="eventPaging.jsp" flush="true">
 									<jsp:param name="url" value="searchEvent.ec"/>
@@ -190,13 +184,19 @@
 								</jsp:include>
 								</td>
 							</tr>	
-						</table>
-					</div>
-				</form>
 			<%				
 						}//end of (list !=null && nCnt>0)
 					}//end of if(obj)
 			%>
+							<tr>
+								<td colspan="4" align="right">
+									<input type="button" value="등록" id="insertData" class=" btn_light btn_box_01">
+								</td>
+							</tr>
+						</tbody>
+						</table>
+					</div>
+				</form>
 				<!-- 검색 폼  -->
 					<div class="div-search">
 						<form id="searchFormEvent" name="searchFormEvent">
