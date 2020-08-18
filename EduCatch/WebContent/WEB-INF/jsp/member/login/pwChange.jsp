@@ -38,10 +38,13 @@
 	
 			#fpw{
 				
-				font-size :23px;
+				font-size :30px;
 				font-weight: bold; 
-				margin:50px 280px 10px 80px;
-				}			
+				color : black;
+				text-align : left;
+				width:350px;
+				margin-top :155px;
+			}			
 		
 				
 			#pw_reset{
@@ -52,6 +55,18 @@
 			
 			}
 			
+			#pw {
+				font-weight: bold;
+				font-size: 20px;
+				text-align : left;
+				width :350px;
+			}
+			#pwconfirm{
+				font-size: 20px;
+				font-weight: bold;
+				text-align : left;
+				width :350px;
+			}
 			
 			.genric-btn {
 				line-height: 35px;
@@ -64,7 +79,8 @@
 	<% 
 		MemberVO memberVO = (MemberVO) request.getAttribute("MemberVO");			
 	%>
-		<div align = "center" id = "fpw" >비밀번호 찾기</div>
+		<div align = "center">
+		<h2 align = "center" id ="fpw">비밀번호찾기</h2></div>
 						
 		<div align = "center">	
 			<hr style=" height:3.5px;
@@ -73,22 +89,22 @@
 						background-color: #d9d9d9;
 						width:350px;
 						margin-top:10px; 
-						margin-bottom:40px;">
+						margin-bottom:33px;">
 		</div>
 	 	 	<form method ="post" action ="#" id = "pwChange"> 
 	 			<div class ="content" align = "center">
 					<div style="width:350px;margin-top:10px; ">
 						<label class="form-label" for="id_password"> 
-							<span class="d-flex justify-content-between align-items-center">비밀번호</span>
+							<span class="d-flex justify-content-between align-items-center" id="pw">비밀번호</span>
 						</label> 
-						<input type="password" style="height: 35px;" class="form-control" name="mpw" id="mpw" placeholder="********" aria-label="********">
+						<input type="password" style="height: 35px; font-size : 14px;" class="form-control" name="mpw" id="mpw" placeholder="********" aria-label="********">
 					</div>
 					<div style="width:350px;margin-top:10px;margin-bottom:30px ">
 						<label class="form-label" for="id_password"> 
-							<span class="d-flex justify-content-between align-items-center">비밀번호 확인</span>
+							<span class="d-flex justify-content-between align-items-center" id ="pwconfirm">비밀번호 확인</span>
 						</label> 
 
-						<input type="password" style="height: 35px;" class="form-control" name="mpw_chk" id="mpw_chk" placeholder="********" aria-label="********">
+						<input type="password" style="height: 35px; font-size : 14px;" class="form-control" name="mpw_chk" id="mpw_chk" placeholder="********" aria-label="********">
 		
 					</div>
 					
@@ -101,7 +117,7 @@
 	     			 		border-width:1px;
 	     			 		color:black;
 	     			 		background-color: #d9d9d9;
-	     			 		margin-bottom : 150px;
+	     			 		margin-bottom : 309px;
 	     			 		width:350px">
 			
 			

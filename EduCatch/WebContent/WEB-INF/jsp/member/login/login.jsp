@@ -48,42 +48,66 @@
 		
 		#subject{
 			
-			font-size :23px;
+			font-size :30px;
 			font-weight: bold; 
 			color : black;
 			text-align : left;
 			width:350px;
-			margin-top : 80px;
-			
-			
+			margin-top : 75px;
+				
 		}
 		
 		#id{
-			font-size :13px;
+			font-size :18px;
 			font-weight: bold;
 			width:350px;
 			margin : auto;
 		}
 	
 		#pw{
-			font-size :13px;
+			font-size :18px;
 			font-weight: bold;
 			width:350px;
 			margin : auto;
 		}
-		#academymem{
-			width : 150px;
-			padding : 0px 0px;
-			margin-top: 10px;
-			margin-bottom : 139px;
 		
+		#login{
+			font-size : 17px;
+			font-weight: bold;
 		}
+		
+		#join{
+			font-size : 17px;
+			font-weight: bold;
+		}
+		
 		#question{
 			color : #808080;
-			font-size : 14px;
+			font-size : 16px;
+			font-weight: bold;
 		
 		}
 		
+		#academymem{
+			width : 170px;
+			padding : 0px 0px;
+			margin-top: 10px;
+			margin-bottom : 100px;
+			font-weight: bold;
+			font-size : 16px;
+		
+		}
+		#mid{
+			height : 30px;
+			font-size : 15px;
+		
+		}
+		
+		#mpw{
+			height : 30px;
+			font-size : 15px;
+		
+		}
 	
 		.genric-btn {
 	   		color: #fff;
@@ -135,7 +159,7 @@
 					<!-- ================ 아이디  ================== -->		
 					<div class="js-form-message form-group"  id ="id">
 	     		   		<label class="form-label" for="id_login">아이디</label>
-	        			<input type="email" class="form-control" name="mid" id="mid" placeholder="이메일을 입력해주세요"
+	        			<input type="email" class="form-control" name="mid" id="mid" placeholder="이메일을 입력해주세요."
 	       	         	 aria-label="Email address" data-error-class="u-has-error" data-success-class="u-has-success">
 	           		</div><br>
 	    		
@@ -153,7 +177,8 @@
 			          		   <a class="link-muted text-capitalize font-weight-normal" href="pwReset.ec"
 			          		   			style = "color : #808080;
 			          		   			 		 border-bottom: 1px dashed #97a4af;
-			          		   			 		 font-size : 11px;">비밀번호를 잊으셨나요?</a>
+			          		   			 		 font-size : 13px;
+			          		   			 		 font-weight: bold;">비밀번호를 잊으셨나요?</a>
 			          	</div> 
 	          		</div> 
 	
@@ -181,9 +206,11 @@
 							<a href ="https://www.facebook.com">
 							<img src = "/EduCatch/assets/img/login/facebook.png" alt = "facebook" id ="facebook" >
 							</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								
-							</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a> <img
-							src="/EduCatch/assets/img/login/kakao.png" alt="kakao" id="kakao">
+							
+							
+							<a >	
+							<img src="/EduCatch/assets/img/login/kakao.png" alt="kakao" id="kakao">
+							</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								
 							<a href ="https://www.google.co.kr">
 							<img src = "/EduCatch/assets/img/login/google.png" alt = "google" id= "google">

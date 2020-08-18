@@ -17,8 +17,6 @@
 		<% 
 			MemberVO memVo = (MemberVO) request.getAttribute("MemberVO");			
 		%>
-			<h3>로그인 확인</h3>
-			<table  border="1">
 			
 
 				
@@ -27,6 +25,9 @@
 				if(memVo != null){
 					
 				%>
+				<h2>로그인 정보</h2>
+				<table border=1>
+				
 					<tr>
 							<td> Member ID :</td>
 							<td align ="center"><b><%=memVo.getMid()%></b></td>
@@ -36,9 +37,10 @@
 							<td align ="center"><b><%=memVo.getMpw()%></b></td>
 					</tr>
 				<% } else {%>
-					<tr>
-							<td> login Fail </td>
-					</tr>
+					<script>
+					alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+					history.back();
+					</script>
 				<% } %>
 			</table>
 	</div>

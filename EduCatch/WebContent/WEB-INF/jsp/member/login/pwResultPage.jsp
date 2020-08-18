@@ -14,13 +14,17 @@
 
 		<style type="text/css">
 
-	
 			#fpw{
 				
 				font-size :23px;
 				font-weight: bold; 
-				margin:50px 280px 10px 80px;
-				}			
+				color : black;
+				margin-top :207px;
+				margin-right : 50px;
+				width :350px;
+				text-align : left;
+
+				}				
 		
 				
 			#pw_reset{
@@ -43,20 +47,21 @@
 		<% 
 			String resultMsg = (String) request.getAttribute("resultMsg");			
 		%>
-		<div align = "center" id = "fpw" >비밀번호 찾기</div>
+		<div align = "center">
+		<h2 align = "center" id ="fpw">비밀번호찾기</h2></div>
 						
 		<div align = "center">	
 			<hr style=" height:3.5px;
 						border-width:1px;
 						color:black;
 						background-color: #d9d9d9;
-						width:350px;
+						width:400px;
 						margin-top:10px; 
 						margin-bottom:40px;">
 		</div>
 	 	 	<form method ="post" action ="#" id = "pwCheckLogin"> 
 	 			<div class ="content" align = "center">
-						<div><%=resultMsg%></div>
+						<div><%=resultMsg%></div><br>
 					
 			 	<button type = "button" onclick = "location.href = 'login.ec' " class = "genric-btn primary">확인</button>	
 			
@@ -65,8 +70,8 @@
 	     			 		border-width:1px;
 	     			 		color:black;
 	     			 		background-color: #d9d9d9;
-	     			 		margin-bottom : 150px;
-	     			 		width:350px">
+	     			 		margin-bottom : 391px;
+	     			 		width:400px">
 			
 			
 				</div>

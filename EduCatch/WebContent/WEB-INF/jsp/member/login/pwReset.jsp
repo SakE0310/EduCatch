@@ -33,7 +33,11 @@
 				
 				font-size :23px;
 				font-weight: bold; 
-				margin:50px 280px 10px 80px;
+				color : black;
+				margin-top :207px;
+				width :350px;
+				text-align : left;
+
 				}			
 		
 				
@@ -46,6 +50,13 @@
 			}
 			
 			
+			#mid{
+			
+			height : 40px;
+			font-size : 15px;
+			
+			}
+			
 			.genric-btn {
 				line-height: 35px;
 			}
@@ -54,7 +65,8 @@
 </style>
 </head>
 <body>
-		<div align = "center" id = "fpw" >비밀번호 찾기</div>
+		<div align = "center">
+		<h2 align = "center" id ="fpw">비밀번호찾기</h2></div>
 						
 		<div align = "center">	
 			<hr style=" height:3.5px;
@@ -77,7 +89,7 @@
 	     			 		border-width:1px;
 	     			 		color:black;
 	     			 		background-color: #d9d9d9;
-	     			 		margin-bottom : 150px;
+	     			 		margin-bottom : 380px;
 	     			 		width:350px">
 			
 			
