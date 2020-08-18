@@ -16,12 +16,12 @@
 		 margin :auto;
 		 align :center;
 		 width : 1200px;
-		 height: 1000px;
+		 height: 700px;
 	}
 	.container-mypage {
 	
 	    max-width: 900px;
-	    height: 500px;
+	    height: 700px;
 	    margin :auto;
 	   /*  margin-left: 710px; */
 	    background-color: #f5f5f0;
@@ -30,11 +30,12 @@
 			position: absolute;
 			/* left:0px; */
 			width:225px;
-			height: 500px;
-			background: #eaeae1;
+			height: 700px;
+			background: #140C40;
 			 margin :auto;
 			/* margin-left: 490px; */
 			padding-left: 12px;
+			padding-right: 12px;
 		} 
 		
 	.sideBox{
@@ -95,10 +96,16 @@
 <div id ="full">
 	<div id="sideBanner-mypage">
 	<form id= "clickForm" name = "clickForm">
+		<div align ="center">
+		<br>
+			<h1 style="color : #ffffff; font-size: 30px;">마이페이지</h1>
+			<hr>
+		</div>
 		<div class ="sideBox">
-	<input type="hidden" id="mno" name ="mno" value="<%=mvo.getMno()%>"> 
+		<input type="hidden" id="mno" name ="mno" value="<%=mvo.getMno()%>"> 
 
 			<%=mvo.getMname() %>님 	 &nbsp;&nbsp;
+			<br>
 			<br>
 			<input type ="button" id="pwCheck" value="개인정보 변경"><br>
 			<input type ="button" id="pwEdit" value="비밀번호 변경"><br>
@@ -126,6 +133,14 @@
 		</div>
 	</div>
 </div>	
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 <jsp:include page="../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

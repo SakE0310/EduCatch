@@ -89,7 +89,7 @@
 			background: #aaa;
 		}  */
 		
-		.layerpop {
+	/*	.layerpop {
 		    display: none;
 		    z-index: 1000;
 		    border: 2px solid #ccc;
@@ -117,20 +117,37 @@
 		.layerpop_area .content {
 		    width: 96%;    
 		    margin: 2%;
-		    color: #828282; }
+		    color: #828282; 
+		   }
+		   
+		  #pop_today{
+		  	color: white;
+		  	background: blue;
+		  } 
 		/*-- POPUP common style E --*/
 
-		
+		*/
 		
 </style>
 <script type="text/javascript">
 
+	 function setCookie( name, value, expirehours ) {
+		  var todayDate = new Date();
+		  todayDate.setHours( todayDate.getHours() + expirehours );
+		  document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+	 } 
+	 function closeWin() {
+		  if(document.getElementById("pop_today").checked){
+		   setCookie( "ncookie", "done" , 24 );
+		  }
+		  document.getElementById('layer_pop').style.display = "none";
+	 }
+
+/*
 	function openPop() {
 		
 		$('.layerpop').css("position", "absolute");
         //영역 가운에데 레이어를 뛰우기 위해 위치 계산 
-        /* $('.layerpop').css("top",(($(window).height() - $('.layerpop').outerHeight()) / 2) + $(window).scrollTop());
-        $('.layerpop').css("left",(($(window).width() - $('.layerpop').outerWidth()) / 2) + $(window).scrollLeft()); */
         $('.layerpop').css("top","100px");
         $('.layerpop').css("right","250px");
         $('#layerbox').show();
@@ -141,9 +158,9 @@
 	 function popupClose() {
 	        $('#layerbox').hide();
 	    }
-		
+*/	
   $(document).ready(function() {
-	  openPop();
+	//  openPop();
 	  
 	//날짜 검색  
  	 $("#startDate").datepicker({
@@ -275,7 +292,7 @@
 			</table>
 			<hr>
 		</div>
-		<div  class="container">
+		<div  class="container" id = "">
 			<table align="center" class="table">
 			<colgroup>
 				<col width="120px"/>
@@ -386,13 +403,19 @@
 	
 <%
 	Object obj2= request.getAttribute("eventVO");
+	System.out.println("obj2>>>"+obj2);
 	
 	if(obj2 != null){
 		EventVO evo =(EventVO)obj2;
+		System.out.println("evo>>>"+evo);
+		System.out.println("evo.getEimg>>>"+evo.getEimg());
+		if(evo != null ){
+			System.out.println("null아님>>>");
+		
 %>	
-    <div style="height:1000px;"> 
+<!-- 팝업1 -->
+   <!--  <div style="height:1000px;"> 
 
-	<!--Popup Start -->
     <div id="layerbox" class="layerpop"
         style="width: 700px; height: 500px;">
         <article class="layerpop_area">
@@ -403,12 +426,49 @@
         <img src="/EduCatch/assets/img/event/<%=evo.getEimg()%>" alt="사진업음" style="width: 600px; height :400px"/><br>							
         </div>
         </article>
-    </div>
+    </div> -->
+
+<!--  팝업2 -->
+	<div class="layer_popup" style="position:absolute; width:500px;left:50%;  top:90px; z-index:1;" id="layer_pop">
+	<table width="500" border="0" cellpadding="0" cellspacing="0">
+		<tr>
+		<td> <img src="/EduCatch/assets/img/event/<%=evo.getEimg()%>" alt="사진업음" width="500" height="500" border="0"/></td>
+		</tr>
+	<tr>
+		 <td align="center" height="30" bgcolor="#F5F5F5">
+		 <table width="95%" border="0" cellpadding="0" cellspacing="0">
+		 <tr>
+			  <td align="left" class="pop"><input type="checkbox" name="pop_today" id="pop_today" />오늘 하루 이 창 열지 않음</td>
+			  <td align="right" class="pop"><a href="javascript:closeWin();">닫기</a></td>
+		 </tr>
+	 	</table>
+	 	</td>
+	</tr>
+	</table>
+<script language="Javascript" type="text/javascript">
+
+ cookiedata = document.cookie;
+ if (cookiedata.indexOf("ncookie=done") < 0){
+  document.getElementById('layer_pop').style.display = "inline";
+ } else {
+  document.getElementById('layer_pop').style.display = "none";
+ }
 
 <%
-	}
-%>	
+		}//end of if(evo)
+		if(evo == null && evo.equals("")){
+			System.out.println("null>>>");
+%>			
+			 document.getElementById('layer_pop').style.display = "none";
+<%
+		}
+			
+	}//end of if
 	
+%>	
+</script>
+</div>
+
 <br>
 <br>
 <br>

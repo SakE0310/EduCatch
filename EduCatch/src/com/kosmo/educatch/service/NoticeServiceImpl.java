@@ -104,10 +104,8 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public EventVO eventPop(EventVO param) {
 		log.info("NoticeServiceImpl eventPop 시작>>>");
-		log.info("param.getEno()>>>"+param.getEno());
 		EventVO evo = new EventVO();
 		evo = noticeMapper.eventPop(param);
-		
 		log.info("NoticeServiceImpl eventPop 끝>>>");
 		return evo;
 	}

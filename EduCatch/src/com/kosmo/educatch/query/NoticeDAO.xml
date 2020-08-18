@@ -168,8 +168,10 @@
 	<!-- 이벤트 팝업 -->
 	<select id="eventPop" parameterType="event" resultType="event">
 	SELECT * FROM(
-    	SELECT A.ENO , A.EIMG FROM EVENT A ORDER BY 1 DESC
+    	SELECT A.ENO , A.EIMG, A.EDELETEYN FROM EVENT A ORDER BY 1 DESC
 	) WHERE ROWNUM=1
+	AND EDELETEYN ='N'
+	
 	</select>
 </mapper>
 
