@@ -181,9 +181,12 @@ public class ReviewController {
 	public ModelAndView insertDisplay(@ModelAttribute ReviewVO param,
 			@ModelAttribute AcademyVO param1) {
 		
+		log.info("aname1 >>>> " + param1.getAname());
 		log.info("ReviewController insertDisplay >>> 호출 성공 ");
-		log.info(param1.getAname());
+		String aname = param1.getAname();
+		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("aname", aname);
 		mav.setViewName("community/reviewBoard/reviewInsert");
 		
 		return mav;

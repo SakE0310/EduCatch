@@ -12,16 +12,6 @@
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="-1"/>
 <title>후기 게시판 입력</title>
-
-<!-- jQuery를 사용하기위해 jQuery라이브러리 추가 -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-<!-- 테이블 부트스트랩 -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 <style type="text/css">
 	.starR1{
 	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
@@ -51,6 +41,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script type="text/javascript">
+
 	var oEditors = [];
 	$(function() {
 		nhn.husky.EZCreator.createInIFrame({
@@ -119,18 +110,9 @@
 
 </script>
 <body>
-	<div class="container">
 <!-- action/document/location -->
 	<form id="edit">
-		<div>
-			<table border="0" cellpadding="1" cellspacing="1" align="center">
-			<tr>
-				<td align="center"><h1>REVIEW</h1></td>
-			</tr>
-			</table>
-			<hr>
-		</div>
-		<table style="width: 90%" border="1" align="center" class="table">
+		<table style="margin-left: auto; margin-right: auto; width: 50%" border="1">
 			<tr>
 				<td style="width: 100px">제목</td>
 				<td><input type="text" id="rbsubject" name="rbsubject"
@@ -156,7 +138,12 @@
 			</tr>
 			<tr>
 				<td style="width: 100px">학원명</td>
-				<td><input type="text"  id="aname" name="aname"
+				<%
+					Object obj = request.getAttribute("aname");
+				
+					String aname = (String)obj;
+				%>
+				<td><input type="text"  id="aname" name="aname" value="<%=aname %>"
 					style="width: 90%" />
 					<input type="button"  id="searchAcademy" value="검색" />
 					<input type="hidden" id="ano" name="ano" /> 
@@ -182,7 +169,6 @@
 			</tr>
 		</table>
 	</form>
-	</div>
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

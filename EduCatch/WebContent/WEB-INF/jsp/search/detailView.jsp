@@ -13,6 +13,7 @@
 <%-- -----------CSS------------- --%>
 <style type="text/css">
 
+
 #fontman{
 		font-weight: bold;
 }
@@ -29,6 +30,51 @@
 	color:black;
 }
 
+
+body {
+  background: #2ecc71;
+  font-size: 62.5%;
+}
+
+
+<%-- 버튼 CSS --%>
+.btn1{
+  background:#172295;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:30px;
+  font-size:1.2em;
+  padding:0 1em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  border-radius: 12px;
+}
+.btn1:hover{
+  background:#fff;
+  color:#172295;
+}
+.btn1:before,.btn1:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #172295;
+  transition:400ms ease all;
+}
+.btn1:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.btn1:hover:before,.btn1:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
 
 
 <%-- 스크롤스파이 --%>
@@ -49,7 +95,7 @@
 }
 .nav-menu-item {
     display: block;
-    padding: 0 90px;
+    padding: 0 106px;
     color: #fff;
     text-decoration: none;          
 }
@@ -96,10 +142,10 @@
 
 
 
-<%-- 공유하기 --%>
+<%-- SNS 공유하기 --%>
 .sns-share {
          text-align:right; 
-         padding: 20px 0;
+         padding: 15px 0;
       
       }
       .sns-share li {
@@ -110,8 +156,8 @@
       
       .sns-share img {
          border-radius: 20%;
-         width : 42px;
-         height : 42px;
+         width : 32px;
+         height : 32px;
          
       }
 
@@ -121,11 +167,10 @@
 		border-left:1px solid #f3f3f3;
 		border-right:1px solid #f3f3f3;
 		background:#f3f3f3;
-
 }
 
 #content{
-		width:1000px;
+		width:1100px;
 		height:auto;
 		margin:0 auto;
 		border-left:1px solid #d8d8d8;
@@ -367,6 +412,11 @@ html, body {
 
 	$(document).ready(function(){
 		
+		$('#addrev').click(function(){
+			 $("#pageForm").attr("action","insertDisplay.ec");
+	         $("#pageForm").attr("method","POST");
+	         $("#pageForm").submit();  
+		});
 		
 		<%-- 찜하기 버튼 클릭 --%>
 		$('#follow').click(function(){
@@ -509,8 +559,8 @@ html, body {
 	<section id="content"> <%-- 컨텐츠(본문) div --%>
 	
 		<div class="container-fluid"> <%-- top(윗부분) div --%>
-			<div class="row" style="margin-top:80px">
-				<div class="col-md-4" align="center">
+			<div class="row" style="margin-top:50px">
+				<div class="col-md-4" align="right">
 					<input type="hidden" id="ano" name="ano" value="<%=avo.getAno() %>"/>
 					<input type="hidden" id="academy_ano" name="academy_ano" value="<%=avo.getAcademy_ano() %>"/>
 					<input type="hidden" id="member_mno" name="member_mno" />
@@ -518,18 +568,18 @@ html, body {
 				</div>
 				<div class="col-md-8" style="margin-top:30px">
 					<h1 style="font-weight:bold"><%=avo.getAname() %></h1> 
-					<input id="follow" name="follow" type="button" value="찜추가" style="margin-left:500px" />
-					<h3><img src='assets/img/Icon_location.png' style='width:17px; height:17px'><%=address %></h3>
-					<h3><img src='assets/img/Icon_phone.png' style='width:17px; height:17px'><%=avo.getAtel() %></h3>
-					<h3><img src='assets/img/Icon_star.png' style='width:17px; height:17px'>학원 평가 : <%= gvo.getRbgrade() %>(점)</h3>
+					<input id="follow" name="follow" type="button" value="찜추가" class="btn1" style="margin-left:450px" />
+					<h3><img src="/EduCatch/assets/img/Icon_location.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;<%=address %> </h3>
+					<h3><img src="/EduCatch/assets/img/Icon_call.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;<%=avo.getAtel() %> </h3>
+					<h3><img src="/EduCatch/assets/img/Icon_star.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;학원 평가 : <%=gvo.getRbgrade() %>(점) </h3>
 				</div>
 			</div>
-			<h4 align="right">업데이트 날짜 : <%= avo.getAupdatedate()%> &nbsp;&nbsp;&nbsp;</h4>
+			<div style="margin-right:30px">
+			<h4 align="right">업데이트 날짜 : <%= avo.getAupdatedate()%></h4>
+			</div>
 		</div>
-	
-	
 		<%-- 상단 sns공유 div --%>
-		<div class="sns-share">
+		<div class="sns-share" style="margin-right:30px">
                  <ul>
                    <li>
                      <a href="#" onclick="javascript:window.open('http://share.naver.com/web/shareView.nhn?url=http://localhost:8088/EduCatch/listDetailView.ec' +encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title), 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Naver" ><img src="/EduCatch/assets/img/share/naver_blog.png" width="40" alt="네이버 블러그 공유하기"></a>
@@ -540,8 +590,6 @@ html, body {
                    <li>
                       <a href="#" onclick="javascript:window.open('https://story.kakao.com/s/share?url=http:' +encodeURIComponent(document.URL), 'kakaostorysharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes, height=400,width=600');return false;" target="_blank" alt="Share on kakaostory"><img src="/EduCatch/assets/img/share/kakao.png" width="40" alt="카카오스토리 공유하기"></a>
                    </li>
-                   &nbsp;&nbsp;&nbsp;
-                  
                  </ul>
         </div>
 	
@@ -684,15 +732,15 @@ html, body {
 	        <div class="container">
 				  <table class="table table-condensed">
 				    <tr>
-				        <td>학원명</td>
+				        <td><img src="/EduCatch/assets/img/Icon_academy.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;학원명</td>
 				        <td><%=avo.getAname() %></td>
 				      </tr>
 				      <tr>
-				        <td>연락처</td>
+				        <td><img src="/EduCatch/assets/img/Icon_call.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;연락처</td>
 				        <td><%=avo.getAtel() %></td>
 				      </tr>
 				      <tr>
-				        <td>주소</td>
+				        <td><img src="/EduCatch/assets/img/Icon_location.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;주소</td>
 				        <td><%=address %></td>
 				      </tr>
 				  </table>
@@ -705,7 +753,8 @@ html, body {
     	<hr id="hhr">
     	<div class="container">
 			  <table class="table table-condensed">
-       			 <h1>수업 정보</h1><br><br>
+       			 <h1>수업 정보</h1>
+       			 <br><br>
 			    <thead>
 			      <tr>
 			        <th>과목명</th>
@@ -804,14 +853,15 @@ html, body {
     <hr id="hhr">
     	<div class="container">
 			  <table class="table table-condensed">
-       			 <h1>수강후기</h1><br><br>
+       			 <h1>수강후기</h1>
+       			 	<input id="addrev" name="addrev" type="button" value="후기작성" class="btn1" style="margin-left:700px" />
+       			 <br><br>
 			    <thead>
 			      <tr>
-			        <th>제목</th>
 			        <th>작성자</th>
-			        <th>내용</th>
+			        <th>제목</th>
 			        <th>별점</th>
-			        <th>사진</th>
+			        <th>후기내용</th>
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -822,11 +872,10 @@ html, body {
 		if(reivewnCnt>0){
 %>
 			    <tr>
-			        <td><%=rvo.getRbsubject() %></td>
 			        <td><%=rvo.getRbname() %></td>
-			        <td><%=rvo.getRbcontent() %></td>
+			        <td><%=rvo.getRbsubject() %></td>
 			        <td><%=rvo.getRbgrade() %></td>
-			        <td><%=rvo.getRbimg() %></td>
+			        <td><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>"><h3>후기내용보기</h3></a></td>
 			    </tr>
 <%
 		}
@@ -839,6 +888,11 @@ html, body {
 </div>
 	</section>
 </div>
+
+<form id="pageForm" name="pageForm">
+      <input type="hidden" id="rbno" name="rbno"/>
+      <input type="hidden" id="aname" name="aname" value="<%=avo.getAname() %>"/>
+</form>
 
 <%-- -----------부트스크랩 하단------------- --%>
 	<jsp:include page="../../../footer.jsp" flush="true">
