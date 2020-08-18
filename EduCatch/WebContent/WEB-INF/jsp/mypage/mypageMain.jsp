@@ -184,7 +184,7 @@
 				<tr align="center">
 					<td><%= rvo.getRbno() %></td>
 					<td><%= rvo.getAname() %></td>
-					<td><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>" id="cvo_no"><%= rvo.getRbsubject() %></td>
+					<td><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>"><%= rvo.getRbsubject() %></a></td>
 					<td><%= rvo.getRbinsertdate() %></td>
 				</tr>
 <%
