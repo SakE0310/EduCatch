@@ -9,6 +9,9 @@
 	.required{
 		color:red;
 	}
+	.imgmes{
+		color:red;
+	}
 </style>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
@@ -29,10 +32,13 @@ function joinCommit(){
 }
 
 </script>
+<jsp:include page="../../../../top.jsp" flush="true">
+	<jsp:param value="" name=""/>
+	</jsp:include>
 </head>
 <body>
 <form name="amemberjoin" id="amemberjoin">
-		<table border=1>
+		<table border=1 align="center">
 			<tr>
 				<td class="mem"><span class="required">*</span>회원번호:</td>
 				<td>
@@ -91,9 +97,10 @@ function joinCommit(){
 				</td>
 			</tr>
 			<tr>
-				<td>첨부파일</td>
+				<td class="mem"><span class="required">*</span>첨부파일</td>
 				<td>
 					<input type="file" value="찾아보기" id="mimg" name="mimg" /><br> 
+					<p class="imgmes">정상적인 이미지 첨부가 되지않을 시 관리자 가입이 거부될 수 있습니다</p>
 				</td>
 			</tr>
 			<tr>						
@@ -104,5 +111,8 @@ function joinCommit(){
 			</tr>	
 		</table>
 	</form>
+		<jsp:include page="../../../../footer.jsp" flush="true">
+	<jsp:param value="" name=""/>
+	</jsp:include>
 </body>
 </html>

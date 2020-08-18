@@ -203,7 +203,7 @@ $(document).ready(function(){
 
 	<div class="all-agreement">
 		<p class="join-agreement">
-			<input type="checkbox" name="checkAll" id="checkAll" title="이용약관동의 및 개인정보수집동의 체크"/>위의 <span class="blue-txt">이용약관 및 개인정보 수집 및 이용에 대한 안내</span>에 동의합니다.
+			<input type="checkbox" name="checkAll" id="checkAll" title="이용약관동의 및 개인정보수집동의 체크"/><span class="blue-txt">전체 필수 약관에 동의합니다.</span>
 		</p>
 	</div>
 	
