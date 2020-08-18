@@ -9,6 +9,12 @@
 <title>상세정보조회</title>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <script type="text/javascript">
 function updateClick(){
 	console.log("updateClick함수 진입");
@@ -32,6 +38,32 @@ function listClick(){
 	$("#edit").submit();
 }
 </script>
+<style type="text/css">
+	#contnent{
+		width : 600px;
+		height: 600px;
+	}
+	
+	#table_head{
+		border-collapse: collapse;
+		background-color: #F5F5F5;
+	}
+	
+	.btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #e5e5e5;
+	    color: #555;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #e5e5e5;
+	}
+		
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	}
+</style>
 </head>
 <body>
 	<jsp:include page="../../../../top.jsp" flush="true">
@@ -39,8 +71,9 @@ function listClick(){
 	</jsp:include>
 	<!-- action/document/location -->
 	<!-- enctype="multipart/form-data" -->
+	<div class="container">
 	<form id="edit" name="edit">
-		<table style="margin-left: auto; margin-right: auto;" border="1" >
+		<table style="margin-left: auto; margin-right: auto;" border="1" class="table" >
 		<% 
 			String freeboard_fbno = "";
 			
@@ -49,48 +82,64 @@ function listClick(){
 				FreeVO freevo = (FreeVO)obj;
 				freeboard_fbno = freevo.getFbno();
 			%>
-			<tr>
-				<td style="width: 100px">글번호</td>
-				<td><input type="text" id="fbno" name="fbno"
-					style="width: 98%"/ value=<%=freevo.getFbno() %> readonly /></td>
-			</tr>
-			<tr>
-				<td style="width: 100px">제목</td>
-				<td><input type="text" id="fbsubject" name="fbsubject"
-					style="width: 98%" value=<%=freevo.getFbsubject() %> readonly /></td>
-			</tr>
-			<tr>
-				<td style="width: 100px">작성자</td>
-				<td><input type="text" id="fbname" name="fbname"
-					style="width: 98%" value=<%=freevo.getFbname() %> readonly /></td>
-			</tr>
-
-			<tr>
-				<td>내용</td>
-				<td><div><%=freevo.getFbcontent() %></div>
-				</td>
-			</tr>
-			<tr>
-				<td>첨부파일</td>
-				<td>
-					 <div id ="rbimg" name="rbimg" align="center">
+			<thead id="table_head">
+				<tr>
+					<th><div align="center"><%= freevo.getFbsubject() %></div></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<div>
+							<span>
+							글번호: <%=freevo.getFbno() %>&nbsp;&nbsp;&nbsp;
+							작성자:<%= freevo.getFbname() %>&nbsp;&nbsp;&nbsp;
+							작성일자:<%=freevo.getFbinsertdate() %>&nbsp;&nbsp;&nbsp;
+							</span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div>
+							<span>
+							<%=freevo.getFbcontent() %>
+							</span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div>
+						<%
+						String img = freevo.getFbimg();
+						if(img!=null){
+						%>
+							<div id ="fbimg" name="fbimg" align="center">
 	         				<img src="/EduCatch/assets/img/freeImg/<%= freevo.getFbimg() %>" border=() width="100" height="100"/><br>
-	         		</div>
-				</td>
-			</tr>
+	         				</div>
+						<%
+						}
+						%>
+						</div>
+					</td>
+				</tr>
+			</tbody>
 		</table>
-		<table style="margin-left: auto; margin-right: auto;" border="0">
+	</div>
+		<!-- ========== 댓글 =========================================== -->
+			<jsp:include page="reply.jsp">
+				<jsp:param name="freeboard_fbno" value="<%=freeboard_fbno  %>"/>
+			</jsp:include>
+		<table style="margin-left: auto; margin-right: 400px;" border="0">
 			<tr align="center">
 				<td colspan="3" align="right">
-				 <input type="button" id="updateclick" value="수정" onclick="updateClick()" />
-				 <input type="button" id="deleteclick" value="삭제" onclick="deleteClick()" />
-				 <input type="button" id="listclick" value="목록" onclick="listClick()" />
+				 <input type="button" id="updateclick" value="수정" onclick="updateClick()" class=" btn_light btn_box_01" />
+				 <input type="button" id="deleteclick" value="삭제" onclick="deleteClick()" class=" btn_light btn_box_01" />
+				 <input type="button" id="listclick" value="목록" onclick="listClick()" class=" btn_light btn_box_01" />
 				</td>
 			</tr>
-			<!-- ========== 댓글 =========================================== -->
-				<jsp:include page="reply.jsp">
-					<jsp:param name="freeboard_fbno" value="<%=freeboard_fbno  %>"/>
-				</jsp:include>
+			
 		
 			<%
 			} 
