@@ -20,7 +20,7 @@
 	}
 	.container-mypage {
 	
-	    max-width: 900px;
+	    width: 700px;
 	    height: 700px;
 	    margin :auto;
 	   /*  margin-left: 710px; */
@@ -31,7 +31,7 @@
 			/* left:0px; */
 			width:225px;
 			height: 700px;
-			background: #140C40;
+			/* background: #140C40; */
 			 margin :auto;
 			/* margin-left: 490px; */
 			padding-left: 12px;
@@ -40,12 +40,35 @@
 		
 	.sideBox{
 		width:200px;
-		height:110px;
+		height:180px;
 		background-color: #ffffff;
 		margin-top: 15px;
-		
+		border-radius: 0.5em;
 	}	
 	
+	.btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #ffffff;
+	    color: #555;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 0px solid #e5e5e5;
+	    height: 40px;
+	    font-size: 20px;
+		}
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	    
+	    }
+	    
+	    .shadow {
+		    box-shadow: -100px 100px 100px -90px #000000,
+		        60px 0px 100px -90px #000000;
+		}
+
+
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -98,27 +121,26 @@
 	<form id= "clickForm" name = "clickForm">
 		<div align ="center">
 		<br>
-			<h1 style="color : #ffffff; font-size: 30px;">마이페이지</h1>
+			<h1 style="color : ; font-size: 30px;">마이페이지</h1>
 			<hr>
 		</div>
-		<div class ="sideBox">
+		<div class ="sideBox shadow" style="font-size: 20px;">
 		<input type="hidden" id="mno" name ="mno" value="<%=mvo.getMno()%>"> 
 
-			<%=mvo.getMname() %>님 	 &nbsp;&nbsp;
+			<%=mvo.getMname() %>님 
 			<br>
-			<br>
-			<input type ="button" id="pwCheck" value="개인정보 변경"><br>
-			<input type ="button" id="pwEdit" value="비밀번호 변경"><br>
-			회원탈퇴
+			<input type ="button" id="pwCheck" class ="btn_light btn_box_01" value=" 개인정보 변경"><br>
+			<input type ="button" id="pwEdit" class ="btn_light btn_box_01" value=" 비밀번호 변경"><br>
+			<input type ="button" id="" class ="btn_light btn_box_01" value=" 회원탈퇴"><br>
 			
 		<input type="hidden" id ="mid" name ="mid" value="<%=mvo.getMid()%>">
 		</div>
-		<div class ="sideBox">
+		<div class ="sideBox shadow">
 			즐겨찾기
 		</div>
-		<div class ="sideBox">
-			이력조회<br>
-			<input type ="button" id="consultSearch" value="학원문의  조회"><br>
+		<div class ="sideBox shadow">
+			내 컨텐츠<br>
+			<input type ="button" id="consultSearch" class ="btn_light btn_box_01" value=" 학원상담 조회"><br>
 		</div>
 	</form>	
 <%		
@@ -133,11 +155,6 @@
 		</div>
 	</div>
 </div>	
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 	<br>
 	<br>
 	<br>
