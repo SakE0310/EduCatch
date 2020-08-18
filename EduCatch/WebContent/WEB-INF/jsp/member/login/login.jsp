@@ -53,7 +53,7 @@
 			color : black;
 			text-align : left;
 			width:350px;
-			margin-top : 75px;
+			margin-top : 55px;
 				
 		}
 		
@@ -92,7 +92,7 @@
 			width : 170px;
 			padding : 0px 0px;
 			margin-top: 10px;
-			margin-bottom : 100px;
+			margin-bottom : 120px;
 			font-weight: bold;
 			font-size : 16px;
 		

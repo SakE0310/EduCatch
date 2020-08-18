@@ -32,6 +32,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public MemberVO loginCheck(MemberVO mvo) {
 		MemberVO result = loginMapper.memberLoginInfo(mvo);
+		log.info("result" + result );
 		return result;
 	}
 	
@@ -47,7 +48,8 @@ public class LoginServiceImpl implements LoginService {
 		log.info("password change > " + email);
 		if(email != null) {
 			String checkMember = loginMapper.emailCheckID(param);
-			if(checkMember == "") {
+			log.info("checkMember >>>" + checkMember );
+			if(checkMember == "" || checkMember == null) {
 				result = "이메일 인증이 완료되지 않은 아이디 입니다.";
 				return result;
 			} else {
