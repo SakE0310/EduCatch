@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.NoticeService;
+import com.kosmo.educatch.vo.EventVO;
 import com.kosmo.educatch.vo.NoticeVO;
 import com.kosmo.educatch.vo.PagingVO;
 import com.oreilly.servlet.MultipartRequest;
@@ -115,7 +116,7 @@ public class NoticeController {
 	
 	// ============ 공지사항 게시판 목록 조회===================================
 	@RequestMapping("/listNotice.ec")
-	public ModelAndView listNotice(HttpServletRequest request, @ModelAttribute NoticeVO param) {
+	public ModelAndView listNotice(HttpServletRequest request, @ModelAttribute NoticeVO param, EventVO eParam) {
 		log.info("NoticeController listNotice 시작 >>>");
 
 		log.info("param.getKeyword()>>" + param.getKeyword());
@@ -163,6 +164,10 @@ public class NoticeController {
 
 		List<NoticeVO> list = noticeService.listNotice(param);
 		log.info("NoticeController listNotice list.size()>>>" + list.size());
+		
+		EventVO evo = noticeService.eventPop(eParam);
+		log.info("evo.getEno()>>"+evo.getEno());
+		log.info("evo.getEimg()>>>"+evo.getEimg());
 
 		for (int i = 0; i < list.size(); i++) {
 			// list를 VO로 형변환해준다.
@@ -185,6 +190,7 @@ public class NoticeController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("noticeList", list);
+		mav.addObject("eventVO", evo);
 		mav.setViewName("notice/noticeBoard/notice");
 
 		log.info("NoticeController listNotice 끝 >>>");
@@ -448,5 +454,15 @@ public class NoticeController {
 		mav.setViewName("notice/noticeBoard/noticeForm");
 		log.info("NoticeController deleteNotice 끝 >>>");
 		return mav;
-	}
+	}//end of deleteNotice
+	
+	
+	
+	
+	@RequestMapping("eventPopup.ec")
+	public ModelAndView eventPopup() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("notice/noticeBoard/pop");
+		return mav;
+	}//end of eventPopup
 }

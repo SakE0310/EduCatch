@@ -164,5 +164,12 @@
 		    ,NUPDATEDATE=SYSDATE
 	WHERE NNO=#{nno, jdbcType=VARCHAR}
 	</update>
+	
+	<!-- 이벤트 팝업 -->
+	<select id="eventPop" parameterType="event" resultType="event">
+	SELECT * FROM(
+    	SELECT A.ENO , A.EIMG FROM EVENT A ORDER BY 1 DESC
+	) WHERE ROWNUM=1
+	</select>
 </mapper>
 

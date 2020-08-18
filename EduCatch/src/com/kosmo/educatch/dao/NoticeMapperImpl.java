@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.kosmo.educatch.vo.EventVO;
 import com.kosmo.educatch.vo.NoticeVO;
 
 public class NoticeMapperImpl extends SqlSessionDaoSupport implements NoticeMapper{
@@ -51,6 +52,13 @@ public class NoticeMapperImpl extends SqlSessionDaoSupport implements NoticeMapp
 		int nCnt = getSqlSession().update("deleteNotice");
 		return nCnt;
 	}//end of deleteNotice
+
+	@Override
+	public EventVO eventPop(EventVO param) {
+		EventVO evo= new EventVO();
+		evo=getSqlSession().selectOne("eventPop");
+		return evo;
+	}
 
 
 }

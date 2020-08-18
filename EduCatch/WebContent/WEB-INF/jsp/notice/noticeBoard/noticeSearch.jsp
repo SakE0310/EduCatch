@@ -172,7 +172,7 @@
 	//검색버튼을 누르면 실행
 	$("#searchData").click(function() {
 		console.log("검색버튼 누름");
-		var sVal = document.searchForm.searchFilter.options[document.searchForm.searchFilter.selectedIndex].value;
+		var sVal = document.searchFormNotice.searchFilter.options[document.searchFormNotice.searchFilter.selectedIndex].value;
 		console.log("sVal>>>"+sVal);
 		 
 		$("#searchFormNotice").attr("action","searchNotice.ec");

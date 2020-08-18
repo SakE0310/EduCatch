@@ -79,7 +79,7 @@
 		<div>
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
-				<td align="center"><h1>Notice</h1></td>
+				<td align="center"><h1>notice</h1></td>
 			</tr>
 			</table>
 			<hr>

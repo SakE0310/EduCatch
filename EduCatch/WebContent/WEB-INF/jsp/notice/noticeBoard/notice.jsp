@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kosmo.educatch.vo.NoticeVO" %>
+<%@ page import="com.kosmo.educatch.vo.EventVO" %>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
@@ -87,13 +88,65 @@
 			height:600px;
 			background: #aaa;
 		}  */
-</style>
+		
+		.layerpop {
+		    display: none;
+		    z-index: 1000;
+		    border: 2px solid #ccc;
+		    background: #fff;
+		    cursor: move; }
+		
+		.layerpop_area .title {
+		    padding: 10px 10px 10px 10px;
+		    border: 0px solid #aaaaaa;
+		    background: #f1f1f1;
+		    color: #3eb0ce;
+		    font-size: 1.3em;
+		    font-weight: bold;
+		    line-height: 24px; }
+		
+		.layerpop_area .layerpop_close {
+		    width: 25px;
+		    height: 25px;
+		    display: block;
+		    position: absolute;
+		    top: 10px;
+		    right: 10px;
+		    background:transparent url('/EduCatch/assets/img/pagingBtn/btn_close.gif') no-repeat; }
+		
+		.layerpop_area .content {
+		    width: 96%;    
+		    margin: 2%;
+		    color: #828282; }
+		/*-- POPUP common style E --*/
 
+		
+		
+</style>
 <script type="text/javascript">
-  $(document).ready(function() {
+
+	function openPop() {
+		
+		$('.layerpop').css("position", "absolute");
+        //영역 가운에데 레이어를 뛰우기 위해 위치 계산 
+        /* $('.layerpop').css("top",(($(window).height() - $('.layerpop').outerHeight()) / 2) + $(window).scrollTop());
+        $('.layerpop').css("left",(($(window).width() - $('.layerpop').outerWidth()) / 2) + $(window).scrollLeft()); */
+        $('.layerpop').css("top","100px");
+        $('.layerpop').css("right","250px");
+        $('#layerbox').show();
+
+		}
 	
+	//팝업창에 있는 닫기버튼을 누르면
+	 function popupClose() {
+	        $('#layerbox').hide();
+	    }
+		
+  $(document).ready(function() {
+	  openPop();
+	  
 	//날짜 검색  
-  $("#startDate").datepicker({
+ 	 $("#startDate").datepicker({
 		showOn: "button",
         buttonImage: "images/calendar.gif",
 	    buttonImageOnly: false,
@@ -187,16 +240,14 @@
 		$("#searchFormNotice").attr("action","searchNotice.ec");
 		$("#searchFormNotice").attr("method","POST");
 		$("#searchFormNotice").submit();
-		 
 		
-		alert("아직안만듬");
 	})//end of searchData
 	
 	
   });//end of ready()
 </script>
 </head>
-<body>
+<body onload="openPop()">
 <%
 	//페이징 변수 초기화
 	String pno="0";
@@ -256,9 +307,7 @@
 				System.out.println("curpage >>>"+curpage);
 				System.out.println("totalcount >>>"+totalcount);
 				System.out.println("==============================");
-				
 %>
-				
 				<tr align="center">
 					<td><%=nvo.getNno() %></td>
 					<td>
@@ -266,7 +315,6 @@
 					<td><%=nvo.getNname() %></td>
 					<td><%=nvo.getNinsertdate()%></td>
 				</tr>	
-				
 <%			
 			}//end of for
 		
@@ -288,12 +336,10 @@
 			<jsp:include page="noticePaging.jsp" flush="true">
 				<jsp:param name="url" value="listNotice.ec"/>
 				<jsp:param name="str" value=""/>
-				
-				
-					<jsp:param name="pagesize" value="<%= pagesize %>"/>
-					<jsp:param name="groupsize" value="<%= groupsize %>"/>
-					<jsp:param name="curpage" value="<%= curpage %>"/>
-					<jsp:param name="totalcount" value="<%= totalcount %>"/>
+				<jsp:param name="pagesize" value="<%= pagesize %>"/>
+				<jsp:param name="groupsize" value="<%= groupsize %>"/>
+				<jsp:param name="curpage" value="<%= curpage %>"/>
+				<jsp:param name="totalcount" value="<%= totalcount %>"/>
 					
 			</jsp:include>
 			</td>
@@ -304,12 +350,9 @@
 	}//end of if(obj)
 		
 %>
-
 				<tr>
 				<td colspan="4" align="right">
 				<input type="button" value="글쓰기" id="insertData" class=" btn_light btn_box_01"> 
-				<!-- <input type="button" value="수정" id="updateData">
-				<input type="button" value="삭제" id="deleteData"> -->
 				</td>
 			</tr>
 			</tbody>
@@ -339,6 +382,32 @@
 		</div>
 		</form>
 	</div>
+	
+	
+<%
+	Object obj2= request.getAttribute("eventVO");
+	
+	if(obj2 != null){
+		EventVO evo =(EventVO)obj2;
+%>	
+    <div style="height:1000px;"> 
+
+	<!--Popup Start -->
+    <div id="layerbox" class="layerpop"
+        style="width: 700px; height: 500px;">
+        <article class="layerpop_area">
+        <div class="title">이벤트 팝업</div>
+        <a href="javascript:popupClose();" class="layerpop_close"
+            id="layerbox_close"></a> <br>
+        <div class="content" align="center">
+        <img src="/EduCatch/assets/img/event/<%=evo.getEimg()%>" alt="사진업음" style="width: 600px; height :400px"/><br>							
+        </div>
+        </article>
+    </div>
+
+<%
+	}
+%>	
 	
 <br>
 <br>

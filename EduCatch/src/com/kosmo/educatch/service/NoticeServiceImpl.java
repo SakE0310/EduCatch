@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kosmo.educatch.controller.NoticeController;
 import com.kosmo.educatch.dao.NoticeMapper;
 import com.kosmo.educatch.manager.LoggerManager;
+import com.kosmo.educatch.vo.EventVO;
 import com.kosmo.educatch.vo.NoticeVO;
 import org.apache.log4j.Logger;
 
@@ -60,7 +61,7 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		log.info("NoticeServiceImpl selectNotice 끝>>>");
 		return nvo;
-	}//end of insertEvent
+	}//end of selectNotice
 	
 	
 	//=============== 공지사항 등록=============================
@@ -99,6 +100,17 @@ public class NoticeServiceImpl implements NoticeService {
 		log.info("NoticeServiceImpl deleteNotice 끝>>>");
 		return nCnt;
 	}//end of deleteNotice
+
+	@Override
+	public EventVO eventPop(EventVO param) {
+		log.info("NoticeServiceImpl eventPop 시작>>>");
+		log.info("param.getEno()>>>"+param.getEno());
+		EventVO evo = new EventVO();
+		evo = noticeMapper.eventPop(param);
+		
+		log.info("NoticeServiceImpl eventPop 끝>>>");
+		return evo;
+	}
 
 
 
