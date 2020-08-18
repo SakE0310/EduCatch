@@ -30,6 +30,7 @@
 <!-- 폰트 -->
 <!-- <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet"> -->
 <style type="text/css">
+
 	#nno_color{
 		color: black;
 	}
@@ -68,11 +69,11 @@
   	height: 100px;
   	margin: auto;
 	}
-	#dForm{
+	/* #dForm{
 	 width: 350px;
   	height: 100px;
   	margin: auto;
-	}
+	} */
 	
 	/* body{
 	 	font-family: 'Hi Melody', cursive;
@@ -168,16 +169,25 @@
         buttonImage: "images/calendar.gif",
 	    buttonImageOnly: false,
 		buttonText: "Select date",
-		dateFormat : 'yy-mm-dd'
+		dateFormat : 'yy-mm-dd',
+		
 		
 	});
+ 	$("#startDate").focus(function(event){
+        var dim = $(this).offset();
+        $("#ui-datepicker-div").offset({
+            top     :   dim.top - 180,
+            left    :   dim.left + 150
+        });
+    });
 	
 	$("#endDate").datepicker({
 		showOn: "button",
         buttonImage: "images/calendar.gif",
 	    buttonImageOnly: false,
 		buttonText: "Select date",
-		dateFormat : 'yy-mm-dd'
+		dateFormat : 'yy-mm-dd',
+		
 	});
 	
 	$("#searchPiker").click(function() {
@@ -279,20 +289,23 @@
 		ArrayList list = (ArrayList)obj;
 		int nCnt = list.size();
 %>
-	<form id="noticeForm" name="noticeForm">
 	<!--  <div id="sideBanner">
 		사이드 바
 	</div>  -->
-	<div id="mainWrapper">
-		<div>
+	<form>
+	<div id="mainWrapper" align = "center">
+		<div align = "center" style="width: 500px;" >
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
 				<td align="center"><h1>공지사항 게시판 목록</h1></td>
+				
 			</tr>
 			</table>
 			<hr>
 		</div>
-		<div  class="container" id = "">
+		</form>
+	<form id="noticeForm" name="noticeForm">
+		<div  class="container" style="height: 390px;">
 			<table align="center" class="table">
 			<colgroup>
 				<col width="120px"/>
@@ -378,6 +391,8 @@
 	</div>	
 	</form>
 	<!-- 검색 폼  -->
+
+	
 	<div >
 		<form id="searchFormNotice" name="searchFormNotice">
 		<div align = "center" id="sForm">
@@ -390,17 +405,28 @@
 			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 			<hr>
 		</div>
-		<div align = "center" id="dForm">	
-			<div style="width: 200px">
-			<input type="text" name="startDate" id="startDate"> - <input type="text" name="endDate" id="endDate"> 
-			<input type="button" id="searchPiker" value="검색">
-			</div>
 			
-		</div>
+						<div class="row">
+					      <div class="col-md-12">
+					         <div class="row">
+					            <div class="col-md-5">
+					            </div>
+					            <div class="col-md-1.8">
+									<input type="text" name="startDate" id="startDate">
+					            </div>
+					             <h3> &nbsp;&nbsp;~ &nbsp;</h3>
+					            <div class="col-md-1.5">
+				      		 		<input type="text" name="endDate" id="endDate"> 
+					            </div>
+				      				&nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
+					         </div>
+					      </div>
+					   </div>
 		</form>
 	</div>
 	
-	
+   
+   
 <%
 	Object obj2= request.getAttribute("eventVO");
 	System.out.println("obj2>>>"+obj2);

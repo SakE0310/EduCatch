@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="../../../../top.jsp" flush="true">
+<jsp:param value="" name=""/>
+</jsp:include>
 <meta charset="UTF-8">
 <title>이벤트 상세보기</title>
 
@@ -92,13 +95,13 @@ $(document).ready(function() {
 		EventVO evo =(EventVO)obj;
 
 %>
-<main>
-	<div class="container box_1170">
-		<div class="section-top-border">
-			<div class="row">
+<main align ="center">
+	<div class="container box_1170"  align ="center">
+		<div class="section-top-border" align ="center">
+			<div class="row" align ="center">
 				<form id="eventSelForm" name="eventSelForm" >
 				<input type="hidden" name="eno" id="eno" value="<%=evo.getEno() %>">
-					<table class="table">
+					<table class="table" align ="center">
 					 <thead>
 			             <tr>
 			                 <th><div><%=evo.getEsubject() %></div></th>
@@ -150,5 +153,8 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</main>
+	<jsp:include page="../../../../footer.jsp" flush="true">
+<jsp:param value="" name=""/>
+</jsp:include>
 </body>
 </html>

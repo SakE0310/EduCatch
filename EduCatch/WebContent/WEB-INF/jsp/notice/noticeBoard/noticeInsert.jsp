@@ -79,7 +79,7 @@
 		<div>
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
-				<td align="center"><h1>notice</h1></td>
+				<td align="center"><h2>notice</h2></td>
 			</tr>
 			</table>
 			<hr>
@@ -94,7 +94,7 @@
 			<tr>
 				<td>내용</td>
 				<td><textarea name="ncontent" id="ncontent" title="내용"
-						style="width: 100%; height: 400px; padding: 0; margin: 0;"></textarea>
+						style="width: 100%; height: 415px; padding: 0; margin: 0;"></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -114,10 +114,6 @@
 		</table>
 	</form>
 	</div>
-	<br>
-<br>
-<br>
-<br>
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

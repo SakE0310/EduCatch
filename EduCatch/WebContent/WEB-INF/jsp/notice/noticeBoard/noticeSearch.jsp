@@ -215,7 +215,7 @@
 			</table>
 			<hr>
 		</div>
-		<div  class="container">
+		<div  class="container"  style="height: 390px;">
 			<table align="center" class="table">
 			<colgroup>
 				<col width="120px"/>
@@ -259,22 +259,14 @@
 %>
 				<tr>
 					<td colspan ="4" align="center">
-						등록된 글이 없습니다.
+						조회된 글이 없습니다.
 					</td>
 				</tr>
 <%			
 		}//end of if(list)
-	}//end of if(obj)
-		
+			
+		if(list !=null && nCnt>0){
 %>
-				<tr>
-				<td colspan="4" align="right">
-				<input type="button" value="글쓰기" id="insertData" class=" btn_light btn_box_01"> 
-				<!-- <input type="button" value="수정" id="updateData">
-				<input type="button" value="삭제" id="deleteData"> -->
-				</td>
-			</tr>
-			</tbody>
 			<tr>
 			<td colspan="18">
 			<jsp:include page="noticePaging.jsp" flush="true">
@@ -290,6 +282,19 @@
 			</jsp:include>
 			</td>
 			</tr>	
+<%				
+		}//end of (list !=null && nCnt>0)
+	}//end of if(obj)
+		
+%>
+				<tr>
+				<td colspan="4" align="right">
+				<input type="button" value="글쓰기" id="insertData" class=" btn_light btn_box_01"> 
+				<!-- <input type="button" value="수정" id="updateData">
+				<input type="button" value="삭제" id="deleteData"> -->
+				</td>
+			</tr>
+			
 			</table>
 		</div>
 	</div>	
@@ -307,13 +312,22 @@
 			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 			<hr>
 		</div>
-		<div align = "center" id="dForm">	
-			<div style="width: 200px">
-			<input type="text" name="startDate" id="startDate"> - <input type="text" name="endDate" id="endDate"> 
-			<input type="button" id="searchPiker" value="검색">
-			</div>
-			
-		</div>
+			<div class="row">
+		      <div class="col-md-12">
+		         <div class="row">
+		            <div class="col-md-5">
+		            </div>
+		            <div class="col-md-1.8">
+						<input type="text" name="startDate" id="startDate">
+		            </div>
+		             <h3> &nbsp;&nbsp;~ &nbsp;</h3>
+		            <div class="col-md-1.5">
+	      		 		<input type="text" name="endDate" id="endDate"> 
+		            </div>
+	      				&nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
+		         </div>
+		      </div>
+		   </div>
 		</form>
 	</div>
 	

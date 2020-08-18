@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="../../../../top.jsp" flush="true">
+<jsp:param value="" name=""/>
+</jsp:include>
 <meta charset="UTF-8">
 <title>공지사항 상세보기</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +24,12 @@
 		border-collapse: collapse;
 		background-color: #F5F5F5;
 	}
+	
+	#contentDIV{
+		overflow:hidden;
+		height:auto;
+	}
+
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -75,8 +84,8 @@
 %>
 	<div class="container">
 	<form id="noticeSelForm" name="noticeSelForm" >
-		 <input type="text" name="nno" id="nno" value="<%=nvo.getNno() %>" >
-		<table align="center" width="700" height="100" class="table">
+		 <input type="hidden" name="nno" id="nno" value="<%=nvo.getNno() %>" >
+		<table align="center" width="700px" height="100px" class="table">
 		 <thead id="table_head">
              <tr>
                  <th><div align="center"><%=nvo.getNsubject() %></div></th>
@@ -98,7 +107,7 @@
          	</tr>
          	<tr>
          		<td>
-         			<div align="center">
+         			<div id="contentDIV" style="height: 565px;">
          				<%=nvo.getNcontent()%>
 <%
 							String img = nvo.getNimg();
@@ -126,6 +135,9 @@
 		</table>
 		</form>
 	</div>
+		<jsp:include page="../../../../footer.jsp" flush="true">
+<jsp:param value="" name=""/>
+</jsp:include>
 </body>
 </html>
 

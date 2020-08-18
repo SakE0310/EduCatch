@@ -75,14 +75,14 @@
 	// 첫번째 그룹인 아닌경우
 	if(curGroup > 0) {
 %>
-	<a href="<%=url%>?&curPage=1&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>">◁◁</a>&nbsp;&nbsp;&nbsp;
-	<a href="<%=url%>?&curPage=<%=linkPage%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>">◀</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?&curPage=1&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>"><img src="/EduCatch/assets/img/pagingBtn/first_btn.gif" alt="◁◁"></a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?&curPage=<%=linkPage%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>"><img src="/EduCatch/assets/img/pagingBtn/prev_btn.gif" alt="◀"></a>&nbsp;&nbsp;&nbsp;
 <%
 	}
 	else
 	{
 %>
-◁◁&nbsp;&nbsp;&nbsp;◀&nbsp;&nbsp;&nbsp;
+<img src="/EduCatch/assets/img/pagingBtn/first_btn.gif" alt="◁◁">&nbsp;&nbsp;&nbsp;<img src="/EduCatch/assets/img/pagingBtn/prev_btn.gif" alt="◀">&nbsp;&nbsp;&nbsp;
 <%
 	}
 	
@@ -96,13 +96,13 @@
 		if(linkPage == curpage)
 		{
 %>
-	<%=linkPage%>
+	<strong><%=linkPage%></strong>
 <%
 		}
 		else
 		{
 %>
-	[<a href="<%=url%>?curpage=<%=linkPage%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>" style="color : black;"><%=linkPage%></a>]&nbsp;
+	<a href="<%=url%>?curpage=<%=linkPage%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>"><%=linkPage%></a>&nbsp;
 <%
 		}
 		
@@ -114,14 +114,14 @@
 	if(linkPage <= pagecount)
 	{
 %>
-	<a href="<%=url%>?curpage=<%=linkPage%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>">▶</a>&nbsp;&nbsp;&nbsp;
-	<a href="<%=url%>?curpage=<%=pagecount%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>">▷▷</a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?curpage=<%=linkPage%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>"><img src="/EduCatch/assets/img/pagingBtn/next_btn.gif" alt="▶"></a>&nbsp;&nbsp;&nbsp;
+	<a href="<%=url%>?curpage=<%=pagecount%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>"><img src="/EduCatch/assets/img/pagingBtn/last_btn.gif" alt="▷▷"></a>&nbsp;&nbsp;&nbsp;
 <%
 	}
 	else
 	{
 %>
-	▶&nbsp;&nbsp;&nbsp;▷▷&nbsp;&nbsp;&nbsp;
+	<img src="/EduCatch/assets/img/pagingBtn/next_btn.gif" alt="▶">&nbsp;&nbsp;&nbsp;<img src="/EduCatch/assets/img/pagingBtn/last_btn.gif" alt="▷▷">&nbsp;&nbsp;&nbsp;
 <%
 	}
 %>
