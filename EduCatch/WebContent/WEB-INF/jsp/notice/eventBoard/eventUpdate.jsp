@@ -86,7 +86,7 @@
 	<!-- action/document/location -->
 	<form id="edit">
 		<table style="width: 50%" border="1" align="center">
-		<input type="text" id="eno" name="eno" value="<%=evo.getEno() %>" />
+		<input type="hidden" id="eno" name="eno" value="<%=evo.getEno() %>" />
 			<tr>
 				<td style="width: 100px">제목</td>
 				<td><input type="text" id="esubject" name="esubject" value="<%=evo.getEsubject() %>"

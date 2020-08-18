@@ -6,12 +6,42 @@
 <head>
 <meta charset="UTF-8">
 <title>이벤트 상세보기</title>
+
+<!-- 테이블 부트스트랩 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
-	img {
+	  img {
 		 display: block; 
 		 margin: 0px auto;
 	  }
+	  .container box_1170 {
+		margin : 0 auto;
+		padding : 50px;
+	  }
+	  .btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #e5e5e5;
+	    color: #555;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #e5e5e5;
+	    height: 40px;
+	    font-size: 15px;
+		}
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	    }
+	.table {
+		position : relative;
+		top : 50px;
+	}
 </style>
 <script type="text/javascript">
 
@@ -51,8 +81,6 @@ $(document).ready(function() {
 		
 	})//end of listData
 	
-	
-	
 });//end of ready()
 </script>
 </head>
@@ -64,58 +92,63 @@ $(document).ready(function() {
 		EventVO evo =(EventVO)obj;
 
 %>
-	<div>
-	<form id="eventSelForm" name="eventSelForm" >
-		 <input type="text" name="eno" id="eno" value="<%=evo.getEno() %>" >
-		<table align="center" width="700" height="100" border="1">
-		 <thead>
-             <tr>
-                 <th><div><%=evo.getEsubject() %></div></th>
-             </tr>
-         </thead>
-         <tbody>
-         	<tr>
-         		<td>
-         			<div>
-         				<div>
-                             <span><em>작성일자 :</em><%=evo.getEinsertdate()%></span>                                                </div>
-                             <span><em>수정일자 :</em><%=evo.getEupdatedate()%></span>                                                </div>
-                         <div>
-                         <div id ="nname1" name="nname1" align="right" >
-                         	<span><em>작성자 :</em><%=evo.getEname()%></span>
-                         </div>
-         			</div>
-         		</td>
-         	</tr>
-         	<tr>
-         		<td>
-         			<div>
-         				<%=evo.getEcontent()%>
-<%
-							String img = evo.getEimg();
-							if(img != null){
-%>
-         						<img src="/EduCatch/assets/img/event/<%=evo.getEimg()%>" alt="사진업음"/><br>
-<%								
-							}//end of if(img)
-%>         				
-         			</div>
-         		</td>
-         	</tr>
-<%			
-	}//end of if(obj)	
-%>
-			<tr>
-			<td align="center">
-				<input type="button" value="수정" id="updateData">
-				<input type="button" value="삭제" id="deleteData">
-				<input type="button" value="목록" id="listData">
-				
-			</td>	
-			</tr>
-         </tbody>
-		</table>
-		</form>
-	</div>
+<main>
+	<div class="container box_1170">
+		<div class="section-top-border">
+			<div class="row">
+				<form id="eventSelForm" name="eventSelForm" >
+				<input type="hidden" name="eno" id="eno" value="<%=evo.getEno() %>">
+					<table class="table">
+					 <thead>
+			             <tr>
+			                 <th><div><%=evo.getEsubject() %></div></th>
+			             </tr>
+			         </thead>
+			         <tbody>
+			         	<tr>
+			         		<td>
+			         			<div>
+			         				<div>
+			                             <span><em>작성일자 :</em><%=evo.getEinsertdate()%></span>                                                </div>
+			                             <span><em>수정일자 :</em><%=evo.getEupdatedate()%></span>                                                </div>
+			                         <div>
+			                         <div id ="nname1" name="nname1" align="right" >
+			                         	<span><em>작성자 :</em><%=evo.getEname()%></span>
+			                         </div>
+			         			</div>
+			         		</td>
+			         	</tr>
+			         	<tr>
+			         		<td>
+			         			<div>
+			         				<%=evo.getEcontent()%>
+			<%
+										String img = evo.getEimg();
+										if(img != null){
+			%>
+			         						<img src="/EduCatch/assets/img/event/<%=evo.getEimg()%>" alt="사진업음"/><br>
+			<%								
+										}//end of if(img)
+			%>         				
+			         			</div>
+			         		</td>
+			         	</tr>
+			<%			
+				}//end of if(obj)	
+			%>
+						<tr>
+							<td align="center">
+								<input type="button" value="수정" id="updateData" class=" btn_light btn_box_01">
+								<input type="button" value="삭제" id="deleteData" class=" btn_light btn_box_01">
+								<input type="button" value="목록" id="listData" class=" btn_light btn_box_01">
+							</td>	
+						</tr>
+		         </tbody>
+				</table>
+				</form>
+				</div>
+			</div>
+		</div>
+	</main>
 </body>
 </html>
