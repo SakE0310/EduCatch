@@ -11,6 +11,7 @@
 	</jsp:include>
 </head>
 
+
 <title>상담 게시판</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -71,26 +72,29 @@
   	margin: auto;
 	}
 	
-		
-	/* #sideBanner{
-			position: absolute;
-			top:100px;
-			left:0px;
-			width:150px;
-			height:600px;
-			background: #aaa;
-		} */
-	.tt{	
-			text-align:center;
-			font-size: xx-large;
-			font-weight: bold;
-			
-		}		
-		
-	#aa{	
-			color:black;
-		
-		}
+	#sideBanner{
+		margin-top: 10px;
+		position: absolute;
+		top:180px;
+		left:0px;
+		width:150px;
+		height:200px;
+		background: gray;
+	}
+	
+	#listFont{
+		color: white;
+		font-weight: bold;
+	}
+	
+	#list{
+		color:white;
+	}
+	
+	#aa{
+		color:black;
+	}
+	
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -192,8 +196,17 @@
 		<input type="hidden" id="cbno" name="cbno"/>
 	</form>
 	<div id="mainWrapper">
-		<div></div>
-		<table style="margin-left: auto; margin-right: auto;" border="0" cellpadding="1" cellspacing="1">
+	   <div id="sideBanner">
+	  	 <ul id="listFont" align="center">
+			<li style="margin-top: 20px;"><a href="freeboardlist.ec" id="list">자유게시판</a></li>
+			<hr>
+			<li><a href="listReview.ec" id="list">후기게시판</a></li>
+			<hr>
+			<li><a href="listConsult.ec" id="list">상담게시판</a></li>
+		</ul>
+	   </div>
+		<div>
+		<table  border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
 				<td align="center"><h1>상담 게시판</h1></td>
 			</tr>
@@ -210,11 +223,13 @@
 				<col width="120px"/>
 			</colgroup>
 			<thead id="table_head">	
+				<tr>
 					<td align="center">글번호</td>
 					<td align="center">학원명</td>
 					<td align="center">제목</td>
 					<td align="center">작성자</td>
 					<td align="center">날짜</td>
+				</tr>
 			</thead>
 			<tbody>
 <%
@@ -238,11 +253,11 @@ if(listConsult !=null && nCnt>0){
 	
 %>
 					<tr align="center">
-						<td><%= cvo.getCbno() %></td>
-						<td><%= cvo.getAname() %></td>
-						<td><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
-						<td><%= cvo.getCbname() %></td>
-						<td><%= cvo.getCinsertdate() %></td>
+						<td class="cc"><%= cvo.getCbno() %></td>
+						<td class="cc"><%= cvo.getAname() %></td>
+						<td class="cc"><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
+						<td class="cc"><%= cvo.getCbname() %></td>
+						<td class="cc"><%= cvo.getCinsertdate() %></td>
 					</tr>
 <%
 				}	
@@ -266,9 +281,7 @@ if(listConsult !=null && nCnt>0){
 			<jsp:include page="memberPaging.jsp" flush="true">
 				<jsp:param name="url" value="listConsult.ec"/>
 				<jsp:param name="str" value=""/>
-				
-				
-					<jsp:param name="pagesize" value='<%= pagesize %>'/>
+					<jsp:param name="pagesize" value="<%= pagesize %>"/>
 					<jsp:param name="groupsize" value="<%= groupsize %>"/>
 					<jsp:param name="curpage" value="<%= curpage %>"/>
 					<jsp:param name="totalcount" value="<%= totalcount %>"/>
@@ -290,6 +303,7 @@ if(listConsult !=null && nCnt>0){
 		</tr>
 
 		</table>
+	</div>
 	</div>
 	<div>
 		<form id="searchForm" name="searchForm">

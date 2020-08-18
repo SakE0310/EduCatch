@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.MyPageService;
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.ConsultVO;
 
 @Controller
@@ -241,6 +242,47 @@ public class MyPageController {
 		log.info("MyPageController consultSearch 끝 >>>");
 		return mav;
 	}//end of consultSearch
+	
+	@RequestMapping("myReview")
+	public ModelAndView myReview(HttpServletRequest request,
+								 @ModelAttribute ReviewVO rvo, MemberVO param) {
+		log.info("MyPageController myReview 시작>>>");
+		
+		String mno = request.getParameter("mno");
+		log.info("mno>>>>"+mno);
+		
+		rvo.setMember_mno(mno);
+		List<ReviewVO> list = mypageService.myReview(rvo);
+		log.info("MyPageController myReview list.size()>>>" + list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			// list를 VO로 형변환해준다.
+			ReviewVO rvo1 = (ReviewVO) list.get(i);
+			
+			log.info(""+rvo1.getRbno());
+			log.info(""+rvo1.getRbsubject());
+			log.info(""+rvo1.getRbname());
+			log.info(""+rvo1.getRbimg());
+			log.info(""+rvo1.getRbcontent());
+			log.info(""+rvo1.getAcademy_ano());
+			log.info(""+rvo1.getMember_mno());
+			log.info(""+rvo1.getRbgrade());
+			log.info(""+rvo1.getRbdeleteyn());
+			log.info(""+rvo1.getRbinsertdate());
+			log.info(""+rvo1.getRbupdatedate());
+
+		}
+		
+		MemberVO mvo = mypageService.selectMyPage(param);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("ReviewVO", list);
+		mav.addObject("MemberVO", mvo);
+		mav.setViewName("/mypage/mypageMain");
+		
+		log.info("MyPageController myReview 끝 >>>");
+		return mav;
+	}
 	
 }
 

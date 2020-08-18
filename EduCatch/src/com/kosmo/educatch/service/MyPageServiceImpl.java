@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.ConsultVO;
 
 @Service
@@ -93,4 +94,17 @@ public class MyPageServiceImpl implements MyPageService{
 		log.info("MyPageServiceImpl consultSearch 끝>>>");
 		return list;
 	}//end of consultSearch
+
+	@Override
+	public List<ReviewVO> myReview(ReviewVO param) {
+		// TODO Auto-generated method stub
+		log.info("MyPageServiceImpl myReview 시작>>>");
+		
+		List<ReviewVO> list = new ArrayList<ReviewVO>();
+		list = mypageMapper.myReview(param);
+		log.info("MyPageServiceImpl consultSearch list.size() >>>"+list.size());
+		
+		log.info("MyPageServiceImpl myReview 끝>>>");
+		return list;
+	}
 }

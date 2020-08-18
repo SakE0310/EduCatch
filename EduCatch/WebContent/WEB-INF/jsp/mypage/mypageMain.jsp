@@ -1,3 +1,5 @@
+<%@page import="com.kosmo.educatch.vo.ReviewVO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "com.kosmo.educatch.vo.MemberVO" %>    
@@ -146,12 +148,61 @@
 <%		
 	}
 %>	
+
 	</div>
+<%
+	Object obj3 =request.getAttribute("ReviewVO");
+
+	if(obj3 !=null){
+		ArrayList list=(ArrayList)obj3;
+		
+		int nCnt=list.size();
+
+%>
 	<div class = "container-mypage ">
 		<div align="center">
-			마이페이지 메인
-			<br>
-			 여긴 게시글 관리 부분
+			<table align ="center" border="1">
+			 	<colgroup>
+					<col width="100px"/>
+					<col width="140px"/>
+					<col width="300px"/>
+					<col width="100px"/>
+				</colgroup>
+				<thead id="table_head">
+					<td align="center">글번호</td>
+					<td align="center">학원명</td>
+					<td align="center">제목</td>
+					<td align="center">작성일</td>
+				</thead>
+				<tbody>
+<%
+		if(list !=null && nCnt>0){
+			for(int i=0; i<nCnt; i++){
+				ReviewVO rvo=(ReviewVO)list.get(i);
+
+%>
+				<tr align="center">
+					<td><%= rvo.getRbno() %></td>
+					<td><%= rvo.getAname() %></td>
+					<td><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>" id="cvo_no"><%= rvo.getRbsubject() %></td>
+					<td><%= rvo.getRbinsertdate() %></td>
+				</tr>
+<%
+			}
+		}else{
+%>
+				<tr>
+					<td colspan ="4" align="center">
+						등록된 글이 없습니다.
+					</td>
+				</tr>
+<%			
+		}//end of if(list)
+	}//end of if(obj)	
+		
+%>			
+				</tbody>
+				</table>
 		</div>
 	</div>
 </div>	

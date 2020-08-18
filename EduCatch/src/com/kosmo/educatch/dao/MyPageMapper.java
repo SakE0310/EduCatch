@@ -1,6 +1,7 @@
 package com.kosmo.educatch.dao;
 
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.ConsultVO;
 import java.util.List;
 
@@ -11,5 +12,6 @@ public interface MyPageMapper {
 	public int editMyPage(MemberVO param);
 	public int updatePW(MemberVO param);
 	public List<ConsultVO> consultQuestion(ConsultVO param);
+	public List<ReviewVO> myReview(ReviewVO param);
 	
 }

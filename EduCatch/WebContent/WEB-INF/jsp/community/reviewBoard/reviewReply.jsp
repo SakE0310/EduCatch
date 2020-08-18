@@ -47,6 +47,73 @@
 #list{
 	margin-left: 10px;
 }
+
+#updateForm_btn{
+		margin-top:10px;
+		margin-right:5px;
+	    display: inline-block;
+	    text-align: center;
+	    background: #e5e5e5;
+	    color: #555;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #e5e5e5;
+	   	width: auto;
+	    padding: 3px 10px;
+}
+
+#delete_btn{
+		margin-top:10px;
+		display: inline-block;
+	    text-align: center;
+	    background: #e5e5e5;
+	    color: #555;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #e5e5e5;
+	   	width: auto;
+	    padding: 3px 10px;
+
+}
+
+#update_btn{
+
+		margin-bottom: 30px;
+		margin-right:5px;
+		display: inline-block;
+	    text-align: center;
+	    background: #e5e5e5;
+	    color: #555;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #e5e5e5;
+	   	width: auto;
+	    padding: 3px 10px;
+}
+
+#updateReset_btn{
+		margin-bottom: 30px;
+		display: inline-block;
+	    text-align: center;
+	    background: #e5e5e5;
+	    color: #555;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #e5e5e5;
+	   	width: auto;
+	    padding: 3px 10px;
+}
+
+#bm_recontextUp{
+		margin-left: 20px;
+		width: 990px;
+}
+
+#replyList_ul{
+		margin-left: 20px;
+}
+
+
 </style>
 <script type="text/javascript"
 		src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -313,7 +380,6 @@
 					<tbody id="replyList_ul">	
 					
 						<!-- 동적생성요소 댓글리스트 들어갈 자리 -->	
-					
 					</tbody>
 					</div>
 				</table>

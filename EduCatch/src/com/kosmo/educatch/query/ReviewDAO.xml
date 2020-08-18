@@ -80,7 +80,7 @@
 	
 	<insert id="insertReview" parameterType="review">
 		<selectKey keyProperty="rbno" resultType="String" order="BEFORE">
-			SELECT 'R'||LPAD((SELECT /* +INDEX_DESC(A SYS_C0011581) */              
+			SELECT 'R'||LPAD((SELECT /* +INDEX_DESC(A SYS_C0012055) */              
 			NVL(MAX(SUBSTR(A.RBNO,-5)),0)+1 commNO
 			FROM    REVIEWBOARD A), 5,'0') 
 			FROM DUAL
