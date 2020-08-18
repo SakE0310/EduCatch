@@ -259,17 +259,17 @@ public class MyPageController {
 			// list를 VO로 형변환해준다.
 			ReviewVO rvo1 = (ReviewVO) list.get(i);
 			
-			log.info(""+rvo1.getRbno());
-			log.info(""+rvo1.getRbsubject());
-			log.info(""+rvo1.getRbname());
-			log.info(""+rvo1.getRbimg());
-			log.info(""+rvo1.getRbcontent());
-			log.info(""+rvo1.getAcademy_ano());
-			log.info(""+rvo1.getMember_mno());
-			log.info(""+rvo1.getRbgrade());
-			log.info(""+rvo1.getRbdeleteyn());
-			log.info(""+rvo1.getRbinsertdate());
-			log.info(""+rvo1.getRbupdatedate());
+			log.info("getRbno			>>"+rvo1.getRbno());
+			log.info("getRbsubject		>>"+rvo1.getRbsubject());
+			log.info("getRbname			>>"+rvo1.getRbname());
+			log.info("getRbimg			>>"+rvo1.getRbimg());
+			log.info("getRbcontent		>>"+rvo1.getRbcontent());
+			log.info("getAcademy_ano	>>"+rvo1.getAcademy_ano());
+			log.info("getMember_mno		>>"+rvo1.getMember_mno());
+			log.info("getRbgrade		>>"+rvo1.getRbgrade());
+			log.info("getRbdeleteyn		>>"+rvo1.getRbdeleteyn());
+			log.info("getRbinsertdate	>>"+rvo1.getRbinsertdate());
+			log.info("getRbupdatedate	>>"+rvo1.getRbupdatedate());
 
 		}
 		

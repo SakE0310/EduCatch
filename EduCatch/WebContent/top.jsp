@@ -107,7 +107,7 @@
                                                         <li><a href="listEvent.ec">이벤트</a></li>
                                                         <li><a href="listDetailView.ec">남시현상세</a></li>
                                                 		<li><a href="academyPage.ec">남시현등록</a></li>
-                                                		<li><a href="listMyPage.ec">마이페이지</a></li>
+                                                		<li><a href="myReview.ec">마이페이지</a></li>
                                                     </ul>
                                                 </li>
                                                 <li><a href="manage.ec">관리자</a></li>

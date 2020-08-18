@@ -122,7 +122,7 @@
 		                        AA.MEMBER_MNO = B.MNO
 		                    
 		     )AAA
-		     WHERE AAA.MNO=#{member_mno, jdbcType=VARCHAR}
+		     WHERE AAA.MNO='M202008180002'
 		     ORDER BY 1 DESC
 	</select>
 </mapper>
