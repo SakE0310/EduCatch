@@ -74,6 +74,7 @@ function listClick(){
 	<div class="container">
 	<form id="edit" name="edit">
 		<table style="margin-left: auto; margin-right: auto;" border="1" class="table" >
+			
 		<% 
 			String freeboard_fbno = "";
 			
@@ -82,6 +83,10 @@ function listClick(){
 				FreeVO freevo = (FreeVO)obj;
 				freeboard_fbno = freevo.getFbno();
 			%>
+			<input type="hidden" id="fbno" name="fbno" value="<%= freevo.getFbno() %>"/> 
+		 	<input type="hidden" id="fbname" name="fbname" value="<%= freevo.getFbname() %>"/> 
+		 	<input type="hidden" id="fbinsertdate" name="fbinsertdate" value="<%= freevo.getFbinsertdate() %>"/> 
+		 	
 			<thead id="table_head">
 				<tr>
 					<th><div align="center"><%= freevo.getFbsubject() %></div></th>
@@ -139,13 +144,10 @@ function listClick(){
 				 <input type="button" id="listclick" value="목록" onclick="listClick()" class=" btn_light btn_box_01" />
 				</td>
 			</tr>
-			
-		
 			<%
 			} 
 			%>
 		</table>
-		
 	</form>
 	<jsp:include page="../../../../footer.jsp" flush="true">
 	<jsp:param value="" name=""/>
