@@ -15,6 +15,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 	#contnent{
@@ -129,7 +130,7 @@
 							if(img != null){
 %>
 								<div align="center">
-         						<img src="/EduCatch/assets/img/reviewImg/<%= rvo.getRbimg() %>" border=() width="100" height="100"/>
+         						<img src="/EduCatch/assets/img/reviewImg/<%= rvo.getRbimg() %>" border=() width="300" height="300"/>
          						</div>
 <%								
 							}//end of if(img)
@@ -152,10 +153,10 @@
 					<a href="selectUpdate.ec?rbno=<%= rvo.getRbno()%>">
 					<input type="button" id="updateData" value="수정" class=" btn_light btn_box_01"/>
 					</a>
-				</td>&nbsp;&nbsp;
+				</td>
 				<td>
 					<input type="button" id="deleteData" value="삭제" class=" btn_light btn_box_01"/>
-				</td>&nbsp;&nbsp;
+				</td>
 				<td>
 					<input type="button" id="listData" value="목록"   class=" btn_light btn_box_01"/>
 				</td>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.ConsultVO;
 
 public class MyPageMapperImpl extends SqlSessionDaoSupport implements MyPageMapper{
@@ -53,5 +54,11 @@ public class MyPageMapperImpl extends SqlSessionDaoSupport implements MyPageMapp
 		List<ConsultVO> list = getSqlSession().selectList("consultQuestion");
 		return list;
 	}//end of consultSearch
+
+	@Override
+	public List<ReviewVO> myReview(ReviewVO param) {
+		List<ReviewVO> list = getSqlSession().selectList("myReview");
+		return list;
+	}
 
 }

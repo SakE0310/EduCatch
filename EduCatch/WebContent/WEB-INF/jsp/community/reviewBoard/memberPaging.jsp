@@ -76,7 +76,7 @@
 	else
 	{
 %>
-¢·¢·&nbsp;&nbsp;&nbsp;¢¸&nbsp;&nbsp;&nbsp;
+<img src="/EduCatch/assets/img/pagingBtn/first_btn.gif" alt="¢·¢·">&nbsp;&nbsp;&nbsp;<img src="/EduCatch/assets/img/pagingBtn/prev_btn.gif" alt="¢¸">&nbsp;&nbsp;&nbsp;
 <%
 	}
 	
@@ -96,7 +96,7 @@
 		else
 		{
 %>
-	[<a href="<%=url%>?curpage=<%=linkPage%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>"><%=linkPage%></a>]&nbsp;
+	<a href="<%=url%>?curpage=<%=linkPage%>&searchFilter=<%=searchFilter %>&keyword=<%=keyword %>&startDate=<%= startDate%>&endDate=<%=endDate%>"><%=linkPage%></a>&nbsp;
 <%
 		}
 		
@@ -115,7 +115,7 @@
 	else
 	{
 %>
-	¢º&nbsp;&nbsp;&nbsp;¢¹¢¹&nbsp;&nbsp;&nbsp;
+	<img src="/EduCatch/assets/img/pagingBtn/next_btn.gif" alt="¢º">&nbsp;&nbsp;&nbsp;<img src="/EduCatch/assets/img/pagingBtn/last_btn.gif" alt="¢¹¢¹">&nbsp;&nbsp;&nbsp;
 <%
 	}
 %>

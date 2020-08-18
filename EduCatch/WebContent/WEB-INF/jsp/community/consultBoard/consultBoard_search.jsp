@@ -235,9 +235,9 @@
 %>
 					<tr align="center">
 						<td><%= cvo.getCbno() %></td>
-						<td><%= cvo.getCbname() %></td>
 						<td><%= cvo.getAcademy_ano() %></td>
 						<td><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
+						<td><%= cvo.getCbname() %></td>
 						<td><%= cvo.getCinsertdate() %></td>
 					</tr>
 <%

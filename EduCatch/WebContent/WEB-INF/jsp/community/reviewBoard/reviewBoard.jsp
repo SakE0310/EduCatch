@@ -21,6 +21,9 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+<!-- 사이드바 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <!-- 데이터피커 -->
 <link rel="stylesheet" href="/EduCatch/assets/datepicker/jquery-ui-1.12.1/jquery-ui.min.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -59,19 +62,35 @@
 	    text-align: left;
 	}
 	.bbs-link {
-   	 position: relative;
+   	 	position: relative;
 	}
 	
 	#sForm{
-    width: 350px;
-  	height: 100px;
-  	margin: auto;
+	    width: 350px;
+	  	height: 100px;
+	  	margin: auto;
 	}
 	#dForm{
-	 width: 350px;
-  	height: 100px;
-  	margin: auto;
+		 width: 350px;
+	  	height: 100px;
+	  	margin: auto;
 	}
+	
+			
+	#sideBanner{
+		position: absolute;
+		top:180px;
+		left:0px;
+		width:150px;
+		height:200px;
+		background: gray;
+	}
+	
+	#listFont{
+		color:white;
+		font-weight: bold;
+	}
+	
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -189,6 +208,15 @@
       <input type="hidden" id="rbno" name="rbno"/>
    </form>
    <div id="mainWrapper">
+   <div id="sideBanner">
+  	 <ul id="listFont" align="center">
+		<li style="margin-top: 20px;"><a href="freeboardlist.ec">자유게시판</a></li>
+		<hr>
+		<li><a href="listReview.ec">후기게시판</a></li>
+		<hr>
+		<li><a href="listConsult.ec">상담게시판</a></li>
+	</ul>
+   </div>
 		<div>
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
@@ -217,7 +245,7 @@
          </thead>
          <tbody>
 <%
-
+if(listReview !=null && nCnt>0){
       for(int i=0; i<nCnt; i++){
          ReviewVO rvo=(ReviewVO)listReview.get(i);
 
@@ -231,8 +259,7 @@
          System.out.println("rvo.getGroupsize()"+rvo.getGroupsize());
          System.out.println("rvo.getCurpage()"+rvo.getCurpage());
          System.out.println("rvo.getTotalcount()"+rvo.getTotalcount());
-         
-         if(nCnt>0){
+
       
 %>
 
@@ -245,7 +272,7 @@
                </tr>
 <%
       }
-   }if(nCnt==0){
+   }else{
 %>
                <tr>
                   <td colspan="7" align="center">
@@ -254,7 +281,8 @@
                </tr>
 <%
       }
-   }
+
+	  if(listReview !=null && nCnt>0){
 %>         
          </tbody>
          <tr>
@@ -269,6 +297,11 @@
          </jsp:include>
          </td>
          </tr>
+<%		
+		}//end of (list !=null && nCnt>0)
+	}//end of if(obj)
+		
+%>
          <tr>
 			<td colspan="6" align="right">
                <input type="button" value="글쓰기" id="insertPage" class=" btn_light btn_box_01"/>

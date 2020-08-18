@@ -18,6 +18,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <!-- 데이터피커 -->
 <link rel="stylesheet" href="/EduCatch/assets/datepicker/jquery-ui-1.12.1/jquery-ui.min.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -45,8 +47,10 @@
 	    border: 1px solid #e5e5e5;
 		}
 	.btn_box_01 {
-	    width: auto;
+		height: 40px;
+	    width: 60px;
 	    padding: 3px 10px;
+	    margin-bottom: 3px;
 	}	
 	.bbs-link-btm {
 	    float: right;
@@ -67,27 +71,6 @@
   	height: 100px;
   	margin: auto;
 	}
-	
-		
-	/* #sideBanner{
-			position: absolute;
-			top:100px;
-			left:0px;
-			width:150px;
-			height:600px;
-			background: #aaa;
-		} */
-	.tt{	
-			text-align:center;
-			font-size: xx-large;
-			font-weight: bold;
-			
-		}		
-		
-	#aa{	
-			color:black;
-		
-		}
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -204,33 +187,29 @@
 <form id="pageForm" name="pageForm">
 		<input type="hidden" id="rbno" name="rbno"/>
 	</form>
-	<br><br><br><br>
+	<div id="mainWrapper">
 	<div>
-		<table style="margin-left: auto; margin-right: auto;" border="0" cellpadding="1" cellspacing="1">
+		<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
-				<th><h4 class="tt">후기 게시판</h4><br><br><br></th>
+				<td align="center"><h1>후기게시판 목록</h1></td>
 			</tr>
 		</table>
-		<table  style="margin-left: auto; margin-right: auto;" border="1">
+		<div  class="container">
+      	<table align="center" class="table">
 			<colgroup>
-				<col width="120px"/>
-				<col width="110px"/>
-				<col width="120px"/>
-				<col width="220px"/>
+	            <col width="120px"/>
+	            <col width="120px"/>
+	            <col width="600px"/>
+	            <col width="120px"/>
+	            <col width="120px"/>
 			</colgroup>
-			<thead>	
+         <thead id="table_head">   
 				<tr>
-					<td colspan="6" align="right">
-						<input type="button" value="[글쓰기]"
-						id="insertPage"/>
-					</td>
-				</tr>
-				<tr>
-					<th>글번호</th>
-					<th>작성자</th>
-					<th>학원명</th>
-					<th>제목</th>
-					<th>날짜</th>
+	               <td align="center">글번호</td>
+	               <td align="center">학원명</td>
+	               <td align="center">제목</td>
+	               <td align="center">작성자</td>
+	               <td align="center">날짜</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -257,9 +236,9 @@
 
 					<tr align="center">
 						<td><%= rvo.getRbno() %></td>
-						<td><%= rvo.getRbname() %></td>
 						<td><%= rvo.getAcademy_ano() %></td>
 						<td><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>"  id="aa"><%= rvo.getRbsubject() %></a></td>
+						<td><%= rvo.getRbname() %></td>
 						<td><%= rvo.getRbinsertdate() %></td>
 						<!-- 
 						<td><input type="button" value="[수정/삭제]"
@@ -288,11 +267,16 @@
 					<jsp:param name="groupsize" value="<%= groupsize %>"/>
 					<jsp:param name="curpage" value="<%= curpage %>"/>
 					<jsp:param name="totalcount" value="<%= totalcount %>"/>
-					
 			</jsp:include>
 			</td>
 			</tr>
+				<tr>
+					<td colspan="6" align="right">
+		               <input type="button" value="글쓰기" id="insertPage" class=" btn_light btn_box_01"/>
+					</td>
+				</tr>
 		</table>
+	</div>
 	</div>
 	<div>
 		<form id="searchForm" name="searchForm">

@@ -4,13 +4,37 @@
 						
 <mapper namespace = "com.kosmo.educatch.dao.ReplyMapper">
 	<select id="creplyList" parameterType="reply" resultType="reply">
-		SELECT * FROM REPLY
+		SELECT 
+         RENO                   AS RENO
+        ,FREEBOARD_FBNO         AS FREEBOARD_FBNO
+        ,CONSULTBOARD_CBNO      AS CONSULTBOARD_CBNO
+        ,REVIEWBOARD_RBNO       AS REVIEWBOARD_RBNO
+        ,RESUBJECT              AS RENO
+        ,REWRITER               AS REWRITER
+        ,RECONTENT              AS RECONTENT
+        ,MEMBER_MNO             AS MEMBER_MNO
+        ,REDELETEYN             AS REDELETEYN
+        ,REINSERTDATE           AS REINSERTDATE
+        ,REUPDATEDATE           AS REUPDATEDATE
+		FROM REPLY
 		WHERE CONSULTBOARD_CBNO = #{consultboard_cbno,jdbcType=VARCHAR}
 		AND   REDELETEYN = 'N'
 	</select>
 	
 	<select id="replyList" parameterType="reply" resultType="reply">
-		SELECT * FROM REPLY
+		SELECT 
+         RENO                   AS RENO
+        ,FREEBOARD_FBNO         AS FREEBOARD_FBNO
+        ,CONSULTBOARD_CBNO      AS CONSULTBOARD_CBNO
+        ,REVIEWBOARD_RBNO       AS REVIEWBOARD_RBNO
+        ,RESUBJECT              AS RENO
+        ,REWRITER               AS REWRITER
+        ,RECONTENT              AS RECONTENT
+        ,MEMBER_MNO             AS MEMBER_MNO
+        ,REDELETEYN             AS REDELETEYN
+        ,REINSERTDATE           AS REINSERTDATE
+        ,REUPDATEDATE           AS REUPDATEDATE
+		FROM REPLY
 		WHERE REVIEWBOARD_RBNO = #{reviewboard_rbno,jdbcType=VARCHAR}
 		AND   REDELETEYN = 'N'
 	</select>
@@ -24,7 +48,7 @@
 		</selectKey>
 			INSERT INTO REPLY(
 			    REVIEWBOARD_RBNO,
-			    CONSULTBOARD_CBNO,
+			    CONSULTBOARD_CBNO,                
 			    RENO,
 			    RECONTENT,
 			    REDELETEYN,
