@@ -367,6 +367,7 @@ html, body {
 
 	$(document).ready(function(){
 		
+		
 		<%-- 찜하기 버튼 클릭 --%>
 		$('#follow').click(function(){
 			
@@ -377,7 +378,7 @@ html, body {
 				var ano = $('#ano').val();
 				
 				$.ajax({
-					url : "insertBookmark.ec",
+					url : "insertBookmark.ec?ano=" + ano,
 					type : "post",
 					data : {
 						"academy_ano" : academy_ano,
@@ -402,7 +403,7 @@ html, body {
 				var ano = $('#ano').val();
 				
 				$.ajax({
-					url : "deleteBookmark.ec",
+					url : "deleteBookmark.ec?ano=" + ano,
 					type : "post",
 					data : {
 						"academy_ano" : academy_ano,
@@ -498,41 +499,37 @@ html, body {
 		double AXPOINT = Double.parseDouble(avo.getAxpoint());
 		double AYPOINT = Double.parseDouble(avo.getAypoint());
 		String address = avo.getAaddr1() + " " + avo.getAaddr2();
+		
+		
 					
 %>
 
-<div id="all">
+<div id="all"><%-- 전체 div --%>
 
-	<section id="content">
+	<section id="content"> <%-- 컨텐츠(본문) div --%>
 	
-		<div id="top">
-			<div id="topcon" align="center">
-			<table style="margin-left: auto; margin-right: auto;" border="0" cellpadding="1" cellspacing="1" id="fontman">
-				<tr>
-					<td>
-					<br><br><br><br>
-						<img src="/EduCatch/assets/img/academyLogo/<%= avo.getAlogo() %>" border=0 width="150" height="150" />
-					</td>
-					<td>
-					<br><br><br><br>
-					<input type="hidden" id="ano" name="ano" />
-					<input type="hidden" id="academy_ano" name="academy_ano" />
+		<div class="container-fluid"> <%-- top(윗부분) div --%>
+			<div class="row" style="margin-top:80px">
+				<div class="col-md-4" align="center">
+					<input type="hidden" id="ano" name="ano" value="<%=avo.getAno() %>"/>
+					<input type="hidden" id="academy_ano" name="academy_ano" value="<%=avo.getAcademy_ano() %>"/>
 					<input type="hidden" id="member_mno" name="member_mno" />
-						<h1 style="font-weight:bold;" align="center"><%=avo.getAname() %></h1> 
-						 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="follow" name="follow" type="button" value="찜추가" style="margin-left:400px" />
-						 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=address %></h4>
-						 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=avo.getAtel() %></h4>
-						 <h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 학원 평가 : <%= gvo.getRbgrade() %>(점)</h4>
-					</td>
-				</tr>
-			</table>
-			
-			<h4 align="right">업데이트 날짜 : <%= avo.getAupdatedate()%> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>
-			
+					<img src="/EduCatch/assets/img/academyLogo/<%= avo.getAlogo() %>" border=0 width="200" height="200" />
+				</div>
+				<div class="col-md-8" style="margin-top:30px">
+					<h1 style="font-weight:bold"><%=avo.getAname() %></h1> 
+					<input id="follow" name="follow" type="button" value="찜추가" style="margin-left:500px" />
+					<h3><img src='assets/img/Icon_location.png' style='width:17px; height:17px'><%=address %></h3>
+					<h3><img src='assets/img/Icon_phone.png' style='width:17px; height:17px'><%=avo.getAtel() %></h3>
+					<h3><img src='assets/img/Icon_star.png' style='width:17px; height:17px'>학원 평가 : <%= gvo.getRbgrade() %>(점)</h3>
+				</div>
 			</div>
+			<h4 align="right">업데이트 날짜 : <%= avo.getAupdatedate()%> &nbsp;&nbsp;&nbsp;</h4>
 		</div>
-		
-		   <div class="sns-share">
+	
+	
+		<%-- 상단 sns공유 div --%>
+		<div class="sns-share">
                  <ul>
                    <li>
                      <a href="#" onclick="javascript:window.open('http://share.naver.com/web/shareView.nhn?url=http://localhost:8088/EduCatch/listDetailView.ec' +encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title), 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;" target="_blank" alt="Share on Naver" ><img src="/EduCatch/assets/img/share/naver_blog.png" width="40" alt="네이버 블러그 공유하기"></a>
@@ -546,26 +543,26 @@ html, body {
                    &nbsp;&nbsp;&nbsp;
                   
                  </ul>
-            </div>
+        </div>
 	
 	
 		
-		
-<div>
-    <nav class="nav clearfix">
-        <ul class="nav-menu">
-            <li><a class="nav-menu-item" href="#section-1">기본정보</a></li>
-            <li><a class="nav-menu-item" href="#section-2">수업정보</a></li>
-            <li><a class="nav-menu-item" href="#section-3">편의기능</a></li>
-            <li><a class="nav-menu-item" href="#section-4">수강후기</a></li>
-        </ul>
-    </nav>
-</div>
+		<%-- 4분할 탭메뉴 div --%>		
+		<div>
+		    <nav class="nav clearfix">
+		        <ul class="nav-menu">
+		            <li><a class="nav-menu-item" href="#section-1">기본정보</a></li>
+		            <li><a class="nav-menu-item" href="#section-2">수업정보</a></li>
+		            <li><a class="nav-menu-item" href="#section-3">편의기능</a></li>
+		            <li><a class="nav-menu-item" href="#section-4">수강후기</a></li>
+		        </ul>
+		    </nav>
+		</div>
 
 
 
-<br><br><br>
-<%-- ----------- 카카오맵 API ------------- --%>
+		<br><br><br>
+		<%-- ----------- 카카오맵 API ------------- --%>
 		<div align="center">
 			<div class="map_wrap">
 				<div id="map"
@@ -674,34 +671,36 @@ html, body {
 				}
 			</script>
 		</div>
+			
+			
+			<br>
+			<br>
+		    <hr id="hhr">
 		
-	<br>
-	<br>
-    <hr id="hhr">
-		
-
-<div class="section">
-    <section id="section-1">
-        <h1>학원 정보</h1><br><br>
-        <div class="container">
-			  <table class="table table-condensed">
-			    <tr>
-			        <td>학원명</td>
-			        <td><%=avo.getAname() %></td>
-			      </tr>
-			      <tr>
-			        <td>연락처</td>
-			        <td><%=avo.getAtel() %></td>
-			      </tr>
-			      <tr>
-			        <td>주소</td>
-			        <td><%=address %></td>
-			      </tr>
-			  </table>
-			</div>
-        
-    </section>
-
+	<%-- 탭 본문내용1 div --%>
+	<div class="section">
+	    <section id="section-1">
+	        <h1>학원 정보</h1><br><br>
+	        <div class="container">
+				  <table class="table table-condensed">
+				    <tr>
+				        <td>학원명</td>
+				        <td><%=avo.getAname() %></td>
+				      </tr>
+				      <tr>
+				        <td>연락처</td>
+				        <td><%=avo.getAtel() %></td>
+				      </tr>
+				      <tr>
+				        <td>주소</td>
+				        <td><%=address %></td>
+				      </tr>
+				  </table>
+				</div>
+	        
+	    </section>
+	
+	<%-- 탭 본문내용2 div --%>
     <section id="section-2">
     	<hr id="hhr">
     	<div class="container">
@@ -739,7 +738,8 @@ html, body {
 			  </table>
 			</div>
     </section>
-
+	
+	<%-- 탭 본문내용3 div --%>
     <section id="section-3">
     <hr id="hhr">
         <h1>편의기능</h1>
@@ -797,6 +797,9 @@ html, body {
 				}
 			%>
     </section>
+    
+    
+    <%-- 탭 본문내용4 div --%>
     <section id="section-4">
     <hr id="hhr">
     	<div class="container">
@@ -829,7 +832,6 @@ html, body {
 		}
 	}
 %>
-			      
 			    </tbody>
 			  </table>
 			</div>

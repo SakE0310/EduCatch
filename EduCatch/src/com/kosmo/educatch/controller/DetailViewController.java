@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,18 +31,20 @@ public class DetailViewController {
 
 	// ----------상세조회페이지
 	@RequestMapping("listDetailView.ec")
-	public ModelAndView listDetailView(@ModelAttribute SubjectVO param) {
+	public ModelAndView listDetailView(@ModelAttribute
+										SubjectVO svo, ReviewVO rvo,HttpServletRequest request) {
 		log.info("DetailViewController listDetailView 시작 >>>> ");
 		ModelAndView mav = new ModelAndView();
 		
-		//String ano = (String)param.getAno();
-		String ano = "A00002";
+		String ano = (String)request.getParameter("ano");
+		//String ano = "A00001";
+		log.info("ano >!>!>!>!>!>"+ano);
 		
 		AcademyVO avo = detailViewService.academyView(ano);
 		ConvenienceVO cvo = detailViewService.conView(ano);
 		AcademyVO gvo = detailViewService.gradeView(ano);
-		List<SubjectVO> subjectlist = detailViewService.subjectViewList(param);
-		List<ReviewVO> reviewlist = detailViewService.reviewList(param);
+		List<SubjectVO> subjectlist = detailViewService.subjectViewList(svo);
+		List<ReviewVO> reviewlist = detailViewService.reviewList(rvo);
 		
 
 		mav.addObject("avo", avo);
@@ -72,9 +75,11 @@ public class DetailViewController {
 		tvo.setAcademy_ano("A00001");
 		int i = manageService.insertTimetable(tvo);
 		*/
-		
+		String ano = request.getParameter("ano");
+		log.info("ano >!>!>!> " + ano);
 		AcademyVO avo = new AcademyVO();
-		avo.setAcademy_ano("A00002");
+		avo.setAcademy_ano(ano);
+		avo.setAno(ano);
 		avo.setMember_mno("M202008130001");
 		
 		int i = detailViewService.insertBookmark(avo);
@@ -93,9 +98,11 @@ public class DetailViewController {
 	@RequestMapping("deleteBookmark.ec")
 	public Map<String, String> deleteBookmark(HttpServletRequest request){
 		log.info("DetailViewController deleteBookmark >>> ");
-		
+		String ano = request.getParameter("ano");
+		log.info("ano >!>!>!> " + ano);
 		AcademyVO avo = new AcademyVO();
-		avo.setAcademy_ano("A00002");
+		avo.setAcademy_ano(ano);
+		avo.setAno(ano);
 		avo.setMember_mno("M202008130001");
 		int i = detailViewService.deleteBookmark(avo);
 		

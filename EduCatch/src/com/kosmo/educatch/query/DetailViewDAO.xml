@@ -21,9 +21,10 @@
 			    TO_CHAR(B.AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
 		FROM 
 				SUBJECT A , ACADEMY B
-		WHERE A.ACADEMY_ANO = B.ANO
+		WHERE A.ACADEMY_ANO(+) = B.ANO
 		AND A.SDELETEYN = 'N'
 		AND B.ADELETEYN = 'N'
+		AND B.ANO = #{ano, jdbcType=VARCHAR}
 		ORDER BY 1 DESC
 	</select>
 	
@@ -65,7 +66,7 @@
                 B.ANO
 		FROM 
 				ACADEMY_CONVENIENCE A , ACADEMY B
-		WHERE A.ACADEMY_ANO = B.ANO
+		WHERE A.ACADEMY_ANO(+) = B.ANO
 		AND ANO=#{ano, jdbcType=VARCHAR}	
 		ORDER BY 1 DESC
 		
@@ -74,11 +75,11 @@
 	
 	<select id="gradeView" parameterType="String" resultType="academyview">
 		SELECT
-            TRUNC(AVG(A.RBGRADE),2) AS RBGRADE
+            NVL(TRUNC(AVG(A.RBGRADE),2),0) AS RBGRADE
         FROM 
             REVIEWBOARD A, ACADEMY B
         WHERE
-            A.ACADEMY_ANO = B.ANO
+            A.ACADEMY_ANO(+) = B.ANO
             AND B.ANO = #{ano, jdbcType=VARCHAR}
         GROUP BY B.ANO
 	</select>
@@ -99,7 +100,7 @@
 		            B.ANO				AS ANO
 		FROM 
 					REVIEWBOARD A, ACADEMY B
-		WHERE A.ACADEMY_ANO = B.ANO
+		WHERE A.ACADEMY_ANO(+) = B.ANO
 		AND A.RBDELETEYN = 'N'
 		AND B.ADELETEYN = 'N'
 		AND B.ANO = #{ano, jdbcType=VARCHAR}
@@ -113,16 +114,16 @@
 						    MEMBER_MNO
 					)
 		VALUES(
-					        'A00002',
-					        'M202008130001'
+					        #{ano, jdbcType=VARCHAR},
+					        'M202008170001'
 					)
 	</insert>
 	
 	<delete id="deleteBookmark" parameterType="academyview">
 		DELETE FROM BOOKMARK 
 		WHERE 
-				MEMBER_MNO='M202008130001' 
-		AND		ACADEMY_ANO='A00002'
+				MEMBER_MNO='M202008170001' 
+		AND		ACADEMY_ANO= #{ano, jdbcType=VARCHAR}
 	</delete>
 	
 	

@@ -97,6 +97,12 @@
 								<i class="fas fa-table mr-1"></i> 학원정보
 							</div>
 							<div class="card-body">
+                                <div class="table-responsive">
+                                    <div class="text-right container" style="margin-right:0px;">
+		                    	<button class="btn btn-primary success"><i class="fas fa-edit"></i> 수정</button>
+		                    	<button class="btn btn-danger reject" style="margin-right:5px;"><i class="fas fa-eraser"></i> 삭제</button>
+		                    </div>     
+							<div class="card-body">
 								<div class="table-responsive">
 									<div class="text-right container" style="margin-right: 0px;">
 									</div>
@@ -134,6 +140,41 @@
 										%>
 										</tbody>
 									</table>
+	<div class="row">
+		<div class="col-md-12">
+			 <a id="modal-749483" href="#modal-container-749483" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+			
+			<div class="modal fade" id="modal-container-749483" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="myModalLabel">
+								학원 수정
+							</h5> 
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							수정할 내용내용
+						</div>
+						<div class="modal-footer">
+							 
+							<button type="button" class="btn btn-primary">
+								변경
+							</button> 
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">
+								취소
+							</button>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
 								</div>
 							</div>
 						</div>
