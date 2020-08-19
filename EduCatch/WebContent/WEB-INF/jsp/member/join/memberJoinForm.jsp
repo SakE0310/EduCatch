@@ -5,21 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 폼</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 <style type="text/css">
 .required {
 	color: red;
 }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
-<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript"
 		        src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
@@ -111,17 +106,45 @@ function addrCheck(){
 }
 function pwCheck(){
 	//비밀번호 확인
-	if(document.memberjoin.mpw.value != document.memberjoin.mpw_r.value){
+	var mpw = document.getElementById("mpw");
+	var mpw_r = document.getElementById("mpw_r");
+	//if(document.memberjoin.mpw.value != document.memberjoin.mpw_r.value){
+	if(mpw != mpw_r){
 		alert("비밀번호가 일치하지 않습니다. 다시 입력해주세요");
 		document.getElementById("mpw").focus();
+		mpw.value = "";
+		mpw_r.value="";
+		mpw.focus();
 		return false;
 	}else{
 		alert("비밀번호가 일치합니다.");
+		return true;
 	}
 	
 }
+	
+//이메일 select박스 클릭시	
+function emailCheck(){
+	alert(" emailCheck 함수 진입");
+	var eVal = document.memberjoin.memail.options[document.memberjoin.memail.selectedIndex].value;
+	alert("eVal >>> : " + eVal);				
+	if (eVal == '0'){								
+		document.memberjoin.memail1.readOnly = true;
+		document.memberjoin.memail1.value = "";
+	}
+	if (eVal == '9'){
+		document.memberjoin.memail1.readOnly = false;
+		document.memberjoin.memail1.value = "";
+		document.memberjoin.memail1.focus();
+	}else{
+		document.memberjoin.memail1.readOnly = true;
+		document.memberjoin.memail1.value = eVal;
+	}				
+}
+
 //아이디(이메일) 중복 체크
 function idCheck(){
+		
 	var idVal =document.memberjoin.memail0.value +"@"+ document.memberjoin.memail1.value;
 	console.log("idCheck()함수 진입");
 	console.log("idVal>>>"+idVal)
@@ -134,10 +157,10 @@ function idCheck(){
 			console.log(data);
 			if(data==0){
 				alert("사용가능한 아이디입니다");
-				$("memail0").attr("readonly",true);
-				$("memail1").attr("readonly",true);
+				$("#memail0").attr("readonly",true);
+				$("#memail1").attr("readonly",true);
 				$("#idcheck").hide();
-				$("ajaxResData").html("중복체크 완료");
+				$("#ajaxResData").html("중복체크 완료");
 				
 			}else{
 				alert("중복된 아이디입니다.");
@@ -159,6 +182,7 @@ function idCheck(){
 					+ error);
 		}
 	});
+
 }
 
 </script>
@@ -170,7 +194,7 @@ function idCheck(){
 <br><br><br>
 <div class="container">
 	<form name="memberjoin" id="memberjoin" method="get">
-		<table border=1 align="center"  class="table table-striped">
+		<table border=1 align="center"  class="table table-condensed">
 				<div class="mem" align="center">
 					<h1>회원가입</h1>
 					<p align="right">
@@ -197,7 +221,7 @@ function idCheck(){
 							</c:if>
 						</div>
 						<div class="col-md-6">
-							<select name="lemail" onchange="emailCheck()">
+							<select name="memail" onchange="emailCheck()">
 								<option value="0">선택하세요</option>
 								<option value="9">직접입력</option>
 								<option>naver.com</option>
