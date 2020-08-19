@@ -10,9 +10,17 @@
 <head>
 <meta charset="utf-8" />
 
-<%-- -----------CSS------------- --%>
-<style type="text/css">
 
+<%-- -----------CSS------------- --%>
+
+<style type="text/css">
+#mrcontainer {overflow:hidden;height:300px;position:relative;}
+#btnRoadview,  #btnMap {position:absolute;top:5px;left:5px;padding:7px 12px;font-size:14px;border: 1px solid #dbdbdb;background-color: #fff;border-radius: 2px;box-shadow: 0 1px 1px rgba(0,0,0,.04);z-index:1;cursor:pointer;}
+#btnRoadview:hover,  #btnMap:hover{background-color: #fcfcfc;border: 1px solid #c1c1c1;}
+#mrcontainer.view_map #mapWrapper {z-index: 10;}
+#mrcontainer.view_map #btnMap {display: none;}
+#mrcontainer.view_roadview #mapWrapper {z-index: 0;}
+#mrcontainer.view_roadview #btnRoadview {display: none;}
 
 #fontman{
 		font-weight: bold;
@@ -192,13 +200,6 @@ body {
 
 
 <!-- 이곳은 카카오맵 API-->
-
-html, body {
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-}
 
 .map_wrap {
 	position: relative;
@@ -521,6 +522,10 @@ html, body {
 	        }
 	      });
 	    });
+	
+	function ajaxGetBookmark(){
+		$.ajax
+	}
 	</script>
 </head>
 <body>
@@ -611,116 +616,212 @@ html, body {
 
 		<br><br><br>
 		<%-- ----------- 카카오맵 API ------------- --%>
-		<div align="center">
-			<div class="map_wrap">
-				<div id="map"
-					style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-				<!-- 지도타입 컨트롤 div 입니다 -->
-				<div class="custom_typecontrol1 radius_border1">
-					<span id="btnRoadmap" class="selected_btn10"
-						onclick="setMapType('roadmap')">지도</span> <span id="btnSkyview"
-						class="btn10" onclick="setMapType('skyview')">스카이뷰</span>
-				</div>
-				<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
-				<div class="custom_zoomcontrol1 radius_border1">
-					<span onclick="zoomIn()"><img
-						src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png"
-						alt="확대"></span> <span onclick="zoomOut()"><img
-						src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png"
-						alt="축소"></span>
-				</div>
+		<div id="mrcontainer" class="view_map">
+			<div id="mapWrapper" style="width:100%;height:300px;position:relative;">
+				<div id="map" style="width:1100px;height:350px;"></div>
+				<input type="button" id="btnRoadview" onclick="toggleMap(false)" title="로드뷰 보기" value="로드뷰">
 			</div>
-			<script>
-				var container = document.getElementById('map');
-				var options = {
-					center : new kakao.maps.LatLng(<%= AYPOINT %>, <%= AXPOINT %>),
-					level : 3
-				};
-		
-				var map = new kakao.maps.Map(container, options);
-			
-				
-				// markers 배열로 두어 marker 들을 넣음
-				var markers = [];
-				var marker = new kakao.maps.Marker({
-					position : new kakao.maps.LatLng(<%= AYPOINT %>, <%= AXPOINT %>)
-				});
-				
-				markers.push(marker);
-				
-				// markers를 map에 세팅
-				for (var i = 0; i < markers.length; i++) {
-			        markers[i].setMap(map);
-			    }  
-		
-				function setMapType(maptype) {
-					var roadmapControl = document.getElementById('btnRoadmap');
-					var skyviewControl = document.getElementById('btnSkyview');
-					if (maptype === 'roadmap') {
-						map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
-						roadmapControl.className = 'selected_btn10';
-						skyviewControl.className = 'btn10';
-					} else {
-						map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
-						skyviewControl.className = 'selected_btn10';
-						roadmapControl.className = 'btn10';
-					}
-				}
-		
-				// 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-				function zoomIn() {
-					map.setLevel(map.getLevel() - 1);
-				}
-		
-				// 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-				function zoomOut() {
-					map.setLevel(map.getLevel() + 1);
-				}
-				
-				// 커스텀 오버레이에 표시할 컨텐츠 입니다
-				// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
-				// 별도의 이벤트 메소드를 제공하지 않습니다 
-				
-				
-				
-				var content = '<div class="wrap">' + 
-				            '    <div class="info">' + 
-				            '        <div class="title">' + 
-				            '          <%= avo.getAname()%>  ' + 
-				            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-				            '        </div>' + 
-				            '        <div class="body">' + 
-				            '            <div class="img">' +
-				            '                <img src="/EduCatch/assets/img/academyLogo/<%= avo.getAlogo() %>" border=0 width="73" height="70" >' +
-				            '           </div>' + 
-				            '            <div class="desc">' + 
-				            '                <div class="ellipsis"><%= avo.getAaddr1()%><%= avo.getAaddr2() %> </div>' + 
-				            '                <div class="jibun ellipsis">(우)<%= avo.getAaddrno()%> </div> '+ 
-				            '            </div>' + 
-				            '        </div>' + 
-				            '    </div>' +    
-				            '</div>';
-				// 마커 위에 커스텀오버레이를 표시합니다
-				// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-				var overlay = new kakao.maps.CustomOverlay({
-				    content: content,
-				    map: map,
-				    position: markers[0].getPosition()       
-				});
-		
-				// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-				kakao.maps.event.addListener(markers[0], 'click', function() {
-				    overlay.setMap(map);
-				});
-		
-				// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-				function closeOverlay() {
-				    overlay.setMap(null);     
-				}
-			</script>
+			 <div id="rvWrapper" style="width:100%;height:300px;position:absolute;top:0;left:0;">
+				<div id="roadview" style="width:1100px;height:350px;"></div>
+				<input type="button" id="btnMap" onclick="toggleMap(true)" title="지도 보기" value="지도">
+			</div>
 		</div>
+		
+		<script>
+		
+		var mrcontainer = document.getElementById('mrcontainer'), // 지도와 로드뷰를 감싸고 있는 div 입니다
+	    mapWrapper = document.getElementById('mapWrapper'), // 지도를 감싸고 있는 div 입니다
+	    btnRoadview = document.getElementById('btnRoadview'), // 지도 위의 로드뷰 버튼, 클릭하면 지도는 감춰지고 로드뷰가 보입니다 
+	    btnMap = document.getElementById('btnMap'), // 로드뷰 위의 지도 버튼, 클릭하면 로드뷰는 감춰지고 지도가 보입니다 
+	    roadviewContainer = document.getElementById('roadview'); // 로드뷰를 표시할 div 입니다
+	    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			    mapOption = {
+			        center: new kakao.maps.LatLng(<%=AYPOINT %>, <%=AXPOINT%>), // 지도의 중심좌표
+			        level: 3, // 지도의 확대 레벨
+			        mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
+			    }; 
+	
+			// 지도를 생성한다 
+			var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+			// 지도 타입 변경 컨트롤을 생성한다
+			var mapTypeControl = new kakao.maps.MapTypeControl();
+	
+			// 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
+			map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);	
+	
+			// 지도에 확대 축소 컨트롤을 생성한다
+			var zoomControl = new kakao.maps.ZoomControl();
+	
+			// 지도의 우측에 확대 축소 컨트롤을 추가한다
+			map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+	
+			// 지도 중심 좌표 변화 이벤트를 등록한다
+			kakao.maps.event.addListener(map, 'center_changed', function () {
+				console.log('지도의 중심 좌표는 ' + map.getCenter().toString() +' 입니다.');
+			});
+	
+			// 지도 확대 레벨 변화 이벤트를 등록한다
+			kakao.maps.event.addListener(map, 'zoom_changed', function () {
+				console.log('지도의 현재 확대레벨은 ' + map.getLevel() +'레벨 입니다.');
+			});
+	
+			// 지도 영역 변화 이벤트를 등록한다
+			kakao.maps.event.addListener(map, 'bounds_changed', function () {
+				var mapBounds = map.getBounds(),
+					message = '지도의 남서쪽, 북동쪽 영역좌표는 ' +
+								mapBounds.toString() + '입니다.';
+	
+				console.log(message);	
+			});
+	
+			// 지도 시점 변화 완료 이벤트를 등록한다
+			kakao.maps.event.addListener(map, 'idle', function () {
+				var message = '지도의 중심좌표는 ' + map.getCenter().toString() + ' 이고,' + 
+								'확대 레벨은 ' + map.getLevel() + ' 레벨 입니다.';
+				console.log(message);
+			});
+	
+			// 지도 클릭 이벤트를 등록한다 (좌클릭 : click, 우클릭 : rightclick, 더블클릭 : dblclick)
+			kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+				console.log('지도에서 클릭한 위치의 좌표는 ' + mouseEvent.latLng.toString() + ' 입니다.');
+			});	
+	
+			// 지도 드래깅 이벤트를 등록한다 (드래그 시작 : dragstart, 드래그 종료 : dragend)
+			kakao.maps.event.addListener(map, 'drag', function () {
+				var message = '지도를 드래그 하고 있습니다. ' + 
+								'지도의 중심 좌표는 ' + map.getCenter().toString() +' 입니다.';
+				console.log(message);
+			});
+	
+	
 			
 			
+			// 로드뷰 위치
+			var rvPosition = new kakao.maps.LatLng(<%=AYPOINT %>, <%=AXPOINT %>);
+	
+			//로드뷰 객체를 생성한다
+			var roadview = new kakao.maps.Roadview(roadviewContainer); //로드뷰 객체
+			var roadviewClient = new kakao.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+			var position = new kakao.maps.LatLng(<%=AYPOINT%>, <%=AXPOINT%>);
+	
+			// 특정 위치의 좌표와 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄운다.
+			roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+			    roadview.setPanoId(panoId, position); //panoId와 중심좌표를 통해 로드뷰 실행
+			});
+	
+			// 로드뷰 초기화 완료 이벤트를 등록한다
+			kakao.maps.event.addListener(roadview, 'init', function() {
+			    console.log('로드뷰 초기화가 완료되었습니다');
+			});
+	
+			// 로드뷰 파노라마 ID 변화 이벤트를 등록한다
+			kakao.maps.event.addListener(roadview, 'panoid_changed', function() {
+			    console.log('로드뷰의 파노라마 ID가 변경되었습니다');
+			});
+	
+			// 로드뷰 시점 변화 이벤트를 등록한다
+			kakao.maps.event.addListener(roadview, 'viewpoint_changed', function() {
+				console.log('로드뷰 시점이 변경되었습니다');
+			});
+	
+			// 로드뷰 지도 좌표 변화 이벤트를 등록한다
+			kakao.maps.event.addListener(roadview, 'position_changed', function() {
+			    console.log('로드뷰 좌표가 변경되었습니다');
+			});
+			
+			// 로드뷰 초기화가 완료되면 
+			kakao.maps.event.addListener(roadview, 'init', function() {
+
+			    // 로드뷰에 특정 장소를 표시할 마커를 생성하고 로드뷰 위에 표시합니다 
+			    var rvMarker = new kakao.maps.Marker({
+			        position: placePosition,
+			        map: roadview
+			    });
+			});
+			
+			// 지도와 로드뷰를 감싸고 있는 div의 class를 변경하여 지도를 숨기거나 보이게 하는 함수입니다 
+			function toggleMap(active) {
+			    if (active) {
+
+			        // 지도가 보이도록 지도와 로드뷰를 감싸고 있는 div의 class를 변경합니다
+			        mrcontainer.className = "view_map"
+			    } else {
+
+			        // 지도가 숨겨지도록 지도와 로드뷰를 감싸고 있는 div의 class를 변경합니다
+			        mrcontainer.className = "view_roadview"   
+			    }
+			}
+			
+			
+			
+			
+			// markers 배열로 두어 marker 들을 넣음
+			var markers = [];
+			var marker = new kakao.maps.Marker({
+				position : new kakao.maps.LatLng(<%= AYPOINT %>, <%= AXPOINT %>)
+			});
+			
+			markers.push(marker);
+			
+			// markers를 map에 세팅
+			for (var i = 0; i < markers.length; i++) {
+		        markers[i].setMap(map);
+		    }  
+			
+			var content = '<div class="wrap">' + 
+	        '    <div class="info">' + 
+	        '        <div class="title">' + 
+	        '          <%= avo.getAname()%>  ' + 
+	        '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+	        '        </div>' + 
+	        '        <div class="body">' + 
+	        '            <div class="img">' +
+	        '                <img src="/EduCatch/assets/img/academyLogo/<%= avo.getAlogo() %>" border=0 width="73" height="70" >' +
+	        '           </div>' + 
+	        '            <div class="desc">' + 
+	        '                <div class="ellipsis"><%= avo.getAaddr1()%><%= avo.getAaddr2() %> </div>' + 
+	        '                <div class="jibun ellipsis">(우)<%= avo.getAaddrno()%> </div> '+ 
+	        '            </div>' + 
+	        '        </div>' + 
+	        '    </div>' +    
+	        '</div>';
+	
+			function setMapType(maptype) {
+				var roadmapControl = document.getElementById('btnRoadmap');
+				var skyviewControl = document.getElementById('btnSkyview');
+				if (maptype === 'roadmap') {
+					map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);
+					roadmapControl.className = 'selected_btn10';
+					skyviewControl.className = 'btn10';
+				} else {
+					map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);
+					skyviewControl.className = 'selected_btn10';
+					roadmapControl.className = 'btn10';
+				}
+			}
+			
+			// 마커 위에 커스텀오버레이를 표시합니다
+			// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+			var overlay = new kakao.maps.CustomOverlay({
+			    content: content,
+			    map: map,
+			    position: markers[0].getPosition()       
+			});
+	
+			// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+			kakao.maps.event.addListener(markers[0], 'click', function() {
+			    overlay.setMap(map);
+			});
+	
+			// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+			function closeOverlay() {
+			    overlay.setMap(null);     
+			}
+			     
+		</script>
+		
+		
 			<br>
 			<br>
 		    <hr id="hhr">
