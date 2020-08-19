@@ -43,6 +43,8 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		
 		MemberVO memberInfo = loginService.loginCheck(param);
+		
+		log.info("memberInfo >>>>"+memberInfo);
 		mav.addObject("MemberVO", memberInfo);
 		mav.setViewName("member/login/result");
 				
@@ -62,6 +64,8 @@ public class LoginController {
 	      log.info("joinCheckForm() end");
 	      return mav;
 	   }// end of joinCheckForm()
+	
+	
 	// ==================== 학원가입 폼으로 ========================
 	@RequestMapping("/academyJoinForm")
 	   public ModelAndView academyJoinForm(){
@@ -82,7 +86,7 @@ public class LoginController {
 		log.info("LoginController login 끝 >>>");
 		return mav;
 
-	}// end of login.jsp
+	}
 
 	@RequestMapping("/passwordReset.ec")
 	public ModelAndView pwReset(@ModelAttribute MemberVO param){
@@ -96,7 +100,7 @@ public class LoginController {
 		log.info("pwReset() end");
 		return mav;
 	
-	}// end of pwReset(
+	}// end of pwReset
 	
 	/*
 	 * 비밀번호 변경 후 Callback
