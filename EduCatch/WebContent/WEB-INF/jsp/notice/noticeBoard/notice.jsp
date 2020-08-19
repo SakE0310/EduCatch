@@ -90,68 +90,11 @@
 			background: #aaa;
 		}  */
 		
-	/*	.layerpop {
-		    display: none;
-		    z-index: 1000;
-		    border: 2px solid #ccc;
-		    background: #fff;
-		    cursor: move; }
-		
-		.layerpop_area .title {
-		    padding: 10px 10px 10px 10px;
-		    border: 0px solid #aaaaaa;
-		    background: #f1f1f1;
-		    color: #3eb0ce;
-		    font-size: 1.3em;
-		    font-weight: bold;
-		    line-height: 24px; }
-		
-		.layerpop_area .layerpop_close {
-		    width: 25px;
-		    height: 25px;
-		    display: block;
-		    position: absolute;
-		    top: 10px;
-		    right: 10px;
-		    background:transparent url('/EduCatch/assets/img/pagingBtn/btn_close.gif') no-repeat; }
-		
-		.layerpop_area .content {
-		    width: 96%;    
-		    margin: 2%;
-		    color: #828282; 
-		   }
-		   
-		  #pop_today{
-		  	color: white;
-		  	background: blue;
-		  } 
-		/*-- POPUP common style E --*/
-
-		*/
-		
 </style>
 
 <script type="text/javascript">
-	 
-/*
-	function openPop() {
-		
-		$('.layerpop').css("position", "absolute");
-        //영역 가운에데 레이어를 뛰우기 위해 위치 계산 
-        $('.layerpop').css("top","100px");
-        $('.layerpop').css("right","250px");
-        $('#layerbox').show();
 
-		}
-	
-	//팝업창에 있는 닫기버튼을 누르면
-	 function popupClose() {
-	        $('#layerbox').hide();
-	    }
-*/	
   $(document).ready(function() {
-	//  openPop();
-	  ajaxGetPopup();
 	  
 	//날짜 검색  
  	 $("#startDate").datepicker({

@@ -27,6 +27,10 @@
 		  }
 		  document.getElementById('layer_pop').style.display = "none";
 	 } 
+	 function checkBtn() {
+		console.log("누름");
+		document.getElementById("pop_today").checked = true;
+	}
 
 	 function ajaxGetPopup(){
 		 urls = "eventPopup.ec";
@@ -47,7 +51,7 @@
 			st += "<td align='center' height='30' bgcolor='#F5F5F5'>";
 			st += "<table width='95%' border='0' cellpadding='0' cellspacing='0'>";
 			st += "<tr>";
-			st += " <td align='left' class='pop'><input type='checkbox' name='pop_today' id='pop_today' />오늘 하루 이 창 열지 않음</td>";
+			st += " <td align='left' class='pop'><input type='checkbox' name='pop_today' id='pop_today' /><a href='javascript:checkBtn();' style='color: black;'>오늘 하루 이 창 열지 않음</a></td>";
 			st += "<td align='right' class='pop' ><a href='javascript:closeWin();' style='color: black;'>닫기</a></td>";
 			st += " </tr>";
 			st += "</table>";
@@ -66,6 +70,7 @@
 	 
 	 $(document).ready(function() {
 		 ajaxGetPopup();
+		 
 	});//end of ready()
 </script>
 </head>
