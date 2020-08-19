@@ -122,7 +122,31 @@
 		                        AA.MEMBER_MNO = B.MNO
 		                    
 		     )AAA
-		     WHERE AAA.MNO='M202008180002'
+		     WHERE AAA.MNO='M202008180002'--세션
 		     ORDER BY 1 DESC
+	</select>
+	
+	<select id="myFree" parameterType="freeboard" resultType="freeboard">
+	 SELECT AAA.* FROM(
+     SELECT AA.* , B.MNO FROM(
+                SELECT 
+                         A.FBNO                                       AS  FBNO
+                        ,A.FBSUBJECT                                  AS  FBSUBJECT   
+                        ,A.FBNAME                                     AS  FBNAME
+                        ,A.FBIMG                                      AS  FBIMG
+                        ,A.FBCONTENT                                  AS  FBCONTENT
+                        ,A.MEMBER_MNO                                 AS  MEMBER_MNO
+                        ,A.FBDELETEYN                                 AS  FBDELETEYN
+                        ,TO_CHAR(A.FBINSERTDATE,'YYYY-MM-DD')         AS  FBINSERTDATE            
+                        ,TO_CHAR(A.FBUPDATEDATE,'YYYY-MM-DD')         AS  FBUPDATEDATE       
+                FROM    
+                        FREEBOARD A
+                      ) AA , MEMBER B
+         WHERE
+                        AA.MEMBER_MNO = B.MNO
+                    
+     )AAA
+     WHERE AAA.MNO='M202008180002'--세션
+     ORDER BY 1 DESC
 	</select>
 </mapper>

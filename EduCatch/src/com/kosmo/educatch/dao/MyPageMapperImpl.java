@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.ConsultVO;
+import com.kosmo.educatch.vo.FreeVO;
 
 public class MyPageMapperImpl extends SqlSessionDaoSupport implements MyPageMapper{
 
@@ -58,6 +59,13 @@ public class MyPageMapperImpl extends SqlSessionDaoSupport implements MyPageMapp
 	@Override
 	public List<ReviewVO> myReview(ReviewVO param) {
 		List<ReviewVO> list = getSqlSession().selectList("myReview");
+		return list;
+	}
+
+	@Override
+	public List<FreeVO> myFree(FreeVO param) {
+		// TODO Auto-generated method stub
+		List<FreeVO> list = getSqlSession().selectList("myFree");
 		return list;
 	}
 

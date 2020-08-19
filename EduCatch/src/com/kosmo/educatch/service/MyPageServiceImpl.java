@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.ConsultVO;
+import com.kosmo.educatch.vo.FreeVO;
 
 @Service
 @Transactional
@@ -105,6 +106,19 @@ public class MyPageServiceImpl implements MyPageService{
 		log.info("MyPageServiceImpl consultSearch list.size() >>>"+list.size());
 		
 		log.info("MyPageServiceImpl myReview 끝>>>");
+		return list;
+	}
+
+	@Override
+	public List<FreeVO> myFree(FreeVO param) {
+		// TODO Auto-generated method stub
+		log.info("MyPageServiceImpl FreeVO 시작>>>");
+		
+		List<FreeVO> list = new ArrayList<FreeVO>();
+		list = mypageMapper.myFree(param);
+		
+		
+		log.info("MyPageServiceImpl myFree 끝>>>");
 		return list;
 	}
 }

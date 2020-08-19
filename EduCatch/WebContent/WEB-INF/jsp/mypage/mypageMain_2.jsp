@@ -115,15 +115,13 @@
 
 		$("#freeBoard").click(function() {
 			console.log("freeBoard >>> ");
-
 			$("#clickForm").attr("action","myFree.ec");
 			$("#clickForm").attr("method","POST");
 			$("#clickForm").submit();	
 		})
-
+		
 		$("#reviewBoard").click(function() {
 			console.log("reviewBoard >>> ");
-
 			$("#clickForm").attr("action","myReview.ec");
 			$("#clickForm").attr("method","POST");
 			$("#clickForm").submit();	
@@ -171,61 +169,58 @@
 %>	
 
 	</div>
-<%
-	Object obj3 =request.getAttribute("ReviewVO");
-
-	if(obj3 !=null){
-		ArrayList list=(ArrayList)obj3;
-		
-		int nCnt=list.size();
-
-%>
-	<div class = "container-mypage ">
-		<div align="center">
+	<%
+		Object obj4 =request.getAttribute("FreeVO");
+	
+		if(obj4 !=null){
+			ArrayList list2=(ArrayList)obj4;
+			
+			int nCnt=list2.size();
+	
+	%>
+		<div class = "container-mypage ">
+			<div align="center">
 			<input type="button" value="후기게시판" id="reviewBoard"/>
 			<input type="button" value="자유게시판" id="freeBoard"/>
-			<table align ="center" border="1">
-			 	<colgroup>
-					<col width="100px"/>
-					<col width="140px"/>
-					<col width="300px"/>
-					<col width="100px"/>
-				</colgroup>
-				<thead id="table_head">
-					<td align="center">글번호</td>
-					<td align="center">학원명</td>
-					<td align="center">제목</td>
-					<td align="center">작성일</td>
-				</thead>
-				<tbody>
-<%
-		if(list !=null && nCnt>0){
-			for(int i=0; i<nCnt; i++){
-				ReviewVO rvo=(ReviewVO)list.get(i);
-
-%>
-				<tr align="center">
-					<td><%= rvo.getRbno() %></td>
-					<td><%= rvo.getAname() %></td>
-					<td><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>" id="a"><%= rvo.getRbsubject() %></a></td>
-					<td><%= rvo.getRbinsertdate() %></td>
-				</tr>
-<%
-			}
-		}else{
-%>
-				<tr>
-					<td colspan ="4" align="center">
-						등록된 글이 없습니다.
-					</td>
-				</tr>
-<%			
-		}//end of if(list)
-	}//end of if(obj)	
-		
-%>			
-				</tbody>
-				</table>
+				<table align ="center" border="1">
+				 	<colgroup>
+						<col width="100px"/>
+						<col width="300px"/>
+						<col width="100px"/>
+					</colgroup>
+					<thead id="table_head">
+						<td align="center">글번호</td>
+						<td align="center">제목</td>
+						<td align="center">작성일</td>
+					</thead>
+					<tbody>
+	<%
+			if(list2 !=null && nCnt>0){
+				for(int i=0; i<nCnt; i++){
+					FreeVO fvo=(FreeVO)list2.get(i);
+	
+	%>
+					<tr align="center">
+						<td><%= fvo.getFbno() %></td>
+						<td><a href="selectfreeboardDetail.ec?fbno=<%= fvo.getFbno() %>" id="a"><%= fvo.getFbsubject() %></a></td>
+						<td><%= fvo.getFbinsertdate() %></td>
+					</tr>
+	<%
+				}
+			}else{
+	%>
+					<tr>
+						<td colspan ="4" align="center">
+							등록된 글이 없습니다.
+						</td>
+					</tr>
+	<%			
+			}//end of if(list)
+		}//end of if(obj)	
+			
+	%>			
+					</tbody>
+					</table>
 			</div>
 		</div>
 	</div>

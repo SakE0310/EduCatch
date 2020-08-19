@@ -16,6 +16,7 @@ import com.kosmo.educatch.service.MyPageService;
 import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.ConsultVO;
+import com.kosmo.educatch.vo.FreeVO;
 
 @Controller
 public class MyPageController {
@@ -279,6 +280,45 @@ public class MyPageController {
 		mav.addObject("ReviewVO", list);
 		mav.addObject("MemberVO", mvo);
 		mav.setViewName("/mypage/mypageMain");
+		
+		log.info("MyPageController myReview 끝 >>>");
+		return mav;
+	}
+	
+	@RequestMapping("myFree")
+	public ModelAndView myFree(HttpServletRequest request,
+								 @ModelAttribute FreeVO fvo, MemberVO param) {
+		log.info("MyPageController myFree 시작>>>");
+		
+		String mno = request.getParameter("mno");
+		log.info("mno>>>>"+mno);
+		
+		fvo.setMember_mno(mno);
+		List<FreeVO> list = mypageService.myFree(fvo);
+		log.info("MyPageController myFree list.size()>>>" + list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			// list를 VO로 형변환해준다.
+			FreeVO fvo1 = (FreeVO) list.get(i);
+			
+			log.info("getRbno			>>"+fvo1.getFbno());
+			log.info("getRbsubject		>>"+fvo1.getFbsubject());
+			log.info("getRbname			>>"+fvo1.getFbname());
+			log.info("getRbimg			>>"+fvo1.getFbimg());
+			log.info("getRbcontent		>>"+fvo1.getFbcontent());
+			log.info("getAcademy_ano	>>"+fvo1.getMember_mno());
+			log.info("getRbgrade		>>"+fvo1.getFbdeleteyn());
+			log.info("getRbdeleteyn		>>"+fvo1.getFbinsertdate());
+			log.info("getRbinsertdate	>>"+fvo1.getFbupdatedate());
+
+		}
+		
+		MemberVO mvo = mypageService.selectMyPage(param);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("FreeVO", list);
+		mav.addObject("MemberVO", mvo);
+		mav.setViewName("/mypage/mypageMain_2");
 		
 		log.info("MyPageController myReview 끝 >>>");
 		return mav;
