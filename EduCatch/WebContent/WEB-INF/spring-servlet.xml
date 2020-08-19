@@ -17,7 +17,21 @@
 		<property name="prefix" value="/WEB-INF/jsp/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
-	
+	<!-- 인터셉터적용  -->
+	<!-- <mvc:interceptors>
+        <mvc:interceptor>
+        	<mvc:mapping path="/myReview.ec"/>
+        	<bean id="loginInterceptor" class="com.kosmo.educatch.manager.LoginCheckInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+        	<mvc:mapping path="/manage.ec"/>
+        	<mvc:mapping path="/manageAca.ec"/>
+        	<mvc:mapping path="/manageReserChk.ec"/>
+        	<mvc:mapping path="/manageAcaMem.ec"/>
+        	<mvc:mapping path="/addAca.ec"/>
+        	<bean id="ManagerInterceptor" class="com.kosmo.educatch.manager.ManagerCheckInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors> -->
 	
 	<import resource="servlet-context.xml" />
 </beans>

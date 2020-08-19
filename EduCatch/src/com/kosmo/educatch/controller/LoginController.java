@@ -1,5 +1,7 @@
 package com.kosmo.educatch.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,13 +40,14 @@ public class LoginController {
 	// ================ 로그인 처리 ========================
 	
 	@RequestMapping("/loginCheck")
-	public ModelAndView  loginCheck(@ModelAttribute MemberVO param) {
+	public ModelAndView  loginCheck(@ModelAttribute MemberVO param, HttpSession session) {
 		log.info("LoginController loginCheck 시작 >>>");
 		ModelAndView mav = new ModelAndView();
 		
 		MemberVO memberInfo = loginService.loginCheck(param);
 		
 		log.info("memberInfo >>>>"+memberInfo);
+		session.setAttribute("user", memberInfo);
 		mav.addObject("MemberVO", memberInfo);
 		mav.setViewName("member/login/result");
 				

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
+import com.kosmo.educatch.vo.MemberVO;
+
 public class SessionManager implements HttpSessionBindingListener{
 private static Hashtable hashManager = new Hashtable();
 	
@@ -57,7 +59,7 @@ private static Hashtable hashManager = new Hashtable();
 		return isFlag;
 	}
 	
-	public void setSession(HttpSession hSession, List user){
+	public void setSession(HttpSession hSession, MemberVO user){
 		hashManager.put(hSession.getId(), user);
 		hSession.setAttribute("login", this.getInstance());
 	}
@@ -71,8 +73,8 @@ private static Hashtable hashManager = new Hashtable();
 		hashManager.remove(event.getSession().getId());
 	}
 	
-	public List getUserID(String sessionID){
-		return (List)hashManager.get(sessionID);
+	public MemberVO getUserID(String sessionID){
+		return (MemberVO)hashManager.get(sessionID);
 	}
 	
 	public int getUSerCount(){

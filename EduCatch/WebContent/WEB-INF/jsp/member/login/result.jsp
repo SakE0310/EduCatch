@@ -15,7 +15,8 @@
 <body>
 	<div align="center" class ="body">
 		<% 
-			MemberVO memVo = (MemberVO) request.getAttribute("MemberVO");			
+			HttpSession hs = request.getSession(false);
+			MemberVO memVo = (MemberVO) hs.getAttribute("user");
 		%>
 			
 
@@ -36,6 +37,9 @@
 							<td> PW :</td>
 							<td align ="center"><b><%=memVo.getMpw()%></b></td>
 					</tr>
+					<script>
+						location.href="http://localhost:8088/EduCatch/index.jsp";
+					</script>
 				<% } else {%>
 					<script>
 					alert("아이디 또는 비밀번호가 올바르지 않습니다.");
