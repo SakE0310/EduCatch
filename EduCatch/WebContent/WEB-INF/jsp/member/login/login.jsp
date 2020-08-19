@@ -269,6 +269,7 @@
 															console.log(data);
 															if (data > 0) {
 																//이미 회원이 있음
+																alert("이미 회원이십니다.");
 															} else {
 																// 회원이 없음
 																var emailSplit = email
@@ -279,7 +280,7 @@
 																		+ emailSplit[0]
 																		+ "&emailaddr="
 																		+ emailSplit[1]
-																		+"&snstype=k"
+																		+"&msnstype=k"
 															}
 														},
 														error : function(request,
