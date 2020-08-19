@@ -102,12 +102,11 @@ public class NoticeServiceImpl implements NoticeService {
 	}//end of deleteNotice
 
 	@Override
-	public EventVO eventPop(EventVO param) {
+	public List<EventVO> eventPop(EventVO param) {
 		log.info("NoticeServiceImpl eventPop 시작>>>");
-		EventVO evo = new EventVO();
-		evo = noticeMapper.eventPop(param);
+		List list = noticeMapper.eventPop(param);
 		log.info("NoticeServiceImpl eventPop 끝>>>");
-		return evo;
+		return list;
 	}
 
 

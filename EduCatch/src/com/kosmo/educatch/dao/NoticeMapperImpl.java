@@ -1,5 +1,6 @@
 package com.kosmo.educatch.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -54,10 +55,9 @@ public class NoticeMapperImpl extends SqlSessionDaoSupport implements NoticeMapp
 	}//end of deleteNotice
 
 	@Override
-	public EventVO eventPop(EventVO param) {
-		EventVO evo= new EventVO();
-		evo=getSqlSession().selectOne("eventPop");
-		return evo;
+	public List<EventVO> eventPop(EventVO param) {
+		List<EventVO> list = getSqlSession().selectOne("eventPop");
+		return list;
 	}
 
 

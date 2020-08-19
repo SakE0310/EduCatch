@@ -130,20 +130,9 @@
 		*/
 		
 </style>
+
 <script type="text/javascript">
-
-	 function setCookie( name, value, expirehours ) {
-		  var todayDate = new Date();
-		  todayDate.setHours( todayDate.getHours() + expirehours );
-		  document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
-	 } 
-	 function closeWin() {
-		  if(document.getElementById("pop_today").checked){
-		   setCookie( "ncookie", "done" , 24 );
-		  }
-		  document.getElementById('layer_pop').style.display = "none";
-	 }
-
+	 
 /*
 	function openPop() {
 		
@@ -162,6 +151,7 @@
 */	
   $(document).ready(function() {
 	//  openPop();
+	  ajaxGetPopup();
 	  
 	//날짜 검색  
  	 $("#startDate").datepicker({
@@ -274,7 +264,7 @@
   });//end of ready()
 </script>
 </head>
-<body onload="openPop()">
+<body>
 <%
 	//페이징 변수 초기화
 	String pno="0";
@@ -427,7 +417,7 @@
 	
    
    
-<%
+<%-- <%
 	Object obj2= request.getAttribute("eventVO");
 	System.out.println("obj2>>>"+obj2);
 	
@@ -438,62 +428,7 @@
 		if(evo != null ){
 			System.out.println("null아님>>>");
 		
-%>	
-<!-- 팝업1 -->
-   <!--  <div style="height:1000px;"> 
-
-    <div id="layerbox" class="layerpop"
-        style="width: 700px; height: 500px;">
-        <article class="layerpop_area">
-        <div class="title">이벤트 팝업</div>
-        <a href="javascript:popupClose();" class="layerpop_close"
-            id="layerbox_close"></a> <br>
-        <div class="content" align="center">
-        <img src="/EduCatch/assets/img/event/<%=evo.getEimg()%>" alt="사진업음" style="width: 600px; height :400px"/><br>							
-        </div>
-        </article>
-    </div> -->
-
-<!--  팝업2 -->
-	<div class="layer_popup" style="position:absolute; width:500px;left:50%;  top:90px; z-index:1;" id="layer_pop">
-	<table width="500" border="0" cellpadding="0" cellspacing="0">
-		<tr>
-		<td> <img src="/EduCatch/assets/img/event/<%=evo.getEimg()%>" alt="사진업음" width="500" height="500" border="0"/></td>
-		</tr>
-	<tr>
-		 <td align="center" height="30" bgcolor="#F5F5F5">
-		 <table width="95%" border="0" cellpadding="0" cellspacing="0">
-		 <tr>
-			  <td align="left" class="pop"><input type="checkbox" name="pop_today" id="pop_today" />오늘 하루 이 창 열지 않음</td>
-			  <td align="right" class="pop"><a href="javascript:closeWin();">닫기</a></td>
-		 </tr>
-	 	</table>
-	 	</td>
-	</tr>
-	</table>
-<script language="Javascript" type="text/javascript">
-
- cookiedata = document.cookie;
- if (cookiedata.indexOf("ncookie=done") < 0){
-  document.getElementById('layer_pop').style.display = "inline";
- } else {
-  document.getElementById('layer_pop').style.display = "none";
- }
-
-<%
-		}//end of if(evo)
-		if(evo == null && evo.equals("")){
-			System.out.println("null>>>");
-%>			
-			 document.getElementById('layer_pop').style.display = "none";
-<%
-		}
-			
-	}//end of if
-	
-%>	
-</script>
-</div>
+%>	 --%>
 
 <br>
 <br>

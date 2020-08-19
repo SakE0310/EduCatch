@@ -3,7 +3,9 @@ package com.kosmo.educatch.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,8 +13,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.manager.LoggerManager;
@@ -165,9 +169,7 @@ public class NoticeController {
 		List<NoticeVO> list = noticeService.listNotice(param);
 		log.info("NoticeController listNotice list.size()>>>" + list.size());
 		
-		EventVO evo = noticeService.eventPop(eParam);
-		log.info("evo.getEno()>>"+evo.getEno());
-		log.info("evo.getEimg()>>>"+evo.getEimg());
+		
 
 		for (int i = 0; i < list.size(); i++) {
 			// list를 VO로 형변환해준다.
@@ -190,7 +192,7 @@ public class NoticeController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("noticeList", list);
-		mav.addObject("eventVO", evo);
+	
 		mav.setViewName("notice/noticeBoard/notice");
 
 		log.info("NoticeController listNotice 끝 >>>");
@@ -458,11 +460,17 @@ public class NoticeController {
 	
 	
 	
-	
+	@ResponseBody
 	@RequestMapping("eventPopup.ec")
-	public ModelAndView eventPopup() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("notice/noticeBoard/pop");
-		return mav;
+	public Map<String,List<EventVO>> eventPopup(@ModelAttribute EventVO eParam) {
+		 Map<String,List<EventVO>> map = new HashMap<String, List<EventVO>>();
+		
+		 List<EventVO> list = noticeService.eventPop(eParam);
+		 map.put("eventPop",list);
+		 log.info("eParam>>>"+eParam.getEimg());
+		 log.info("list>>>"+list);
+		 log.info("map>>>"+map);
+		 
+		return map;
 	}//end of eventPopup
 }

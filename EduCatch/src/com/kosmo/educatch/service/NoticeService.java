@@ -13,5 +13,5 @@ public interface NoticeService {
 	public int updateNotice(NoticeVO param);
 	public int deleteNotice(NoticeVO param);
 	
-	public EventVO eventPop(EventVO param);
+	public List<EventVO> eventPop(EventVO param);
 }
