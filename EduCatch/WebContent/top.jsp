@@ -1,4 +1,12 @@
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% 
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}
+%>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -105,18 +113,50 @@
                                                     <ul class="submenu">
                                                         <li><a href="listNotice.ec">공지사항</a></li>
                                                         <li><a href="listEvent.ec">이벤트</a></li>
-                                                        <li><a href="listDetailView.ec">남시현상세</a></li>
-                                                		<li><a href="academyPage.ec">남시현등록</a></li>
                                                 		<li><a href="myReview.ec">마이페이지</a></li>
                                                     </ul>
                                                 </li>
+                                                <%
+					                            	if(mvo != null){
+					                            		if(mvo.getMauth().equals("2") || mvo.getMauth().equals("3")){
+					                            			
+					                            %>
                                                 <li><a href="manage.ec">관리자</a></li>
+                                                <%		}
+                                                	}
+                                                %>
                                             </ul>
                                         </nav>
                                     </div>
                                 </div>
                             </div> 
+                            <%
+                            	if(mvo != null){
+                            	
+                            %>
                            <div class="col-lg-2">
+                           <div class="main-menu d-none d-lg-block">
+                                <!-- 로그인버튼 예정  -->
+                                <div class="search d-none d-lg-block">
+                                    <ul class="login">
+                                        <li>
+                                            <div class="nav-log login">
+                                                <img width="25px"src="assets/img/login/mypage.png" alt="마이페이지" /> 내정보
+                                            </div>
+                                            <ul class="submenu">
+                                        		<li><a href="myReview.ec">마이페이지</a></li>
+                                                <li><a href="logout.ec">로그아웃</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+                            <% 
+                            	}else{
+                            	
+                            %>
+                            <div class="col-lg-2">
                                 <!-- 로그인버튼 예정  -->
                                 <div class="search d-none d-lg-block">
                                     <ul class="login">
@@ -128,6 +168,9 @@
                                     </ul>
                                 </div>
                             </div>
+                            <%
+                            	}
+                            %>
                             <!-- Mobile Menu -->
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-lg-none"></div>

@@ -18,9 +18,13 @@
 		<property name="suffix" value=".jsp"/>
 	</bean>
 	<!-- 인터셉터적용  -->
-	<!-- <mvc:interceptors>
+	<mvc:interceptors>
         <mvc:interceptor>
         	<mvc:mapping path="/myReview.ec"/>
+        	<mvc:mapping path="/selectfreeboardI.ec"/>
+        	<mvc:mapping path="/insertDisplay.ec"/>
+        	<mvc:mapping path="/cinsertDisplay.ec"/>
+        	<mvc:mapping path="/AcaReq.ec"/>
         	<bean id="loginInterceptor" class="com.kosmo.educatch.manager.LoginCheckInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
@@ -31,7 +35,7 @@
         	<mvc:mapping path="/addAca.ec"/>
         	<bean id="ManagerInterceptor" class="com.kosmo.educatch.manager.ManagerCheckInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors> -->
+    </mvc:interceptors>
 	
 	<import resource="servlet-context.xml" />
 </beans>

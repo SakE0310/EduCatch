@@ -130,6 +130,21 @@ public class LoginController {
 		
 		return result;
 	}
+	
+	@RequestMapping("logout")
+	public ModelAndView logout(HttpSession session) {
+		if(session != null)
+		{
+			if(session.getAttribute("user") != null)
+			{
+				session.removeAttribute("user");
+			}
+		}
+		session.invalidate();
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("member/login/logout");
+		return mav;
+	}
 		
 	
 }
