@@ -182,18 +182,17 @@
 	<div class="container">
 		<table style="margin-left: auto; margin-right: auto;" border="1" class="table">
 			<colgroup>
-				<col width="120px"/>
-				<col width="220px"/>
-				<col width="120px"/>
-				<col width="300px"/>
-				<col width="110px"/>
+				<col width="100px"/>
+				<col width="320px"/>
+				<col width="100px"/>
+				<col width="100px"/>
 			</colgroup>
 			<thead id="table_head">
 				<tr>
 					<th>글번호</th>
 					<th>제목</th>
 					<th>작성자</th>
-					<th>첨부파일</th>
+					<!-- th>첨부파일</th> -->
 					<th>작성일</th>
 				</tr>
 			</thead>
@@ -215,10 +214,10 @@
 			%>
 					<tr>			
 						<td align="center"><%=freevo.getFbno() %></td>					
-						<td align="center"><a href="selectfreeboardDetail.ec?fbno=<%=freevo.getFbno() %>" style="color:black;"><%=freevo.getFbsubject() %></a></td>
+						<td align="center"><a href="selectfreeboardDetail.ec?fbno=<%=freevo.getFbno() %>" style="color:blue;"><%=freevo.getFbsubject() %></a></td>
 						<td align="center"><%=freevo.getFbname() %></td>
 						<!-- td align="center"><%=freevo.getFbcontent() %></td -->
-						<td align="center"><%=freevo.getFbimg() %></td>
+						<!-- td align="center"><%=freevo.getFbimg() %></td> -->
 						<td align="center"><%=freevo.getFbinsertdate() %></td>
 					</tr>
 					<%
@@ -285,8 +284,8 @@
 	</div>
 		<br>
 		<br>
+</body>
 	<jsp:include page="../../../../footer.jsp" flush="true">
 	<jsp:param value="" name=""/>
 	</jsp:include>
-</body>
 </html>

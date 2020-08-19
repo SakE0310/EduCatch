@@ -121,7 +121,7 @@ function listClick(){
 						if(img!=null){
 						%>
 							<div id ="fbimg" name="fbimg" align="center">
-	         				<img src="/EduCatch/assets/img/freeImg/<%= freevo.getFbimg() %>" border=() width="100" height="100"/><br>
+	         				<img src="/EduCatch/assets/img/freeImg/<%= freevo.getFbimg() %>" border=() width="300" height="300"/><br>
 	         				</div>
 						<%
 						}
