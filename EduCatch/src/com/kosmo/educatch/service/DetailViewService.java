@@ -15,4 +15,5 @@ public interface DetailViewService {
 	public List<ReviewVO> reviewList(ReviewVO param);
 	public int insertBookmark(AcademyVO param);
 	public int deleteBookmark(AcademyVO param);
+	public List<AcademyVO> selectBookmark(AcademyVO param);
 }

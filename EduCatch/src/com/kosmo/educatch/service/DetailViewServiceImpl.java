@@ -111,4 +111,16 @@ public class DetailViewServiceImpl implements DetailViewService {
 		return nCnt;
 	}//end of deleteBookmark
 
+	//----------찜목록 조회
+	@Override
+	public List<AcademyVO> selectBookmark(AcademyVO param) {
+
+		log.info("DetailViewServiceImpl reviewList 시작 >>>> ");
+		List<AcademyVO> list = new ArrayList<AcademyVO>();
+		list = detailViewMapper.selectBookmark(param);
+		log.info("DetailViewServiceImpl reviewList 끝 >>>> ");
+		
+		return list;
+	}//end of deleteBookmark
+
 }
