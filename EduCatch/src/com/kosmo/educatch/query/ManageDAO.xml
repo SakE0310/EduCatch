@@ -65,7 +65,7 @@
 	
 	<insert id="insertTimetable" parameterType="timetable">
 		<selectKey keyProperty="ttno" resultType="String" order="BEFORE">
-	      SELECT    /*+ INDEX_DESC(SYS_C007117) */        
+	      SELECT    /*+ INDEX_DESC(SYS_C0012156) */        
 		          'TT'||LPAD(
 		              (NVL(MAX(SUBSTR(TTNO,-4)),0)+1),5,'0' 
 		          )TTNO

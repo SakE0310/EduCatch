@@ -33,7 +33,7 @@ public class ManagerCheckInterceptor extends HandlerInterceptorAdapter {
 				PrintWriter pw = response.getWriter();
 				pw.println("<script type='text/javascript' charset='utf-8'>");
 				pw.println("alert('관리자 기능입니다. 새로운 접속을 시도해주세요');");
-				pw.println("history.back();");
+				pw.println("location.href='http://localhost:8088/EduCatch/index.jsp'");
 				pw.println("</script>");
 				pw.flush();
 				return false;

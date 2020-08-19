@@ -52,16 +52,20 @@
 	$(document).ready(function(){
 		var windowWidth1 = $(window).width();
 		if(windowWidth1 < 992) {
-			$('.liLogin').show();
+            $('.liLogin').show();
+            $('.liMy').show();
 		} else {
-			$('.liLogin').hide();
+            $('.liLogin').hide();
+            $('.liMy').hide();
 		}
 		$(window).resize(function() {
 			var windowWidth = $(window).width();
 			if(windowWidth < 992) {
-				$('.liLogin').show();
+                $('.liLogin').show();
+                $('.liMy').show();
 			} else {
-				$('.liLogin').hide();
+                $('.liLogin').hide();
+                $('.liMy').hide();
 			}
 		});
 	});
@@ -134,6 +138,7 @@
                             	if(mvo != null){
                             	
                             %>
+                            <input type="hidden" id="mm" value="1"/>
                            <div class="col-lg-2">
                            <div class="main-menu d-none d-lg-block">
                                 <!-- 로그인버튼 예정  -->
@@ -156,6 +161,7 @@
                             	}else{
                             	
                             %>
+                            <input type="hidden" id="mm" value="0"/>
                             <div class="col-lg-2">
                                 <!-- 로그인버튼 예정  -->
                                 <div class="search d-none d-lg-block">

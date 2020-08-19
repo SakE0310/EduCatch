@@ -34,7 +34,17 @@
 /* 3. slick Nav */
 // mobile_menu
     var menu = $('ul#navigation');
-    menu.append('<li class="liLogin"><a href="login.ec">로그인</a></li>');
+	var mm = $('#mm');
+	if(mm.val()>0){
+    menu.append('<li class="liMy slicknav_collapsed slicknav_parent">' + 
+                '<a href="#" role="menuitem" aria-haspopup="true" tabindex="0" class="slicknav_item slicknav_row" style="outline: none;">'+
+                '<a href="#" tabindex="0">내정보</a>'+
+                '<ul>'+ 
+                '<li><a href="myReview.ec" role="menuitem" tabindex="0">마이페이지</a></li>' +
+                '<li><a href="logout.ec" role="menuitem" tabindex="0">로그아웃</a></li></ul>');		
+	}else{
+    menu.append('<li class="liLogin"><a href="login.ec">로그인</a></li>');		
+	}
     if(menu.length){
       menu.slicknav({
         prependTo: ".mobile_menu",
