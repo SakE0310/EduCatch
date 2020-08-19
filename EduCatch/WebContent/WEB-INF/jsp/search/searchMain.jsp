@@ -12,18 +12,21 @@
 		<jsp:include page="../../../top.jsp" flush="true">
 			<jsp:param value="" name=""/>
 		</jsp:include>
+		
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- 		<script src="/path/to/jquery.mCustomScrollbar.concat.min.js"></script> -->
 		<script type="text/javascript">
 			$(document).ready(function(){
 				//지역 함수
 				ajaxGetDistrict();
 				//카테고리 함수
 				ajaxGetMajor();
-				
-				
+
 				//지역 대분류 변경시 지역소 분류 자동 변경
 				$('.select-district').on('change','select',function(){
 					var setDistrict = $('#district').val();
@@ -223,7 +226,7 @@
 						url : urls,
 						data : datas
 					}).done(function(resParam){
-						console.log("ajaxGetCity resParam >>> "+resParam);
+						console.log("ajaxGetCity re,sParam >>> "+resParam);
 						var st = "";
 						for(i in resParam.cityList){
 							var city = resParam.cityList[i].city; //강남 강북
@@ -231,12 +234,24 @@
 						}
 						$('select#city').html(st);
 						$('select#city').niceSelect('update');
+						//call scroll
+						callNiceSelect(resParam);
 						console.log("ajaxGetCity end >>>");
 					}).fail(function(resParam){
 						alert("에러");
 					});
 				}//getCity 
 				
+				//scroll function
+				function callNiceSelect(resParam){
+					console.log("callNiceSelect >>> "+resParam.cityList[0].city);
+					$('.nice-select').click(function(){
+						console.log("nice-select click");
+						var list = $('.list');
+						console.log("list >>> "+list);
+						list.css("overflow","scroll");
+ 					});
+				};
 				//카테 대분류
 				function ajaxGetMajor(){
 					urls = "getCmajor.ec"; //controller 카테고리 대분류
@@ -250,7 +265,6 @@
 							var cmajor = resParam.major[i].cmajor; //언어,체육
 							st += "<option value='"+cmajor+"'>"+cmajor+"</option>\n";
 						}
-						console.log()
 						$('select#cmajor').html(st);
 						$('select#cmajor').niceSelect('update');
 						console.log("ajaxGetMajor end >>>");
@@ -286,11 +300,9 @@
 				}//getMinor
 				
 			});//document function
-			
 		</script>
-		
+	
 		<style type="text/css">
-		
 		table{
 			border-spacing : 10px;
 			border-collapse : separate;
@@ -302,7 +314,11 @@
 	   		background: #140C40;
 	   		width: 100px;
 	   		border: 1px solid transparent;
-		}
+ 		}
+ 		.list { 
+ 		    height:250px; 
+ 		    width:145px;
+		} 
 		#form {
 			margin: auto;
 		}
@@ -329,22 +345,22 @@
 								</td>
 								<td class="select-district">
 									<select id="district">
-										<option value=""></option>
+										<option></option>
 									</select>
 								</td>
 								<td class="select-city">
 									<select id="city">
-										<option value=""></option>
+										<option></option>
 									</select>
 								</td>
 								<td class="select-cmajor">
 									<select id="cmajor">
-										<option value=""></option>
+										<option></option>
 									</select>
 								</td>
 								<td class="select-cminor">
 									<select id="cminor">
-										<option value=""></option>
+										<option></option>
 									</select>
 								</td>
 								<td class="button-search">
