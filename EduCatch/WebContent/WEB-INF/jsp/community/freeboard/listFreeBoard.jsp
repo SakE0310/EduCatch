@@ -258,6 +258,7 @@
 				</tr>
 			</tbody>
 		</table>
+		</div>
 		</form>
 		<br>
 		<!-- 검색 폼  -->
@@ -282,8 +283,7 @@
 		</div>
 		</form>
 	</div>
-		<br>
-		<br>
+		<br><br><br><br><br><br>
 </body>
 	<jsp:include page="../../../../footer.jsp" flush="true">
 	<jsp:param value="" name=""/>
