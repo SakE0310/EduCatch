@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,6 @@ import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SubjectVO;
-import com.kosmo.educatch.vo.TimetableVO;
 
 @Controller
 public class DetailViewController {
@@ -64,7 +63,7 @@ public class DetailViewController {
 	
 	@ResponseBody
 	@RequestMapping("insertBookmark.ec")
-	public Map<String, String> insertBookmark(HttpServletRequest request){
+	public Map<String, String> insertBookmark(HttpServletRequest request, HttpSession session){
 		log.info("DetailViewController insertBookmark 시작 >>> ");
 		/*
 		TimetableVO tvo = new TimetableVO();
@@ -96,7 +95,7 @@ public class DetailViewController {
 	
 	@ResponseBody
 	@RequestMapping("deleteBookmark.ec")
-	public Map<String, String> deleteBookmark(HttpServletRequest request){
+	public Map<String, String> deleteBookmark(HttpServletRequest request, HttpSession session){
 		log.info("DetailViewController deleteBookmark >>> ");
 		String ano = request.getParameter("ano");
 		log.info("ano >!>!>!> " + ano);
@@ -115,6 +114,41 @@ public class DetailViewController {
 		log.info("DetailViewController deleteBookmark 끝 >>> ");
 		return map;
 	}
+	
+	@ResponseBody
+	@RequestMapping("selectBookmark.ec")
+	public Map<String, String> selectBookmark(HttpServletRequest request, HttpSession session, AcademyVO param){
+		log.info("DetailViewController selectBookmark >>> ");
+		String ano = request.getParameter("ano");
+		log.info("ano >!>!>!> " + ano);
+		//log.info("academy_ano >!>!>!> " + academy_ano);
+		//sbvo.setAcademy_ano(ano);
+		//sbvo.setMember_mno("M202008130001");
+		
+		param.setAno(ano);
+		param.setAcademy_ano(ano);
+		
+		
+		List<AcademyVO> bookmarklist = detailViewService.selectBookmark(param);
+		
+		int i = bookmarklist.size();
+		log.info("booksize >>>" + i);
+		
+		
+		Map<String, String> map = new HashMap<String, String>();
+		if(i > 0) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "failed");
+		}
+		
+		
+		
+		log.info("DetailViewController selectBookmark 끝 >>> ");
+		return map;
+	}
+	
+	
 	
 	
 }

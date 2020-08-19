@@ -56,6 +56,11 @@ public class DetailViewMapperImpl extends SqlSessionDaoSupport implements Detail
 	public int deleteBookmark(AcademyVO param) {
 		return getSqlSession().delete("DetailViewMapper.deleteBookmark");
 	}
+	//----------찜목록 조회
+	@Override
+	public List<AcademyVO> selectBookmark(AcademyVO param) {
+		return getSqlSession().selectList("DetailViewMapper.selectBookmark");
+	}
 	
 	
 	

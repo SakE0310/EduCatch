@@ -3,31 +3,6 @@
 						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kosmo.educatch.dao.DetailViewMapper">
 
-	<select id="subjectViewList" parameterType="subjectview" resultType="subjectview">
-		SELECT
-			    A.SNO,
-			    A.SNAME,
-			    A.SDAY,
-			    A.STIME,
-			    A.SPEOPLE,
-			    A.SPRICE,
-			    A.ACADEMY_ANO,
-			    A.SDELETEYN,
-			    TO_CHAR(A.SINSERTDATE,'YYYY-MM-DD') AS SINSERTDATE, 
-			    TO_CHAR(A.SUPDATEDATE,'YYYY-MM-DD') AS SUPDATEDATE,
-                B.ANO,
-                B.ADELETEYN,
-                TO_CHAR(B.AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
-			    TO_CHAR(B.AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
-		FROM 
-				SUBJECT A , ACADEMY B
-		WHERE A.ACADEMY_ANO(+) = B.ANO
-		AND A.SDELETEYN = 'N'
-		AND B.ADELETEYN = 'N'
-		AND B.ANO = #{ano, jdbcType=VARCHAR}
-		ORDER BY 1 DESC
-	</select>
-	
 	<select id="academyView" parameterType="String" resultType="academyview">
 		
 		SELECT
@@ -84,6 +59,31 @@
         GROUP BY B.ANO
 	</select>
 	
+	<select id="subjectViewList" parameterType="subjectview" resultType="subjectview">
+		SELECT
+			    A.SNO,
+			    A.SNAME,
+			    A.SDAY,
+			    A.STIME,
+			    A.SPEOPLE,
+			    A.SPRICE,
+			    A.ACADEMY_ANO,
+			    A.SDELETEYN,
+			    TO_CHAR(A.SINSERTDATE,'YYYY-MM-DD') AS SINSERTDATE, 
+			    TO_CHAR(A.SUPDATEDATE,'YYYY-MM-DD') AS SUPDATEDATE,
+                B.ANO,
+                B.ADELETEYN,
+                TO_CHAR(B.AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
+			    TO_CHAR(B.AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
+		FROM 
+				SUBJECT A , ACADEMY B
+		WHERE A.ACADEMY_ANO(+) = B.ANO
+		AND A.SDELETEYN = 'N'
+		AND B.ADELETEYN = 'N'
+		AND B.ANO = #{ano, jdbcType=VARCHAR}
+		ORDER BY 1 DESC
+	</select>
+	
 	<select id="reviewList" parameterType="review" resultType="review">
 		SELECT
 			    	A.RBNO              AS RBNO,
@@ -126,5 +126,17 @@
 		AND		ACADEMY_ANO= #{ano, jdbcType=VARCHAR}
 	</delete>
 	
+	<select id="selectBookmark" parameterType="academyview" resultType="academyview">
+		
+		SELECT
+			    A.ACADEMY_ANO,
+			    A.MEMBER_MNO
+		FROM 
+				BOOKMARK A
+		WHERE ACADEMY_ANO=#{academy_ano, jdbcType=VARCHAR}
+		AND MEMBER_MNO='M202008170001'
+		ORDER BY 1 DESC
+		
+	</select>
 	
 </mapper>

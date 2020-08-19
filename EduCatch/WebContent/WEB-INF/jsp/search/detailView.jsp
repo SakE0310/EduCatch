@@ -413,6 +413,8 @@ body {
 
 	$(document).ready(function(){
 		
+		ajaxGetBookmark();
+		
 		$('#addrev').click(function(){
 			 $("#pageForm").attr("action","insertDisplay.ec");
 	         $("#pageForm").attr("method","POST");
@@ -524,7 +526,27 @@ body {
 	    });
 	
 	function ajaxGetBookmark(){
-		$.ajax
+		var academy_ano = $('#academy_ano').val();
+		var member_mno = $('#member_mno').val();
+		var ano = $('#ano').val();
+		
+		$.ajax({
+			url : "selectBookmark.ec",
+			type : "post",
+			data : {
+				"academy_ano" : academy_ano,
+				"member_mno" : member_mno,
+				"ano" : ano,
+				},
+		}).done(function(resultParam){
+			if(resultParam.result=="success"){
+				$('#follow').val('찜제거');
+			}else{
+				$('#follow').val('찜추가');
+			}
+		}).fail(function(resultParam){
+			alert("추가시 DB연결에 문제가 발생하였습니다.");
+		});
 	}
 	</script>
 </head>
