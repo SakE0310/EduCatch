@@ -189,6 +189,5 @@ public class MemberJoinController {
 		log.info("memberCheck함수 진입 끝");
 		return num;
 	}
-	
 	//자체 가입시 아이디 중복체크
 }
