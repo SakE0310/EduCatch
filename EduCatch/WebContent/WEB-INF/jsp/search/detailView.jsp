@@ -446,7 +446,11 @@ body {
 						alert('정상적으로 데이터가 등록되지 않았습니다.')
 					}
 				}).fail(function(resultParam){
-					alert("추가시 DB연결에 문제가 발생하였습니다.");
+					if(resultParam.readyState == 4){
+						alert(resultParam.responseText);
+					}else{
+						alert("추가시 DB연결에 문제가 발생하였습니다.");	
+					}
 				});
 			}
 			else
@@ -471,7 +475,11 @@ body {
 						alert('정상적으로 데이터가 등록되지 않았습니다.')
 					}
 				}).fail(function(resultParam){
-					alert("추가시 DB연결에 문제가 발생하였습니다.");
+					if(resultParam.readyState == 4){
+						alert(resultParam.responseText);
+					}else{
+						alert("추가시 DB연결에 문제가 발생하였습니다.");	
+					}
 				});
 			}
 			

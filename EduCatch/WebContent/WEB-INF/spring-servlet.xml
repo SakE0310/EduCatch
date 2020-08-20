@@ -33,7 +33,12 @@
         	<mvc:mapping path="/manageReserChk.ec"/>
         	<mvc:mapping path="/manageAcaMem.ec"/>
         	<mvc:mapping path="/addAca.ec"/>
-        	<bean id="ManagerInterceptor" class="com.kosmo.educatch.manager.ManagerCheckInterceptor"/>
+        	<bean id="managerInterceptor" class="com.kosmo.educatch.manager.ManagerCheckInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+        	<mvc:mapping path="/insertBookmark.ec"/>
+        	<mvc:mapping path="/deleteBookmark.ec"/>
+        	<bean id="ajaxInterceptor" class="com.kosmo.educatch.manager.AjaxLoginCheckInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 	
