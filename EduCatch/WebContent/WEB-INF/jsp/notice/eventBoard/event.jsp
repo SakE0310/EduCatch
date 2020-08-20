@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import ="com.kosmo.educatch.vo.EventVO" %>    
+<%@page import ="com.kosmo.educatch.vo.EventVO" %> 
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,6 +59,10 @@
 	    width: auto;
 	    padding: 3px 10px;
 	    }
+	    
+	   #mainWrapper{
+	   	margin-bottom: 260px;
+	   } 
 </style>
 
 <script type="text/javascript">
@@ -75,11 +80,11 @@
 	//검색버튼을 누르면 실행
 	$("#searchData").click(function() {
 		console.log("검색버튼 누름");
-		var sVal = document.searchFormEvent.searchFilter.options[document.searchFormEvent.searchFilter.selectedIndex].value;
+		var sVal = document.eventForm.searchFilter.options[document.eventForm.searchFilter.selectedIndex].value;
 		console.log("sVal>>>"+sVal);
-		$("#searchFormEvent").attr("action","searchEvent.ec");
-		$("#searchFormEvent").attr("method","POST");
-		$("#searchFormEvent").submit();
+		$("#eventForm").attr("action","searchEvent.ec");
+		$("#eventForm").attr("method","POST");
+		$("#eventForm").submit();
 	})//end of searchData
 	
   });//end of ready()
@@ -87,6 +92,12 @@
 	</head>
 <body>
 <%
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}	
+
 	//페이징 변수 초기화
 	String pno="0";
 	String pagesize="0";
@@ -100,64 +111,61 @@
 		ArrayList list = (ArrayList)obj;
 		int nCnt = list.size();
 %>
-<main>
-	<div class="container box_1170">
-		<div class="section-top-border">
-			<div class="row">
-				<div class="col-lg-10 col-md-10" id="form">
-				<form id="eventForm" name="eventForm">
-					<div class="div-header">
-						<table class="table-header">
-							<tr>
-								<td align="center"><h1>이벤트 게시판 목록</h1></td>
-							</tr>
-						</table>
-						<hr>
-					</div>
-					<div class="div-body">
-						<table class="table">
-							<colgroup>
-								<col width="120px"/>
-								<col width="600px"/>
-								<col width="120px"/>
-								<col width="120px"/>
-							</colgroup>
-						<thead class="table_head">
-							<tr class="table-row">
-								<td align="center">글번호</td>
-								<td align="center">제목</td>
-								<td align="center">작성자</td>
-								<td align="center">등록일자</td>
-							</tr>
-						</thead>
-						<tbody>			
+		<div id="mainWrapper" align = "center">
+		<div align = "center" style="width: 500px;" >
+		<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+				<td align="center"><h1>이벤트게시판 목록</h1></td>
+				
+			</tr>
+			</table>
+			<hr>
+		</div>
+		<form id="eventForm" name="eventForm">
+			<div  class="container" style="height: 390px;">
+				<table align="center" class="table">
+				<colgroup>
+					<col width="120px"/>
+					<col width="600px"/>
+					<col width="120px"/>
+					<col width="120px"/>
+				</colgroup>
+				<thead class="table_head">
+					<tr class="table-row">
+						<td align="center">글번호</td>
+						<td align="center">제목</td>
+						<td align="center">작성자</td>
+						<td align="center">작성일</td>
+					</tr>
+				</thead>
+				<tbody>			
 			<%		
-					if(list !=null && nCnt>0){
-			
-						for(int i=0; i<nCnt; i++){
-							EventVO evo = (EventVO)list.get(i);
-							
-							pagesize = evo.getPagesize();
-							groupsize = evo.getGroupsize();
-							curpage = evo.getCurpage();
-							totalcount = evo.getTotalcount();
-							
-							System.out.println("pagesize >>>"+pagesize);
-							System.out.println("groupsize >>>"+groupsize);
-							System.out.println("curpage >>>"+curpage);
-							System.out.println("totalcount >>>"+totalcount);
-							System.out.println("==============================");
+				if(list !=null && nCnt>0){
+		
+					for(int i=0; i<nCnt; i++){
+						EventVO evo = (EventVO)list.get(i);
+						
+						pagesize = evo.getPagesize();
+						groupsize = evo.getGroupsize();
+						curpage = evo.getCurpage();
+						totalcount = evo.getTotalcount();
+						
+						System.out.println("pagesize >>>"+pagesize);
+						System.out.println("groupsize >>>"+groupsize);
+						System.out.println("curpage >>>"+curpage);
+						System.out.println("totalcount >>>"+totalcount);
+						System.out.println("==============================");
 			%>
-							<tr align="center">
-								<td>
-									<a href="selectEvent.ec?eno=<%=evo.getEno() %>" id="eno_color"><%=evo.getEno() %></a>
-								</td>
-								<td>
-									<a href="selectEvent.ec?eno=<%=evo.getEno() %>" id="eno_color"><%=evo.getEsubject() %></a>
-								</td>
-								<td><%=evo.getEname() %></td>
-								<td><%=evo.getEinsertdate()%></td>
-							</tr>	
+						<tr align="center">
+							<td>
+								<a href="selectEvent.ec?eno=<%=evo.getEno() %>" id="eno_color"><%=evo.getEno() %></a>
+							</td>
+							<td>
+								<a href="selectEvent.ec?eno=<%=evo.getEno() %>" id="eno_color"><%=evo.getEsubject() %></a>
+							</td>
+							<td><%=evo.getEname() %></td>
+							<td><%=evo.getEinsertdate()%></td>
+						</tr>	
 			<%				
 							}//end of for
 						
@@ -174,7 +182,7 @@
 						if(list !=null && nCnt>0){
 			%>
 							<tr>
-								<td colspan="18">
+								<td colspan="4">
 								<jsp:include page="eventPaging.jsp" flush="true">
 									<jsp:param name="url" value="searchEvent.ec"/>
 									<jsp:param name="pagesize" value="<%= pagesize %>"/>
@@ -189,16 +197,36 @@
 					}//end of if(obj)
 			%>
 							<tr>
-								<td colspan="4" align="right">
-									<input type="button" value="등록" id="insertData" class=" btn_light btn_box_01">
+								<td colspan="2" align="left">
+							
+								<select name="searchFilter">
+									<option value="제목">제목</option>
+									<option value="내용">내용</option>
+								</select>
+								<input type="text" name="keyword" id = "keyword" style ="width:200px; height:40px;">
+								<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 								</td>
+							
+<%
+							if(mvo != null){
+								if( mvo.getMauth().equals("3")){
+%>				
+								<td colspan="2" align="right">
+								<input type="button" value="글쓰기" id="insertData" class=" btn_light btn_box_01"> 
+								</td>
+<%	
+									}
+								}
+ %>
 							</tr>
 						</tbody>
 						</table>
 					</div>
+					</div>
 				</form>
+				
 				<!-- 검색 폼  -->
-					<div class="div-search">
+					<!-- <div class="div-search">
 						<form id="searchFormEvent" name="searchFormEvent">
 							<div align = "center" id="sForm">
 								<select name="searchFilter">
@@ -209,12 +237,7 @@
 								<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 							</div>
 						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</main>
+						</div> -->
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

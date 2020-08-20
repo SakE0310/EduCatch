@@ -78,6 +78,10 @@
 			height:600px;
 			background: #aaa;
 		} */
+		
+		#row-magin{
+		margin-bottom: 185px;
+	}	
 </style>
 
 <script type="text/javascript">
@@ -172,12 +176,12 @@
 	//검색버튼을 누르면 실행
 	$("#searchData").click(function() {
 		console.log("검색버튼 누름");
-		var sVal = document.searchFormNotice.searchFilter.options[document.searchFormNotice.searchFilter.selectedIndex].value;
+		var sVal = document.noticeForm.searchFilter.options[document.noticeForm.searchFilter.selectedIndex].value;
 		console.log("sVal>>>"+sVal);
 		 
-		$("#searchFormNotice").attr("action","searchNotice.ec");
-		$("#searchFormNotice").attr("method","POST");
-		$("#searchFormNotice").submit();
+		$("#noticeForm").attr("action","searchNotice.ec");
+		$("#noticeForm").attr("method","POST");
+		$("#noticeForm").submit();
 		 
 		
 		alert("아직안만듬");
@@ -202,19 +206,20 @@
 		ArrayList list = (ArrayList)obj;
 		int nCnt = list.size();
 %>
-	<form id="noticeForm" name="noticeForm">
 	<!-- <div id="sideBanner">
 		사이드 바
 	</div> -->
-	<div id="mainWrapper">
-		<div>
+	<div id="mainWrapper"align = "center">
+		<div align = "center" style="width: 500px;" >
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
 				<td align="center"><h1>공지사항 게시판 목록</h1></td>
+				
 			</tr>
 			</table>
 			<hr>
 		</div>
+	<form id="noticeForm" name="noticeForm">
 		<div  class="container"  style="height: 390px;">
 			<table align="center" class="table">
 			<colgroup>
@@ -268,7 +273,7 @@
 		if(list !=null && nCnt>0){
 %>
 			<tr>
-			<td colspan="18">
+			<td colspan="4">
 			<jsp:include page="noticePaging.jsp" flush="true">
 				<jsp:param name="url" value="searchNotice.ec"/>
 				<jsp:param name="str" value=""/>
@@ -287,14 +292,19 @@
 	}//end of if(obj)
 		
 %>
-				<tr>
-				<td colspan="4" align="right">
-				<input type="button" value="글쓰기" id="insertData" class=" btn_light btn_box_01"> 
-				<!-- <input type="button" value="수정" id="updateData">
-				<input type="button" value="삭제" id="deleteData"> -->
-				</td>
+					<tr>
+					<td colspan="2" align="left">
+						<select name="searchFilter">
+							<option value="제목">제목</option>
+							<option value="내용">내용</option>
+						</select>
+						<input type="text" name="keyword" id = "keyword" style ="width:200px; height:40px;">
+						<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
+					</td>
+					<td colspan="2" align="right">
+						<input type="button" value="글쓰기" id="insertData" class=" btn_light btn_box_01"> 
+					</td>
 			</tr>
-			
 			</table>
 		</div>
 	</div>	
@@ -302,39 +312,28 @@
 	<!-- 검색 폼  -->
 	<div >
 		<form id="searchFormNotice" name="searchFormNotice">
-		<div align = "center" id="sForm">
-		
-			<select name="searchFilter">
-				<option value="제목">제목</option>
-				<option value="내용">내용</option>
-			</select>
-			<input type="text" name="keyword" id = "keyword" style ="width:200px; height:40px;">
-			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
-			<hr>
-		</div>
-			<div class="row">
-		      <div class="col-md-12">
-		         <div class="row">
-		            <div class="col-md-5">
-		            </div>
-		            <div class="col-md-1.8">
-						<input type="text" name="startDate" id="startDate">
-		            </div>
-		             <h3> &nbsp;&nbsp;~ &nbsp;</h3>
-		            <div class="col-md-1.5">
-	      		 		<input type="text" name="endDate" id="endDate"> 
-		            </div>
-	      				&nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
-		         </div>
-		      </div>
-		   </div>
+
+			<div id ="row-magin">
+						<div class="row" >
+					      <div class="col-md-12">
+					         <div class="row">
+					            <div class="col-md-5">
+					            </div>
+					            <div class="col-md-1.8">
+									<input type="text" name="startDate" id="startDate">
+					            </div>
+					             <h3> &nbsp;&nbsp;~ &nbsp;</h3>
+					            <div class="col-md-1.5">
+				      		 		<input type="text" name="endDate" id="endDate"> 
+					            </div>
+				      				&nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
+					         </div>
+					      </div>
+					   </div>
+					</div>   
 		</form>
 	</div>
-	
-<br>
-<br>
-<br>
-<br>
+
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

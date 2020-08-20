@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<jsp:include page="../../../../top.jsp" flush="true">
+<jsp:param value="" name=""/>
+</jsp:include>
 <meta charset="UTF-8"">
 <title>Insert title here</title>
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
@@ -13,8 +16,11 @@
 <!-- jQuery를 사용하기위해 jQuery라이브러리 추가 -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-<!-- function 함수 짜야함 -->
+<!-- 테이블 부트스트랩 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 	var oEditors = [];
@@ -60,12 +66,12 @@
 			$("#edit").submit();
 		});
 		
-		//==관리자가 삭제버튼 클릭시 form 전송========
+		/* //==관리자가 삭제버튼 클릭시 form 전송========
 		$("#deleteData").click(function() {
 			$("#edit").attr("action",".ec");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
-		});
+		}); */
 		
 		//===관리자가 취소버튼을 누르면 실행========
 		$("#selectData").click(function() {
@@ -83,9 +89,17 @@
 </style>
 <body>
 
-	<!-- action/document/location -->
+<div class="container">
 	<form id="edit">
-		<table style="width: 50%" border="1" align="center">
+		<div>
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+				<td align="center"><h2>event</h2></td>
+			</tr>
+			</table>
+			<hr>
+		</div>
+		<table style="width: 90%" border="0" align="center"  class="table">
 		<input type="hidden" id="eno" name="eno" value="<%=evo.getEno() %>" />
 			<tr>
 				<td style="width: 100px">제목</td>
@@ -119,11 +133,14 @@
 			<tr>
 				<td colspan="3" align="right">
 				 <input type="button" id="updateData" value="수정" />
-				 <input type="button" id="deleteData" value="삭제" />
 				 <input type="button" id="selectData" value="취소" /> 
 				</td>
 			</tr>
 		</table>
 	</form>
+</div>	
+<jsp:include page="../../../../footer.jsp" flush="true">
+<jsp:param value="" name=""/>
+</jsp:include>	
 </body>
 </html>

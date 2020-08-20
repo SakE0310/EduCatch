@@ -84,7 +84,7 @@
 			</table>
 			<hr>
 		</div>
-		<table style="width: 90%" border="1" align="center" class="table">
+		<table style="width: 90%" border="0" align="center" class="table">
 			<tr>
 				<td style="width: 100px">제목</td>
 				<td><input type="text" id="nsubject" name="nsubject"

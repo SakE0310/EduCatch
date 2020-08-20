@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kosmo.educatch.vo.EventVO" %>    
+<%@ page import="com.kosmo.educatch.vo.EventVO" %>  
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,10 +23,7 @@
 		 display: block; 
 		 margin: 0px auto;
 	  }
-	  .container box_1170 {
-		margin : 0 auto;
-		padding : 50px;
-	  }
+	  
 	  .btn_light {
 	    display: inline-block;
 	    text-align: center;
@@ -37,14 +35,22 @@
 	    height: 40px;
 	    font-size: 15px;
 		}
-	.btn_box_01 {
-	    width: auto;
-	    padding: 3px 10px;
-	    }
-	.table {
-		position : relative;
-		top : 50px;
+
+	#contnent{
+		width : 600px;
+		height: 600px;
 	}
+	#table_head{
+		border-collapse: collapse;
+		background-color: #F5F5F5;
+	}
+	
+	#contentDIV{
+		overflow:hidden;
+		height:auto;
+	}
+	
+	
 </style>
 <script type="text/javascript">
 
@@ -89,22 +95,33 @@ $(document).ready(function() {
 </head>
 <body>
 <%
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}
+
 	Object obj= request.getAttribute("EventVO");
 
 	if(obj != null){
 		EventVO evo =(EventVO)obj;
 
 %>
-<main align ="center">
-	<div class="container box_1170"  align ="center">
-		<div class="section-top-border" align ="center">
-			<div class="row" align ="center">
+	<div class="container">
+	<div>
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+				<td align="center"><h2>event</h2></td>
+			</tr>
+			</table>
+			<hr>
+		</div>
 				<form id="eventSelForm" name="eventSelForm" >
 				<input type="hidden" name="eno" id="eno" value="<%=evo.getEno() %>">
-					<table class="table" align ="center">
-					 <thead>
+					<table align="center" width="700px" height="100px" class="table">
+					<thead id="table_head">
 			             <tr>
-			                 <th><div><%=evo.getEsubject() %></div></th>
+			                 <th><div align="center"><%=evo.getEsubject() %></div></th>
 			             </tr>
 			         </thead>
 			         <tbody>
@@ -123,7 +140,7 @@ $(document).ready(function() {
 			         	</tr>
 			         	<tr>
 			         		<td>
-			         			<div>
+			         			<div id="contentDIV" >
 			         				<%=evo.getEcontent()%>
 			<%
 										String img = evo.getEimg();
@@ -141,8 +158,16 @@ $(document).ready(function() {
 			%>
 						<tr>
 							<td align="center">
+<%
+			if(mvo != null){
+				if( mvo.getMauth().equals("3")){
+%>							
 								<input type="button" value="수정" id="updateData" class=" btn_light btn_box_01">
 								<input type="button" value="삭제" id="deleteData" class=" btn_light btn_box_01">
+<%	
+					}
+				}
+%>								
 								<input type="button" value="목록" id="listData" class=" btn_light btn_box_01">
 							</td>	
 						</tr>
@@ -150,9 +175,6 @@ $(document).ready(function() {
 				</table>
 				</form>
 				</div>
-			</div>
-		</div>
-	</main>
 	<jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

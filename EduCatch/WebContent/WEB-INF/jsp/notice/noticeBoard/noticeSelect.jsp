@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kosmo.educatch.vo.NoticeVO" %>
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
@@ -16,10 +17,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
-	#contnent{
-		width : 600px;
-		height: 600px;
-	}
 	#table_head{
 		border-collapse: collapse;
 		background-color: #F5F5F5;
@@ -27,7 +24,9 @@
 	
 	#contentDIV{
 		overflow:hidden;
-		height:auto;
+		 height:auto;
+		/* height:462px; */
+		/* overflow:scroll; */
 	}
 
 </style>
@@ -76,6 +75,12 @@
 </head>
 <body>
 <%
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}
+
 	Object obj= request.getAttribute("NoticeVO");
 
 	if(obj != null){
@@ -84,6 +89,14 @@
 %>
 	<div class="container">
 	<form id="noticeSelForm" name="noticeSelForm" >
+	<div>
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+				<td align="center"><h2>notice</h2></td>
+			</tr>
+			</table>
+			<hr>
+		</div>
 		 <input type="hidden" name="nno" id="nno" value="<%=nvo.getNno() %>" >
 		<table align="center" width="700px" height="100px" class="table">
 		 <thead id="table_head">
@@ -107,7 +120,7 @@
          	</tr>
          	<tr>
          		<td>
-         			<div id="contentDIV" style="height: 565px;">
+         			<div id="contentDIV" align="center">
          				<%=nvo.getNcontent()%>
 <%
 							String img = nvo.getNimg();
@@ -123,10 +136,19 @@
 <%			
 	}//end of if(obj)	
 %>
+
 			<tr>
 			<td align="center">
+<%
+			if(mvo != null){
+				if( mvo.getMauth().equals("3")){
+%>
 				<input type="button" value="수정" id="updateData">
 				<input type="button" value="삭제" id="deleteData">
+<%	
+					}
+				}
+%>				
 				<input type="button" value="목록" id="listData">
 				
 			</td>	
