@@ -31,7 +31,7 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter{
 			PrintWriter pw = response.getWriter();
 			pw.println("<script type='text/javascript' charset='utf-8'> ");
 			pw.println("alert('로그인이 필요한 기능입니다. 로그인을 해주세요');");
-			pw.println("history.back();");
+			pw.println("location.href = document.referrer;");
 			pw.println("</script>");
 			pw.flush();
 			return false;

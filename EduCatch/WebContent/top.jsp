@@ -7,6 +7,13 @@
 		mvo = (MemberVO)hs.getAttribute("user");
 	}
 %>
+<%  
+response.setHeader("Cache-Control","no-store");  
+response.setHeader("Pragma","no-cache");  
+response.setDateHeader("Expires",0);  
+if (request.getProtocol().equals("HTTP/1.1"))
+        response.setHeader("Cache-Control", "no-cache");
+%>  
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -136,6 +143,7 @@
                             </div> 
                             <%
                             	if(mvo != null){
+                            		if(mvo.getMno() != null){
                             	
                             %>
                             <input type="hidden" id="mm" value="1"/>
@@ -158,6 +166,7 @@
                             </div>
                             </div>
                             <% 
+                            		}
                             	}else{
                             	
                             %>
