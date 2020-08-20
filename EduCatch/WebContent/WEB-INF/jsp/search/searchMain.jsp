@@ -19,7 +19,6 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<!-- 		<script src="/path/to/jquery.mCustomScrollbar.concat.min.js"></script> -->
 		<script type="text/javascript">
 			$(document).ready(function(){
 				//지역 함수
@@ -303,6 +302,7 @@
 		</script>
 	
 		<style type="text/css">
+		
 		table{
 			border-spacing : 10px;
 			border-collapse : separate;
@@ -319,28 +319,31 @@
  		    height:250px; 
  		    width:145px;
 		} 
+		.main {
+			margin : 0 auto;
+		}
 		#form {
 			margin: auto;
 		}
 		#show{
 			margin : 0 auto;
 			text-align : center;
-			padding : 200px 200px;
+			padding : 200px 100px;
 		}
 		</style>
 	</head>
 	<body>
-		<main>
+		<main class="main">
 		<div class="container box_1170">
 			<div class="section-top-border">
 				<div class="row">
 					<div class="col-lg-10 col-md-10" id="form">
 						<table class="search-table">
-							<tr class="search-header">
+							<tr class="search-row">
 								<td class="search-aname">
-									<input type="text" id="aname" name="aname" size="60px" class="form-control" placeholder="학원명으로 입력해보세요">
+									<input type="text" id="aname" name="aname" size="58px" class="form-control" placeholder="학원명으로 입력해보세요">
 								</td>
-								<td>
+								<td class="search-aname">
 									<input type="button" id="search-aname" class="genric-btn primary" value="검색">
 								</td>
 								<td class="select-district">
