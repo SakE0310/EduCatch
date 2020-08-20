@@ -24,22 +24,166 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
 	crossorigin="anonymous"></script>
 <style type="text/css">
+
+<%-- -----------CSS------------- --%>
+
 .sb-nav-link-icon {
 	height: 20px;
 	width: 20px;
 }
+
+
+#hhr {
+    border-bottom: 5px solid #eceff8;
+    border-top: 0 none;
+    margin: 30px 0;
+    padding: 0;
+}
+
+.table{
+
+	color:black;
+}
+
+
+
+<%-- 버튼 CSS --%>
+.btn1{
+  background:#172295;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:30px;
+  font-size:1.2em;
+  padding:0 1em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  border-radius: 12px;
+}
+.btn1:hover{
+  background:#fff;
+  color:#172295;
+}
+.btn1:before,.btn1:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #172295;
+  transition:400ms ease all;
+}
+.btn1:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.btn1:hover:before,.btn1:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+<%-- 스크롤스파이 --%>
+* {
+  margin: 0;
+  padding: 0;
+}
+.nav {
+  background-color: rgba(51, 51, 51, 0.9);
+  width: 100%;
+  height: 60px;
+  top: 0;
+}
+.nav-menu li {
+    display: inline-block;
+    margin-right: -6px;
+    line-height: 60px;
+}
+.nav-menu-item {
+    display: block;
+    padding: 0 106px;
+    color: #fff;
+    text-decoration: none;          
+}
+.nav-menu-item:hover,
+.isactive {
+    background-color: #222;
+    color: #fff;
+}
+
+.section {
+    margin-top: 60px;
+    line-height: 22px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.padding-top10 {
+    padding-top:10px;
+}
+
+#section-1 {
+    height: auto;
+    background-color: #ffffff;
+    color: #fff;
+    padding: 20px;
+}
+#section-2 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+#section-3 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+#section-4 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+
+
+
+<%-- --전체,컨텐츠-- --%>  
+#all{
+		border-left:1px solid #f3f3f3;
+		border-right:1px solid #f3f3f3;
+		background:#f3f3f3;
+}
+
+#content{
+		width:1100px;
+		height:auto;
+		margin:0 auto;
+		border-left:1px solid #d8d8d8;
+		border-right:1px solid #d8d8d8;
+		border-top:1px solid #d8d8d8;
+		border-bottom:1px solid #d8d8d8;
+		background:#ffffff;
+}
+
+#linked{ 
+		color: black;
+
+}
+
+
+
+
+
+
+
 </style>
 </head>
 <body class="sb-nav-fixed">
 <%-- ----------- 바디 ------------- --%>
-<%
-		Object listobj1 = request.getAttribute("academylist"); 
-
-		ArrayList academylist = (ArrayList)listobj1;
-		
-		int academynCnt = academylist.size();
-%>
-
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<a class="navbar-brand" href="index.jsp"><img alt="logo"
 			src="assets/img/favicon-32x32.png"> EduCatch</a>
@@ -97,85 +241,203 @@
 								<i class="fas fa-table mr-1"></i> 학원정보
 							</div>
 							<div class="card-body">
-                                <div class="table-responsive">
-                                    <div class="text-right container" style="margin-right:0px;">
-		                    	<button class="btn btn-primary success"><i class="fas fa-edit"></i> 수정</button>
-		                    	<button class="btn btn-danger reject" style="margin-right:5px;"><i class="fas fa-eraser"></i> 삭제</button>
-		                    </div>     
-							<div class="card-body">
-								<div class="table-responsive">
-									<div class="text-right container" style="margin-right: 0px;">
-									</div>
-									<table class="acceptTable table table-striped"
-										id="memberAccept" style="width: 100%">
-										<thead>
-											<tr>
-												<th>학원 이름</th>
-												<th>학원 연락처</th>
-												<th>학원 주소</th>
-												<th>학원 로고</th>
-												<th>학원 가입일</th>
-												<th>마지막 수정일</th>
-											</tr>
-										</thead>
-										<tbody>
-										<%
-											for(int i=0; i<academynCnt; i++){
-												AcademyVO avo = (AcademyVO)academylist.get(i);
-												
-												if(academynCnt>0){
-													String address = avo.getAaddr1() + " " + avo.getAaddr2();
-										%>
-											<tr>
-												<th><%=avo.getAname() %></th>
-												<th><%=avo.getAtel() %></th>
-												<th><%=address %></th>
-												<th><img src="/EduCatch/assets/img/academyLogo/<%= avo.getAlogo() %>" border=0 width="50" height="50" /></th>
-												<th><%=avo.getAinsertdate() %></th>
-												<th><%=avo.getAupdatedate() %></th>
-											</tr>
-											<%
-												}
-											}
-										%>
-										</tbody>
-									</table>
-	<div class="row">
-		<div class="col-md-12">
-			 <a id="modal-749483" href="#modal-container-749483" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
+								<%-- ----------- 카트바디 ------------- --%>
+								<%
+									//Object obj1 = request.getAttribute("avo");
+									//Object obj2 = request.getAttribute("cvo");
+									//Object obj3 = request.getAttribute("gvo");
+									Object objlist1 = request.getAttribute("academylist"); 
+									
+									//AcademyVO avo = (AcademyVO)obj1;
+									//ConvenienceVO cvo = (ConvenienceVO)obj2;
+									//AcademyVO gvo = (AcademyVO)obj3;
+									ArrayList academylist = (ArrayList)objlist1;
+									
+									int academynCnt = academylist.size();
+									
+								%>
+								
+<div id="all"><%-- 전체 div --%>
+
+	<section id="content"> <%-- 컨텐츠(본문) div --%>
+	<%
+		for(int i=0; i<academynCnt; i++){
+			AcademyVO avo = (AcademyVO)academylist.get(i);
 			
-			<div class="modal fade" id="modal-container-749483" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="myModalLabel">
-								학원 수정
-							</h5> 
-							<button type="button" class="close" data-dismiss="modal">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							수정할 내용내용
-						</div>
-						<div class="modal-footer">
-							 
-							<button type="button" class="btn btn-primary">
-								변경
-							</button> 
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">
-								취소
-							</button>
-						</div>
-					</div>
-					
+			if(academynCnt>0){
+				String address = avo.getAaddr1() + " " + avo.getAaddr2();
+	%>
+		<div class="container-fluid"> <%-- top(윗부분) div --%>
+			<h4 align="center" style="margin-top:30px">업데이트 날짜 : <%= avo.getAupdatedate()%></h4>
+			<div class="row" style="margin-top:50px">
+				<div class="col-md-4" align="right">
+					<input type="hidden" id="ano" name="ano" value="<%=avo.getAno() %>"/>
+					<input type="hidden" id="academy_ano" name="academy_ano" value="<%=avo.getAcademy_ano() %>"/>
+					<input type="hidden" id="member_mno" name="member_mno" />
+					<img src="/EduCatch/assets/img/academyLogo/<%= avo.getAlogo() %>" border=0 width="200" height="200" />
 				</div>
-				
+				<div class="col-md-8" style="margin-top:30px">
+					<h1 style="font-weight:bold"><%=avo.getAname() %></h1> 
+					<h3><img src="/EduCatch/assets/img/Icon_location.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;<%=address %> </h3>
+					<h3><img src="/EduCatch/assets/img/Icon_call.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;<%=avo.getAtel() %> </h3>
+				</div>
 			</div>
-			
+			<div style="margin-right:30px">
+			</div>
 		</div>
-	</div>
-								</div>
+	
+		
+	<hr id="hhr">
+
+
+		
+	<%-- 탭 본문내용1 div --%>
+	<div class="section">
+	    <section id="section-1">
+	        <h1 style="color:black">학원 정보</h1><br><br>
+	        <div class="container">
+				  <table class="table table-condensed">
+				    <tr>
+				        <td><img src="/EduCatch/assets/img/Icon_academy.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;학원명</td>
+				        <td><%=avo.getAname() %></td>
+				      </tr>
+				      <tr>
+				        <td><img src="/EduCatch/assets/img/Icon_call.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;연락처</td>
+				        <td><%=avo.getAtel() %></td>
+				      </tr>
+				      <tr>
+				        <td><img src="/EduCatch/assets/img/Icon_location.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;주소</td>
+				        <td><%=address %></td>
+				      </tr>
+				  </table>
+				</div>
+	    </section>
+	    <%
+			}
+		}
+	    %>
+	
+	<%-- 탭 본문내용2 div --%>
+    <section id="section-2">
+    	<hr id="hhr">
+       	<h1 style="color:black">수업 정보</h1>
+    	<div class="container">
+			  <table class="table table-condensed">
+       			 <br><br>
+			    <thead>
+			      <tr>
+			        <th>과목명</th>
+			        <th>수강날짜</th>
+			        <th>수강시간</th>
+			        <th>수강금액</th>
+			        <th>수강인원</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+<%--
+<%
+
+	for(int i=0; i<subjectnCnt; i++){
+		SubjectVO svo = (SubjectVO)subjectlist.get(i);
+		
+		if(subjectnCnt>0){
+%>
+			    <tr>
+			        <td><%=svo.getSname() %></td>
+			        <td><%=svo.getSday() %></td>
+			        <td><%=svo.getStime() %></td>
+			        <td><%=svo.getSprice() %></td>
+			        <td><%=svo.getSpeople() %></td>
+			    </tr>
+<%
+		}
+	}
+%>
+--%>		      
+			    </tbody>
+			  </table>
+			</div>
+    </section>
+	<%-- 탭 본문내용3 div --%>
+    <section id="section-3">
+    <hr id="hhr">
+         <h1 style="color:black">편의기능</h1>
+	<%--
+			<br><br>
+			<%
+				String acparking = cvo.getAcbus();
+				String acstore = cvo.getAcstore();
+				String acbus = cvo.getAcbus();
+				String acelevator = cvo.getAcelevator();
+				String acstudyroom = cvo.getAcstudyroom();
+				String aclounge = cvo.getAclounge();
+				String aclocker = cvo.getAclocker();
+				//주차장
+				if(acparking.equals("Y")){
+					%>
+					<img src="/EduCatch/assets/img/convenience/parking.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<%
+					
+				}
+				//편의점
+				if(acstore.equals("Y")){
+					%>
+					<img src="/EduCatch/assets/img/convenience/convenience.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<%
+				}
+				//셔틀버스
+				if(acbus.equals("Y")){
+					%>
+					<img src="/EduCatch/assets/img/convenience/bus.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<%
+				}
+				//엘레베이터
+				if(acelevator.equals("Y")){
+					%>
+					<img src="/EduCatch/assets/img/convenience/elevator.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<%
+				}
+				//자습실
+				if(acstudyroom.equals("Y")){
+					%>
+					<img src="/EduCatch/assets/img/convenience/studyroom.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<%
+				}
+				//휴게실
+				if(aclounge.equals("Y")){
+					%>
+					<img src="/EduCatch/assets/img/convenience/lounge.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<%
+				}
+				//사물함
+				if(aclocker.equals("Y")){
+					%>
+					<img src="/EduCatch/assets/img/convenience/locker.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<%
+				}
+			%>
+			
+    --%>
+    </section>
+    
+</div>
+	</section>
+</div>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+								
+								
 							</div>
 						</div>
 					</div>

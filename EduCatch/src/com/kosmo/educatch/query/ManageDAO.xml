@@ -65,7 +65,7 @@
 	
 	<insert id="insertTimetable" parameterType="timetable">
 		<selectKey keyProperty="ttno" resultType="String" order="BEFORE">
-	      SELECT    /*+ INDEX_DESC(SYS_C0012156) */        
+	      SELECT    /*+ INDEX_DESC(SYS_C007117) */        
 		          'TT'||LPAD(
 		              (NVL(MAX(SUBSTR(TTNO,-4)),0)+1),5,'0' 
 		          )TTNO
@@ -118,12 +118,15 @@
 			    A.CATEGORY_CNO,
 			    A.ADELETEYN,
 			    TO_CHAR(A.AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
-			    TO_CHAR(A.AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
+			    TO_CHAR(A.AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE,
+                B.MNO,
+                B.ACADEMY_ANO
 		FROM 
-				ACADEMY A
+				ACADEMY A, MEMBER B
 		WHERE A.ADELETEYN = 'N'
+        AND A.ANO(+) = B.ACADEMY_ANO
+        AND B.MNO = 'M202008170001'
 		ORDER BY 1 DESC
-		
 	</select>
 	
 	

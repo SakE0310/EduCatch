@@ -36,7 +36,6 @@ public class DetailViewController {
 		ModelAndView mav = new ModelAndView();
 		
 		String ano = (String)request.getParameter("ano");
-		//String ano = "A00001";
 		log.info("ano >!>!>!>!>!>"+ano);
 		
 		AcademyVO avo = detailViewService.academyView(ano);
