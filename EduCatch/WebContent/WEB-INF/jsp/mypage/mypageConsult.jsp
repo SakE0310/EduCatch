@@ -98,7 +98,7 @@
 			<br>
 			<input type ="button" id="pwCheck" value="개인정보 변경"><br>
 			<input type ="button" id="pwEdit" value="비밀번호 변경"><br>
-			회원탈퇴
+			<input type ="button" id="memOut" value="회원탈퇴"><br>
 			
 		<input type="hidden" id ="mid" name ="mid" value="<%=mvo.getMid()%>">
 		</div>

@@ -25,6 +25,8 @@
         	<mvc:mapping path="/insertDisplay.ec"/>
         	<mvc:mapping path="/cinsertDisplay.ec"/>
         	<mvc:mapping path="/AcaReq.ec"/>
+        	<mvc:mapping path="/mypageOut.ec"/>
+        	<mvc:mapping path="/myReview.ec"/>
         	<bean id="loginInterceptor" class="com.kosmo.educatch.manager.LoginCheckInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
