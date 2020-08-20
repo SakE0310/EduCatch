@@ -1,3 +1,5 @@
+<%@page import="com.kosmo.educatch.vo.ConvenienceVO"%>
+<%@page import="com.kosmo.educatch.vo.SubjectVO"%>
 <%@page import="com.kosmo.educatch.vo.AcademyVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -181,6 +183,20 @@
 
 
 </style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$('#addSubject').on('click', function(){
+			$('#subjectForm').attr("action", "manageInsertSubject.ec");
+			$('#subjectForm').attr("method", "POST");
+			$('#subjectForm').submit();
+		});
+	
+	});
+
+</script>
+
 </head>
 <body class="sb-nav-fixed">
 <%-- ----------- 바디 ------------- --%>
@@ -243,17 +259,30 @@
 							<div class="card-body">
 								<%-- ----------- 카트바디 ------------- --%>
 								<%
-									//Object obj1 = request.getAttribute("avo");
-									//Object obj2 = request.getAttribute("cvo");
-									//Object obj3 = request.getAttribute("gvo");
-									Object objlist1 = request.getAttribute("academylist"); 
+									Object obj = null;
+									obj = request.getAttribute("resultStr");
+									String str = (String)obj;
+									if(str != null && str != "null"){
+										out.println("<script>\n");
+										out.println("alert('" + str + "');");
+										out.println("location.href='manageAca.ec'");
+										out.println("</script>\n");
+									}
 									
-									//AcademyVO avo = (AcademyVO)obj1;
-									//ConvenienceVO cvo = (ConvenienceVO)obj2;
-									//AcademyVO gvo = (AcademyVO)obj3;
+								
+								
+								
+									Object objlist1 = request.getAttribute("academylist"); 
+									Object objlist2 = request.getAttribute("subjectlist"); 
+									Object objlist3 = request.getAttribute("conlist");
+									
 									ArrayList academylist = (ArrayList)objlist1;
+									ArrayList subjectlist = (ArrayList)objlist2;
+									ArrayList conlist = (ArrayList)objlist3;
 									
 									int academynCnt = academylist.size();
+									int subjectnCnt = subjectlist.size();
+									int connCnt = conlist.size();
 									
 								%>
 								
@@ -277,9 +306,9 @@
 					<img src="/EduCatch/assets/img/academyLogo/<%= avo.getAlogo() %>" border=0 width="200" height="200" />
 				</div>
 				<div class="col-md-8" style="margin-top:30px">
-					<h1 style="font-weight:bold"><%=avo.getAname() %></h1> 
-					<h3><img src="/EduCatch/assets/img/Icon_location.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;<%=address %> </h3>
-					<h3><img src="/EduCatch/assets/img/Icon_call.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;<%=avo.getAtel() %> </h3>
+					<h3 style="font-weight:bold"><%=avo.getAname() %></h3> 
+					<h5><img src="/EduCatch/assets/img/Icon_location.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;<%=address %> </h5>
+					<h5><img src="/EduCatch/assets/img/Icon_call.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;<%=avo.getAtel() %> </h5>
 				</div>
 			</div>
 			<div style="margin-right:30px">
@@ -294,7 +323,56 @@
 	<%-- 탭 본문내용1 div --%>
 	<div class="section">
 	    <section id="section-1">
-	        <h1 style="color:black">학원 정보</h1><br><br>
+	        <h1 style="color:black">학원 정보</h1>
+	        <div class="row" style="color:black">
+									<div class="col-md-12">
+										 <a id="modal-749483" href="#modal-container-749483" role="button" class="btn btn-primary" data-toggle="modal">학원정보수정</a>
+									
+										<div class="modal fade" id="modal-container-749483" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="myModalLabel">
+															학원 정보
+														</h5> 
+														<button type="button" class="close" data-dismiss="modal">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<table class="table table-condensed">
+				    <tr>
+				        <td><img src="/EduCatch/assets/img/Icon_academy.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;학원명</td>
+				        <td><%=avo.getAname() %></td>
+				      </tr>
+				      <tr>
+				        <td><img src="/EduCatch/assets/img/Icon_call.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;연락처</td>
+				        <td><%=avo.getAtel() %></td>
+				      </tr>
+				      <tr>
+				        <td><img src="/EduCatch/assets/img/Icon_location.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;주소</td>
+				        <td><%=address %></td>
+				      </tr>
+				  </table>
+													</div>
+													<div class="modal-footer">
+														 
+														<button type="button" class="btn btn-primary">
+															수정
+														</button> 
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">
+															취소
+														</button>
+													</div>
+												</div>
+												
+											</div>
+										
+										</div>
+								
+									</div>
+								</div><!--모달 end-->
+								<br><br>
 	        <div class="container">
 				  <table class="table table-condensed">
 				    <tr>
@@ -312,15 +390,105 @@
 				  </table>
 				</div>
 	    </section>
-	    <%
-			}
-		}
-	    %>
+	  
 	
 	<%-- 탭 본문내용2 div --%>
     <section id="section-2">
     	<hr id="hhr">
        	<h1 style="color:black">수업 정보</h1>
+       	<div class="row" style="color:black">
+									<div class="col-md-12">
+										 <a id="modal-749484" href="#modal-container-749484" role="button" class="btn btn-primary" data-toggle="modal">과목추가</a>
+										<div class="modal fade" id="modal-container-749484" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="myModalLabel">
+															수업 정보
+														</h5> 
+														<button type="button" class="close" data-dismiss="modal">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+													<div class="modal-body">
+													<form name="subjectForm" id="subjectForm">
+														<table class="table table-condensed">
+														   	 <tr>
+														        <td>과목명</td>
+														        <td><input type="text" class="form-control" id="sname" name="sname"></td>
+														     </tr>
+														     <tr>
+														        <td>수강날짜</td>
+														        <td><input type="text" class="form-control" id="sday" name="sday"></td>
+														     </tr>
+														     <tr>
+														        <td>수강시간</td>
+														        <td><input type="text" class="form-control" id="stime" name="stime"></td>
+														     </tr>
+														     <tr>
+														        <td>수강금액</td>
+														        <td><input type="text" class="form-control" id="speople" name="speople"></td>
+														     </tr>
+														     <tr>
+														        <td>수강인원</td>
+														        <td><input type="text" class="form-control" id="sprice" name="sprice"></td>
+														     </tr>
+														</table>
+														<input type="hidden" class="form-control" id="sno" name="sno">
+														<input type="hidden" class="form-control" id="academy_ano" name="academy_ano" value="<%=avo.getAcademy_ano()%>">
+													<%
+			
+			}
+			}
+													%>
+													</form>
+													</div>
+													<div class="modal-footer">
+														 
+														<button type="button" class="btn btn-primary" id="addSubject">
+															추가
+														</button> 
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">
+															취소
+														</button>
+													</div>
+												</div>
+												
+											</div>
+										
+										</div>
+										
+										 <a id="modal-749483" href="#modal-container-749483" role="button" class="btn btn-primary" data-toggle="modal">과목수정</a>
+									
+										<div class="modal fade" id="modal-container-749483" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="myModalLabel">
+															과목 정보
+														</h5> 
+														<button type="button" class="close" data-dismiss="modal">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														수정할 내용내용
+													</div>
+													<div class="modal-footer">
+														 
+														<button type="button" class="btn btn-primary">
+															추가
+														</button> 
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">
+															취소
+														</button>
+													</div>
+												</div>
+												
+											</div>
+								</div><!--모달 end-->
+									</div>
+								</div><!--모달 end-->
     	<div class="container">
 			  <table class="table table-condensed">
        			 <br><br>
@@ -334,7 +502,7 @@
 			      </tr>
 			    </thead>
 			    <tbody>
-<%--
+
 <%
 
 	for(int i=0; i<subjectnCnt; i++){
@@ -353,7 +521,7 @@
 		}
 	}
 %>
---%>		      
+	      
 			    </tbody>
 			  </table>
 			</div>
@@ -362,9 +530,14 @@
     <section id="section-3">
     <hr id="hhr">
          <h1 style="color:black">편의기능</h1>
-	<%--
 			<br><br>
 			<%
+			for(int i=0; i<connCnt; i++){
+				ConvenienceVO cvo = (ConvenienceVO)conlist.get(i);
+				
+				if(connCnt>0){
+					
+				
 				String acparking = cvo.getAcbus();
 				String acstore = cvo.getAcstore();
 				String acbus = cvo.getAcbus();
@@ -415,11 +588,12 @@
 					<img src="/EduCatch/assets/img/convenience/locker.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
 				}
+				}
+				}
 			%>
 			
-    --%>
-    </section>
     
+    </section>
 </div>
 	</section>
 </div>

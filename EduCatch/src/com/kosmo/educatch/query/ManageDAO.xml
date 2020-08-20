@@ -102,7 +102,7 @@
 	</delete>
 	
 	
-	<!-- 학원관리 학원 전체조회 -->
+	<!-- 학원관리 학원 조회 -->
 	<select id="academyManageView" parameterType="academyview" resultType="academyview">
 		
 		SELECT
@@ -128,6 +128,88 @@
         AND B.MNO = 'M202008170001'
 		ORDER BY 1 DESC
 	</select>
+	
+	<!-- 학원관리 과목 조회 -->
+	<select id="subjectManageView" parameterType="subjectview" resultType="subjectview">
+		
+		SELECT
+			    A.SNO,
+			    A.SNAME,
+			    A.SDAY,
+			    A.STIME,
+			    A.SPEOPLE,
+			    A.SPRICE,
+			    A.ACADEMY_ANO,
+			    A.SDELETEYN,
+			    TO_CHAR(A.SINSERTDATE,'YYYY-MM-DD') AS SINSERTDATE, 
+			    TO_CHAR(A.SUPDATEDATE,'YYYY-MM-DD') AS SUPDATEDATE,
+                B.ANO,
+                B.ADELETEYN,
+                TO_CHAR(B.AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
+			    TO_CHAR(B.AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
+		FROM 
+				SUBJECT A , ACADEMY B, MEMBER C
+		WHERE A.ACADEMY_ANO(+) = B.ANO
+		AND A.SDELETEYN = 'N'
+		AND B.ADELETEYN = 'N'
+		AND C.MNO = 'M202008170001'
+		ORDER BY 1 DESC
+	</select>
+	
+		<!-- 학원관리 편의기능 조회 -->
+	<select id="conManageView" parameterType="convenience" resultType="convenience">
+		SELECT
+			    A.ACADEMY_ANO,
+                A.ACPARKING,
+                A.ACSTORE,
+                A.ACBUS,
+                A.ACELEVATOR,
+                A.ACSTUDYROOM,
+                A.ACLOUNGE,
+                A.ACLOCKER
+		FROM 
+				ACADEMY_CONVENIENCE A, MEMBER B
+        WHERE A.ACADEMY_ANO(+) = B.ACADEMY_ANO
+        AND B.MNO = 'M202008170001'
+		ORDER BY 1 DESC
+	</select>
+	
+	<insert id="insertSubject" parameterType="subjectview">
+		<selectKey keyProperty="sno" resultType="String" order="BEFORE">
+		SELECT 	/*+ INDEX_DESC(SYS_C0011497) */ 		 
+			    'S'||LPAD(
+			    (NVL(MAX(SUBSTR(A.SNO,-4)),0)+1),5,'0' 
+			    )COMMNO  
+		FROM SUBJECT A
+		</selectKey>
+		
+		INSERT INTO SUBJECT
+					(
+					        SNO, 
+						    SNAME,
+						    SDAY,
+						    STIME,
+						    SPEOPLE,
+						    SPRICE,
+						    ACADEMY_ANO,
+						    SDELETEYN,
+						    SINSERTDATE,
+						    SUPDATEDATE
+					)
+		VALUES
+					(
+					        #{sno, jdbcType=VARCHAR},
+					        #{sname, jdbcType=VARCHAR},
+					        #{sday, jdbcType=VARCHAR},
+					        #{stime, jdbcType=VARCHAR},
+					        #{speople, jdbcType=VARCHAR},
+					        #{sprice, jdbcType=VARCHAR},
+					        #{academy_ano, jdbcType=VARCHAR},
+					        'N',
+					        SYSDATE,
+					        SYSDATE
+					)
+	</insert>
 	
 	
 </mapper>

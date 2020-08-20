@@ -8,6 +8,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.ConvenienceVO;
 import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.SubjectVO;
 import com.kosmo.educatch.vo.TimetableVO;
@@ -64,11 +65,31 @@ public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapp
 		return getSqlSession().insert("ManagerMapper.deleteTimetable", tvo);
 	}
 	
-	// ---------- 학원관리 학원 전체조회
+	// ---------- 학원관리 학원 조회
 	@Override
 	public List<AcademyVO> academyManageView(AcademyVO avo){
 		log.info("ManageMapperImpl academyManageView >>> ");
 		return getSqlSession().selectList("ManagerMapper.academyManageView");
+	}
+	
+	// ---------- 학원관리 과목 조회
+	@Override
+	public List<SubjectVO> subjectManageView(SubjectVO svo) {
+		log.info("ManageMapperImpl subjectManageView >>> ");
+		return getSqlSession().selectList("ManagerMapper.subjectManageView");
+	}
+	
+	// ---------- 학원관리 편의기능 조회
+	@Override
+	public List<ConvenienceVO> conManageView(ConvenienceVO cvo) {
+		log.info("ManageMapperImpl conManageView >>> ");
+		return getSqlSession().selectList("ManagerMapper.conManageView");
+	}
+
+	// ---------- 학원관리 과목 입력
+	@Override
+	public int insertSubject(SubjectVO svo) {
+		return getSqlSession().insert("ManagerMapper.insertSubject");
 	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kosmo.educatch.dao.ManageMapper;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.ConvenienceVO;
 import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.SubjectVO;
 import com.kosmo.educatch.vo.TimetableVO;
@@ -91,7 +92,7 @@ public class ManageServiceImpl implements ManageService {
 		return cnt;
 	}
 	
-	// ---------- 학원관리 학원 전체조회
+	// ---------- 학원관리 학원 조회
 	@Override
 	public List<AcademyVO> academyManageView(AcademyVO avo){
 		log.info("ManagerServiceImpl academyManageView >>> ");
@@ -100,6 +101,34 @@ public class ManageServiceImpl implements ManageService {
 		log.info("ManagerServiceImpl selectMemList end >>> ");
 		
 		return list;
+	}
+	// ---------- 학원관리 과목 조회
+	@Override
+	public List<SubjectVO> subjectManageView(SubjectVO svo) {
+		log.info("ManagerServiceImpl subjectManageView >>> ");
+		List<SubjectVO> list = new ArrayList<SubjectVO>();
+		list = manageMapper.subjectManageView(svo);
+		log.info("ManagerServiceImpl subjectManageView end >>> ");
+		
+		return list;
+	}
+	// ---------- 학원관리 편의기능 조회
+	@Override
+	public List<ConvenienceVO> conManageView(ConvenienceVO cvo) {
+		log.info("ManagerServiceImpl conManageView >>> ");
+		List<ConvenienceVO> list = new ArrayList<ConvenienceVO>();
+		list = manageMapper.conManageView(cvo);
+		log.info("ManagerServiceImpl conManageView end >>> ");
+		
+		return list;
+	}
+	// ---------- 학원관리 과목 추가
+	@Override
+	public int insertSubject(SubjectVO svo) {
+		log.info("ManagerserviceImpl insertSubject >>> ");
+		int cnt = manageMapper.insertSubject(svo);
+		log.info("ManagerserviceImpl insertSubject end >>> ");
+		return cnt;
 	}
 
 }

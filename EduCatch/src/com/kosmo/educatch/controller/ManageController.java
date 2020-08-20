@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +22,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.ManageService;
 import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.ConvenienceVO;
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.SubjectVO;
 import com.kosmo.educatch.vo.TimetableVO;
 
 @Controller
@@ -41,19 +45,53 @@ public class ManageController {
 	}
 	
 	@RequestMapping("manageAca")
-	public ModelAndView getManageAcaPage(@ModelAttribute AcademyVO avo) {
+	public ModelAndView getManageAcaPage(@ModelAttribute AcademyVO avo, 
+													SubjectVO svo,ConvenienceVO cvo) {
 		log.info("ManageController getManagePage >>> ");
 		
 		List<AcademyVO> academylist = manageService.academyManageView(avo);
-		
+		List<SubjectVO> subjectlist = manageService.subjectManageView(svo);
+		List<ConvenienceVO> conlist = manageService.conManageView(cvo);
 		
 
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("academylist", academylist);
+		mv.addObject("subjectlist", subjectlist);
+		mv.addObject("conlist", conlist);
 		mv.setViewName("manage/academyManage");
 		
 		return mv;
 	}
+	
+	
+	@RequestMapping("manageInsertSubject.ec")
+	public ModelAndView manageInsertSubject(HttpServletRequest request, 
+						SubjectVO svo, AcademyVO avo, ConvenienceVO cvo){
+		log.info("ManageController manageInsertSubject >>> ");
+		int i = manageService.insertSubject(svo);
+		
+		List<AcademyVO> academylist = manageService.academyManageView(avo);
+		List<SubjectVO> subjectlist = manageService.subjectManageView(svo);
+		List<ConvenienceVO> conlist = manageService.conManageView(cvo);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("academylist", academylist);
+		mav.addObject("subjectlist", subjectlist);
+		mav.addObject("conlist", conlist);
+		if(i>0) {
+			mav.addObject("resultStr", "등록 성공");
+			mav.setViewName("manage/academyManage");
+		}else {
+			mav.addObject("resultStr", "등록 실패");
+			mav.setViewName("manage/academyManage");
+		}
+		
+		log.info("ManageController manageInsertSubject 끝>>> ");
+		
+		return mav;
+	}
+	
+	
 	
 	@RequestMapping("manageReserChk")
 	public ModelAndView getManageReserChkPage() {
