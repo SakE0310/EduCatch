@@ -45,11 +45,28 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		
 		MemberVO memberInfo = loginService.loginCheck(param);
-		
 		log.info("memberInfo >>>>"+memberInfo);
-		session.setAttribute("user", memberInfo);
-		mav.addObject("MemberVO", memberInfo);
-		mav.setViewName("member/login/result");
+		
+		if(memberInfo != null){
+		
+			if(memberInfo.getMemailchk().toUpperCase().equals("Y")) {
+				session.setAttribute("user", memberInfo);
+				mav.addObject("MemberVO", memberInfo);
+				mav.setViewName("member/login/result");
+				
+			}else{
+				mav.addObject("result", "인증 받지 않은 이메일입니다.");
+				mav.setViewName("member/join/result");
+				
+			}
+		}else
+		{
+			mav.addObject("message","아이디 또는 비밀번호가 올바르지 않습니다.");
+			mav.setViewName("member/login/error");
+		}
+			
+		
+		
 				
 		log.info("loginCheck() >>>>");
 		return mav;

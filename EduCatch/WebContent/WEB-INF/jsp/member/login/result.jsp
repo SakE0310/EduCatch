@@ -14,6 +14,8 @@
 </head>
 <body>
 	<div align="center" class ="body">
+		
+		
 		<% 
 			HttpSession hs = request.getSession(false);
 			MemberVO memVo = (MemberVO) hs.getAttribute("user");
@@ -39,11 +41,7 @@
 					</tr>
 					<script>
 						location.href="http://localhost:8088/EduCatch/index.jsp";
-					</script>
-				<% } else {%>
-					<script>
-					alert("아이디 또는 비밀번호가 올바르지 않습니다.");
-					history.back();
+						
 					</script>
 				<% } %>
 			</table>

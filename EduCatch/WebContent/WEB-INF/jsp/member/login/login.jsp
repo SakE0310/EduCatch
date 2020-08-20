@@ -133,6 +133,8 @@
 	// SDK 초기화 여부를 판단합니다.
 	console.log(Kakao.isInitialized());
 	// @breif 카카오 로그인 버튼을 생성합니다.
+
+	
 </script>
 	</head>
 		<body>
