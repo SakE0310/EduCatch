@@ -99,7 +99,7 @@
                             <div class="col-xl-7 col-lg-9 col-md-8 col-sm-9">
                                 <div class="hero__caption">
                                     <h1 data-animation="fadeInLeft" data-delay="0.2s">우리동네 학원찾기</h1>
-                                    <p data-animation="fadeInLeft" data-delay="0.4s">EduCatch에서 우리동네 학원과 후기를 살펴보세요!</p>
+                                    <p data-animation="fadeInLeft" data-delay="0.4s">EduCatch에서 우리동네 학원과 후기를 살펴보세요</p>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +117,7 @@
                             <!-- Section Tittle -->
                             <div class="section-tittle mb-35">
                                 <span class="element">About Us</span>
-                                <h2>We have all your needs, from micro macro</h2>
+                                <h2>We have all your needs, from micro macro1</h2>
                             </div>
                             <p>We collect and analyze information about your general usage of the website, products, services, and courses. We might track your usage patterns to see what features of the website you commonly use, website traffic volume, frequency of visits, type and time of transactions, type of browser, browser language.</p>
                         </div>
@@ -157,36 +157,33 @@
                 <div class="row no-gutters">
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="single-gallery text-center">
-                            <div class="gallery-img" style="background-image: url(assets/img/gallery/gallery1.png);"></div>
+                            <div class="gallery-img" style="background-image: url(assets/img/gallery/g1.jpg);"></div>
                             <div class="thumb-content-box">
                                 <div class="thumb-content">
-                                    <h3>Mechanical Engineering</h3>
-                                    <p>We collect and analyze information about your general usage of the website, products, services.</p>
-                                    <a href="services.html">Learn More</a>
+                                    <h3>쉬운 학원찾기</h3>
+                                    <p>직접 학원에 전화를 하거나, 방문할 필요없이 언제 어디서나 간편하게 주변 학원정보를 찾아보세요.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="single-gallery no-margin text-center">
-                            <div class="gallery-img" style="background-image: url(assets/img/gallery/gallery2.png);"></div>
+                            <div class="gallery-img" style="background-image: url(assets/img/gallery/g2.jpg);"></div>
                             <div class="thumb-content-box">
                                 <div class="thumb-content">
-                                    <h3>Mechanical Engineering</h3>
-                                    <p>We collect and analyze information about your general usage of the website, products, services.</p>
-                                    <a href="services.html">Learn More</a>
+                                    <h3>필요한 정보를 한 페이지에</h3>
+                                    <p>학원에 대한 정보를 한 페이지에서 제공합니다. 다른곳에서 정보를 찾아 헤맬 필요가 없습니다.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="single-gallery text-center">
-                            <div class="gallery-img" style="background-image: url(assets/img/gallery/gallery3.png);"></div>
+                            <div class="gallery-img" style="background-image: url(assets/img/gallery/g3.jpg);"></div>
                             <div class="thumb-content-box">
                                 <div class="thumb-content">
-                                    <h3>Mechanical Engineering</h3>
-                                    <p>We collect and analyze information about your general usage of the website, products, services.</p>
-                                    <a href="services.html">Learn More</a>
+                                    <h3>믿을 수 있는 학원 정보</h3>
+                                    <p>학원 QnA와 회원들의 후기를 통해 궁금점을 해결 하세요. 학원 QnA는 학원 담당자들이 답변을 달아줍니다.</p>
                                 </div>
                             </div>
                         </div>
@@ -256,262 +253,15 @@
         </div>
         <!-- cat End -->
         <!-- Services Area start -->
-        <div class="service-area section-bg" data-background="assets/img/gallery/section_bg01.png">
-            <div class="container">
-                <div class="row align-items-end no-gutters">
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="single-main position-relative">
-                            <div class="single-wrapper active">
-                                <div class="single-services ">
-                                    <span>01.</span>
-                                    <h4>Building Yead</h4>
-                                    <p>We collect and analyze information about your general usage of the website to the products services and courses.</p>
-                                </div>
-                                <div class="services-btn">
-                                    <a href="project.html">View More</a>
-                                </div>
-                            </div>
-                            <span class="transparrent-btn active position-absolute">02. Meghna Bridge</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="single-main position-relative ">
-                            <div class="single-wrapper hide">
-                                <div class="single-services ">
-                                    <span>02.</span>
-                                    <h4>Meghna Bridge</h4>
-                                    <p>We collect and analyze information about your general usage of the website to the products services and courses.</p>
-                                </div>
-                                <div class="services-btn">
-                                    <a href="project.html">View More</a>
-                                </div>
-                            </div>
-                            <span class="transparrent-btn position-absolute">02. Meghna Bridge</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <div class="single-main position-relative">
-                            <div class="single-wrapper hide">
-                                <div class="single-services ">
-                                    <span>03.</span>
-                                    <h4>Kalis Vadru</h4>
-                                    <p>We collect and analyze information about your general usage of the website to the products services and courses.</p>
-                                </div>
-                                <div class="services-btn">
-                                    <a href="project.html">View More</a>
-                                </div>
-                            </div>
-                            <span class="transparrent-btn position-absolute">03. Kalis Vadru</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Services Area End -->
         <!-- Want To work -->
-        <section class="wantToWork-area gray-bg ">
-            <div class="container">
-                <div class="wants-wrapper w-padding2">
-                    <div class="row align-items-center justify-content-between">
-                        <div class="col-xl-8 col-lg-9 col-md-8">
-                            <div class="wantToWork-caption wantToWork-caption2">
-                                <h2>Up to 40% Off</h2>
-                                <p>We collect and analyze information about your general usage of the website, products, services, and courses.</p>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-md-4">
-                            <a href="#" class="btn w-btn wantToWork-btn">Learn More <i class="ti-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
         <!-- Want To work End -->
         <!-- Contact form Start -->
-        <div class="contact-form testimonial-area section-padding40 mb-40">
-            <div class="container">
-                <!-- Section Tittle -->
-                <div class="row justify-content-center">
-                    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10">
-                        <div class="section-tittle text-center mb-100">
-                            <span class="element">Testimonial</span>
-                            <h2>Some amazing words from our clients</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row no-gutters">
-                    <div class="col-lg-6 col-md-12">
-                        <!-- Testimonial Start -->
-                        <div class="h1-testimonial-active">
-                            <!-- Single Testimonial -->
-                            <div class="single-testimonial">
-                                <div class="testimonial-caption">
-                                    <p>"Working in conjunction with humanitarian aid agencies, we have supported programmes to help alleviate human suffering through.</p>
-                                    <div class="rattiong-caption">
-                                        <span>- Micky Mouse,<span>Business Man</span> </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single Testimonial -->
-                            <div class="single-testimonial">
-                                <div class="testimonial-caption">
-                                    <p>"Working in conjunction with humanitarian aid agencies, we have supported programmes to help alleviate human suffering through.</p>
-                                    <div class="rattiong-caption">
-                                        <span>- Micky Mouse,<span>Business Man</span> </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <!-- slider -->
-                        <div class="single-man-slider">
-                            <div class="man-slider-active">
-                                <div class="single-mam-img">
-                                    <img src="assets/img/gallery/man1.png" alt="">
-                                </div>
-                                <div class="single-mam-img">
-                                    <img src="assets/img/gallery/man1.png" alt="">
-                                </div>
-                                <div class="single-mam-img">
-                                    <img src="assets/img/gallery/man1.png" alt="">
-                                </div>
-                                <div class="single-mam-img">
-                                    <img src="assets/img/gallery/man1.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <!-- galary -->
-                        <div class="single-gallery">
-                            <div class="gallery-img" style="background-image: url(assets/img/gallery/gallery2.png);"></div>
-                            <div class="thumb-content-box">
-                                <div class="thumb-content">
-                                    <h3><a href="#">Need to make<br> an enquiry?</a></h3>
-                                    <p>We collect and analyze information about your general usage of the website products.</p>
-                                    <a href="services.html">Learn More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <!-- contact-form -->
-                        <div class="form-wrapper">
-                            <div class="row ">
-                                <div class="col-xl-12">
-                                    <div class="section-tittle section-tittle2 mb-30">
-                                        <h2>Drop your message</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <form id="contact-form" action="#" method="POST">
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-6">
-                                        <div class="form-box user-icon mb-15">
-                                            <input type="text" name="name" placeholder="Your Name">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-6">
-                                        <div class="form-box email-icon mb-15">
-                                            <input type="text" name="email" placeholder="Email">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-6">
-                                        <div class="form-box email-icon mb-15">
-                                            <input type="text" name="email" placeholder="Phone no.">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-6 mb-15">
-                                        <div class="select-itms">
-                                            <select name="select" id="select2">
-                                                <option value="">Topic</option>
-                                                <option value="">Topic one</option>
-                                                <option value="">Topic Two</option>
-                                                <option value="">Topic Three</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="form-box message-icon mb-15">
-                                            <textarea name="message" id="message" placeholder="Message"></textarea>
-                                        </div>
-                                        <div class="submit-info">
-                                            <button class="submit-btn2" type="submit">Send Message</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Contact form End -->
         <!--? Blog Area Start -->
-        <section class="home-blog-area pb-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="section-tittle mb-100">
-                            <span class="element">From News</span>
-                            <h2>News & Media center</h2>
-                            <p>We collect and analyze information about your general usage of the website products services and courses.</p>
-                            <a href="blog_details.html" class="all-btn">View All</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="home-blog-single mb-30">
-                            <div class="blog-img-cap">
-                                <div class="blog-img">
-                                    <img src="assets/img/gallery/home-blog1.png" alt="">
-                                </div>
-                                <div class="blog-cap">
-                                    <p>22 Apr 2020</p>
-                                    <h3><a href="blog_details.html">We might track your usage patterns to see</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="home-blog-single mb-30">
-                            <div class="blog-img-cap">
-                                <div class="blog-img">
-                                    <img src="assets/img/gallery/home-blog2.png" alt="">
-                                </div>
-                                <div class="blog-cap">
-                                    <p>22 Apr 2020</p>
-                                    <h3><a href="blog_details.html">The massive stadium screens at the MCG</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <!-- Blog Area End -->
         <!-- Want To work 2-->
-        <section class="wantToWork-area">
-            <div class="container">
-                <div class="wants-wrapper w-padding3">
-                    <div class="row align-items-center justify-content-between">
-                        <div class="col-xl-3 col-lg-3 col-md-3">
-                            <div class="wantToWork-caption wantToWork-caption2">
-                                <div class="logo">
-                                    <img src="assets/img/logo/logo.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-8 col-lg-8 col-md-8">
-                            <div class="double-btn f-right ">
-                                <a href="#" class="btn w-btn wantToWork-btn mr-20">Learn More <i class="ti-arrow-right"></i></a>
-                                <a href="#" class="btn2 w-btn wantToWork-btn">Learn More <i class="ti-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <!-- Want To work End 2-->
     </main>
     <footer>
@@ -519,7 +269,7 @@
         <div class="footer-area footer-padding">
             <div class="container">
                 <div class="row d-flex justify-content-between">
-                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-5">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
                                 <h4>Company</h4>
@@ -557,28 +307,6 @@
                             <div class="footer-number">
                                 <p>Phone: +10 783 3674 356</p>
                                 <p>Email: company@gmail.com</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle mb-50">
-                                <h4>Newsletter</h4>
-                                <p>Subscribe our newsletter to get updates about our services</p>
-                            </div>
-                            <!-- Form -->
-                            <div class="footer-form">
-                                <div id="mc_embed_signup">
-                                    <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative mail_part" novalidate="true">
-                                        <input type="email" name="EMAIL" id="newsletter-form-email" placeholder=" Email Address " class="placeholder hide-on-focus" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your email address'">
-                                        <div class="form-icon">
-                                            <button type="submit" name="submit" id="newsletter-submit" class="email_icon newsletter-submit button-contactForm">
-                                                Subscribe
-                                            </button>
-                                        </div>
-                                        <div class="mt-10 info"></div>
-                                    </form>
-                                </div>
                             </div>
                         </div>
                     </div>
