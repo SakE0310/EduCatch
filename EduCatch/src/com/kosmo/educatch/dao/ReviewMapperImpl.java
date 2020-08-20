@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
 
 public class ReviewMapperImpl extends SqlSessionDaoSupport implements ReviewMapper{
@@ -71,6 +72,12 @@ public class ReviewMapperImpl extends SqlSessionDaoSupport implements ReviewMapp
 	public AcademyVO academyAno(String ano) {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("academyAno");
+	}
+
+	@Override
+	public MemberVO memberMno(MemberVO param) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("memberMno");
 	}
 	
 }

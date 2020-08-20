@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.kosmo.educatch.service.ConsultService;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConsultVO;
+import com.kosmo.educatch.vo.MemberVO;
 
 public class ConsultMapperImpl extends SqlSessionDaoSupport implements ConsultMapper{
 
@@ -62,6 +63,12 @@ public class ConsultMapperImpl extends SqlSessionDaoSupport implements ConsultMa
 	@Override
 	public AcademyVO academyAno(String ano) {
 		return getSqlSession().selectOne("academyAno");
+	}
+
+	@Override
+	public MemberVO memberMno(MemberVO param) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("memberMno");
 	}
 
 }

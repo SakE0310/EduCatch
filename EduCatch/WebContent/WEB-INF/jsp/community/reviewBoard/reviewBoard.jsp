@@ -1,6 +1,7 @@
 <%@page import="com.kosmo.educatch.vo.PagingVO"%>
 <%@page import="com.kosmo.educatch.vo.ReviewVO"%>
 <%@page import="com.kosmo.educatch.vo.AcademyVO"%>
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -20,9 +21,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-<!-- 사이드바 -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <!-- 데이터피커 -->
 <link rel="stylesheet" href="/EduCatch/assets/datepicker/jquery-ui-1.12.1/jquery-ui.min.css">
@@ -76,20 +74,6 @@
 	  	margin: auto;
 	}
 	
-			
-	#sideBanner{
-		position: absolute;
-		top:180px;
-		left:0px;
-		width:150px;
-		height:200px;
-		background: gray;
-	}
-	
-	#listFont{
-		color:white;
-		font-weight: bold;
-	}
 	
 </style>
 
@@ -197,6 +181,12 @@
 
 
    Object obj=request.getAttribute("listReview");
+   
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}
 
    if(obj !=null){
       ArrayList listReview=(ArrayList)obj;
@@ -208,15 +198,6 @@
       <input type="hidden" id="rbno" name="rbno"/>
    </form>
    <div id="mainWrapper">
-   <div id="sideBanner">
-  	 <ul id="listFont" align="center">
-		<li style="margin-top: 20px;"><a href="freeboardlist.ec">자유게시판</a></li>
-		<hr>
-		<li><a href="listReview.ec">후기게시판</a></li>
-		<hr>
-		<li><a href="listConsult.ec">상담게시판</a></li>
-	</ul>
-   </div>
 		<div>
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
@@ -228,11 +209,11 @@
 	  <div  class="container">
       <table align="center" class="table">
          <colgroup>
-            <col width="120px"/>
-            <col width="120px"/>
-            <col width="600px"/>
-            <col width="120px"/>
-            <col width="120px"/>
+	            <col width="120px"/>
+	            <col width="120px"/>
+	            <col width="600px"/>
+	            <col width="120px"/>
+	            <col width="120px"/>
          </colgroup>
          <thead id="table_head">   
             <tr>
@@ -284,7 +265,7 @@ if(listReview !=null && nCnt>0){
 
 	  if(listReview !=null && nCnt>0){
 %>         
-         </tbody>
+
          <tr>
          <td colspan="18">
          <jsp:include page="memberPaging.jsp" flush="true">
@@ -302,18 +283,8 @@ if(listReview !=null && nCnt>0){
 	}//end of if(obj)
 		
 %>
-         <tr>
-			<td colspan="6" align="right">
-               <input type="button" value="글쓰기" id="insertPage" class=" btn_light btn_box_01"/>
-			</td>
-		</tr>
-      </table>
-   </div>
-   </div>
-   <div>
-      <form id="searchForm" name="searchForm">
-      <div align = "center" id="sForm">
-      
+	<tr>
+		<td colspan="2" align="left">
          <select name="searchFilter">
             <option value="제목">제목</option>
             <option value="내용">내용</option>
@@ -321,7 +292,29 @@ if(listReview !=null && nCnt>0){
          </select>
          <input type="text" name="keyword" id = "keyword" style="height: 40px">
          <input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
-         <hr>
+         </td>
+
+<%
+				if(mvo != null){
+					if( mvo.getMauth().equals("1")){
+%>
+
+			<td colspan="6" align="right">
+               <input type="button" value="글쓰기" id="insertPage" class=" btn_light btn_box_01"/>
+			</td>
+<%	
+						}
+					}
+%>
+		</tr>
+      </tbody>
+      </table>
+   </div>
+   </div>
+   <div>
+      <form id="searchForm" name="searchForm">
+      <div align = "center" id="sForm">
+      
       </div>
       <div align = "center" id="dForm">   
          <div style="width: 200px">

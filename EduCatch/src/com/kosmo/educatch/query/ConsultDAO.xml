@@ -73,7 +73,7 @@
 	</select>
 	<insert id="insertConsult" parameterType="consult">
 		<selectKey keyProperty="cbno" resultType="String" order="BEFORE">
-			SELECT 'C'||LPAD((SELECT /* +INDEX_DESC(A SYS_C0011684) */              
+			SELECT 'C'||LPAD((SELECT /* +INDEX_DESC(A SYS_C0012151) */              
 			NVL(MAX(SUBSTR(A.CBNO,-5)),0)+1 commNO
 			FROM    CONSULTBOARD A), 5,'0') 
 			FROM DUAL
@@ -155,7 +155,8 @@
 	<select id="cacademyList" parameterType="academyview" resultType="academyview">
 		SELECT
 		     ANO,
-		     ANAME 
+		     ANAME,
+		     AADDR1
 		FROM 
 		      ACADEMY
 		WHERE ANAME LIKE '%' ||#{aname, jdbcType=VARCHAR}||'%'
@@ -165,13 +166,20 @@
 	<select id="academyAno" parameterType="String" resultType="academyview">
 		SELECT
 		     ANO,
-		     ANAME 
+		     ANAME,
+		     AADDR1
 		FROM 
 		      ACADEMY A
 		WHERE ANAME = #{aname, jdbcType=VARCHAR}
 	</select>
 	
-	
+	<select id="memberMno" parameterType="String" resultType="member">
+		SELECT 
+		    MNO,
+		    MNAME
+		FROM MEMBER
+		WHERE MID=#{mid,  jdbcType=VARCHAR}
+	</select>
 	
 	
 	

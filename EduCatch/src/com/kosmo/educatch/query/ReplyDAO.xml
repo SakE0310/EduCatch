@@ -41,7 +41,7 @@
 	
 	<insert id="replyInsert" parameterType="reply">
 		<selectKey keyProperty="reno" resultType="String" order="BEFORE">
-			SELECT 'RE'||LPAD((SELECT /* +INDEX_DESC(A SYS_C0011812) */              
+			SELECT 'RE'||LPAD((SELECT /* +INDEX_DESC(A SYS_C0012157) */              
 			NVL(MAX(SUBSTR(A.RENO,-5)),0)+1 commNO
 			FROM    REPLY A), 5,'0') 
 			FROM DUAL

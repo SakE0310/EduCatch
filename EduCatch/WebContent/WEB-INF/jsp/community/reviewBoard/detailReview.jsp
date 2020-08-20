@@ -146,7 +146,6 @@
 		<jsp:include page="reviewReply.jsp">
 			<jsp:param name="reviewboard_rbno" value="<%=reviewboard_rbno %>"/>
 		</jsp:include>
-		<p></p>
 		<table style="margin-left: auto; margin-right: 400px;" border="0">
 			<tr align="center">
 				<td>

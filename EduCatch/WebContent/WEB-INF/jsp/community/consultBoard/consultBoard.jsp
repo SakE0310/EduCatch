@@ -1,3 +1,4 @@
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@page import="com.kosmo.educatch.vo.ConsultVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -70,25 +71,6 @@
 	 width: 350px;
   	height: 100px;
   	margin: auto;
-	}
-	
-	#sideBanner{
-		margin-top: 10px;
-		position: absolute;
-		top:180px;
-		left:0px;
-		width:150px;
-		height:200px;
-		background: gray;
-	}
-	
-	#listFont{
-		color: white;
-		font-weight: bold;
-	}
-	
-	#list{
-		color:white;
 	}
 	
 	#aa{
@@ -185,6 +167,12 @@
 	String totalcount="0";	
 
 	Object obj=request.getAttribute("listConsult");
+	
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}
 
 	if(obj !=null){
 		ArrayList listConsult=(ArrayList)obj;
@@ -196,15 +184,6 @@
 		<input type="hidden" id="cbno" name="cbno"/>
 	</form>
 	<div id="mainWrapper">
-	   <div id="sideBanner">
-	  	 <ul id="listFont" align="center">
-			<li style="margin-top: 20px;"><a href="freeboardlist.ec" id="list">자유게시판</a></li>
-			<hr>
-			<li><a href="listReview.ec" id="list">후기게시판</a></li>
-			<hr>
-			<li><a href="listConsult.ec" id="list">상담게시판</a></li>
-		</ul>
-	   </div>
 		<div>
 		<table  border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
@@ -294,21 +273,8 @@ if(listConsult !=null && nCnt>0){
 	}//end of if(obj)
 		
 %>
-
-		<tr>
-			<td colspan="6" align="right">
-				<input type="button" value="글쓰기"
-				id="insertPage" class=" btn_light btn_box_01"/>
-			</td>
-		</tr>
-
-		</table>
-	</div>
-	</div>
-	<div>
-		<form id="searchForm" name="searchForm">
-		<div align = "center" id="sForm">
-		
+		<tr>	
+		<td colspan="2" align="left">
 			<select name="searchFilter">
 				<option value="제목">제목</option>
 				<option value="내용">내용</option>
@@ -316,6 +282,29 @@ if(listConsult !=null && nCnt>0){
 			</select>
 			<input type="text" name="keyword" id = "keyword" style="height: 40px">
 			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
+		</td>
+<%
+		if(mvo != null){
+			if( mvo.getMauth().equals("1")){
+%>
+		
+			<td colspan="6" align="right">
+				<input type="button" value="글쓰기"
+				id="insertPage" class=" btn_light btn_box_01"/>
+			</td>
+<%	
+						}
+					}
+%>		
+		</tr>
+		</tbody>
+		</table>
+	</div>
+	</div>
+	<div>
+		<form id="searchForm" name="searchForm">
+		<div align = "center" id="sForm">
+		
 			<hr>
 		</div>
 		<div align = "center" id="dForm">	

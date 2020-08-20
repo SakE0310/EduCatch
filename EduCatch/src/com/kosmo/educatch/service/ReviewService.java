@@ -3,6 +3,7 @@ package com.kosmo.educatch.service;
 import java.util.List;
 
 import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
 
 public interface ReviewService {
@@ -17,4 +18,5 @@ public interface ReviewService {
 	public ReviewVO selectReview(String rbno);
 	public ReviewVO selectUpdate(String rbno);
 	public AcademyVO academyAno(String ano);
+	public MemberVO memberMno(MemberVO param);
 }

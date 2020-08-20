@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConsultVO;
+import com.kosmo.educatch.vo.MemberVO;
 
 public interface ConsultMapper {
 
@@ -16,4 +17,5 @@ public interface ConsultMapper {
 	public ConsultVO selectConsult(String cbno);
 	public ConsultVO selectUpdate1(String cbno);
 	public AcademyVO academyAno(String ano);
+	public MemberVO memberMno(MemberVO param);
 }

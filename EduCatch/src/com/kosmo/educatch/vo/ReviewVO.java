@@ -28,6 +28,11 @@ public class ReviewVO{
 	
 	private String ano;
 	private String aname;
+	private String aaddr1;
+	
+	private String mno;
+	private String mname;
+	private String mid;
 	
 	public String getAno() {
 		return ano;
@@ -253,6 +258,46 @@ public class ReviewVO{
 
 	public void setTotalcount(String totalcount) {
 		this.totalcount = totalcount;
+	}
+
+
+	public String getAaddr1() {
+		return aaddr1;
+	}
+
+
+	public void setAaddr1(String aaddr1) {
+		this.aaddr1 = aaddr1;
+	}
+
+
+	public String getMno() {
+		return mno;
+	}
+
+
+	public void setMno(String mno) {
+		this.mno = mno;
+	}
+
+
+	public String getMname() {
+		return mname;
+	}
+
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+
+
+	public String getMid() {
+		return mid;
+	}
+
+
+	public void setMid(String mid) {
+		this.mid = mid;
 	}
 	
 	

@@ -1,3 +1,4 @@
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@page import="com.kosmo.educatch.vo.AcademyVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -12,6 +13,18 @@
 <meta http-equiv="Pragma" content="no-cache"/>
 <meta http-equiv="Expires" content="-1"/>
 <title>후기 게시판 입력</title>
+<!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
+<script src ="/EduCatch/assets/js/service/HuskyEZCreator.js"></script>
+
+<!-- jQuery를 사용하기위해 jQuery라이브러리 추가 -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<!-- 테이블 부트스트랩 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <style type="text/css">
 	.starR1{
 	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
@@ -110,12 +123,37 @@
 
 </script>
 <body>
+<%
+
+
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+		
+		System.out.println("reviewinsert.jsp   mvo >>>> "+mvo);
+		System.out.println("reviewinsert.jsp   mvo.getMid >>>> "+mvo.getMid());
+	}
+	
+
+%>
+	<div class="container">
 <!-- action/document/location -->
 	<form id="edit">
-		<table style="margin-left: auto; margin-right: auto; width: 50%" border="1">
+		<div>
+		<input type="hidden" id="rbname" name="rbname" value="<%= mvo.getMname()%>">
+		<input type="hidden" id="mid" name="mid" value="<%= mvo.getMid()%>">
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+				<td align="center"><h1>REVIEW</h1></td>
+			</tr>
+			</table>
+			<hr>
+		</div>
+		<table style="width: 90%" border="1" align="center" class="table">
 			<tr>
 				<td style="width: 100px">제목</td>
-				<td><input type="text" id="rbsubject" name="rbsubject"
+				<td><input type="text" id="rbsubject" name="rbsubject" placeholder="제목을 입력하세요"
 					style="width: 98%" /></td>
 			</tr>
 			<tr>
@@ -140,14 +178,26 @@
 				<td style="width: 100px">학원명</td>
 				<%
 					Object obj = request.getAttribute("aname");
-				
+					if(obj !=null){
 					String aname = (String)obj;
+					
 				%>
 				<td><input type="text"  id="aname" name="aname" value="<%=aname %>"
 					style="width: 90%" />
 					<input type="button"  id="searchAcademy" value="검색" />
 					<input type="hidden" id="ano" name="ano" /> 
 				</td>
+				<%
+					}else{
+				%>
+				<td><input type="text"  id="aname" name="aname" placeholder="학원명을 입력하세요"
+					style="width: 90%" />
+					<input type="button"  id="searchAcademy" value="검색" />
+					<input type="hidden" id="ano" name="ano" /> 
+				</td>
+				<%
+					}
+				%>
 			</tr>
 			<tr>
 				<td>내용</td>
@@ -169,6 +219,7 @@
 			</tr>
 		</table>
 	</form>
+</div>
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

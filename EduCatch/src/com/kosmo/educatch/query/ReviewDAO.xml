@@ -165,7 +165,8 @@
 	<select id="academyList" parameterType="academyview" resultType="academyview">
 		SELECT
 		     ANO,
-		     ANAME 
+		     ANAME,
+		     AADDR1
 		FROM 
 		      ACADEMY
 		WHERE ANAME LIKE '%' ||#{aname, jdbcType=VARCHAR}||'%'
@@ -174,9 +175,18 @@
 	<select id="academyAno" parameterType="String" resultType="academyview">
 		SELECT
 		     ANO,
-		     ANAME 
+		     ANAME,
+		     AADDR1
 		FROM 
 		      ACADEMY A
 		WHERE ANAME = #{aname, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="memberMno" parameterType="String" resultType="member">
+		SELECT 
+		    MNO,
+		    MNAME
+		FROM MEMBER
+		WHERE MID=#{mid,  jdbcType=VARCHAR}
 	</select>
 </mapper>

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kosmo.educatch.dao.ConsultMapper;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConsultVO;
+import com.kosmo.educatch.vo.MemberVO;
 
 @Service
 @Transactional
@@ -95,6 +96,15 @@ public class ConsultServiceImpl implements ConsultService{
 		
 		return avo;
 	
+	}
+
+	@Override
+	public MemberVO memberMno(MemberVO param) {
+		// TODO Auto-generated method stub
+		MemberVO mvo = new MemberVO();
+		mvo = consultMapper.memberMno(param);
+		
+		return mvo;
 	}
 	
 }

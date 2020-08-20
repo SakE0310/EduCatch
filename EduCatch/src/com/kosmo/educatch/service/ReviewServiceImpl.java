@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kosmo.educatch.dao.ReviewMapper;
 import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
 
 @Service
@@ -99,6 +100,15 @@ public class ReviewServiceImpl implements ReviewService{
 		avo = reviewMapper.academyAno(ano);
 		
 		return avo;
+	}
+
+	@Override
+	public MemberVO memberMno(MemberVO param) {
+		// TODO Auto-generated method stub
+		MemberVO mvo = new MemberVO();
+		mvo = reviewMapper.memberMno(param);
+		
+		return mvo;
 	}
 	
 	

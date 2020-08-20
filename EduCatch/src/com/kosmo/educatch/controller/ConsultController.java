@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.educatch.service.ConsultService;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConsultVO;
+import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
 
 @Controller
@@ -191,15 +192,21 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 	
 	//등록 버튼 눌렀을 때
 	@RequestMapping("insertConsult")
-	public ModelAndView insertConsult(@ModelAttribute AcademyVO avo, ConsultVO param) {
+	public ModelAndView insertConsult(HttpServletRequest request,
+									  @ModelAttribute AcademyVO avo, ConsultVO param,
+																	 MemberVO mvo) {
 		log.info("ConsultController insertConsult >>> 호출 성공");
-		
+		String mid=mvo.getMid();
 		String aname = avo.getAname();
+		
 		AcademyVO avov = consultService.academyAno(aname);
+		MemberVO mvov=consultService.memberMno(mvo);
 		
 		String ano = avov.getAno();
+		String mno=mvov.getMid();
 		
 		param.setAcademy_ano(ano);
+		param.setMember_mno(mno);
 		
 		
 		String resultStr="";

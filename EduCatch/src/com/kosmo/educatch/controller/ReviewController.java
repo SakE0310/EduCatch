@@ -5,6 +5,7 @@ import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.AcademyAddService;
+import com.kosmo.educatch.service.LoginService;
 import com.kosmo.educatch.service.ReviewService;
 import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.PagingVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.oreilly.servlet.MultipartRequest;
@@ -30,7 +33,7 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
-
+	
 
 	//전체조회
 	@RequestMapping("listReview.ec")
@@ -197,10 +200,14 @@ public class ReviewController {
 	@RequestMapping("insertReview.ec")
 	public ModelAndView insertReview(HttpServletRequest request,
 									@ModelAttribute ReviewVO param,
-									@ModelAttribute AcademyVO avo) {
+									@ModelAttribute AcademyVO avo,
+									@ModelAttribute MemberVO mvo) {
 		log.info("ReviewController insertReview >>> 호출 성공 ");
 		
-
+		log.info("membervo.getmid >>> "+mvo.getMid());
+		String mid=null;
+		String mno=null;
+		String mname=null;
 		String ano=null;
 		String aname=null;
 		String rbno=null;
@@ -216,7 +223,7 @@ public class ReviewController {
 		String rbupdatedate=null;
 		String resultStr="";
 		
-		
+
 		
 		ModelAndView mav = new ModelAndView();
 		if(request.getContentType().toLowerCase().startsWith("multipart/form-data")) {
@@ -234,6 +241,9 @@ public class ReviewController {
 														   size, 
 														   "UTF-8", 
 														   new DefaultFileRenamePolicy());
+				mid=mr.getParameter("mid");
+				mno=mr.getParameter("mno");
+				mname=mr.getParameter("mname");
 				ano=mr.getParameter("ano");
 				aname=mr.getParameter("aname");
 				rbno=mr.getParameter("rbno");
@@ -258,7 +268,9 @@ public class ReviewController {
 					log.info("fileName >>> " + rbimg);
 				}
 				
-				
+				mvo.setMid(mid);
+				mvo.setMno(mno);
+				mvo.setMname(mname);
 				avo.setAno(ano);
 				avo.setAname(aname);
 				param.setRbno(rbno);
@@ -283,10 +295,12 @@ public class ReviewController {
 		
 		
 		AcademyVO avov = reviewService.academyAno(aname);
+		MemberVO mvov=reviewService.memberMno(mvo);
 		
 		ano = avov.getAno();
-		
+		mno = mvov.getMid();
 		param.setAcademy_ano(ano);
+		param.setMember_mno(mno);
 		
 		
 		int nCnt = reviewService.insertReview(param);
@@ -417,6 +431,7 @@ public class ReviewController {
 		for(int i=0; i<listCnt; i++) {
 			AcademyVO avo=(AcademyVO)list.get(i);
 			
+			log.info("avo.getAaddr1()	>>"+avo.getAaddr1());
 			log.info("avo.getAno()		>>"+avo.getAno());
 			log.info("avo.getAname()	>>"+avo.getAname());
 		}

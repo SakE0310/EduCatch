@@ -1,3 +1,4 @@
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -79,10 +80,26 @@
 	}
 </script>
 <body>
+<%
+
+
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+		
+		System.out.println("reviewinsert.jsp   mvo >>>> "+mvo);
+		System.out.println("reviewinsert.jsp   mvo.getMid >>>> "+mvo.getMid());
+	}
+	
+
+%>
 	<div class="container">
 <!-- action/document/location -->
 	<form id="edit">
 		<div>
+		<input type="hidden" id="cbname" name="cbname" value="<%= mvo.getMname()%>">
+		<input type="hidden" id="mid" name="mid" value="<%= mvo.getMid()%>">
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
 				<td align="center"><h1>CONSULT</h1></td>
@@ -93,12 +110,12 @@
 		<table style="width: 90%" border="1" align="center" class="table">
 			<tr>
 				<td style="width: 100px">제목</td>
-				<td><input type="text" id="cbsubject" name="cbsubject"
+				<td><input type="text" id="cbsubject" name="cbsubject" placeholder="제목을 입력하세요"
 					style="width: 98%" /></td>
 			</tr>
 			<tr>
 				<td style="width: 100px">학원명</td>
-				<td><input type="text"  id="aname" name="aname"
+				<td><input type="text"  id="aname" name="aname"  placeholder="학원명을 입력하세요"
 					style="width: 98%" />
 					<input type="button"  id="searchAcademy" value="검색" />
 					<input type="hidden" id="ano" name="ano" />
