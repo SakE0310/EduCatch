@@ -29,7 +29,9 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <!-- 폰트 -->
-<!-- <link href="https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap" rel="stylesheet"> -->
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+
 <style type="text/css">
 
 	#nno_color{
@@ -94,7 +96,17 @@
 	#row-magin{
 		margin-bottom: 185px;
 	}	
+	
+	 #nfont{
+	 	font-family: 'Do Hyeon', sans-serif;
+	  }
 		
+	#mainWrapper{
+		font-family: 'Gothic A1', sans-serif;
+	} 	
+	.table_head_font{
+		font-family: 'Do Hyeon', sans-serif;
+	}
 </style>
 
 <script type="text/javascript">
@@ -237,11 +249,10 @@
 		사이드 바
 	</div>  -->
 	<div id="mainWrapper" align = "center">
-		<div align = "center" style="width: 500px;" >
+		<div align = "center" style="width: 700px;" >
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
-				<td align="center"><h1>공지사항 게시판 목록</h1></td>
-				
+				<td align="center" id = "nfont"><h1>notice</h1></td>
 			</tr>
 			</table>
 			<hr>
@@ -255,11 +266,11 @@
 				<col width="120px"/>
 				<col width="120px"/>
 			</colgroup>
-			<thead id="table_head">
-				<td align="center">글번호</td>
-				<td align="center">제목</td>
-				<td align="center">작성자</td>
-				<td align="center">작성일</td>
+			<thead id="table_head" >
+				<td align="center" class ="table_head_font">글번호</td>
+				<td align="center" class ="table_head_font">제목</td>
+				<td align="center" class ="table_head_font">작성자</td>
+				<td align="center" class ="table_head_font">작성일</td>
 			</thead>
 			<tbody>
 <%		
@@ -332,7 +343,8 @@
 					<input type="text" name="keyword" id = "keyword" style ="width:200px; height:40px;">
 					<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 					</td>
-<%
+					
+ <%
 				if(mvo != null){
 					if( mvo.getMauth().equals("3")){
 %>				
@@ -344,6 +356,7 @@
 					}
  %>					
 			</tr>
+			
 			</tbody>
 			</table>
 		</div>
@@ -364,12 +377,37 @@
 			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 			<hr>
 		</div> -->
+		<div id="mainWrapper" align = "center">
+		<div align = "center" style="width: 700px;" >
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+			<td width="500">
+		         <div class="row">
+		         <div></div>
+		            <div class="col-md-1.8">
+						<input type="text" name="startDate" id="startDate">
+		            </div>
+		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		            <div class="col-md-1.5">
+	      		 		<input type="text" name="endDate" id="endDate"> 
+		            </div>
+	      				&nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
+		      </div>
+		      
+				<td>
+			</tr>
+			</table>
+			<hr>
+		</div>
+		</div>
+		
+		
+			<!-- <table style="margin: auto; " border="3" >
+			<td>
+				<div style="width: 500px;" align="left" >
 					<div id ="row-magin">
 						<div class="row" >
-					      <div class="col-md-12">
 					         <div class="row">
-					            <div class="col-md-5">
-					            </div>
 					            <div class="col-md-1.8">
 									<input type="text" name="startDate" id="startDate">
 					            </div>
@@ -378,27 +416,18 @@
 				      		 		<input type="text" name="endDate" id="endDate"> 
 					            </div>
 				      				&nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
-					         </div>
 					      </div>
 					   </div>
-					</div>   
+					</div> 
+				</div>
+				<td>
+				<td>
+				aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+				</td>
+				</table>	  --> 
 		</form>
 	</div>
-	
-   
-   
-<%-- <%
-	Object obj2= request.getAttribute("eventVO");
-	System.out.println("obj2>>>"+obj2);
-	
-	if(obj2 != null){
-		EventVO evo =(EventVO)obj2;
-		System.out.println("evo>>>"+evo);
-		System.out.println("evo.getEimg>>>"+evo.getEimg());
-		if(evo != null ){
-			System.out.println("null아님>>>");
-		
-%>	 --%>
+  
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

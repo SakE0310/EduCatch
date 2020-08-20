@@ -16,6 +16,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
 <style type="text/css">
 	#table_head{
 		border-collapse: collapse;
@@ -28,6 +32,10 @@
 		/* height:462px; */
 		/* overflow:scroll; */
 	}
+	
+	#nfont {
+	 	font-family: 'Do Hyeon', sans-serif;
+	  }
 
 </style>
 <script type="text/javascript">
@@ -92,7 +100,7 @@
 	<div>
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
-				<td align="center"><h2>notice</h2></td>
+				<td align="center" id = "nfont"><h2>notice</h2></td>
 			</tr>
 			</table>
 			<hr>
