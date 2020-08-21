@@ -128,6 +128,14 @@
 			$("#clickForm").attr("method","POST");
 			$("#clickForm").submit();	
 		})
+		
+		$("#memOut").click(function() {
+			console.log("회원탈라라ㅏ라라 >>> ");
+
+			$("#clickForm").attr("action","mypageOut.ec");
+			$("#clickForm").attr("method","POST");
+			$("#clickForm").submit();
+		})
 			
 	});//end of ready()
 </script>
@@ -154,7 +162,7 @@
 			<br>
 			<input type ="button" id="pwCheck" class ="btn_light btn_box_01" value=" 개인정보 변경"><br>
 			<input type ="button" id="pwEdit" class ="btn_light btn_box_01" value=" 비밀번호 변경"><br>
-			<input type ="button" id="" class ="btn_light btn_box_01" value=" 회원탈퇴"><br>
+			<input type ="button" id="memOut" class ="btn_light btn_box_01" value=" 회원탈퇴"><br>
 			
 		<input type="hidden" id ="mid" name ="mid" value="<%=mvo.getMid()%>">
 		</div>

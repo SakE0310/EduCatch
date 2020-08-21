@@ -3,6 +3,7 @@ package com.kosmo.educatch.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -322,6 +323,40 @@ public class MyPageController {
 		
 		log.info("MyPageController myReview 끝 >>>");
 		return mav;
+	}
+	
+	//회원탈퇴폼으로 이동
+	@RequestMapping("/mypageOut")
+	public ModelAndView mypageOut(@ModelAttribute MemberVO param, HttpSession session) {
+		log.info("MyPageController mypageOut 시작 >>>");
+		
+		MemberVO mvo = null;
+		mvo=(MemberVO) session.getAttribute("user");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("memberVO", mvo);
+		mav.setViewName("/mypage/mypageOut");
+		
+		log.info("MyPageController mypageOut 끝 >>>");
+		return mav;
+	
+	}
+	//회원탈퇴 deleteyn을 y로 변경
+	@RequestMapping("/memberout")
+	public ModelAndView memberOut(@ModelAttribute MemberVO param, HttpSession session) {
+		log.info("MyPageController memberOut 시작 >>>");
+		
+		//MemberVO mvo = mypageService.deleteMember();
+		
+		ModelAndView mav = new ModelAndView();
+		
+		//mav.addObject("memberVO", mvo);
+		mav.setViewName("/mypage/mypageOut");
+		
+		log.info("MyPageController memberOut 끝 >>>");
+		return mav;
+	
 	}
 	
 }
