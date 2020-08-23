@@ -121,4 +121,13 @@ public class MyPageServiceImpl implements MyPageService{
 		log.info("MyPageServiceImpl myFree 끝>>>");
 		return list;
 	}
+	//=========회원탈퇴==================
+	@Override
+	public int deleteMember(MemberVO param) {
+		// TODO Auto-generated method stub
+		log.info("회원탈퇴deleteMember서비스 진입");
+		int del = mypageMapper.deleteMember(param);
+		log.info("회원탈퇴deleteMember서비스 진입 끝");
+		return del;
+	}
 }

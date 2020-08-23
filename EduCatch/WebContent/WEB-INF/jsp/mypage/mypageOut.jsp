@@ -53,6 +53,7 @@
 %>
 //회원탈퇴 버튼 클릭
 $(document).ready(function() {
+	var clickYN =0;
 	$("#checkpw").click(function(){
 		console.log("확인버튼 클릭");
 	
@@ -62,22 +63,29 @@ $(document).ready(function() {
 	
 		if(pass !=""){
 			if(pass == DBpw){
-				alert("비밀번호 일치");	
+				alert("비밀번호 일치");
+				clickYN =1;
 			}else{
 				alert("비밀번호가 일치하지 않습니다.");
 				$("#mpw").val('');
+				clickYN=0;
 			}
 		}else{
 			alert("비밀번호를 입력하세요");
 		}
 	
 	});
-	
-	$("memberOut").click(function(){
-		console.log("회원탈퇴버튼 클릭")
-		$("#pwOutForm").attr("action","#.ec");
-		$("#pwOutForm").attr("method","POST");
-		$("#pwOutForm").submit(); 
+
+	$("#memberOut").click(function(){
+		console.log("회원탈퇴버튼 클릭");
+		console.log("clickYN>>"+clickYN);
+		if(clickYN==1){
+			$("#pwOutForm").attr("action","memberout.ec");
+			$("#pwOutForm").attr("method","POST");
+			$("#pwOutForm").submit(); 
+		}else{
+			alert("비밀번호 확인 버튼을 눌러주세요");
+		}
 
 		});
 	
@@ -124,12 +132,12 @@ $(document).ready(function() {
 						<td><input type ="password" id="mpw" name="mpw"/></td>
 						<td><input type ="button" id="checkpw" name="checkpw" value="확인"/></td>
 					</tr>
-				</table>
 				<tr>						
 				<td colspan=2 align="center">
-					<input type="button" id="memberOut" value="회원탈퇴" >
+					<input type="button" id="memberOut" name="memberOut" value="회원탈퇴" >
 				</td>
 			</tr>
+				</table>
 			</form>
 <%		
 	}

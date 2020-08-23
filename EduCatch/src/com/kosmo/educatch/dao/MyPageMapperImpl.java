@@ -68,5 +68,13 @@ public class MyPageMapperImpl extends SqlSessionDaoSupport implements MyPageMapp
 		List<FreeVO> list = getSqlSession().selectList("myFree");
 		return list;
 	}
+	
+	//=====회원 탈퇴==========
+	@Override
+	public int deleteMember(MemberVO param) {
+		// TODO Auto-generated method stub
+		int del =(int)getSqlSession().delete("deleteMember");
+		return del;
+	}
 
 }

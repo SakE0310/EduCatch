@@ -16,5 +16,6 @@ public interface MyPageMapper {
 	public List<ConsultVO> consultQuestion(ConsultVO param);
 	public List<ReviewVO> myReview(ReviewVO param);
 	public List<FreeVO> myFree(FreeVO param);
+	public int deleteMember(MemberVO param);
 	
 }

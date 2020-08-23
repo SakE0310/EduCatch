@@ -345,14 +345,21 @@ public class MyPageController {
 	//회원탈퇴 deleteyn을 y로 변경
 	@RequestMapping("/memberout")
 	public ModelAndView memberOut(@ModelAttribute MemberVO param, HttpSession session) {
-		log.info("MyPageController memberOut 시작 >>>");
+		log.info("회원탈퇴 MyPageController memberOut 시작 >>>");
 		
-		//MemberVO mvo = mypageService.deleteMember();
+		int deyn = mypageService.deleteMember(param);
+		log.info("삭제여부"+deyn);
 		
 		ModelAndView mav = new ModelAndView();
 		
-		//mav.addObject("memberVO", mvo);
-		mav.setViewName("/mypage/mypageOut");
+		if(deyn>0) {
+			log.info("회원탈퇴 성공");
+			mav.addObject("result", deyn);
+			mav.setViewName("/mypage/deleteResult");
+		}else {
+			log.info("회원탈퇴에 실패하셨습니다");
+			mav.setViewName("/mypage/deleteResult");
+		}
 		
 		log.info("MyPageController memberOut 끝 >>>");
 		return mav;

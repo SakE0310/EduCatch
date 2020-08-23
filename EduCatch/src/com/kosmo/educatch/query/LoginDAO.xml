@@ -23,7 +23,7 @@
 			A.MUPDATEDATE AS MUPDATEDATE
 							
 		FROM MEMBER A
-		WHERE A.MID = #{mid} and A.MPW = #{mpw}
+		WHERE A.MID = #{mid} and A.MPW = #{mpw} and A.MDELETEYN='N'
 	</select>
 	
 	<select id="emailCheckID" parameterType="member" resultType="String">

@@ -149,4 +149,11 @@
      WHERE AAA.MNO='M202008180002'--세션
      ORDER BY 1 DESC
 	</select>
+	
+	<update id="deleteMember" parameterType="member">
+	UPDATE MEMBER
+		    SET MDELETEYN = 'Y'
+		WHERE MNO=#{mno, jdbcType=VARCHAR}
+	    AND MDELETEYN = 'N'
+	</update>
 </mapper>
