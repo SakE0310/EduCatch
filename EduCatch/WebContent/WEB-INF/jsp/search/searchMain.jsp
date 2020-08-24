@@ -25,16 +25,18 @@
 				ajaxGetDistrict();
 				//카테고리 함수
 				ajaxGetMajor();
-
+				
 				//지역 대분류 변경시 지역소 분류 자동 변경
 				$('.select-district').on('change','select',function(){
+					console.log("change district");
 					var setDistrict = $('#district').val();
 					console.log("setDistrict >>> "+setDistrict);
 					ajaxGetCity(setDistrict);
 				});//setDistrict
-			
-				//카테고리 대분류 변경시 카테고리 소분류 자동 변경
+				
+// 				카테고리 대분류 변경시 카테고리 소분류 자동 변경
 				$('.select-cmajor').on('change','select',function(){
+					console.log("change cmajor");
 					var setCmajor = $('#cmajor').val();
 					console.log("setCmajor >>> "+setCmajor);
 					ajaxGetMinor(setCmajor);
@@ -151,7 +153,7 @@
 							st = "<p style='margin:0 auto; text-align:center; padding:200px 200px;'>일치하는 학원이 없습니다</p>";
 						}else{
 						console.log("done start >>> "+resParam);
-						st = "";
+						var st = "";
 						console.log("acaList >>> "+resParam.acaList);
 							var listcount = resParam.acaList[0].listcount;
 							st = "<h5>"+listcount+"개의 학원이 조회됬습니다</h5>";
@@ -310,7 +312,7 @@
 				grid-column-gap: 10px;
 			}
 		}
-		@media screen and (min-width: 500px) and (max-width: 940px) {
+		@media screen and (max-width: 940px) {
 			.box {
 				display : grid;
 				grid-template-row : 2fr 1fr 1fr 1fr 2fr;
@@ -350,21 +352,29 @@
 				<div class="row">
 					<div class="col-lg-10 col-md-10" id="form">
 					<div class="box">
-									<input type="text" id="aname" name="aname" size="58px" class="form-control" placeholder="학원명으로 입력해보세요">
-									<input type="button" id="search-aname" class="genric-btn primary" value="검색">
-							<select id="district">
-								<option></option>
-							</select>
-							<select id="city">
-								<option></option>
-							</select>
-							<select id="cmajor">
-								<option></option>
-							</select>
-							<select id="cminor">
-								<option></option>
-							</select>
-							<input type="button" id="search" class="genric-btn primary" value="검색">
+						<input type="text" id="aname" name="aname" size="58px" style="height:42px" class="form-control" placeholder="학원명으로 입력해보세요">
+						<input type="button" id="search-aname" class="genric-btn primary" value="검색">
+					<div class="select-district">
+						<select id="district">
+							<option></option>
+						</select>
+					</div>
+					<div class="select-city">
+						<select id="city">
+							<option></option>
+						</select>
+					</div>
+					<div class="select-cmajor">
+						<select id="cmajor">
+							<option></option>
+						</select>
+					</div>
+					<div class="select-cminor">
+						<select id="cminor">
+							<option></option>
+						</select>
+					</div>
+						<input type="button" id="search" class="genric-btn primary" value="검색">
 					</div>
 							<form id="detailViewForm" name="detailViewForm">
 								<div class="acaList"><p id="show">검색조건을 입력하세요<p></div>
