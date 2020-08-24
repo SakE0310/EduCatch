@@ -6,18 +6,19 @@
 
 	<!-- 지역 대분류 -->
 	<select id="getDistrict" parameterType="search" resultType="search">
-	SELECT DISTINCT
-	        A.DISTRICT   AS DISTRICT
-	FROM    AREA A
-	ORDER BY 1 DESC
+	SELECT DISTRICT
+	FROM (SELECT ROWNUM, DISTRICT, RANK() OVER (PARTITION BY DISTRICT
+    ORDER BY DISTRICT, CITY) AS RK FROM AREA ORDER BY 1)
+    <![CDATA[ WHERE RK <= 1 ]]>
 	</select>
 	
 	<!-- 지역 소분류 -->
 	<select id="getCity" parameterType="search" resultType="search">
-	SELECT 
-	        A.CITY       AS CITY
-	FROM    AREA A
-	WHERE	A.DISTRICT = #{district}
+	SELECT CITY
+	FROM (SELECT ROWNUM, A.DISTRICT, A.CITY
+		FROM AREA A
+		WHERE A.DISTRICT = #{district}
+		ORDER BY ROWNUM)
  	</select>
 	
 	<select id="getAcaList" parameterType="academyview" resultType="academyview">
