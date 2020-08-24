@@ -53,7 +53,7 @@
 		height:180px;
 		background-color: #ffffff;
 		margin-top: 15px;
-		border-radius: 0.5em;
+		
 	}	
 	
 	.btn_light {
@@ -76,6 +76,7 @@
 	    .shadow {
 		    box-shadow: -100px 100px 100px -90px #000000,
 		        60px 0px 100px -90px #000000;
+		    border-radius: 0.5em;    
 		}
 
 	#a{
@@ -263,12 +264,14 @@
 			<form id="pwEditForm" name = "pwEditForm">
 			<input type ="hidden" id="mno" name="mno" value="<%=mvo.getMno()%>">
 			<input type ="hidden" id="mname" name="mname" value="<%=mvo.getMname()%>">
-			<div>
+			<div align="left">
 			<br>	
-				<h2>비밀번호 설정</h2>
-				<br>
+			<br>	
+				<h4>비밀번호 설정</h4>
+				<hr>
 			</div>
-				<div class="container" style="width: 600px;">
+				<div class="container shadow"  style="width: 800px; height: 570px;">
+				<br>
 				<table class="table">
 					<tr>
 						<td>기존 비밀번호</td>
@@ -295,7 +298,6 @@
 							</div>
 						</td>
 					</tr>
-				</table>
 				</div>
 				<tr>						
 				<td colspan=2 align="center">
@@ -303,11 +305,13 @@
 					<input type="button" id=""  value="취소하기" >
 				</td>
 			</tr>
+				</table>
 			</form>
 <%		
 	}
 %>	
 		</div>
+	</div>
 	</div>
 	</div>
 	<br>

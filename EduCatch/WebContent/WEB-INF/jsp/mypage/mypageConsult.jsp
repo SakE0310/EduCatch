@@ -19,6 +19,8 @@
 <!-- 아이콘 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
 
@@ -53,7 +55,7 @@
 		height:180px;
 		background-color: #ffffff;
 		margin-top: 15px;
-		border-radius: 0.5em;
+		
 	}	
 	
 	.btn_light {
@@ -76,6 +78,7 @@
 	    .shadow {
 		    box-shadow: -100px 100px 100px -90px #000000,
 		        60px 0px 100px -90px #000000;
+		   border-radius: 0.5em;     
 		}
 
 	#a{
@@ -84,6 +87,10 @@
 	
 	i{
 		color : #140C40;
+	}
+	#font_id{
+		font-family: 'Do Hyeon', sans-serif;
+		font-size: 30px;
 	}
 </style>
 <script type="text/javascript">
@@ -203,13 +210,14 @@
 %>
 	<div class = "container-mypage ">
 		<div align="center">
-		<div>
+		<div align="left">
 		<br>
-			<h2>학원 상담 내역 </h2>
+		<br>
+			<h4 id ="font_id">학원 상담 내역 </h4>
 			<hr>
-			<br>
 		</div>
-		<div class="container"  style="width: 600px;">
+		<div class="container shadow"  style="width: 800px; height: 570px; "overflow:auto;" id ="container_div">
+		<br>
 			<table align ="center" class="table">
 			 	<colgroup>
 					<col width="100px"/>

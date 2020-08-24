@@ -57,7 +57,7 @@
 		height:180px;
 		background-color: #ffffff;
 		margin-top: 15px;
-		border-radius: 0.5em;
+		
 	}	
 	
 	.btn_light {
@@ -80,6 +80,7 @@
 	    .shadow {
 		    box-shadow: -100px 100px 100px -90px #000000,
 		        60px 0px 100px -90px #000000;
+		        border-radius: 0.5em;
 		}
 	
 	.required{
@@ -330,12 +331,14 @@
 	</div>
 	<div class = "container-mypage ">
 		<div align="center">
-		<div>
+		<div align="left">
 		<br>
-			<h2>프로필 수정</h2>
-			<br>
+		<br>
+			<h4>프로필 수정</h4>
+			<hr>
 		</div>
-		<div class="container" style="width: 600px;">
+		<div class="container shadow" style="width: 800px; height: 570px;">
+		<br>
 		<form id="mypageEditForm" name="mypageEditForm">
 		<input type="hidden" id="mno" name="mno" value="<%=mvo.getMno()%>">
 			<table  class="table">
@@ -398,7 +401,6 @@
 					</div>
 				</td>
 			</tr>
-			</table>
 			</div>
 			<tr>						
 				<td colspan=2 align="center">
@@ -408,8 +410,10 @@
 <%		
 	}
 %>	
+			</table>
 		</form>
 		</div>
+	</div>
 	</div>
 	</div>
 	<br>
