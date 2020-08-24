@@ -251,6 +251,7 @@
 						list.css("overflow","scroll");
  					});
 				};
+				
 				//카테 대분류
 				function ajaxGetMajor(){
 					urls = "getCmajor.ec"; //controller 카테고리 대분류
@@ -302,12 +303,22 @@
 		</script>
 	
 		<style type="text/css">
-		
-		table{
-			border-spacing : 10px;
-			border-collapse : separate;
-			margin : auto;
-			align : center;
+		@media screen and (min-width: 744px) {
+			.box {
+				display : grid;
+				grid-template-columns : 200px 1fr 1fr 1fr 1fr 1fr 1fr;
+				grid-column-gap: 10px;
+			}
+		}
+		@media screen and (min-width: 500px) and (max-width: 940px) {
+			.box {
+				display : grid;
+				grid-template-row : 2fr 1fr 1fr 1fr 2fr;
+				grid-row-gap: 10px;
+			}
+			.list {
+				width : 450px;
+			}
 		}
 		.genric-btn {
 	   		color: #fff;
@@ -338,39 +349,23 @@
 			<div class="section-top-border">
 				<div class="row">
 					<div class="col-lg-10 col-md-10" id="form">
-						<table class="search-table">
-							<tr class="search-row">
-								<td class="search-aname">
+					<div class="box">
 									<input type="text" id="aname" name="aname" size="58px" class="form-control" placeholder="학원명으로 입력해보세요">
-								</td>
-								<td class="search-aname">
 									<input type="button" id="search-aname" class="genric-btn primary" value="검색">
-								</td>
-								<td class="select-district">
-									<select id="district">
-										<option></option>
-									</select>
-								</td>
-								<td class="select-city">
-									<select id="city">
-										<option></option>
-									</select>
-								</td>
-								<td class="select-cmajor">
-									<select id="cmajor">
-										<option></option>
-									</select>
-								</td>
-								<td class="select-cminor">
-									<select id="cminor">
-										<option></option>
-									</select>
-								</td>
-								<td class="button-search">
-									<input type="button" id="search" class="genric-btn primary" value="검색">
-								</td>
-							</tr>
-						</table>
+							<select id="district">
+								<option></option>
+							</select>
+							<select id="city">
+								<option></option>
+							</select>
+							<select id="cmajor">
+								<option></option>
+							</select>
+							<select id="cminor">
+								<option></option>
+							</select>
+							<input type="button" id="search" class="genric-btn primary" value="검색">
+					</div>
 							<form id="detailViewForm" name="detailViewForm">
 								<div class="acaList"><p id="show">검색조건을 입력하세요<p></div>
 							</form>
