@@ -7,6 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- 테이블부트스트랩 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+ 
 <script type="text/javascript">
 	$(document).ready(function() {
 		
@@ -31,25 +37,34 @@
 <%
 	Object obj = request.getAttribute("MemberVO");
 	
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}	
 	if(obj != null){
-		MemberVO mvo = (MemberVO)obj;
 %>
-<div>
+<div class="container">
 	<form id ="checkForm" name = "checkForm">
-		 개인정보 수정 <br>비밀번호 확인
-		<table border ="1">
+	<br>
+	<br>
+	
+		<h2>비밀번호 확인</h2>
+		<table border ="0" class="table table-bordered" >
 			<tr>
 				<td>아이디 </td>
 				<td><div><%=mvo.getMid() %></div></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="text" id="mpw" name ="mpw"/></td>
-				<td><input type="hidden" id="mid" name ="mid" value="<%=mvo.getMid() %>"/></td>
+				<td><input type="password" id="mpw" name ="mpw"/></td>
+				<input type="hidden" id="mid" name ="mid" value="<%=mvo.getMid() %>"/>
 			</tr>
 		</table>
+		<div align="center">
 		<input type="button" value="확인" id ="checkPW">
 		<input type="button" value="닫기" id ="closePW">
+		</div>
 	</form>
 <%		
 	}

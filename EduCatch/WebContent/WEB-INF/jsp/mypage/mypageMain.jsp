@@ -12,6 +12,9 @@
 </jsp:include>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 아이콘 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
 
@@ -51,7 +54,7 @@
 	
 	.btn_light {
 	    display: inline-block;
-	    text-align: center;
+	    text-align: left;
 	    background: #ffffff;
 	    color: #555;
 	    vertical-align: middle;
@@ -62,8 +65,6 @@
 		}
 	.btn_box_01 {
 	    width: auto;
-	    padding: 3px 10px;
-	    
 	    }
 	    
 	    .shadow {
@@ -75,6 +76,9 @@
 			color:black;
 		}
 
+	i{
+		color : #140C40;
+	}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -144,8 +148,13 @@
 <%
 	Object obj = request.getAttribute("MemberVO");
 
+		HttpSession hs = request.getSession(false);
+		MemberVO mvo = null;
+		if(hs != null){
+			mvo = (MemberVO)hs.getAttribute("user");
+		}	
+
 	if(obj != null){
-		MemberVO mvo = (MemberVO)obj;
 %>
 <div id ="full">
 	<div id="sideBanner-mypage">
@@ -156,22 +165,25 @@
 			<hr>
 		</div>
 		<div class ="sideBox shadow" style="font-size: 20px;">
-		<input type="hidden" id="mno" name ="mno" value="<%=mvo.getMno()%>"> 
+<%-- 		<input type="hidden" id="mno" name ="mno" value="<%=mvo.getMno()%>">  --%>
 
 			<%=mvo.getMname() %>님 
 			<br>
-			<input type ="button" id="pwCheck" class ="btn_light btn_box_01" value=" 개인정보 변경"><br>
-			<input type ="button" id="pwEdit" class ="btn_light btn_box_01" value=" 비밀번호 변경"><br>
-			<input type ="button" id="memOut" class ="btn_light btn_box_01" value=" 회원탈퇴"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-user-cog col-2 p-0"></i><input type ="button" id="pwCheck" class ="btn_light btn_box_01" value="개인정보 변경"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-key"></i><input type ="button" id="pwEdit" class ="btn_light btn_box_01" value="  비밀번호 변경"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-user-slash"></i><input type ="button" id="memOut" class ="btn_light btn_box_01" value=" 회원탈퇴"><br>
 			
 		<input type="hidden" id ="mid" name ="mid" value="<%=mvo.getMid()%>">
 		</div>
 		<div class ="sideBox shadow">
-			즐겨찾기
+			즐겨찾기<br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-hand-pointer"></i><input type ="button" id="" class ="btn_light btn_box_01" value="  찜목록"><br>
 		</div>
 		<div class ="sideBox shadow">
 			내 컨텐츠<br>
-			<input type ="button" id="consultSearch" class ="btn_light btn_box_01" value=" 학원상담 조회"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-file-alt col-2 p-0"></i><input type ="button" id="" class ="btn_light btn_box_01" value="내가 쓴 글"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit col-2 p-0"></i><input type ="button" id="consultSearch" class ="btn_light btn_box_01" value="작성한 상담"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit col-2 p-0"></i><input type ="button" id="" class ="btn_light btn_box_01" value="작성한 후기"><br>
 		</div>
 	</form>	
 <%		

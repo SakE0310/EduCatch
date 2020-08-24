@@ -103,7 +103,7 @@ public class MyPageServiceImpl implements MyPageService{
 		
 		List<ReviewVO> list = new ArrayList<ReviewVO>();
 		list = mypageMapper.myReview(param);
-		log.info("MyPageServiceImpl consultSearch list.size() >>>"+list.size());
+		log.info("MyPageServiceImpl  list.size() >>>"+list.size());
 		
 		log.info("MyPageServiceImpl myReview 끝>>>");
 		return list;

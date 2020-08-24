@@ -101,10 +101,14 @@ public class MyPageController {
 	
 	//====== 프로필 수정페이지로 이동
 	@RequestMapping("EditDisplay.ec")
-	public ModelAndView EditDisplay(@ModelAttribute MemberVO param) {
+	public ModelAndView EditDisplay( HttpSession session) {
 		log.info("MyPageController EditDisplay 시작 >>>");
 		
-		MemberVO mvo = mypageService.selectMyPage(param);
+		MemberVO mvo = null;
+		if(session != null){
+			mvo = (MemberVO)session.getAttribute("user");
+		}
+		MemberVO mvo_1 = mypageService.selectMyPage(mvo);
 		
 		log.info("mvo.getMno()>>>"+mvo.getMno());
 		log.info("mvo.getMid()>>>"+mvo.getMid());
@@ -117,7 +121,7 @@ public class MyPageController {
 		log.info("mvo.getMimg()>>>"+mvo.getMimg());
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("MemberVO", mvo);
+		mav.addObject("MemberVO", mvo_1);
 		mav.setViewName("/mypage/mypageEdit");
 		
 		log.info("MyPageController EditDisplay 끝 >>>");
@@ -159,11 +163,15 @@ public class MyPageController {
 	
 	//=======비밀번호 변경페이지로 이동=======================
 	@RequestMapping("editPW.ec")
-	public ModelAndView editPW(@ModelAttribute MemberVO param) {
+	public ModelAndView editPW(HttpSession session) {
 		log.info("MyPageController editPW 시작 >>>");
 		
+		MemberVO mvo = null;
+		if(session != null){
+			mvo = (MemberVO)session.getAttribute("user");
+		}	
 		
-		MemberVO mvo = mypageService.selectMyPage(param);
+		MemberVO mvo_1 = mypageService.selectMyPage(mvo);
 		
 		log.info("mvo.getMno()>>>"+mvo.getMno());
 		log.info("mvo.getMid()>>>"+mvo.getMid());
@@ -176,7 +184,7 @@ public class MyPageController {
 		log.info("mvo.getMimg()>>>"+mvo.getMimg());
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("MemberVO", mvo);
+		mav.addObject("MemberVO", mvo_1);
 		mav.setViewName("/mypage/mypagePwEdit");
 		
 		log.info("MyPageController editPW 끝 >>>");
@@ -208,14 +216,18 @@ public class MyPageController {
 	
 	//===== 학원문의 조회 ======================
 	@RequestMapping("consultQuestion.ec")
-	public ModelAndView consultQuestion(HttpServletRequest request,
-										@ModelAttribute ConsultVO cvo, MemberVO param) {
+	public ModelAndView consultQuestion(HttpServletRequest request, HttpSession session,
+										@ModelAttribute ConsultVO cvo) {
 		log.info("MyPageController consultSearch 시작>>>");
 		
-		String mno = request.getParameter("mno");
-		log.info("mno>>>>"+mno);
+		MemberVO mvo = null;
+		String member_mno ="";
+		if(session != null){
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno =mvo.getMno();
+		}
 		
-		cvo.setMember_mno(mno);
+		cvo.setMember_mno(member_mno);
 		List<ConsultVO> list = mypageService.consultQuestion(cvo);
 		log.info("MyPageController consultSearch list.size()>>>" + list.size());
 		
@@ -234,11 +246,11 @@ public class MyPageController {
 			log.info(cvo1.getCupdatedate());
 		}
 		
-		MemberVO mvo = mypageService.selectMyPage(param);
+		MemberVO mvo_1 = mypageService.selectMyPage(mvo);
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("ConsultVO", list);
-		mav.addObject("MemberVO", mvo);
+		mav.addObject("MemberVO", mvo_1);
 		mav.setViewName("/mypage/mypageConsult");
 		
 		log.info("MyPageController consultSearch 끝 >>>");
@@ -247,13 +259,21 @@ public class MyPageController {
 	
 	@RequestMapping("myReview")
 	public ModelAndView myReview(HttpServletRequest request,
-								 @ModelAttribute ReviewVO rvo, MemberVO param) {
+								 @ModelAttribute ReviewVO rvo, HttpSession session) {
 		log.info("MyPageController myReview 시작>>>");
 		
+		MemberVO mvo = null;
+		if(session != null){
+			mvo = (MemberVO)session.getAttribute("user");
+		}	
+		
+		String mvo1 = mvo.getMno();
+		log.info("mvo1>>>>"+mvo1);
+
 		String mno = request.getParameter("mno");
 		log.info("mno>>>>"+mno);
 		
-		rvo.setMember_mno(mno);
+		rvo.setMember_mno(mvo1);
 		List<ReviewVO> list = mypageService.myReview(rvo);
 		log.info("MyPageController myReview list.size()>>>" + list.size());
 		
@@ -275,11 +295,11 @@ public class MyPageController {
 
 		}
 		
-		MemberVO mvo = mypageService.selectMyPage(param);
+		MemberVO mvov = mypageService.selectMyPage(mvo);
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("ReviewVO", list);
-		mav.addObject("MemberVO", mvo);
+		mav.addObject("MemberVO", mvov);
 		mav.setViewName("/mypage/mypageMain");
 		
 		log.info("MyPageController myReview 끝 >>>");
@@ -288,9 +308,12 @@ public class MyPageController {
 	
 	@RequestMapping("myFree")
 	public ModelAndView myFree(HttpServletRequest request,
-								 @ModelAttribute FreeVO fvo, MemberVO param) {
+								 @ModelAttribute FreeVO fvo, MemberVO param, HttpSession session) {
 		log.info("MyPageController myFree 시작>>>");
-		
+		MemberVO mvo = null;
+		if(session != null){
+			mvo = (MemberVO)session.getAttribute("user");
+		}
 		String mno = request.getParameter("mno");
 		log.info("mno>>>>"+mno);
 		
@@ -314,11 +337,11 @@ public class MyPageController {
 
 		}
 		
-		MemberVO mvo = mypageService.selectMyPage(param);
+		MemberVO mvo_1 = mypageService.selectMyPage(mvo);
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("FreeVO", list);
-		mav.addObject("MemberVO", mvo);
+		mav.addObject("MemberVO", mvo_1);
 		mav.setViewName("/mypage/mypageMain_2");
 		
 		log.info("MyPageController myReview 끝 >>>");

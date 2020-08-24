@@ -134,8 +134,13 @@
 <%
 	Object obj = request.getAttribute("MemberVO");
 
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}	
+
 	if(obj != null){
-		MemberVO mvo = (MemberVO)obj;
 %>
 <div id ="full">
 	<div id="sideBanner-mypage">

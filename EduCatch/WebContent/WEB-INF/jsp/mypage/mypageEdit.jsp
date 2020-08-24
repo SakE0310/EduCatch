@@ -15,37 +15,86 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<!-- 부트스트랩 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- 아이콘 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <style type="text/css">
 
+	#full{
+		 margin :auto;
+		 align :center;
+		 width : 1200px;
+		 height: 700px;
+	}
 	.container-mypage {
 	
-	    max-width: 840px;
-	    height: 500px;
-	    margin-left: 710px;
-	    background-color: #f5f5f0;
+	    width: 700px;
+	    height: 700px;
+	    margin :auto;
+	   /*  margin-left: 710px; */
+	   /*background-color: #f5f5f0;*/
 	}
 	#sideBanner-mypage{
 			position: absolute;
-			left:0px;
+			/* left:0px; */
 			width:225px;
-			height: 500px;
-			background: #eaeae1;
-			margin-left: 490px;
+			height: 700px;
+			/* background: #140C40; */
+			 margin :auto;
+			/* margin-left: 490px; */
 			padding-left: 12px;
+			padding-right: 12px;
 		} 
 		
 	.sideBox{
 		width:200px;
-		height:110px;
+		height:180px;
 		background-color: #ffffff;
 		margin-top: 15px;
-		
+		border-radius: 0.5em;
 	}	
+	
+	.btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #ffffff;
+	    color: #555;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 0px solid #e5e5e5;
+	    height: 40px;
+	    font-size: 20px;
+		}
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	    
+	    }
+	    
+	    .shadow {
+		    box-shadow: -100px 100px 100px -90px #000000,
+		        60px 0px 100px -90px #000000;
+		}
 	
 	.required{
 		color : red;
 	}
-	
+	.form-label {
+    display: block;
+    text-transform: uppercase;
+    font-size: 80%;
+    font-weight: 500;
+    }
+    
+    i{
+		color : #140C40;
+	}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -61,6 +110,48 @@
 			$("#clickForm").attr("target","pop");
 			$("#clickForm").submit();
 		})//end of myPageMemUpdate
+		
+		//=====비밀번호 변경 버튼 누르면 실행
+		$("#pwEdit").click(function() {
+			console.log("비밀번호 변경 버튼 누름");
+			
+			$("#clickForm").attr("action","editPW.ec");
+			$("#clickForm").attr("method","POST");
+			$("#clickForm").submit(); 
+		})
+		
+		$("#consultSearch").click(function() {
+			console.log("학원문의 변경 버튼 누름");
+			
+			$("#clickForm").attr("action","consultQuestion.ec");
+			$("#clickForm").attr("method","POST");
+			$("#clickForm").submit(); 
+		})
+		
+
+		$("#freeBoard").click(function() {
+			console.log("freeBoard >>> ");
+
+			$("#clickForm").attr("action","myFree.ec");
+			$("#clickForm").attr("method","POST");
+			$("#clickForm").submit();	
+		})
+
+		$("#reviewBoard").click(function() {
+			console.log("reviewBoard >>> ");
+
+			$("#clickForm").attr("action","myReview.ec");
+			$("#clickForm").attr("method","POST");
+			$("#clickForm").submit();	
+		})
+		
+		$("#memOut").click(function() {
+			console.log("회원탈라라ㅏ라라 >>> ");
+
+			$("#clickForm").attr("action","mypageOut.ec");
+			$("#clickForm").attr("method","POST");
+			$("#clickForm").submit();
+		})
 
 		//수정페이지 부분==================================
 		console.log("수정수정 분리분리");
@@ -191,16 +282,6 @@
 			$("#mypageEditForm").submit();
 				
 		})//end of mypageEdit
-		
-		//=====비밀번호 변경 버튼 누르면 실행
-		$("#pwEdit").click(function() {
-			console.log("비밀번호 변경 버튼 누름");
-			
-			$("#mypageEditForm").attr("action","editPW.ec");
-			$("#mypageEditForm").attr("method","POST");
-			$("#mypageEditForm").submit(); 
-		})//end of pwEdit
-			
 	});//end of ready()
 </script>
 </head>
@@ -208,48 +289,70 @@
 <%
 	Object obj = request.getAttribute("MemberVO");
 
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}	
+
 	if(obj != null){
-		MemberVO mvo = (MemberVO)obj;
 %>
+	<div id ="full">
 	<div id="sideBanner-mypage">
 	<form id= "clickForm" name = "clickForm">
-		<div class ="sideBox">
+		<div align ="center">
+		<br>
+			<h1 style="color : ; font-size: 30px;">마이페이지</h1>
+			<hr>
+		</div>
+		<div class ="sideBox shadow" style="font-size: 20px;">
+<%-- 		<input type="hidden" id="mno" name ="mno" value="<%=mvo.getMno()%>">  --%>
 
-			<%=mvo.getMname() %>님 	&nbsp;&nbsp;
+			<%=mvo.getMname() %>님 
 			<br>
-			<input type ="button" id="pwCheck" value="개인정보 변경"><br>
-			<input type ="button" id="pwEdit" value="비밀번호 변경"><br>
-			회원탈퇴
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-user-cog col-2 p-0"></i><input type ="button" id="pwCheck" class ="btn_light btn_box_01" value="개인정보 변경"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-key"></i><input type ="button" id="pwEdit" class ="btn_light btn_box_01" value="  비밀번호 변경"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-user-slash"></i><input type ="button" id="memOut" class ="btn_light btn_box_01" value=" 회원탈퇴"><br>
+			
 		<input type="hidden" id ="mid" name ="mid" value="<%=mvo.getMid()%>">
 		</div>
-		<div class ="sideBox">
-			즐겨찾기
+		<div class ="sideBox shadow">
+			즐겨찾기<br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-hand-pointer"></i><input type ="button" id="" class ="btn_light btn_box_01" value="  찜목록"><br>
 		</div>
-		<div class ="sideBox">
-			이력조회
+		<div class ="sideBox shadow">
+			내 컨텐츠<br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-file-alt col-2 p-0"></i><input type ="button" id="" class ="btn_light btn_box_01" value="내가 쓴 글"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit col-2 p-0"></i><input type ="button" id="consultSearch" class ="btn_light btn_box_01" value="작성한 상담"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit col-2 p-0"></i><input type ="button" id="" class ="btn_light btn_box_01" value="작성한 후기"><br>
 		</div>
 	</form>	
 	</div>
 	<div class = "container-mypage ">
 		<div align="center">
+		<div>
+		<br>
+			<h2>프로필 수정</h2>
+			<br>
+		</div>
+		<div class="container" style="width: 600px;">
 		<form id="mypageEditForm" name="mypageEditForm">
-		<input type="text" id="mno" name="mno" value="<%=mvo.getMno()%>">
-			<table border="1">
+		<input type="hidden" id="mno" name="mno" value="<%=mvo.getMno()%>">
+			<table  class="table">
 				<tr>
-					<td class="mem">아이디</td>
-					<td><input type="text" id="mid" name="mid" value="<%=mvo.getMid() %>" readOnly/></td>
-				</tr>
-				<!-- <tr>
-					<td class="mem"><span class="required">*</span>비밀번호</td>
-					<td><input type="text" id="mpw" name="mpw"></br>
-						<input type="text" id="mpw_r" name="mpw_r"/>
-						<input type="button" value="비밀번호확인" id="checkPW"/></br>
+					<div class="col-xs-5" align="left">
+						<label>아이디</label>
+						<input  class="form-control" type="text" id="mid" name="mid" value="<%=mvo.getMid() %>" readOnly/>
+					</div>
 					</td>
-				</tr> -->
+					
+				</tr>
 				<tr>
-					<td class="mem"><span class="required">*</span>회원이름</td>
 					<td>
-					<input type="text" id="mname" name="mname" value="<%=mvo.getMname() %>"/></br>
+					<div class="col-xs-5" align="left">
+						<label><span class="required">*</span>이름</label>
+						<input class="form-control" type="text" id="mname" name="mname" value="<%=mvo.getMname() %>"/></br>
+					</div>
 					</td>
 				</tr>
 				<tr>
@@ -265,32 +368,41 @@
 			System.out.println("ret2>>>"+ret2);
 			System.out.println("ret3>>>"+ret3);
 %>				
-				<td class="mem"><span class="required">*</span>핸드폰</td>
 				<td>
+				&nbsp;<label><span class="required">*</span>&nbsp;핸드폰</label><br>
 				<input type ="hidden" id="tel" value="<%=mvo.getMtel()%>">
-					<select id="mtel1" name="mtel1">
+					&nbsp;&nbsp;<select id="mtel1" name="mtel1">
 						<option value="010"<%if(ret1.equals("010")){%>selected="selected"<%} %> >010</option>
 						<option value="017"<%if(ret1.equals("017")){%>selected="selected"<%} %>>017</option>
 						<option value="016"<%if(ret1.equals("016")){%>selected="selected"<%} %>>016</option>
-					</select>
-					<input type="text" id="mtel2" name="mtel2"/> - 
-					<input type="text" id="mtel3" name="mtel3"/>
+					</select> 
+					<div class="col-xs-2" >
+						 <input class="form-control" type="text" id="mtel2" name="mtel2"/>
+					</div> 
+					<div class="col-xs-2" >
+						 <input class="form-control" type="text" id="mtel3" name="mtel3"/>
+					</div>
 				</td>
 			</tr>
 			<tr>
-				<td class="mem"><span class="required">*</span>주소</td>
 				<td>
-					 <input type="text" id="maddrno" name="maddrno" size=6 value="<%= mvo.getMaddrno()%>"/>
+					 <div class="col-xs-9">
+				<label><span class="required">*</span>주소</label><br>
+					<div class="col-xs-6">
+					<input  class="form-control"  type="text" id="maddrno" name="maddrno" size=6 value="<%= mvo.getMaddrno()%>"/>
+					</div>
 					 <input type="button" value="우편번호 찾기" id="addrCheck"/>(도로명주소)<br>
-					 <input type="text" id="maddr1" name="maddr1" size=35 value="<%=mvo.getMaddr1() %>" /><br>							 
-					 <input type="text" id="maddr2" name="maddr2" size=35 value="<%=mvo.getMaddr2() %>" /><br>
+					 <br>
+					 <input  class="form-control" type="text" id="maddr1" name="maddr1" size=35 value="<%=mvo.getMaddr1() %>" /><br>							 
+					 <input class="form-control" type="text" id="maddr2" name="maddr2" size=35 value="<%=mvo.getMaddr2() %>" /><br>
+					</div>
 				</td>
 			</tr>
 			</table>
+			</div>
 			<tr>						
 				<td colspan=2 align="center">
-					<input type="button" id="mypageEdit" value="수정" >
-					<input type="reset" value="다시">
+					<input type="button" id="mypageEdit" value="저장" >
 				</td>
 			</tr>
 <%		
@@ -299,6 +411,10 @@
 		</form>
 		</div>
 	</div>
+	</div>
+	<br>
+	<br>
+	<br>
 <jsp:include page="../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>
