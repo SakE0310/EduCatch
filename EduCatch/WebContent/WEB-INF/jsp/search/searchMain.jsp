@@ -34,7 +34,7 @@
 					ajaxGetCity(setDistrict);
 				});//setDistrict
 				
-// 				카테고리 대분류 변경시 카테고리 소분류 자동 변경
+ 				//카테고리 대분류 변경시 카테고리 소분류 자동 변경
 				$('.select-cmajor').on('change','select',function(){
 					console.log("change cmajor");
 					var setCmajor = $('#cmajor').val();
@@ -308,8 +308,11 @@
 		@media screen and (min-width: 744px) {
 			.box {
 				display : grid;
-				grid-template-columns : 200px 1fr 1fr 1fr 1fr 1fr 1fr;
-				grid-column-gap: 10px;
+				grid-template-columns : 185px 1fr 1fr 1fr 1fr 1fr 1fr;
+				grid-column-gap: 5px;
+			}
+			.nice-select {
+				width:135px;
 			}
 		}
 		@media screen and (max-width: 940px) {
@@ -319,7 +322,10 @@
 				grid-row-gap: 10px;
 			}
 			.list {
-				width : 450px;
+				width:350px;
+			}
+			.nice-select {
+				width:350px;
 			}
 		}
 		.genric-btn {
