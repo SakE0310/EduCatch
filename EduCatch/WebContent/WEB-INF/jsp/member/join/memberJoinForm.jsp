@@ -6,9 +6,16 @@
 <meta charset="UTF-8">
 <title>회원가입 폼</title>
 <style type="text/css">
+
 .required {
 	color: red;
 }
+.memberin{
+	margin-top:44px;
+	margin-bottom:40px;
+}
+
+
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -106,10 +113,10 @@ function addrCheck(){
 }
 function pwCheck(){
 	//비밀번호 확인
-	var mpw = document.getElementById("mpw");
-	var mpw_r = document.getElementById("mpw_r");
-	//if(document.memberjoin.mpw.value != document.memberjoin.mpw_r.value){
-	if(mpw != mpw_r){
+	//var mpw = document.getElementById("mpw");
+	//var mpw_r = document.getElementById("mpw_r");
+	if(document.memberjoin.mpw.value != document.memberjoin.mpw_r.value){
+	//if(mpw != mpw_r){
 		alert("비밀번호가 일치하지 않습니다. 다시 입력해주세요");
 		document.getElementById("mpw").focus();
 		mpw.value = "";
@@ -157,9 +164,9 @@ function idCheck(){
 			console.log(data);
 			if(data==0){
 				alert("사용가능한 아이디입니다");
-				$("#memail0").attr("readonly",true);
-				$("#memail1").attr("readonly",true);
-				$("#idcheck").hide();
+				//$("#memail0").attr("readonly",true);
+				//$("#memail1").attr("readonly",true);
+				//$("#idcheck").hide();
 				$("#ajaxResData").html("중복체크 완료");
 				
 			}else{
@@ -192,11 +199,11 @@ function idCheck(){
 </head>
 <body>
 <br><br><br>
-<div class="container">
+	<div class="container">
 	<form name="memberjoin" id="memberjoin" method="get">
-		<table border=1 align="center"  class="table table-condensed">
-				<div class="mem" align="center">
-					<h1>회원가입</h1>
+		<table align="center"  class="table table-condensed">
+				<div align="center">
+					<h1 class="memberin">회원가입</h1>
 					<p align="right">
 						<span class="required">*</span>표시는 필수 입력항목입니다.
 					</p>
@@ -207,19 +214,25 @@ function idCheck(){
 					</td>
 					<td>
 					<div class="row">
-						<div class="col-md-3.5">
 						&nbsp;&nbsp;&nbsp;
 							<c:if test="${param.emailname ne null }">
-								<input type="text" id="memail0" name="memail0" value="${param.emailname }" size=10 readonly />
-							@
-							<input type="text" id="memail1" name="memail1" value="${param.emailaddr }" size=10 readonly />
+						<div class="col-xs-2">
+								<input type="text" id="memail0" name="memail0" value="${param.emailname }" class="form-control" readonly />
+						</div>
+								@
+						<div class="col-xs-2">
+							<input type="text" id="memail1" name="memail1" value="${param.emailaddr }" class="form-control" readonly />
+						</div>
 							</c:if>
 							<c:if test="${param.emailname eq null }">
-								<input type="text" id="memail0" name="memail0" value="" size=10 onfocus="this.value=''" />
-							@
-							<input type="text" id="memail1" name="memail1" value="" size=10 />
-							</c:if>
+						<div class="col-xs-2">
+								<input type="text" id="memail0" name="memail0" value="" size=10 onfocus="this.value=''"  class="form-control" />
 						</div>
+								@
+						<div class="col-xs-2">
+							<input type="text" id="memail1" name="memail1" value="" size=10  class="form-control" />
+						</div>
+							</c:if>
 						<div class="col-md-6">
 							<select name="memail" onchange="emailCheck()">
 								<option value="0">선택하세요</option>
@@ -238,21 +251,33 @@ function idCheck(){
 						<span class="required">*</span>회원비밀번호:
 					</td>
 					<td>
-						<input type="text" id="mpw" name="mpw" />
-						</br>
-						<input type="text" id="mpw_r" name="mpw_r" />
+					<div class=row>
+					<div class="col-xs-2">
+						<input type="text"  class="form-control" id="mpw" name="mpw" />
+					</div>
+					</div>
+					<div class="row">
+					<div class="col-xs-2">
+ 						<input type="text" class="form-control" id="mpw_r" name="mpw_r"/>
+					</div>
+					<div class="col-xs-2">
 						<input type="button" value="비밀번호확인" onclick="pwCheck()" />
+					</div>
+					</div>
 						<p>4자 이상 12자 이내의 영문/숫자 조합</p>
-						</br>
 					</td>
 				</tr>
 				<tr>
 					<td class="mem">
 						<span class="required">*</span>회원이름:
 					</td>
+					
 					<td>
-						<input type="text" id="mname" name="mname" value="${param.mname }" />
-						</br>
+					<div class="form-group row">
+						<div class="col-xs-2">
+						<input class="form-control" type="text" id="mname" name="mname" value="${param.mname }" />
+						</div>
+					</div>
 					</td>
 				</tr>
 
@@ -261,11 +286,17 @@ function idCheck(){
 						<span class="required">*</span>핸드폰
 					</td>
 					<td>
-						<input type="text" name="mtel1" id="mtel1" value="" maxlength="3" class="join_input" style="width: 70px;" />
-						&nbsp;-&nbsp;
-						<input type="text" name="mtel2" id="mtel2" value="" maxlength="4" class="join_input" style="width: 70px;" />
-						&nbsp;-&nbsp;
-						<input type="text" name="mtel3" id="mtel3" value="" maxlength="4" class="join_input" style="width: 70px;" />
+						<select name="mtel1">
+							<option value="010">010</option>
+							<option value="017">017</option>
+							<option value="016">016</option>
+						</select>
+						<div class="col-xs-2">
+						<input type="text" id="mtel2" name="mtel2" class="form-control" />
+						</div>
+						<div class="col-xs-2">
+						<input type="text" id="mtel3" name="mtel3" class="form-control" />
+						</div>
 					</td>
 				</tr>
 
@@ -274,13 +305,21 @@ function idCheck(){
 						<span class="required">*</span>주소
 					</td>
 					<td>
-						<input type="text" id="maddrno" name="maddrno" size=6 />
+					<div class="row">
+					<div class="col-xs-2">
+						<input type="text" id="maddrno" name="maddrno" size=6 class="form-control" />
+					</div>
 						<input type="button" value="우편번호 찾기" onclick="addrCheck()" />
-						(도로명주소)<br />
-						<input type="text" id="maddr1" name="maddr1" size=35 />
+						(도로명주소)<br/>
+					</div>
+					<div class="row">	
+					<div class="col-xs-7">
+						<input type="text" id="maddr1" name="maddr1" size=35 class="form-control" />
 						<br>
-						<input type="text" id="maddr2" name="maddr2" size=35 />
+						<input type="text" id="maddr2" name="maddr2" size=35 class="form-control" />
 						<br />
+					</div>
+					 </div>
 					</td>
 				</tr>
 
@@ -290,9 +329,11 @@ function idCheck(){
 						<input type="reset" value="다시">
 					</td>
 				</tr>
-		</table><br><br><br><br><br><br>
+		</table>
+		<br><br><br><br>
 	</form>
 	</div>
+		<br><br><br>
 	<jsp:include page="../../../../footer.jsp" flush="true">
 		<jsp:param value="" name="" />
 	</jsp:include>

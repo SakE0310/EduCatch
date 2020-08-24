@@ -142,12 +142,12 @@
 	//검색버튼을 누르면 실행
 	$("#searchData").click(function() {
 		console.log("검색버튼 누름");
-		var sVal = document.searchForm.searchFilter.options[document.searchForm.searchFilter.selectedIndex].value;
+		var sVal = document.freeBoardForm.searchFilter.options[document.freeBoardForm.searchFilter.selectedIndex].value;
 		console.log("sVal>>>"+sVal);
 		 
-		$("#searchForm").attr("action","freeboardlist.ec");
-		$("#searchForm").attr("method","POST");
-		$("#searchForm").submit();
+		$("#freeBoardForm").attr("action","freeboardlist.ec");
+		$("#freeBoardForm").attr("method","POST");
+		$("#freeBoardForm").submit();
 		
 	})//end of searchData
 	
@@ -167,20 +167,23 @@
 	String totalCount = "0";
 	
 	Object obj = request.getAttribute("freeboardlist"); 
+	
 	if(obj!=null){
 		List<FreeVO> list = (List<FreeVO>)obj;
 		int nCnt =list.size();
 %>
-<form id="freeBoardForm" name="freeBoardForm" >
-	
-	<br>
 	<div id="mainWrapper">
-		<table border="0" style="margin-left: auto; margin-right: auto;">
-			<tr><th><h4>자유게시판 목록</h4></th></tr>
+	<div>
+		<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+				<td align="center"><h1>자유게시판 목록</h1></td>
+			</tr>
 		</table>
+			<hr>
 	</div>	
-	<div class="container">
-		<table style="margin-left: auto; margin-right: auto;" border="1" class="table">
+<form id="freeBoardForm" name="freeBoardForm" >
+	<div class="container" style="height: 390px;">
+		<table align="center" class="table">
 			<colgroup>
 				<col width="100px"/>
 				<col width="320px"/>
@@ -197,6 +200,7 @@
 				</tr>
 			</thead>
 			<tbody>
+			
 			<% if(list != null && nCnt>0){
 				for(int i=0; i<list.size(); i++){
 					FreeVO freevo = (FreeVO)list.get(i);
@@ -227,7 +231,8 @@
 				%>
 					<tr>
 						<td colspan="5" align="center">
-						등록된 학과 정보가 존재하지 않습니다 </td>
+						등록된 학과 정보가 존재하지 않습니다
+						 </td>
 					</tr>				
 				<%
 			}//end of if
@@ -252,6 +257,16 @@
 			}//end of obj
 			%>
 			<tr>
+				<td colspan="2" align="left">
+				
+					<select name="searchFilter">
+						<option value="제목">제목</option>
+						<option value="내용">내용</option>
+					</select>
+					<input type="text" name="keyword" id = "keyword" style ="width:200px; height:40px;">
+					<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
+					</td>
+					
 					<td colspan="6" align="right">
 					<input type="button" id="insertboard" name="insertboard" class=" btn_light btn_box_01"
 					value="[글쓰기]"/></td>
@@ -259,13 +274,14 @@
 			</tbody>
 		</table>
 		</div>
+		</div>
 		</form>
 		<br>
 		<!-- 검색 폼  -->
 	<div >
 		<form id="searchForm" name="searchForm">
+		<!-- 
 		<div align = "center" id="sForm">
-		
 			<select name="searchFilter">
 				<option value="제목">제목</option>
 				<option value="내용">내용</option>
@@ -275,6 +291,7 @@
 			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 			<hr>
 		</div>
+		 -->
 		<div align = "center" id="dForm">	
 			<div style="width: 200px">
 			<input type="text" name="startDate" id="startDate"> - <input type="text" name="endDate" id="endDate"> 
@@ -283,9 +300,9 @@
 		</div>
 		</form>
 	</div>
-		<br><br><br><br><br><br>
-</body>
+		<br><br><br>
 	<jsp:include page="../../../../footer.jsp" flush="true">
 	<jsp:param value="" name=""/>
 	</jsp:include>
+</body>
 </html>
