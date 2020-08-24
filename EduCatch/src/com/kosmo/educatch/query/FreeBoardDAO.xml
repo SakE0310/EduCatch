@@ -92,7 +92,8 @@ SELECT * FROM(
 	UPDATE FREEBOARD
 	SET FBSUBJECT=#{fbsubject},
 		FBCONTENT=#{fbcontent},
-		FBIMG=#{fbimg}
+		FBIMG=#{fbimg},
+		FBUPDATEDATE=SYSDATE
 	<![CDATA[
 	WHERE FBDELETEYN='N' AND 
 	FBNO=#{fbno}
@@ -100,7 +101,8 @@ SELECT * FROM(
 </update>
 <update id="deleteFreeBoard" parameterType="freeboard">
 		UPDATE FREEBOARD
-		    SET FBDELETEYN = 'Y'
+		SET FBDELETEYN = 'Y',
+		   	FBUPDATEDATE=SYSDATE
 		WHERE FBNO=#{fbno, jdbcType=VARCHAR}
 	    AND FBDELETEYN = 'N'
 </update>
