@@ -90,7 +90,7 @@ public class ConsultServiceImpl implements ConsultService{
 	}
 	
 	@Override
-	public AcademyVO academyAno(String ano) {
+	public AcademyVO academyAno(AcademyVO ano) {
 		AcademyVO avo = new AcademyVO();
 		avo = consultMapper.academyAno(ano);
 		

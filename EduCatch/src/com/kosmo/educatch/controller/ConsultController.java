@@ -199,11 +199,11 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		String mid=mvo.getMid();
 		String aname = avo.getAname();
 		
-		AcademyVO avov = consultService.academyAno(aname);
+		AcademyVO avov = consultService.academyAno(avo);
 		MemberVO mvov=consultService.memberMno(mvo);
 		
 		String ano = avov.getAno();
-		String mno=mvov.getMid();
+		String mno=mvov.getMno();
 		
 		param.setAcademy_ano(ano);
 		param.setMember_mno(mno);

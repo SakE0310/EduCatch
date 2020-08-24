@@ -204,6 +204,7 @@ public class ReviewController {
 									@ModelAttribute MemberVO mvo) {
 		log.info("ReviewController insertReview >>> 호출 성공 ");
 		
+		
 		log.info("membervo.getmid >>> "+mvo.getMid());
 		String mid=null;
 		String mno=null;
@@ -289,18 +290,20 @@ public class ReviewController {
 				log.info("Exception >>> "+e);
 			}
 		}else {
-			log.info("multipart/form-data true");
+			log.info("multipart/form-data false");
 			
 		}
 		
 		
-		AcademyVO avov = reviewService.academyAno(aname);
+		AcademyVO avov = reviewService.academyAno(avo);
 		MemberVO mvov=reviewService.memberMno(mvo);
 		
 		ano = avov.getAno();
-		mno = mvov.getMid();
+		mno = mvov.getMno();
 		param.setAcademy_ano(ano);
 		param.setMember_mno(mno);
+		
+		log.info("<<<< ano >>>> "+ano);
 		
 		
 		int nCnt = reviewService.insertReview(param);

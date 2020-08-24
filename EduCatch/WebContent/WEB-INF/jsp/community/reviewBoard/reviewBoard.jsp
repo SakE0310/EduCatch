@@ -135,15 +135,13 @@
       //검색버튼을 누르면 실행
       $("#searchData").click(function() {
          console.log("검색버튼 누름");
-         var sVal = document.searchForm.searchFilter.options[document.searchForm.searchFilter.selectedIndex].value;
+         var sVal = document.pageForm.searchFilter.options[document.pageForm.searchFilter.selectedIndex].value;
          console.log("sVal>>>"+sVal);
           
-         $("#searchForm").attr("action","searchList.ec");
-         $("#searchForm").attr("method","POST");
-         $("#searchForm").submit();
-          
-         
-         alert("아직안만듬");
+         $("#pageForm").attr("action","searchList.ec");
+         $("#pageForm").attr("method","POST");
+         $("#pageForm").submit();
+
       })//end of searchData
         
         
@@ -156,19 +154,7 @@
          $("#pageForm").submit();   
       })
      });
-     
-     /*
-    function updatePopup(rbno){
-      alert(">>>");
-      $("#rbno").val(rbno);
-      $("#pageForm").attr("action","selectReview.ec");
-      $("#pageForm").attr("method","POST");
-      $("#pageForm").submit();
-      
-   }
-   */
-  
-   
+
 </script>
 <body>
 <%
@@ -192,12 +178,13 @@
       ArrayList listReview=(ArrayList)obj;
       
       int nCnt=listReview.size();
+      
+      
    
 %>
 <form id="pageForm" name="pageForm">
       <input type="hidden" id="rbno" name="rbno"/>
-   </form>
-   <div id="mainWrapper">
+   	  <div id="mainWrapper">
 		<div>
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
@@ -226,20 +213,20 @@
          </thead>
          <tbody>
 <%
-if(listReview !=null && nCnt>0){
-      for(int i=0; i<nCnt; i++){
-         ReviewVO rvo=(ReviewVO)listReview.get(i);
-
-         pagesize=rvo.getPagesize();
-         groupsize=rvo.getGroupsize();
-         curpage=rvo.getCurpage();
-         totalcount=rvo.getTotalcount();
-         
-
-         System.out.println("rvo.getPno()"+rvo.getPagesize());
-         System.out.println("rvo.getGroupsize()"+rvo.getGroupsize());
-         System.out.println("rvo.getCurpage()"+rvo.getCurpage());
-         System.out.println("rvo.getTotalcount()"+rvo.getTotalcount());
+	if(listReview !=null && nCnt>0){
+	      for(int i=0; i<nCnt; i++){
+	         ReviewVO rvo=(ReviewVO)listReview.get(i);
+	
+	         pagesize=rvo.getPagesize();
+	         groupsize=rvo.getGroupsize();
+	         curpage=rvo.getCurpage();
+	         totalcount=rvo.getTotalcount();
+	         
+	
+	         System.out.println("rvo.getPno()"+rvo.getPagesize());
+	         System.out.println("rvo.getGroupsize()"+rvo.getGroupsize());
+	         System.out.println("rvo.getCurpage()"+rvo.getCurpage());
+	         System.out.println("rvo.getTotalcount()"+rvo.getTotalcount());
 
       
 %>
@@ -257,7 +244,7 @@ if(listReview !=null && nCnt>0){
 %>
                <tr>
                   <td colspan="7" align="center">
-                  등록된 게시물이 없습니다.
+                  		등록된 게시물이 없습니다.
                   </td>
                </tr>
 <%
@@ -267,7 +254,7 @@ if(listReview !=null && nCnt>0){
 %>         
 
          <tr>
-         <td colspan="18">
+         <td colspan="5">
          <jsp:include page="memberPaging.jsp" flush="true">
             <jsp:param name="url" value="listReview.ec"/>
             <jsp:param name="str" value=""/>
@@ -284,22 +271,21 @@ if(listReview !=null && nCnt>0){
 		
 %>
 	<tr>
-		<td colspan="2" align="left">
+		<td colspan="3" align="left">
          <select name="searchFilter">
             <option value="제목">제목</option>
             <option value="내용">내용</option>
-            <option value="제목+내용">제목+내용</option>
          </select>
-         <input type="text" name="keyword" id = "keyword" style="height: 40px">
+         <input type="text" name="keyword" id = "keyword" style="width:200px; height: 40px;">
          <input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
-         </td>
+		</td>
 
 <%
-				if(mvo != null){
-					if( mvo.getMauth().equals("1")){
+		if(mvo != null){
+			if( mvo.getMauth().equals("1") || mvo.getMauth().equals("3")){
 %>
 
-			<td colspan="6" align="right">
+			<td colspan="2" align="right">
                <input type="button" value="글쓰기" id="insertPage" class=" btn_light btn_box_01"/>
 			</td>
 <%	
@@ -307,24 +293,41 @@ if(listReview !=null && nCnt>0){
 					}
 %>
 		</tr>
-      </tbody>
-      </table>
+      	</tbody>
+      	</table>
    </div>
    </div>
-   <div>
-      <form id="searchForm" name="searchForm">
-      <div align = "center" id="sForm">
-      
-      </div>
-      <div align = "center" id="dForm">   
-         <div style="width: 200px">
-         <input type="text" name="startDate" id="startDate"> - <input type="text" name="endDate" id="endDate"> 
-         <input type="button" id="searchPiker" value="검색">
-         </div>
-      </div>
-      </form>
-   </div>
-   <br><br><br><br><br><br>
+</form>
+
+	<div>
+		<form id="searchFormNotice" name="searchFormNotice">
+		
+		<div id="mainWrapper" align = "center">
+		<div align = "center" style="width: 700px;" >
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+			<td width="500">
+		         <div class="row">
+		         <div></div>
+		            <div class="col-md-1.8">
+						<input type="text" name="startDate" id="startDate">
+		            </div>
+		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		            <div class="col-md-1.5">
+	      		 		<input type="text" name="endDate" id="endDate"> 
+		            </div>
+	      				  &nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
+	      				  
+		      </div>
+		      
+				<td>
+			</tr>
+			</table>
+			<hr>
+		</div>
+		</div>
+		</form>
+	</div>
 
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>

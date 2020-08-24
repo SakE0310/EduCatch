@@ -170,7 +170,8 @@
 		     AADDR1
 		FROM 
 		      ACADEMY A
-		WHERE ANAME = #{aname, jdbcType=VARCHAR}
+		WHERE ANO = #{ano, jdbcType=VARCHAR}
+		AND   ANAME=#{aname, jdbcType=VARCHAR}
 	</select>
 	
 	<select id="memberMno" parameterType="String" resultType="member">

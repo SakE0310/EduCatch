@@ -74,8 +74,11 @@
 
 	function setChildValue(aname){
 
-	      document.getElementById("aname").value = aname;
-	      document.getElementById("ano").value = ano;
+	      var aname1=aname.split(",");
+	      console.log("aname1.index[0] >>> "+aname1[0]);
+	      console.log("aname1.index[1] >>> "+aname1[1]);
+	      document.getElementById("aname").value = aname1[0];
+	      document.getElementById("ano").value = aname1[1];
 
 	}
 </script>
@@ -99,6 +102,7 @@
 	<form id="edit">
 		<div>
 		<input type="hidden" id="cbname" name="cbname" value="<%= mvo.getMname()%>">
+		<input type="hidden" id="ano" name="ano">
 		<input type="hidden" id="mid" name="mid" value="<%= mvo.getMid()%>">
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
@@ -116,9 +120,8 @@
 			<tr>
 				<td style="width: 100px">학원명</td>
 				<td><input type="text"  id="aname" name="aname"  placeholder="학원명을 입력하세요"
-					style="width: 98%" />
+					style="width: 90%" />
 					<input type="button"  id="searchAcademy" value="검색" />
-					<input type="hidden" id="ano" name="ano" />
 				</td>
 			</tr>
 			<tr>

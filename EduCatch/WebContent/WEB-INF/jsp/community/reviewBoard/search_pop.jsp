@@ -62,9 +62,9 @@
 </style>
 <script type="text/javascript">
 
-	function sendChildValue(aname){
+	function sendChildValue(aname, ano){
 
-	opener.setChildValue(aname);
+	opener.setChildValue(aname, ano);
 
 
 	window.close();
@@ -109,7 +109,7 @@
 		<input type="hidden" id="ano" name="ano" value="<%=avo.getAno() %>"/>
 		<tr align="center">
 			<td>
-				<a href="javascript:sendChildValue('<%= avo.getAname()%>')"><%= avo.getAname()%></a></td>				
+				<a href="javascript:sendChildValue('<%= avo.getAname()%>,<%=avo.getAno() %>')"><%= avo.getAname()%></a>				
 			</td>
 			<td><%= avo.getAaddr1() %></td>
 		</tr>

@@ -16,6 +16,6 @@ public interface ConsultMapper {
 	public int deleteConsult(String cbno);
 	public ConsultVO selectConsult(String cbno);
 	public ConsultVO selectUpdate1(String cbno);
-	public AcademyVO academyAno(String ano);
+	public AcademyVO academyAno(AcademyVO ano);
 	public MemberVO memberMno(MemberVO param);
 }

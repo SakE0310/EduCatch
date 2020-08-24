@@ -135,12 +135,12 @@
 		//검색버튼을 누르면 실행
 		$("#searchData").click(function() {
 			console.log("검색버튼 누름");
-			var sVal = document.searchForm.searchFilter.options[document.searchForm.searchFilter.selectedIndex].value;
+			var sVal = document.consultForm.searchFilter.options[document.consultForm.searchFilter.selectedIndex].value;
 			console.log("sVal>>>"+sVal);
 			 
-			$("#searchForm").attr("action","searchConsult.ec");
-			$("#searchForm").attr("method","POST");
-			$("#searchForm").submit();
+			$("#consultForm").attr("action","searchConsult.ec");
+			$("#consultForm").attr("method","POST");
+			$("#consultForm").submit();
 			 
 			
 			alert("아직안만듬");
@@ -182,7 +182,6 @@
 %>
 	<form id="consultForm" name="consultForm">
 		<input type="hidden" id="cbno" name="cbno"/>
-	</form>
 	<div id="mainWrapper">
 		<div>
 		<table  border="0" cellpadding="1" cellspacing="1" align="center">
@@ -273,14 +272,13 @@ if(listConsult !=null && nCnt>0){
 	}//end of if(obj)
 		
 %>
-		<tr>	
-		<td colspan="2" align="left">
+	<tr>	
+		<td colspan="3" align="left">
 			<select name="searchFilter">
 				<option value="제목">제목</option>
 				<option value="내용">내용</option>
-				<option value="제목+내용">제목+내용</option>
 			</select>
-			<input type="text" name="keyword" id = "keyword" style="height: 40px">
+			<input type="text" name="keyword" id = "keyword" style="width:200px; height: 40px;">
 			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 		</td>
 <%
@@ -288,7 +286,7 @@ if(listConsult !=null && nCnt>0){
 			if( mvo.getMauth().equals("1")){
 %>
 		
-			<td colspan="6" align="right">
+			<td colspan="2" align="right">
 				<input type="button" value="글쓰기"
 				id="insertPage" class=" btn_light btn_box_01"/>
 			</td>
@@ -301,21 +299,35 @@ if(listConsult !=null && nCnt>0){
 		</table>
 	</div>
 	</div>
+</form>
 	<div>
 		<form id="searchForm" name="searchForm">
-		<div align = "center" id="sForm">
 		
+		<div id="mainWrapper" align = "center">
+		<div align = "center" style="width: 700px;" >
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+			<td width="500">
+		         <div class="row">
+		         <div></div>
+		            <div class="col-md-1.8">
+						<input type="text" name="startDate" id="startDate">
+		            </div>
+		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		            <div class="col-md-1.5">
+	      		 		<input type="text" name="endDate" id="endDate"> 
+		            </div>
+	      				&nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
+		      </div>
+		      
+				<td>
+			</tr>
+			</table>
 			<hr>
 		</div>
-		<div align = "center" id="dForm">	
-			<div style="width: 200px">
-			<input type="text" name="startDate" id="startDate"> - <input type="text" name="endDate" id="endDate"> 
-			<input type="button" id="searchPiker" value="검색">
-			</div>
 		</div>
 		</form>
 	</div>
-	<br><br><br><br><br><br>
 	<jsp:include page="../../../../footer.jsp" flush="true">
 		<jsp:param value="" name=""/>
 	</jsp:include>

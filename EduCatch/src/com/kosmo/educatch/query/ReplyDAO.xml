@@ -48,18 +48,22 @@
 		</selectKey>
 			INSERT INTO REPLY(
 			    REVIEWBOARD_RBNO,
-			    CONSULTBOARD_CBNO,                
+			    CONSULTBOARD_CBNO,
+			    MEMBER_MNO,                
 			    RENO,
+			    REWRITER,
 			    RECONTENT,
 			    REDELETEYN,
 			    REINSERTDATE,
 			    REUPDATEDATE
 			)
 			VALUES(
-			    #{reviewboard_rbno,jdbcType=VARCHAR},
-			    #{consultboard_cbno,jdbcType=VARCHAR},
-			    #{reno,jdbcType=VARCHAR},
-			    #{recontent,jdbcType=VARCHAR},
+			    #{reviewboard_rbno, jdbcType=VARCHAR},
+			    #{consultboard_cbno, jdbcType=VARCHAR},
+			    #{member_mno, jdbcType=VARCHAR},
+			    #{reno, jdbcType=VARCHAR},
+			    #{rewriter, jdbcType=VARCHAR},
+			    #{recontent, jdbcType=VARCHAR},
 			    'N',
 			    SYSDATE,
 			    SYSDATE

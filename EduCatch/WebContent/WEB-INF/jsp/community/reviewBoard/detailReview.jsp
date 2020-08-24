@@ -1,3 +1,4 @@
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.kosmo.educatch.vo.ReviewVO"%>
@@ -84,13 +85,22 @@
 <body>
 <%
 
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}
+
 	String reviewboard_rbno = "";
+	
 
 	Object obj=request.getAttribute("ReviewVO");
 	
 	if(obj !=null){
 		
 			ReviewVO rvo=(ReviewVO)obj;
+			
+			if(mvo !=null){
 %>
 <p></p>
 	<div class="container">
@@ -146,7 +156,10 @@
 		<jsp:include page="reviewReply.jsp">
 			<jsp:param name="reviewboard_rbno" value="<%=reviewboard_rbno %>"/>
 		</jsp:include>
-		<table style="margin-left: auto; margin-right: 400px;" border="0">
+<%
+	if( rvo.getRbname().equals(mvo.getMname())){
+%>
+	<table style="margin-left: auto; margin-right: auto;" border="0">
 			<tr align="center">
 				<td>
 					<a href="selectUpdate.ec?rbno=<%= rvo.getRbno()%>">
@@ -156,16 +169,26 @@
 				<td>
 					<input type="button" id="deleteData" value="삭제" class=" btn_light btn_box_01"/>
 				</td>
-				<td>
-					<input type="button" id="listData" value="목록"   class=" btn_light btn_box_01"/>
-				</td>
-			</tr>
 <%
 	}
 %>
+				<td align="center">
+					<input type="button" id="listData" value="목록"   class=" btn_light btn_box_01"/>
+				</td>
+			</tr>
 		</table>
-		
-
+<%
+			
+		}else if(mvo == null){
+%>
+		<script>
+			alert("로그인 후 이용해주세요");
+			location.href="listReview.ec";
+		</script>
+<%
+		}
+	}
+%>
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

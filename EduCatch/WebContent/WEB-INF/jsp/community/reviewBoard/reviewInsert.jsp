@@ -114,8 +114,13 @@
 	
 	function setChildValue(aname){
 
-	      document.getElementById("aname").value = aname;
-	      document.getElementById("ano").value = ano;
+	      var aname1=aname.split(",");
+	      console.log("aname1.index[0] >>> "+aname1[0]);
+	      console.log("aname1.index[1] >>> "+aname1[1]);
+	      document.getElementById("aname").value = aname1[0];
+	      document.getElementById("ano").value = aname1[1];
+	      //document.getElementById("ano").value = ano;
+	      
 
 	}
 
@@ -124,7 +129,7 @@
 </script>
 <body>
 <%
-
+	
 
 	HttpSession hs = request.getSession(false);
 	MemberVO mvo = null;
@@ -133,6 +138,8 @@
 		
 		System.out.println("reviewinsert.jsp   mvo >>>> "+mvo);
 		System.out.println("reviewinsert.jsp   mvo.getMid >>>> "+mvo.getMid());
+		
+		System.out.println("mvo.getMno() >>> "+mvo.getMno());
 	}
 	
 
@@ -142,7 +149,9 @@
 	<form id="edit">
 		<div>
 		<input type="hidden" id="rbname" name="rbname" value="<%= mvo.getMname()%>">
+		<input type="hidden" id="ano" name="ano">
 		<input type="hidden" id="mid" name="mid" value="<%= mvo.getMid()%>">
+		<input type="hidden" id="mno" name="mno" value="<%= mvo.getMno()%>">
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
 				<td align="center"><h1>REVIEW</h1></td>
@@ -177,26 +186,29 @@
 			<tr>
 				<td style="width: 100px">학원명</td>
 				<%
-					Object obj = request.getAttribute("aname");
-					if(obj !=null){
-					String aname = (String)obj;
+					//Object obj = request.getAttribute("aname");
+					//if(obj !=null){
+					//String aname = (String)obj;
+					//String ano = (String)obj;
+					
 					
 				%>
-				<td><input type="text"  id="aname" name="aname" value="<%=aname %>"
+				<!--  
+				<td><input type="text"  id="aname" name="aname" value="<%--=aname --%>"
 					style="width: 90%" />
 					<input type="button"  id="searchAcademy" value="검색" />
-					<input type="hidden" id="ano" name="ano" /> 
+					<input type="hidden" id="ano" name="ano" value="<%--=ano--%>"/> 
 				</td>
+				-->
 				<%
-					}else{
+					//}else{
 				%>
 				<td><input type="text"  id="aname" name="aname" placeholder="학원명을 입력하세요"
 					style="width: 90%" />
 					<input type="button"  id="searchAcademy" value="검색" />
-					<input type="hidden" id="ano" name="ano" /> 
 				</td>
 				<%
-					}
+					//}
 				%>
 			</tr>
 			<tr>

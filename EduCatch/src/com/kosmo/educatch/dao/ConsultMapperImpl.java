@@ -61,7 +61,7 @@ public class ConsultMapperImpl extends SqlSessionDaoSupport implements ConsultMa
 	}
 	
 	@Override
-	public AcademyVO academyAno(String ano) {
+	public AcademyVO academyAno(AcademyVO ano) {
 		return getSqlSession().selectOne("academyAno");
 	}
 

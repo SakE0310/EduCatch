@@ -1,3 +1,4 @@
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@page import="com.kosmo.educatch.vo.ConsultVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.kosmo.educatch.vo.ReviewVO"%>
@@ -75,6 +76,12 @@
 <body>
 <%
 
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}
+
 	String consultboard_cbno = "";
 	Object obj=request.getAttribute("ConsultVO");
 	
@@ -120,6 +127,9 @@
 		<jsp:include page="consultReply.jsp">
 			<jsp:param name="consultboard_cbno" value="<%=consultboard_cbno %>"/>
 		</jsp:include>
+<%
+	if( cvo.getCbname().equals(mvo.getMname()) || mvo.getMauth().equals("3")){
+%>
 		<table style="margin-left: auto; margin-right: auto;" border="0">
 			<tr align="center">
 				<td>
@@ -130,13 +140,15 @@
 				<td>
 					<input type="button" id="deleteData" value="삭제" class=" btn_light btn_box_01"/>
 				</td>
-				<td>
+<%
+	}
+%>
+				<td align="center">
 					<input type="button" id="listData" value="목록" class=" btn_light btn_box_01"/>
 				</td>
-
 			</tr>
 <%
-		//}
+		
 	}
 %>
 		</table>

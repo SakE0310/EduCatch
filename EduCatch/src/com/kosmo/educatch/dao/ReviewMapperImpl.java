@@ -69,7 +69,7 @@ public class ReviewMapperImpl extends SqlSessionDaoSupport implements ReviewMapp
 	}
 
 	@Override
-	public AcademyVO academyAno(String ano) {
+	public AcademyVO academyAno(AcademyVO param) {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("academyAno");
 	}

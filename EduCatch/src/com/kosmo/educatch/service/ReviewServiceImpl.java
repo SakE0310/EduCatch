@@ -95,11 +95,13 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public AcademyVO academyAno(String ano) {
+	public AcademyVO academyAno(AcademyVO param) {
+		
 		AcademyVO avo = new AcademyVO();
-		avo = reviewMapper.academyAno(ano);
+		avo = reviewMapper.academyAno(param);
 		
 		return avo;
+		
 	}
 
 	@Override
