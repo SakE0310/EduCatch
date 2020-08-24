@@ -130,5 +130,13 @@ public class ManageServiceImpl implements ManageService {
 		log.info("ManagerserviceImpl insertSubject end >>> ");
 		return cnt;
 	}
+	// ---------- 학원관리 학원 수정
+	@Override
+	public int updateAcademy(AcademyVO avo) {
+		log.info("ManagerserviceImpl updateAcademy >>> ");
+		int cnt = manageMapper.updateAcademy(avo);
+		log.info("ManagerserviceImpl updateAcademy end >>> ");
+		return cnt;
+	}
 
 }

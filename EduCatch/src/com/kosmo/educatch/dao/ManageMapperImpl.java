@@ -13,6 +13,8 @@ import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.SubjectVO;
 import com.kosmo.educatch.vo.TimetableVO;
 
+import sun.security.action.GetLongAction;
+
 public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapper {
 	
 	private Logger log = LoggerManager.getInstance().getLogger(ManageMapperImpl.class);
@@ -90,6 +92,12 @@ public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapp
 	@Override
 	public int insertSubject(SubjectVO svo) {
 		return getSqlSession().insert("ManagerMapper.insertSubject");
+	}
+
+	// ---------- 학원관리 학원 수정
+	@Override
+	public int updateAcademy(AcademyVO avo) {
+		return getSqlSession().update("ManagerMapper.updateAcademy");
 	}
 
 }

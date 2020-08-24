@@ -156,7 +156,7 @@
 		ORDER BY 1 DESC
 	</select>
 	
-		<!-- 학원관리 편의기능 조회 -->
+	<!-- 학원관리 편의기능 조회 -->
 	<select id="conManageView" parameterType="convenience" resultType="convenience">
 		SELECT
 			    A.ACADEMY_ANO,
@@ -174,6 +174,7 @@
 		ORDER BY 1 DESC
 	</select>
 	
+	<!-- 학원관리 과목 삽입-->
 	<insert id="insertSubject" parameterType="subjectview">
 		<selectKey keyProperty="sno" resultType="String" order="BEFORE">
 		SELECT 	/*+ INDEX_DESC(SYS_C0011497) */ 		 
@@ -210,6 +211,20 @@
 					        SYSDATE
 					)
 	</insert>
+	
+	<update id="updateAcademy" parameterType="academyview">
+		UPDATE ACADEMY
+		    SET     ANAME = #{aname, jdbcType=VARCHAR},
+		            ATEL = #{atel, jdbcType=VARCHAR},
+		            AADDRNO = #{aaddrno, jdbcType=VARCHAR},
+		            AADDR1 = #{aaddr1, jdbcType=VARCHAR},
+		            AADDR2 = #{aaddr2, jdbcType=VARCHAR},
+		            ALOGO = #{alogo, jdbcType=VARCHAR},
+		            AUPDATEDATE = SYSDATE
+		WHERE ADELETEYN = 'N'
+		AND ANO= #{ano, jdbcType=VARCHAR}
+	</update>	
+	
 	
 	
 </mapper>

@@ -183,17 +183,112 @@
 
 
 </style>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		
+		//학원정보수정 - 이미지
+		$('#ex_filename').on('change', function(){
+			
+			var filename;
+			// 값이 변경되면 
+			if(window.FileReader){ 
+				// modern browser 
+				filename = $(this)[0].files[0].name; 
+			} else { 
+				// old IE 
+				filename = $(this).val().split('/').pop().split('\\').pop(); 
+				// 파일명만 추출 
+			} // 추출한 파일명 삽입
+			var fileType = filename.split(".")[1];
+			fileType = fileType.toLowerCase();
+			if(fileType=='jpg' || fileType == 'gif' || fileType == 'png' || fileType == 'jpeg' || fileType == 'bmp'){
+				
+			}else{
+				alert('이미지 파일만 선택할 수 있습니다.')
+				return false;
+			}
+			$('#alogo').val(filename);
+			
+		});
+		//학원정보수정 버튼
+		$('#updateAcademy').on('click', function(){
+			if($('#alogo').val() != null && $('#alogo').val() != ""){
+				$('#academyForm').attr("enctype", "multipart/form-data");
+			}else{
+			
+			}
+			$('#academyForm').attr("action", "manageUpdateAcademy.ec");
+			$('#academyForm').attr("method", "POST");
+			$('#academyForm').submit();
+		});
+		
+		//과목추가 버튼
 		$('#addSubject').on('click', function(){
 			$('#subjectForm').attr("action", "manageInsertSubject.ec");
 			$('#subjectForm').attr("method", "POST");
 			$('#subjectForm').submit();
 		});
+		
+		
+		//두번째 주소창값을 가지고 좌표찍기
+		$(document).on('keyup', '#aaddr2', function(){
+			var geocoder = new kakao.maps.services.Geocoder();
+	
+			var callback = function(result, status) {
+			    if (status === kakao.maps.services.Status.OK) {
+			        console.log(result);
+			        console.log(result[0].x);
+			        console.log(result[0].y);
+			        $('#axpoint').val(result[0].x);
+					$('#aypoint').val(result[0].y);
+			    }
+			};
+			
+			var address = $('#aaddr1').val() + " " + $('#aaddr2').val();
+			
+			geocoder.addressSearch(address, callback);
+			
+		});
 	
 	});
+	
+	function addrCheck(){
+		new daum.Postcode({
+			oncomplete: function(data){
+				console.log("새우편번호 >>> : " + data.zonecode);
+				console.log("주소값 >>> : " + data.address);
+				console.log("빌딩값 >>> : " + data.buildingName);	
+				$('#aaddrno').val(data.zonecode);
+				$('#aaddr1').val(data.address);
+				$('#aaddr2').val(data.buildingName);
+				
+				
+				//주소를 가져왔을때 좌표찍기 
+				var geocoder = new kakao.maps.services.Geocoder();
+	
+				var callback = function(result, status) {
+				    if (status === kakao.maps.services.Status.OK) {
+				        console.log(result);
+				        console.log(result[0].x);
+				        console.log(result[0].y);
+				        $('#axpoint').val(result[0].x);
+						$('#aypoint').val(result[0].y);
+				    }
+				};
+				
+				var address = $('#aaddr1').val() + " " + $('#aaddr2').val();
+				
+				geocoder.addressSearch(address, callback);
+						
+					
+					
+				
+			}
+		}).open();
+	}
 
 </script>
 
@@ -333,31 +428,67 @@
 												<div class="modal-content">
 													<div class="modal-header">
 														<h5 class="modal-title" id="myModalLabel">
-															학원 정보
+															학원 정보 수정
 														</h5> 
 														<button type="button" class="close" data-dismiss="modal">
 															<span aria-hidden="true">×</span>
 														</button>
 													</div>
 													<div class="modal-body">
+														<form name="academyForm" id="academyForm">
 														<table class="table table-condensed">
-				    <tr>
-				        <td><img src="/EduCatch/assets/img/Icon_academy.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;학원명</td>
-				        <td><%=avo.getAname() %></td>
-				      </tr>
-				      <tr>
-				        <td><img src="/EduCatch/assets/img/Icon_call.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;연락처</td>
-				        <td><%=avo.getAtel() %></td>
-				      </tr>
-				      <tr>
-				        <td><img src="/EduCatch/assets/img/Icon_location.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;주소</td>
-				        <td><%=address %></td>
-				      </tr>
-				  </table>
+														   	 <tr>
+														        <td>학원명</td>
+														        <td><input type="text" class="form-control" id="aname" name="aname" value="<%=avo.getAname() %>"></td>
+														     </tr>
+														     <tr>
+														        <td>연락처</td>
+														        <td><input type="text" class="form-control" id="atel" name="atel" value="<%=avo.getAtel() %>"></td>
+														     </tr>
+														     <tr>
+														        <td>우편번호</td>
+														        <td>
+															        <div class="row">
+																	<div class="col-md-8">
+																			<input type="text" class="form-control" id="aaddrno" name="aaddrno" value="<%=avo.getAaddrno() %>" readonly />
+																	</div>
+																	<div class="col-md-4">
+																		<a href="javascript:addrCheck();" class="btn btn-primary">찾기</a>
+																	</div>
+																</div>
+																</td>
+														     </tr>
+														     <tr>
+														        <td>주소</td>
+														        <td><input type="text" class="form-control" id="aaddr1" name="aaddr1" value="<%=avo.getAaddr1() %>" readonly></td>
+														     </tr>
+														     <tr>
+														        <td>상세주소</td>
+														        <td><input type="text" class="form-control" id="aaddr2" name="aaddr2" value="<%=avo.getAaddr2() %>"></td>
+														        	<input type="hidden" name="axpoint" id="axpoint" value="<%=avo.getAxpoint() %>">
+																	<input type="hidden" name="aypoint" id="aypoint" value="<%=avo.getAypoint() %>">
+														     </tr>
+														     <tr>
+														        <td>로고이미지</td>
+														        <td>
+															        <div class="row">
+																		<div class="col-md-8">
+																			<input type="text" class="form-control" id="alogo" name="alogo" value="<%=avo.getAlogo() %>" readonly>
+																		</div>
+																		<div class="col-md-4">
+																			<label for="ex_filename" class="btn btn-primary">찾기</label>
+																			<input type="file" id="ex_filename" name="file" class="upload-hidden">
+																		</div>
+																	</div>
+																</td>
+														     </tr>
+														</table>
+														<input type="hidden" class="form-control" id="ano" name="ano" value="<%=avo.getAno()%>">
+													</form>
 													</div>
 													<div class="modal-footer">
 														 
-														<button type="button" class="btn btn-primary">
+														<button type="button" class="btn btn-primary" id="updateAcademy">
 															수정
 														</button> 
 														<button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -404,7 +535,7 @@
 												<div class="modal-content">
 													<div class="modal-header">
 														<h5 class="modal-title" id="myModalLabel">
-															수업 정보
+															과목 추가
 														</h5> 
 														<button type="button" class="close" data-dismiss="modal">
 															<span aria-hidden="true">×</span>
@@ -427,22 +558,20 @@
 														     </tr>
 														     <tr>
 														        <td>수강금액</td>
-														        <td><input type="text" class="form-control" id="speople" name="speople"></td>
+														        <td><input type="text" class="form-control" id="sprice" name="sprice"></td>
 														     </tr>
 														     <tr>
 														        <td>수강인원</td>
-														        <td><input type="text" class="form-control" id="sprice" name="sprice"></td>
+														        <td><input type="text" class="form-control" id="speople" name="speople"></td>
 														     </tr>
 														</table>
 														<input type="hidden" class="form-control" id="sno" name="sno">
 														<input type="hidden" class="form-control" id="academy_ano" name="academy_ano" value="<%=avo.getAcademy_ano()%>">
-													<%
-			
-			}
-			}
-													%>
 													</form>
 													</div>
+													<%
+			}}
+													%>
 													<div class="modal-footer">
 														 
 														<button type="button" class="btn btn-primary" id="addSubject">
@@ -457,36 +586,6 @@
 											</div>
 										
 										</div>
-										
-										 <a id="modal-749483" href="#modal-container-749483" role="button" class="btn btn-primary" data-toggle="modal">과목수정</a>
-									
-										<div class="modal fade" id="modal-container-749483" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="myModalLabel">
-															과목 정보
-														</h5> 
-														<button type="button" class="close" data-dismiss="modal">
-															<span aria-hidden="true">×</span>
-														</button>
-													</div>
-													<div class="modal-body">
-														수정할 내용내용
-													</div>
-													<div class="modal-footer">
-														 
-														<button type="button" class="btn btn-primary">
-															추가
-														</button> 
-														<button type="button" class="btn btn-secondary" data-dismiss="modal">
-															취소
-														</button>
-													</div>
-												</div>
-												
-											</div>
-								</div><!--모달 end-->
 									</div>
 								</div><!--모달 end-->
     	<div class="container">
@@ -499,6 +598,7 @@
 			        <th>수강시간</th>
 			        <th>수강금액</th>
 			        <th>수강인원</th>
+			        <th></th>
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -516,20 +616,136 @@
 			        <td><%=svo.getStime() %></td>
 			        <td><%=svo.getSprice() %></td>
 			        <td><%=svo.getSpeople() %></td>
+			        <td>
+			         <div class="row" style="color:black">
+									<div class="col-md-12">
+										 <a id="modal-749489" href="#modal-container-749489" role="button" class="btn btn-primary" data-toggle="modal">수정</a>
+									
+										<div class="modal fade" id="modal-container-749489" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="myModalLabel">
+															과목 수정
+														</h5> 
+														<button type="button" class="close" data-dismiss="modal">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<form name="subjectUpdateForm" id="subjectUpdateForm">
+															<table class="table table-condensed">
+														   	 <tr>
+														        <td>과목명</td>
+														        <td><input type="text" class="form-control" id="sname" name="sname" value="<%=svo.getSname()%>"></td>
+														     </tr>
+														     <tr>
+														        <td>수강날짜</td>
+														        <td><input type="text" class="form-control" id="sday" name="sday" value="<%=svo.getSday()%>"></td>
+														     </tr>
+														     <tr>
+														        <td>수강시간</td>
+														        <td><input type="text" class="form-control" id="stime" name="stime" value="<%=svo.getStime()%>"></td>
+														     </tr>
+														     <tr>
+														        <td>수강금액</td>
+														        <td><input type="text" class="form-control" id="speople" name="speople" value="<%=svo.getSpeople()%>"></td>
+														     </tr>
+														     <tr>
+														        <td>수강인원</td>
+														        <td><input type="text" class="form-control" id="sprice" name="sprice" value="<%=svo.getSprice()%>"></td>
+														     </tr>
+														</table>
+														<input type="hidden" class="form-control" id="sno" name="sno">
+														<input type="hidden" class="form-control" id="academy_ano" name="academy_ano" value="<%=svo.getAcademy_ano()%>">
+													</form>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-primary">
+															수정
+														</button> 
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">
+															취소
+														</button>
+													</div>
+												</div>
+												
+											</div>
+										
+										</div>
+								
+									</div>
+								</div><!--모달 end-->
+			        </td>
 			    </tr>
-<%
-		}
-	}
-%>
-	      
 			    </tbody>
+<%
+														 
+		}
+		}
+%>
 			  </table>
 			</div>
     </section>
+    
 	<%-- 탭 본문내용3 div --%>
     <section id="section-3">
     <hr id="hhr">
          <h1 style="color:black">편의기능</h1>
+          <div class="row" style="color:black">
+									<div class="col-md-12">
+										 <a id="modal-749487" href="#modal-container-749487" role="button" class="btn btn-primary" data-toggle="modal">편의기능 수정</a>
+									
+										<div class="modal fade" id="modal-container-749487" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="myModalLabel">
+															편의기능 수정
+														</h5> 
+														<button type="button" class="close" data-dismiss="modal">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+													<div class="modal-body">
+															 <div class="mt-10">
+																 <input type="checkbox" id="acparking" name="acparking" value="Y">&nbsp;주차장<br><br>
+															 </div>
+															 <div class="mt-10">
+															 	<input type="checkbox" id="acstore" name="acstore" value="Y">&nbsp;편의점<br><br>
+															 </div>
+															 	<div class="mt-10">
+															 <input type="checkbox" id="acbus" name="acbus" value="Y">&nbsp;셔틀버스<br><br>
+															 </div>
+															 <div class="mt-10">
+															 	<input type="checkbox" id="acelevator" name="acelevator" value="Y">&nbsp;엘리베이터<br><br>
+															 </div>
+															 <div class="mt-10">
+															 	<input type="checkbox" id="acstudyroom" name="acstudyroom" value="Y">&nbsp;자습실<br><br>
+															 </div>
+															 <div class="mt-10">
+															 	<input type="checkbox" id="aclounge" name="aclounge" value="Y">&nbsp;휴게실<br><br>
+															 </div>
+															 <div class="mt-10">
+																 <input type="checkbox" id="aclocker" name="aclocker" value="Y">&nbsp;사물함<br><br>
+														   	 </div>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-primary">
+															수정
+														</button> 
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">
+															취소
+														</button>
+													</div>
+												</div>
+												
+											</div>
+										
+										</div>
+								
+									</div>
+								</div><!--모달 end-->
 			<br><br>
 			<%
 			for(int i=0; i<connCnt; i++){
