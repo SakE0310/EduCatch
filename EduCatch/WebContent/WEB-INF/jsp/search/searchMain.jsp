@@ -81,7 +81,7 @@
 					}).done(function(resParam){
 						if(resParam.acaList==""){
 							console.log("done error >>> ");
-								st = "<p style='margin:0 auto; text-align:center; padding:200px 200px;'>일치하는 학원이 없습니다</p>";
+								st = "<p style='margin:0 auto; text-align:center; padding:200px 100px;'>일치하는 학원이 없습니다</p>";
 							}else{
 						console.log("done start >>> "+resParam);
 						st = "";
@@ -150,7 +150,7 @@
 					}).done(function(resParam){
 						if(resParam.acaList==""){
 						console.log("done error >>> ");
-							st = "<p style='margin:0 auto; text-align:center; padding:200px 200px;'>일치하는 학원이 없습니다</p>";
+							st = "<p style='margin:0 auto; text-align:center; padding:200px 100px;'>일치하는 학원이 없습니다</p>";
 						}else{
 						console.log("done start >>> "+resParam);
 						var st = "";
@@ -204,13 +204,14 @@
 						console.log("ajaxGetDistrict resparam >>> "+resParam);
 						var st = "";
 						for(i in resParam.districtList){
-							var district = resParam.districtList[i].district; //서울 경기
+							var district = resParam.districtList[i];
+							console.log("option value >>>"+district);
 							st += "<option value='"+district+"'>"+district+"</option>\n";
 						}
 						$('select#district').html(st);
 						$('select#district').niceSelect('update');
 						console.log("ajaxGetDistrict end >>>");
-						ajaxGetCity(resParam.districtList[0].district);
+						ajaxGetCity(resParam.districtList[0]);
 					}).fail(function(resParam){
 						alert("오류");
 					});
@@ -305,8 +306,10 @@
 		</script>
 	
 		<style type="text/css">
-		@media screen and (min-width: 744px) {
+		/* 모니터 */
+		@media screen and (min-width: 1024px) {
 			.box {
+				margin : auto;
 				display : grid;
 				grid-template-columns : 185px 1fr 1fr 1fr 1fr 1fr 1fr;
 				grid-column-gap: 5px;
@@ -315,14 +318,34 @@
 				width:135px;
 			}
 		}
-		@media screen and (max-width: 940px) {
+		/* 테블릿 */
+		@media screen and (max-width: 1023px) {
 			.box {
 				display : grid;
-				grid-template-row : 2fr 1fr 1fr 1fr 2fr;
+				grid-template-rows : repeat(7, 1fr);
 				grid-row-gap: 10px;
 			}
-			.list {
-				width:350px;
+			.nice-select {
+				width:600px;
+			}
+		}
+		/* 모바일 가로모드 */
+		@media screen and (max-width: 767px) {
+			.box {
+				display : grid;
+				grid-template-rows : repeat(7, 1fr);
+				grid-row-gap: 10px;
+			}
+			.nice-select {
+				width:510px;
+			}
+		}
+		/* 모바일 세로모드 */
+		@media screen and (max-width: 480px) {
+			.box {
+				display : grid;
+				grid-template-rows : repeat(7, 1fr);
+				grid-row-gap: 10px;
 			}
 			.nice-select {
 				width:350px;
@@ -331,12 +354,12 @@
 		.genric-btn {
 	   		color: #fff;
 	   		background: #140C40;
-	   		width: 100px;
+	   		width: 90px;
 	   		border: 1px solid transparent;
  		}
  		.list { 
- 		    height:250px; 
- 		    width:145px;
+ 		    height:300px; 
+ 		    width:140px;
 		} 
 		.main {
 			margin : 0 auto;
@@ -382,9 +405,9 @@
 					</div>
 						<input type="button" id="search" class="genric-btn primary" value="검색">
 					</div>
-							<form id="detailViewForm" name="detailViewForm">
+						<form id="detailViewForm" name="detailViewForm">
 								<div class="acaList"><p id="show">검색조건을 입력하세요<p></div>
-							</form>
+						</form>
 						</div>
 					</div>
 				</div>

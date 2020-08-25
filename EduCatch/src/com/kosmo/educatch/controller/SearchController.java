@@ -1,5 +1,6 @@
 package com.kosmo.educatch.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,13 +39,29 @@ public class SearchController {
 	//지역 대분류
 	@ResponseBody
 	@RequestMapping("getDistrict")
-	public Map<String,List<SearchVO>>getDistrict(SearchVO param){
+	public Map<String,ArrayList<String>>getDistrict(SearchVO param){
 		log.info("search controller getDistrict start >>> ");
-		log.info("search controller getDistrict param >>> "+param);
-		Map<String,List<SearchVO>>map = new HashMap<String,List<SearchVO>>();
-		List<SearchVO>list = searchService.getDistrict(param);
-		map.put("districtList",list);
-		log.info("search controller getDistrict list >>> "+list);
+		Map<String, ArrayList<String>>map = new HashMap<String,ArrayList<String>>();
+		ArrayList<String> arr = new ArrayList<String>();
+		arr.add("서울");
+		arr.add("경기도");
+		arr.add("인천");
+		arr.add("강원");
+		arr.add("충북");
+		arr.add("충남");
+		arr.add("전북");
+		arr.add("전남");
+		arr.add("경북");
+		arr.add("경남");
+		arr.add("부산");
+		arr.add("대구");
+		arr.add("광주");
+		arr.add("대전");
+		arr.add("울산");
+		arr.add("세종특별자치시");
+		arr.add("제주특별자치도");
+		map.put("districtList",arr);
+		log.info("search controller getDistrict arr >>> "+arr);
 		log.info("search controller getDistrict map >>> "+map);
 		log.info("search controller getDistrict end >>> ");
 		return map;
