@@ -115,14 +115,14 @@
 					)
 		VALUES(
 					        #{ano, jdbcType=VARCHAR},
-					        'M202008170001'
+					        #{member_mno, jdbcType=VARCHAR}
 					)
 	</insert>
 	
 	<delete id="deleteBookmark" parameterType="academyview">
 		DELETE FROM BOOKMARK 
 		WHERE 
-				MEMBER_MNO='M202008170001' 
+				MEMBER_MNO=#{member_mno, jdbcType=VARCHAR}
 		AND		ACADEMY_ANO= #{ano, jdbcType=VARCHAR}
 	</delete>
 	
@@ -134,7 +134,7 @@
 		FROM 
 				BOOKMARK A
 		WHERE ACADEMY_ANO=#{academy_ano, jdbcType=VARCHAR}
-		AND MEMBER_MNO='M202008170001'
+		AND MEMBER_MNO=#{member_mno, jdbcType=VARCHAR}
 		ORDER BY 1 DESC
 		
 	</select>

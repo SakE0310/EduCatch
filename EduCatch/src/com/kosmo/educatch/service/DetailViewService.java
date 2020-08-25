@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
+import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SubjectVO;
 

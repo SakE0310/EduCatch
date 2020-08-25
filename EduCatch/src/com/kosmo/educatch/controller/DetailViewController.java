@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.educatch.service.DetailViewService;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
+import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SubjectVO;
 
@@ -60,25 +61,26 @@ public class DetailViewController {
 		return mav;
 	}
 	
+	// ----------찜목록 추가 ajax
 	@ResponseBody
 	@RequestMapping("insertBookmark.ec")
 	public Map<String, String> insertBookmark(HttpServletRequest request, HttpSession session){
 		log.info("DetailViewController insertBookmark 시작 >>> ");
-		/*
-		TimetableVO tvo = new TimetableVO();
-		tvo.setTtdate(request.getParameter("date"));
-		tvo.setTttime(request.getParameter("time"));
-		tvo.setTtpeople(request.getParameter("people"));
-		//세션 적용하면 바꿀부분
-		tvo.setAcademy_ano("A00001");
-		int i = manageService.insertTimetable(tvo);
-		*/
+		
+		MemberVO mvo = null;
+		String member_mno="";
+		if(session != null) {
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno = mvo.getMno();
+		}
+		
+		
 		String ano = request.getParameter("ano");
 		log.info("ano >!>!>!> " + ano);
 		AcademyVO avo = new AcademyVO();
 		avo.setAcademy_ano(ano);
 		avo.setAno(ano);
-		avo.setMember_mno("M202008130001");
+		avo.setMember_mno(member_mno);
 		
 		int i = detailViewService.insertBookmark(avo);
 		
@@ -92,16 +94,27 @@ public class DetailViewController {
 		return map;
 	}
 	
+	// ----------찜목록제거 ajax
 	@ResponseBody
 	@RequestMapping("deleteBookmark.ec")
 	public Map<String, String> deleteBookmark(HttpServletRequest request, HttpSession session){
 		log.info("DetailViewController deleteBookmark >>> ");
+		
+		MemberVO mvo = null;
+		String member_mno="";
+		if(session != null) {
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno = mvo.getMno();
+		}
+		
+		
+		
 		String ano = request.getParameter("ano");
 		log.info("ano >!>!>!> " + ano);
 		AcademyVO avo = new AcademyVO();
 		avo.setAcademy_ano(ano);
 		avo.setAno(ano);
-		avo.setMember_mno("M202008130001");
+		avo.setMember_mno(member_mno);
 		int i = detailViewService.deleteBookmark(avo);
 		
 		Map<String, String> map = new HashMap<String, String>();
@@ -114,15 +127,25 @@ public class DetailViewController {
 		return map;
 	}
 	
+	// ----------찜목록조회 ajax
 	@ResponseBody
 	@RequestMapping("selectBookmark.ec")
-	public Map<String, String> selectBookmark(HttpServletRequest request, HttpSession session, AcademyVO param){
+	public Map<String, String> selectBookmark(HttpServletRequest request, HttpSession session,
+										AcademyVO param){
 		log.info("DetailViewController selectBookmark >>> ");
+		
+		MemberVO mvo = null;
+		String member_mno="";
+		if(session != null) {
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno = mvo.getMno();
+		}
+		
+		param.setMember_mno(member_mno);
+		
+		
 		String ano = request.getParameter("ano");
 		log.info("ano >!>!>!> " + ano);
-		//log.info("academy_ano >!>!>!> " + academy_ano);
-		//sbvo.setAcademy_ano(ano);
-		//sbvo.setMember_mno("M202008130001");
 		
 		param.setAno(ano);
 		param.setAcademy_ano(ano);

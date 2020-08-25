@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.build.gradle.DetectSplitPackagesPlugin;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.log4j.Logger;
@@ -11,6 +12,7 @@ import org.apache.log4j.Logger;
 import com.kosmo.educatch.dao.DetailViewMapper;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
+import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SubjectVO;
 
