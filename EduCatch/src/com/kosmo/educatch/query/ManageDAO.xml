@@ -291,6 +291,12 @@
         WHERE SNO = #{sno, jdbcType=VARCHAR}
 	</update>
 	
-	
+	<select id="getAcaListManage" parameterType="academyview" resultType="academyview">
+	SELECT 	ANO, ANAME
+	FROM 	ACADEMY
+	<![CDATA[ WHERE 	AADDR1 LIKE '%'||#{district}||'%' ]]>
+	<![CDATA[ AND 		AADDR1 LIKE '%'||#{city}||'%' ]]>
+	ORDER BY 2
+	</select>
 	
 </mapper>

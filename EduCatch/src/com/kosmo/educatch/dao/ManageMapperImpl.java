@@ -126,4 +126,10 @@ public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapp
 		return getSqlSession().update("ManagerMapper.deleteSubject");
 	}
 
+	@Override
+	public List<AcademyVO> getAcaListManage(AcademyVO param) {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList("ManagerMapper.getAcaListManage", param);
+	}
+
 }

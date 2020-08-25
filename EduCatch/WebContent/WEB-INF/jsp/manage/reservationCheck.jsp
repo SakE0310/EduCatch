@@ -49,6 +49,12 @@
 	color:blue;  
  }
 .fc-day-other .fc-daygrid-day-number { display:none;}
+.mb-4, .my-4 {
+    margin-bottom: 0.5rem !important;
+}
+.list{
+	margin-bottom: 0.5rem !important;
+}
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -112,6 +118,42 @@
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item active">상담 신청한 회원을 확인 할 수 있습니다.</li>
 					</ol>
+					<%
+						if(mvo != null){
+							if(mvo.getMauth().equals("3")){
+			           			
+		            %>
+					<div class="col-md-12 list">
+					<select name="district" id="district">
+						<option value="서울" selected>서울</option>
+						<option value="경기도">경기도</option>
+						<option value="인천">인천</option>
+						<option value="강원">강원</option>
+						<option value="충북">충북</option>
+						<option value="충남">충남</option>
+						<option value="전북">전북</option>
+						<option value="전남">전남</option>
+						<option value="경북">경북</option>
+						<option value="경남">경남</option>
+						<option value="부산">부산</option>
+						<option value="대구">대구</option>
+						<option value="광주">광주</option>
+						<option value="대전">대전</option>
+						<option value="울산">울산</option>
+						<option value="세종특별자치시">세종특별자치시</option>
+						<option value="제주특별자치도">제주특별자치도</option>
+					</select>
+					<select name="city" id="city">
+					</select>
+					<select name="academy" id="academy">
+					</select>
+					</div>
+					<div></div>
+					<% 
+							}
+						}
+					%>
+					<input type="hidden" id="acano" value="<%=mvo.getAcademy_ano() %>">
 					<div class="col-md-12">
 						<div class="card mb-1">
 							<div class="card-header">
@@ -306,8 +348,74 @@
 			$('#btnDelete').on('click',function(){
 				ajaxDeleteTime();
 			});
+			<%
+	        if(mvo != null){
+				if(mvo.getMauth().equals("3")){
+	        %>
+		        $('#district').on('change',function(){
+		        	ajaxGetCity($('#district').val());
+		        })
+		        $('#city').on('change',function(){
+		        	ajaxGetAcaList();
+		        })
+		        $('#academy').on('change',function(){
+		        	$('#acano').val($('#academy').val());
+		        	drawCalendar();
+		        })
+		        
+		        ajaxGetCity($('#district').val());
+				function ajaxGetCity(param){
+					console.log("ajaxGetCity param(setDistrict) >>> "+param);
+					urls = "getCity.ec"; //controller 지역 소분류
+					datas = {"district" : param}; //param = 서울
+					$.ajax({
+						url : urls,
+						data : datas
+					}).done(function(resParam){
+						console.log("ajaxGetCity resParam >>> "+resParam);
+						var st = "";
+						for(i in resParam.cityList){
+							var city = resParam.cityList[i].city; //강남 강북
+							st += "<option value='"+city+"'>"+city+"</option>\n";
+						}
+						$('#city').html(st);
+						console.log("ajaxGetCity end >>>");
+						ajaxGetAcaList();
+					}).fail(function(resParam){
+						alert("에러");
+					});
+				}
+				
+				function ajaxGetAcaList(){
+					var district = $('#district').val();
+					var city = $('#city').val();
+					$.ajax({
+						url : "getAcaListManage.ec",
+						data : {"district" : district,
+	       						"city" : city},
+	     			dataType : "json"
+					}).done(function(result){
+						var st ="";
+						console.log("success");
+						for(i in result.acaList){
+							var name = result.acaList[i].aname;
+							var ano  = result.acaList[i].ano;
+							if(i==0){
+								$('#acano').val(ano);
+							}
+							st += "<option value='"+ano+"'>" +name+"</option>\n"
+						}
+						$('#academy').html(st);
+						drawCalendar();
+					}).fail(function(result){
+						console.log("fail");
+					})
+				}
+			<%
+					}
+		        }
+			%>
 		});
-		
 		function drawCalendar(){
 			var calendarEl = document.getElementById('calendar');
 			var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -342,9 +450,12 @@
 			var date = year +"-"+month
 			
 			calendar.removeAllEvents();
+			var ano = $('#acano').val();
 			$.ajax({
        			url : "selectReser.ec",
-       			data : {"date" : date}
+       			data : {"date" : date,
+       					"ano" : ano},
+    			dataType : "json"
        		}).done(function(resultParam){
        			for(result in resultParam.data){
        				var ttdate = resultParam.data[result].ttdate;
