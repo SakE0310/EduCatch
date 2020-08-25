@@ -290,7 +290,6 @@
 		    		SUPDATEDATE=SYSDATE
         WHERE SNO = #{sno, jdbcType=VARCHAR}
 	</update>
-	
 	<!-- 학원관리 과목선택 체크박스-->
 	<select id="selectOneConvenience" parameterType="String" resultType="convenience">
 		SELECT
@@ -307,6 +306,12 @@
         WHERE ACADEMY_ANO=#{academy_ano, jdbcType=VARCHAR}
 	</select>
 	
-	
+	<select id="getAcaListManage" parameterType="academyview" resultType="academyview">
+	SELECT 	ANO, ANAME
+	FROM 	ACADEMY
+	<![CDATA[ WHERE 	AADDR1 LIKE '%'||#{district}||'%' ]]>
+	<![CDATA[ AND 		AADDR1 LIKE '%'||#{city}||'%' ]]>
+	ORDER BY 2
+	</select>
 	
 </mapper>

@@ -199,4 +199,12 @@ public class ManageServiceImpl implements ManageService {
 		return cvo;
 	}
 
+	@Override
+	public List<AcademyVO> getAcaListManage(AcademyVO param) {
+		log.info("ManagerserviceImpl getAcaList >>> ");
+		List<AcademyVO> list = manageMapper.getAcaListManage(param);
+		log.info("ManagerserviceImpl getAcaList end >>> ");
+		return list;
+	}
+
 }

@@ -603,7 +603,7 @@ public class ManageController {
 		MemberVO mvo = new MemberVO();
 
 		// 세션 적용하면 바꿔야함
-		mvo.setAno("A00001");
+		mvo.setAno(request.getParameter("ano"));
 		mvo.setMinsertdate(request.getParameter("date"));
 		List<TimetableVO> list = manageService.selectReservation(mvo);
 		Map<String, List<TimetableVO>> map = new HashMap<String, List<TimetableVO>>();
@@ -616,7 +616,7 @@ public class ManageController {
 	@RequestMapping("selectMemList")
 	public Map<String, List<MemberVO>> selectMemberList(HttpServletRequest request) {
 		log.info("ManageController selectMemberList >>> ");
-		List<MemberVO> list = manageService.selectMemList(request.getParameter("ttno"), "A00001");
+		List<MemberVO> list = manageService.selectMemList(request.getParameter("ttno"), request.getParameter("ano"));
 		log.info(list);
 		Map<String, List<MemberVO>> map = new HashMap<String, List<MemberVO>>();
 		map.put("list", list);
@@ -634,7 +634,7 @@ public class ManageController {
 		tvo.setTttime(request.getParameter("time"));
 		tvo.setTtpeople(request.getParameter("people"));
 		// 세션 적용하면 바꿀부분
-		tvo.setAcademy_ano("A00001");
+		tvo.setAcademy_ano(request.getParameter("ano"));
 		int i = manageService.insertTimetable(tvo);
 		Map<String, String> map = new HashMap<String, String>();
 		if (i > 0) {
@@ -681,6 +681,25 @@ public class ManageController {
 			map.put("result", "failed");
 		}
 		log.info("ManageController deleteTimeTable end >>> ");
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("getAcaListManage")
+	public Map<String,List<AcademyVO>> getAcademyList(HttpServletRequest request){
+		log.info("ManageController getAcaListManager >>> ");
+		String district = request.getParameter("district");
+		String city = request.getParameter("city");
+		log.info("dist >> " + district);
+		log.info("city >> " + city);
+		city = city.split(" ")[0];
+		AcademyVO vo = new AcademyVO();
+		vo.setDistrict(district);
+		vo.setCity(city);
+		Map<String, List<AcademyVO>> map = new HashMap<String, List<AcademyVO>>();
+		List<AcademyVO> list = manageService.getAcaListManage(vo);
+		map.put("acaList", list);
+		log.info("ManageController getAcaListManager <<< ");
 		return map;
 	}
 }
