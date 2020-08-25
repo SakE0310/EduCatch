@@ -118,14 +118,11 @@
 			    A.CATEGORY_CNO,
 			    A.ADELETEYN,
 			    TO_CHAR(A.AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
-			    TO_CHAR(A.AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE,
-                B.MNO,
-                B.ACADEMY_ANO
+			    TO_CHAR(A.AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
 		FROM 
-				ACADEMY A, MEMBER B
+				ACADEMY A
 		WHERE A.ADELETEYN = 'N'
-        AND A.ANO(+) = B.ACADEMY_ANO
-        AND B.MNO = #{mno, jdbcType=VARCHAR}
+        AND A.ANO = #{ano, jdbcType=VARCHAR}
 		ORDER BY 1 DESC
 	</select>
 	
@@ -148,11 +145,11 @@
                 TO_CHAR(B.AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE, 
 			    TO_CHAR(B.AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
 		FROM 
-				SUBJECT A , ACADEMY B, MEMBER C
+				SUBJECT A , ACADEMY B
 		WHERE A.ACADEMY_ANO(+) = B.ANO
 		AND A.SDELETEYN = 'N'
 		AND B.ADELETEYN = 'N'
-		AND C.MNO = #{mno, jdbcType=VARCHAR}
+		AND B.ANO = #{ano, jdbcType=VARCHAR}
 		ORDER BY 1 DESC
 	</select>
 	
@@ -168,9 +165,8 @@
                 A.ACLOUNGE,
                 A.ACLOCKER
 		FROM 
-				ACADEMY_CONVENIENCE A, MEMBER B
-        WHERE A.ACADEMY_ANO(+) = B.ACADEMY_ANO
-        AND B.MNO = #{mno, jdbcType=VARCHAR}
+				ACADEMY_CONVENIENCE A
+        WHERE A.ACADEMY_ANO = #{ano, jdbcType=VARCHAR}
 		ORDER BY 1 DESC
 	</select>
 	

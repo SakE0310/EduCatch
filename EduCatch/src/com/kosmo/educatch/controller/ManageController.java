@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -55,12 +56,12 @@ public class ManageController {
 		String member_mno="";
 		if(session != null) {
 			mvo = (MemberVO)session.getAttribute("user");
-			member_mno = mvo.getMno();
+			member_mno = mvo.getAcademy_ano();
 		}
 		
-		avo.setMno(member_mno);
-		svo.setMno(member_mno);
-		cvo.setMno(member_mno);
+		avo.setAno(member_mno);
+		svo.setAno(member_mno);
+		cvo.setAno(member_mno);
 
 		List<AcademyVO> academylist = manageService.academyManageView(avo);
 		List<SubjectVO> subjectlist = manageService.subjectManageView(svo);
@@ -71,6 +72,57 @@ public class ManageController {
 		mv.addObject("subjectlist", subjectlist);
 		mv.addObject("conlist", conlist);
 		mv.setViewName("manage/academyManage");
+
+		return mv;
+	}
+	
+	@RequestMapping("acmb.ec")
+	public ModelAndView getManageAcaPage1(@ModelAttribute AcademyVO avo, HttpSession session, SubjectVO svo, ConvenienceVO cvo) {
+		log.info("ManageController getManagePage >>> ");
+		
+		MemberVO mvo = null;
+		String member_mno="";
+		if(session != null) {
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno = mvo.getAcademy_ano();
+		}
+		
+		avo.setAno(member_mno);
+		svo.setAno(member_mno);
+		cvo.setAno(member_mno);
+
+		List<AcademyVO> academylist = manageService.academyManageView(avo);
+		List<SubjectVO> subjectlist = manageService.subjectManageView(svo);
+		List<ConvenienceVO> conlist = manageService.conManageView(cvo);
+
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("academylist", academylist);
+		mv.addObject("subjectlist", subjectlist);
+		mv.addObject("conlist", conlist);
+		mv.setViewName("manage/academyManage2");
+
+		return mv;
+	}
+	@RequestMapping("acmb2.ec")
+	public ModelAndView getManageAcaPage2(@ModelAttribute AcademyVO avo, HttpSession session, SubjectVO svo, ConvenienceVO cvo, HttpServletRequest request) {
+		log.info("ManageController getManagePage >>> ");
+		
+		MemberVO mvo = null;
+		String member_mno=request.getParameter("ano");
+		
+		avo.setAno(member_mno);
+		svo.setAno(member_mno);
+		cvo.setAno(member_mno);
+
+		List<AcademyVO> academylist = manageService.academyManageView(avo);
+		List<SubjectVO> subjectlist = manageService.subjectManageView(svo);
+		List<ConvenienceVO> conlist = manageService.conManageView(cvo);
+
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("academylist", academylist);
+		mv.addObject("subjectlist", subjectlist);
+		mv.addObject("conlist", conlist);
+		mv.setViewName("manage/acaManageBody");
 
 		return mv;
 	}
@@ -86,9 +138,9 @@ public class ManageController {
 			member_mno = mvo.getMno();
 		}
 		
-		avo.setMno(member_mno);
-		svo.setMno(member_mno);
-		cvo.setMno(member_mno);
+		avo.setAno(member_mno);
+		svo.setAno(member_mno);
+		cvo.setAno(member_mno);
 		
 		
 		int i = manageService.insertSubject(svo);

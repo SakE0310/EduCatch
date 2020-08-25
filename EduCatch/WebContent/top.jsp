@@ -124,7 +124,6 @@ if (request.getProtocol().equals("HTTP/1.1"))
                                                     <ul class="submenu">
                                                         <li><a href="listNotice.ec">공지사항</a></li>
                                                         <li><a href="listEvent.ec">이벤트</a></li>
-                                                		<li><a href="myReview.ec">마이페이지</a></li>
                                                     </ul>
                                                 </li>
                                                 <%

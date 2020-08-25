@@ -75,6 +75,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
                                 로그아웃
                             </a>
+                            <a class="nav-link" href="acmb.ec">
+                                <div class="sb-nav-link-icon"><i class="fas fa-plus-square"></i></div>
+                              	학원정보
+                            </a>
                         </div>
                     </div>
                 </nav>
