@@ -252,7 +252,18 @@
 						var list = $('.list');
 						console.log("list >>> "+list);
 						list.css("overflow","scroll");
- 					});
+						
+						var mql1 = window.matchMedia("screen and (min-width: 767px) and (max-width: 1023px)");
+						var mql2 = window.matchMedia("screen and (min-width: 321px) and (max-width: 480px)");
+						
+						if(mql1.matches){
+							list.css("width","600px");		
+						}else if(mql2.matches){
+							list.css("width","350px");
+						}else{
+							list.css("width","");
+						}
+					});
 				};
 				
 				//카테 대분류
@@ -349,6 +360,17 @@
 			}
 			.nice-select {
 				width:350px;
+			}
+		}
+		/* 모바일 최소 */
+		@media screen and (max-width: 320px) {
+			.box {
+				display : grid;
+				grid-template-rows : repeat(7, 1fr);
+				grid-row-gap: 10px;
+			}
+			.nice-select {
+				width:300px;
 			}
 		}
 		.genric-btn {
