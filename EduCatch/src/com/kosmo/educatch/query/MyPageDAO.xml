@@ -156,4 +156,22 @@
 		WHERE MNO=#{mno, jdbcType=VARCHAR}
 	    AND MDELETEYN = 'N'
 	</update>
+	
+	<select id="listBookmark" parameterType="academyview" resultType="academyview">
+			SELECT
+			    A.MEMBER_MNO,
+			    A.ACADEMY_ANO,
+			    B.ANAME,
+			    B.ANO,
+			    B.ATEL,
+			    B.AADDR1,
+			    B.AADDR2,
+			    C.MNAME
+			FROM
+			    BOOKMARK A, ACADEMY B, MEMBER C
+			WHERE MEMBER_MNO=#{member_mno, jdbcType=VARCHAR}
+			AND A.ACADEMY_ANO = B.ANO
+			AND A.MEMBER_MNO = C.MNO
+	</select>
+	
 </mapper>

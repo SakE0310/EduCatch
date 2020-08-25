@@ -153,6 +153,14 @@
 			$("#clickForm").attr("method","POST");
 			$("#clickForm").submit();
 		})
+		
+		$("#bookmark").click(function() {
+			console.log("찜목록 >>>");
+
+			$("#clickForm").attr("action","listBookmark.ec");
+			$("#clickForm").attr("method","POST");
+			$("#clickForm").submit();
+		})
 
 		//수정페이지 부분==================================
 		console.log("수정수정 분리분리");
@@ -319,7 +327,7 @@
 		</div>
 		<div class ="sideBox shadow">
 			즐겨찾기<br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-hand-pointer"></i><input type ="button" id="" class ="btn_light btn_box_01" value="  관심학원"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-hand-pointer"></i><input type ="button" id="bookmark" class ="btn_light btn_box_01" value="  관심학원"><br>
 		</div>
 		<div class ="sideBox shadow">
 			내 컨텐츠<br>

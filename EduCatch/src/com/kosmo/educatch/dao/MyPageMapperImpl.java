@@ -6,6 +6,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConsultVO;
 import com.kosmo.educatch.vo.FreeVO;
 
@@ -75,6 +76,11 @@ public class MyPageMapperImpl extends SqlSessionDaoSupport implements MyPageMapp
 		// TODO Auto-generated method stub
 		int del =(int)getSqlSession().delete("deleteMember");
 		return del;
+	}
+	//=====찜목록조회==========
+	@Override
+	public List<AcademyVO> listBookmark(AcademyVO param) {
+		return getSqlSession().selectList("listBookmark");
 	}
 
 }

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "com.kosmo.educatch.vo.MemberVO" %>    
+<%@ page import = "com.kosmo.educatch.vo.AcademyVO" %>  
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +11,6 @@
 </jsp:include>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <!-- 부트스트랩 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -18,7 +19,8 @@
 <!-- 아이콘 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
 
@@ -34,7 +36,7 @@
 	    height: 700px;
 	    margin :auto;
 	   /*  margin-left: 710px; */
-	   /* background-color: #f5f5f0;*/
+	   /*background-color: #f5f5f0;*/
 	}
 	#sideBanner-mypage{
 			position: absolute;
@@ -76,22 +78,24 @@
 	    .shadow {
 		    box-shadow: -100px 100px 100px -90px #000000,
 		        60px 0px 100px -90px #000000;
-		    border-radius: 0.5em;    
+		   border-radius: 0.5em;     
 		}
 
 	#a{
 			color:black;
 		}
-	#passCheck{
-		font-size: 12px;
-	}	
+	
 	i{
 		color : #140C40;
 	}
-	
+	#font_id{
+		font-family: 'Do Hyeon', sans-serif;
+		font-size: 30px;
+	}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
 		//==사이드바=============================================
 		//======프로필 수정버튼을 누르면 실행 -> 비밀번호 확인 창
 		$("#pwCheck").click(function() {
@@ -146,23 +150,19 @@
 			$("#clickForm").submit();
 		})
 		
-		//=====비밀번호 변경 버튼 누르면 실행
-		$("#pwEdit").click(function() {
-			console.log("비밀번호 변경 버튼 누름");
-			
-			$("#clickForm").attr("action","editPW.ec");
-			$("#clickForm").attr("method","POST");
-			$("#clickForm").submit(); 
-		})//end of pwEdit
-		
 		$("#bookmark").click(function() {
-			console.log("찜목록 >>> ");
+			console.log("찜목록 >>>");
 
 			$("#clickForm").attr("action","listBookmark.ec");
 			$("#clickForm").attr("method","POST");
 			$("#clickForm").submit();
 		})
 		
+			
+	});//end of ready()
+</script>
+</head>
+<body>
 <%
 	Object obj = request.getAttribute("MemberVO");
 
@@ -171,71 +171,9 @@
 	if(hs != null){
 		mvo = (MemberVO)hs.getAttribute("user");
 	}	
+
 	if(obj != null){
-		
-		/* String NowPW = mvo.getMpw();
-		System.out.println("NowPW>>>"+NowPW);//1234 */
-		
 %>
-		//==== 비밀번호 변경 : 비밀번호 변경 버튼 누르면 실행
-		$("#updatePW").click(function() {
-			console.log("비밀번호 변경버튼 누름");
-			
-			var DBpw = "<%= mvo.getMpw()%>";
-			var NowPW = $("#mpw").val();
-			var NewPW = $("#mpw_new").val();
-			var NewPWRe = $("#mpw_new_R").val();
-			
-			//현재 비밀번호 체크
-			if(NowPW !='' ){
-				if(NowPW == DBpw ){
-					console.log("현재비밀번호 일치");
-					
-					if(NewPW != '' || NewPWRe !='' ){
-						
-						//새비밀번호 : 비밀번호 확인
-						if(NewPW == NewPWRe ){
-							 var length= document.pwEditForm.mpw_new.value.length;
-							 if(length <6 || length >12){
-								alert("비밀번호 오류- 6자 이상 12자 이하");
-								$("#mpw_new").val('');
-								$("#mpw_new_R").val('');
-								return false; 
-							}//end of if((length <6 || length >12))
-							console.log("새비밀번호 : 비밀번호  일치 \n 수정가능");
-							alert("비밀번호 수정 성공");
-							$("#pwEditForm").attr("action","updatePW.ec");
-							$("#pwEditForm").attr("method","POST");
-							$("#pwEditForm").submit(); 
-							
-						}else{
-							alert("비밀번호가 일치하지 않습니다.");
-							$("#mpw_new").val('');
-							$("#mpw_new_R").val('');
-						}//end of if(NewPW == NewPWRe)
-					}else{
-						alert("새 비밀번호를 입력하세요");
-					}//end of (NewPW != '' || NewPWRe !='' )
-					
-				}else{
-					alert("현재비밀번호가 일치하지 않습니다.");
-					$("#mpw").val('');
-				}//end of if-else(NowPW == DBpw )
-			}else{
-				alert("현재 비밀번호를 입력하세요");
-			}//end of if-else(NowPW !='' )
-				
-			
-			
-		})//end of updatePW
-	
-			
-			
-			
-	});//end of ready()
-</script>
-</head>
-<body>
 	<div id ="full">
 	<div id="sideBanner-mypage">
 	<form id= "clickForm" name = "clickForm">
@@ -261,65 +199,76 @@
 		</div>
 		<div class ="sideBox shadow">
 			내 컨텐츠<br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-file-alt"></i><input type ="button" id="" class ="btn_light btn_box_01" value="  내가 쓴 글"><br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="consultSearch" class ="btn_light btn_box_01" value="  작성한 상담"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-file-alt "></i><input type ="button" id="" class ="btn_light btn_box_01" value="   내가 쓴 글"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit"></i><input type ="button" id="consultSearch" class ="btn_light btn_box_01" value="  작성한 상담"><br>
 			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="" class ="btn_light btn_box_01" value="  작성한 후기"><br>
 		</div>
 	</form>	
-	</div>
-	<div class = "container-mypage ">
-		<div align="center">
-			<form id="pwEditForm" name = "pwEditForm">
-			<input type ="hidden" id="mno" name="mno" value="<%=mvo.getMno()%>">
-			<input type ="hidden" id="mname" name="mname" value="<%=mvo.getMname()%>">
-			<div align="left">
-			<br>	
-			<br>	
-				<h4>비밀번호 설정</h4>
-				<hr>
-			</div>
-				<div class="container shadow"  style="width: 800px; height: 570px;">
-				<br>
-				<table class="table">
-					<tr>
-						<td>기존 비밀번호</td>
-						<td>
-							<div class="col-xs-7">
-								<input class="form-control" type ="password" id="mpw" name="mpw"/>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>새로운 비밀번호</td>
-						<td>
-							<div class="col-xs-7">
-								<input class="form-control" type ="password" id="mpw_new" name="mpw_new"/>
-								<span id ="passCheck">*6자 이상 12자 이하</span>
-							</div>
-						</td>	
-					</tr>
-					<tr>
-						<td>새로운 비밀번호 확인</td>
-						<td>
-							<div class="col-xs-7">
-								<input class="form-control" type ="password" id="mpw_new_R" name="mpw_new_R"/>
-							</div>
-						</td>
-					</tr>
-				</div>
-				<tr>						
-				<td colspan=2 align="center">
-					<input type="button" id="updatePW"  value="수정사항 저장" >
-					<input type="button" id=""  value="취소하기" >
-				</td>
-			</tr>
-				</table>
-			</form>
 <%		
 	}
 %>	
-		</div>
 	</div>
+<%
+	Object obj2 = request.getAttribute("bookmarkList");
+	
+	if(obj2 != null){
+		ArrayList list = (ArrayList)obj2;
+		int nCnt = list.size();
+		
+%>
+	<div class = "container-mypage ">
+		<div align="center">
+		<div align="left">
+		<br>
+		<br>
+			<h4 id ="font_id">관심학원 내역 </h4>
+			<hr>
+		</div>
+		<div class="container shadow"  style="width: 800px; height: 570px; "overflow:auto;" id ="container_div">
+		<br>
+			<table align ="center" class="table">
+			 	<colgroup>
+					<col width="200px"/>
+					<col width="400px"/>
+					<col width="200px"/>
+				</colgroup>
+				<thead id="table_head">
+					<td align="center">학원명</td>
+					<td align="center">학원주소</td>
+					<td align="center">학원전화번호</td>
+				</thead>
+				<tbody>
+<%
+			if(list !=null && nCnt>0){
+				for(int i=0; i<nCnt; i++){
+					AcademyVO avo = (AcademyVO)list.get(i);
+
+%>					
+			<tr align="center">
+				<td><a href="listDetailView.ec?ano=<%= avo.getAno() %>" id="cvo_no"><%=avo.getAname() %></td>
+				<td><%=avo.getAaddr1()%>&nbsp;&nbsp;<%=avo.getAaddr2() %></td>
+				<td><%=avo.getAtel()%></td>
+			</tr>
+<%			
+				}//end of for
+			
+			//게시물이 0건 일 때
+			}else{
+%>
+				<tr>
+					<td colspan ="3" align="center">
+						등록된 글이 없습니다.
+					</td>
+				</tr>
+<%			
+		}//end of if(list)
+	}//end of if(obj)	
+	
+%>		
+				</tbody>
+			</table>
+			</div>
+		</div>
 	</div>
 	</div>
 	<br>

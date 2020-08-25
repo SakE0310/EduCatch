@@ -126,6 +126,14 @@
 			$("#clickForm").attr("method","POST");
 			$("#clickForm").submit();	
 		})
+		
+		$("#bookmark").click(function() {
+			console.log("찜목록 >>>");
+
+			$("#clickForm").attr("action","listBookmark.ec");
+			$("#clickForm").attr("method","POST");
+			$("#clickForm").submit();
+		})
 			
 	});//end of ready()
 </script>

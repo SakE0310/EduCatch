@@ -16,6 +16,7 @@ import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.MyPageService;
 import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConsultVO;
 import com.kosmo.educatch.vo.FreeVO;
 
@@ -388,6 +389,46 @@ public class MyPageController {
 		return mav;
 	
 	}
+	
+	//===== 찜 조회 ======================
+	@RequestMapping("listBookmark.ec")
+	public ModelAndView listBookmark(HttpServletRequest request, HttpSession session,
+											@ModelAttribute AcademyVO avo) {
+		log.info("MyPageController listBookmark 시작>>>");
+		
+		MemberVO mvo = null;
+		String member_mno ="";
+		if(session != null){
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno =mvo.getMno();
+		}
+		
+		avo.setMember_mno(member_mno);
+		List<AcademyVO> list = mypageService.listBookmark(avo);
+		log.info("MyPageController consultSearch list.size()>>>" + list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			// list를 VO로 형변환해준다.
+			AcademyVO avo1 = (AcademyVO) list.get(i);
+			
+			log.info(avo1.getAname());
+			log.info(avo1.getMember_mno());
+			log.info(avo1.getAcademy_ano());
+			log.info(avo1.getMname());
+		}
+		
+		MemberVO mvo_1 = mypageService.selectMyPage(mvo);
+			
+			
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("bookmarkList", list);
+		mav.addObject("MemberVO", mvo_1);
+		mav.setViewName("/mypage/mypageBookmark");
+		
+		log.info("MyPageController listBookmark 끝>>>");
+		return mav;
+	}//end of listBookmark
+	
 	
 }
 

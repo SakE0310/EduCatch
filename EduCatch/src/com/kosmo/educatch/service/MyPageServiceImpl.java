@@ -13,6 +13,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConsultVO;
 import com.kosmo.educatch.vo.FreeVO;
 
@@ -129,5 +130,19 @@ public class MyPageServiceImpl implements MyPageService{
 		int del = mypageMapper.deleteMember(param);
 		log.info("회원탈퇴deleteMember서비스 진입 끝");
 		return del;
+	}
+
+	@Override
+	public List<AcademyVO> listBookmark(AcademyVO param) {
+		log.info("MyPageServiceImpl listBookmark 시작>>>");
+		
+		List<AcademyVO> list = new ArrayList<AcademyVO>();
+		list = mypageMapper.listBookmark(param);
+		log.info("list >>> "+list);
+		log.info("list.size() >>> "+list.size());
+		
+		log.info("MyPageServiceImpl listBookmark 끝>>>");
+		
+		return list;
 	}
 }

@@ -2,6 +2,7 @@ package com.kosmo.educatch.dao;
 
 import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
+import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConsultVO;
 import com.kosmo.educatch.vo.FreeVO;
 
@@ -17,5 +18,6 @@ public interface MyPageMapper {
 	public List<ReviewVO> myReview(ReviewVO param);
 	public List<FreeVO> myFree(FreeVO param);
 	public int deleteMember(MemberVO param);
+	public List<AcademyVO> listBookmark(AcademyVO param);
 	
 }
