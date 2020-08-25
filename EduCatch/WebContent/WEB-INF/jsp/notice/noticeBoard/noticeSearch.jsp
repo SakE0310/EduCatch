@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.kosmo.educatch.vo.NoticeVO" %>
 <%@page import="java.util.ArrayList"%>
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
+<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +28,127 @@
 <!-- 날짜 형식변환 -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <style type="text/css">
+	
+	/*미디어 쿼리*/
+	/* Mobile Device (가로폭 767px 이하) */
+	@media all and (max-width:767px) {
+		thead {
+			display: none;
+		}
+		.nice-select{
+		    width: 50px;
+		    height: 35px;
+		    padding-left: 0px;
+		}
+		#keyword{
+			width: 90px;
+			height: 32px;
+		}
+		.btn_light {
+		  height: 30px;
+		}
+		.gj-textbox-md{
+			width: 100px;
+    		height: 40px;
+    		
+		}
+		
+		.gj-datepicker-md [role="right-icon"] {
+		    position: absolute;
+		    left: 5px;
+		    top: 10px;
+		    font-size: 24px;
+		}
+		#b{
+			width: 300px;
+		}
+		#nfont{
+			display: none;
+		}
+		#mfont{
+			font-size: 30px;
+		}
+		#media_mobile{
+			width: 330px;
+    		height: 130px;
+		}
+		 #keyword{
+			width:96px; 
+	}
+	.gj-textbox-md {
+			width: 100px;
+			font-size: 10px;
+		}
+		.media_mobile_td{
+			display: none;
+		}
+		
+	}
+	
+	/* Tablet (가로폭 768px 이상, 1023px 이하) */
+	@media all and (min-width:768px) and (max-width:1023px) {
+	
+	/* 브라우저 가로폭이 768~1023px일때 적용될 css (태블릿) */
+	#media_mobile{
+	 	width: 400px;
+   		 height: 180px;
+	 }
+	 
+	 #keyword{
+			width:200px; 
+	}
+	.gj-textbox-md {
+			width: 130px;
+			font-size: 15px;
+		}
+	#nfont{
+			display: none;
+		}
+	#mfont{
+			font-size: 50px;
+		}
+	.nice-select{
+	    width: 60px;
+    	height: 35px;
+	    padding-left: 10px;
+	}
+	}
+	
+	/* PC Desktop (가로폭 1024 이상) */
+	@media all and (min-width:1024px) {
+	
+		body {
+		}
+		#media_mobile{
+			width: 700px;
+		}
+		
+		#b{
+			width: 700px;
+		}
+		.nice-select{
+		    width: 70px;
+		    height: 35px;
+		    padding-left: 0px;
+		}
+		 #media_mobile{
+	 	width: 1100px;
+	 	margin: auto;
+	 }
+	 	#mfont{
+	 	display: none;
+	 }
+	 #keyword{
+			width:200px; 
+	}
+	.gj-textbox-md {
+			width: 130px;
+			font-size: 15px;
+		}
+	}
+	
+	/* --------------------------------------------- */
+
 	#nno_color{
 		color: black;
 	}
@@ -35,15 +158,16 @@
 		background-color: #F5F5F5;
 	}
 	.btn_light {
-	     display: inline-block;
+	    display: inline-block;
 	    text-align: center;
-	    background: #e5e5e5;
-	    color: #555;
+	    background: #140C40;
+	    color: #ffffff;
 	    vertical-align: middle;
 	    cursor: pointer;
-	    border: 1px solid #e5e5e5;
-	    height: 40px;
+	    border: 1px solid #140C40;
+	    height: 30px;
 	    font-size: 15px;
+	     border-radius: 0.5em;
 		}
 	.btn_box_01 {
 	    width: auto;
@@ -53,6 +177,7 @@
 	    float: right;
 	    margin: 20px 0px 0;
 	    text-align: left;
+	   
 	}
 	.bbs-link {
    	 position: relative;
@@ -63,25 +188,50 @@
   	height: 100px;
   	margin: auto;
 	}
-	#dForm{
-	 width: 350px;
-  	height: 100px;
-  	margin: auto;
-	}
-	
-		
-	/* #sideBanner{
-			position: absolute;
-			top:100px;
-			left:0px;
-			width:150px;
-			height:600px;
-			background: #aaa;
-		} */
-		
-		#row-magin{
+	#row-magin{
 		margin-bottom: 185px;
 	}	
+	
+	 #nfont, #mfont{
+	 	font-family: 'Do Hyeon', sans-serif;
+	  }
+		
+	#mainWrapper{
+		font-family: 'Gothic A1', sans-serif;
+	} 	
+	.table_head_font{
+		font-family: 'Do Hyeon', sans-serif;
+	}
+	
+	#keyword{
+			height:30px;
+			border: 1px solid #140C40;
+			 border-radius: 0.5em;
+		}
+		
+	/*데이트 피커*/
+	.gj-textbox-md{ 
+		border: 1px solid #140C40;
+		
+	}
+	
+	.gj-icon{
+			color : #140C40;
+		}
+		
+	.gj-textbox-md {
+   			height: 30px;
+		}
+	.gj-datepicker-md [role="right-icon"] {
+	    left: 3px;
+   		top: 3px;
+  	 }
+   		 
+	
+	 #c{
+	 	height: 10px;
+	 }
+	 /*---------------------------------*/
 </style>
 
 <script type="text/javascript">
@@ -201,26 +351,49 @@
 	String totalcount="0";
 	
 	Object obj= request.getAttribute("noticeList");
+	
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}
 
 	if(obj != null){
 		ArrayList list = (ArrayList)obj;
 		int nCnt = list.size();
 %>
-	<!-- <div id="sideBanner">
-		사이드 바
-	</div> -->
-	<div id="mainWrapper"align = "center">
-		<div align = "center" style="width: 500px;" >
-			<table border="0" cellpadding="1" cellspacing="1" align="center">
+
+	<div id="mainWrapper" align = "center">
+		<div  id="media_mobile" >
+	<form id="searchFormNotice" name="searchFormNotice" >
+			<table border="0" cellpadding="1" cellspacing="1" align="left">
+			<tr>	
+				<td align="center" id = "mfont">공지사항</h4>
+				<br>
+				<br>
+				</td>
+			</tr>
 			<tr>
-				<td align="center"><h1>공지사항 게시판 목록</h1></td>
-				
+				<td width="500">
+		         <div class="row" id="c">
+		            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		            <div class="col-md-1.8">
+						<input type="text" name="startDate" id="startDate">
+		            </div>
+		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		            <div class="col-md-1.5">
+	      		 		<input type="text" name="endDate" id="endDate"> 
+		            </div>
+	      				&nbsp;&nbsp; <input class=" btn_light btn_box_01" type="button" id="searchPiker" value="검색">
+		      </div>
+		      </td>
+				<td align="center" id = "nfont"><h1>공지사항</h1></td>
 			</tr>
 			</table>
-			<hr>
+	</form>	
 		</div>
 	<form id="noticeForm" name="noticeForm">
-		<div  class="container"  style="height: 390px;">
+		<div  class="container" style="height: 390px;">
 			<table align="center" class="table">
 			<colgroup>
 				<col width="120px"/>
@@ -228,11 +401,11 @@
 				<col width="120px"/>
 				<col width="120px"/>
 			</colgroup>
-			<thead id="table_head">
-				<td align="center">글번호</td>
-				<td align="center">제목</td>
-				<td align="center">작성자</td>
-				<td align="center">작성일</td>
+			<thead id="table_head" >
+				<td align="center" class ="table_head_font">글번호</td>
+				<td align="center" class ="table_head_font">제목</td>
+				<td align="center" class ="table_head_font">작성자</td>
+				<td align="center" class ="table_head_font">작성일</td>
 			</thead>
 			<tbody>
 <%		
@@ -246,16 +419,20 @@
 				groupsize = nvo.getGroupsize();
 				curpage = nvo.getCurpage();
 				totalcount = nvo.getTotalcount();
-%>
 				
+				System.out.println("pagesize >>>"+pagesize);
+				System.out.println("groupsize >>>"+groupsize);
+				System.out.println("curpage >>>"+curpage);
+				System.out.println("totalcount >>>"+totalcount);
+				System.out.println("==============================");
+%>
 				<tr align="center">
 					<td><%=nvo.getNno() %></td>
 					<td>
 					<a href="selectNotice.ec?nno=<%=nvo.getNno() %>" id="nno_color"><%=nvo.getNsubject() %></a></td>
-					<td><%=nvo.getNname() %></td>
-					<td><%=nvo.getNinsertdate()%></td>
+					<td class ="media_mobile_td"><%=nvo.getNname() %></td>
+					<td class ="media_mobile_td"><%=nvo.getNinsertdate()%></td>
 				</tr>	
-				
 <%			
 			}//end of for
 		
@@ -264,76 +441,103 @@
 %>
 				<tr>
 					<td colspan ="4" align="center">
-						조회된 글이 없습니다.
+						등록된 글이 없습니다.
 					</td>
 				</tr>
 <%			
 		}//end of if(list)
-			
-		if(list !=null && nCnt>0){
+	
+	if(list !=null && nCnt>0){
 %>
 			<tr>
 			<td colspan="4">
 			<jsp:include page="noticePaging.jsp" flush="true">
-				<jsp:param name="url" value="searchNotice.ec"/>
+				<jsp:param name="url" value="listNotice.ec"/>
 				<jsp:param name="str" value=""/>
-				
-				
-					<jsp:param name="pagesize" value="<%= pagesize %>"/>
-					<jsp:param name="groupsize" value="<%= groupsize %>"/>
-					<jsp:param name="curpage" value="<%= curpage %>"/>
-					<jsp:param name="totalcount" value="<%= totalcount %>"/>
+				<jsp:param name="pagesize" value="<%= pagesize %>"/>
+				<jsp:param name="groupsize" value="<%= groupsize %>"/>
+				<jsp:param name="curpage" value="<%= curpage %>"/>
+				<jsp:param name="totalcount" value="<%= totalcount %>"/>
 					
 			</jsp:include>
 			</td>
 			</tr>	
-<%				
+
+<%		
 		}//end of (list !=null && nCnt>0)
 	}//end of if(obj)
 		
 %>
-					<tr>
-					<td colspan="2" align="left">
-						<select name="searchFilter">
-							<option value="제목">제목</option>
-							<option value="내용">내용</option>
-						</select>
-						<input type="text" name="keyword" id = "keyword" style ="width:200px; height:40px;">
-						<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
+				<tr id ="media_mobile_tr">
+					<td colspan="2" align="left" >
+					<select name="searchFilter" id ="searchFilter">
+						<option value="제목">제목</option>
+						<option value="내용">내용</option>
+					</select>
+					<input type="text" name="keyword" id = "keyword" >
+					<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 					</td>
+					
+ <%
+				if(mvo != null){
+					if( mvo.getMauth().equals("3")){
+%>				
 					<td colspan="2" align="right">
-						<input type="button" value="글쓰기" id="insertData" class=" btn_light btn_box_01"> 
+					<input type="button" value="글쓰기" id="insertData" class=" btn_light btn_box_01"> 
 					</td>
+<%	
+						}
+					}
+ %>					
 			</tr>
+			
+			</tbody>
 			</table>
 		</div>
-	</div>	
 	</form>
+	</div>	
+	
+	
 	<!-- 검색 폼  -->
-	<div >
+<!-- 	<div id ="a">
 		<form id="searchFormNotice" name="searchFormNotice">
-
-			<div id ="row-magin">
-						<div class="row" >
-					      <div class="col-md-12">
-					         <div class="row">
-					            <div class="col-md-5">
-					            </div>
-					            <div class="col-md-1.8">
-									<input type="text" name="startDate" id="startDate">
-					            </div>
-					             <h3> &nbsp;&nbsp;~ &nbsp;</h3>
-					            <div class="col-md-1.5">
-				      		 		<input type="text" name="endDate" id="endDate"> 
-					            </div>
-				      				&nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
-					         </div>
-					      </div>
-					   </div>
-					</div>   
+		 <div id="mainWrapper" align = "center">
+		<div align = "center"   id="b">
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+			<td width="500">
+		         <div class="row" id="c">
+		            <div class="col-md-1.8">
+						<input type="text" name="startDate" id="startDate">
+		            </div>
+		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		            <div class="col-md-1.5">
+	      		 		<input type="text" name="endDate" id="endDate"> 
+		            </div>
+	      				&nbsp;&nbsp; <input class=" btn_light btn_box_01" type="button" id="searchPiker" value="검색">
+		      </div>
+		      
+				<td>
+			</tr>
+			</table>
+			<hr>
+		</div>
+		</div> 
 		</form>
-	</div>
-
+	</div> -->
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

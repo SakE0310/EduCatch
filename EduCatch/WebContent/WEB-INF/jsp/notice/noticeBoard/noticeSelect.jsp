@@ -21,6 +21,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 
 <style type="text/css">
+/*미디어 쿼리*/
+	/* Mobile Device (가로폭 767px 이하) */
+	@media all and (max-width:767px) {
+		#media_mobile_div{
+			width: 300px;
+			height: 500px;
+			margin: auto;
+		}		
+		#media_mobile_img{
+			width: 250px;
+			height: 300px;
+		}
+	}
+	
+	/* Tablet (가로폭 768px 이상, 1023px 이하) */
+	@media all and (min-width:768px) and (max-width:1023px) {
+	/* 브라우저 가로폭이 768~1023px일때 적용될 css (태블릿) */
+	}
+	
+	/* PC Desktop (가로폭 1024 이상) */
+	@media all and (min-width:1024px) {
+		#media_mobile_table{
+			width:700px;
+			height:100px;
+		}
+	}
+
 	#table_head{
 		border-collapse: collapse;
 		background-color: #F5F5F5;
@@ -95,18 +122,18 @@
 		NoticeVO nvo =(NoticeVO)obj;
 
 %>
-	<div class="container">
+	<div class="container" id ="media_mobile_div">
 	<form id="noticeSelForm" name="noticeSelForm" >
 	<div>
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
-				<td align="center" id = "nfont"><h2>notice</h2></td>
+				<td align="center" id = "nfont"><h2>공지사항</h2></td>
 			</tr>
 			</table>
 			<hr>
 		</div>
 		 <input type="hidden" name="nno" id="nno" value="<%=nvo.getNno() %>" >
-		<table align="center" width="700px" height="100px" class="table">
+		<table align="center"  class="table" id="media_mobile_table">
 		 <thead id="table_head">
              <tr>
                  <th><div align="center"><%=nvo.getNsubject() %></div></th>
@@ -134,7 +161,7 @@
 							String img = nvo.getNimg();
 							if(img != null){
 %>
-         						<img src="/EduCatch/assets/img/notice/<%=nvo.getNimg()%>" alt="사진업음"/><br>
+         						<img id ="media_mobile_img"src="/EduCatch/assets/img/notice/<%=nvo.getNimg()%>" alt="사진업음"/><br>
 <%								
 							}//end of if(img)
 %>         				
@@ -165,6 +192,19 @@
 		</table>
 		</form>
 	</div>
+	  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 		<jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

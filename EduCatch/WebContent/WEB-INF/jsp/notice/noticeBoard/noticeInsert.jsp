@@ -21,6 +21,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<style type="text/css">
+
+
+</style>
 <script type="text/javascript">
 	var oEditors = [];
 	$(function() {
@@ -67,6 +71,9 @@
 			$("#edit").submit();
 			
 		})//end of listData
+		
+		$('#smart_editor2').addClass("asas");
+		$('#smart_editor2').css('min-width', '200px');
 	});
 </script>
 
@@ -82,7 +89,6 @@
 				<td align="center"><h2>notice</h2></td>
 			</tr>
 			</table>
-			<hr>
 		</div>
 		<table style="width: 90%" border="0" align="center" class="table">
 			<tr>
@@ -94,7 +100,7 @@
 			<tr>
 				<td>내용</td>
 				<td><textarea name="ncontent" id="ncontent" title="내용"
-						style="width: 100%; height: 415px; padding: 0; margin: 0;"></textarea>
+						style="width: 100%; height: 415px; padding: 0; margin: 0; min-width:260px;  min-height: 300px;"></textarea>
 				</td>
 			</tr>
 			<tr>

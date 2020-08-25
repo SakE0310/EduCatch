@@ -104,7 +104,7 @@
 			<tr>
 				<td>내용</td>
 				<td><textarea name="ncontent" id="ncontent" title="내용" 
-						style="width: 100%; height: 415px; padding: 0; margin: 0;"></textarea>
+						style="width: 100%; height: 415px; padding: 0; margin: 0; min-width:260px;  min-height: 300px;"></textarea>
 				</td>
 			</tr>
 			<tr>
