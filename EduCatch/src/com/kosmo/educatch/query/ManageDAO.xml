@@ -125,7 +125,7 @@
 				ACADEMY A, MEMBER B
 		WHERE A.ADELETEYN = 'N'
         AND A.ANO(+) = B.ACADEMY_ANO
-        AND B.MNO = 'M202008170001'
+        AND B.MNO = #{mno, jdbcType=VARCHAR}
 		ORDER BY 1 DESC
 	</select>
 	
@@ -152,7 +152,7 @@
 		WHERE A.ACADEMY_ANO(+) = B.ANO
 		AND A.SDELETEYN = 'N'
 		AND B.ADELETEYN = 'N'
-		AND C.MNO = 'M202008170001'
+		AND C.MNO = #{mno, jdbcType=VARCHAR}
 		ORDER BY 1 DESC
 	</select>
 	
@@ -170,7 +170,7 @@
 		FROM 
 				ACADEMY_CONVENIENCE A, MEMBER B
         WHERE A.ACADEMY_ANO(+) = B.ACADEMY_ANO
-        AND B.MNO = 'M202008170001'
+        AND B.MNO = #{mno, jdbcType=VARCHAR}
 		ORDER BY 1 DESC
 	</select>
 	

@@ -357,6 +357,7 @@ input[type="file"] {
 			}else{
 			
 			}
+			
 			$('#academyForm').attr("action", "manageUpdateAcademy.ec");
 			$('#academyForm').attr("method", "POST");
 			$('#academyForm').submit();

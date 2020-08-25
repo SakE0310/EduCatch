@@ -48,8 +48,19 @@ public class ManageController {
 	}
 
 	@RequestMapping("manageAca")
-	public ModelAndView getManageAcaPage(@ModelAttribute AcademyVO avo, SubjectVO svo, ConvenienceVO cvo) {
+	public ModelAndView getManageAcaPage(@ModelAttribute AcademyVO avo, HttpSession session, SubjectVO svo, ConvenienceVO cvo) {
 		log.info("ManageController getManagePage >>> ");
+		
+		MemberVO mvo = null;
+		String member_mno="";
+		if(session != null) {
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno = mvo.getMno();
+		}
+		
+		avo.setMno(member_mno);
+		svo.setMno(member_mno);
+		cvo.setMno(member_mno);
 
 		List<AcademyVO> academylist = manageService.academyManageView(avo);
 		List<SubjectVO> subjectlist = manageService.subjectManageView(svo);
@@ -65,9 +76,21 @@ public class ManageController {
 	}
 
 	@RequestMapping("manageInsertSubject.ec")
-	public ModelAndView manageInsertSubject(HttpServletRequest request, SubjectVO svo, AcademyVO avo,
+	public ModelAndView manageInsertSubject(HttpSession session, HttpServletRequest request, SubjectVO svo, AcademyVO avo,
 			ConvenienceVO cvo) {
 		log.info("ManageController manageInsertSubject >>> ");
+		MemberVO mvo = null;
+		String member_mno="";
+		if(session != null) {
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno = mvo.getMno();
+		}
+		
+		avo.setMno(member_mno);
+		svo.setMno(member_mno);
+		cvo.setMno(member_mno);
+		
+		
 		int i = manageService.insertSubject(svo);
 
 		List<AcademyVO> academylist = manageService.academyManageView(avo);
@@ -92,9 +115,21 @@ public class ManageController {
 	}
 	
 	@RequestMapping("manageUpdateSubject")
-	public ModelAndView manageUpdateSubject(HttpServletRequest request, SubjectVO svo, AcademyVO avo,
+	public ModelAndView manageUpdateSubject(HttpSession session, HttpServletRequest request, SubjectVO svo, AcademyVO avo,
 			ConvenienceVO cvo) {
 		log.info("ManageController manageUpdateSubject >>> ");
+		MemberVO mvo = null;
+		String member_mno="";
+		if(session != null) {
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno = mvo.getMno();
+		}
+		
+		avo.setMno(member_mno);
+		svo.setMno(member_mno);
+		cvo.setMno(member_mno);
+		
+		
 		int i = manageService.updateSubject(svo);
 
 		List<AcademyVO> academylist = manageService.academyManageView(avo);
@@ -120,9 +155,21 @@ public class ManageController {
 	}
 	
 	@RequestMapping("manageDeleteSubject")
-	public ModelAndView manageDeleteSubject(HttpServletRequest request, SubjectVO svo, AcademyVO avo,
+	public ModelAndView manageDeleteSubject(HttpSession session, HttpServletRequest request, SubjectVO svo, AcademyVO avo,
 			ConvenienceVO cvo) {
 		log.info("ManageController manageDeleteSubject >>> ");
+		MemberVO mvo = null;
+		String member_mno="";
+		if(session != null) {
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno = mvo.getMno();
+		}
+		
+		avo.setMno(member_mno);
+		svo.setMno(member_mno);
+		cvo.setMno(member_mno);
+		
+		
 		int i = manageService.deleteSubject(svo);
 
 		List<AcademyVO> academylist = manageService.academyManageView(avo);
@@ -149,7 +196,7 @@ public class ManageController {
 
 	@RequestMapping("manageUpdateAcademy")
 	public ModelAndView manageUpdateAcademy(@ModelAttribute AcademyVO avo, SubjectVO svo, ConvenienceVO cvo,
-			HttpServletRequest request) {
+			HttpSession session, HttpServletRequest request ) {
 		log.info("ManageController manageUpdateAcademy >>> 시작");
 
 		String ano = null;
@@ -197,6 +244,16 @@ public class ManageController {
 					file = multi.getFilesystemName(file1);
 					log.info("fileName >>> " + file);
 				}
+				
+				avo.setAno(ano);
+				avo.setAname(aname);
+				avo.setAtel(atel);
+				avo.setAxpoint(axpoint);
+				avo.setAypoint(aypoint);
+				avo.setAaddrno(aaddrno);
+				avo.setAaddr1(aaddr1);
+				avo.setAaddr2(aaddr2);
+				avo.setAlogo(file);
 
 			} catch (Exception e) {
 				log.info("에러>>>>" + e.getMessage());
@@ -215,6 +272,16 @@ public class ManageController {
 			aaddr1 = request.getParameter("aaddr1");
 			aaddr2 = request.getParameter("aaddr2");
 			alogo = request.getParameter("alogo");
+			
+			avo.setAno(ano);
+			avo.setAname(aname);
+			avo.setAtel(atel);
+			avo.setAxpoint(axpoint);
+			avo.setAypoint(aypoint);
+			avo.setAaddrno(aaddrno);
+			avo.setAaddr1(aaddr1);
+			avo.setAaddr2(aaddr2);
+			avo.setAlogo(alogo);
 		}
 
 		log.info("ano >>> " + ano);
@@ -226,15 +293,18 @@ public class ManageController {
 		log.info("aaddr2 >>> " + aaddr2);
 		log.info("alogo >>> " + alogo);
 
-		avo.setAno(ano);
-		avo.setAname(aname);
-		avo.setAtel(atel);
-		avo.setAxpoint(axpoint);
-		avo.setAypoint(aypoint);
-		avo.setAaddrno(aaddrno);
-		avo.setAaddr1(aaddr1);
-		avo.setAaddr2(aaddr2);
-		avo.setAlogo(file);
+		
+		
+		MemberVO mvo = null;
+		String member_mno="";
+		if(session != null) {
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno = mvo.getMno();
+		}
+		
+		avo.setMno(member_mno);
+		svo.setMno(member_mno);
+		cvo.setMno(member_mno);
 
 		List<AcademyVO> academylist = manageService.academyManageView(avo);
 		List<SubjectVO> subjectlist = manageService.subjectManageView(svo);
@@ -261,7 +331,7 @@ public class ManageController {
 	
 	@RequestMapping("manageUpdateConvenience")
 	public ModelAndView manageUpdateConvenience(@ModelAttribute AcademyVO avo, SubjectVO svo, ConvenienceVO cvo,
-			HttpServletRequest request) {
+			HttpSession session, HttpServletRequest request) {
 		log.info("ManageController manageUpdateConvenience >>> 시작");
 		log.info("ManageController manageUpdateConvenience >>> 시작");
 		ModelAndView mav = new ModelAndView();
@@ -344,6 +414,17 @@ public class ManageController {
 		log.info("시작");
 		int i = manageService.updateConvenience(cvo);
 		log.info("끝");
+		
+		MemberVO mvo = null;
+		String member_mno="";
+		if(session != null) {
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno = mvo.getMno();
+		}
+		
+		avo.setMno(member_mno);
+		svo.setMno(member_mno);
+		cvo.setMno(member_mno);
 		
 		List<AcademyVO> academylist = manageService.academyManageView(avo);
 		List<SubjectVO> subjectlist = manageService.subjectManageView(svo);

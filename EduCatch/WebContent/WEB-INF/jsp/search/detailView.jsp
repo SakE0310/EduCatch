@@ -553,7 +553,7 @@ body {
 				$('#follow').val('찜추가');
 			}
 		}).fail(function(resultParam){
-			alert("추가시 DB연결에 문제가 발생하였습니다.");
+			
 		});
 	}
 	</script>
