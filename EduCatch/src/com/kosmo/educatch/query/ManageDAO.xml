@@ -211,7 +211,7 @@
 					        SYSDATE
 					)
 	</insert>
-	
+	<!-- 학원관리 학원 수정-->
 	<update id="updateAcademy" parameterType="academyview">
 		UPDATE ACADEMY
 		    SET     ANAME = #{aname, jdbcType=VARCHAR},
@@ -224,6 +224,59 @@
 		WHERE ADELETEYN = 'N'
 		AND ANO= #{ano, jdbcType=VARCHAR}
 	</update>	
+	
+	<!-- 학원관리 편의기능 수정-->
+	<update id="updateConvenience" parameterType="convenience">
+		UPDATE  ACADEMY_CONVENIENCE
+		    SET     ACPARKING = #{acparking, jdbcType=VARCHAR},
+		            ACSTORE = #{acstore, jdbcType=VARCHAR},
+		            ACBUS = #{acbus, jdbcType=VARCHAR},
+		            ACELEVATOR = #{acelevator, jdbcType=VARCHAR},
+		            ACSTUDYROOM = #{acstudyroom, jdbcType=VARCHAR},
+		            ACLOUNGE = #{aclounge, jdbcType=VARCHAR},
+		            ACLOCKER = #{aclocker, jdbcType=VARCHAR}
+		WHERE ACADEMY_ANO= #{academy_ano, jdbcType=VARCHAR}
+	</update>	
+	
+	<!-- 학원관리 과목선택 체크박스-->
+	<select id="selectOneSubject" parameterType="String" resultType="subjectview">
+		
+		SELECT
+			    A.SNO,
+			    A.SNAME,
+			    A.SDAY,
+			    A.STIME,
+			    A.SPEOPLE,
+			    A.SPRICE,
+			    A.ACADEMY_ANO,
+			    A.SDELETEYN,
+			    TO_CHAR(A.SINSERTDATE,'YYYY-MM-DD') AS SINSERTDATE, 
+			    TO_CHAR(A.SUPDATEDATE,'YYYY-MM-DD') AS SUPDATEDATE
+		FROM 
+				SUBJECT A
+        WHERE SNO=#{sno, jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 학원관리 과목수정-->
+	<update id="updateSubject" parameterType="subjectview">
+		UPDATE  SUBJECT
+		    SET     SNAME = #{sname, jdbcType=VARCHAR},
+		            SDAY = #{sday, jdbcType=VARCHAR},
+		            STIME = #{stime, jdbcType=VARCHAR},
+		            SPRICE = #{sprice, jdbcType=VARCHAR},
+		            SPEOPLE = #{speople, jdbcType=VARCHAR},
+		            SUPDATEDATE = SYSDATE
+		WHERE SDELETEYN = 'N'
+        AND SNO = #{sno, jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 학원관리 과목삭제-->
+	<update id="deleteSubject" parameterType="subjectview">
+		UPDATE  SUBJECT
+		    SET     SDELETEYN='Y',
+		    		SUPDATEDATE=SYSDATE
+        WHERE SNO = #{sno, jdbcType=VARCHAR}
+	</update>
 	
 	
 	

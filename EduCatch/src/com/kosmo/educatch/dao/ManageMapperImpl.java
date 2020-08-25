@@ -99,5 +99,26 @@ public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapp
 	public int updateAcademy(AcademyVO avo) {
 		return getSqlSession().update("ManagerMapper.updateAcademy");
 	}
+	// ---------- 학원관리 편의기능 수정
+	@Override
+	public int updateConvenience(ConvenienceVO cvo) {
+		return getSqlSession().update("ManagerMapper.updateConvenience");
+	}
+	// ---------- 학원관리 과목 수정/삭제 체크박스
+	@Override
+	public SubjectVO selectOneSubject(String sno) {
+		return getSqlSession().selectOne("ManagerMapper.selectOneSubject");
+	}
+	
+	// ---------- 학원관리 과목 수정
+	@Override
+	public int updateSubject(SubjectVO svo) {
+		return getSqlSession().update("ManagerMapper.updateSubject");
+	}
+	// ---------- 학원관리 과목 삭제
+	@Override
+	public int deleteSubject(SubjectVO svo) {
+		return getSqlSession().update("ManagerMapper.deleteSubject");
+	}
 
 }

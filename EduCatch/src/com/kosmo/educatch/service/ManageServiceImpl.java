@@ -138,5 +138,44 @@ public class ManageServiceImpl implements ManageService {
 		log.info("ManagerserviceImpl updateAcademy end >>> ");
 		return cnt;
 	}
+	// ---------- 학원관리 편의기능 수정
+	@Override
+	public int updateConvenience(ConvenienceVO cvo) {
+		log.info("ManagerserviceImpl updateConvenience >>> ");
+		int cnt = manageMapper.updateConvenience(cvo);
+		log.info("ManagerserviceImpl updateConvenience end >>> ");
+		return cnt;
+	}
+
+	// ---------- 학원관리 과목 선택 체크박스
+	@Override
+	public SubjectVO selectOneSubject(String sno) {
+		log.info("ManagerserviceImpl selectOneSubject 시작 >>>> ");
+		SubjectVO svo = new SubjectVO();
+		svo = manageMapper.selectOneSubject(sno);
+		log.info("svo >>> " + svo);
+
+		log.info("ManagerserviceImpl selectOneSubject 끝 >>>> ");
+
+		return svo;
+	}
+
+	// ---------- 학원관리 과목 수정
+	@Override
+	public int updateSubject(SubjectVO svo) {
+		log.info("ManagerserviceImpl updateSubject >>> ");
+		int cnt = manageMapper.updateSubject(svo);
+		log.info("ManagerserviceImpl updateSubject end >>> ");
+		return cnt;
+	}
+
+	// ---------- 학원관리 과목 수정
+	@Override
+	public int deleteSubject(SubjectVO svo) {
+		log.info("ManagerserviceImpl deleteSubject >>> ");
+		int cnt = manageMapper.deleteSubject(svo);
+		log.info("ManagerserviceImpl deleteSubject end >>> ");
+		return cnt;
+	}
 
 }

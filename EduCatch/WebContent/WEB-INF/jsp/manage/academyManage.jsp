@@ -28,7 +28,19 @@
 <style type="text/css">
 
 <%-- -----------CSS------------- --%>
-
+input[type="file"] {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		border: 0;
+}
+			
+			
+			
 .sb-nav-link-icon {
 	height: 20px;
 	width: 20px;
@@ -179,15 +191,140 @@
 
 
 
-
-
-
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
+		
+		//과목수정 셀렉트
+		$('#modal-749411').on('click', function(){
+            
+			var sno = $("input:checkbox[name='chkInBno']:checked").val();
+			console.log(sno);
+
+			
+			$.ajax({
+				url : "selectOneSubject.ec",
+				type : "post",
+				data : {
+					"sno" : sno,
+					},
+				dataType : "json"
+			}).done(function(resultParam){
+				if(resultParam.svo=="aa"){
+					alert('정상적으로 데이터가 등록되지 않았습니다.');
+				}else{
+					var st = "";
+					var sname = resultParam.svo.sname;
+					var sday = resultParam.svo.sday;
+					var stime = resultParam.svo.stime;
+					var sprice = resultParam.svo.sprice;
+					var speople = resultParam.svo.speople;
+					var sdeleteyn = resultParam.svo.sdeleteyn;
+					var sno = resultParam.svo.sno;
+					
+					st = "<table class='table table-condensed'>";
+				   	st +="<tr>";
+				    st +="   <td>과목명</td>";
+				    st +="    <td><input type='text' class='form-control' id='sname' name='sname' value="+sname+"></td>";
+				    st +=" </tr>";
+				    st +=" <tr>";
+				    st +="    <td>수강날짜</td>";
+				    st +="    <td><input type='text' class='form-control' id='sday' name='sday' value="+sday+"></td>";
+				    st +=" </tr>";
+				    st +=" <tr>";
+				    st +="    <td>수강시간</td>";
+				    st +="    <td><input type='text' class='form-control' id='stime' name='stime' value="+stime+"></td>";
+				    st +=" </tr>";
+				    st +=" <tr>";
+				    st +="    <td>수강금액</td>";
+				    st +="    <td><input type='text' class='form-control' id='sprice' name='sprice' value="+sprice+"></td>";
+				    st +=" </tr>";
+				    st +=" <tr>";
+				    st +="    <td>수강인원</td>";
+				    st +="    <td><input type='text' class='form-control' id='speople' name='speople' value="+speople+"></td>";
+				    st +="    <input type='hidden' class='form-control' id='sno' name='sno' value="+sno+">";
+				    st +="    <input type='hidden' class='form-control' id='sdeleteyn' name='sdeleteyn' value="+sdeleteyn+">";
+				    st +=" </tr>";
+				    st +="	</table>";
+					$('.subjectdiv').html(st);
+				}
+			}).fail(function(resultParam){
+				if(resultParam.readyState == 4){
+					alert(resultParam.responseText);
+				}else{
+					alert("추가시 DB연결에 문제가 발생하였습니다.");	
+				}
+			});
+		});
+		
+		//과목삭제 셀렉트
+		$('#modal-749489').on('click', function(){
+			
+            
+			var sno = $("input:checkbox[name='chkInBno']:checked").val()
+			console.log(sno);
+
+			
+			$.ajax({
+				url : "selectOneSubject.ec",
+				type : "post",
+				data : {
+					"sno" : sno,
+					},
+				dataType : "json"
+			}).done(function(resultParam){
+				if(resultParam.svo=="aa"){
+					alert('정상적으로 데이터가 등록되지 않았습니다.');
+				}else{
+					var st = "";
+					var sname = resultParam.svo.sname;
+					var sday = resultParam.svo.sday;
+					var stime = resultParam.svo.stime;
+					var sprice = resultParam.svo.sprice;
+					var speople = resultParam.svo.speople;
+					var sdeleteyn = resultParam.svo.sdeleteyn;
+					var sno = resultParam.svo.sno;
+					
+					st = "<table class='table table-condensed'>";
+				   	st +="<tr>";
+				    st +="   <td>과목명</td>";
+				    st +="    <td><input type='text' class='form-control' id='sname' name='sname' value="+sname+" readonly></td>";
+				    st +=" </tr>";
+				    st +=" <tr>";
+				    st +="    <td>수강날짜</td>";
+				    st +="    <td><input type='text' class='form-control' id='sday' name='sday' value="+sday+" readonly></td>";
+				    st +=" </tr>";
+				    st +=" <tr>";
+				    st +="    <td>수강시간</td>";
+				    st +="    <td><input type='text' class='form-control' id='stime' name='stime' value="+stime+" readonly></td>";
+				    st +=" </tr>";
+				    st +=" <tr>";
+				    st +="    <td>수강금액</td>";
+				    st +="    <td><input type='text' class='form-control' id='sprice' name='sprice' value="+sprice+" readonly></td>";
+				    st +=" </tr>";
+				    st +=" <tr>";
+				    st +="    <td>수강인원</td>";
+				    st +="    <td><input type='text' class='form-control' id='speople' name='speople' value="+speople+" readonly></td>";
+				    st +="    <input type='hidden' class='form-control' id='sno' name='sno' value="+sno+">";
+				    st +="    <input type='hidden' class='form-control' id='sdeleteyn' name='sdeleteyn' value="+sdeleteyn+">";
+				    st +=" </tr>";
+				    st +="	</table>";
+					$('.subjectdeletediv').html(st);
+				}
+			}).fail(function(resultParam){
+				if(resultParam.readyState == 4){
+					alert(resultParam.responseText);
+				}else{
+					alert("추가시 DB연결에 문제가 발생하였습니다.");	
+				}
+			});
+		});
+		
+		
 		
 		//학원정보수정 - 이미지
 		$('#ex_filename').on('change', function(){
@@ -232,6 +369,27 @@
 			$('#subjectForm').submit();
 		});
 		
+		//과목수정 버튼
+		$('#updateSubject').on('click', function(){
+			$('#subjectUpdateForm').attr("action", "manageUpdateSubject.ec");
+			$('#subjectUpdateForm').attr("method", "POST");
+			$('#subjectUpdateForm').submit();
+		});
+		
+		//과목삭제 버튼
+		$('#deleteSubject').on('click', function(){
+			$('#subjectDeleteForm').attr("action", "manageDeleteSubject.ec");
+			$('#subjectDeleteForm').attr("method", "POST");
+			$('#subjectDeleteForm').submit();
+			
+		});
+		
+		//편의기능수정 버튼
+		$('#updateConvenience').on('click', function(){
+			$('#convenienceUpdateForm').attr("action", "manageUpdateConvenience.ec");
+			$('#convenienceUpdateForm').attr("method", "POST");
+			$('#convenienceUpdateForm').submit();
+		});
 		
 		//두번째 주소창값을 가지고 좌표찍기
 		$(document).on('keyup', '#aaddr2', function(){
@@ -254,6 +412,15 @@
 		});
 	
 	});
+	
+	function checkOnly(chk){	 		
+        var obj = document.getElementsByName("chkInBno");	        
+        for(var i=0; i < obj.length; i++){ 
+            if(obj[i] != chk){
+                obj[i].checked = false;
+            }
+        }
+    }	
 	
 	function addrCheck(){
 		new daum.Postcode({
@@ -421,7 +588,7 @@
 	        <h1 style="color:black">학원 정보</h1>
 	        <div class="row" style="color:black">
 									<div class="col-md-12">
-										 <a id="modal-749483" href="#modal-container-749483" role="button" class="btn btn-primary" data-toggle="modal">학원정보수정</a>
+										 <a id="modal-749483" href="#modal-container-749483" role="button" class="btn btn-success" data-toggle="modal"><i class="fas fa-edit"></i> 학원정보수정</a>
 									
 										<div class="modal fade" id="modal-container-749483" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 											<div class="modal-dialog" role="document">
@@ -528,8 +695,8 @@
     	<hr id="hhr">
        	<h1 style="color:black">수업 정보</h1>
        	<div class="row" style="color:black">
-									<div class="col-md-12">
-										 <a id="modal-749484" href="#modal-container-749484" role="button" class="btn btn-primary" data-toggle="modal">과목추가</a>
+									<div class="col-md-8">
+										 <a id="modal-749484" href="#modal-container-749484" role="button" class="btn btn-primary" data-toggle="modal"><i class="fas fa-edit"></i> 과목추가</a>
 										<div class="modal fade" id="modal-container-749484" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
@@ -586,13 +753,83 @@
 											</div>
 										
 										</div>
-									</div>
+										</div>
+										<div class="col-md-4" align="right">
+											<a id="modal-749411" href="#modal-container-749411" role="button" class="btn btn-success" data-toggle="modal"><i class="fas fa-edit"></i> 과목수정</a>
+											<div class="modal fade" id="modal-container-749411" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="myModalLabel">
+																과목 수정
+															</h5> 
+															<button type="button" class="close" data-dismiss="modal">
+																<span aria-hidden="true">×</span>
+															</button>
+														</div>
+														<div class="modal-body">
+														<form id="subjectUpdateForm" name="subjectUpdateForm">
+															<div class="subjectdiv">
+															</div>
+														</form>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-primary" id="updateSubject">
+																수정
+															</button> 
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">
+																취소
+															</button>
+														</div>
+													</div>
+													
+												</div>
+										
+								
 								</div><!--모달 end-->
+								<a id="modal-749489" href="#modal-container-749489" role="button" class="btn btn-danger" data-toggle="modal"><i class="fas fa-eraser"></i>과목삭제</a>
+										<div class="modal fade" id="modal-container-749489" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="myModalLabel">
+															과목 삭제
+														</h5> 
+														<button type="button" class="close" data-dismiss="modal">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<form id="subjectDeleteForm" name="subjectDeleteForm">
+														<div class="subjectdeletediv">
+														</div>
+														</form>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-primary" id="deleteSubject">
+															삭제
+														</button> 
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">
+															취소
+														</button>
+													</div>
+												</div>
+												
+											</div>
+										
+								
+								</div><!--모달 end-->
+								</div>
+									
+								</div><!--모달 end-->
+										 
+										 
     	<div class="container">
 			  <table class="table table-condensed">
        			 <br><br>
 			    <thead>
 			      <tr>
+			      	<th>     </th>
 			        <th>과목명</th>
 			        <th>수강날짜</th>
 			        <th>수강시간</th>
@@ -609,74 +846,18 @@
 		SubjectVO svo = (SubjectVO)subjectlist.get(i);
 		
 		if(subjectnCnt>0){
-%>
+%>		
 			    <tr>
+			   		<td align="center">
+						<input type="checkbox" name="chkInBno" 
+								id="chkInBno"  value = <%=svo.getSno() %>
+						 	    onclick="checkOnly(this)">
+					</td>		
 			        <td><%=svo.getSname() %></td>
 			        <td><%=svo.getSday() %></td>
 			        <td><%=svo.getStime() %></td>
 			        <td><%=svo.getSprice() %></td>
 			        <td><%=svo.getSpeople() %></td>
-			        <td>
-			         <div class="row" style="color:black">
-									<div class="col-md-12">
-										 <a id="modal-749489" href="#modal-container-749489" role="button" class="btn btn-primary" data-toggle="modal">수정</a>
-									
-										<div class="modal fade" id="modal-container-749489" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="myModalLabel">
-															과목 수정
-														</h5> 
-														<button type="button" class="close" data-dismiss="modal">
-															<span aria-hidden="true">×</span>
-														</button>
-													</div>
-													<div class="modal-body">
-														<form name="subjectUpdateForm" id="subjectUpdateForm">
-															<table class="table table-condensed">
-														   	 <tr>
-														        <td>과목명</td>
-														        <td><input type="text" class="form-control" id="sname" name="sname" value="<%=svo.getSname()%>"></td>
-														     </tr>
-														     <tr>
-														        <td>수강날짜</td>
-														        <td><input type="text" class="form-control" id="sday" name="sday" value="<%=svo.getSday()%>"></td>
-														     </tr>
-														     <tr>
-														        <td>수강시간</td>
-														        <td><input type="text" class="form-control" id="stime" name="stime" value="<%=svo.getStime()%>"></td>
-														     </tr>
-														     <tr>
-														        <td>수강금액</td>
-														        <td><input type="text" class="form-control" id="speople" name="speople" value="<%=svo.getSpeople()%>"></td>
-														     </tr>
-														     <tr>
-														        <td>수강인원</td>
-														        <td><input type="text" class="form-control" id="sprice" name="sprice" value="<%=svo.getSprice()%>"></td>
-														     </tr>
-														</table>
-														<input type="hidden" class="form-control" id="sno" name="sno">
-														<input type="hidden" class="form-control" id="academy_ano" name="academy_ano" value="<%=svo.getAcademy_ano()%>">
-													</form>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-primary">
-															수정
-														</button> 
-														<button type="button" class="btn btn-secondary" data-dismiss="modal">
-															취소
-														</button>
-													</div>
-												</div>
-												
-											</div>
-										
-										</div>
-								
-									</div>
-								</div><!--모달 end-->
-			        </td>
 			    </tr>
 			    </tbody>
 <%
@@ -694,7 +875,7 @@
          <h1 style="color:black">편의기능</h1>
           <div class="row" style="color:black">
 									<div class="col-md-12">
-										 <a id="modal-749487" href="#modal-container-749487" role="button" class="btn btn-primary" data-toggle="modal">편의기능 수정</a>
+										 <a id="modal-749487" href="#modal-container-749487" role="button" class="btn btn-success" data-toggle="modal"><i class="fas fa-edit"></i> 편의기능 수정</a>
 									
 										<div class="modal fade" id="modal-container-749487" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 											<div class="modal-dialog" role="document">
@@ -707,7 +888,14 @@
 															<span aria-hidden="true">×</span>
 														</button>
 													</div>
+													<%
+													for(int i=0; i<connCnt; i++){
+														ConvenienceVO cvo = (ConvenienceVO)conlist.get(i);
+														
+														if(connCnt>0){
+													%>
 													<div class="modal-body">
+														<form name="convenienceUpdateForm" id="convenienceUpdateForm">
 															 <div class="mt-10">
 																 <input type="checkbox" id="acparking" name="acparking" value="Y">&nbsp;주차장<br><br>
 															 </div>
@@ -729,9 +917,14 @@
 															 <div class="mt-10">
 																 <input type="checkbox" id="aclocker" name="aclocker" value="Y">&nbsp;사물함<br><br>
 														   	 </div>
+														   	 <input type="hidden" class="form-control" id="academy_ano" name="academy_ano" value="<%=cvo.getAcademy_ano()%>">
+														</form>
 													</div>
+													<%
+														}}
+													%>
 													<div class="modal-footer">
-														<button type="button" class="btn btn-primary">
+														<button type="button" class="btn btn-primary" id="updateConvenience">
 															수정
 														</button> 
 														<button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -764,44 +957,43 @@
 				//주차장
 				if(acparking.equals("Y")){
 					%>
-					<img src="/EduCatch/assets/img/convenience/parking.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img title="주차장" src="/EduCatch/assets/img/convenience/parking.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
-					
 				}
 				//편의점
 				if(acstore.equals("Y")){
 					%>
-					<img src="/EduCatch/assets/img/convenience/convenience.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img title="편의점" src="/EduCatch/assets/img/convenience/convenience.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
 				}
 				//셔틀버스
 				if(acbus.equals("Y")){
 					%>
-					<img src="/EduCatch/assets/img/convenience/bus.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img title="셔틀버스" src="/EduCatch/assets/img/convenience/bus.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
 				}
 				//엘레베이터
 				if(acelevator.equals("Y")){
 					%>
-					<img src="/EduCatch/assets/img/convenience/elevator.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img title="엘레베이터" src="/EduCatch/assets/img/convenience/elevator.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
 				}
 				//자습실
 				if(acstudyroom.equals("Y")){
 					%>
-					<img src="/EduCatch/assets/img/convenience/studyroom.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img title="자습실" src="/EduCatch/assets/img/convenience/studyroom.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
 				}
 				//휴게실
 				if(aclounge.equals("Y")){
 					%>
-					<img src="/EduCatch/assets/img/convenience/lounge.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img title="휴게실" src="/EduCatch/assets/img/convenience/lounge.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
 				}
 				//사물함
 				if(aclocker.equals("Y")){
 					%>
-					<img src="/EduCatch/assets/img/convenience/locker.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<img title="사물함" src="/EduCatch/assets/img/convenience/locker.png" border=0 width="150" height="150" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<%
 				}
 				}

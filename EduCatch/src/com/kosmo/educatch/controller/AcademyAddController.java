@@ -162,9 +162,6 @@ public class AcademyAddController {
 		log.info("cmajor >>> " + cmajor);
 		log.info("cminor >>> " + cminor);
 		log.info("acparking >>> " + acparking);
-		log.info("acparking >>> " + acparking);
-		log.info("acparking >>> " + acparking);
-		log.info("acparking >>> " + acparking);
 
 		avo.setAno(ano);
 		avo.setAname(aname);

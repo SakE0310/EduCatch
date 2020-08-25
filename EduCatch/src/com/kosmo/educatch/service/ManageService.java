@@ -22,4 +22,8 @@ public interface ManageService {
 	public List<ConvenienceVO> conManageView(ConvenienceVO cvo);
 	public int insertSubject(SubjectVO svo);
 	public int updateAcademy(AcademyVO avo);
+	public int updateConvenience(ConvenienceVO cvo);
+	public SubjectVO selectOneSubject(String sno);
+	public int updateSubject(SubjectVO svo);
+	public int deleteSubject(SubjectVO svo);
 }
