@@ -291,6 +291,22 @@
         WHERE SNO = #{sno, jdbcType=VARCHAR}
 	</update>
 	
+	<!-- 학원관리 과목선택 체크박스-->
+	<select id="selectOneConvenience" parameterType="String" resultType="convenience">
+		SELECT
+			    A.ACADEMY_ANO,
+			    A.ACPARKING,
+			    A.ACSTORE,
+			    A.ACBUS,
+			    A.ACELEVATOR,
+			    A.ACSTUDYROOM,
+			    A.ACLOUNGE,
+			    A.ACLOCKER
+		FROM 
+				ACADEMY_CONVENIENCE A
+        WHERE ACADEMY_ANO=#{academy_ano, jdbcType=VARCHAR}
+	</select>
+	
 	
 	
 </mapper>

@@ -198,6 +198,100 @@ input[type="file"] {
 <script type="text/javascript">
 	$(document).ready(function(){
 		
+		//편의기능수정 셀렉트
+		$('#modal-749487').on('click', function(){
+            
+			var academy_ano = $('#academy_ano').val(); 
+			
+			$.ajax({
+				url : "selectOneConvenienice.ec",
+				type : "post",
+				data : {
+					"academy_ano" : academy_ano,
+					},
+				dataType : "json"
+			}).done(function(resultParam){
+				if(resultParam.cvo=="aa"){
+					alert('정상적으로 데이터가 등록되지 않았습니다.');
+				}else{
+					var st = "";
+					var acbus = resultParam.cvo.acbus;
+					var acelevator = resultParam.cvo.acelevator;
+					var aclocker = resultParam.cvo.aclocker;
+					var aclounge = resultParam.cvo.aclounge;
+					var acparking = resultParam.cvo.acparking;
+					var acstore = resultParam.cvo.acstore;
+					var acstudyroom = resultParam.cvo.acstudyroom;
+					var academy_ano = resultParam.cvo.academy_ano;
+					console.log(resultParam.cvo);
+			
+					st = " <div class='mt-10'>";
+					if(acparking=="Y"){
+						st +=" 		<input type='checkbox' id='acparking' name='acparking' value='Y' checked>&nbsp;주차장<br><br>";
+					}else{
+						st +=" 		<input type='checkbox' id='acparking' name='acparking' value='Y' >&nbsp;주차장<br><br>";
+					}
+					st +=" </div>";
+					st +=" <div class='mt-10'>";
+					if(acstore=="Y"){
+						st +=" 		<input type='checkbox' id='acstore' name='acstore' value='Y' checked>&nbsp;편의점<br><br>";
+					}else{
+						st +=" 		<input type='checkbox' id='acstore' name='acstore' value='Y'>&nbsp;편의점<br><br>";
+					}
+					st +=" </div>";
+					st +=" 	<div class='mt-10'>";
+					if(acbus=="Y"){
+						st +=" 		<input type='checkbox' id='acbus' name='acbus' value='Y' checked>&nbsp;셔틀버스<br><br>";
+					}else{
+						st +=" 		<input type='checkbox' id='acbus' name='acbus' value='Y'>&nbsp;셔틀버스<br><br>";
+					}
+					st +="	 </div>";
+					st +="  <div class='mt-10'>";
+					if(acelevator=="Y"){
+						st +="	 	<input type='checkbox' id='acelevator' name='acelevator' value='Y' checked>&nbsp;엘리베이터<br><br>";
+					}else{
+						st +="	 	<input type='checkbox' id='acelevator' name='acelevator' value='Y'>&nbsp;엘리베이터<br><br>";
+					}
+						st +="	 </div>";
+						st +="	 <div class='mt-10'>";
+					if(acstudyroom=="Y"){
+						st +="	 	<input type='checkbox' id='acstudyroom' name='acstudyroom' value='Y' checked>&nbsp;자습실<br><br>";
+						
+					}else{
+						st +="	 	<input type='checkbox' id='acstudyroom' name='acstudyroom' value='Y'>&nbsp;자습실<br><br>";
+						
+					}
+						st +="	 </div>";
+						st +="	 <div class='mt-10'>";
+					if(aclounge=="Y"){
+						st +="	 	<input type='checkbox' id='aclounge' name='aclounge' value='Y' checked>&nbsp;휴게실<br><br>";
+						
+					}else{
+						
+						st +="	 	<input type='checkbox' id='aclounge' name='aclounge' value='Y'>&nbsp;휴게실<br><br>";
+					}
+						st +="	 </div>";
+						st +="	 <div class='mt-10'>";
+					if(aclocker=="Y"){
+						st +="		 <input type='checkbox' id='aclocker' name='aclocker' value='Y' checked>&nbsp;사물함<br><br>";
+					}else{
+						st +="		 <input type='checkbox' id='aclocker' name='aclocker' value='Y'>&nbsp;사물함<br><br>";
+					}
+					
+					st +="		 <input type='hidden' id='academy_ano' name='academy_ano' value="+academy_ano+">";
+					st +="   </div>";
+					
+					
+					$('.condiv').html(st);
+				}
+			}).fail(function(resultParam){
+				if(resultParam.readyState == 4){
+					alert(resultParam.responseText);
+				}else{
+					alert("추가시 DB연결에 문제가 발생하였습니다.");	
+				}
+			});
+		});
 		
 		//과목수정 셀렉트
 		$('#modal-749411').on('click', function(){
@@ -413,6 +507,7 @@ input[type="file"] {
 		});
 	
 	});
+	
 	
 	function checkOnly(chk){	 		
         var obj = document.getElementsByName("chkInBno");	        
@@ -847,7 +942,7 @@ input[type="file"] {
 		SubjectVO svo = (SubjectVO)subjectlist.get(i);
 		
 		if(subjectnCnt>0){
-%>		
+%>
 			    <tr>
 			   		<td align="center">
 						<input type="checkbox" name="chkInBno" 
@@ -889,41 +984,11 @@ input[type="file"] {
 															<span aria-hidden="true">×</span>
 														</button>
 													</div>
-													<%
-													for(int i=0; i<connCnt; i++){
-														ConvenienceVO cvo = (ConvenienceVO)conlist.get(i);
-														
-														if(connCnt>0){
-													%>
 													<div class="modal-body">
-														<form name="convenienceUpdateForm" id="convenienceUpdateForm">
-															 <div class="mt-10">
-																 <input type="checkbox" id="acparking" name="acparking" value="Y">&nbsp;주차장<br><br>
-															 </div>
-															 <div class="mt-10">
-															 	<input type="checkbox" id="acstore" name="acstore" value="Y">&nbsp;편의점<br><br>
-															 </div>
-															 	<div class="mt-10">
-															 <input type="checkbox" id="acbus" name="acbus" value="Y">&nbsp;셔틀버스<br><br>
-															 </div>
-															 <div class="mt-10">
-															 	<input type="checkbox" id="acelevator" name="acelevator" value="Y">&nbsp;엘리베이터<br><br>
-															 </div>
-															 <div class="mt-10">
-															 	<input type="checkbox" id="acstudyroom" name="acstudyroom" value="Y">&nbsp;자습실<br><br>
-															 </div>
-															 <div class="mt-10">
-															 	<input type="checkbox" id="aclounge" name="aclounge" value="Y">&nbsp;휴게실<br><br>
-															 </div>
-															 <div class="mt-10">
-																 <input type="checkbox" id="aclocker" name="aclocker" value="Y">&nbsp;사물함<br><br>
-														   	 </div>
-														   	 <input type="hidden" class="form-control" id="academy_ano" name="academy_ano" value="<%=cvo.getAcademy_ano()%>">
-														</form>
-													</div>
-													<%
-														}}
-													%>
+													<form id="convenienceUpdateForm" name="convenienceUpdateForm">
+															<div class="condiv">
+															</div>
+													</form>
 													<div class="modal-footer">
 														<button type="button" class="btn btn-primary" id="updateConvenience">
 															수정

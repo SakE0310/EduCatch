@@ -27,4 +27,5 @@ public interface ManageService {
 	public SubjectVO selectOneSubject(String sno);
 	public int updateSubject(SubjectVO svo);
 	public int deleteSubject(SubjectVO svo);
+	public ConvenienceVO selectOneConvenience(String ano);
 }

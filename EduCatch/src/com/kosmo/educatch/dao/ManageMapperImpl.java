@@ -125,5 +125,10 @@ public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapp
 	public int deleteSubject(SubjectVO svo) {
 		return getSqlSession().update("ManagerMapper.deleteSubject");
 	}
+	//---------- 학원관리 편의기능 버튼조회
+	@Override
+	public ConvenienceVO selectOneConvenience(String ano) {
+		return getSqlSession().selectOne("ManagerMapper.selectOneConvenience");
+	}
 
 }

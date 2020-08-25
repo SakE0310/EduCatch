@@ -462,6 +462,24 @@ public class ManageController {
 		log.info("ManageController selectOneSubject >>> 끝");
 		return map;
 	}
+	
+	@ResponseBody
+	@RequestMapping("selectOneConvenienice")
+	public Map<String, ConvenienceVO> selectOneConvenience(HttpServletRequest request) {
+		log.info("ManageController selectOneConvenience >>> 시작");
+		
+		String academy_ano = request.getParameter("academy_ano");
+		log.info("academy_ano >>>>" + academy_ano);
+		ConvenienceVO cvo = new ConvenienceVO();
+		cvo = manageService.selectOneConvenience(academy_ano);
+		log.info("cvo >>> " + cvo);
+		
+		Map<String, ConvenienceVO> map = new HashMap<String, ConvenienceVO>();
+		map.put("cvo", cvo);
+		
+		log.info("ManageController selectOneConvenience >>> 끝");
+		return map;
+	}
 
 	@RequestMapping("manageReserChk")
 	public ModelAndView getManageReserChkPage() {

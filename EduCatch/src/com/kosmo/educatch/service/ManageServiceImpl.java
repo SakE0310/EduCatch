@@ -186,5 +186,17 @@ public class ManageServiceImpl implements ManageService {
 		log.info("ManagerserviceImpl deleteSubject end >>> ");
 		return cnt;
 	}
+	// ---------- 학원관리 편의기능 버튼조회
+	@Override
+	public ConvenienceVO selectOneConvenience(String ano) {
+		log.info("ManagerserviceImpl selectOneConvenience 시작 >>>> ");
+		ConvenienceVO cvo = new ConvenienceVO();
+		cvo = manageMapper.selectOneConvenience(ano);
+		log.info("cvo >>> " + cvo);
+
+		log.info("ManagerserviceImpl selectOneConvenience 끝 >>>> ");
+
+		return cvo;
+	}
 
 }
