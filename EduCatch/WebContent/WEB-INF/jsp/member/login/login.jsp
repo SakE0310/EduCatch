@@ -30,7 +30,7 @@
 		
 		$("#login").click(function(){
 	
-			alert("로그인");
+// 			alert("로그인");
 			$("#loginForm").attr("action","loginCheck.ec")
 			$("#loginForm").submit();
 		

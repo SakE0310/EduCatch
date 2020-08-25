@@ -28,17 +28,15 @@
 				if(memVo != null){
 					
 				%>
-				<h2>로그인 정보</h2>
-				<table border=1>
+				<table id= "login" style="visibility:hidden;">
 				
 					<tr>
-							<td> Member ID :</td>
-							<td align ="center"><b><%=memVo.getMid()%></b></td>
+							<td><%=memVo.getMid()%></td>
 					</tr>
 					<tr>
-							<td> PW :</td>
-							<td align ="center"><b><%=memVo.getMpw()%></b></td>
+							<td><%=memVo.getMpw()%></td>
 					</tr>
+				
 					<script>
 						location.href="http://localhost:8088/EduCatch/index.jsp";
 						
