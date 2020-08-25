@@ -1,8 +1,16 @@
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
+	<%
+		HttpSession hs = request.getSession(false);
+		MemberVO mvo = null;
+	    if(hs != null){
+			mvo = (MemberVO)hs.getAttribute("user");
+		}
+	%>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -238,6 +246,11 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-check"></i></div>
                               	 상담예약 관리
                             </a>
+                            <%
+								if(mvo != null){
+									if(mvo.getMauth().equals("3")){
+					           			
+				            %>
                             <a class="nav-link" href="manageAcaMem.ec">
                                 <div class="sb-nav-link-icon"><i class="fas fa-user-check"></i></div>
                               	학원회원 승인
@@ -247,8 +260,11 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-plus-square"></i></div>
                               	학원정보 등록
                             </a>
-                            
-                            <a class="nav-link" href="tables.html">
+                            <%
+									}
+								}
+                            %>
+                            <a class="nav-link" href="logout.ec">
                                 <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
                                 로그아웃
                             </a>
