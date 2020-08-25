@@ -696,6 +696,7 @@ public class ManageController {
 		AcademyVO vo = new AcademyVO();
 		vo.setDistrict(district);
 		vo.setCity(city);
+		log.info("a");
 		Map<String, List<AcademyVO>> map = new HashMap<String, List<AcademyVO>>();
 		List<AcademyVO> list = manageService.getAcaListManage(vo);
 		map.put("acaList", list);
