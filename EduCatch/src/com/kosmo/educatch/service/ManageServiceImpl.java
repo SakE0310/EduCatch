@@ -138,6 +138,15 @@ public class ManageServiceImpl implements ManageService {
 		log.info("ManagerserviceImpl updateAcademy end >>> ");
 		return cnt;
 	}
+	// ---------- 학원관리 학원 수정 이미지 없을때
+	@Override
+	public int updateAcademyNoImg(AcademyVO avo) {
+		log.info("ManagerserviceImpl updateAcademyNoImg >>> ");
+		int cnt = manageMapper.updateAcademyNoImg(avo);
+		log.info("ManagerserviceImpl updateAcademyNoImg end >>> ");
+		return cnt;
+	}
+	
 	// ---------- 학원관리 편의기능 수정
 	@Override
 	public int updateConvenience(ConvenienceVO cvo) {

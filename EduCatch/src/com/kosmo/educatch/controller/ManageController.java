@@ -209,6 +209,7 @@ public class ManageController {
 		String aaddr2 = null;
 		String alogo = null;
 		String file = null;
+		int i=0;
 
 		ModelAndView mav = new ModelAndView();
 
@@ -255,6 +256,7 @@ public class ManageController {
 				avo.setAaddr2(aaddr2);
 				avo.setAlogo(file);
 
+				i = manageService.updateAcademy(avo);
 			} catch (Exception e) {
 				log.info("에러>>>>" + e.getMessage());
 			} // end of try-catch
@@ -271,7 +273,6 @@ public class ManageController {
 			aaddrno = request.getParameter("aaddrno");
 			aaddr1 = request.getParameter("aaddr1");
 			aaddr2 = request.getParameter("aaddr2");
-			alogo = request.getParameter("alogo");
 			
 			avo.setAno(ano);
 			avo.setAname(aname);
@@ -281,7 +282,7 @@ public class ManageController {
 			avo.setAaddrno(aaddrno);
 			avo.setAaddr1(aaddr1);
 			avo.setAaddr2(aaddr2);
-			avo.setAlogo(alogo);
+			i = manageService.updateAcademyNoImg(avo);
 		}
 
 		log.info("ano >>> " + ano);
@@ -313,7 +314,6 @@ public class ManageController {
 		mav.addObject("subjectlist", subjectlist);
 		mav.addObject("conlist", conlist);
 
-		int i = manageService.updateAcademy(avo);
 
 		if (i > 0) {
 			mav.addObject("resultStr", "수정 완료");

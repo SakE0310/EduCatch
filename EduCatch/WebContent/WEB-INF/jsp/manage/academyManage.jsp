@@ -641,7 +641,7 @@ input[type="file"] {
 														        <td>
 															        <div class="row">
 																		<div class="col-md-8">
-																			<input type="text" class="form-control" id="alogo" name="alogo" value="<%=avo.getAlogo() %>" readonly>
+																			<input type="text" class="form-control" id="alogo" name="alogo" readonly>
 																		</div>
 																		<div class="col-md-4">
 																			<label for="ex_filename" class="btn btn-primary">찾기</label>

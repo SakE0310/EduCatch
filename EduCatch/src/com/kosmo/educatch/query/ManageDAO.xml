@@ -225,6 +225,19 @@
 		AND ANO= #{ano, jdbcType=VARCHAR}
 	</update>	
 	
+	<!-- 학원관리 학원 수정-->
+	<update id="updateAcademyNoImg" parameterType="academyview">
+		UPDATE ACADEMY
+		    SET     ANAME = #{aname, jdbcType=VARCHAR},
+		            ATEL = #{atel, jdbcType=VARCHAR},
+		            AADDRNO = #{aaddrno, jdbcType=VARCHAR},
+		            AADDR1 = #{aaddr1, jdbcType=VARCHAR},
+		            AADDR2 = #{aaddr2, jdbcType=VARCHAR},
+		            AUPDATEDATE = SYSDATE
+		WHERE ADELETEYN = 'N'
+		AND ANO= #{ano, jdbcType=VARCHAR}
+	</update>	
+	
 	<!-- 학원관리 편의기능 수정-->
 	<update id="updateConvenience" parameterType="convenience">
 		UPDATE  ACADEMY_CONVENIENCE

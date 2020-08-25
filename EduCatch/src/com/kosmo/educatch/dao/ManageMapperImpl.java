@@ -99,6 +99,11 @@ public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapp
 	public int updateAcademy(AcademyVO avo) {
 		return getSqlSession().update("ManagerMapper.updateAcademy");
 	}
+	// ---------- 학원관리 학원 수정 이미지없을때
+	@Override
+	public int updateAcademyNoImg(AcademyVO avo) {
+		return getSqlSession().update("ManagerMapper.updateAcademyNoImg");
+	}
 	// ---------- 학원관리 편의기능 수정
 	@Override
 	public int updateConvenience(ConvenienceVO cvo) {
