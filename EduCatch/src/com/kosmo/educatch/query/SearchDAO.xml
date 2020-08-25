@@ -22,20 +22,19 @@
  	</select>
 	
 	<select id="getAcaList" parameterType="academyview" resultType="academyview">
-SELECT 
-    COUNT(C.ANO) OVER() AS LISTCOUNT
-   ,C.ANO AS ANO
-   ,C.ANAME AS ANAME
-   ,C.ATEL AS ATEL
-   ,C.AADDR1 AS AADDR1
-   ,C.AADDR2 AS AADDR2
-   ,C.ALOGO AS ALOGO
-   ,TRUNC(C.AGRADE,2) AS AGRADE
-   ,D.CMAJOR AS CMAJOR
-   ,D.CMINOR AS CMINOR
-   ,C.AINSERTDATE AS AINSERTDATE
-   ,C.AUPDATEDATE AS AUPDATEDATE
-	FROM (SELECT    NVL(AVG(B.RBGRADE),0) AS AGRADE
+	SELECT  COUNT(C.ANO) OVER() AS LISTCOUNT
+		   ,C.ANO AS ANO
+		   ,C.ANAME AS ANAME
+		   ,C.ATEL AS ATEL
+		   ,C.AADDR1 AS AADDR1
+		   ,C.AADDR2 AS AADDR2
+		   ,C.ALOGO AS ALOGO
+		   ,TRUNC(C.AGRADE,2) AS AGRADE
+		   ,D.CMAJOR AS CMAJOR
+		   ,D.CMINOR AS CMINOR
+		   ,C.AINSERTDATE AS AINSERTDATE
+		   ,C.AUPDATEDATE AS AUPDATEDATE
+	FROM   (SELECT  NVL(AVG(B.RBGRADE),0) AS AGRADE
 	               ,A.CATEGORY_CNO AS CNO
 	               ,A.ANO AS ANO
 	               ,A.ANAME AS ANAME
@@ -52,7 +51,6 @@ SELECT
 	        GROUP BY A.CATEGORY_CNO,A.ANAME,A.ANO,A.ATEL,A.AADDR1,A.AADDR2,A.ALOGO,AINSERTDATE,AUPDATEDATE,TO_CHAR(AINSERTDATE,'YYYY-MM-DD') ,TO_CHAR(AUPDATEDATE,'YYYY-MM-DD')) C, 
 	        CATEGORY D
 	WHERE C.CNO = D.CNO
-	<!-- 지역/카테고리 검색 -->
 	<if test="district!=null or city!=null or cmajor!=null or cminor!=null">
     AND
     <![CDATA[ C.AADDR1 LIKE '%'||#{district}||'%' ]]>
@@ -65,13 +63,10 @@ SELECT
 	<![CDATA[ D.CMINOR LIKE '%'||#{cminor}||'%' ]]>
 	</if>
 	</if>
-	
-	<!-- 학원명 검색 -->
 	<if test="aname!=null">
 	AND
 	<![CDATA[ C.ANAME LIKE '%'||#{aname}||'%' ]]>
 	</if>
-	
 	</select>
 	
 </mapper>

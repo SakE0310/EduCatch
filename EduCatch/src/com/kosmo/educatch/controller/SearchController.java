@@ -97,8 +97,8 @@ public class SearchController {
 		String cminor = req.getParameter("cminor");
 		String aname = req.getParameter("aname");
 		
+		//지역, 카테고리 검색
 		if(district!=null && city!=null && cmajor!=null && cminor!=null) {
-		
 		String[] cityArr = city.split(" ");
 		String cityStr = cityArr[0];
 		String cminorAdd = cminor+" "+"split";
@@ -108,7 +108,7 @@ public class SearchController {
 		log.info("search controller getAcaList cminorArr[0] >>> "+cminorArr[0]);
 		//전체
 		log.info("search controller getAcaList cminorArr[1] >>> "+cminorArr[1]);
-		
+
 		if(cminorArr[1].equals("전체")) {
 			String cminorStr = cminorArr[1]; //전체
 			param.setCminor(cminorStr);
@@ -129,6 +129,8 @@ public class SearchController {
 		log.info("search controller getAcaList param.getCminor() >>> "+param.getCminor());
 		log.info("search controller getAcaList param.getAgrade() >>> "+param.getAgrade());
 		}
+		
+		//학원명 검색
 		if(aname!=null) {
 		param.setAname(aname);
 		

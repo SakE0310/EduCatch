@@ -10,6 +10,7 @@ public class SearchVO extends ReviewVO{
 	private String city;	 //개포동
 	
 	private String listcount;// 리스트 개수
+	 
 	
 	
 	public SearchVO(){

@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.kosmo.educatch.vo.AcademyVO;
-import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SearchVO;
 
 public class SearchMapperImpl extends SqlSessionDaoSupport implements SearchMapper{
