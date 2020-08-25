@@ -88,6 +88,8 @@
 	if(obj !=null){
 
 		ConsultVO cvo=(ConsultVO)obj;
+		
+		if(mvo !=null){
 %>
 <p></p>
 	<div class="container">
@@ -147,12 +149,19 @@
 					<input type="button" id="listData" value="목록" class=" btn_light btn_box_01"/>
 				</td>
 			</tr>
+		</table>
 <%
 		
+	}else if(mvo == null){
+%>
+		<script>
+			alert("로그인 후 이용해주세요");
+			location.href="listReview.ec";
+		</script>
+<%
+		}
 	}
 %>
-		</table>
-		
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

@@ -1,3 +1,4 @@
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -13,6 +14,13 @@
 <title>Insert title here</title>
 </head>
 <%
+
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+
+	}
 
 	String cbno = request.getParameter("cbno");
 	String consultboard_cbno = request.getParameter("cbno");
@@ -117,9 +125,10 @@
 <script type="text/javascript">
 
 	var consultboard_cbno = "<%=consultboard_cbno%>";
-	var member_mno = "<%=member_mno%>";
+	var member_mno = "<%=mvo.getMno()%>";
 	var reno = "<%=reno%>";
 	var recontent = "<%=recontent%>";
+	var rewriter = "<%=mvo.getMname()%>";
 	
 	$(document).ready(function(){
 		
@@ -136,7 +145,8 @@
 				type:"post",
 				dataType:"html",
 				data:{
-					//member_mno: member_mno,
+					rewriter: rewriter,
+					member_mno: member_mno,
 					consultboard_cbno: consultboard_cbno,
 					recontent: recontent
 				},
@@ -210,7 +220,8 @@
 			dataType:"html",
 			data: {
 				reno: reno,
-				recontent: recontent
+				recontent: recontent,
+				member_mno: member_mno
 			},
 				success:function(updateResult){
 				console.log("댓글수정 ajax 성공 >>> updateResult : " + updateResult);
@@ -238,7 +249,8 @@
 				type: "post",
 				dataType: "html",
 				data: {
-					reno: reno
+					reno: reno,
+					member_mno: member_mno
 				},
 				success:function(deleteResult){
 					console.log("댓글삭제 ajax 성공 >>> deleteResult : " + deleteResult);
@@ -297,7 +309,7 @@
 			
 			console.log('creplyList['+i+'] >>>\nreno : ' + reno + ', rewriter : ' + rewriter + ', reinsertdate : ' + reinsertdate + ', recontent : ' + recontent );
 			
-			//var replyWriterBool = replyWriterI_no == i_no;
+			var replyWriterBool = member_mno == member_mno;
 			//var replyMasterBool = i_no.indexOf("M") == 0;
 			//console.log('replyWriterBool : ' + replyWriterBool + ', replyMasterBool : ' + replyMasterBool);
 
@@ -331,7 +343,7 @@
 			bm_reinsertdate_span.html(reinsertdate);
 			
 			
-			//if(replyWriterBool || replyMasterBool){		
+			if(replyWriterBool){		
 				// 수정폼 출력버튼
 				var updateForm_btn_input = $("<input>");
 				updateForm_btn_input.attr({"type":"button","id":"updateForm_btn","value":"수정"});
@@ -341,7 +353,7 @@
 				var delete_btn_input = $("<input>");
 				delete_btn_input.attr({"type":"button","id":"delete_btn","value":"삭제"});
 				delete_btn_input.addClass("reply_btn");
-			//}	
+			}	
 			
 			// 내용
 			var bm_recontext_p = $("<p>");
@@ -349,7 +361,7 @@
 			bm_recontext_p.html(recontent);
 			
 			// 조립하기
-			info_p.append(num_span).append(i_nameKr_span).append(bm_reinsertdate_span).append(updateForm_btn_input).append(delete_btn_input)
+			info_p.append(i_nameKr_span).append(bm_reinsertdate_span).append(updateForm_btn_input).append(delete_btn_input)
 			newRe_td.append(info_p).append(bm_recontext_p)
 			newRe_li.append(newRe_td);
 			$("#replyList_ul").append(newRe_li);

@@ -358,6 +358,8 @@
          var bm_recontext_p = $("<p>");
          bm_recontext_p.addClass("marT5 marL5 marB5");
          bm_recontext_p.html(recontent);
+         
+ 
 
          if(replyWriterBool){      
             // 수정폼 출력버튼

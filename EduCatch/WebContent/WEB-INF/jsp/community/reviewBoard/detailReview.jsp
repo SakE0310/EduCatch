@@ -157,7 +157,7 @@
 			<jsp:param name="reviewboard_rbno" value="<%=reviewboard_rbno %>"/>
 		</jsp:include>
 <%
-	if( rvo.getRbname().equals(mvo.getMname())){
+	if( rvo.getRbname().equals(mvo.getMname()) || mvo.getMauth().equals("3")){
 %>
 	<table style="margin-left: auto; margin-right: auto;" border="0">
 			<tr align="center">

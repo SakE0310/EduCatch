@@ -264,18 +264,14 @@ public class MyPageController {
 		log.info("MyPageController myReview 시작>>>");
 		
 		MemberVO mvo = null;
+		String member_mno ="";
 		if(session != null){
 			mvo = (MemberVO)session.getAttribute("user");
+			member_mno =mvo.getMno();
 		}	
 		
-		String mvo1 = mvo.getMno();
-		log.info("mvo1>>>>"+mvo1);
-
-		String mno = request.getParameter("mno");
-		log.info("mno>>>>"+mno);
-		
-		rvo.setMember_mno(mvo1);
-		List<ReviewVO> list = mypageService.myReview(rvo);
+		rvo.setMember_mno(member_mno);
+		List<ReviewVO> list = mypageService.myReview(rvo);	
 		log.info("MyPageController myReview list.size()>>>" + list.size());
 		
 		for (int i = 0; i < list.size(); i++) {
@@ -301,24 +297,25 @@ public class MyPageController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("ReviewVO", list);
 		mav.addObject("MemberVO", mvov);
-		mav.setViewName("/mypage/mypageMain");
+		mav.setViewName("/mypage/myReviewCheck");
 		
 		log.info("MyPageController myReview 끝 >>>");
 		return mav;
 	}
 	
 	@RequestMapping("myFree")
-	public ModelAndView myFree(HttpServletRequest request,
-								 @ModelAttribute FreeVO fvo, MemberVO param, HttpSession session) {
+	public ModelAndView myFree(HttpServletRequest request, HttpSession session,
+								 @ModelAttribute FreeVO fvo) {
 		log.info("MyPageController myFree 시작>>>");
 		MemberVO mvo = null;
+		String member_mno ="";
+		
 		if(session != null){
 			mvo = (MemberVO)session.getAttribute("user");
+			member_mno =mvo.getMno();
 		}
-		String mno = request.getParameter("mno");
-		log.info("mno>>>>"+mno);
 		
-		fvo.setMember_mno(mno);
+		fvo.setMember_mno(member_mno);
 		List<FreeVO> list = mypageService.myFree(fvo);
 		log.info("MyPageController myFree list.size()>>>" + list.size());
 		
@@ -343,7 +340,7 @@ public class MyPageController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("FreeVO", list);
 		mav.addObject("MemberVO", mvo_1);
-		mav.setViewName("/mypage/mypageMain_2");
+		mav.setViewName("/mypage/myFreeCheck");
 		
 		log.info("MyPageController myReview 끝 >>>");
 		return mav;

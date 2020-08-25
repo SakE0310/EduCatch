@@ -1,3 +1,4 @@
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@page import="com.kosmo.educatch.vo.ConsultVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,12 +12,14 @@
 	</jsp:include>
 </head>
 
+
 <title>상담 게시판</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <!-- 데이터피커 -->
 <link rel="stylesheet" href="/EduCatch/assets/datepicker/jquery-ui-1.12.1/jquery-ui.min.css">
@@ -70,26 +73,10 @@
   	margin: auto;
 	}
 	
-		
-	/* #sideBanner{
-			position: absolute;
-			top:100px;
-			left:0px;
-			width:150px;
-			height:600px;
-			background: #aaa;
-		} */
-	.tt{	
-			text-align:center;
-			font-size: xx-large;
-			font-weight: bold;
-			
-		}		
-		
-	#aa{	
-			color:black;
-		
-		}
+	#aa{
+		color:black;
+	}
+	
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -140,7 +127,7 @@
 			}
 			
 			$("#searchForm").attr("action","searchConsult.ec");
-			$("#searchForm").attr("method","GET");
+			$("#searchForm").attr("method","POST");
 			$("#searchForm").submit();
 			
 		})//end of searchPiker
@@ -148,12 +135,12 @@
 		//검색버튼을 누르면 실행
 		$("#searchData").click(function() {
 			console.log("검색버튼 누름");
-			var sVal = document.searchForm.searchFilter.options[document.searchForm.searchFilter.selectedIndex].value;
+			var sVal = document.consultForm.searchFilter.options[document.consultForm.searchFilter.selectedIndex].value;
 			console.log("sVal>>>"+sVal);
 			 
-			$("#searchForm").attr("action","searchConsult.ec");
-			$("#searchForm").attr("method","POST");
-			$("#searchForm").submit();
+			$("#consultForm").attr("action","searchConsult.ec");
+			$("#consultForm").attr("method","POST");
+			$("#consultForm").submit();
 			 
 			
 			alert("아직안만듬");
@@ -180,6 +167,12 @@
 	String totalcount="0";	
 
 	Object obj=request.getAttribute("searchConsult");
+	
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}
 
 	if(obj !=null){
 		ArrayList searchConsult=(ArrayList)obj;
@@ -189,14 +182,15 @@
 %>
 	<form id="consultForm" name="consultForm">
 		<input type="hidden" id="cbno" name="cbno"/>
-	</form>
-		<br><br><br><br>
 	<div id="mainWrapper">
-		<table style="margin-left: auto; margin-right: auto;" border="0" cellpadding="1" cellspacing="1">
+		<div>
+		<table  border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
 				<td align="center"><h1>상담 게시판</h1></td>
 			</tr>
 		</table>
+		<hr>
+		</div>
 		<div class="container">
 		<table align="center" class="table">
 			<colgroup>
@@ -207,14 +201,18 @@
 				<col width="120px"/>
 			</colgroup>
 			<thead id="table_head">	
+				<tr>
 					<td align="center">글번호</td>
 					<td align="center">학원명</td>
 					<td align="center">제목</td>
 					<td align="center">작성자</td>
 					<td align="center">날짜</td>
+				</tr>
 			</thead>
 			<tbody>
 <%
+
+if(searchConsult !=null && nCnt>0){
 	for(int i=0; i<nCnt; i++){
 		ConsultVO cvo=(ConsultVO)searchConsult.get(i);
 		
@@ -230,19 +228,18 @@
 		System.out.println("cvo.getCurpage()"+cvo.getCurpage());
 		System.out.println("cvo.getTotalcount()"+cvo.getTotalcount());
 		
-		if(nCnt>0){
 	
 %>
 					<tr align="center">
-						<td><%= cvo.getCbno() %></td>
-						<td><%= cvo.getAcademy_ano() %></td>
-						<td><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
-						<td><%= cvo.getCbname() %></td>
-						<td><%= cvo.getCinsertdate() %></td>
+						<td class="cc"><%= cvo.getCbno() %></td>
+						<td class="cc"><%= cvo.getAname() %></td>
+						<td class="cc"><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
+						<td class="cc"><%= cvo.getCbname() %></td>
+						<td class="cc"><%= cvo.getCinsertdate() %></td>
 					</tr>
 <%
 				}	
-		}if(nCnt==0){
+		}else{
 		
 %>	
 					<tr>
@@ -252,9 +249,9 @@
 					</tr>
 <%
 			}
-			
-		}	
-	
+
+		if(searchConsult !=null && nCnt>0){
+
 %>			
 			</tbody>
 			<tr>
@@ -262,8 +259,6 @@
 			<jsp:include page="memberPaging.jsp" flush="true">
 				<jsp:param name="url" value="searchConsult.ec"/>
 				<jsp:param name="str" value=""/>
-				
-				
 					<jsp:param name="pagesize" value="<%= pagesize %>"/>
 					<jsp:param name="groupsize" value="<%= groupsize %>"/>
 					<jsp:param name="curpage" value="<%= curpage %>"/>
@@ -272,37 +267,67 @@
 			</jsp:include>
 			</td>
 			</tr>
-			
-				<tr>
-					<td colspan="6" align="right">
-						<input type="button" value="글쓰기"
-						id="insertPage" class=" btn_light btn_box_01"/>
-					</td>
-				</tr>
-		</table>
-	</div>
-	<div>
-		<form id="searchForm" name="searchForm">
-		<div align = "center" id="sForm">
+<%		
+		}//end of (list !=null && nCnt>0)
+	}//end of if(obj)
 		
+%>
+	<tr>	
+		<td colspan="3" align="left">
 			<select name="searchFilter">
 				<option value="제목">제목</option>
 				<option value="내용">내용</option>
-				<option value="제목+내용">제목+내용</option>
 			</select>
-			<input type="text" name="keyword" id = "keyword" style="height: 40px">
+			<input type="text" name="keyword" id = "keyword" style="width:200px; height: 40px;">
 			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
+		</td>
+<%
+		if(mvo != null){
+			if( mvo.getMauth().equals("1")){
+%>
+		
+			<td colspan="2" align="right">
+				<input type="button" value="글쓰기"
+				id="insertPage" class=" btn_light btn_box_01"/>
+			</td>
+<%	
+						}
+					}
+%>		
+		</tr>
+		</tbody>
+		</table>
+	</div>
+	</div>
+</form>
+	<div>
+		<form id="searchForm" name="searchForm">
+		
+		<div id="mainWrapper" align = "center">
+		<div align = "center" style="width: 700px;" >
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+			<td width="500">
+		         <div class="row">
+		         <div></div>
+		            <div class="col-md-1.8">
+						<input type="text" name="startDate" id="startDate">
+		            </div>
+		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		            <div class="col-md-1.5">
+	      		 		<input type="text" name="endDate" id="endDate"> 
+		            </div>
+	      				&nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
+		      </div>
+		      
+				<td>
+			</tr>
+			</table>
 			<hr>
 		</div>
-		<div align = "center" id="dForm">	
-			<div style="width: 200px">
-			<input type="text" name="startDate" id="startDate"> - <input type="text" name="endDate" id="endDate"> 
-			<input type="button" id="searchPiker" value="검색">
-			</div>
 		</div>
 		</form>
 	</div>
-	<br><br><br><br><br><br>
 	<jsp:include page="../../../../footer.jsp" flush="true">
 		<jsp:param value="" name=""/>
 	</jsp:include>

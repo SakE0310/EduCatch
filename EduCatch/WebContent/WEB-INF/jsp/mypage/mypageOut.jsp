@@ -216,9 +216,9 @@ $(document).ready(function() {
 		</div>
 		<div class ="sideBox shadow">
 			내 컨텐츠<br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-file-alt"></i><input type ="button" id="" class ="btn_light btn_box_01" value="  내가 쓴 글"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-file-alt"></i><input type ="button" id="freeboard" class ="btn_light btn_box_01" value="  내가 쓴 글"><br>
 			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="consultSearch" class ="btn_light btn_box_01" value="  작성한 상담"><br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="" class ="btn_light btn_box_01" value="  작성한 후기"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="reviewboard" class ="btn_light btn_box_01" value="  작성한 후기"><br>
 		</div>
 	</form>	
 	</div>

@@ -12,6 +12,16 @@
 </jsp:include>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 부트스트랩 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- 아이콘 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
 
@@ -27,7 +37,7 @@
 	    height: 700px;
 	    margin :auto;
 	   /*  margin-left: 710px; */
-	    background-color: #f5f5f0;
+	   /*background-color: #f5f5f0;*/
 	}
 	#sideBanner-mypage{
 			position: absolute;
@@ -46,7 +56,7 @@
 		height:180px;
 		background-color: #ffffff;
 		margin-top: 15px;
-		border-radius: 0.5em;
+		
 	}	
 	
 	.btn_light {
@@ -69,12 +79,20 @@
 	    .shadow {
 		    box-shadow: -100px 100px 100px -90px #000000,
 		        60px 0px 100px -90px #000000;
+		   border-radius: 0.5em;     
 		}
 
 	#a{
 			color:black;
 		}
-
+	
+	i{
+		color : #140C40;
+	}
+	#font_id{
+		font-family: 'Do Hyeon', sans-serif;
+		font-size: 30px;
+	}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -134,6 +152,7 @@
 			$("#clickForm").attr("method","POST");
 			$("#clickForm").submit();
 		})
+		
 			
 	});//end of ready()
 </script>
@@ -159,22 +178,25 @@
 			<hr>
 		</div>
 		<div class ="sideBox shadow" style="font-size: 20px;">
-		<input type="hidden" id="mno" name ="mno" value="<%=mvo.getMno()%>"> 
+<%-- 		<input type="hidden" id="mno" name ="mno" value="<%=mvo.getMno()%>">  --%>
 
 			<%=mvo.getMname() %>님 
 			<br>
-			<input type ="button" id="pwCheck" class ="btn_light btn_box_01" value=" 개인정보 변경"><br>
-			<input type ="button" id="pwEdit" class ="btn_light btn_box_01" value=" 비밀번호 변경"><br>
-			<input type ="button" id="" class ="btn_light btn_box_01" value=" 회원탈퇴"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-user-cog col-2 p-0"></i><input type ="button" id="pwCheck" class ="btn_light btn_box_01" value="개인정보 변경"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-key"></i><input type ="button" id="pwEdit" class ="btn_light btn_box_01" value="  비밀번호 변경"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-user-slash"></i><input type ="button" id="memOut" class ="btn_light btn_box_01" value=" 회원탈퇴"><br>
 			
 		<input type="hidden" id ="mid" name ="mid" value="<%=mvo.getMid()%>">
 		</div>
 		<div class ="sideBox shadow">
-			즐겨찾기
+			즐겨찾기<br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-hand-pointer"></i><input type ="button" id="bookmark" class ="btn_light btn_box_01" value="  관심학원"><br>
 		</div>
 		<div class ="sideBox shadow">
 			내 컨텐츠<br>
-			<input type ="button" id="consultSearch" class ="btn_light btn_box_01" value=" 학원상담 조회"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-file-alt "></i><input type ="button" id="freeBoard" class ="btn_light btn_box_01" value="   내가 쓴 글"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit"></i><input type ="button" id="consultSearch" class ="btn_light btn_box_01" value="  작성한 상담"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="reviewBoard" class ="btn_light btn_box_01" value="  작성한 후기"><br>
 		</div>
 	</form>	
 <%		
@@ -193,9 +215,14 @@
 	%>
 		<div class = "container-mypage ">
 			<div align="center">
-			<input type="button" value="후기게시판" id="reviewBoard"/>
-			<input type="button" value="자유게시판" id="freeBoard"/>
-				<table align ="center" border="1">
+			<div align="left">
+			<br>
+			<br>
+				<h4 id ="font_id">자유게시글 </h4>
+				<hr>
+			</div>
+			<div class="container shadow"  style="width: 800px; height: 570px; "overflow:auto;" id ="container_div">
+				<table align ="center" class="table">
 				 	<colgroup>
 						<col width="100px"/>
 						<col width="300px"/>

@@ -1,5 +1,7 @@
 <%@page import="com.kosmo.educatch.vo.PagingVO"%>
 <%@page import="com.kosmo.educatch.vo.ReviewVO"%>
+<%@page import="com.kosmo.educatch.vo.AcademyVO"%>
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -7,9 +9,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<jsp:include page="../../../../top.jsp" flush="true">
-		<jsp:param value="" name=""/>
-	</jsp:include>
+   <jsp:include page="../../../../top.jsp" flush="true">
+      <jsp:param value="" name=""/>
+   </jsp:include>
 </head>
 
 <title>후기 게시판</title>
@@ -58,248 +60,274 @@
 	    text-align: left;
 	}
 	.bbs-link {
-   	 position: relative;
+   	 	position: relative;
 	}
 	
 	#sForm{
-    width: 350px;
-  	height: 100px;
-  	margin: auto;
+	    width: 350px;
+	  	height: 100px;
+	  	margin: auto;
 	}
 	#dForm{
-	 width: 350px;
-  	height: 100px;
-  	margin: auto;
+		 width: 350px;
+	  	height: 100px;
+	  	margin: auto;
 	}
+	
+	
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 
-  	
- 	 $(document).ready(function() {
- 		 
-	//날짜 검색  
-	  $("#startDate").datepicker({
-			showOn: "button",
-	        buttonImage: "images/calendar.gif",
-		    buttonImageOnly: false,
-			buttonText: "Select date",
-			dateFormat : 'yy-mm-dd'
-			
-		});
-		
-		$("#endDate").datepicker({
-			showOn: "button",
-	        buttonImage: "images/calendar.gif",
-		    buttonImageOnly: false,
-			buttonText: "Select date",
-			dateFormat : 'yy-mm-dd'
-		});
-		
-		$("#searchPiker").click(function() {
-			console.log("날짜 검색버튼 누름");
-			
-			var startVal = document.searchForm.startDate.value;
-			var endVal = document.searchForm.endDate.value;
-			
-			console.log("startVal>>>"+startVal);
-			console.log("endVal>>>"+endVal);
-			
-			startVal = moment(startVal).format("YYYY-MM-DD");
-			endVal = moment(endVal).format("YYYY-MM-DD");
-			console.log("startVal_1>>>"+startVal);
-			console.log("endVal_1>>>"+endVal);
-			
-			$("#startDate").val(startVal);
-			$("#endDate").val(endVal);
-			
-			if(startVal == ""){
-				  alert("시작일이 입력되지 않았습니다.\n시작일을 먼저 입력해주세요");
-			}
-			
-			if(startVal > endVal){
-				 alert("종료일이 시작일보다 이 전 일수는 없습니다.\n다시 선택하여 주시기 바랍니다.");
-			}
-			
-			$("#searchForm").attr("action","searchList.ec");
-			$("#searchForm").attr("method","GET");
-			$("#searchForm").submit();
-			
-		})//end of searchPiker
-		
-		//검색버튼을 누르면 실행
-		$("#searchData").click(function() {
-			console.log("검색버튼 누름");
-			var sVal = document.searchForm.searchFilter.options[document.searchForm.searchFilter.selectedIndex].value;
-			console.log("sVal>>>"+sVal);
-			 
-			$("#searchForm").attr("action","searchList.ec");
-			$("#searchForm").attr("method","POST");
-			$("#searchForm").submit();
-			 
-			
-			alert("아직안만듬");
-		})//end of searchData
- 		 
- 		 
-		//글쓰기 버튼 눌렀을 때 실행
-		$("#insertPage").click(function() {
-			console.log("insertPage >>> ");
-			//글쓰기 에디터 화면으로 이동
-			$("#pageForm").attr("action","insertDisplay.ec");
-			$("#pageForm").attr("method","POST");
-			$("#pageForm").submit();	
-		})
-  	});
- 	 
- 	 /*
- 	function updatePopup(rbno){
-		alert(">>>");
-		$("#rbno").val(rbno);
-		$("#pageForm").attr("action","selectReview.ec");
-		$("#pageForm").attr("method","POST");
-		$("#pageForm").submit();
-		
-	}
-	*/
-  
-	
+     
+     $(document).ready(function() {
+        
+   //날짜 검색  
+     $("#startDate").datepicker({
+         showOn: "button",
+           buttonImage: "images/calendar.gif",
+          buttonImageOnly: false,
+         buttonText: "Select date",
+         dateFormat : 'yy-mm-dd'
+         
+      });
+      
+      $("#endDate").datepicker({
+         showOn: "button",
+           buttonImage: "images/calendar.gif",
+          buttonImageOnly: false,
+         buttonText: "Select date",
+         dateFormat : 'yy-mm-dd'
+      });
+      
+      $("#searchPiker").click(function() {
+         console.log("날짜 검색버튼 누름");
+         
+         var startVal = document.searchForm.startDate.value;
+         var endVal = document.searchForm.endDate.value;
+         
+         console.log("startVal>>>"+startVal);
+         console.log("endVal>>>"+endVal);
+         
+         startVal = moment(startVal).format("YYYY-MM-DD");
+         endVal = moment(endVal).format("YYYY-MM-DD");
+         console.log("startVal_1>>>"+startVal);
+         console.log("endVal_1>>>"+endVal);
+         
+         $("#startDate").val(startVal);
+         $("#endDate").val(endVal);
+         
+         if(startVal == ""){
+              alert("시작일이 입력되지 않았습니다.\n시작일을 먼저 입력해주세요");
+         }
+         
+         if(startVal > endVal){
+             alert("종료일이 시작일보다 이 전 일수는 없습니다.\n다시 선택하여 주시기 바랍니다.");
+         }
+         
+         $("#searchForm").attr("action","searchList.ec");
+         $("#searchForm").attr("method","POST");
+         $("#searchForm").submit();
+         
+      })//end of searchPiker
+      
+      //검색버튼을 누르면 실행
+      $("#searchData").click(function() {
+         console.log("검색버튼 누름");
+         var sVal = document.pageForm.searchFilter.options[document.pageForm.searchFilter.selectedIndex].value;
+         console.log("sVal>>>"+sVal);
+          
+         $("#pageForm").attr("action","searchList.ec");
+         $("#pageForm").attr("method","POST");
+         $("#pageForm").submit();
+
+      })//end of searchData
+        
+        
+      //글쓰기 버튼 눌렀을 때 실행
+      $("#insertPage").click(function() {
+         console.log("insertPage >>> ");
+         //글쓰기 에디터 화면으로 이동
+         $("#pageForm").attr("action","insertDisplay.ec");
+         $("#pageForm").attr("method","POST");
+         $("#pageForm").submit();   
+      })
+     });
+
 </script>
 <body>
 <%
 
 
-	String pagesize="0";
-	String groupsize="0";
-	String curpage="0";
-	String totalcount="0";
-	String rbinsertdate=request.getParameter("rbinsertdate");
+   String pagesize="0";
+   String groupsize="0";
+   String curpage="0";
+   String totalcount="0";
 
-	Object obj=request.getAttribute("searchList");
 
-	if(obj !=null){
+   Object obj=request.getAttribute("searchList");
+   
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}
+
+   if(obj !=null){
 		ArrayList searchList=(ArrayList)obj;
 		
 		int nCnt=searchList.size();
-	
+      
+      
+   
 %>
 <form id="pageForm" name="pageForm">
-		<input type="hidden" id="rbno" name="rbno"/>
-	</form>
-	<div id="mainWrapper">
-	<div>
-		<table border="0" cellpadding="1" cellspacing="1" align="center">
+      <input type="hidden" id="rbno" name="rbno"/>
+   	  <div id="mainWrapper">
+		<div>
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
 				<td align="center"><h1>후기게시판 목록</h1></td>
 			</tr>
-		</table>
-		<div  class="container">
-      	<table align="center" class="table">
-			<colgroup>
+			</table>
+			<hr>
+		</div>
+	  <div  class="container">
+      <table align="center" class="table">
+         <colgroup>
 	            <col width="120px"/>
 	            <col width="120px"/>
 	            <col width="600px"/>
 	            <col width="120px"/>
 	            <col width="120px"/>
-			</colgroup>
+         </colgroup>
          <thead id="table_head">   
-				<tr>
-	               <td align="center">글번호</td>
-	               <td align="center">학원명</td>
-	               <td align="center">제목</td>
-	               <td align="center">작성자</td>
-	               <td align="center">날짜</td>
-				</tr>
-			</thead>
-			<tbody>
+            <tr>
+               <td align="center">글번호</td>
+               <td align="center">학원명</td>
+               <td align="center">제목</td>
+               <td align="center">작성자</td>
+               <td align="center">날짜</td>
+            </tr>
+         </thead>
+         <tbody>
 <%
+	if(searchList !=null && nCnt>0){
+	      for(int i=0; i<nCnt; i++){
+	    	  ReviewVO rvo=(ReviewVO)searchList.get(i);
+	
+	         pagesize=rvo.getPagesize();
+	         groupsize=rvo.getGroupsize();
+	         curpage=rvo.getCurpage();
+	         totalcount=rvo.getTotalcount();
+	         
+	
+	         System.out.println("rvo.getPno()"+rvo.getPagesize());
+	         System.out.println("rvo.getGroupsize()"+rvo.getGroupsize());
+	         System.out.println("rvo.getCurpage()"+rvo.getCurpage());
+	         System.out.println("rvo.getTotalcount()"+rvo.getTotalcount());
 
-		for(int i=0; i<nCnt; i++){
-			ReviewVO rvo=(ReviewVO)searchList.get(i);
-			
-			rbinsertdate=rvo.getRbinsertdate();
-			pagesize=rvo.getPagesize();
-			groupsize=rvo.getGroupsize();
-			curpage=rvo.getCurpage();
-			totalcount=rvo.getTotalcount();
-			
-			System.out.println("rvo.getRbinsertdate()"+rvo.getRbinsertdate());
-			System.out.println("rvo.getPno()"+rvo.getPagesize());
-			System.out.println("rvo.getGroupsize()"+rvo.getGroupsize());
-			System.out.println("rvo.getCurpage()"+rvo.getCurpage());
-			System.out.println("rvo.getTotalcount()"+rvo.getTotalcount());
-			
-			if(nCnt>0){
+      
+%>
+
+               <tr align="center">
+                  <td class="cc"><%= rvo.getRbno() %></td>
+                  <td class="cc"><%= rvo.getAname() %></td>
+                  <td class="cc"><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>"  id="aa"><%= rvo.getRbsubject() %></a></td>
+                  <td class="cc"><%= rvo.getRbname() %></td>
+                  <td class="cc"><%= rvo.getRbinsertdate() %></td>
+               </tr>
+<%
+      }
+   }else{
+%>
+               <tr>
+                  <td colspan="7" align="center">
+                  		등록된 게시물이 없습니다.
+                  </td>
+               </tr>
+<%
+      }
+
+	  if(searchList !=null && nCnt>0){
+%>         
+
+         <tr>
+         <td colspan="5">
+         <jsp:include page="memberPaging.jsp" flush="true">
+            <jsp:param name="url" value="searchList.ec"/>
+            <jsp:param name="str" value=""/>
+               <jsp:param name="pagesize" value="<%= pagesize %>"/>
+               <jsp:param name="groupsize" value="<%= groupsize %>"/>
+               <jsp:param name="curpage" value="<%= curpage %>"/>
+               <jsp:param name="totalcount" value="<%= totalcount %>"/>      
+         </jsp:include>
+         </td>
+         </tr>
+<%		
+		}//end of (list !=null && nCnt>0)
+	}//end of if(obj)
 		
 %>
+	<tr>
+		<td colspan="3" align="left">
+         <select name="searchFilter">
+            <option value="제목">제목</option>
+            <option value="내용">내용</option>
+         </select>
+         <input type="text" name="keyword" id = "keyword" style="width:200px; height: 40px;">
+         <input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
+		</td>
 
-					<tr align="center">
-						<td><%= rvo.getRbno() %></td>
-						<td><%= rvo.getAcademy_ano() %></td>
-						<td><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>"  id="aa"><%= rvo.getRbsubject() %></a></td>
-						<td><%= rvo.getRbname() %></td>
-						<td><%= rvo.getRbinsertdate() %></td>
-						<!-- 
-						<td><input type="button" value="[수정/삭제]"
-						onclick="updatePopup('${row.rbno}')"/></td>
-						-->
-					</tr>
 <%
-		}
-	}if(nCnt==0){
+		if(mvo != null){
+			if( mvo.getMauth().equals("1") || mvo.getMauth().equals("3")){
 %>
-					<tr>
-						<td colspan="7" align="center">
-						등록된 게시물이 없습니다.
-						</td>
-					</tr>
-<%
-		}
-	}
-%>			
-			</tbody>
-			<tr>
-			<td colspan="18">
-			<jsp:include page="memberPaging.jsp" flush="true">
-				<jsp:param name="url" value="searchList.ec"/>
-					<jsp:param name="pagesize" value='<%= pagesize %>'/>
-					<jsp:param name="groupsize" value="<%= groupsize %>"/>
-					<jsp:param name="curpage" value="<%= curpage %>"/>
-					<jsp:param name="totalcount" value="<%= totalcount %>"/>
-			</jsp:include>
+
+			<td colspan="2" align="right">
+               <input type="button" value="글쓰기" id="insertPage" class=" btn_light btn_box_01"/>
 			</td>
-			</tr>
-				<tr>
-					<td colspan="6" align="right">
-		               <input type="button" value="글쓰기" id="insertPage" class=" btn_light btn_box_01"/>
-					</td>
-				</tr>
-		</table>
-	</div>
-	</div>
+<%	
+						}
+					}
+%>
+		</tr>
+      	</tbody>
+      	</table>
+   </div>
+   </div>
+</form>
+
 	<div>
-		<form id="searchForm" name="searchForm">
-		<div align = "center" id="sForm">
+		<form id="searchFormNotice" name="searchFormNotice">
 		
-			<select name="searchFilter">
-				<option value="제목">제목</option>
-				<option value="내용">내용</option>
-				<option value="제목+내용">제목+내용</option>
-			</select>
-			<input type="text" name="keyword" id = "keyword">
-			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
+		<div id="mainWrapper" align = "center">
+		<div align = "center" style="width: 700px;" >
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+			<td width="500">
+		         <div class="row">
+		         <div></div>
+		            <div class="col-md-1.8">
+						<input type="text" name="startDate" id="startDate">
+		            </div>
+		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		            <div class="col-md-1.5">
+	      		 		<input type="text" name="endDate" id="endDate"> 
+		            </div>
+	      				  &nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
+	      				  
+		      </div>
+		      
+				<td>
+			</tr>
+			</table>
 			<hr>
 		</div>
-		<div align = "center" id="dForm">	
-			<div style="width: 200px">
-			<input type="text" name="startDate" id="startDate"> - <input type="text" name="endDate" id="endDate"> 
-			<input type="button" id="searchPiker" value="검색">
-			</div>
 		</div>
 		</form>
 	</div>
-	<br><br><br><br><br><br>
 
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>

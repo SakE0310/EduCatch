@@ -98,32 +98,32 @@
 	</select>
 	
 	<select id="myReview" parameterType="review" resultType="review">
-			 SELECT AAA.* FROM(
-		     SELECT AA.* , B.MNO FROM(
-		                SELECT 
-		                         A.RBNO                                       AS  RBNO
-		                        ,A.RBSUBJECT                                  AS  RBSUBJECT   
-		                        ,A.RBNAME                                     AS  RBNAME
-		                        ,A.RBIMG                                      AS  RBIMG
-		                        ,A.RBCONTENT                                  AS  RBCONTENT
-		                        ,A.ACADEMY_ANO                                AS  ACADEMY_ANO
-		                        ,A.MEMBER_MNO                                 AS  MEMBER_MNO
-		                        ,A.RBGRADE                                    AS  RBGRADE
-		                        ,A.RBDELETEYN                                 AS  RBDELETEYN
-		                        ,TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD')         AS  RBINSERTDATE            
-		                        ,TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')         AS  RBUPDATEDATE
-		                        ,C.ANAME                                      AS  ANAME          
-		                FROM    
-		                        REVIEWBOARD A ,ACADEMY C
-		                WHERE 
-		                        C.ANO = A.ACADEMY_ANO
-		                      ) AA , MEMBER B
-		         WHERE
-		                        AA.MEMBER_MNO = B.MNO
-		                    
-		     )AAA
-		     WHERE AAA.MNO=#{member_mno, jdbcType=VARCHAR}
-		     ORDER BY 1 DESC
+	 SELECT AAA.* FROM(
+     SELECT AA.* , B.MNO FROM(
+                SELECT 
+                         A.RBNO                                       AS  RBNO
+                        ,A.RBSUBJECT                                  AS  RBSUBJECT   
+                        ,A.RBNAME                                     AS  RBNAME
+                        ,A.RBIMG                                      AS  RBIMG
+                        ,A.RBCONTENT                                  AS  RBCONTENT
+                        ,A.ACADEMY_ANO                                AS  ACADEMY_ANO
+                        ,A.MEMBER_MNO                                 AS  MEMBER_MNO
+                        ,A.RBGRADE                                    AS  RBGRADE
+                        ,A.RBDELETEYN                                 AS  RBDELETEYN
+                        ,TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD')         AS  RBINSERTDATE            
+                        ,TO_CHAR(A.RBUPDATEDATE,'YYYY-MM-DD')         AS  RBUPDATEDATE
+                        ,C.ANAME                                      AS  ANAME          
+                FROM    
+                        REVIEWBOARD A ,ACADEMY C
+                WHERE 
+                        C.ANO = A.ACADEMY_ANO
+                      ) AA , MEMBER B
+         WHERE
+                        AA.MEMBER_MNO = B.MNO
+                    
+     )AAA
+     WHERE AAA.MNO=#{member_mno, jdbcType=VARCHAR}
+     ORDER BY 1 DESC
 	</select>
 	
 	<select id="myFree" parameterType="freeboard" resultType="freeboard">
