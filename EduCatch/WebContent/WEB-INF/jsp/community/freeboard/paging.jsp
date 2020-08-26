@@ -77,7 +77,7 @@
 	else
 	{
 %>
-◁◁&nbsp;&nbsp;&nbsp;◀&nbsp;&nbsp;&nbsp;
+<img src="/EduCatch/assets/img/pagingBtn/first_btn.gif" alt="◁◁">&nbsp;&nbsp;&nbsp;<img src="/EduCatch/assets/img/pagingBtn/prev_btn.gif" alt="◀">&nbsp;&nbsp;&nbsp;
 <%
 	}
 	
@@ -119,7 +119,7 @@
 	else
 	{
 %>
-	▶&nbsp;&nbsp;&nbsp;▷▷&nbsp;&nbsp;&nbsp;
+	<img src="/EduCatch/assets/img/pagingBtn/next_btn.gif" alt="▶">&nbsp;&nbsp;&nbsp;<img src="/EduCatch/assets/img/pagingBtn/last_btn.gif" alt="▷▷">&nbsp;&nbsp;&nbsp;
 <%
 	}
 %>
