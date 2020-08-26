@@ -5,10 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <head>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 </head>
-
 <script type="text/javascript">
 $(document).ready(function(){
 	//편의기능수정 셀렉트
@@ -260,14 +258,33 @@ $(document).ready(function(){
 	//학원정보수정 버튼
 	$('#updateAcademy').on('click', function(){
 		if($('#alogo').val() != null && $('#alogo').val() != ""){
-			$('#academyForm').attr("enctype", "multipart/form-data");
+			var formData = new FormData();
+			formData.append('ano', $('#ano').val());
+			formData.append('aname', $('#aname').val());
+			formData.append('atel', $('#atel').val());
+			formData.append('axpoint', $('#axpoint').val());
+			formData.append('aypoint', $('#aypoint').val());
+			formData.append('aaddrno', $('#aaddrno').val());
+			formData.append('aaddr1', $('#aaddr1').val());
+			formData.append('aaddr2', $('#aaddr2').val());
+			formData.append('alogo', $('#alogo').val());
+			formData.append('file', $('#ex_filename').prop('files')[0]);
+			/* ajaxMultiUpdateAcademy(formData, encType); */
+			var encType = "multipart/form-data";
+			ajaxMultiUpdateAcademy(formData, encType);
 		}else{
-		
+			var data ={
+					'ano' : $('#ano').val(),
+					'aname' : $('#aname').val(),
+					'atel' : $('#atel').val(),
+					'axpoint' : $('#axpoint').val(),
+					'aypoint' : $('#aypoint').val(),
+					'aaddrno' : $('#aaddrno').val(),
+					'aaddr1' : $('#aaddr1').val(),
+					'aaddr2' : $('#aaddr2').val()
+			}
+			ajaxNoimgUpdateAcademy(data);
 		}
-		
-		$('#academyForm').attr("action", "manageUpdateAcademy.ec");
-		$('#academyForm').attr("method", "POST");
-		$('#academyForm').submit();
 	});
 	
 	//과목추가 버튼
@@ -447,6 +464,55 @@ function ajaxData2(){
 		}
 	}); 
 	
+}
+
+function ajaxMultiUpdateAcademy(formData, encType){
+	$.ajax({
+		type : 'PUT',
+		url : "manageUpdateAcademy.ec",
+		data : formData,
+		dataType : "json",
+		enctype: encType,
+		cache: false,
+        contentType: false,
+        processData: false,
+		error: function(xhr, status, error){
+			$('#modal-container-749483').modal("hide");
+			alert("DB가 연결되지 않았습니다.");
+        },
+        success : function(resultParams){
+			if(resultParams.isSuccess){
+				$('#modal-container-749483').modal("hide");
+				ajaxData2();
+          	}else{
+				$('#modal-container-749483').modal("hide");
+				alert("데이터가 정상적으로 들어가지않았습니다.");
+				ajaxData2();
+          	}
+        }
+	});
+}
+
+function ajaxNoimgUpdateAcademy(data){
+	console.log('2');
+	$.ajax({
+		type : 'POST',
+		url : "manageUpdateAcademy.ec",
+		data : data,
+		dataType : "json"
+	}).done(function(resultParams){
+		if(resultParams.isSuccess){
+			$('#modal-container-749483').modal("hide");
+			ajaxData2();
+      	}else{
+			$('#modal-container-749483').modal("hide");
+			alert("데이터가 정상적으로 들어가지않았습니다.");
+			ajaxData2();
+		}
+	}).fail(function(resultParams){
+		$('#modal-container-749483').modal("hide");
+		alert("DB가 연결되지 않았습니다.");
+	});
 }
 
 function checkOnly(chk){	 		

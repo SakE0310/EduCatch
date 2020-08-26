@@ -200,9 +200,9 @@ public class ManageController {
 		return map;
 	}
 
+	@ResponseBody
 	@RequestMapping("manageUpdateAcademy")
-	public ModelAndView manageUpdateAcademy(@ModelAttribute AcademyVO avo, SubjectVO svo, ConvenienceVO cvo,
-			HttpSession session, HttpServletRequest request ) {
+	public Map<String, Boolean> manageUpdateAcademy(AcademyVO avo, HttpServletRequest request) {
 		log.info("ManageController manageUpdateAcademy >>> 시작");
 
 		String ano = null;
@@ -217,15 +217,13 @@ public class ManageController {
 		String file = null;
 		int i=0;
 
-		ModelAndView mav = new ModelAndView();
-
 		// 멀티파트 폼데이터인지 확인하기 위함
 		// 멀티파트 폼데이터면 파일 전송을 실시
 		if (request.getContentType().toLowerCase().startsWith("multipart/form-data")) {
 			log.info("multipart/form-data true");
 
 			// file삽입경로 (변경필수)
-			String uploadPath = "C://Users//kosmo_26//git//EduCatch//EduCatch//WebContent//assets//img//academyLogo";
+			String uploadPath = request.getServletContext().getRealPath("") + "/assets/img/academyLogo";
 			// file 최대크기
 			int size = 10 * 1024 * 1024;
 			// multipart로 파일을 업로드 후 각 데이터셋팅
@@ -301,36 +299,15 @@ public class ManageController {
 		log.info("alogo >>> " + alogo);
 
 		
-		
-		MemberVO mvo = null;
-		String member_mno="";
-		if(session != null) {
-			mvo = (MemberVO)session.getAttribute("user");
-			member_mno = mvo.getMno();
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		if(i >0) {
+			map.put("isSuccess", true);
+		}else {
+			map.put("isSuccess", true);
 		}
-		
-		avo.setMno(member_mno);
-		svo.setMno(member_mno);
-		cvo.setMno(member_mno);
-
-		List<AcademyVO> academylist = manageService.academyManageView(avo);
-		List<SubjectVO> subjectlist = manageService.subjectManageView(svo);
-		List<ConvenienceVO> conlist = manageService.conManageView(cvo);
-		mav.addObject("academylist", academylist);
-		mav.addObject("subjectlist", subjectlist);
-		mav.addObject("conlist", conlist);
-
-
-		if (i > 0) {
-			mav.addObject("resultStr", "수정 완료");
-		} else {
-			mav.addObject("resultStr", "수정 실패");
-		}
-
-		mav.setViewName("manage/academyManage");
 
 		log.info("ManageController manageUpdateAcademy >>> 끝");
-		return mav;
+		return map;
 	}
 	
 	
@@ -371,7 +348,7 @@ public class ManageController {
 		
 		Map<String, String> map = new HashMap<String, String>();
 		if(i >0) {
-			map.put("result", "success");
+			map.put("isSuccess", "success");
 		}
 
 		log.info("ManageController manageUpdateConvenience >>> 끝");
