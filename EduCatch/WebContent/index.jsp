@@ -5,6 +5,86 @@
 <jsp:include page="top.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>
+<style type="text/css">
+	/*미디어 쿼리*/
+	/* Mobile Device (가로폭 767px 이하) */
+	@media all and (max-width:767px) {
+		#layer_pop{
+			position:absolute; 
+			width:250px;
+			left:10%;  
+			top:110px; 
+			z-index:1;
+		}
+		
+		#layer_pop_img{
+			width :250px; 
+			height :300px;
+			border :0px;
+		}
+		#layer_pop_table{
+			width :250px; 
+		}
+		.layer_pop_a{
+			font-size: 12px;
+			color: black;
+		}
+	}
+	
+	/* Tablet (가로폭 768px 이상, 1023px 이하) */
+	@media all and (min-width:768px) and (max-width:1023px) {
+	/* 브라우저 가로폭이 768~1023px일때 적용될 css (태블릿) */
+		#layer_pop{
+			position:absolute; 
+			width:350px;
+			left:45%;  
+			top:110px; 
+			z-index:1;
+		}
+		#layer_pop_table{
+			width :350px; 
+		}
+		
+		#layer_pop_img{
+			width :350px; 
+			height :500px;
+			border :0px;
+		}
+		.layer_pop_a{
+			font-size: 16px;
+			color: black;
+		}
+		
+	}
+	
+	/* PC Desktop (가로폭 1024 이상) */
+	@media all and (min-width:1024px) {
+		#layer_pop{
+			position:absolute; 
+			width:350px;
+			left:55%;  
+			top:110px; 
+			z-index:1;
+		}
+		#layer_pop_table{
+			width :350px; 
+		}
+		
+		#layer_pop_img{
+			width :350px; 
+			height :500px;
+			border :0px;
+		}
+		.layer_pop_a{
+			font-size: 16px;
+			color: black;
+		}
+		
+	}
+		a:hover {
+		    color: black;
+		}
+</style>
 <script type="text/javascript">
 	function call(){
 		console.log("call");
@@ -30,7 +110,6 @@
 		   document.getElementById('layer_pop').style.display = "none";
 	 } 
 	 function checkBtn() {
-		console.log("누름");
 		if(document.getElementById("pop_today").checked == false){
 			document.getElementById("pop_today").checked = true;
 		}else{
@@ -47,17 +126,17 @@
 			 var img = resParam.eventPop[0].eimg;
 			 var st ="";
 			
-			st =  "<div class='layer_popup' style='position:absolute; width:350px;left:55%;  top:110px; z-index:1;' id='layer_pop'>";
-			st += "<table width='350' border='3' cellpadding='0' cellspacing='0' >";
+			st =  "<div class='layer_popup'  id='layer_pop'>";
+			st += "<table  border='3' cellpadding='0' cellspacing='0'id='layer_pop_table' >";
 			st += "<tr>";
-			st += "<td> <img src='/EduCatch/assets/img/event/"+img+"' alt='사진업음' width='350' height='500' border='0'/></td>";
+			st += "<td> <img src='/EduCatch/assets/img/event/"+img+"' alt='사진없음' id='layer_pop_img'/></td>";
 			st += "</tr>";
 			st += "<tr>";
 			st += "<td align='center' height='30' bgcolor='#F5F5F5'>";
 			st += "<table width='95%' border='0' cellpadding='0' cellspacing='0'>";
 			st += "<tr>";
-			st += "<td align='left' class='pop'><input type='checkbox' name='pop_today' id='pop_today' /><a href='javascript:checkBtn();' style='color: black;'>오늘 하루 이 창 열지 않음</a></td>";
-			st += "<td align='right' class='pop' ><a href='javascript:closeWin();' style='color: black;'>닫기</a></td>";
+			st += "<td align='left' class='pop'><input type='checkbox' name='pop_today' id='pop_today' /><a href='javascript:checkBtn();' class='layer_pop_a'>오늘 하루 이 창 열지 않음</a></td>";
+			st += "<td align='right' class='pop' ><a href='javascript:closeWin();' class='layer_pop_a' >닫기</a></td>";
 			st += "</tr>";
 			st += "</table>";
 			st += "</td>";
