@@ -79,6 +79,9 @@
 	    width: auto;
 	    padding: 3px 10px;
 	}	
+	#noticeSelForm{
+		margin-bottom: 178px;
+	}
 
 </style>
 <script type="text/javascript">

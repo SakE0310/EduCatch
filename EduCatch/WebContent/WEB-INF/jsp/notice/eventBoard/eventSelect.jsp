@@ -19,27 +19,33 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
-	  img {
-		 display: block; 
-		 margin: 0px auto;
-	  }
-	  
-	  .btn_light {
-	    display: inline-block;
-	    text-align: center;
-	    background: #e5e5e5;
-	    color: #555;
-	    vertical-align: middle;
-	    cursor: pointer;
-	    border: 1px solid #e5e5e5;
-	    height: 40px;
-	    font-size: 15px;
+	/*미디어 쿼리*/
+	/* Mobile Device (가로폭 767px 이하) */
+	@media all and (max-width:767px) {
+		#media_mobile_div{
+			width: 300px;
+			height: 500px;
+			margin: auto;
+		}		
+		#media_mobile_img{
+			width: 250px;
+			height: 300px;
 		}
-
-	#contnent{
-		width : 600px;
-		height: 600px;
 	}
+	
+	/* Tablet (가로폭 768px 이상, 1023px 이하) */
+	@media all and (min-width:768px) and (max-width:1023px) {
+	/* 브라우저 가로폭이 768~1023px일때 적용될 css (태블릿) */
+	}
+	
+	/* PC Desktop (가로폭 1024 이상) */
+	@media all and (min-width:1024px) {
+		#media_mobile_table{
+			width:700px;
+			height:100px;
+		}
+	}
+
 	#table_head{
 		border-collapse: collapse;
 		background-color: #F5F5F5;
@@ -47,9 +53,33 @@
 	
 	#contentDIV{
 		overflow:hidden;
-		height:auto;
+		 height:auto;
+		/* height:462px; */
+		/* overflow:scroll; */
 	}
 	
+	#nfont {
+	 	font-family: 'Do Hyeon', sans-serif;
+	  }
+	  .btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #140C40;
+	    color: #ffffff;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
+		}
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	}	
+	#eventSelForm{
+		
+	}
 	
 </style>
 <script type="text/javascript">
@@ -108,15 +138,15 @@ $(document).ready(function() {
 
 %>
 	<div class="container">
+				<form id="eventSelForm" name="eventSelForm" >
 	<div>
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
-				<td align="center"><h2>event</h2></td>
+				<td align="center"><h2>이벤트</h2></td>
 			</tr>
 			</table>
 			<hr>
 		</div>
-				<form id="eventSelForm" name="eventSelForm" >
 				<input type="hidden" name="eno" id="eno" value="<%=evo.getEno() %>">
 					<table align="center" width="700px" height="100px" class="table">
 					<thead id="table_head">
@@ -140,7 +170,7 @@ $(document).ready(function() {
 			         	</tr>
 			         	<tr>
 			         		<td>
-			         			<div id="contentDIV" >
+			         			<div id="contentDIV" align="center" >
 			         				<%=evo.getEcontent()%>
 			<%
 										String img = evo.getEimg();

@@ -7,12 +7,12 @@
 <jsp:param value="" name=""/>
 </jsp:include>
 <meta charset="UTF-8"">
-<title>공지사항 등록페이지</title>
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
 <script type="text/javascript" src="/EduCatch/assets/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 
 <!-- jQuery를 사용하기위해 jQuery라이브러리 추가 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <!-- 테이블 부트스트랩 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -20,6 +20,28 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
+<style type="text/css">
+.btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #140C40;
+	    color: #ffffff;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
+		}
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	}	
+	#margin_div{
+		margin-bottom:10px; 
+	}
+
+</style>
 <script type="text/javascript">
 	var oEditors = [];
 	$(function() {
@@ -79,12 +101,12 @@
 		<div>
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
-				<td align="center"><h2>event</h2></td>
+				<td align="center"><h2>이벤트</h2></td>
 			</tr>
 			</table>
 			<hr>
 		</div>
-		<table style="width: 90%" border="1" align="center" class="table">
+			<table style="width: 90%" border="0" align="center" class="table">
 			<tr>
 				<td style="width: 100px">제목</td>
 				<td><input type="text" id="esubject" name="esubject"
@@ -94,7 +116,7 @@
 			<tr>
 				<td>내용</td>
 				<td><textarea name="econtent" id="econtent" title="내용"
-						style="width: 100%; height: 415px; padding: 0; margin: 0;"></textarea>
+						style="width: 100%; height: 415px; padding: 0; margin: 0; min-width:260px;  min-height: 300px;"></textarea>
 				</td>
 			</tr>
 			<tr>
@@ -105,8 +127,8 @@
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="save" value="등록" />
-				 <input type="button" id="listData" value="취소" /> 
+				 <input type="button" id="save" value="등록"class=" btn_light btn_box_01" />
+				 <input type="button" id="listData" value="취소" class=" btn_light btn_box_01"/> 
 				</td>
 			</tr>
 		</table>
