@@ -510,8 +510,8 @@ body {
 <%-- -----------스크립트------------- --%>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>
+<!--<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>-->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b7f350ead2b7c77b31a6b3a2be10fbd"></script>
 	<script type="text/javascript">
 
 	$(document).ready(function(){
