@@ -132,7 +132,6 @@ public class SearchController {
 			param.setCminor(cminorStr);
 			log.info("search controller getAcaList cminor >>> "+cminorStr);
 		}
-		
 		param.setDistrict(district);
 		param.setCity(cityStr);
 		param.setCmajor(cmajor);

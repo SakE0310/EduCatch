@@ -42,7 +42,6 @@
 					ajaxGetMinor(setCmajor);
 				});//setDistrict
 				
-				$('')
 				//검색시 AcaList호출
 				$('#search').click(function(){
 					var setDistrict = $('#district').val(); //서울
@@ -139,7 +138,7 @@
 					});					
 				}//ajaxGetAcaList
 
-				//리스트 정렬
+				//필터 설정
 				function selectDesc(setDistrict,setCity,setCmajor,setCminor,setAname){
 					console.log("selectDesc setDistrict >>> "+setDistrict);
 					console.log("selectDesc setCity >>> "+setCity);
