@@ -12,7 +12,7 @@
 		history.go(-1);
 	}else{
 		alert("이메일 인증을 진행해주세요.");
-		location.href= "http://localhost:8088/EduCatch/login.ec";
+		location.href= "/EduCatch/login.ec";
 	}
 </script>
 </head>

@@ -22,6 +22,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<style type="text/css">
+.btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #140C40;
+	    color: #ffffff;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
+		}
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	}	
+</style>
 <script type="text/javascript">
 	var oEditors = [];
 	$(function() {
@@ -132,8 +150,8 @@
 %>			
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="updateData" value="수정" />
-				 <input type="button" id="selectData" value="취소" /> 
+				 <input type="button" id="updateData" value="수정"  class=" btn_light btn_box_01" />
+				 <input type="button" id="selectData" value="취소"  class=" btn_light btn_box_01"/> 
 				</td>
 			</tr>
 		</table>

@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>Login</title>
 <script type="text/javascript">
-	location.href="http://localhost:8088/EduCatch/index.jsp";
+	location.href="/EduCatch/index.jsp";
 </script>
 </head>
 <body>

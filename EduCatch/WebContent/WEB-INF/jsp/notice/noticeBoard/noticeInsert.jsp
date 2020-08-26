@@ -38,6 +38,9 @@
 	    width: auto;
 	    padding: 3px 10px;
 	}	
+	#margin_div{
+		margin-bottom:38px; 
+	}
 
 </style>
 <script type="text/javascript">
@@ -96,7 +99,7 @@
 </style>
 <body>
 	<!-- action/document/location -->
-	<div class="container">
+	<div class="container" id="margin_div">
 	<form id="edit">
 		<div>
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
