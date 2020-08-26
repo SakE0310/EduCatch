@@ -36,7 +36,22 @@
 		}
 		
 		
-		
+		/* Mobile Device (가로폭 767px 이하) */
+	@media all and (max-width:767px) {
+		select {
+		width: 200px;
+		padding: .8em .5em;
+		border: 1px solid #999;
+		font-family: inherit;
+		background: url('arrow.jpg') no-repeat 95% 50%;
+		border-radius: 0px;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		}
+		}
+		/* PC Desktop (가로폭 1024 이상) */
+	@media all and (min-width:1024px) {
 		select {
 		width: 500px;
 		padding: .8em .5em;
@@ -47,6 +62,7 @@
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		appearance: none;
+		}
 		}
 		
 		
