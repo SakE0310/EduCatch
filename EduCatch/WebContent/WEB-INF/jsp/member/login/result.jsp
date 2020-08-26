@@ -38,7 +38,7 @@
 					</tr>
 				
 					<script>
-						location.href="http://localhost:8088/EduCatch/index.jsp";
+						location.href="/EduCatch/index.jsp";
 						
 					</script>
 				<% } %>

@@ -49,7 +49,7 @@ public class ManageController {
 	}
 
 	@RequestMapping("manageAca")
-	public ModelAndView getManageAcaPage(@ModelAttribute AcademyVO avo, HttpSession session, SubjectVO svo, ConvenienceVO cvo) {
+	public ModelAndView getManageAcaPage(@ModelAttribute AcademyVO avo, HttpSession session, SubjectVO svo, ConvenienceVO cvo, HttpServletRequest request) {
 		log.info("ManageController getManagePage >>> ");
 		
 		MemberVO mvo = null;
@@ -58,7 +58,7 @@ public class ManageController {
 			mvo = (MemberVO)session.getAttribute("user");
 			member_mno = mvo.getAcademy_ano();
 		}
-		
+		log.info(request.getServletContext().getRealPath(""));
 		avo.setAno(member_mno);
 		svo.setAno(member_mno);
 		cvo.setAno(member_mno);
