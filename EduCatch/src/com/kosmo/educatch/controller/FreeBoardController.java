@@ -171,7 +171,7 @@ public class FreeBoardController {
 															new DefaultFileRenamePolicy());
 				fbno = mr.getParameter("fbno");
 				fbsubject = mr.getParameter("fbsubject");
-				fbname =mr.getParameter("fbname");
+				fbname =mr.getParameter("mname");
 				fbcontent = mr.getParameter("fbcontent");
 				resultStr="";
 				
@@ -207,7 +207,7 @@ public class FreeBoardController {
 			log.info("파일이 없는 경우");
 			fbno = request.getParameter("fbno");
 			fbsubject = request.getParameter("fbsubject");
-			fbname = request.getParameter("fbname");
+			fbname = request.getParameter("mname");
 			fbcontent = request.getParameter("fbcontent");
 			member_mno = request.getParameter("mno");
 			fbimg = request.getParameter("fbimg");
