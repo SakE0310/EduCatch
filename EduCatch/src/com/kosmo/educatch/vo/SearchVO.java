@@ -10,10 +10,16 @@ public class SearchVO extends ReviewVO{
 	private String city;	 //개포동
 	
 	private String listcount;// 리스트 개수
-	 
-	
+	private String rvcount;// 평점 개수
 	
 	public SearchVO(){
+	}
+	
+	public String getRvcount() {
+		return rvcount;
+	}
+	public void setRvcount(String rvcount) {
+		this.rvcount = rvcount;
 	}
 	public String getCno() {
 		return cno;

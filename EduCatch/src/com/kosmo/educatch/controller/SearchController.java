@@ -96,7 +96,21 @@ public class SearchController {
 		String cmajor = req.getParameter("cmajor");
 		String cminor = req.getParameter("cminor");
 		String aname = req.getParameter("aname");
+		String setDesc = req.getParameter("setDesc");
 		
+		if(setDesc!=null) {
+			log.info("search controller getAcaList setDesc not null >>> ");
+			if(setDesc.equals("리뷰 많은순")) {
+				log.info("search controller getAcaList heightReview >>> ");
+				log.info("search controller getAcaList setDesc >>> "+setDesc);
+				param.setRvcount(setDesc);
+			}
+			if (setDesc.equals("평점 높은순")) {
+				log.info("search controller getAcaList heightGrade >>> ");
+				log.info("search controller getAcaList setDesc >>> "+setDesc);
+				param.setAgrade(setDesc);
+			}
+		}
 		//지역, 카테고리 검색
 		if(district!=null && city!=null && cmajor!=null && cminor!=null) {
 		String[] cityArr = city.split(" ");
@@ -128,6 +142,7 @@ public class SearchController {
 		log.info("search controller getAcaList param.getCmajor() >>> "+param.getCmajor());
 		log.info("search controller getAcaList param.getCminor() >>> "+param.getCminor());
 		log.info("search controller getAcaList param.getAgrade() >>> "+param.getAgrade());
+		log.info("search controller getAcaList param.getRvcount()() >>> "+param.getRvcount());
 		}
 		
 		//학원명 검색

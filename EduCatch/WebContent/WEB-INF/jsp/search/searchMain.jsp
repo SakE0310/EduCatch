@@ -42,7 +42,7 @@
 					ajaxGetMinor(setCmajor);
 				});//setDistrict
 				
-				
+				$('')
 				//검색시 AcaList호출
 				$('#search').click(function(){
 					var setDistrict = $('#district').val(); //서울
@@ -59,12 +59,13 @@
 				});//search button function
 				
 				//call 함수호출 
-				function ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor,setAname){
+				function ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc){
 					console.log("ajaxGetAcaList setDistrict >>> "+setDistrict);
 					console.log("ajaxGetAcaList setCity >>> "+setCity);
 					console.log("ajaxGetAcaList setCmajor >>> "+setCmajor);
 					console.log("ajaxGetAcaList setCminor >>> "+setCminor);
 					console.log("ajaxGetAcaList setAname >>> "+setAname);
+					console.log("ajaxGetAcaList setDesc >>> "+setDesc);
 					urls = "getAcaList.ec";
 					datas = {
 							 "district" : setDistrict
@@ -72,6 +73,7 @@
 							,"cmajor" : setCmajor
 							,"cminor" : setCminor
 							,"aname" : setAname
+							,"setDesc" : setDesc
 							};
 					console.log("urls >>> "+urls);
 					console.log("datas >>> "+datas);
@@ -86,10 +88,22 @@
 						console.log("done start >>> "+resParam);
 						st = "";
 						console.log("acaList >>> "+resParam.acaList);
+						console.log("setDesc >>> "+setDesc);
 							var listcount = resParam.acaList[0].listcount;
-							st = "<h5>"+listcount+"개의 학원이 조회됬습니다</h5>";
+							st = "<p>";
+							st+= "<div class='sidebar'><h5>"+listcount+"개의 학원이 조회되었습니다</h5>";
+							st+= "<span class='select-desc'><select id='desc' style='height:25px;'>";
+							if(setDesc!=null){
+								st+= "<option id='filter'>"+setDesc+"</option>";	
+							}else{
+								st+= "<option id='filter'>필터 설정</option>";
+							}
+							st+= "<option id='heightGrade' value='평점 높은순'>평점 높은순</option>";
+							st+= "<option id='heightReview' value='리뷰 많은순'>리뷰 많은순</option>";
+							st+= "</select></span>";
+							st+= "</div>";
+							st+= "</p>";
 						for(i in resParam.acaList){
-							var aupdatedate = resParam.acaList[i].aupdatedate;
 							var cmajor = resParam.acaList[i].cmajor;
 							var cminor = resParam.acaList[i].cminor;
 							var ano = resParam.acaList[i].ano;
@@ -98,33 +112,49 @@
 							var aaddr1 = resParam.acaList[i].aaddr1;
 							var aaddr2 = resParam.acaList[i].aaddr2;
 							var agrade = resParam.acaList[i].agrade;
-							st += "<p>";
+							var rvcount = resParam.acaList[i].rvcount;
 							st += "<div class='panel panel-default'>";
 							st += "<a href='listDetailView.ec?ano="+ano+"' style='text-decoration:none'>";
 							st += "<div class='media'>";
 							st += "<div class='media-left'>";
-							st += "<img src='assets/img/academyLogo/"+alogo+"' class='media-object' style='width:135px; height:135px'>";
+							st += "<img src='assets/img/academyLogo/"+alogo+"' class='media-object' style='width:125px; height:125px'>";
 							st += "</div>";
 							st += "<div class='media-body'>";
-							st += "<p><h4 class='media-heading'>"+aname+"</h4></p>";
-							st += "<p><img src='assets/img/Icon_location.png' style='width:15px; height:15px'>"+aaddr1+"</p>";
-							st += "<h4><img src='assets/img/Icon_star.png' style='width:15px; height:15px'>&nbsp;"+agrade+"&nbsp;&nbsp;&nbsp;#"+cmajor+"&nbsp;#"+cminor+"<h4>";
-							st += "<h5 align='right'>최근업데이트 : "+aupdatedate+"&nbsp;&nbsp;</h5></p>";
+							st += "<br><div class='title'><h4 class='media-heading'>"+aname+"</h4>&nbsp;&nbsp;&nbsp;<h5>#"+cmajor+"&nbsp;#"+cminor+"</h5></div>";
+							st += "<div><h5><img src='assets/img/Icon_location.png' style='width:15px; height:15px'>"+aaddr1+"</h5></div>";
+							st += "<div class='title'>&nbsp;<h4>평점 "+agrade+"</h4>";
+							st += "&nbsp;<h5>(평가  "+rvcount+"개)</h5></div>";
 							st += "</div>";
 							st += "</div>";
 							st += "</a>";
 							st += "</div>";
-							st += "</p>";
 						}
-						}//학원명이 없을시 if
+					}//학원명이 없을시 if
 						$('.acaList').html(st);
 						$('.acaList').niceSelect('update');
 						console.log("done end >>> "+resParam);
+						selectDesc(setDistrict,setCity,setCmajor,setCminor,setAname);
 					}).fail(function(resParam){
 						alert("에러");
 					});					
 				}//ajaxGetAcaList
 
+				//리스트 정렬
+				function selectDesc(setDistrict,setCity,setCmajor,setCminor,setAname){
+					console.log("selectDesc setDistrict >>> "+setDistrict);
+					console.log("selectDesc setCity >>> "+setCity);
+					console.log("selectDesc setCmajor >>> "+setCmajor);
+					console.log("selectDesc setCminor >>> "+setCminor);
+					console.log("selectDesc setAname >>> "+setAname);
+					$('.select-desc').on('change','select',function(selectDesc){
+						console.log("select-desc");
+						console.log("select-desc selectDesc >>> "+selectDesc.setDistrict);
+						var setDesc = $('#desc').val();
+						console.log("setDesc >>> "+setDesc);
+						ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc);
+					});
+				}//selectDesc
+				
 				//학원명으로 검색
 				$('#search-aname').click(function(){
 					var setAname = $('#aname').val();
@@ -136,11 +166,13 @@
 					}//학원명 입력 유무
 				});//search aname button function
 				
-				function ajaxGetAname(setAname){
+				function ajaxGetAname(setAname,setDesc){
 					console.log("ajaxGetAname setAname >>> "+setAname);
+					console.log("ajaxGetAname setDesc >>> "+setDesc);
 					urls = "getAcaList.ec";
 					datas = {
-							"aname" : setAname
+							"aname" : setAname,
+							"setDesc" : setDesc
 							};
 					console.log("urls >>> "+urls);
 					console.log("datas >>> "+datas);
@@ -156,9 +188,20 @@
 						var st = "";
 						console.log("acaList >>> "+resParam.acaList);
 							var listcount = resParam.acaList[0].listcount;
-							st = "<h5>"+listcount+"개의 학원이 조회됬습니다</h5>";
+							st = "<p>";
+							st+= "<div class='sidebar'><h5>"+listcount+"개의 학원이 조회되었습니다</h5>";
+							st+= "<span class='select-desc'><select id='desc' style='height:25px;'>";
+							if(setDesc!=null){
+								st+= "<option id='filter'>"+setDesc+"</option>";	
+							}else{
+								st+= "<option id='filter'>필터 설정</option>";
+							}
+							st+= "<option id='heightGrade' value='평점 높은순'>평점 높은순</option>";
+							st+= "<option id='heightReview' value='리뷰 많은순'>리뷰 많은순</option>";
+							st+= "</select></span>";
+							st+= "</div>";
+							st+= "</p>";
 						for(i in resParam.acaList){
-							var aupdatedate = resParam.acaList[i].aupdatedate;
 							var cmajor = resParam.acaList[i].cmajor;
 							var cminor = resParam.acaList[i].cminor;
 							var ano = resParam.acaList[i].ano;
@@ -167,32 +210,44 @@
 							var aaddr1 = resParam.acaList[i].aaddr1;
 							var aaddr2 = resParam.acaList[i].aaddr2;
 							var agrade = resParam.acaList[i].agrade;
-							st += "<p>";
+							var rvcount = resParam.acaList[i].rvcount;
 							st += "<div class='panel panel-default'>";
 							st += "<a href='listDetailView.ec?ano="+ano+"' style='text-decoration:none'>";
 							st += "<div class='media'>";
 							st += "<div class='media-left'>";
-							st += "<img src='assets/img/academyLogo/"+alogo+"' class='media-object' style='width:135px; height:135px'>";
+							st += "<img src='assets/img/academyLogo/"+alogo+"' class='media-object' style='width:125px; height:125px'>";
 							st += "</div>";
 							st += "<div class='media-body'>";
-							st += "<p><h4 class='media-heading'>"+aname+"</h4></p>";
-							st += "<p><img src='assets/img/Icon_location.png' style='width:15px; height:15px'>"+aaddr1+"</p>";
-							st += "<h4><img src='assets/img/Icon_star.png' style='width:15px; height:15px'>&nbsp;"+agrade+"&nbsp;&nbsp;&nbsp;#"+cmajor+"&nbsp;#"+cminor+"<h4>";
-							st += "<h5 align='right'>최근업데이트 : "+aupdatedate+"&nbsp;&nbsp;</h5></p>";
+							st += "<br><div class='title'><h4 class='media-heading'>"+aname+"</h4>&nbsp;&nbsp;&nbsp;<h5>#"+cmajor+"&nbsp;#"+cminor+"</h5></div>";
+							st += "<div><h5><img src='assets/img/Icon_location.png' style='width:15px; height:15px'>"+aaddr1+"</h5></div>";
+							st += "<div class='title'>&nbsp;<h4>평점 "+agrade+"</h4>";
+							st += "&nbsp;<h5>(평가  "+rvcount+"개)</h5></div>";
 							st += "</div>";
 							st += "</div>";
 							st += "</a>";
 							st += "</div>";
-							st += "</p>";
-						}
+							}
 						}//검색한 학원이 있을때 if
 						$('.acaList').html(st);
 						$('.acaList').niceSelect('update');
 						console.log("done end >>> "+resParam);
+						selectDescName(setAname);
 					}).fail(function(resParam){
 						alert("에러");
 					});
 				}//ajaxGetAname
+				
+				//리스트 정렬 이름으로
+				function selectDescName(setAname){
+					console.log("selectDesc setAname >>> "+setAname);
+					$('.select-desc').on('change','select',function(selectDesc){
+						console.log("select-desc");
+						console.log("select-desc selectDesc >>> "+selectDesc.setAname);
+						var setDesc = $('#desc').val();
+						console.log("setDesc >>> "+setDesc);
+						ajaxGetAname(setAname,setDesc);
+					});
+				}//selectDesc
 				
 				//지역 대분류
 				function ajaxGetDistrict(){
@@ -308,15 +363,39 @@
 						$('select#cminor').html(st);
 						$('select#cminor').niceSelect('update');
 						console.log("ajaxGetMinor end >>>");
+						callNiceSelectMinor(resParam);
 					}).fail(function(resParam){
 						alert("에러");
 					});
 				}//getMinor
 				
+				//scroll function
+				function callNiceSelectMinor(resParam){
+					console.log("callNiceSelect >>> "+resParam.minor[0].cminor);
+					$('.nice-select').click(function(){
+						console.log("nice-select click");
+						var list = $('.list');
+						console.log("list >>> "+list);
+						list.css("overflow","scroll");
+						
+						var mql1 = window.matchMedia("screen and (min-width: 767px) and (max-width: 1023px)");
+						var mql2 = window.matchMedia("screen and (min-width: 321px) and (max-width: 480px)");
+						
+						if(mql1.matches){
+							list.css("width","600px");		
+						}else if(mql2.matches){
+							list.css("width","350px");
+						}else{
+							list.css("width","");
+						}
+					});
+				};
+				
 			});//document function
 		</script>
 	
 		<style type="text/css">
+		
 		/* 모니터 */
 		@media screen and (min-width: 1024px) {
 			.box {
@@ -337,7 +416,7 @@
 				grid-row-gap: 10px;
 			}
 			.nice-select {
-				width:600px;
+				width:570px;
 			}
 		}
 		/* 모바일 가로모드 */
@@ -372,6 +451,14 @@
 			.nice-select {
 				width:300px;
 			}
+		}
+		.title h4, .title h5 {
+			display:inline;
+			
+		}
+		.sidebar {
+			display : grid;
+			grid-template-columns : 10fr 1fr;
 		}
 		.genric-btn {
 	   		color: #fff;
