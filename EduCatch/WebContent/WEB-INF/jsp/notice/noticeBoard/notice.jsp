@@ -92,7 +92,9 @@
 		.media_mobile_td{
 			display: none;
 		}
-		
+		 #noticeForm{
+	 	padding-bottom: 0px;
+	 }
 	}
 	
 	/* Tablet (가로폭 768px 이상, 1023px 이하) */
@@ -129,9 +131,6 @@
 	
 		body {
 		}
-		#media_mobile{
-			width: 700px;
-		}
 		
 		#b{
 			width: 700px;
@@ -139,10 +138,10 @@
 		.nice-select{
 		    width: 70px;
 		    height: 35px;
-		    padding-left: 0px;
+		     padding-left: 14px;
 		}
 		 #media_mobile{
-	 	width: 1100px;
+	 	width: 1140px;
 	 	margin: auto;
 	 }
 	 	#mfont{
@@ -155,6 +154,9 @@
 			width: 130px;
 			font-size: 15px;
 		}
+	 #noticeForm{
+	 	padding-bottom: 370px;
+	 }	
 	}
 	
 	/* --------------------------------------------- */
@@ -241,6 +243,13 @@
 	 #c{
 	 	height: 10px;
 	 }
+	 #h3_margin{
+	 	margin-top: 2px;
+	 }
+	 #media_mobile_td_margin{
+	 	padding-left: 0px;
+	 }
+	
 	 /*---------------------------------*/
 	 
 
@@ -326,7 +335,6 @@
 			$("#endDate").val(endVal);
 			return;
 		}else if(startVal < endVal){
-			alert("으아아아아");
 			$("#searchFormNotice").attr("action","searchNotice.ec");
 			$("#searchFormNotice").attr("method","POST");
 			$("#searchFormNotice").submit();
@@ -400,7 +408,7 @@
 		            <div class="col-md-1.8">
 						<input type="text" name="startDate" id="startDate">
 		            </div>
-		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		             <h3 id="h3_margin"> &nbsp;&nbsp;- &nbsp;</h3>
 		            <div class="col-md-1.5">
 	      		 		<input type="text" name="endDate" id="endDate"> 
 		            </div>
@@ -488,8 +496,8 @@
 	}//end of if(obj)
 		
 %>
-				<tr id ="media_mobile_tr">
-					<td colspan="2" align="left" >
+				<tr >
+					<td colspan="2" align="left" id ="media_mobile_td_margin" >
 					<select name="searchFilter" id ="searchFilter">
 						<option value="제목">제목</option>
 						<option value="내용">내용</option>
@@ -545,19 +553,7 @@
 		</div> 
 		</form>
 	</div> -->
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+ 
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

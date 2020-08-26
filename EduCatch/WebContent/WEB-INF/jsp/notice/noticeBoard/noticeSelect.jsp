@@ -63,6 +63,22 @@
 	#nfont {
 	 	font-family: 'Do Hyeon', sans-serif;
 	  }
+	  .btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #140C40;
+	    color: #ffffff;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
+		}
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	}	
 
 </style>
 <script type="text/javascript">
@@ -178,13 +194,13 @@
 			if(mvo != null){
 				if( mvo.getMauth().equals("3")){
 %>
-				<input type="button" value="수정" id="updateData">
-				<input type="button" value="삭제" id="deleteData">
+				<input type="button" value="수정" id="updateData" class=" btn_light btn_box_01">
+				<input type="button" value="삭제" id="deleteData" class=" btn_light btn_box_01">
 <%	
 					}
 				}
 %>				
-				<input type="button" value="목록" id="listData">
+				<input type="button" value="목록" id="listData" class=" btn_light btn_box_01">
 				
 			</td>	
 			</tr>

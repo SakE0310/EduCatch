@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kosmo.educatch.vo.NoticeVO" %>
-<%@page import="java.util.ArrayList"%>
+<%@ page import="com.kosmo.educatch.vo.EventVO" %>
 <%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
@@ -27,8 +27,18 @@
 
 <!-- 날짜 형식변환 -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+
+<!-- 모바일 제이쿼리 -->
+<!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script> -->
+
 <style type="text/css">
-	
+
 	/*미디어 쿼리*/
 	/* Mobile Device (가로폭 767px 이하) */
 	@media all and (max-width:767px) {
@@ -82,7 +92,9 @@
 		.media_mobile_td{
 			display: none;
 		}
-		
+		 #noticeForm{
+	 	padding-bottom: 0px;
+	 }
 	}
 	
 	/* Tablet (가로폭 768px 이상, 1023px 이하) */
@@ -119,9 +131,6 @@
 	
 		body {
 		}
-		#media_mobile{
-			width: 700px;
-		}
 		
 		#b{
 			width: 700px;
@@ -129,10 +138,10 @@
 		.nice-select{
 		    width: 70px;
 		    height: 35px;
-		    padding-left: 0px;
+		     padding-left: 14px;
 		}
 		 #media_mobile{
-	 	width: 1100px;
+	 	width: 1140px;
 	 	margin: auto;
 	 }
 	 	#mfont{
@@ -145,6 +154,9 @@
 			width: 130px;
 			font-size: 15px;
 		}
+	 #noticeForm{
+	 	padding-bottom: 370px;
+	 }	
 	}
 	
 	/* --------------------------------------------- */
@@ -231,28 +243,47 @@
 	 #c{
 	 	height: 10px;
 	 }
+	 #h3_margin{
+	 	margin-top: 2px;
+	 }
+	 #media_mobile_td_margin{
+	 	padding-left: 0px;
+	 }
+	
 	 /*---------------------------------*/
+	 
+
 </style>
 
 <script type="text/javascript">
+
   $(document).ready(function() {
-	
+	  
 	//날짜 검색  
-  $("#startDate").datepicker({
+ 	 $("#startDate").datepicker({
 		showOn: "button",
         buttonImage: "images/calendar.gif",
 	    buttonImageOnly: false,
 		buttonText: "Select date",
-		dateFormat : 'yy-mm-dd'
+		dateFormat : 'yy-mm-dd',
+		
 		
 	});
+ 	$("#startDate").focus(function(event){
+        var dim = $(this).offset();
+        $("#ui-datepicker-div").offset({
+            top     :   dim.top - 180,
+            left    :   dim.left + 150
+        });
+    });
 	
 	$("#endDate").datepicker({
 		showOn: "button",
         buttonImage: "images/calendar.gif",
 	    buttonImageOnly: false,
 		buttonText: "Select date",
-		dateFormat : 'yy-mm-dd'
+		dateFormat : 'yy-mm-dd',
+		
 	});
 	
 	$("#searchPiker").click(function() {
@@ -304,7 +335,6 @@
 			$("#endDate").val(endVal);
 			return;
 		}else if(startVal < endVal){
-			alert("으아아아아");
 			$("#searchFormNotice").attr("action","searchNotice.ec");
 			$("#searchFormNotice").attr("method","POST");
 			$("#searchFormNotice").submit();
@@ -332,9 +362,7 @@
 		$("#noticeForm").attr("action","searchNotice.ec");
 		$("#noticeForm").attr("method","POST");
 		$("#noticeForm").submit();
-		 
 		
-		alert("아직안만듬");
 	})//end of searchData
 	
 	
@@ -380,7 +408,7 @@
 		            <div class="col-md-1.8">
 						<input type="text" name="startDate" id="startDate">
 		            </div>
-		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		             <h3 id="h3_margin"> &nbsp;&nbsp;- &nbsp;</h3>
 		            <div class="col-md-1.5">
 	      		 		<input type="text" name="endDate" id="endDate"> 
 		            </div>
@@ -468,8 +496,8 @@
 	}//end of if(obj)
 		
 %>
-				<tr id ="media_mobile_tr">
-					<td colspan="2" align="left" >
+				<tr >
+					<td colspan="2" align="left" id ="media_mobile_td_margin" >
 					<select name="searchFilter" id ="searchFilter">
 						<option value="제목">제목</option>
 						<option value="내용">내용</option>
@@ -525,19 +553,7 @@
 		</div> 
 		</form>
 	</div> -->
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+ 
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

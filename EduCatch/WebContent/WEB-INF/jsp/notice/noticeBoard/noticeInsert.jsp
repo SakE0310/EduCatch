@@ -22,7 +22,22 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style type="text/css">
-
+.btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #140C40;
+	    color: #ffffff;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
+		}
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	}	
 
 </style>
 <script type="text/javascript">
@@ -86,7 +101,7 @@
 		<div>
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
-				<td align="center"><h2>notice</h2></td>
+				<td align="center"><h2>공지사항</h2></td>
 			</tr>
 			</table>
 		</div>
@@ -113,8 +128,8 @@
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="save" value="등록" />
-				 <input type="button" id="listData" value="취소" /> 
+				 <input type="button" id="save" value="등록" class=" btn_light btn_box_01" />
+				 <input type="button" id="listData" value="취소" class=" btn_light btn_box_01" /> 
 				</td>
 			</tr>
 		</table>
