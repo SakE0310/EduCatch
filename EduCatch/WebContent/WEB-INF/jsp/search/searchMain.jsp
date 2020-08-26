@@ -406,6 +406,12 @@
 			.nice-select {
 				width:135px;
 			}
+			.genric-btn {
+		   		color: #fff;
+		   		background: #140C40;
+		   		width: 90px;
+		   		border: 1px solid transparent;
+ 			}
 		}
 		/* 테블릿 */
 		@media screen and (max-width: 1023px) {
@@ -439,6 +445,15 @@
 			.nice-select {
 				width:350px;
 			}
+			.genric-btn {
+		   		color: #fff;
+		   		background: #140C40;
+		   		width: 350px;
+		   		border: 1px solid transparent;
+			}
+			#aname{
+				width:350px;		
+			}
 		}
 		/* 모바일 최소 */
 		@media screen and (max-width: 320px) {
@@ -450,6 +465,15 @@
 			.nice-select {
 				width:300px;
 			}
+			.genric-btn {
+		   		color: #fff;
+		   		background: #140C40;
+		   		width: 300px;
+		   		border: 1px solid transparent;
+			}
+			#aname{
+				width:300px;		
+			}
 		}
 		.title h4, .title h5 {
 			display:inline;
@@ -459,12 +483,6 @@
 			display : grid;
 			grid-template-columns : 10fr 1fr;
 		}
-		.genric-btn {
-	   		color: #fff;
-	   		background: #140C40;
-	   		width: 90px;
-	   		border: 1px solid transparent;
- 		}
  		.list { 
  		    height:300px; 
  		    width:140px;
