@@ -10,26 +10,32 @@
 		console.log("call");
 		cookiedata = document.cookie;
 		if (cookiedata.indexOf("ncookie=done") < 0){
-		  document.getElementById('layer_pop').style.display = "inline";
-		console.log("inline");
+		    document.getElementById('layer_pop').style.display = "inline";
+			console.log("inline");
 		}else {
-		  document.getElementById('layer_pop').style.display = "none";
+		    document.getElementById('layer_pop').style.display = "none";
 		}
 	}
-	 function setCookie( name, value, expirehours ) {
+	
+	function setCookie( name, value, expirehours ) {
 		  var todayDate = new Date();
 		  todayDate.setHours( todayDate.getHours() + expirehours );
 		  document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
 	 } 
+	
 	 function closeWin() {
 		  if(document.getElementById("pop_today").checked){
-		   setCookie( "ncookie", "done" , 24 );
+		   	setCookie( "ncookie", "done" , 24 );
 		  }
-		  document.getElementById('layer_pop').style.display = "none";
+		   document.getElementById('layer_pop').style.display = "none";
 	 } 
 	 function checkBtn() {
 		console.log("누름");
-		document.getElementById("pop_today").checked = true;
+		if(document.getElementById("pop_today").checked == false){
+			document.getElementById("pop_today").checked = true;
+		}else{
+			document.getElementById("pop_today").checked = false;
+		}
 	}
 
 	 function ajaxGetPopup(){
@@ -40,26 +46,24 @@
 		}).done(function(resParam){
 			 var img = resParam.eventPop[0].eimg;
 			 var st ="";
-			console.log(resParam.eventPop[0].eimg);
 			
-			st = "<div class='layer_popup' style='position:absolute; width:500px;left:55%;  top:110px; z-index:1;' id='layer_pop'>";
-			st += "<table width='500' border='3' cellpadding='0' cellspacing='0' >";
+			st =  "<div class='layer_popup' style='position:absolute; width:350px;left:55%;  top:110px; z-index:1;' id='layer_pop'>";
+			st += "<table width='350' border='3' cellpadding='0' cellspacing='0' >";
 			st += "<tr>";
-			st += "<td> <img src='/EduCatch/assets/img/event/"+img+"' alt='사진업음' width='500' height='500' border='0'/></td>";
+			st += "<td> <img src='/EduCatch/assets/img/event/"+img+"' alt='사진업음' width='350' height='500' border='0'/></td>";
 			st += "</tr>";
 			st += "<tr>";
 			st += "<td align='center' height='30' bgcolor='#F5F5F5'>";
 			st += "<table width='95%' border='0' cellpadding='0' cellspacing='0'>";
 			st += "<tr>";
-			st += " <td align='left' class='pop'><input type='checkbox' name='pop_today' id='pop_today' /><a href='javascript:checkBtn();' style='color: black;'>오늘 하루 이 창 열지 않음</a></td>";
+			st += "<td align='left' class='pop'><input type='checkbox' name='pop_today' id='pop_today' /><a href='javascript:checkBtn();' style='color: black;'>오늘 하루 이 창 열지 않음</a></td>";
 			st += "<td align='right' class='pop' ><a href='javascript:closeWin();' style='color: black;'>닫기</a></td>";
-			st += " </tr>";
+			st += "</tr>";
 			st += "</table>";
 			st += "</td>";
 			st += "</tr>";
 			st += "</table>";
 			st += "</div>";
-		
 				
 			$(".pop").html(st);	
 			call();			
