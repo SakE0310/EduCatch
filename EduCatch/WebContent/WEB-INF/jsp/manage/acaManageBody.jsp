@@ -294,15 +294,16 @@ $(document).ready(function(){
 				},
 			dataType : "json"
 		}).done(function(resultParam){
-			$('#modal-container-749484').modal("hide");
 			if(resultParam.result!="success"){
+				$('#modal-container-749484').modal("hide");
 				alert('정상적으로 데이터가 등록되지 않았습니다.');
 			}else{
+				$('#modal-container-749484').modal("hide");
 				ajaxData2();
 			}
 		}).fail(function(resultParam){
-			$('#modal-container-749484').modal("hide");
 			alert("추가시 DB연결에 문제가 발생하였습니다.");
+			$('#modal-container-749484').modal("hide");
 		});
 	});
 	
@@ -562,7 +563,7 @@ function addrCheck(){
 									<div class="col-md-12">
 										 <a id="modal-749483" href="#modal-container-749483" role="button" class="btn btn-success" data-toggle="modal"><i class="fas fa-edit"></i> 학원정보수정</a>
 									
-										<div class="modal fade" id="modal-container-749483" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal" id="modal-container-749483" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -669,7 +670,7 @@ function addrCheck(){
        	<div class="row" style="color:black">
 									<div class="col-md-8">
 										 <a id="modal-749484" href="#modal-container-749484" role="button" class="btn btn-primary" data-toggle="modal"><i class="fas fa-edit"></i> 과목추가</a>
-										<div class="modal fade" id="modal-container-749484" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal" id="modal-container-749484" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
 													<div class="modal-header">
