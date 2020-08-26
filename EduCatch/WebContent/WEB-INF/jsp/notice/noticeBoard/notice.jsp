@@ -93,7 +93,7 @@
 			display: none;
 		}
 		 #noticeForm{
-	 	padding-bottom: 0px;
+	 	padding-bottom: 150px;
 	 }
 	}
 	

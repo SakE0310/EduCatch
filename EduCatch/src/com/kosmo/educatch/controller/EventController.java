@@ -222,7 +222,8 @@ public class EventController {
 		if(request.getContentType().toLowerCase().startsWith("multipart/form-data")) {
 			log.info("multipart/form-data true");
 			int size = 10*1024*1024;
-			String path = "C://Users//user//git//EduCatch//EduCatch//WebContent//assets//img//event";
+			//String path = "C://Users//user//git//EduCatch//EduCatch//WebContent//assets//img//event";
+			String path = request.getServletContext().getRealPath("")+"//assets//img//event";
 			
 			try {
 				MultipartRequest multi = new MultipartRequest(request 
