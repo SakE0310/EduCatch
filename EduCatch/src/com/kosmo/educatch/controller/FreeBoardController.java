@@ -152,7 +152,8 @@ public class FreeBoardController {
 			log.info("multipart/form-data 파일 업로드");
 			
 			int size=10*1024*1024;
-			String uploadPath = "C://Users//ekfri//git//EduCatch//EduCatch//WebContent//assets//img//freeImg";
+			String uploadPath =request.getServletContext().getRealPath("")+"//assets//img//freeImg";
+			//String uploadPath = "C://Users//ekfri//git//EduCatch//EduCatch//WebContent//assets//img//freeImg";
 			
 			ModelAndView mav = new ModelAndView();
 			try {
@@ -242,7 +243,8 @@ public class FreeBoardController {
 			log.info("파일 업로드");
 			
 			int size=10*1024*1024;
-			String uploadPath = "C://Users//ekfri//git//EduCatch//EduCatch//WebContent//assets//img//freeImg";
+			String uploadPath = request.getServletContext().getRealPath("")+"//assets//img//freeImg";
+			//String uploadPath = "C://Users//ekfri//git//EduCatch//EduCatch//WebContent//assets//img//freeImg";
 			
 			ModelAndView mav = new ModelAndView();
 			try {

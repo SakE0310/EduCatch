@@ -140,11 +140,11 @@
 	/* text-align: ; */
 	color: rgba(0,0,0,.87);
 	padding-left: 44px;
-	border: 1px solid #dca73a;
+	/*border: 1px solid #dca73a;*/
 	/* padding: 15px 15px; */
 	/* text-align: center; */
 	width: 177px;
-	height: 55px;
+	/*height: 55px;*/
 	border-radius: 5px;
 }
 .gj-textbox-md:focus,
@@ -1963,7 +1963,7 @@ ul.gj-list-md li.disabled > [data-role="wrapper"] > [data-role="expander"] {
 .gj-datepicker-md [role="right-icon"] {
 	position: absolute;
 	left: 13px;
-	top: 16px;
+	/*top: 16px;*/
 	font-size: 24px;
 }
 

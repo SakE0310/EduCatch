@@ -68,7 +68,8 @@ public class AmemberJoinController {
 		String resultStr = "";
 
 		int size=10*1024*1024;
-		String uploadPath = "C://Users//ekfri//git//EduCatch//EduCatch//WebContent//assets//img//amemimg";
+		String uploadPath = request.getServletContext().getRealPath("")+"//assets//img//amemimg";
+		//String uploadPath = "C://Users//ekfri//git//EduCatch//EduCatch//WebContent//assets//img//amemimg";
 		
 		try {
 			MultipartRequest mr = new MultipartRequest(request,
