@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,10 +60,22 @@
 	</jsp:include>
 </head>
 <body>
+<%
+HttpSession hs = request.getSession(false);
+MemberVO mvo = null;
+if(hs != null){
+	mvo = (MemberVO)hs.getAttribute("user");
 	
+	System.out.println("freevinsert>>>mvo>>>"+mvo);
+	System.out.println("freevinsert>>>mvo.getMid>>>"+mvo.getMid());
+	System.out.println("freevinsert>>>mvo>.getMno>>"+mvo.getMno());
+}
+%>
 	<!-- action/document/location -->
 	<!-- enctype="multipart/form-data" -->
 	<form id="edit" name="edit">
+	<input type="hidden" id ="mid" name="mid" value="<%=mvo.getMid() %>">
+	<input type="hidden" id ="mno" name="mno" value="<%=mvo.getMno() %>">
 		<table style="margin-left: auto; margin-right: auto;" border="1" width="50%">
 			<!--tr>
 				<td style="width: 100px">글번호</td>

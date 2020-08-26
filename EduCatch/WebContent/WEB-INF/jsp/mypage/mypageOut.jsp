@@ -9,6 +9,12 @@
 </jsp:include>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<!-- 부트스트랩 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- 아이콘 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -76,6 +82,7 @@
 	}
 </style>
 <script type="text/javascript">
+	$(document).ready(function() {
 		//==사이드바=============================================
 		//======프로필 수정버튼을 누르면 실행 -> 비밀번호 확인 창
 		$("#pwCheck").click(function() {
@@ -104,7 +111,6 @@
 			$("#clickForm").attr("method","POST");
 			$("#clickForm").submit(); 
 		})
-		
 		
 		$("#freeBoard").click(function() {
 			console.log("freeBoard >>> ");
@@ -137,6 +143,7 @@
 			$("#clickForm").attr("method","POST");
 			$("#clickForm").submit();
 		})
+	});
 		
 <%
 	Object obj = request.getAttribute("memberVO");
@@ -225,20 +232,35 @@ $(document).ready(function() {
 	<div class = "container-mypage ">
 		<div align="center">
 			<form id="pwOutForm" name = "pwOutForm">
-			<input type ="text" id="mno" name="mno" value="<%=mvo.getMno()%>">
-			<input type ="text" id="mname" name="mname" value="<%=mvo.getMname()%>">
-				<table>
-					<tr>
-						<td><%=mvo.getMname() %>님 탈퇴하시겠습니까?</td>
-					</tr>
+			<input type ="hidden" id="mno" name="mno" value="<%=mvo.getMno()%>">
+			<input type ="hidden" id="mname" name="mname" value="<%=mvo.getMname()%>">
+			<div align="left">
+			<br>
+			<br>
+				<h4>회원 탈퇴</h4>	
+				<hr>
+			<div class="container shadow"  style="width: 800px; height: 570px;">
+			<br>
+				<table class="table">
+					
 					<tr>
 						<td>아이디</td>
-						<td><input type ="text" id="mid" name="mid" value="<%=mvo.getMid() %>" /></td>
+						<td>
+							<div class="col-xs-7">
+								<input type ="text" class="form-control" id="mid" name="mid" value="<%=mvo.getMid() %>" />
+							</div>
+						</td>
 					</tr>
 					<tr>
 						<td>비밀번호</td>
-						<td><input type ="password" id="mpw" name="mpw"/></td>
-						<td><input type ="button" id="checkpw" name="checkpw" value="확인"/></td>
+						<td>
+							<div class="col-xs-7">
+								<input type ="password" class="form-control" id="mpw" name="mpw"/>
+							</div>
+							<div class="col-xs-3">
+							<input type ="button" class="form-control" id="checkpw" name="checkpw" value="확인"/>
+							</div>
+						</td>
 					</tr>
 				<tr>						
 				<td colspan=2 align="center">
@@ -246,6 +268,8 @@ $(document).ready(function() {
 				</td>
 			</tr>
 				</table>
+				</div>
+				</div>
 			</form>
 <%		
 	}

@@ -5,6 +5,7 @@ import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.FreeService;
 import com.kosmo.educatch.vo.FreeVO;
+import com.kosmo.educatch.vo.MemberVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -138,7 +140,7 @@ public class FreeBoardController {
 	}
 	//자유게시판 등록
 	@RequestMapping("insertfreeboard")
-	public ModelAndView insertFreeBoard(@ModelAttribute FreeVO param, HttpServletRequest request) {
+	public ModelAndView insertFreeBoard(@ModelAttribute FreeVO param, HttpSession session,HttpServletRequest request) {
 		log.info("insertFreeBoard 함수 진입");
 		
 		String fbno = null;
@@ -147,6 +149,11 @@ public class FreeBoardController {
 		String fbcontent =null;
 		String fbimg = null;
 		String resultStr = "";
+		
+		//String mid = null;
+		//String mno = null;
+		String member_mno = null;
+		
 		
 		if(request.getContentType().toLowerCase().startsWith("multipart/form-data")) {
 			log.info("multipart/form-data 파일 업로드");
@@ -168,10 +175,17 @@ public class FreeBoardController {
 				fbcontent = mr.getParameter("fbcontent");
 				resultStr="";
 				
+				//mid = mr.getParameter("mid");
+				//mno = mr.getParameter("mno");
+				member_mno = mr.getParameter("mno");
+				
 				log.info("fbno>>>"+fbno);
 				log.info("fbsubject>>>"+fbsubject);
 				log.info("fbname>>>"+fbname);
 				log.info("fbcontent>>>"+fbcontent);
+				//log.info("mid>>>"+mid);
+				//log.info("mno>>>"+mno);
+				log.info("member_mno>>>"+member_mno);
 				
 				Enumeration<String> en = mr.getFileNames();
 				List<String> list = new ArrayList<String>();
@@ -195,6 +209,7 @@ public class FreeBoardController {
 			fbsubject = request.getParameter("fbsubject");
 			fbname = request.getParameter("fbname");
 			fbcontent = request.getParameter("fbcontent");
+			member_mno = request.getParameter("mno");
 			fbimg = request.getParameter("fbimg");
 		}
 		
@@ -202,12 +217,14 @@ public class FreeBoardController {
 		param.setFbsubject(fbsubject);
 		param.setFbname(fbname);
 		param.setFbcontent(fbcontent);
+		param.setMember_mno(member_mno);
 		param.setFbimg(fbimg);
 		
 		log.info("글번호"+param.getFbno());
 		log.info("글제목"+param.getFbsubject());
 		log.info("작성자"+param.getFbname());
 		log.info("글내용"+param.getFbcontent());
+		log.info("회원번호"+param.getMember_mno());
 		log.info("이미지파일"+param.getFbimg());
 		log.info("삭제여부"+param.getFbdeleteyn());
 		log.info("입력일"+param.getFbinsertdate());

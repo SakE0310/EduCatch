@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.kosmo.educatch.vo.FreeVO"  %>
+<%@ page import="com.kosmo.educatch.vo.MemberVO"  %>
 <%@ page import="java.util.List"  %>
 <!DOCTYPE html>
 <html>
@@ -24,7 +25,130 @@
 <!-- 날짜 형식변환 -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+
 <style type="text/css">
+/*미디어 쿼리*/
+	/* Mobile Device (가로폭 767px 이하) */
+	@media all and (max-width:767px) {
+		thead {
+			display: none;
+		}
+		.nice-select{
+		    width: 50px;
+		    height: 35px;
+		    padding-left: 0px;
+		}
+		#keyword{
+			width: 90px;
+			height: 32px;
+		}
+		.btn_light {
+		  height: 30px;
+		}
+		.gj-textbox-md{
+			width: 100px;
+    		height: 40px;
+    		
+		}
+		
+		.gj-datepicker-md [role="right-icon"] {
+		    position: absolute;
+		    left: 5px;
+		    top: 10px;
+		    font-size: 24px;
+		}
+		#b{
+			width: 300px;
+		}
+		#nfont{
+			display: none;
+		}
+		#mfont{
+			font-size: 30px;
+		}
+		#media_mobile{
+			width: 330px;
+    		height: 130px;
+		}
+		 #keyword{
+			width:96px; 
+	}
+	.gj-textbox-md {
+			width: 100px;
+			font-size: 10px;
+		}
+		.media_mobile_td{
+			display: none;
+		}
+		
+	}
+	
+	/* Tablet (가로폭 768px 이상, 1023px 이하) */
+	@media all and (min-width:768px) and (max-width:1023px) {
+	
+	/* 브라우저 가로폭이 768~1023px일때 적용될 css (태블릿) */
+	#media_mobile{
+	 	width: 400px;
+   		 height: 180px;
+	 }
+	 
+	 #keyword{
+			width:200px; 
+	}
+	.gj-textbox-md {
+			width: 130px;
+			font-size: 15px;
+		}
+	#nfont{
+			display: none;
+		}
+	#mfont{
+			font-size: 50px;
+		}
+	.nice-select{
+	    width: 60px;
+    	height: 35px;
+	    padding-left: 10px;
+	}
+	}
+	
+	/* PC Desktop (가로폭 1024 이상) */
+	@media all and (min-width:1024px) {
+	
+		body {
+		}
+		#media_mobile{
+			width: 700px;
+		}
+		
+		#b{
+			width: 700px;
+		}
+		.nice-select{
+		    width: 70px;
+		    height: 35px;
+		    padding-left: 0px;
+		}
+		 #media_mobile{
+	 	width: 1100px;
+	 	margin: auto;
+	 }
+	 	#mfont{
+	 	display: none;
+	 }
+	 #keyword{
+			width:200px; 
+	}
+	.gj-textbox-md {
+			width: 130px;
+			font-size: 15px;
+		}
+	}
+	/*-----------------------------------*/
+
 	#nno_color{
 		color: black;
 	}
@@ -36,11 +160,14 @@
 	.btn_light {
 	    display: inline-block;
 	    text-align: center;
-	    background: #e5e5e5;
-	    color: #555;
+	    background: #140C40;
+	    color: #ffffff;
 	    vertical-align: middle;
 	    cursor: pointer;
-	    border: 1px solid #e5e5e5;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	    border-radius: 0.5em;
 		}
 	.btn_box_01 {
 	    width: auto;
@@ -60,21 +187,48 @@
   	height: 100px;
   	margin: auto;
 	}
-	#dForm{
-	 width: 350px;
-  	height: 100px;
-  	margin: auto;
+	#row-magin{
+		margin-bottom: 185px;
+	}	
+	
+	 #nfont, #mfont{
+	 	font-family: 'Do Hyeon', sans-serif;
+	  }
+		
+	#mainWrapper{
+		font-family: 'Gothic A1', sans-serif;
+	} 	
+	.table_head_font{
+		font-family: 'Do Hyeon', sans-serif;
 	}
 	
+	#keyword{
+			height:30px;
+			border: 1px solid #140C40;
+			 border-radius: 0.5em;
+		}
 		
-	/* #sideBanner{
-			position: absolute;
-			top:100px;
-			left:0px;
-			width:150px;
-			height:600px;
-			background: #aaa;
-		} */
+	/*데이트 피커*/
+	.gj-icon{
+			color : #140C40;
+		}
+		
+	.gj-textbox-md {
+   			height: 30px;
+   			border: 1px solid #140C40;
+		}
+	.gj-datepicker-md [role="right-icon"] {
+	    left: 3px;
+   		top: 3px;
+  	 }
+   		 
+	
+	 #c{
+	 	height: 10px;
+	 }
+	
+		
+	
 </style>
 
 <script type="text/javascript">
@@ -89,6 +243,14 @@
 		dateFormat : 'yy-mm-dd'
 		
 	});
+	
+  $("#startDate").focus(function(event){
+      var dim = $(this).offset();
+      $("#ui-datepicker-div").offset({
+          top     :   dim.top - 180,
+          left    :   dim.left + 150
+      });
+  });
 	
 	$("#endDate").datepicker({
 		showOn: "button",
@@ -115,17 +277,42 @@
 		$("#startDate").val(startVal);
 		$("#endDate").val(endVal);
 		
-		if(startVal == ""){
-			  alert("시작일이 입력되지 않았습니다.\n시작일을 먼저 입력해주세요");
+		if(startVal == "Invalid date" && endVal == "Invalid date"){
+			alert("시작일과 종료일이 입력되지 않았습니다.\n시작일을 먼저 입력해주세요");
+			startVal = moment(startVal).format("MM/DD/YYYY");
+			endVal = moment(endVal).format("MM/DD/YYYY");
+			$("#startDate").val();
+			  $("#endDate").val();
+			return;
 		}
+		
+		if(startVal == "Invalid date"){
+			  alert("시작일이 입력되지 않았습니다.\n시작일을 먼저 입력해주세요");
+			  startVal = moment(startVal).format("MM/DD/YYYY");
+			  endVal = moment(endVal).format("MM/DD/YYYY");
+			  $("#startDate").val(startVal);
+			  $("#endDate").val(endVal);
+			  return;
+		}
+		if(endVal == "Invalid date"){
+			  alert("종료일이 입력되지 않았습니다.\n종료일을 먼저 입력해주세요");
+			  $("#startDate").val("");
+			  $("#endDate").val("");
+			  return;
+		} 
 		
 		if(startVal > endVal){
-			 alert("종료일이 시작일보다 이 전 일수는 없습니다.\n다시 선택하여 주시기 바랍니다.");
+			alert("종료일이 시작일보다 이 전 일수는 없습니다.\n다시 선택하여 주시기 바랍니다.");
+			startVal = moment(startVal).format("MM/DD/YYYY");
+			endVal = moment(endVal).format("MM/DD/YYYY");
+			$("#startDate").val(startVal);
+			$("#endDate").val(endVal);
+			return;
+		}else if(startVal < endVal){
+			$("#searchForm").attr("action","freeboardlist.ec");
+			$("#searchForm").attr("method","POST");
+			$("#searchForm").submit();
 		}
-		
-		$("#searchForm").attr("action","freeboardlist.ec");
-		$("#searchForm").attr("method","POST");
-		$("#searchForm").submit();
 		
 	})//end of searchPiker
 	
@@ -168,18 +355,46 @@
 	
 	Object obj = request.getAttribute("freeboardlist"); 
 	
+	HttpSession hs = request.getSession(false);
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	}
+	
 	if(obj!=null){
 		List<FreeVO> list = (List<FreeVO>)obj;
 		int nCnt =list.size();
 %>
-	<div id="mainWrapper">
-	<div>
-		<table border="0" cellpadding="1" cellspacing="1" align="center">
+	<div id="mainWrapper" align = "center">
+	<div  id="media_mobile" >
+	<form id="searchForm" name="searchForm">
+		<table border="0" cellpadding="1" cellspacing="1" align="left">
+			<tr>	
+				<td align="center" id = "mfont">자유게시판</h4>
+				<br>
+				<br>
+				</td>
+			</tr>
 			<tr>
-				<td align="center"><h1>자유게시판 목록</h1></td>
+				<td width="500">
+		         <div class="row" id="c">
+		            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		            <div class="col-md-1.8">
+						<input type="text" name="startDate" id="startDate">
+		            </div>
+		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		            <div class="col-md-1.5">
+	      		 		<input type="text" name="endDate" id="endDate"> 
+		            </div>
+	      				&nbsp;&nbsp; <input class="btn_light btn_box_01" type="button" id="searchPiker" value="검색">
+		      </div>
+		      </td>
+				<td align="center" id ="nfont"><h1>자유게시판</h1></td>
 			</tr>
 		</table>
-			<hr>
+		</form>
+		<br>
+		<br>	
 	</div>	
 <form id="freeBoardForm" name="freeBoardForm" >
 	<div class="container" style="height: 390px;">
@@ -258,8 +473,7 @@
 			%>
 			<tr>
 				<td colspan="2" align="left">
-				
-					<select name="searchFilter">
+					<select name="searchFilter" id="searchFilter">
 						<option value="제목">제목</option>
 						<option value="내용">내용</option>
 					</select>
@@ -275,31 +489,35 @@
 		</table>
 		</div>
 		</div>
-		</form>
+	</form>
 		<br>
 		<!-- 검색 폼  -->
-	<div >
-		<form id="searchForm" name="searchForm">
 		<!-- 
-		<div align = "center" id="sForm">
-			<select name="searchFilter">
-				<option value="제목">제목</option>
-				<option value="내용">내용</option>
-				<option value="제목+내용">제목+내용</option>
-			</select>
-			<input type="text" name="keyword" id = "keyword">
-			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
-			<hr>
+	<div>
+		<form id="searchForm" name="searchForm">
+		<div id="mainWrapper" align="center">
+		<div align = "center" style="width:700px">	
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+			<td width="500">
+				<div class="row">
+					<div class="col-md-1.8">
+						<input type="text" name="startDate" id="startDate">
+					</div>
+					 <h3> &nbsp;&nbsp;- &nbsp;</h3>
+					 <div class="col-md-1.5">
+					 	<input type="text" name="endDate" id="endDate">
+					 </div>
+					  &nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
+				</div>
+			</td>
+			</tr>
+			</table>
 		</div>
-		 -->
-		<div align = "center" id="dForm">	
-			<div style="width: 200px">
-			<input type="text" name="startDate" id="startDate"> - <input type="text" name="endDate" id="endDate"> 
-			<input type="button" id="searchPiker" value="검색">
-			</div>
 		</div>
 		</form>
 	</div>
+	 -->
 		<br><br><br>
 	<jsp:include page="../../../../footer.jsp" flush="true">
 	<jsp:param value="" name=""/>
