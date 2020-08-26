@@ -30,7 +30,132 @@
 
 <!-- 날짜 형식변환 -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
+
 <style type="text/css">
+	/*미디어 쿼리*/
+	/* Mobile Device (가로폭 767px 이하) */
+	@media all and (max-width:767px) {
+		thead {
+			display: none;
+		}
+		.nice-select{
+		    width: 50px;
+		    height: 35px;
+		    padding-left: 0px;
+		}
+		#keyword{
+			width: 90px;
+			height: 32px;
+		}
+		.btn_light {
+		  height: 30px;
+		}
+		.gj-textbox-md{
+			width: 100px;
+    		height: 40px;
+    		
+		}
+		
+		.gj-datepicker-md [role="right-icon"] {
+		    position: absolute;
+		    left: 5px;
+		    top: 10px;
+		    font-size: 24px;
+		}
+		#b{
+			width: 300px;
+		}
+		#nfont{
+			display: none;
+		}
+		#mfont{
+			font-size: 30px;
+		}
+		#media_mobile{
+			width: 330px;
+    		height: 130px;
+		}
+		 #keyword{
+			width:96px; 
+	}
+	.gj-textbox-md {
+			width: 100px;
+			font-size: 10px;
+		}
+		.media_mobile_td{
+			display: none;
+		}
+		
+	}
+	
+	/* Tablet (가로폭 768px 이상, 1023px 이하) */
+	@media all and (min-width:768px) and (max-width:1023px) {
+	
+	/* 브라우저 가로폭이 768~1023px일때 적용될 css (태블릿) */
+	#media_mobile{
+	 	width: 400px;
+   		 height: 180px;
+	 }
+	 
+	 #keyword{
+			width:200px; 
+	}
+	.gj-textbox-md {
+			width: 130px;
+			font-size: 15px;
+		}
+	#nfont{
+			display: none;
+		}
+	#mfont{
+			font-size: 50px;
+		}
+	.nice-select{
+	    width: 60px;
+    	height: 35px;
+	    padding-left: 10px;
+	}
+	}
+	
+	/* PC Desktop (가로폭 1024 이상) */
+	@media all and (min-width:1024px) {
+	
+		body {
+		}
+		#media_mobile{
+			width: 700px;
+		}
+		
+		#b{
+			width: 700px;
+		}
+		.nice-select{
+		    width: 70px;
+		    height: 35px;
+		    padding-left: 0px;
+		}
+		 #media_mobile{
+	 	width: 1100px;
+	 	margin: auto;
+	 }
+	 	#mfont{
+	 	display: none;
+	 }
+	 #keyword{
+			width:200px; 
+	}
+	.gj-textbox-md {
+			width: 130px;
+			font-size: 15px;
+		}
+	}
+	
+	/* --------------------------------------------- */
+
 	#nno_color{
 		color: black;
 	}
@@ -42,38 +167,79 @@
 	.btn_light {
 	    display: inline-block;
 	    text-align: center;
-	    background: #e5e5e5;
-	    color: #555;
+	    background: #140C40;
+	    color: #ffffff;
 	    vertical-align: middle;
 	    cursor: pointer;
-	    border: 1px solid #e5e5e5;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
 		}
 	.btn_box_01 {
-		height: 40px;
-	    width: 60px;
+	    width: auto;
 	    padding: 3px 10px;
-	    margin-bottom: 3px;
 	}	
 	.bbs-link-btm {
 	    float: right;
 	    margin: 20px 0px 0;
 	    text-align: left;
+	   
 	}
 	.bbs-link {
-   	 	position: relative;
+   	 position: relative;
 	}
 	
 	#sForm{
-	    width: 350px;
-	  	height: 100px;
-	  	margin: auto;
+    width: 350px;
+  	height: 100px;
+  	margin: auto;
 	}
-	#dForm{
-		 width: 350px;
-	  	height: 100px;
-	  	margin: auto;
+	#row-magin{
+		margin-bottom: 185px;
+	}	
+	
+	 #nfont, #mfont{
+	 	font-family: 'Do Hyeon', sans-serif;
+	  }
+		
+	#mainWrapper{
+		font-family: 'Gothic A1', sans-serif;
+	} 	
+	.table_head_font{
+		font-family: 'Do Hyeon', sans-serif;
 	}
 	
+	#keyword{
+			height:30px;
+			border: 1px solid #140C40;
+			 border-radius: 0.5em;
+		}
+		
+	/*데이트 피커*/
+	.gj-textbox-md{ 
+		border: 1px solid #140C40;
+		
+	}
+	
+	.gj-icon{
+			color : #140C40;
+		}
+		
+	.gj-textbox-md {
+   			height: 30px;
+		}
+	.gj-datepicker-md [role="right-icon"] {
+	    left: 3px;
+   		top: 3px;
+  	 }
+   		 
+	
+	 #c{
+	 	height: 10px;
+	 }
+	 /*---------------------------------*/
+	 
 	
 </style>
 
@@ -83,20 +249,20 @@
      
      $(document).ready(function() {
         
-   //날짜 검색  
-     $("#startDate").datepicker({
-         showOn: "button",
-           buttonImage: "images/calendar.gif",
-          buttonImageOnly: false,
-         buttonText: "Select date",
-         dateFormat : 'yy-mm-dd'
-         
-      });
+ 		//날짜 검색  
+   	  $("#startDate").datepicker({
+   			showOn: "button",
+   	        buttonImage: "images/calendar.gif",
+   		    buttonImageOnly: false,
+   			buttonText: "Select date",
+   			dateFormat : 'yy-mm-dd'
+   			
+   		});
       
       $("#endDate").datepicker({
          showOn: "button",
-           buttonImage: "images/calendar.gif",
-          buttonImageOnly: false,
+         buttonImage: "images/calendar.gif",
+         buttonImageOnly: false,
          buttonText: "Select date",
          dateFormat : 'yy-mm-dd'
       });
@@ -182,19 +348,41 @@
       
    
 %>
-<form id="pageForm" name="pageForm">
-      <input type="hidden" id="rbno" name="rbno"/>
-   	  <div id="mainWrapper">
-		<div>
-			<table border="0" cellpadding="1" cellspacing="1" align="center">
+	<div id="mainWrapper" align = "center">
+		<div  id="media_mobile" >
+		<form id="searchForm" name="searchForm">
+			<table border="0" cellpadding="1" cellspacing="1" align="left">
+			<tr>	
+				<td align="center" id = "mfont">후기 게시판</h4>
+				<br>
+				<br>
+				</td>
+			</tr>
 			<tr>
-				<td align="center"><h1>후기게시판 목록</h1></td>
+				<td width="500">
+		         <div class="row" id="c">
+		         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		            <div class="col-md-1.8">
+						<input type="text" name="startDate" id="startDate">
+		            </div>
+		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		            <div class="col-md-1.5">
+	      		 		<input type="text" name="endDate" id="endDate"> 
+		            </div>
+	      				  &nbsp;&nbsp; <input type="button" id="searchPiker" value="검색"
+	      				  				class=" btn_light btn_box_01">	  
+		      	</div>
+				</td>
+				<td align="center" id = "nfont"><h1>후기 게시판</h1></td>
 			</tr>
 			</table>
-			<hr>
-		</div>
-	  <div  class="container">
-      <table align="center" class="table">
+		</form>
+	</div>
+
+	<form id="pageForm" name="pageForm">
+      <input type="hidden" id="rbno" name="rbno"/>
+	  <div  class="container" class="table">
+      	<table align="center" class="table">
          <colgroup>
 	            <col width="120px"/>
 	            <col width="120px"/>
@@ -204,11 +392,11 @@
          </colgroup>
          <thead id="table_head">   
             <tr>
-               <td align="center">글번호</td>
-               <td align="center">학원명</td>
-               <td align="center">제목</td>
-               <td align="center">작성자</td>
-               <td align="center">날짜</td>
+               <td align="center" class ="table_head_font">글번호</td>
+               <td align="center" class ="table_head_font">학원명</td>
+               <td align="center" class ="table_head_font">제목</td>
+               <td align="center" class ="table_head_font">작성자</td>
+               <td align="center" class ="table_head_font">날짜</td>
             </tr>
          </thead>
          <tbody>
@@ -232,7 +420,7 @@
 %>
 
                <tr align="center">
-                  <td class="cc"><%= rvo.getRbno() %></td>
+                  <td class="cc media_mobile_td"><%= rvo.getRbno() %></td>
                   <td class="cc"><%= rvo.getAname() %></td>
                   <td class="cc"><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>"  id="aa"><%= rvo.getRbsubject() %></a></td>
                   <td class="cc"><%= rvo.getRbname() %></td>
@@ -270,13 +458,13 @@
 	}//end of if(obj)
 		
 %>
-	<tr>
+	<tr id ="media_mobile_tr">
 		<td colspan="3" align="left">
-         <select name="searchFilter">
+         <select name="searchFilter" id ="searchFilter">
             <option value="제목">제목</option>
             <option value="내용">내용</option>
          </select>
-         <input type="text" name="keyword" id = "keyword" style="width:200px; height: 40px;">
+         <input type="text" name="keyword" id = "keyword">
          <input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 		</td>
 
@@ -286,7 +474,8 @@
 %>
 
 			<td colspan="2" align="right">
-               <input type="button" value="글쓰기" id="insertPage" class=" btn_light btn_box_01"/>
+               <input type="button" value="글쓰기" id="insertPage" 
+                class=" btn_light btn_box_01"/>
 			</td>
 <%	
 						}
@@ -296,41 +485,10 @@
       	</tbody>
       	</table>
    </div>
-   </div>
 </form>
-
-	<div>
-		<form id="searchFormNotice" name="searchFormNotice">
-		
-		<div id="mainWrapper" align = "center">
-		<div align = "center" style="width: 700px;" >
-			<table border="0" cellpadding="1" cellspacing="1" align="center">
-			<tr>
-			<td width="500">
-		         <div class="row">
-		         <div></div>
-		            <div class="col-md-1.8">
-						<input type="text" name="startDate" id="startDate">
-		            </div>
-		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
-		            <div class="col-md-1.5">
-	      		 		<input type="text" name="endDate" id="endDate"> 
-		            </div>
-	      				  &nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
-	      				  
-		      </div>
-		      
-				<td>
-			</tr>
-			</table>
-			<hr>
-		</div>
-		</div>
-		</form>
-	</div>
-
-<jsp:include page="../../../../footer.jsp" flush="true">
-<jsp:param value="" name=""/>
-</jsp:include>
+</div>
+	<jsp:include page="../../../../footer.jsp" flush="true">
+		<jsp:param value="" name=""/>
+	</jsp:include>
 </body>
 </html>

@@ -46,11 +46,25 @@ public class ReviewController {
 		log.info(param.getRbcontent());
 
 		
-		String pagesize="5";
+		String pagesize="10";
 		String groupsize="5";
 		String curpage="1";
 		String totalcount="0";
 		
+		//날짜 조회
+		String startDate = param.getStartDate();
+		String endDate = param.getEndDate();
+		
+		//시작일 종료일 날짜형식 변환
+		if(startDate == null && endDate == null) {
+			startDate = "";
+			endDate ="";
+		}else {
+			startDate = startDate.replace("/", "-");
+			endDate = endDate.replace("/", "-");
+			log.info("startDate>>>"+startDate);
+			log.info("endDate>>>"+endDate);
+		}
 		
 		if(request.getParameter("curpage") !=null) {
 			curpage=request.getParameter("curpage");
@@ -110,7 +124,7 @@ public class ReviewController {
 		log.info(param.getRbcontent());
 		
 		
-		String pagesize="5";
+		String pagesize="10";
 		String groupsize="5";
 		String curpage="1";
 		String totalcount="0";
@@ -232,7 +246,7 @@ public class ReviewController {
 			
 			int size=10*1024*1024;
 			//파일 경로
-			String uploadPath="C://Users//chemi//git//EduCatch//EduCatch//WebContent//assets//img//reviewImg";
+			String uploadPath=request.getServletContext().getRealPath("")+"//assets//img//reviewImg";
 			
 			
 			

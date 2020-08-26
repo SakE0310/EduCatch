@@ -229,7 +229,7 @@ $(document).ready(function() {
 			<h4 id ="font_id">후기게시글 </h4>
 			<hr>
 		</div>
-		<div class="container shadow"  style="width: 800px; height: 570px; "overflow:auto;" id ="container_div">
+		<div class="container shadow"  style="width: 800px; height: 570px; overflow:auto;" id ="container_div">
 		<br>
 			<table align ="center" class="table">
 			 	<colgroup>
@@ -275,6 +275,7 @@ $(document).ready(function() {
 				</table>
 			</div>
 		</div>
+	</div>
 	</div>
 
 	<br>

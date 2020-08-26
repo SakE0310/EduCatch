@@ -408,16 +408,19 @@
                   <!-- 동적생성요소 댓글리스트 들어갈 자리 -->   
                </tbody>
             </table>
-         <form id="replyInsertForm">   
+         <form id="replyInsertForm">  
             <table class="reply_insert_wrap" align="center" width="1100" height="100">
                <tr class="marT5 marL5 marB5">
                   <td>
+               	  <div style="weight: 300; height: 50;">
                      <textarea name="recontent" id="recontent" style="padding:10px; width:90%;" placeHolder="댓글을 입력해주세요."></textarea>
                      <input type="button" class="btn_light btn_box_02" id="replyInsert" value="등록" style="vertical-align:middle;"/>
                      <input type="hidden" id="reno" name="reno"/>
+                  </div>
                   </td>
                </tr>
             </table>
+            </div> 
          </form>
          </div>
       </div>

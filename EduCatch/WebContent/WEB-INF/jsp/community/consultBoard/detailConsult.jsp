@@ -61,7 +61,6 @@
 		
 		$("#listData").click(function(){
 			
-			alert("listData >>>");
 			$("#ConsultForm").attr("action","listConsult.ec");
 			$("#ConsultForm").attr("method","POST");
 			$("#ConsultForm").submit();
@@ -136,22 +135,29 @@
 			<tr align="center">
 				<td>
 					<a href="selectUpdate1.ec?cbno=<%= cvo.getCbno()%>">
-					<input type="button" id="updateData" value="수정" class=" btn_light btn_box_01"/>
+					<input type="button" id="updateData" value="수정" class=" btn_light btn_box_01"/>&nbsp;	
 					</a>
 				</td>
 				<td>
-					<input type="button" id="deleteData" value="삭제" class=" btn_light btn_box_01"/>
+					<input type="button" id="deleteData" value="삭제" class=" btn_light btn_box_01"/>&nbsp;	
 				</td>
-<%
-	}
-%>
 				<td align="center">
 					<input type="button" id="listData" value="목록" class=" btn_light btn_box_01"/>
 				</td>
 			</tr>
 		</table>
 <%
-		
+	}else{
+%>
+		<table style="margin-left: auto; margin-right: auto;" border="0">
+			<tr align="center">
+				<td>
+					<input type="button" id="listData" value="목록"   class=" btn_light btn_box_01" style="margin: auto;"/>
+				</td>
+			</tr>
+		</table>
+<%
+		}
 	}else if(mvo == null){
 %>
 		<script>

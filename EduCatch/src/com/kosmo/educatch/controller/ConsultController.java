@@ -34,7 +34,7 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		log.info("ConsultController listConsult >>> 호출성공");
 		
 		String pno="P003";
-		String pagesize="5";
+		String pagesize="10";
 		String groupsize="5";
 		String curpage="1";
 		String totalcount="0";
@@ -108,7 +108,7 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		log.info("ConsultController searchConsult >>> 호출성공");
 		
 		String pno="P003";
-		String pagesize="5";
+		String pagesize="10";
 		String groupsize="5";
 		String curpage="1";
 		String totalcount="0";

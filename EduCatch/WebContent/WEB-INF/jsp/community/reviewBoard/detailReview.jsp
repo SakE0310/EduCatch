@@ -42,28 +42,18 @@
 	.btn_box_01 {
 	    width: auto;
 	    padding: 3px 10px;
+	    align: center;
 	}
+	
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	
 	$(document).ready(function() {
-		/*
-		//수정 버튼 눌렀을 떄
-		$("#updateData").click(function(){
-			
-			alert("updateData >>>");
-			$("#rbno").val(rbno);
-			$("#ReviewForm").attr("action","selectUpdate.ec");
-			$("#ReviewForm").attr("method","POST");
-			$("#ReviewForm").submit();
-			
-		});
-		*/
 		
 		$("#deleteData").click(function(){
 			
-			alert("deleteData >>>");
+			alert("정말로 삭제하시겠습니까?");
 			$("#ReviewForm").attr("action","deleteReview.ec");
 			$("#ReviewForm").attr("method","POST");
 			$("#ReviewForm").submit();
@@ -72,7 +62,6 @@
 	
 		$("#listData").click(function(){
 			
-			alert("listData >>>");
 			$("#ReviewForm").attr("action","listReview.ec");
 			$("#ReviewForm").attr("method","POST");
 			$("#ReviewForm").submit();
@@ -103,7 +92,7 @@
 			if(mvo !=null){
 %>
 <p></p>
-	<div class="container">
+	<div class="container" style="width: auto; height: auto;">
 		<form id="ReviewForm" name="ReviewForm">
 		 	<input type="hidden" id="ano" name="ano" value="<%= rvo.getAno()%>"/> 
 		 	<input type="hidden" id="aname" name="aname" value="<%= rvo.getAname()%>"/> 
@@ -163,22 +152,29 @@
 			<tr align="center">
 				<td>
 					<a href="selectUpdate.ec?rbno=<%= rvo.getRbno()%>">
-					<input type="button" id="updateData" value="수정" class=" btn_light btn_box_01"/>
+					<input type="button" id="updateData" value="수정" class=" btn_light btn_box_01"/>&nbsp;	
 					</a>
 				</td>
 				<td>
-					<input type="button" id="deleteData" value="삭제" class=" btn_light btn_box_01"/>
+					<input type="button" id="deleteData" value="삭제" class=" btn_light btn_box_01"/>&nbsp;	
 				</td>
-<%
-	}
-%>
 				<td align="center">
 					<input type="button" id="listData" value="목록"   class=" btn_light btn_box_01"/>
 				</td>
 			</tr>
 		</table>
 <%
-			
+	}else{
+%>
+		<table style="margin-left: auto; margin-right: auto;" border="0">
+			<tr align="center">
+				<td>
+					<input type="button" id="listData" value="목록"   class=" btn_light btn_box_01" style="margin: auto;"/>
+				</td>
+			</tr>
+		</table>
+<%
+			}	
 		}else if(mvo == null){
 %>
 		<script>

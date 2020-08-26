@@ -27,9 +27,133 @@
 <script src="/EduCatch/assets/datepicker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <script src="/EduCatch/assets/datepicker/jquery-ui-1.12.1/datepicker-ko.js"></script>
 
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap" rel="stylesheet">
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
 <style type="text/css">
+	/*미디어 쿼리*/
+	/* Mobile Device (가로폭 767px 이하) */
+	@media all and (max-width:767px) {
+		thead {
+			display: none;
+		}
+		.nice-select{
+		    width: 50px;
+		    height: 35px;
+		    padding-left: 0px;
+		}
+		#keyword{
+			width: 90px;
+			height: 32px;
+		}
+		.btn_light {
+		  height: 30px;
+		}
+		.gj-textbox-md{
+			width: 100px;
+    		height: 40px;
+    		
+		}
+		
+		.gj-datepicker-md [role="right-icon"] {
+		    position: absolute;
+		    left: 5px;
+		    top: 10px;
+		    font-size: 24px;
+		}
+		#b{
+			width: 300px;
+		}
+		#nfont{
+			display: none;
+		}
+		#mfont{
+			font-size: 30px;
+		}
+		#media_mobile{
+			width: 330px;
+    		height: 130px;
+		}
+		 #keyword{
+			width:96px; 
+	}
+	.gj-textbox-md {
+			width: 100px;
+			font-size: 10px;
+		}
+		.media_mobile_td{
+			display: none;
+		}
+		
+	}
+	
+	/* Tablet (가로폭 768px 이상, 1023px 이하) */
+	@media all and (min-width:768px) and (max-width:1023px) {
+	
+	/* 브라우저 가로폭이 768~1023px일때 적용될 css (태블릿) */
+	#media_mobile{
+	 	width: 400px;
+   		 height: 180px;
+	 }
+	 
+	 #keyword{
+			width:200px; 
+	}
+	.gj-textbox-md {
+			width: 130px;
+			font-size: 15px;
+		}
+	#nfont{
+			display: none;
+		}
+	#mfont{
+			font-size: 50px;
+		}
+	.nice-select{
+	    width: 60px;
+    	height: 35px;
+	    padding-left: 10px;
+	}
+	}
+	
+	/* PC Desktop (가로폭 1024 이상) */
+	@media all and (min-width:1024px) {
+	
+		body {
+		}
+		#media_mobile{
+			width: 700px;
+		}
+		
+		#b{
+			width: 700px;
+		}
+		.nice-select{
+		    width: 70px;
+		    height: 35px;
+		    padding-left: 0px;
+		}
+		 #media_mobile{
+	 	width: 1100px;
+	 	margin: auto;
+	 }
+	 	#mfont{
+	 	display: none;
+	 }
+	 #keyword{
+			width:200px; 
+	}
+	.gj-textbox-md {
+			width: 130px;
+			font-size: 15px;
+		}
+	}
+	
+	/* --------------------------------------------- */
+
 	#nno_color{
 		color: black;
 	}
@@ -41,22 +165,24 @@
 	.btn_light {
 	    display: inline-block;
 	    text-align: center;
-	    background: #e5e5e5;
-	    color: #555;
+	    background: #140C40;
+	    color: #ffffff;
 	    vertical-align: middle;
 	    cursor: pointer;
-	    border: 1px solid #e5e5e5;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
 		}
 	.btn_box_01 {
-		height: 40px;
-	    width: 60px;
+	    width: auto;
 	    padding: 3px 10px;
-	    margin-bottom: 3px;
 	}	
 	.bbs-link-btm {
 	    float: right;
 	    margin: 20px 0px 0;
 	    text-align: left;
+	   
 	}
 	.bbs-link {
    	 position: relative;
@@ -67,16 +193,50 @@
   	height: 100px;
   	margin: auto;
 	}
-	#dForm{
-	 width: 350px;
-  	height: 100px;
-  	margin: auto;
+	#row-magin{
+		margin-bottom: 185px;
+	}	
+	
+	 #nfont, #mfont{
+	 	font-family: 'Do Hyeon', sans-serif;
+	  }
+		
+	#mainWrapper{
+		font-family: 'Gothic A1', sans-serif;
+	} 	
+	.table_head_font{
+		font-family: 'Do Hyeon', sans-serif;
 	}
 	
-	#aa{
-		color:black;
+	#keyword{
+			height:30px;
+			border: 1px solid #140C40;
+			 border-radius: 0.5em;
+		}
+		
+	/*데이트 피커*/
+	.gj-textbox-md{ 
+		border: 1px solid #140C40;
+		
 	}
 	
+	.gj-icon{
+			color : #140C40;
+		}
+		
+	.gj-textbox-md {
+   			height: 30px;
+		}
+	.gj-datepicker-md [role="right-icon"] {
+	    left: 3px;
+   		top: 3px;
+  	 }
+   		 
+	
+	 #c{
+	 	height: 10px;
+	 }
+	 /*---------------------------------*/
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -104,8 +264,8 @@
 		$("#searchPiker").click(function() {
 			console.log("날짜 검색버튼 누름");
 			
-			var startVal = document.searchForm.startDate.value;
-			var endVal = document.searchForm.endDate.value;
+        	var startVal = document.searchForm.startDate.value;
+         	var endVal = document.searchForm.endDate.value;
 			
 			console.log("startVal>>>"+startVal);
 			console.log("endVal>>>"+endVal);
@@ -141,9 +301,7 @@
 			$("#consultForm").attr("action","searchConsult.ec");
 			$("#consultForm").attr("method","POST");
 			$("#consultForm").submit();
-			 
-			
-			alert("아직안만듬");
+
 		})//end of searchData
 		
 		//글쓰기 버튼 눌렀을 때 실행
@@ -180,18 +338,42 @@
 		int nCnt=listConsult.size();
 	
 %>
+
+
+	<div id="mainWrapper" align = "center">
+		<div  id="media_mobile" >
+		<form id="searchForm" name="searchForm">
+			<table border="0" cellpadding="1" cellspacing="1" align="left">
+			<tr>	
+				<td align="center" id = "mfont">상담 게시판</h4>
+				<br>
+				<br>
+				</td>
+			</tr>
+			<tr>
+			<td width="500">
+		         <div class="row" id="c">
+		         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		            <div class="col-md-1.8">
+						<input type="text" name="startDate" id="startDate">
+		            </div>
+		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		            <div class="col-md-1.5">
+	      		 		<input type="text" name="endDate" id="endDate"> 
+		            </div>
+	      				&nbsp;&nbsp; <input type="button" id="searchPiker" value="검색"
+	      							  class=" btn_light btn_box_01">
+		      </div>
+		      </td>
+			  <td align="center" id = "nfont"><h1>상담 게시판</h1></td>
+			</tr>
+			</table>
+		</form>
+	</div>
+		
 	<form id="consultForm" name="consultForm">
 		<input type="hidden" id="cbno" name="cbno"/>
-	<div id="mainWrapper">
-		<div>
-		<table  border="0" cellpadding="1" cellspacing="1" align="center">
-			<tr>
-				<td align="center"><h1>상담 게시판</h1></td>
-			</tr>
-		</table>
-		<hr>
-		</div>
-		<div class="container">
+		<div class="container" class="table">
 		<table align="center" class="table">
 			<colgroup>
 				<col width="120px"/>
@@ -202,11 +384,11 @@
 			</colgroup>
 			<thead id="table_head">	
 				<tr>
-					<td align="center">글번호</td>
-					<td align="center">학원명</td>
-					<td align="center">제목</td>
-					<td align="center">작성자</td>
-					<td align="center">날짜</td>
+					<td align="center" class ="table_head_font">글번호</td>
+					<td align="center" class ="table_head_font">학원명</td>
+					<td align="center" class ="table_head_font">제목</td>
+					<td align="center" class ="table_head_font">작성자</td>
+					<td align="center" class ="table_head_font">날짜</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -231,11 +413,11 @@ if(listConsult !=null && nCnt>0){
 	
 %>
 					<tr align="center">
-						<td class="cc"><%= cvo.getCbno() %></td>
-						<td class="cc"><%= cvo.getAname() %></td>
-						<td class="cc"><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
-						<td class="cc"><%= cvo.getCbname() %></td>
-						<td class="cc"><%= cvo.getCinsertdate() %></td>
+						<td class="media_mobile_td"><%= cvo.getCbno() %></td>
+						<td><%= cvo.getAname() %></td>
+						<td><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
+						<td class="media_mobile_td"><%= cvo.getCbname() %></td>
+						<td class="media_mobile_td"><%= cvo.getCinsertdate() %></td>
 					</tr>
 <%
 				}	
@@ -255,7 +437,7 @@ if(listConsult !=null && nCnt>0){
 %>			
 			</tbody>
 			<tr>
-			<td colspan="18">
+			<td colspan="5">
 			<jsp:include page="memberPaging.jsp" flush="true">
 				<jsp:param name="url" value="listConsult.ec"/>
 				<jsp:param name="str" value=""/>
@@ -272,18 +454,18 @@ if(listConsult !=null && nCnt>0){
 	}//end of if(obj)
 		
 %>
-	<tr>	
+	<tr id ="media_mobile_tr">	
 		<td colspan="3" align="left">
-			<select name="searchFilter">
+			<select name="searchFilter" id ="searchFilter">
 				<option value="제목">제목</option>
 				<option value="내용">내용</option>
 			</select>
-			<input type="text" name="keyword" id = "keyword" style="width:200px; height: 40px;">
+			<input type="text" name="keyword" id = "keyword">
 			<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
 		</td>
 <%
 		if(mvo != null){
-			if( mvo.getMauth().equals("1")){
+			if( mvo.getMauth().equals("1") || mvo.getMauth().equals("3")){
 %>
 		
 			<td colspan="2" align="right">
@@ -298,36 +480,8 @@ if(listConsult !=null && nCnt>0){
 		</tbody>
 		</table>
 	</div>
-	</div>
 </form>
-	<div>
-		<form id="searchForm" name="searchForm">
-		
-		<div id="mainWrapper" align = "center">
-		<div align = "center" style="width: 700px;" >
-			<table border="0" cellpadding="1" cellspacing="1" align="center">
-			<tr>
-			<td width="500">
-		         <div class="row">
-		         <div></div>
-		            <div class="col-md-1.8">
-						<input type="text" name="startDate" id="startDate">
-		            </div>
-		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
-		            <div class="col-md-1.5">
-	      		 		<input type="text" name="endDate" id="endDate"> 
-		            </div>
-	      				&nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
-		      </div>
-		      
-				<td>
-			</tr>
-			</table>
-			<hr>
-		</div>
-		</div>
-		</form>
-	</div>
+</div>	
 	<jsp:include page="../../../../footer.jsp" flush="true">
 		<jsp:param value="" name=""/>
 	</jsp:include>
