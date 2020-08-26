@@ -71,7 +71,7 @@ public class ManageController {
 		mv.addObject("academylist", academylist);
 		mv.addObject("subjectlist", subjectlist);
 		mv.addObject("conlist", conlist);
-		mv.setViewName("manage/academyManage");
+		mv.setViewName("manage/academyManage2");
 
 		return mv;
 	}
@@ -109,7 +109,7 @@ public class ManageController {
 		
 		MemberVO mvo = null;
 		String member_mno=request.getParameter("ano");
-		
+		log.info("ano >>> " + member_mno);
 		avo.setAno(member_mno);
 		svo.setAno(member_mno);
 		cvo.setAno(member_mno);
@@ -127,123 +127,77 @@ public class ManageController {
 		return mv;
 	}
 
+	@ResponseBody
 	@RequestMapping("manageInsertSubject.ec")
-	public ModelAndView manageInsertSubject(HttpSession session, HttpServletRequest request, SubjectVO svo, AcademyVO avo,
-			ConvenienceVO cvo) {
+	public Map<String, String> manageInsertSubject(HttpServletRequest request, SubjectVO svo) {
 		log.info("ManageController manageInsertSubject >>> ");
-		MemberVO mvo = null;
-		String member_mno="";
-		if(session != null) {
-			mvo = (MemberVO)session.getAttribute("user");
-			member_mno = mvo.getMno();
-		}
 		
-		avo.setAno(member_mno);
-		svo.setAno(member_mno);
-		cvo.setAno(member_mno);
-		
+		String ano=request.getParameter("academy_ano");
+		svo.setSname(request.getParameter("sname"));
+		svo.setSday(request.getParameter("sday"));
+		svo.setStime(request.getParameter("stime"));
+		svo.setSprice(request.getParameter("sprice"));
+		svo.setSpeople(request.getParameter("speople"));
+		svo.setSno(request.getParameter("sno"));
+
+		svo.setAcademy_ano(ano);
 		
 		int i = manageService.insertSubject(svo);
-
-		List<AcademyVO> academylist = manageService.academyManageView(avo);
-		List<SubjectVO> subjectlist = manageService.subjectManageView(svo);
-		List<ConvenienceVO> conlist = manageService.conManageView(cvo);
-
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("academylist", academylist);
-		mav.addObject("subjectlist", subjectlist);
-		mav.addObject("conlist", conlist);
-		if (i > 0) {
-			mav.addObject("resultStr", "등록 성공");
-			mav.setViewName("manage/academyManage");
-		} else {
-			mav.addObject("resultStr", "등록 실패");
-			mav.setViewName("manage/academyManage");
+		
+		Map<String, String> map = new HashMap<String, String>();
+		if(i >0) {
+			map.put("result", "success");
 		}
 
 		log.info("ManageController manageInsertSubject 끝>>> ");
 
-		return mav;
+		return map;
 	}
 	
+	@ResponseBody
 	@RequestMapping("manageUpdateSubject")
-	public ModelAndView manageUpdateSubject(HttpSession session, HttpServletRequest request, SubjectVO svo, AcademyVO avo,
-			ConvenienceVO cvo) {
+	public Map<String, String> manageUpdateSubject(HttpServletRequest request, SubjectVO svo) {
 		log.info("ManageController manageUpdateSubject >>> ");
-		MemberVO mvo = null;
-		String member_mno="";
-		if(session != null) {
-			mvo = (MemberVO)session.getAttribute("user");
-			member_mno = mvo.getMno();
-		}
 		
-		avo.setMno(member_mno);
-		svo.setMno(member_mno);
-		cvo.setMno(member_mno);
+		svo.setSname(request.getParameter("sname"));
+		svo.setSday(request.getParameter("sday"));
+		svo.setStime(request.getParameter("stime"));
+		svo.setSprice(request.getParameter("sprice"));
+		svo.setSpeople(request.getParameter("speople"));
+		svo.setSno(request.getParameter("sno"));
 		
-		
+		log.info("svo >>> " + svo);
 		int i = manageService.updateSubject(svo);
 
-		List<AcademyVO> academylist = manageService.academyManageView(avo);
-		List<SubjectVO> subjectlist = manageService.subjectManageView(svo);
-		List<ConvenienceVO> conlist = manageService.conManageView(cvo);
-
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("academylist", academylist);
-		mav.addObject("subjectlist", subjectlist);
-		mav.addObject("conlist", conlist);
-		
-		if (i > 0) {
-			mav.addObject("resultStr", "수정 성공");
-			mav.setViewName("manage/academyManage");
-		} else {
-			mav.addObject("resultStr", "수정 실패");
-			mav.setViewName("manage/academyManage");
+		Map<String, String> map = new HashMap<String, String>();
+		if(i >0) {
+			map.put("result", "success");
 		}
 
 		log.info("ManageController manageUpdateSubject 끝>>> ");
 		
-		return mav;
+		return map;
 	}
 	
+	@ResponseBody
 	@RequestMapping("manageDeleteSubject")
-	public ModelAndView manageDeleteSubject(HttpSession session, HttpServletRequest request, SubjectVO svo, AcademyVO avo,
-			ConvenienceVO cvo) {
+	public Map<String, String> manageDeleteSubject(HttpServletRequest request, SubjectVO svo) {
 		log.info("ManageController manageDeleteSubject >>> ");
-		MemberVO mvo = null;
-		String member_mno="";
-		if(session != null) {
-			mvo = (MemberVO)session.getAttribute("user");
-			member_mno = mvo.getMno();
-		}
 		
-		avo.setMno(member_mno);
-		svo.setMno(member_mno);
-		cvo.setMno(member_mno);
+		svo.setSno(request.getParameter("sno"));
 		
 		
 		int i = manageService.deleteSubject(svo);
 
-		List<AcademyVO> academylist = manageService.academyManageView(avo);
-		List<SubjectVO> subjectlist = manageService.subjectManageView(svo);
-		List<ConvenienceVO> conlist = manageService.conManageView(cvo);
-
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("academylist", academylist);
-		mav.addObject("subjectlist", subjectlist);
-		mav.addObject("conlist", conlist);
 		
-		if (i > 0) {
-			mav.addObject("resultStr", "삭제 성공");
-			mav.setViewName("manage/academyManage");
-		} else {
-			mav.addObject("resultStr", "삭제 실패");
-			mav.setViewName("manage/academyManage");
+		Map<String, String> map = new HashMap<String, String>();
+		if(i >0) {
+			map.put("result", "success");
 		}
 
 		log.info("ManageController manageDeleteSubject 끝>>> ");
 		
-		return mav;
+		return map;
 	}
 
 	@RequestMapping("manageUpdateAcademy")
@@ -381,12 +335,10 @@ public class ManageController {
 	
 	
 	
+	@ResponseBody
 	@RequestMapping("manageUpdateConvenience")
-	public ModelAndView manageUpdateConvenience(@ModelAttribute AcademyVO avo, SubjectVO svo, ConvenienceVO cvo,
-			HttpSession session, HttpServletRequest request) {
+	public Map<String, String> manageUpdateConvenience(ConvenienceVO cvo, HttpServletRequest request) {
 		log.info("ManageController manageUpdateConvenience >>> 시작");
-		log.info("ManageController manageUpdateConvenience >>> 시작");
-		ModelAndView mav = new ModelAndView();
 		
 		String academy_ano = request.getParameter("academy_ano");
 		String acparking = request.getParameter("acparking");
@@ -397,61 +349,14 @@ public class ManageController {
 		String aclounge = request.getParameter("aclounge");
 		String aclocker = request.getParameter("aclocker");
 		
-		
-		if(acparking !=null) {
-			cvo.setAcparking(acparking);
-		}else {
-			acparking = "N";
-			cvo.setAcparking(acparking);
-		}
-		
-		
-		if(acstore !=null) {
-			cvo.setAcstore(acstore);
-		}else {
-			acstore = "N";
-			cvo.setAcstore(acstore);
-		}
-		
-		
-		if(acbus !=null) {
-			cvo.setAcbus(acbus);
-		}else {
-			acbus = "N";
-			cvo.setAcbus(acbus);
-		}
-		
-		
-		if(acelevator !=null) {
-			cvo.setAcelevator(acelevator);
-		}else {
-			acelevator = "N";
-			cvo.setAcelevator(acelevator);
-		}
-		
-		
-		if(acstudyroom !=null) {
-			cvo.setAcstudyroom(acstudyroom);
-		}else {
-			acstudyroom = "N";
-			cvo.setAcstudyroom(acstudyroom);
-		}
-		
-		
-		if(aclounge !=null) {
-			cvo.setAclounge(aclounge);
-		}else {
-			aclounge = "N";
-			cvo.setAclounge(aclounge);
-		}
-		
-		
-		if(aclocker !=null) {
-			cvo.setAclocker(aclocker);
-		}else {
-			aclocker = "N";
-			cvo.setAclocker(aclocker);
-		}
+		cvo.setAcademy_ano(academy_ano);
+		cvo.setAcparking(acparking);
+		cvo.setAcstore(acstore);
+		cvo.setAcbus(acbus);
+		cvo.setAcelevator(acelevator);
+		cvo.setAcstudyroom(acstudyroom);
+		cvo.setAclounge(aclounge);
+		cvo.setAclocker(aclocker);
 		
 		log.info("academy_ano >>> " + academy_ano);
 		log.info("acparking >>> " + acparking);
@@ -462,38 +367,15 @@ public class ManageController {
 		log.info("aclounge >>> " + aclounge);
 		log.info("aclocker >>> " + aclocker);
 		
-
-		log.info("시작");
 		int i = manageService.updateConvenience(cvo);
-		log.info("끝");
 		
-		MemberVO mvo = null;
-		String member_mno="";
-		if(session != null) {
-			mvo = (MemberVO)session.getAttribute("user");
-			member_mno = mvo.getMno();
-		}
-		
-		avo.setMno(member_mno);
-		svo.setMno(member_mno);
-		cvo.setMno(member_mno);
-		
-		List<AcademyVO> academylist = manageService.academyManageView(avo);
-		List<SubjectVO> subjectlist = manageService.subjectManageView(svo);
-		List<ConvenienceVO> conlist = manageService.conManageView(cvo);
-		mav.addObject("academylist", academylist);
-		mav.addObject("subjectlist", subjectlist);
-		mav.addObject("conlist", conlist);
-
-		if (i > 0) {
-			mav.addObject("resultStr", "수정 완료");
-		} else {
-			mav.addObject("resultStr", "수정 실패");
+		Map<String, String> map = new HashMap<String, String>();
+		if(i >0) {
+			map.put("result", "success");
 		}
 
-		mav.setViewName("manage/academyManage");
 		log.info("ManageController manageUpdateConvenience >>> 끝");
-		return mav;
+		return map;
 
 	}
 	

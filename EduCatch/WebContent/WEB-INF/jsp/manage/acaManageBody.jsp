@@ -4,9 +4,11 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<head>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>
-<script type="text/javascript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+</head>
+
 <script type="text/javascript">
 $(document).ready(function(){
 	//편의기능수정 셀렉트
@@ -89,7 +91,7 @@ $(document).ready(function(){
 					st +="		 <input type='checkbox' id='aclocker' name='aclocker' value='Y'>&nbsp;사물함<br><br>";
 				}
 				
-				st +="		 <input type='hidden' id='academy_ano' name='academy_ano' value="+academy_ano+">";
+				st +="		 <input type='hidden' id='academy_ano2' name='academy_ano2' value="+academy_ano+">";
 				st +="   </div>";
 				
 				
@@ -134,25 +136,25 @@ $(document).ready(function(){
 				st = "<table class='table table-condensed'>";
 			   	st +="<tr>";
 			    st +="   <td>과목명</td>";
-			    st +="    <td><input type='text' class='form-control' id='sname' name='sname' value="+sname+"></td>";
+			    st +="    <td><input type='text' class='form-control' id='sname1' name='sname1' value='"+sname+"'></td>";
 			    st +=" </tr>";
 			    st +=" <tr>";
 			    st +="    <td>수강날짜</td>";
-			    st +="    <td><input type='text' class='form-control' id='sday' name='sday' value="+sday+"></td>";
+			    st +="    <td><input type='text' class='form-control' id='sday1' name='sday1' value='"+sday+"'></td>";
 			    st +=" </tr>";
 			    st +=" <tr>";
 			    st +="    <td>수강시간</td>";
-			    st +="    <td><input type='text' class='form-control' id='stime' name='stime' value="+stime+"></td>";
+			    st +="    <td><input type='text' class='form-control' id='stime1' name='stime1' value='"+stime+"'></td>";
 			    st +=" </tr>";
 			    st +=" <tr>";
 			    st +="    <td>수강금액</td>";
-			    st +="    <td><input type='text' class='form-control' id='sprice' name='sprice' value="+sprice+"></td>";
+			    st +="    <td><input type='text' class='form-control' id='sprice1' name='sprice1' value='"+sprice+"'></td>";
 			    st +=" </tr>";
 			    st +=" <tr>";
 			    st +="    <td>수강인원</td>";
-			    st +="    <td><input type='text' class='form-control' id='speople' name='speople' value="+speople+"></td>";
-			    st +="    <input type='hidden' class='form-control' id='sno' name='sno' value="+sno+">";
-			    st +="    <input type='hidden' class='form-control' id='sdeleteyn' name='sdeleteyn' value="+sdeleteyn+">";
+			    st +="    <td><input type='text' class='form-control' id='speople1' name='speople1' value='"+speople+"'></td>";
+			    st +="    <input type='hidden' class='form-control' id='sno1' name='sno1' value='"+sno+"'>";
+			    st +="    <input type='hidden' class='form-control' id='sdeleteyn1' name='sdeleteyn1' value='"+sdeleteyn+"'>";
 			    st +=" </tr>";
 			    st +="	</table>";
 				$('.subjectdiv').html(st);
@@ -197,25 +199,25 @@ $(document).ready(function(){
 				st = "<table class='table table-condensed'>";
 			   	st +="<tr>";
 			    st +="   <td>과목명</td>";
-			    st +="    <td><input type='text' class='form-control' id='sname' name='sname' value="+sname+" readonly></td>";
+			    st +="    <td><input type='text' class='form-control' id='sname2' name='sname2' value='"+sname+"' readonly></td>";
 			    st +=" </tr>";
 			    st +=" <tr>";
 			    st +="    <td>수강날짜</td>";
-			    st +="    <td><input type='text' class='form-control' id='sday' name='sday' value="+sday+" readonly></td>";
+			    st +="    <td><input type='text' class='form-control' id='sday2' name='sday2' value='"+sday+"' readonly></td>";
 			    st +=" </tr>";
 			    st +=" <tr>";
 			    st +="    <td>수강시간</td>";
-			    st +="    <td><input type='text' class='form-control' id='stime' name='stime' value="+stime+" readonly></td>";
+			    st +="    <td><input type='text' class='form-control' id='stime2' name='stime2' value='"+stime+"' readonly></td>";
 			    st +=" </tr>";
 			    st +=" <tr>";
 			    st +="    <td>수강금액</td>";
-			    st +="    <td><input type='text' class='form-control' id='sprice' name='sprice' value="+sprice+" readonly></td>";
+			    st +="    <td><input type='text' class='form-control' id='sprice2' name='sprice2' value='"+sprice+"' readonly></td>";
 			    st +=" </tr>";
 			    st +=" <tr>";
 			    st +="    <td>수강인원</td>";
-			    st +="    <td><input type='text' class='form-control' id='speople' name='speople' value="+speople+" readonly></td>";
-			    st +="    <input type='hidden' class='form-control' id='sno' name='sno' value="+sno+">";
-			    st +="    <input type='hidden' class='form-control' id='sdeleteyn' name='sdeleteyn' value="+sdeleteyn+">";
+			    st +="    <td><input type='text' class='form-control' id='speople2' name='speople2' value='"+speople+"' readonly></td>";
+			    st +="    <input type='hidden' class='form-control' id='sno2' name='sno2' value='"+sno+"'>";
+			    st +="    <input type='hidden' class='form-control' id='sdeleteyn2' name='sdeleteyn2' value='"+sdeleteyn+"'>";
 			    st +=" </tr>";
 			    st +="	</table>";
 				$('.subjectdeletediv').html(st);
@@ -270,31 +272,139 @@ $(document).ready(function(){
 	
 	//과목추가 버튼
 	$('#addSubject').on('click', function(){
-		$('#subjectForm').attr("action", "manageInsertSubject.ec");
-		$('#subjectForm').attr("method", "POST");
-		$('#subjectForm').submit();
+		
+		var academy_ano = $('#academy_ano').val(); 
+		var sname = $('#sname').val();
+		var sday = $('#sday').val();
+		var stime = $('#stime').val();
+		var sprice = $('#sprice').val();
+		var speople = $('#speople').val();
+		var sno = $('#sno').val();
+		$.ajax({
+			url : "manageInsertSubject.ec",
+			type : "post",
+			data : {
+				"academy_ano" : academy_ano,
+				"sname": sname,
+				"sday": sday,
+				"stime": stime,
+				"sprice": sprice,
+				"speople": speople,
+				"sno": sno
+				},
+			dataType : "json"
+		}).done(function(resultParam){
+			$('#modal-container-749484').modal("hide");
+			if(resultParam.result!="success"){
+				alert('정상적으로 데이터가 등록되지 않았습니다.');
+			}else{
+				ajaxData2();
+			}
+		}).fail(function(resultParam){
+			$('#modal-container-749484').modal("hide");
+			alert("추가시 DB연결에 문제가 발생하였습니다.");
+		});
 	});
 	
 	//과목수정 버튼
 	$('#updateSubject').on('click', function(){
-		$('#subjectUpdateForm').attr("action", "manageUpdateSubject.ec");
-		$('#subjectUpdateForm').attr("method", "POST");
-		$('#subjectUpdateForm').submit();
+		
+		var sname = $('#sname1').val();
+		var sday = $('#sday1').val();
+		var stime = $('#stime1').val();
+		var sprice = $('#sprice1').val();
+		var speople = $('#speople1').val();
+		var sno = $('#sno1').val();
+		$.ajax({
+			url : "manageUpdateSubject.ec",
+			type : "post",
+			data : {
+				"sname": sname,
+				"sday": sday,
+				"stime": stime,
+				"sprice": sprice,
+				"speople": speople,
+				"sno": sno
+				},
+			dataType : "json"
+		}).done(function(resultParam){
+			if(resultParam.result!="success"){
+				$('#modal-container-749411').modal("hide");
+				alert('정상적으로 데이터가 등록되지 않았습니다.');
+			}else{
+				$('#modal-container-749411').modal("hide");
+				ajaxData2();
+			}
+		}).fail(function(resultParam){
+			alert("추가시 DB연결에 문제가 발생하였습니다.");
+			$('#modal-container-749411').modal("hide");
+		});
 	});
 	
 	//과목삭제 버튼
 	$('#deleteSubject').on('click', function(){
-		$('#subjectDeleteForm').attr("action", "manageDeleteSubject.ec");
-		$('#subjectDeleteForm').attr("method", "POST");
-		$('#subjectDeleteForm').submit();
+		
+		var sno = $('#sno2').val();
+		$.ajax({
+			url : "manageDeleteSubject.ec",
+			type : "post",
+			data : {
+				"sno": sno
+				},
+			dataType : "json"
+		}).done(function(resultParam){
+			$('#modal-container-749489').modal("hide");
+			if(resultParam.result!="success"){
+				$('#modal-container-749489').modal("hide");
+				alert('정상적으로 데이터가 삭제되지 않았습니다.');
+			}else{
+				$('#modal-container-749489').modal("hide");
+				ajaxData2();
+			}
+		}).fail(function(resultParam){
+			alert("추가시 DB연결에 문제가 발생하였습니다.");
+			$('#modal-container-749489').modal("hide");
+		});
 		
 	});
 	
 	//편의기능수정 버튼
 	$('#updateConvenience').on('click', function(){
-		$('#convenienceUpdateForm').attr("action", "manageUpdateConvenience.ec");
-		$('#convenienceUpdateForm').attr("method", "POST");
-		$('#convenienceUpdateForm').submit();
+		
+		var academy_ano = $('#academy_ano2').val();
+		var acparking = $('#acparking').is(":checked") ? 'Y' : 'N';
+		var acstore = $('#acstore').is(":checked") ? 'Y' : 'N';
+		var acbus = $('#acbus').is(":checked") ? 'Y' : 'N';
+		var acelevator = $('#acelevator').is(":checked") ? 'Y' : 'N';
+		var acstudyroom = $('#acstudyroom').is(":checked") ? 'Y' : 'N';
+		var aclounge = $('#aclounge').is(":checked") ? 'Y' : 'N';
+		var aclocker = $('#aclocker').is(":checked") ? 'Y' : 'N';
+		$.ajax({
+			url : "manageUpdateConvenience.ec",
+			type : "post",
+			data : {
+				"academy_ano": academy_ano,
+				"acparking": acparking,
+				"acstore": acstore,
+				"acbus": acbus,
+				"acelevator": acelevator,
+				"acstudyroom": acstudyroom,
+				"aclounge": aclounge,
+				"aclocker": aclocker
+				},
+			dataType : "json"
+		}).done(function(resultParam){
+			if(resultParam.result!="success"){
+				$('#modal-container-749487').modal("hide");
+				alert('정상적으로 데이터가 등록되지 않았습니다.');
+			}else{
+				$('#modal-container-749487').modal("hide");
+				ajaxData2();
+			}
+		}).fail(function(resultParam){
+			alert("추가시 DB연결에 문제가 발생하였습니다.");
+			$('#modal-container-749411').modal("hide");
+		});
 	});
 	
 	//두번째 주소창값을 가지고 좌표찍기
@@ -318,6 +428,26 @@ $(document).ready(function(){
 	});
 });
 
+function ajaxData2(){
+	var ano = $('#academy_ano').val();
+	$.ajax({
+		url : "acmb2.ec",
+		data : {
+			"ano" : ano,
+			},
+		dataType : "json"
+	}).done(function(resultParam){
+		$('.card-body').html(resultParam);
+	}).fail(function(resultParam){
+		if(resultParam.readyState == 4){
+			$('.card-body').html(resultParam.responseText);
+		}else{
+			alert("추가시 DB연결에 문제가 발생하였습니다.");	
+		}
+	}); 
+	
+}
+
 function checkOnly(chk){	 		
     var obj = document.getElementsByName("chkInBno");	        
     for(var i=0; i < obj.length; i++){ 
@@ -328,38 +458,37 @@ function checkOnly(chk){
 }	
 
 function addrCheck(){
-	new daum.Postcode({
-		oncomplete: function(data){
-			console.log("새우편번호 >>> : " + data.zonecode);
-			console.log("주소값 >>> : " + data.address);
-			console.log("빌딩값 >>> : " + data.buildingName);	
-			$('#aaddrno').val(data.zonecode);
-			$('#aaddr1').val(data.address);
-			$('#aaddr2').val(data.buildingName);
-			
-			
-			//주소를 가져왔을때 좌표찍기 
-			var geocoder = new kakao.maps.services.Geocoder();
-
-			var callback = function(result, status) {
-			    if (status === kakao.maps.services.Status.OK) {
-			        console.log(result);
-			        console.log(result[0].x);
-			        console.log(result[0].y);
-			        $('#axpoint').val(result[0].x);
-					$('#aypoint').val(result[0].y);
-			    }
-			};
-			
-			var address = $('#aaddr1').val() + " " + $('#aaddr2').val();
-			
-			geocoder.addressSearch(address, callback);
-					
+	daum.postcode.load(function(){
+		new daum.Postcode({
+			oncomplete: function(data){
+				console.log("새우편번호 >>> : " + data.zonecode);
+				console.log("주소값 >>> : " + data.address);
+				console.log("빌딩값 >>> : " + data.buildingName);	
+				$('#aaddrno').val(data.zonecode);
+				$('#aaddr1').val(data.address);
+				$('#aaddr2').val(data.buildingName);
 				
 				
-			
-		}
-	}).open();
+				//주소를 가져왔을때 좌표찍기 
+				var geocoder = new kakao.maps.services.Geocoder();
+	
+				var callback = function(result, status) {
+				    if (status === kakao.maps.services.Status.OK) {
+				        console.log(result);
+				        console.log(result[0].x);
+				        console.log(result[0].y);
+				        $('#axpoint').val(result[0].x);
+						$('#aypoint').val(result[0].y);
+				    }
+				};
+				
+				var address = $('#aaddr1').val() + " " + $('#aaddr2').val();
+				
+				geocoder.addressSearch(address, callback);
+	
+			}
+		}).open();
+	});
 }
 </script>
 <%-- ----------- 카트바디 ------------- --%>
@@ -406,7 +535,7 @@ function addrCheck(){
 			<div class="row" style="margin-top:50px">
 				<div class="col-md-4" align="right">
 					<input type="hidden" id="ano" name="ano" value="<%=avo.getAno() %>"/>
-					<input type="hidden" id="academy_ano" name="academy_ano" value="<%=avo.getAcademy_ano() %>"/>
+					<input type="hidden" id="academy_ano" name="academy_ano" value="<%=avo.getAno() %>"/>
 					<input type="hidden" id="member_mno" name="member_mno" />
 					<img src="/EduCatch/assets/img/academyLogo/<%= avo.getAlogo() %>" border=0 width="200" height="200" />
 				</div>
@@ -576,7 +705,7 @@ function addrCheck(){
 														     </tr>
 														</table>
 														<input type="hidden" class="form-control" id="sno" name="sno">
-														<input type="hidden" class="form-control" id="academy_ano" name="academy_ano" value="<%=avo.getAcademy_ano()%>">
+														<input type="hidden" class="form-control" id="academy_ano" name="academy_ano" value="<%=avo.getAno()%>">
 													</form>
 													</div>
 													<%
@@ -599,7 +728,7 @@ function addrCheck(){
 										</div>
 										<div class="col-md-4" align="right">
 											<a id="modal-749411" href="#modal-container-749411" role="button" class="btn btn-success" data-toggle="modal"><i class="fas fa-edit"></i> 과목수정</a>
-											<div class="modal fade" id="modal-container-749411" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											<div class="modal" id="modal-container-749411" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 												<div class="modal-dialog" role="document">
 													<div class="modal-content">
 														<div class="modal-header">
@@ -631,7 +760,7 @@ function addrCheck(){
 								
 								</div><!--모달 end-->
 								<a id="modal-749489" href="#modal-container-749489" role="button" class="btn btn-danger" data-toggle="modal"><i class="fas fa-eraser"></i>과목삭제</a>
-										<div class="modal fade" id="modal-container-749489" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal" id="modal-container-749489" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -720,7 +849,7 @@ function addrCheck(){
 									<div class="col-md-12">
 										 <a id="modal-749487" href="#modal-container-749487" role="button" class="btn btn-success" data-toggle="modal"><i class="fas fa-edit"></i> 편의기능 수정</a>
 									
-										<div class="modal fade" id="modal-container-749487" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										<div class="modal" id="modal-container-749487" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 											<div class="modal-dialog" role="document">
 												<div class="modal-content">
 													<div class="modal-header">
