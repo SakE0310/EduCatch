@@ -1,5 +1,6 @@
 package com.kosmo.educatch.controller;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,7 +81,8 @@ public class MemberJoinController {
 		String resultStr ="";
 		
 		//인증번호 생성(난수 발생)
-		String memailchk = getKey(6);
+		//String memailchk = getKey(6);
+		String memailchk = getKey();
 		param.setMemailchk(memailchk);
 		log.info("memailchk난수>>>"+memailchk);
 		
@@ -109,27 +111,46 @@ public class MemberJoinController {
 		mav.setViewName("member/join/result");
 		return mav;
 	}
-	
-	//난수발생함수
-	private String getKey(int size) {
+	//난수발생(문자열)
+	private String getKey() {
 		log.info("난수발생함수getKey() 시작");
-		this.size = size;
-		return getAuthcode();
-	}
-	
-	//인증코드 난수 발생
-	private String getAuthcode() {
-		log.info("인증코드 난수 발생함수 getAuthcode() 시작");
-		Random random = new Random();
-		StringBuffer sb = new StringBuffer();
-		int num=0;
+		String eng = "abcdefghijklmnopqrstuvwxyz";
+		String num = "0123456789";
+		String datastring = eng + num;
+		int random_length = 10;
 		
-		while(sb.length()<size) {
-			num = random.nextInt(10);
-			sb.append(num);
+		return getAuthcode(datastring, random_length);
+	}
+	private static SecureRandom random = new SecureRandom();
+	//인증코드 난수 발생(문자열)
+	private String getAuthcode(String data, int length) {
+		StringBuilder sb = new StringBuilder(length);
+		for(int i=0; i<length; i++) {
+			sb.append(data.charAt(random.nextInt(data.length())));
 		}
 		return sb.toString();
 	}
+	
+//	//난수발생함수
+//	private String getKey(int size) {
+//		log.info("난수발생함수getKey() 시작");
+//		this.size = size;
+//		return getAuthcode();
+//	}
+//	
+//	//인증코드 난수 발생
+//	private String getAuthcode() {
+//		log.info("인증코드 난수 발생함수 getAuthcode() 시작");
+//		Random random = new Random();
+//		StringBuffer sb = new StringBuffer();
+//		int num=0;
+//		
+//		while(sb.length()<size) {
+//			num = random.nextInt(10);
+//			sb.append(num);
+//		}
+//		return sb.toString();
+//	}
 	//인증메일 보내기
 	public void sendAuthMail(String email, String memailchk, String mid){
 		log.info("이메일보내기함수 sendAuthMail() 시작");

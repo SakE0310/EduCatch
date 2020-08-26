@@ -22,6 +22,7 @@
         <mvc:interceptor>
         	<mvc:mapping path="/myReview.ec"/>
         	<mvc:mapping path="/selectfreeboardI.ec"/>
+        	<mvc:mapping path="/selectfreeboardDetail.ec"/>
         	<mvc:mapping path="/insertDisplay.ec"/>
         	<mvc:mapping path="/cinsertDisplay.ec"/>
         	<mvc:mapping path="/AcaReq.ec"/>

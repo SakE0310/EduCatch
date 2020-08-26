@@ -25,6 +25,8 @@
 <script type="text/javascript"
 		        src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
+var clickYN = 0;
+
 function joinCommit(){
 	console.log("joinCommit함수 진입");
 	
@@ -40,6 +42,15 @@ function joinCommit(){
 		alert("아이디를 입력해주세요");
 		document.getElementById("memail0").focus();
 		return false;
+	}else{
+		var email = document.memberjoin.memail0.value+'@'+document.memberjoin.memail.value;
+		console.log(email);
+		var exp = /^[a-zA-Z0-9_-]+\@[a-zA-Z]+\.[a-zA-Z]+$/;
+		if (!exp.test(email)) {
+			alert("이메일 형식이 올바르지 않습니다.");
+			document.getElementById("memail1").focus();
+			return false;
+		}
 	}
 
 	//비밀번호
@@ -47,6 +58,13 @@ function joinCommit(){
 		alert("비밀번호를 입력하세요");
 		document.getElementById("mpw").focus();
 		return false;
+	}else{
+		var regex =/^[A-Za-z0-9]{6,12}$/;
+		if(!regex.test(document.memberjoin.mpw.value)){
+			alert("비밀번호형식에 맞게 입력해주세요");
+			document.getElementById("mpw").focus();
+			return false;
+		}
 	}
 	
 	if(document.memberjoin.mpw_r.value==""){
@@ -76,7 +94,18 @@ function joinCommit(){
 		alert("핸드폰 번호를 입력하세요");
 		document.getElementById("mtel2").focus();
 		return false;
+	}else{
+		var mtel = document.memberjoin.mtel1.value+'-'+document.memberjoin.mtel2.value+'-'+document.memberjoin.mtel3.value;	
+		console.log(mtel);
+		var regExp =/^\d{3}-\d{3,4}-\d{4}$/;
+		if(!regExp.test(mtel)){
+			alert("핸드폰 번호를 제대로 입력해주세요");
+			documemt.getElementById("mtel2").value();
+			return false;
+		}
 	}
+		
+		
 	//주소
 	if(document.memberjoin.maddrno.value.length==0){
 		alert("우편번호를 입력하세요");
@@ -88,8 +117,34 @@ function joinCommit(){
 	$("#memberjoin").attr("action","memberinsert.ec");
 	$("#memberjoin").attr("method","get");
 	$("#memberjoin").submit();
+
+
 }
 
+/*
+$(document).ready(function(){
+	console.log(">>>>");
+	$('input[type="text"]').each(function(){
+
+		this.value = $(this).attr('title');
+		$(this).addClass('text-label');
+
+		$(this).focus(function(){
+			if(this.value == $(this).attr('title')) {
+				this.value = '';
+				$(this).removeClass('text-label');
+			}
+		});
+
+		$(this).blur(function(){
+			if(this.value == '') {
+				this.value = $(this).attr('title');
+				$(this).addClass('text-label');
+			}
+		});
+	});
+});
+*/
 //주소(우편번호 찾기)
 function addrCheck(){
 	alert("addrCheck함수진입");
@@ -217,20 +272,20 @@ function idCheck(){
 						&nbsp;&nbsp;&nbsp;
 							<c:if test="${param.emailname ne null }">
 						<div class="col-xs-2">
-								<input type="text" id="memail0" name="memail0" value="${param.emailname }" class="form-control" readonly />
+								<input type="text" id="memail0" name="memail0" value="${param.emailname }" title="" class="form-control" readonly />
 						</div>
 								@
 						<div class="col-xs-2">
-							<input type="text" id="memail1" name="memail1" value="${param.emailaddr }" class="form-control" readonly />
+							<input type="text" id="memail1" name="memail1" value="${param.emailaddr }" title="" class="form-control" readonly />
 						</div>
 							</c:if>
 							<c:if test="${param.emailname eq null }">
 						<div class="col-xs-2">
-								<input type="text" id="memail0" name="memail0" value="" size=10 onfocus="this.value=''"  class="form-control" />
+								<input type="text" id="memail0" name="memail0" value="" size=10 onfocus="this.value=''" title="" class="form-control" />
 						</div>
 								@
 						<div class="col-xs-2">
-							<input type="text" id="memail1" name="memail1" value="" size=10  class="form-control" />
+							<input type="text" id="memail1" name="memail1" value="" size=10 title="" class="form-control" />
 						</div>
 							</c:if>
 						<div class="col-md-6">
@@ -253,18 +308,18 @@ function idCheck(){
 					<td>
 					<div class=row>
 					<div class="col-xs-2">
-						<input type="text"  class="form-control" id="mpw" name="mpw" />
+						<input type="password"  class="form-control" id="mpw" name="mpw" />
 					</div>
 					</div>
 					<div class="row">
 					<div class="col-xs-2">
- 						<input type="text" class="form-control" id="mpw_r" name="mpw_r"/>
+ 						<input type="password" class="form-control" id="mpw_r" name="mpw_r"/>
 					</div>
 					<div class="col-xs-2">
 						<input type="button" value="비밀번호확인" onclick="pwCheck()" />
 					</div>
 					</div>
-						<p>4자 이상 12자 이내의 영문/숫자 조합</p>
+						<p>문자,숫자 포함 6~12자리를 입력하세요</p>
 					</td>
 				</tr>
 				<tr>
@@ -275,7 +330,7 @@ function idCheck(){
 					<td>
 					<div class="form-group row">
 						<div class="col-xs-2">
-						<input class="form-control" type="text" id="mname" name="mname" value="${param.mname }" />
+						<input class="form-control" type="text" title="" id="mname" name="mname" value="${param.mname }" />
 						</div>
 					</div>
 					</td>
@@ -292,10 +347,10 @@ function idCheck(){
 							<option value="016">016</option>
 						</select>
 						<div class="col-xs-2">
-						<input type="text" id="mtel2" name="mtel2" class="form-control" />
+						<input type="text" title="" id="mtel2" name="mtel2" class="form-control" />
 						</div>
 						<div class="col-xs-2">
-						<input type="text" id="mtel3" name="mtel3" class="form-control" />
+						<input type="text" title="" id="mtel3" name="mtel3" class="form-control" />
 						</div>
 					</td>
 				</tr>
@@ -307,16 +362,16 @@ function idCheck(){
 					<td>
 					<div class="row">
 					<div class="col-xs-2">
-						<input type="text" id="maddrno" name="maddrno" size=6 class="form-control" />
+						<input type="text" id="maddrno" name="maddrno" title="우편번호" size=6 class="form-control" />
 					</div>
 						<input type="button" value="우편번호 찾기" onclick="addrCheck()" />
-						(도로명주소)<br/>
+						<br/>
 					</div>
 					<div class="row">	
 					<div class="col-xs-7">
-						<input type="text" id="maddr1" name="maddr1" size=35 class="form-control" />
+						<input type="text" id="maddr1" name="maddr1" title="도로명주소" size=35 class="form-control" />
 						<br>
-						<input type="text" id="maddr2" name="maddr2" size=35 class="form-control" />
+						<input type="text" id="maddr2" name="maddr2" size=35 title="상세주소" class="form-control" />
 						<br />
 					</div>
 					 </div>
