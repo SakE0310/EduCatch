@@ -34,6 +34,7 @@
 		   ,D.CMINOR AS CMINOR
 		   ,C.AINSERTDATE AS AINSERTDATE
 		   ,C.AUPDATEDATE AS AUPDATEDATE
+           ,C.RVCOUNT AS RVCOUNT
 	FROM   (SELECT  NVL(AVG(B.RBGRADE),0) AS AGRADE
 	               ,A.CATEGORY_CNO AS CNO
 	               ,A.ANO AS ANO
@@ -45,6 +46,7 @@
 	               ,TO_CHAR(AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE
 	               ,TO_CHAR(AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
 	               ,COUNT(A.ANO) OVER() AS LISTCOUNT
+                   ,COUNT(B.ACADEMY_ANO) AS RVCOUNT
 	        FROM   ACADEMY A, REVIEWBOARD B
 	        WHERE  B.ACADEMY_ANO(+) = A.ANO
 	        AND    A.ADELETEYN = 'N'
@@ -66,6 +68,12 @@
 	<if test="aname!=null">
 	AND
 	<![CDATA[ C.ANAME LIKE '%'||#{aname}||'%' ]]>
+	</if>
+	<if test="agrade!=null">
+	ORDER BY AGRADE DESC
+	</if>
+	<if test="rvcount!=null">
+	ORDER BY RVCOUNT DESC	
 	</if>
 	</select>
 	
