@@ -444,7 +444,7 @@
          <tr>
          <td colspan="5">
          <jsp:include page="memberPaging.jsp" flush="true">
-            <jsp:param name="url" value="listReview.ec"/>
+            <jsp:param name="url" value="searchReview.ec"/>
             <jsp:param name="str" value=""/>
                <jsp:param name="pagesize" value="<%= pagesize %>"/>
                <jsp:param name="groupsize" value="<%= groupsize %>"/>
