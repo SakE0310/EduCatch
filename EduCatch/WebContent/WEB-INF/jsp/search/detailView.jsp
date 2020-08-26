@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <%-- -----------CSS------------- --%>
 
@@ -89,6 +89,31 @@
 #actb{
 	font-size: 12px;
 }
+.nav {
+  background-color: rgba(51, 51, 51, 0.9);
+  width: 100%;
+  height: 60px;
+  top: 0;
+}
+.nav-menu li {
+    display: inline-block;
+    margin-right: 0px;
+    line-height: 60px;
+}
+.nav-menu-item {
+    display: block;
+    padding: 0 17px;
+    color: #fff;
+    text-decoration: none;          
+}
+.nav-menu-item:hover,
+.isactive {
+    background-color: #222;
+    color: #fff;
+}
+.subth{
+	display:none;
+}
 
 	}
 /* PC Desktop (가로폭 1024 이상) */
@@ -164,6 +189,30 @@
   padding: 20px;
 }
 #actb{
+}
+.nav {
+  background-color: rgba(51, 51, 51, 0.9);
+  width: 100%;
+  height: 60px;
+  top: 0;
+}
+.nav-menu li {
+    display: inline-block;
+    margin-right: -6px;
+    line-height: 60px;
+}
+.nav-menu-item {
+    display: block;
+    padding: 0 106px;
+    color: #fff;
+    text-decoration: none;          
+}
+.nav-menu-item:hover,
+.isactive {
+    background-color: #222;
+    color: #fff;
+}
+.subth{
 }
 	}
 
@@ -242,28 +291,6 @@ body {
 * {
   margin: 0;
   padding: 0;
-}
-.nav {
-  background-color: rgba(51, 51, 51, 0.9);
-  width: 100%;
-  height: 60px;
-  top: 0;
-}
-.nav-menu li {
-    display: inline-block;
-    margin-right: -6px;
-    line-height: 60px;
-}
-.nav-menu-item {
-    display: block;
-    padding: 0 106px;
-    color: #fff;
-    text-decoration: none;          
-}
-.nav-menu-item:hover,
-.isactive {
-    background-color: #222;
-    color: #fff;
 }
 
 
@@ -516,10 +543,9 @@ body {
 
 	$(document).ready(function(){
 		
-		ajaxGetBookmark();
 		
 		$('#addrev').click(function(){
-			 $("#pageForm").attr("action","insertDisplay.ec");
+			 $("#pageForm").attr("action","inserttDisplay.ec");
 	         $("#pageForm").attr("method","POST");
 	         $("#pageForm").submit();  
 		});
@@ -992,8 +1018,8 @@ body {
 			        <th>과목명</th>
 			        <th>수강날짜</th>
 			        <th>수강시간</th>
-			        <th>수강금액</th>
-			        <th>수강인원</th>
+			        <th class=subth>수강금액</th>
+			        <th class=subth>수강인원</th>
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -1007,8 +1033,8 @@ body {
 			        <td><%=svo.getSname() %></td>
 			        <td><%=svo.getSday() %></td>
 			        <td><%=svo.getStime() %></td>
-			        <td><%=svo.getSprice() %></td>
-			        <td><%=svo.getSpeople() %></td>
+			        <td class=subth><%=svo.getSprice() %></td>
+			        <td class=subth><%=svo.getSpeople() %></td>
 			    </tr>
 <%
 		}
@@ -1124,6 +1150,7 @@ body {
 <form id="pageForm" name="pageForm">
       <input type="hidden" id="rbno" name="rbno"/>
       <input type="hidden" id="aname" name="aname" value="<%=avo.getAname() %>"/>
+      <input type="hidden" id="ano" name="ano" value="<%=avo.getAno() %>"/>
 </form>
 
 <%-- -----------부트스크랩 하단------------- --%>

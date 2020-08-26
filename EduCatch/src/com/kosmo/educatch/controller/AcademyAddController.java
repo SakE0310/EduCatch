@@ -75,7 +75,8 @@ public class AcademyAddController {
 			log.info("multipart/form-data true");
 			
 			// file삽입경로 (변경필수)
-			String uploadPath = "C://Users//kosmo_26//git//EduCatch//EduCatch//WebContent//assets//img//academyLogo";
+			String uploadPath = request.getServletContext().getRealPath("")+"//assets//img//academyLogo";
+			//String uploadPath = "C://Users//kosmo_26//git//EduCatch//EduCatch//WebContent//assets//img//academyLogo";
 			// file 최대크기
 			int size = 10 * 1024 * 1024;
 			// multipart로 파일을 업로드 후 각 데이터셋팅
