@@ -14,6 +14,159 @@
 <%-- -----------CSS------------- --%>
 
 <style type="text/css">
+/* Mobile Device (가로폭 767px 이하) */
+	@media all and (max-width:767px) {
+		#mapWrapper{
+			width:100%;
+			height:300px;
+			position:relative
+		}
+		#map{
+			width:414px;height:350px;
+		}
+		#rvWrapper{
+			width:100%;height:300px;position:absolute;top:0;left:0;
+		}
+		#roadview{
+			width:414px;height:350px;
+		}
+		.sns-share{
+			width:380px;
+		}
+		#content{
+		width:414px;
+		height:auto;
+		margin:0 auto;
+		background:#ffffff;
+		}
+		#follow{
+			margin-left:0px;
+		}
+		#logoimg{
+			margin-right:200px;
+		}
+		#addrev{
+			margin-left:0px;
+		}
+		#all{
+		background:#f3f3f3;
+}
+.section {
+    margin-top: 10px;
+    line-height: 33px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.padding-top10 {
+    padding-top:10px;
+}
+
+#section-1 {
+    height: auto;
+    background-color: #ffffff;
+    color: #fff;
+    padding: 20px;
+}
+#section-2 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+#section-3 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+#section-4 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+
+#actb{
+	font-size: 12px;
+}
+
+	}
+/* PC Desktop (가로폭 1024 이상) */
+	@media all and (min-width:1024px) {
+		#mapWrapper{
+			width:100%;
+			height:300px;
+			position:relative
+		}
+		#map{
+			width:1100px;height:350px;
+		}
+		#rvWrapper{
+			width:100%;height:300px;position:absolute;top:0;left:0;
+		}
+		#roadview{
+			width:1100px;height:350px;
+		}
+		#content{
+		width:1100px;
+		height:auto;
+		margin:0 auto;
+		border-left:1px solid #d8d8d8;
+		border-right:1px solid #d8d8d8;
+		border-top:1px solid #d8d8d8;
+		border-bottom:1px solid #d8d8d8;
+		background:#ffffff;
+		
+		}
+		#follow{
+			margin-left:450px;
+		}
+		#addrev{
+			margin-left:700px;
+		}
+		#all{
+		border-left:1px solid #f3f3f3;
+		border-right:1px solid #f3f3f3;
+		background:#f3f3f3;
+}
+.section {
+    margin-top: 60px;
+    line-height: 22px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.padding-top10 {
+    padding-top:10px;
+}
+
+#section-1 {
+    height: auto;
+    background-color: #ffffff;
+    color: #fff;
+    padding: 20px;
+}
+#section-2 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+#section-3 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+#section-4 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+#actb{
+}
+	}
+
 #mrcontainer {overflow:hidden;height:300px;position:relative;}
 #btnRoadview,  #btnMap {position:absolute;top:5px;left:5px;padding:7px 12px;font-size:14px;border: 1px solid #dbdbdb;background-color: #fff;border-radius: 2px;box-shadow: 0 1px 1px rgba(0,0,0,.04);z-index:1;cursor:pointer;}
 #btnRoadview:hover,  #btnMap:hover{background-color: #fcfcfc;border: 1px solid #c1c1c1;}
@@ -113,41 +266,6 @@ body {
     color: #fff;
 }
 
-.section {
-    margin-top: 60px;
-    line-height: 22px;
-    margin-left: 100px;
-    margin-right: 100px;
-}
-.padding-top10 {
-    padding-top:10px;
-}
-
-#section-1 {
-    height: auto;
-    background-color: #ffffff;
-    color: #fff;
-    padding: 20px;
-}
-#section-2 {
-  height: auto;
-  background-color: #ffffff;
-  color: #fff;
-  padding: 20px;
-}
-#section-3 {
-  height: auto;
-  background-color: #ffffff;
-  color: #fff;
-  padding: 20px;
-}
-#section-4 {
-  height: auto;
-  background-color: #ffffff;
-  color: #fff;
-  padding: 20px;
-}
-
 
 
 <%-- SNS 공유하기 --%>
@@ -171,22 +289,7 @@ body {
 
 
 <%-- --전체,컨텐츠-- --%>  
-#all{
-		border-left:1px solid #f3f3f3;
-		border-right:1px solid #f3f3f3;
-		background:#f3f3f3;
-}
 
-#content{
-		width:1100px;
-		height:auto;
-		margin:0 auto;
-		border-left:1px solid #d8d8d8;
-		border-right:1px solid #d8d8d8;
-		border-top:1px solid #d8d8d8;
-		border-bottom:1px solid #d8d8d8;
-		background:#ffffff;
-}
 
 #linked{ 
 		color: black;
@@ -594,16 +697,16 @@ body {
 	<section id="content"> <%-- 컨텐츠(본문) div --%>
 	
 		<div class="container-fluid"> <%-- top(윗부분) div --%>
-			<div class="row" style="margin-top:50px">
+			<div id="topcon" class="row" style="margin-top:50px">
 				<div class="col-md-4" align="right">
 					<input type="hidden" id="ano" name="ano" value="<%=avo.getAno() %>"/>
 					<input type="hidden" id="academy_ano" name="academy_ano" value="<%=avo.getAcademy_ano() %>"/>
 					<input type="hidden" id="member_mno" name="member_mno" />
-					<img src="/EduCatch/assets/img/academyLogo/<%= avo.getAlogo() %>" border=0 width="200" height="200" />
+					<img src="/EduCatch/assets/img/academyLogo/<%= avo.getAlogo() %>" border=0 width="200" height="200" id="logoimg"/>
 				</div>
 				<div class="col-md-8" style="margin-top:30px">
 					<h1 style="font-weight:bold"><%=avo.getAname() %></h1> 
-					<input id="follow" name="follow" type="button" value="찜추가" class="btn1" style="margin-left:450px" />
+					<input id="follow" name="follow" type="button" value="찜추가" class="btn1" />
 					<h3><img src="/EduCatch/assets/img/Icon_location.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;<%=address %> </h3>
 					<h3><img src="/EduCatch/assets/img/Icon_call.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;<%=avo.getAtel() %> </h3>
 					<h3><img src="/EduCatch/assets/img/Icon_star.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;학원 평가 : <%=gvo.getRbgrade() %>(점) </h3>
@@ -631,7 +734,6 @@ body {
 	
 		
 		<%-- 4분할 탭메뉴 div --%>		
-		<div>
 		    <nav class="nav clearfix">
 		        <ul class="nav-menu">
 		            <li><a class="nav-menu-item" href="#section-1">기본정보</a></li>
@@ -640,19 +742,18 @@ body {
 		            <li><a class="nav-menu-item" href="#section-4">수강후기</a></li>
 		        </ul>
 		    </nav>
-		</div>
 
 
 
 		<br><br><br>
 		<%-- ----------- 카카오맵 API ------------- --%>
 		<div id="mrcontainer" class="view_map">
-			<div id="mapWrapper" style="width:100%;height:300px;position:relative;">
-				<div id="map" style="width:1100px;height:350px;"></div>
+			<div id="mapWrapper" >
+				<div id="map"></div>
 				<input type="button" id="btnRoadview" onclick="toggleMap(false)" title="로드뷰 보기" value="로드뷰">
 			</div>
-			 <div id="rvWrapper" style="width:100%;height:300px;position:absolute;top:0;left:0;">
-				<div id="roadview" style="width:1100px;height:350px;"></div>
+			 <div id="rvWrapper">
+				<div id="roadview"></div>
 				<input type="button" id="btnMap" onclick="toggleMap(true)" title="지도 보기" value="지도">
 			</div>
 		</div>
@@ -861,8 +962,8 @@ body {
 	    <section id="section-1">
 	        <h1>학원 정보</h1><br><br>
 	        <div class="container">
-				  <table class="table table-condensed">
-				    <tr>
+				  <table class="table table-condensed" id="actb">
+				      <tr>
 				        <td><img src="/EduCatch/assets/img/Icon_academy.png" border=0 width="20px" height="20px" />&nbsp;&nbsp;학원명</td>
 				        <td><%=avo.getAname() %></td>
 				      </tr>
@@ -883,7 +984,7 @@ body {
     <section id="section-2">
     	<hr id="hhr">
     	<div class="container">
-			  <table class="table table-condensed">
+			  <table class="table table-condensed" id="actb">
        			 <h1>수업 정보</h1>
        			 <br><br>
 			    <thead>
@@ -983,9 +1084,9 @@ body {
     <section id="section-4">
     <hr id="hhr">
     	<div class="container">
-			  <table class="table table-condensed">
+			  <table class="table table-condensed" id="actb">
        			 <h1>수강후기</h1>
-       			 	<input id="addrev" name="addrev" type="button" value="후기작성" class="btn1" style="margin-left:700px" />
+       			 	<input id="addrev" name="addrev" type="button" value="후기작성" class="btn1" />
        			 <br><br>
 			    <thead>
 			      <tr>
