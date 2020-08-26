@@ -487,7 +487,7 @@
 				date = year +"-"+month
 				$.ajax({
 	       			url : "selectReser.ec",
-	       			data : {"date" : date}
+	       			data : {"date" : date, "ano" : ano}
 	       		}).done(function(resultParam){
 	       			calendar.removeAllEvents();
 	       			for(result in resultParam.data){
