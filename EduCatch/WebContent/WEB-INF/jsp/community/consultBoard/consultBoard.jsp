@@ -416,8 +416,8 @@ if(listConsult !=null && nCnt>0){
 						<td class="media_mobile_td"><%= cvo.getCbno() %></td>
 						<td><%= cvo.getAname() %></td>
 						<td><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
-						<td class="media_mobile_td"><%= cvo.getCbname() %></td>
-						<td class="media_mobile_td"><%= cvo.getCinsertdate() %></td>
+						<td><%= cvo.getCbname() %></td>
+						<td><%= cvo.getCinsertdate() %></td>
 					</tr>
 <%
 				}	

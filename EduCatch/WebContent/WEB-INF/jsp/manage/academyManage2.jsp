@@ -210,7 +210,7 @@ input[type="file"] {
 <script type="text/javascript">
 	$(document).ready(function(){
 		
-		ajaxData();
+		
 		<%
         if(mvo != null){
 			if(mvo.getMauth().equals("3")){

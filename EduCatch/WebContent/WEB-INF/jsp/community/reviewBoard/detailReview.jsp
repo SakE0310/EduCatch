@@ -19,6 +19,33 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
+
+	/*미디어 쿼리*/
+	/* Mobile Device (가로폭 767px 이하) */
+	@media all and (max-width:767px) {
+		#media_mobile_div{
+			width: 300px;
+			height: 500px;
+			margin: auto;
+		}		
+		#media_mobile_img{
+			width: 250px;
+			height: 300px;
+		}
+	}
+	
+	/* Tablet (가로폭 768px 이상, 1023px 이하) */
+	@media all and (min-width:768px) and (max-width:1023px) {
+	/* 브라우저 가로폭이 768~1023px일때 적용될 css (태블릿) */
+	}
+	
+	/* PC Desktop (가로폭 1024 이상) */
+	@media all and (min-width:1024px) {
+		#media_mobile_table{
+			width:700px;
+			height:100px;
+		}
+	}
 	#contnent{
 		width : 600px;
 		height: 600px;
@@ -32,17 +59,19 @@
 	.btn_light {
 	    display: inline-block;
 	    text-align: center;
-	    background: #e5e5e5;
-	    color: #555;
+	    background: #140C40;
+	    color: #ffffff;
 	    vertical-align: middle;
 	    cursor: pointer;
-	    border: 1px solid #e5e5e5;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
 	}
 		
 	.btn_box_01 {
 	    width: auto;
 	    padding: 3px 10px;
-	    align: center;
 	}
 	
 </style>

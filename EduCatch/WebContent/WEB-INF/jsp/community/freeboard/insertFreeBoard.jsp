@@ -69,6 +69,7 @@ if(hs != null){
 	System.out.println("freevinsert>>>mvo>>>"+mvo);
 	System.out.println("freevinsert>>>mvo.getMid>>>"+mvo.getMid());
 	System.out.println("freevinsert>>>mvo>.getMno>>"+mvo.getMno());
+	System.out.println("freevinsert>>>mvo>.getMname>>"+mvo.getMname());
 }
 %>
 	<!-- action/document/location -->
@@ -76,6 +77,7 @@ if(hs != null){
 	<form id="edit" name="edit">
 	<input type="hidden" id ="mid" name="mid" value="<%=mvo.getMid() %>">
 	<input type="hidden" id ="mno" name="mno" value="<%=mvo.getMno() %>">
+	<input type="hidden" id ="mname" name="mname" value="<%=mvo.getMname() %>">
 		<table style="margin-left: auto; margin-right: auto;" border="1" width="50%">
 			<!--tr>
 				<td style="width: 100px">글번호</td>
@@ -87,12 +89,13 @@ if(hs != null){
 				<td><input type="text" id="fbsubject" name="fbsubject"
 					style="width: 98%" /></td>
 			</tr>
+			<!-- 
 			<tr>
 				<td style="width: 100px">작성자</td>
 				<td><input type="text" id="fbname" name="fbname"
 					style="width: 98%" /></td>
 			</tr>
-
+			 -->
 			<tr>
 				<td>내용</td>
 				<td><textarea name="fbcontent" id="fbcontent" title="내용"

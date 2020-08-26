@@ -22,19 +22,19 @@
 			position:relative
 		}
 		#map{
-			width:414px;height:350px;
+			width:375px;height:350px;
 		}
 		#rvWrapper{
 			width:100%;height:300px;position:absolute;top:0;left:0;
 		}
 		#roadview{
-			width:414px;height:350px;
+			width:375px;height:350px;
 		}
 		.sns-share{
-			width:380px;
+			width:375px;
 		}
 		#content{
-		width:414px;
+		width:375px;
 		height:auto;
 		margin:0 auto;
 		background:#ffffff;

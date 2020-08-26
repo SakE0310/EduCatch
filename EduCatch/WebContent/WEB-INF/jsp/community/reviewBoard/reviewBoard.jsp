@@ -87,10 +87,14 @@
 			font-size: 10px;
 		}
 		.media_mobile_td{
-			display: none;
+			display: table-column-group;
 		}
-		
+		.media_mobile_td_font{
+			font-size: 10px;
+		}
 	}
+	
+
 	
 	/* Tablet (가로폭 768px 이상, 1023px 이하) */
 	@media all and (min-width:768px) and (max-width:1023px) {
@@ -385,7 +389,7 @@
       	<table align="center" class="table">
          <colgroup>
 	            <col width="120px"/>
-	            <col width="120px"/>
+	            <col width="0px"/>
 	            <col width="600px"/>
 	            <col width="120px"/>
 	            <col width="120px"/>
@@ -420,11 +424,12 @@
 %>
 
                <tr align="center">
-                  <td class="cc media_mobile_td"><%= rvo.getRbno() %></td>
-                  <td class="cc"><%= rvo.getAname() %></td>
-                  <td class="cc"><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>"  id="aa"><%= rvo.getRbsubject() %></a></td>
-                  <td class="cc"><%= rvo.getRbname() %></td>
-                  <td class="cc"><%= rvo.getRbinsertdate() %></td>
+                  <td class=" media_mobile_td"><%= rvo.getRbno() %></td>
+                  <td class="media_mobile_td_font"><%= rvo.getAname() %>
+                  <input type="hidden" id="aname" name="aname" value="<%= rvo.getAname()%>"/></td>
+                  <td class="media_mobile_td_font"><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>"  id="aa"><%= rvo.getRbsubject() %></a></td>
+                  <td class="media_mobile_td_font"><%= rvo.getRbname() %></td>
+                  <td class=" media_mobile_td"><%= rvo.getRbinsertdate() %></td>
                </tr>
 <%
       }

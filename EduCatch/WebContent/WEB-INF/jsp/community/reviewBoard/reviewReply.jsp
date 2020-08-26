@@ -37,9 +37,26 @@
 	   
 %>
 <style type="text/css">
+/*미디어 쿼리*/
+	/* Mobile Device (가로폭 767px 이하) */
+	@media all and (max-width:767px) {
+		#recontent{
+		width:25%;
+		
+		}
+
+	}
+	/* PC Desktop (가로폭 1024 이상) */
+	@media all and (min-width:1024px) {
+		#recontent{
+			width:90%;
+		
+		}
+
+	}
+
 .btn_box_02 {
-    width: 100px;
-    padding: 17px 20px;
+    width: auto;
     margin-bottom: 50px;
 }
 .btn_light {
@@ -80,32 +97,29 @@
 }
 
 #delete_btn{
-      margin-top:10px;
-      display: inline-block;
-       text-align: center;
-       background: #e5e5e5;
-       color: #555;
-       vertical-align: middle;
-       cursor: pointer;
-       border: 1px solid #e5e5e5;
-         width: auto;
-       padding: 3px 10px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    text-align: center;
+    background: #e5e5e5;
+    color: #555;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid #e5e5e5;
 
 }
 
 #update_btn{
 
-      margin-bottom: 30px;
-      margin-right:5px;
-      display: inline-block;
-       text-align: center;
-       background: #e5e5e5;
-       color: #555;
-       vertical-align: middle;
-       cursor: pointer;
-       border: 1px solid #e5e5e5;
-         width: auto;
-       padding: 3px 10px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    text-align: center;
+    background: #e5e5e5;
+    color: #555;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid #e5e5e5;
 }
 
 #updateReset_btn{
@@ -130,6 +144,13 @@
       margin-left: 20px;
 }
 
+textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    width: 100%;
+}
 
 </style>
 <script type="text/javascript"
@@ -413,7 +434,7 @@
                <tr class="marT5 marL5 marB5">
                   <td>
                	  <div style="weight: 300; height: 50;">
-                     <textarea name="recontent" id="recontent" style="padding:10px; width:90%;" placeHolder="댓글을 입력해주세요."></textarea>
+                     <textarea name="recontent" id="recontent" style="padding:10px; min-width: 260px;" placeHolder="댓글을 입력해주세요."></textarea>
                      <input type="button" class="btn_light btn_box_02" id="replyInsert" value="등록" style="vertical-align:middle;"/>
                      <input type="hidden" id="reno" name="reno"/>
                   </div>

@@ -83,7 +83,9 @@
 		.media_mobile_td{
 			display: none;
 		}
-		
+		#media_mobile_td_margin{
+			width: 50px;
+		}
 	}
 	
 	/* Tablet (가로폭 768px 이상, 1023px 이하) */
@@ -129,7 +131,7 @@
 		}
 		.nice-select{
 		    width: 70px;
-		    height: 35px;
+		   height: 32px;
 		    padding-left: 0px;
 		}
 		 #media_mobile{
@@ -142,6 +144,7 @@
 	 #keyword{
 			width:200px; 
 	}
+	
 	.gj-textbox-md {
 			width: 130px;
 			font-size: 15px;
@@ -207,6 +210,7 @@
 			border: 1px solid #140C40;
 			 border-radius: 0.5em;
 		}
+	
 		
 	/*데이트 피커*/
 	.gj-icon{
@@ -472,22 +476,22 @@
 			}//end of obj
 			%>
 			<tr>
-				<td colspan="2" align="left">
+				<td colspan="2" align="left" id ="media_mobile_td_margin">
 					<select name="searchFilter" id="searchFilter">
 						<option value="제목">제목</option>
 						<option value="내용">내용</option>
 					</select>
-					<input type="text" name="keyword" id = "keyword" style ="width:200px; height:40px;">
+					<input type="text" name="keyword" id = "keyword" >
 					<input type="button" class=" btn_light btn_box_01" id="searchData" value="검색">
-					</td>
+				</td>
 					
-					<td colspan="6" align="right">
+					<td colspan="2" align="right">
 					<input type="button" id="insertboard" name="insertboard" class=" btn_light btn_box_01"
-					value="[글쓰기]"/></td>
-				</tr>
+					value="[글쓰기]"/>
+					</td>
+			</tr>
 			</tbody>
 		</table>
-		</div>
 		</div>
 	</form>
 		<br>

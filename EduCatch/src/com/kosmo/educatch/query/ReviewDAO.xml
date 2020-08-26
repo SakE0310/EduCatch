@@ -53,10 +53,13 @@
 		            #{curpage, jdbcType=VARCHAR}		AS CURPAGE,
                		#{pagesize, jdbcType=VARCHAR}		AS PAGESIZE,
                 	#{groupsize, jdbcType=VARCHAR}		AS GROUPSIZE,
-                	#{pno, jdbcType=VARCHAR}			AS PNO
-		FROM REVIEWBOARD A, PAGING P
+                	#{pno, jdbcType=VARCHAR}			AS PNO,
+                	B.ANO		 	AS ANO,
+                	B.ANAME 		AS ANAME
+		FROM REVIEWBOARD A, PAGING P, ACADEMY B
 		WHERE RBDELETEYN = 'N'
 		AND   PNO='P002'
+		AND	  A.ACADEMY_ANO = B.ANO
 		<if test="startDate!=null and startDate!='' and startDate!='null' and endDate!=null and endDate!='' and endDate!='null'">
 			<![CDATA[AND TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD') >= #{startDate,jdbcType=VARCHAR}]]>
 			<![CDATA[AND TO_CHAR(A.RBINSERTDATE,'YYYY-MM-DD') <= #{endDate,jdbcType=VARCHAR}]]>

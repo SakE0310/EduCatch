@@ -91,6 +91,7 @@ public class ReviewController {
 			log.info("rbdeleteyn >>> " + rvo.getRbdeleteyn());
 			log.info("rbinsertdate >>> " + rvo.getRbinsertdate());
 			log.info("rbupdatedate >>> " + rvo.getRbupdatedate());
+			log.info("aname >>> " + rvo.getAname());
 
 			log.info("pagesize >>> " + rvo.getPagesize());
 			log.info("groupsize >>> " + rvo.getGroupsize());
@@ -110,7 +111,7 @@ public class ReviewController {
 
 	// 검색 페이징
 	@RequestMapping("searchList.ec")
-	public ModelAndView searchReview(@ModelAttribute ReviewVO param, HttpServletRequest request) {
+	public ModelAndView searchReview(@ModelAttribute ReviewVO param, AcademyVO avo, HttpServletRequest request) {
 
 		log.info("ReviewController searchList >>> 호출성공");
 		log.info(param);
@@ -165,6 +166,7 @@ public class ReviewController {
 			log.info("rbdeleteyn >>> " + rvo.getRbdeleteyn());
 			log.info("rbinsertdate >>> " + rvo.getRbinsertdate());
 			log.info("rbupdatedate >>> " + rvo.getRbupdatedate());
+			log.info("aname >>> " + rvo.getAname());
 
 			log.info("pagesize >>> " + rvo.getPagesize());
 			log.info("groupsize >>> " + rvo.getGroupsize());
