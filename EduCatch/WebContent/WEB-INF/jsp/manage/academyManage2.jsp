@@ -35,8 +35,43 @@
 	crossorigin="anonymous"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>
 <style type="text/css">
+@media all and (max-width:767px) {
+#content{
+		width:375;
+		height:auto;
+		margin:0 auto;
+		border-left:1px solid #d8d8d8;
+		border-right:1px solid #d8d8d8;
+		border-top:1px solid #d8d8d8;
+		border-bottom:1px solid #d8d8d8;
+		background:#ffffff;
+		
+}
+#all{
+		background:#f3f3f3;
+}
 
+}
+@media all and (min-width:1024px) {
+#content{
+		width:1100px;
+		height:auto;
+		margin:0 auto;
+		border-left:1px solid #d8d8d8;
+		border-right:1px solid #d8d8d8;
+		border-top:1px solid #d8d8d8;
+		border-bottom:1px solid #d8d8d8;
+		background:#ffffff;
+}
+#all{
+		border-left:1px solid #f3f3f3;
+		border-right:1px solid #f3f3f3;
+		background:#f3f3f3;
+}
+
+}
 <%-- -----------CSS------------- --%>
+
 input[type="file"] {
 		position: absolute;
 		width: 1px;
@@ -175,22 +210,6 @@ input[type="file"] {
 
 
 <%-- --전체,컨텐츠-- --%>  
-#all{
-		border-left:1px solid #f3f3f3;
-		border-right:1px solid #f3f3f3;
-		background:#f3f3f3;
-}
-
-#content{
-		width:1100px;
-		height:auto;
-		margin:0 auto;
-		border-left:1px solid #d8d8d8;
-		border-right:1px solid #d8d8d8;
-		border-top:1px solid #d8d8d8;
-		border-bottom:1px solid #d8d8d8;
-		background:#ffffff;
-}
 
 #linked{ 
 		color: black;

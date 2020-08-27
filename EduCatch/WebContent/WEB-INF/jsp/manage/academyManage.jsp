@@ -34,7 +34,40 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
 	crossorigin="anonymous"></script>
 <style type="text/css">
+@media all and (max-width:767px) {
+	#content{
+			width:375px;
+			height:auto;
+			margin:0 auto;
+			border-left:1px solid #d8d8d8;
+			border-right:1px solid #d8d8d8;
+			border-top:1px solid #d8d8d8;
+			border-bottom:1px solid #d8d8d8;
+			background:#ffffff;
+			
+	}
+	#all{
+			background:#f3f3f3;
+	}
 
+}
+@media all and (min-width:1024px) {
+	#content{
+			width:1100px;
+			height:auto;
+			margin:0 auto;
+			border-left:1px solid #d8d8d8;
+			border-right:1px solid #d8d8d8;
+			border-top:1px solid #d8d8d8;
+			border-bottom:1px solid #d8d8d8;
+			background:#ffffff;
+	}
+	#all{
+			border-left:1px solid #f3f3f3;
+			border-right:1px solid #f3f3f3;
+			background:#f3f3f3;
+	}
+}
 <%-- -----------CSS------------- --%>
 input[type="file"] {
 		position: absolute;
@@ -174,23 +207,6 @@ input[type="file"] {
 
 
 <%-- --전체,컨텐츠-- --%>  
-#all{
-		border-left:1px solid #f3f3f3;
-		border-right:1px solid #f3f3f3;
-		background:#f3f3f3;
-}
-
-#content{
-		width:1100px;
-		height:auto;
-		margin:0 auto;
-		border-left:1px solid #d8d8d8;
-		border-right:1px solid #d8d8d8;
-		border-top:1px solid #d8d8d8;
-		border-bottom:1px solid #d8d8d8;
-		background:#ffffff;
-}
-
 #linked{ 
 		color: black;
 
@@ -629,7 +645,7 @@ input[type="file"] {
 					<div class="col-md-12">
 						<div class="card mb-2">
 							<div class="card-header">
-								<i class="fas fa-table mr-1"></i> 학원정보
+								<i class="fas fa-table mr-1" ></i>학원정보
 							</div>
 							<div class="card-body">
 								<%-- ----------- 카트바디 ------------- --%>
@@ -698,7 +714,7 @@ input[type="file"] {
 	<%-- 탭 본문내용1 div --%>
 	<div class="section">
 	    <section id="section-1">
-	        <h1 style="color:black">학원 정보</h1>
+	        <h1>학원 정보</h1>
 	        <div class="row" style="color:black">
 									<div class="col-md-12">
 										 <a id="modal-749483" href="#modal-container-749483" role="button" class="btn btn-success" data-toggle="modal"><i class="fas fa-edit"></i> 학원정보수정</a>
@@ -806,7 +822,7 @@ input[type="file"] {
 	<%-- 탭 본문내용2 div --%>
     <section id="section-2">
     	<hr id="hhr">
-       	<h1 style="color:black">수업 정보</h1>
+       	<h1>수업 정1보</h1>
        	<div class="row" style="color:black">
 									<div class="col-md-8">
 										 <a id="modal-749484" href="#modal-container-749484" role="button" class="btn btn-primary" data-toggle="modal"><i class="fas fa-edit"></i> 과목추가</a>
@@ -940,17 +956,17 @@ input[type="file"] {
     	<div class="container">
 			  <table class="table table-condensed">
        			 <br><br>
-			    <thead>
-			      <tr>
-			      	<th>     </th>
-			        <th>과목명</th>
-			        <th>수강날짜</th>
-			        <th>수강시간</th>
-			        <th>수강금액</th>
-			        <th>수강인원</th>
-			        <th></th>
-			      </tr>
-			    </thead>
+				    <thead>
+				      <tr>
+				      	<th>     </th>
+				        <th>과목명</th>
+				        <th>수강날짜</th>
+				        <th>수강시간</th>
+				        <th>수강금액</th>
+				        <th>수강인원</th>
+				        <th></th>
+				      </tr>
+				    </thead>
 			    <tbody>
 
 <%
@@ -972,12 +988,12 @@ input[type="file"] {
 			        <td><%=svo.getSprice() %></td>
 			        <td><%=svo.getSpeople() %></td>
 			    </tr>
-			    </tbody>
 <%
 														 
 		}
 		}
 %>
+			    </tbody>
 			  </table>
 			</div>
     </section>
