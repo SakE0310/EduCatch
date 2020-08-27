@@ -35,6 +35,7 @@
 	crossorigin="anonymous"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>
 <style type="text/css">
+<%-- 모바일 --%>
 @media all and (max-width:767px) {
 #content{
 		width:375;
@@ -50,8 +51,54 @@
 #all{
 		background:#f3f3f3;
 }
+.h1{
+	font-size: 20px;
+	color: black;
+	font-weight: bold;
+}
+.section {
+    margin-top: 30px;
+    line-height: 22px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.padding-top10 {
+    padding-top:10px;
+}
+
+#section-1 {
+    height: auto;
+    background-color: #ffffff;
+    color: #fff;
+    padding: 10px;
+}
+#section-2 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 10px;
+}
+#section-3 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 10px;
+}
+#section-4 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 10px;
+}
+#mod{
 
 }
+.subth{
+	display:none;
+}
+
+}
+<%-- PC --%>
 @media all and (min-width:1024px) {
 #content{
 		width:1100px;
@@ -67,6 +114,47 @@
 		border-left:1px solid #f3f3f3;
 		border-right:1px solid #f3f3f3;
 		background:#f3f3f3;
+}
+.h1{
+	font-size: 40px;
+	color: black;
+}
+.section {
+    margin-top: 60px;
+    line-height: 22px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.padding-top10 {
+    padding-top:10px;
+}
+
+#section-1 {
+    height: auto;
+    background-color: #ffffff;
+    color: #fff;
+    padding: 20px;
+}
+#section-2 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+#section-3 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+#section-4 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
+#mod{
+	align: right;
 }
 
 }
@@ -172,40 +260,6 @@ input[type="file"] {
     color: #fff;
 }
 
-.section {
-    margin-top: 60px;
-    line-height: 22px;
-    margin-left: 100px;
-    margin-right: 100px;
-}
-.padding-top10 {
-    padding-top:10px;
-}
-
-#section-1 {
-    height: auto;
-    background-color: #ffffff;
-    color: #fff;
-    padding: 20px;
-}
-#section-2 {
-  height: auto;
-  background-color: #ffffff;
-  color: #fff;
-  padding: 20px;
-}
-#section-3 {
-  height: auto;
-  background-color: #ffffff;
-  color: #fff;
-  padding: 20px;
-}
-#section-4 {
-  height: auto;
-  background-color: #ffffff;
-  color: #fff;
-  padding: 20px;
-}
 
 
 
