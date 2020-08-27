@@ -16,15 +16,17 @@
 <title>Insert title here</title>
 </head>
 <%
-
 	
 
 		HttpSession hs = request.getSession(false);
+		System.out.println("hs >>> "+hs);
+		
 		MemberVO mvo = null;
 		if(hs != null){
 			mvo = (MemberVO)hs.getAttribute("user");
 			
-			System.out.println("mno >>>>>>>>>>> "+mvo.getMno());
+			System.out.println("mno >>>>>>>>>>> "+mvo.getMname());
+			
 		}	
 		
 		   String rbno = request.getParameter("rbno");
@@ -32,8 +34,12 @@
 		   String member_mno = request.getParameter("member_mno");
 		   String reno = request.getParameter("reno");
 		   String recontent = request.getParameter("recontent");
-	 		
-	
+		   String rbwt = request.getParameter("rbwt");
+		   
+// 			Object ob = request.getAttribute("replyList");
+			
+// 			ReplyVO rpvo = (ReplyVO)ob;
+// 					System.out.println("getRewiter >>> "+rpvo.getRewriter());
 	   
 %>
 <style type="text/css">
@@ -60,6 +66,8 @@
     margin-bottom: 50px;
 }
 .btn_light {
+	margin-top: 40px;
+	margin-right: 5px;
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -82,45 +90,8 @@
    margin-left: 10px;
 }
 
-#updateForm_btn{
-      margin-top:10px;
-      margin-right:5px;
-       display: inline-block;
-       text-align: center;
-       background: #e5e5e5;
-       color: #555;
-       vertical-align: middle;
-       cursor: pointer;
-       border: 1px solid #e5e5e5;
-         width: auto;
-       padding: 3px 10px;
-}
 
-#delete_btn{
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-    text-align: center;
-    background: #e5e5e5;
-    color: #555;
-    vertical-align: middle;
-    cursor: pointer;
-    border: 1px solid #e5e5e5;
 
-}
-
-#update_btn{
-
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-    text-align: center;
-    background: #e5e5e5;
-    color: #555;
-    vertical-align: middle;
-    cursor: pointer;
-    border: 1px solid #e5e5e5;
-}
 
 #updateReset_btn{
       margin-bottom: 30px;
@@ -135,7 +106,7 @@
        padding: 3px 10px;
 }
 
-#bm_recontextUp{
+#
       margin-left: 20px;
       width: 990px;
 }
@@ -152,16 +123,26 @@ textarea {
     width: 100%;
 }
 
+p{
+	margin: 0px;
+	width: 900px;
+	height: 70px;
+}
+
 </style>
 <script type="text/javascript"
       src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 
    var reviewboard_rbno = "<%=reviewboard_rbno%>";
+<%--    var reviewName = "<%=%>"; --%>
    var member_mno = "<%=mvo.getMno()%>";
    var reno = "<%=reno%>";
    var recontent = "<%=recontent%>";
-   var rewriter = "<%=mvo.getMname()%>";
+   var sessionID = "<%=mvo.getMname()%>";
+   
+   console.log("!@!@!@ sessionID >>> "+sessionID);
+
    
    $(document).ready(function(){
       
@@ -339,6 +320,7 @@ textarea {
          var rewriter = replyList[i].rewriter;
          var reinsertdate = replyList[i].reinsertdate;
          var recontent = replyList[i].recontent;
+         var rewriter = replyList[i].rewriter;
          
          console.log('replyList['+i+'] >>>\nreno : ' + reno + ', rewriter : ' + rewriter + ', reinsertdate : ' + reinsertdate + ', recontent : ' + recontent );
          
@@ -379,27 +361,40 @@ textarea {
          var bm_recontext_p = $("<p>");
          bm_recontext_p.addClass("marT5 marL5 marB5");
          bm_recontext_p.html(recontent);
-         
- 
+
+
 
          if(replyWriterBool){      
             // 수정폼 출력버튼
             var updateForm_btn_input = $("<input>");
-            updateForm_btn_input.attr({"type":"button","id":"updateForm_btn","value":"수정"});
+            updateForm_btn_input.attr({"type":"button","id":"updateForm_btn","value":"수정", "class" : "btn_light btn_box_02"});
             updateForm_btn_input.addClass("reply_btn");
 
             // 삭제버튼
             var delete_btn_input = $("<input>");
-            delete_btn_input.attr({"type":"button","id":"delete_btn","value":"삭제"});
+            delete_btn_input.attr({"type":"button","id":"delete_btn","value":"삭제", "class":"btn_light btn_box_02"});
             delete_btn_input.addClass("reply_btn");
-         }  
-         
-      
-         // 조립하기
-         info_p.append(i_nameKr_span).append(bm_reinsertdate_span).append(updateForm_btn_input).append(delete_btn_input)
-         newRe_td.append(info_p).append(bm_recontext_p)
-         newRe_li.append(newRe_td);
-         $("#replyList_ul").append(newRe_li);
+         }
+         console.log(rewriter);
+         console.log(sessionID);
+         if(rewriter == sessionID){
+     		// 조립하기
+        	info_p.append(i_nameKr_span).append(bm_reinsertdate_span).append(updateForm_btn_input).append(delete_btn_input)
+            newRe_td.append(info_p).append(bm_recontext_p)
+            newRe_li.append(newRe_td);
+            $("#replyList_ul").append(newRe_li);
+         }else{
+//         	조립하기
+         	info_p.append(i_nameKr_span).append(bm_reinsertdate_span)
+             newRe_td.append(info_p).append(bm_recontext_p)
+             newRe_li.append(newRe_td);
+             $("#replyList_ul").append(newRe_li);
+         }
+     	
+     		
+//       console.log("!@!@!@ rbwt >>> "+rbwt);
+//       console.log("!@!@!@ rewriter >>> "+rewriter);
+//       console.log("!@!@!@ getMname >>> "+mvo.getMname());
 
    
 

@@ -34,7 +34,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <style type="text/css">
-	/*미디어 쿼리*/
+/*미디어 쿼리*/
 	/* Mobile Device (가로폭 767px 이하) */
 	@media all and (max-width:767px) {
 		thead {
@@ -85,10 +85,14 @@
 			font-size: 10px;
 		}
 		.media_mobile_td{
-			display: none;
+			display: table-column-group;
 		}
-		
+		.media_mobile_td_font{
+			font-size: 13px;
+		}
 	}
+	
+
 	
 	/* Tablet (가로폭 768px 이상, 1023px 이하) */
 	@media all and (min-width:768px) and (max-width:1023px) {
@@ -237,6 +241,8 @@
 	 	height: 10px;
 	 }
 	 /*---------------------------------*/
+	 
+	
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -377,9 +383,9 @@
 		<table align="center" class="table">
 			<colgroup>
 				<col width="120px"/>
-				<col width="120px"/>
-				<col width="600px"/>
-				<col width="120px"/>
+				<col width="400px"/>
+				<col width="500px"/>
+				<col width="200px"/>
 				<col width="120px"/>
 			</colgroup>
 			<thead id="table_head">	
@@ -414,10 +420,10 @@ if(listConsult !=null && nCnt>0){
 %>
 					<tr align="center">
 						<td class="media_mobile_td"><%= cvo.getCbno() %></td>
-						<td><%= cvo.getAname() %></td>
-						<td><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
-						<td><%= cvo.getCbname() %></td>
-						<td><%= cvo.getCinsertdate() %></td>
+						<td class="media_mobile_td_font"><%= cvo.getAname() %></td>
+						<td class="media_mobile_td_font"><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
+						<td class="media_mobile_td_font"><%= cvo.getCbname() %></td>
+						<td class="media_mobile_td"><%= cvo.getCinsertdate() %></td>
 					</tr>
 <%
 				}	

@@ -75,6 +75,7 @@
 		        REUPDATEDATE = SYSDATE
 		WHERE   REDELETEYN = 'N'
 		AND     RENO = #{reno, jdbcType=VARCHAR}
+		AND		MEMBER_MNO=#{member_mno, jdbcType=VARCHAR}
 	</update>
 	
 	<update id="replyDelete" parameterType="reply">

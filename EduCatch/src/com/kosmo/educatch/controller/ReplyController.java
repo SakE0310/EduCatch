@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.ReplyService;
 import com.kosmo.educatch.vo.AcademyVO;
+import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReplyVO;
 
 @Controller
@@ -31,8 +33,7 @@ public class ReplyController {
 	
 	@ResponseBody
 	@RequestMapping("replyList.ec")
-	public Map<String, Object> replyList(@ModelAttribute ReplyVO rvo,
-										 Model model){
+	public Map<String, Object> replyList(@ModelAttribute ReplyVO rvo){
 		
 		log.info("ReplyController replyList >>> 댓글 조회 성공 ");
 		log.info("reviewboard_rbno >>> "+rvo.getReviewboard_rbno()+"member_mno >>> "+rvo.getMember_mno()+"reno >>> "+rvo.getReno());
@@ -50,8 +51,7 @@ public class ReplyController {
 	
 	@ResponseBody
 	@RequestMapping("creplyList.ec")
-	public Map<String, Object> creplyList(@ModelAttribute ReplyVO rvo,
-										 Model model){
+	public Map<String, Object> creplyList(@ModelAttribute ReplyVO rvo){
 		
 		log.info("ReplyController replyList >>> 댓글 조회 성공 ");
 		log.info("consultboard_cbno >>> "+rvo.getConsultboard_cbno()+"member_mno >>> "+rvo.getMember_mno()+"reno >>> "+rvo.getReno());
@@ -63,14 +63,20 @@ public class ReplyController {
 		m.put("creplyList", creplyList);
 		
 		log.info("ReplyController creplyList >>> 끝 ");
+		
+		
 		return m;
 	}
 	
 	@ResponseBody
 	@RequestMapping("replyInsert.ec")
-	public String replyInsert(@ModelAttribute ReplyVO rvo) {
+	public String replyInsert(@ModelAttribute ReplyVO rvo, MemberVO mvo) {
 		log.info("ReplyController replyList >>> 댓글 입력 성공 ");
 		
+		String mname=mvo.getMname();
+		String mno=mvo.getMno();
+		log.info("mname >>> "+mname);
+		log.info("mno >>> "+mno);
 		int nCntReplyInsert = replyService.replyInsert(rvo);
 		
 		String insertResult = "";
@@ -93,9 +99,20 @@ public class ReplyController {
 	@ResponseBody
 	@RequestMapping("replyUpdate.ec")
 	public String replyUpdate(@ModelAttribute ReplyVO rvo,
-							  HttpServletRequest request) {
+							  HttpServletRequest request,
+							  HttpSession session) {
 		log.info("ReplyController replyList >>> 댓글 수정 성공");
 		
+		String member_mno="";
+		
+		MemberVO mvo = null;
+		if(session != null){
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno=mvo.getMno();
+			
+		}
+		log.info("member_mno  >>>>>>>>  "+member_mno);
+		rvo.setMember_mno(member_mno);
 		
 		int nCntReplyUpdate = replyService.replyUpdate(rvo);
 		
@@ -119,8 +136,19 @@ public class ReplyController {
 	
 	@ResponseBody
 	@RequestMapping("replyDelete")
-	public String replyDelete(@ModelAttribute ReplyVO rvo) {
+	public String replyDelete(@ModelAttribute ReplyVO rvo,HttpSession session) {
 		log.info("ReplyController replyDelete >>> 댓글 수정 성공");
+		
+	String member_mno="";
+		
+		MemberVO mvo = null;
+		if(session != null){
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno=mvo.getMno();
+			
+		}
+		log.info("member_mno  >>>>>>>>  "+member_mno);
+		rvo.setMember_mno(member_mno);
 		
 		int nCntReplyDelete = replyService.replyDelete(rvo);
 		String deleteResult = "";

@@ -397,10 +397,18 @@
 					<tr class="marT5 marL5 marB5">
 						<td>
 							<textarea name="recontent" id="recontent" style="padding:10px; width:90%;"placeHolder="댓글을 입력해주세요."></textarea>
+<%
+		if(mvo != null){
+			if( mvo.getMauth().equals("2") || mvo.getMauth().equals("3")){
+%>
 							<input type="button" class="btn_light btn_box_02" id="replyInsert" value="등록" style="vertical-align:middle;"/>
 							<input type="hidden" id="reno" name="reno"/>
 						</td>
 					</tr>
+<%
+			}
+		}
+%>
 				</table>
 			</form>
 		</div>

@@ -130,7 +130,7 @@
 			<input type="hidden" id="rbno" name="rbno" value="<%= rvo.getRbno()%>"/>
 		
 			<table align="center" width="700" height="100" class="table">
-			<thead id="table_head">
+			<thead id="table_head">bm_recontextUp{
 				<tr>
 					<th><div align="center"><%= rvo.getRbsubject() %></div></th>
 				</tr>
@@ -173,6 +173,7 @@
 	<p></p>
 		<jsp:include page="reviewReply.jsp">
 			<jsp:param name="reviewboard_rbno" value="<%=reviewboard_rbno %>"/>
+			<jsp:param name="rbwt" value="<%=rvo.getMname() %>"/>
 		</jsp:include>
 <%
 	if( rvo.getRbname().equals(mvo.getMname()) || mvo.getMauth().equals("3")){

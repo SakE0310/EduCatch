@@ -90,7 +90,7 @@
 			display: table-column-group;
 		}
 		.media_mobile_td_font{
-			font-size: 10px;
+			font-size: 13px;
 		}
 	}
 	
@@ -389,7 +389,7 @@
       	<table align="center" class="table">
          <colgroup>
 	            <col width="120px"/>
-	            <col width="0px"/>
+	            <col width="400px"/>
 	            <col width="600px"/>
 	            <col width="120px"/>
 	            <col width="120px"/>
