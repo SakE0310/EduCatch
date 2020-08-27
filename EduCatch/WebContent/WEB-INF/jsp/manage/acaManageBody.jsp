@@ -106,7 +106,10 @@ $(document).ready(function(){
 	
 	//과목수정 셀렉트
 	$('#modal-749411').on('click', function(){
-        
+		if($("input:checkbox[id='chkInBno']").is(":checked")==false){
+			alert("수정하실 과목을 체크 해주세요.");
+			return false;
+		}
 		var sno = $("input:checkbox[name='chkInBno']:checked").val();
 		console.log(sno);
 
@@ -168,7 +171,10 @@ $(document).ready(function(){
 	
 	//과목삭제 셀렉트
 	$('#modal-749489').on('click', function(){
-		
+		if($("input:checkbox[id='chkInBno']").is(":checked")==false){
+			alert("삭제하실 과목을 체크 해주세요.");
+			return false;
+		}
         
 		var sno = $("input:checkbox[name='chkInBno']:checked").val()
 		console.log(sno);
@@ -624,7 +630,7 @@ function addrCheck(){
 	<%-- 탭 본문내용1 div --%>
 	<div class="section">
 	    <section id="section-1">
-	        <h1 style="color:black">학원 정보</h1>
+	        <h1 class="h1">학원 정보</h1>
 	        <div class="row" style="color:black">
 									<div class="col-md-12">
 										 <a id="modal-749483" href="#modal-container-749483" role="button" class="btn btn-success" data-toggle="modal"><i class="fas fa-edit"></i> 학원정보수정</a>
@@ -732,7 +738,7 @@ function addrCheck(){
 	<%-- 탭 본문내용2 div --%>
     <section id="section-2">
     	<hr id="hhr">
-       	<h1 style="color:black">수업 정보</h1>
+       	<h1 class="h1">수업 정보</h1>
        	<div class="row" style="color:black">
 									<div class="col-md-8">
 										 <a id="modal-749484" href="#modal-container-749484" role="button" class="btn btn-primary" data-toggle="modal"><i class="fas fa-edit"></i> 과목추가</a>
@@ -793,7 +799,7 @@ function addrCheck(){
 										
 										</div>
 										</div>
-										<div class="col-md-4" align="right">
+										<div class="col-md-4" id="mod">
 											<a id="modal-749411" href="#modal-container-749411" role="button" class="btn btn-success" data-toggle="modal"><i class="fas fa-edit"></i> 과목수정</a>
 											<div class="modal" id="modal-container-749411" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 												<div class="modal-dialog" role="document">
@@ -870,11 +876,10 @@ function addrCheck(){
 			      <tr>
 			      	<th>     </th>
 			        <th>과목명</th>
-			        <th>수강날짜</th>
-			        <th>수강시간</th>
-			        <th>수강금액</th>
-			        <th>수강인원</th>
-			        <th></th>
+			        <th class="subth">수강날짜</th>
+			        <th class="subth">수강시간</th>
+			        <th class="subth">수강금액</th>
+			        <th class="subth">수강인원</th>
 			      </tr>
 			    </thead>
 			    <tbody>
@@ -893,10 +898,10 @@ function addrCheck(){
 						 	    onclick="checkOnly(this)">
 					</td>		
 			        <td><%=svo.getSname() %></td>
-			        <td><%=svo.getSday() %></td>
-			        <td><%=svo.getStime() %></td>
-			        <td><%=svo.getSprice() %></td>
-			        <td><%=svo.getSpeople() %></td>
+			        <td class="subth"><%=svo.getSday() %></td>
+			        <td class="subth"><%=svo.getStime() %></td>
+			        <td class="subth"><%=svo.getSprice() %></td>
+			        <td class="subth"><%=svo.getSpeople() %></td>
 			    </tr>
 			    </tbody>
 <%
@@ -911,7 +916,7 @@ function addrCheck(){
 	<%-- 탭 본문내용3 div --%>
     <section id="section-3">
     <hr id="hhr">
-         <h1 style="color:black">편의기능</h1>
+         <h1 class="h1">편의기능</h1>
           <div class="row" style="color:black">
 									<div class="col-md-12">
 										 <a id="modal-749487" href="#modal-container-749487" role="button" class="btn btn-success" data-toggle="modal"><i class="fas fa-edit"></i> 편의기능 수정</a>
