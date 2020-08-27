@@ -546,9 +546,11 @@
 		};
 		
 		function ajaxSearchPeoplie(date, type, time, people, ttno){
+			var ano = $("#acano").val();
 			$.ajax({
        			url : "selectMemList.ec",
-       			data : {"ttno" : ttno}
+       			data : {"ttno" : ttno,
+       					"ano" : ano}
        		}).done(function(resultParam){
        			$('.chkPeople > tbody').remove();
        			$('.chkPeople').append('<tbody></tbody>');
@@ -582,13 +584,15 @@
 		}
 		
 		function ajaxInsertTime(){
+			var ano = $('#acano').val();
 			var date = $('#date3').val();
 			var time = $('#timepicker3').val();
 			var people = $('#cnt3').val();
 			$.ajax({
        			url : "insertTimeTable.ec",
        			type : "post",
-       			data : {"date" : date,
+       			data : {"ano" : ano,
+       					"date" : date,
        					"time" : time,
        					"people" : people},
      			dataType : "json"

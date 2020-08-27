@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@page import="com.kosmo.educatch.vo.AcademyVO"%>
 <%@page import="com.kosmo.educatch.vo.SubjectVO"%>
 <%@page import="com.kosmo.educatch.vo.ConvenienceVO"%>
@@ -8,11 +9,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link rel="shortcut icon" href="/EduCatch/assets/img/favicon-96x96.png"
+	type="image/x-icon">
+<link rel="icon" href="/EduCatch/assets/img/favicon-96x96.png"
+	type="image/x-icon">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+		crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/timepicker@1.13.14/jquery.timepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/timepicker@1.13.14/jquery.timepicker.min.css">
 <%-- -----------CSS------------- --%>
-
 <style type="text/css">
 /* Mobile Device (가로폭 767px 이하) */
 	@media all and (max-width:767px) {
@@ -530,13 +538,112 @@ body {
 .info .link {
 	color: #5085BB;
 }
+.fc-daygrid-day :hover{
+	background-color:#fff4e3;
+}
+ .fc-day { 
+	color:#212529;  
+ }
+.fc-day-sun { 
+	color:red;  
+ }
+ .fc-day-sat { 
+	color:blue;  
+ }
+ .fc-day-other .fc-daygrid-day-number { display:none;}
+ .modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+}
+.modal-header .close {
+  padding: 1rem 1rem;
+  margin: -1rem -1rem -1rem auto;
+}
 
+.modal-title {
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 1rem;
+}
+
+.modal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0.75rem;
+  border-top: 1px solid #dee2e6;
+  border-bottom-right-radius: calc(0.3rem - 1px);
+  border-bottom-left-radius: calc(0.3rem - 1px);
+}
+.modal-footer > * {
+  margin: 0.25rem;
+}
+
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+  }
+
+  .modal-dialog-scrollable {
+    max-height: calc(100% - 3.5rem);
+  }
+  .modal-dialog-scrollable .modal-content {
+    max-height: calc(100vh - 3.5rem);
+  }
+
+  .modal-dialog-centered {
+    min-height: calc(100% - 3.5rem);
+  }
+  .modal-dialog-centered::before {
+    height: calc(100vh - 3.5rem);
+    height: -webkit-min-content;
+    height: -moz-min-content;
+    height: min-content;
+  }
+
+  .modal-sm {
+    max-width: 300px;
+  }
+}
+@media (min-width: 992px) {
+  .modal-lg,
+.modal-xl {
+    max-width: 800px;
+  }
+}
+@media (min-width: 1200px) {
+  .modal-xl {
+    max-width: 1140px;
+  }
+}
 </style>
 
 
 <%-- -----------스크립트------------- --%>
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/fullcalendar@5.2.0/main.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/fullcalendar@5.2.0/main.min.css">
 <!--<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6fb37ba283dc18386af651f85d45ef34&libraries=services,clusterer,drawing"></script>-->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b7f350ead2b7c77b31a6b3a2be10fbd"></script>
 	<script type="text/javascript">
@@ -660,6 +767,7 @@ body {
 	          $("a[href='#" + id + "']", $menu).addClass("isactive");
 	        }
 	      });
+	      
 	    });
 	
 	function ajaxGetBookmark(){
@@ -692,18 +800,24 @@ body {
 <jsp:include page="../../../top.jsp" flush="true">
 	<jsp:param value="" name="" />
 </jsp:include>
-
 <%-- ----------- 바디 ------------- --%>
 <%
 		Object obj1 = request.getAttribute("avo");
 		Object obj2 = request.getAttribute("cvo");
 		Object obj3 = request.getAttribute("gvo");
+		Object obj4 = session.getAttribute("user");
 		Object listobj1 = request.getAttribute("subjectList"); 
 		Object listobj2 = request.getAttribute("reviewlist"); 
 
 		AcademyVO avo = (AcademyVO)obj1;
 		ConvenienceVO cvo = (ConvenienceVO)obj2;
 		AcademyVO gvo = (AcademyVO)obj3;
+		MemberVO memberVO = new MemberVO();
+		if(obj4!=null){
+			memberVO = (MemberVO)obj4;
+		}
+		System.out.println(memberVO.getMno());	
+		
 		ArrayList subjectlist = (ArrayList)listobj1;
 		ArrayList reviewlist = (ArrayList)listobj2;
 		
@@ -727,7 +841,7 @@ body {
 				<div class="col-md-4" align="right">
 					<input type="hidden" id="ano" name="ano" value="<%=avo.getAno() %>"/>
 					<input type="hidden" id="academy_ano" name="academy_ano" value="<%=avo.getAcademy_ano() %>"/>
-					<input type="hidden" id="member_mno" name="member_mno" />
+					<input type="hidden" id="member_mno" name="member_mno" value="<%=memberVO.getMno() %>" />
 					<img src="/EduCatch/assets/img/academyLogo/<%= avo.getAlogo() %>" border=0 width="200" height="200" id="logoimg"/>
 				</div>
 				<div class="col-md-8" style="margin-top:30px">
@@ -1045,6 +1159,34 @@ body {
 			  </table>
 			</div>
     </section>
+    <%-- 본문내용예약 --%>
+    <section id="section-4">
+    <hr id="hhr">
+        <h1>학원예약</h1><br><br>
+        <div class="container">
+				  <table class="table table-condensed reser" id="actb">
+				      <thead>
+				      	<tr>
+				      		<th>날짜</th>
+				      		<th>시간</th>
+				      		<th>모집인원</th>
+				      		<th>현재인원</th>
+				      		<th>신청/취소</th>
+				      	</tr>
+				      </thead>
+				      <tbody>
+					      <tr>
+					        <td>학원명</td>
+					        <td><%=avo.getAname() %></td>
+					        <td>연락처</td>
+					        <td><%=avo.getAtel() %></td>
+					        <td><input id="addCalcle" name="addCalcle" type="button" value="신청" class="btn1" /></td>
+					      </tr>
+				      </tbody>
+				  </table>
+				</div>
+        
+    </section>
 	
 	<%-- 탭 본문내용3 div --%>
     <section id="section-3">
@@ -1152,7 +1294,47 @@ body {
       <input type="hidden" id="aname" name="aname" value="<%=avo.getAname() %>"/>
       <input type="hidden" id="ano" name="ano" value="<%=avo.getAno() %>"/>
 </form>
-
+<div class="modal" id="applyRes" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">상담예약하기</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+          	<input type="hidden" name="ttno" class="ttno" />
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">날짜</span>
+			  </div>
+			  <input type="text" class="form-control date"aria-describedby="basic-addon1" readonly>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">시간</span>
+			  </div>
+			  <input type="text" class="form-control timepicker" id="timepicker1" aria-describedby="basic-addon1" readonly>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">인원</span>
+			  </div>
+			  <input type="text" class="form-control count"aria-describedby="basic-addon1" readonly>
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">현재인원</span>
+			  </div>
+			  <input type="text" class="form-control countNow"aria-describedby="basic-addon1" readonly>
+			</div>
+			<hr />
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="btnCancel" type="button" data-dismiss="modal">확인</button>
+        </div>
+      </div>
+		</div>
+	</div>
 <%-- -----------부트스크랩 하단------------- --%>
 	<jsp:include page="../../../footer.jsp" flush="true">
 		<jsp:param value="" name="" />

@@ -170,7 +170,12 @@ public class DetailViewController {
 		return map;
 	}
 	
-	
-	
+	@RequestMapping("cal")
+	public ModelAndView getCalendar() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("search/calendar");
+		
+		return mv;
+	}
 	
 }

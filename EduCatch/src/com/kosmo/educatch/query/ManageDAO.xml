@@ -307,6 +307,7 @@
 	FROM 	ACADEMY
 	<![CDATA[ WHERE 	AADDR1 LIKE '%'||#{district}||'%' ]]>
 	<![CDATA[ AND 		AADDR1 LIKE '%'||#{city}||'%' ]]>
+	AND ADELETEYN = 'N'
 	ORDER BY 2
 	</select>
 	
