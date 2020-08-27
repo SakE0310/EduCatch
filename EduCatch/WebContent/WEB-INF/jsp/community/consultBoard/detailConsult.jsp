@@ -32,11 +32,14 @@
 		.btn_light {
 	    display: inline-block;
 	    text-align: center;
-	    background: #e5e5e5;
-	    color: #555;
+	    background: #140C40;
+	    color: #ffffff;
 	    vertical-align: middle;
 	    cursor: pointer;
-	    border: 1px solid #e5e5e5;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
 	}
 		
 	.btn_box_01 {

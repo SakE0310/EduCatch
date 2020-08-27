@@ -29,13 +29,31 @@
 	String recontent = request.getParameter("recontent");
 %>
 <style type="text/css">
+/*미디어 쿼리*/
+	/* Mobile Device (가로폭 767px 이하) */
+	@media all and (max-width:767px) {
+		#recontent{
+		width:20%;
+		
+		}
+
+	}
+	/* PC Desktop (가로폭 1024 이상) */
+	@media all and (min-width:1024px) {
+		#recontent{
+			width:90%;
+		
+		}
+
+	}
+
 .btn_box_02 {
-    width: 100px;
-    padding: 17px 20px;
+    width: auto;
     margin-bottom: 50px;
 }
-
 .btn_light {
+	margin-top: 40px;
+	margin-right: 5px;
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -45,78 +63,43 @@
     vertical-align: middle;
     cursor: pointer;
     border: 1px solid #e5e5e5;
+    
+   	margin-top: 0px;
+    margin-bottom: 0px;
     /* transition: all 0.3s ease-in-out; */
 }
 
 
 .table_wrap{
-	border-collapse: collapse;
-	background-color: #F5F5F5;
+   border-collapse: collapse;
+   background-color: #F5F5F5;
 }
 
 #list{
-	margin-left: 10px;
+   margin-left: 10px;
 }
 
-#updateForm_btn{
-		margin-top:10px;
-		margin-right:5px;
-	    display: inline-block;
-	    text-align: center;
-	    background: #e5e5e5;
-	    color: #555;
-	    vertical-align: middle;
-	    cursor: pointer;
-	    border: 1px solid #e5e5e5;
-	   	width: auto;
-	    padding: 3px 10px;
+
+#replyList_ul{
+      margin-left: 20px;
 }
 
-#delete_btn{
-		margin-top:10px;
-		display: inline-block;
-	    text-align: center;
-	    background: #e5e5e5;
-	    color: #555;
-	    vertical-align: middle;
-	    cursor: pointer;
-	    border: 1px solid #e5e5e5;
-	   	width: auto;
-	    padding: 3px 10px;
+textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 
+    width: 100%;
 }
 
-#update_btn{
-
-		margin-bottom: 30px;
-		margin-right:5px;
-		display: inline-block;
-	    text-align: center;
-	    background: #e5e5e5;
-	    color: #555;
-	    vertical-align: middle;
-	    cursor: pointer;
-	    border: 1px solid #e5e5e5;
-	   	width: auto;
-	    padding: 3px 10px;
+.marT5 marL5 marB5{
+	margin: 0px;
+	width: 900px;
+	height: 70px;
 }
 
-#updateReset_btn{
-		margin-bottom: 30px;
-		display: inline-block;
-	    text-align: center;
-	    background: #e5e5e5;
-	    color: #555;
-	    vertical-align: middle;
-	    cursor: pointer;
-	    border: 1px solid #e5e5e5;
-	   	width: auto;
-	    padding: 3px 10px;
-}
-
-#bm_recontextUp{
-		margin-left: 20px;
-		width: 990px;
+.hrColor{
+	border: solid 0.5px white;
 }
 </style>
 
@@ -129,6 +112,7 @@
 	var reno = "<%=reno%>";
 	var recontent = "<%=recontent%>";
 	var rewriter = "<%=mvo.getMname()%>";
+	var sessionID = "<%=mvo.getMname()%>";
 	
 	$(document).ready(function(){
 		
@@ -189,8 +173,8 @@
 		
 		// 댓글수정폼 데이터 뿌려서 출력
 		var data = "<textarea name='bm_recontextUp' id='bm_recontextUp'>" + recontent + "</textarea>";
-		data += "<input type='button' id='update_btn' value='등록'>";
-		data += "<input type='button' id='updateReset_btn' value='취소'>";
+	      data += "<input type='button' id='update_btn' value='등록' class='btn_light btn_box_02'>";
+	      data += "<input type='button' id='updateReset_btn' value='취소' class='btn_light btn_box_02'>";
 		bm_recontext_p.html(data);
 		
 	});	// end of 수정버튼 수정폼 출력 이벤트
@@ -343,28 +327,44 @@
 			bm_reinsertdate_span.html(reinsertdate);
 			
 			
-			if(replyWriterBool){		
-				// 수정폼 출력버튼
-				var updateForm_btn_input = $("<input>");
-				updateForm_btn_input.attr({"type":"button","id":"updateForm_btn","value":"수정"});
-				updateForm_btn_input.addClass("reply_btn");
-
-				// 삭제버튼
-				var delete_btn_input = $("<input>");
-				delete_btn_input.attr({"type":"button","id":"delete_btn","value":"삭제"});
-				delete_btn_input.addClass("reply_btn");
-			}	
-			
 			// 내용
 			var bm_recontext_p = $("<p>");
 			bm_recontext_p.addClass("marT5 marL5 marB5");
 			bm_recontext_p.html(recontent);
+
 			
-			// 조립하기
-			info_p.append(i_nameKr_span).append(bm_reinsertdate_span).append(updateForm_btn_input).append(delete_btn_input)
-			newRe_td.append(info_p).append(bm_recontext_p)
-			newRe_li.append(newRe_td);
-			$("#replyList_ul").append(newRe_li);
+			 var hr = $("<hr>");
+			 hr.addClass("hrColor");
+			 
+			 
+			 if(replyWriterBool){      
+		            // 수정폼 출력버튼
+		            var updateForm_btn_input = $("<input>");
+		            updateForm_btn_input.attr({"type":"button","id":"updateForm_btn","value":"수정", "class" : "btn_light btn_box_02"});
+		            updateForm_btn_input.addClass("reply_btn");
+
+		            // 삭제버튼
+		            var delete_btn_input = $("<input>");
+		            delete_btn_input.attr({"type":"button","id":"delete_btn","value":"삭제", "class":"btn_light btn_box_02"});
+		            delete_btn_input.addClass("reply_btn");
+		         }
+		         console.log(rewriter);
+		         console.log(sessionID);
+
+		         if(rewriter == sessionID){
+		     		// 조립하기
+		        	info_p.append(i_nameKr_span).append(bm_reinsertdate_span).append(updateForm_btn_input).append(delete_btn_input)
+		            newRe_td.append(info_p).append(bm_recontext_p).append(hr)
+		            newRe_li.append(newRe_td);
+		            $("#replyList_ul").append(newRe_li);
+		         }else{
+//		         	조립하기
+		         	info_p.append(i_nameKr_span).append(bm_reinsertdate_span)
+		             newRe_td.append(info_p).append(bm_recontext_p).append(hr)
+		             newRe_li.append(newRe_td);
+		             $("#replyList_ul").append(newRe_li);
+		         }
+		     	
 			
 		} // end of for
 	} // end of addNewReply 함수
@@ -379,7 +379,7 @@
 	<div class="container">
 		<div class="table_wrap">
 			<!-- =================== 댓글 입력폼 ==================== -->						
-				<table>
+				<table style="width: 1140px;">
 					<thead>
 						<tr>
 							<th class="alignL total"></th>
@@ -396,7 +396,7 @@
 				<table class="reply_insert_wrap" align="center" width="1100" height="100">
 					<tr class="marT5 marL5 marB5">
 						<td>
-							<textarea name="recontent" id="recontent" style="padding:10px; width:90%;"placeHolder="댓글을 입력해주세요."></textarea>
+							<textarea name="recontent" id="recontent" style="padding:10px; min-width: 260px;" placeHolder="댓글을 입력해주세요."></textarea>
 <%
 		if(mvo != null){
 			if( mvo.getMauth().equals("2") || mvo.getMauth().equals("3")){

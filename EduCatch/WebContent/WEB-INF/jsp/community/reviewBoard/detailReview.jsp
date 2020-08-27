@@ -20,32 +20,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 
-	/*미디어 쿼리*/
-	/* Mobile Device (가로폭 767px 이하) */
-	@media all and (max-width:767px) {
-		#media_mobile_div{
-			width: 300px;
-			height: 500px;
-			margin: auto;
-		}		
-		#media_mobile_img{
-			width: 250px;
-			height: 300px;
-		}
-	}
-	
-	/* Tablet (가로폭 768px 이상, 1023px 이하) */
-	@media all and (min-width:768px) and (max-width:1023px) {
-	/* 브라우저 가로폭이 768~1023px일때 적용될 css (태블릿) */
-	}
-	
-	/* PC Desktop (가로폭 1024 이상) */
-	@media all and (min-width:1024px) {
-		#media_mobile_table{
-			width:700px;
-			height:100px;
-		}
-	}
+
 	#contnent{
 		width : 600px;
 		height: 600px;
@@ -121,7 +96,7 @@
 			if(mvo !=null){
 %>
 <p></p>
-	<div class="container" style="width: auto; height: auto;">
+	<div class="container" id="dd" style="width: auto; height: auto;">
 		<form id="ReviewForm" name="ReviewForm">
 		 	<input type="hidden" id="ano" name="ano" value="<%= rvo.getAno()%>"/> 
 		 	<input type="hidden" id="aname" name="aname" value="<%= rvo.getAname()%>"/> 
@@ -130,7 +105,7 @@
 			<input type="hidden" id="rbno" name="rbno" value="<%= rvo.getRbno()%>"/>
 		
 			<table align="center" width="700" height="100" class="table">
-			<thead id="table_head">bm_recontextUp{
+			<thead id="table_head">
 				<tr>
 					<th><div align="center"><%= rvo.getRbsubject() %></div></th>
 				</tr>

@@ -47,7 +47,7 @@
 	/* Mobile Device (가로폭 767px 이하) */
 	@media all and (max-width:767px) {
 		#recontent{
-		width:25%;
+		width:20%;
 		
 		}
 
@@ -62,11 +62,11 @@
 	}
 
 .btn_box_02 {
-    width: auto;
+/*     width: auto; */
     margin-bottom: 50px;
 }
 .btn_light {
-	margin-top: 40px;
+
 	margin-right: 5px;
     display: inline-block;
     *display: inline;
@@ -77,6 +77,9 @@
     vertical-align: middle;
     cursor: pointer;
     border: 1px solid #e5e5e5;
+
+    margin-top: 0px;
+    margin-bottom: 0px;
     /* transition: all 0.3s ease-in-out; */
 }
 
@@ -92,25 +95,6 @@
 
 
 
-
-#updateReset_btn{
-      margin-bottom: 30px;
-      display: inline-block;
-       text-align: center;
-       background: #e5e5e5;
-       color: #555;
-       vertical-align: middle;
-       cursor: pointer;
-       border: 1px solid #e5e5e5;
-         width: auto;
-       padding: 3px 10px;
-}
-
-#
-      margin-left: 20px;
-      width: 990px;
-}
-
 #replyList_ul{
       margin-left: 20px;
 }
@@ -123,12 +107,23 @@ textarea {
     width: 100%;
 }
 
-p{
+.marT5 marL5 marB5{
 	margin: 0px;
 	width: 900px;
 	height: 70px;
 }
 
+.hrColor{
+	border: solid 0.5px white;
+}
+
+.brGap{
+	margin-right: 10px;
+}
+
+.marL10{
+	font-size: 10px;
+}
 </style>
 <script type="text/javascript"
       src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -140,6 +135,7 @@ p{
    var reno = "<%=reno%>";
    var recontent = "<%=recontent%>";
    var sessionID = "<%=mvo.getMname()%>";
+   var rewriter = "<%=mvo.getMname()%>";
    
    console.log("!@!@!@ sessionID >>> "+sessionID);
 
@@ -204,8 +200,8 @@ p{
       
       // 댓글수정폼 데이터 뿌려서 출력
       var data = "<textarea name='bm_recontextUp' id='bm_recontextUp'>" + recontent + "</textarea>";
-      data += "<input type='button' id='update_btn' value='등록'>";
-      data += "<input type='button' id='updateReset_btn' value='취소'>";
+      data += "<input type='button' id='update_btn' value='등록' class='btn_light btn_box_02'>";
+      data += "<input type='button' id='updateReset_btn' value='취소' class='btn_light btn_box_02'>";
       bm_recontext_p.html(data);
       
    });   // end of 수정버튼 수정폼 출력 이벤트
@@ -362,6 +358,9 @@ p{
          bm_recontext_p.addClass("marT5 marL5 marB5");
          bm_recontext_p.html(recontent);
 
+		 var hr = $("<hr>");
+		 hr.addClass("hrColor");
+
 
 
          if(replyWriterBool){      
@@ -377,18 +376,20 @@ p{
          }
          console.log(rewriter);
          console.log(sessionID);
+
          if(rewriter == sessionID){
      		// 조립하기
         	info_p.append(i_nameKr_span).append(bm_reinsertdate_span).append(updateForm_btn_input).append(delete_btn_input)
-            newRe_td.append(info_p).append(bm_recontext_p)
+            newRe_td.append(info_p).append(bm_recontext_p).append(hr)
+            
             newRe_li.append(newRe_td);
             $("#replyList_ul").append(newRe_li);
          }else{
 //         	조립하기
          	info_p.append(i_nameKr_span).append(bm_reinsertdate_span)
-             newRe_td.append(info_p).append(bm_recontext_p)
-             newRe_li.append(newRe_td);
-             $("#replyList_ul").append(newRe_li);
+            newRe_td.append(info_p).append(bm_recontext_p).append(hr)
+            newRe_li.append(newRe_td);
+            $("#replyList_ul").append(newRe_li);
          }
      	
      		
@@ -413,7 +414,7 @@ p{
       <div class="container">
          <div class="table_wrap">
          <!-- =================== 댓글 입력폼 ==================== -->                  
-            <table>
+            <table style="width: 1140px;">
                <thead>
                   <tr>
                      <th class="alignL total"></th>
