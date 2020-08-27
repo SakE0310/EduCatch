@@ -714,7 +714,7 @@ input[type="file"] {
 	<%-- 탭 본문내용1 div --%>
 	<div class="section">
 	    <section id="section-1">
-	        <h1>학원 정보</h1>
+	        <h1 style="color:black">학원 정보1</h1>
 	        <div class="row" style="color:black">
 									<div class="col-md-12">
 										 <a id="modal-749483" href="#modal-container-749483" role="button" class="btn btn-success" data-toggle="modal"><i class="fas fa-edit"></i> 학원정보수정</a>
@@ -822,7 +822,7 @@ input[type="file"] {
 	<%-- 탭 본문내용2 div --%>
     <section id="section-2">
     	<hr id="hhr">
-       	<h1>수업 정1보</h1>
+       	<h1 style="color:black">수업 정보</h1>
        	<div class="row" style="color:black">
 									<div class="col-md-8">
 										 <a id="modal-749484" href="#modal-container-749484" role="button" class="btn btn-primary" data-toggle="modal"><i class="fas fa-edit"></i> 과목추가</a>
