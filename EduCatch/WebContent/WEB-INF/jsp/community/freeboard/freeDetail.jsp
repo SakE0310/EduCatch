@@ -2,9 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.kosmo.educatch.vo.FreeVO"  %>
+<%@ page import="com.kosmo.educatch.vo.MemberVO"  %>
 <!DOCTYPE html>
 <html>
 <head>
+<%
+HttpSession hs = request.getSession(false);
+MemberVO mvo = null;
+if(hs != null){
+	mvo = (MemberVO)hs.getAttribute("user");
+}
+%>
 <meta charset="UTF-8">
 <title>상세정보조회</title>
 <script type="text/javascript"
@@ -16,6 +24,18 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script type="text/javascript">
+<%
+String freeboard_fbno = "";
+
+Object obj = request.getAttribute("freevo"); 
+
+if(obj!=null){
+	FreeVO freevo = (FreeVO)obj;
+	
+	freeboard_fbno = freevo.getFbno();
+	if(mvo!=null){
+		if(mvo.getMno().equals(freevo.getMember_mno())){
+%>
 function updateClick(){
 	console.log("updateClick함수 진입");
 	alert("수정");
@@ -30,6 +50,10 @@ function deleteClick(){
 	$("#edit").attr("method","POST");
 	$("#edit").submit();
 }
+<%
+		}
+	}
+%>
 function listClick(){
 	console.log("listClick함수 진입");
 	alert("목록");
@@ -50,13 +74,16 @@ function listClick(){
 	}
 	
 	.btn_light {
-	    display: inline-block;
-	    text-align: center;
-	    background: #e5e5e5;
-	    color: #555;
-	    vertical-align: middle;
-	    cursor: pointer;
-	    border: 1px solid #e5e5e5;
+	   display: inline-block;
+	   text-align: center;
+	   background: #140C40;
+	   color: #ffffff;
+	   vertical-align: middle;
+	   cursor: pointer;
+	   border: 1px solid #140C40;
+	   height: 30px;
+	   font-size: 15px;
+	   border-radius: 0.5em;
 	}
 		
 	.btn_box_01 {
@@ -73,19 +100,13 @@ function listClick(){
 	<!-- enctype="multipart/form-data" -->
 	<div class="container">
 	<form id="edit" name="edit">
-		<table style="margin-left: auto; margin-right: auto;" border="1" class="table" >
+		<table style="margin-left: auto; margin-right: auto;" class="table" >
 			
-		<% 
-			String freeboard_fbno = "";
-			
-			Object obj = request.getAttribute("freevo"); 
-			if(obj!=null){
-				FreeVO freevo = (FreeVO)obj;
-				freeboard_fbno = freevo.getFbno();
-			%>
+		
 			<input type="hidden" id="fbno" name="fbno" value="<%= freevo.getFbno() %>"/> 
 		 	<input type="hidden" id="fbname" name="fbname" value="<%= freevo.getFbname() %>"/> 
 		 	<input type="hidden" id="fbinsertdate" name="fbinsertdate" value="<%= freevo.getFbinsertdate() %>"/> 
+		 	<input type="hidden" id="member_mno" name="member_mno" value="<%= freevo.getMember_mno() %>"/> 
 		 	
 			<thead id="table_head">
 				<tr>
@@ -139,8 +160,16 @@ function listClick(){
 		<table style="margin-left: auto; margin-right: 400px;" border="0">
 			<tr align="center">
 				<td colspan="3" align="right">
+				<%
+					if(mvo !=null){
+						if(mvo.getMno().equals(freevo.getMember_mno())){
+				%>
 				 <input type="button" id="updateclick" value="수정" onclick="updateClick()" class=" btn_light btn_box_01" />
 				 <input type="button" id="deleteclick" value="삭제" onclick="deleteClick()" class=" btn_light btn_box_01" />
+				<%
+						}
+					}
+				%>
 				 <input type="button" id="listclick" value="목록" onclick="listClick()" class=" btn_light btn_box_01" />
 				</td>
 			</tr>

@@ -109,14 +109,21 @@ public class FreeBoardController {
 	}
 	//자유게시판 상세정보조회(수정,삭제일경우->상세정보조회)
 	@RequestMapping("selectfreeboardDetail")
-	public ModelAndView selectfreeboarddDetail(@ModelAttribute FreeVO param) {
+	public ModelAndView selectfreeboarddDetail(@ModelAttribute FreeVO param, HttpSession session) {
 		log.info("selectfreeboarddDetail함수 시작>>>");
+		
+		MemberVO mvo = null;
+		mvo=(MemberVO) session.getAttribute("user");
+		
 		ModelAndView mav = new ModelAndView();
 		log.info("fbno>>>"+param.getFbno());
+		log.info("회원번호>>>"+mvo.getMno());
 		
 		if(param.getFbno().length()>0 && param.getFbno()!=null) {
 			FreeVO freevo = freeService.selectFreeBoard(param);
+			log.info("frevo.getMember_mno>>>"+freevo.getMember_mno());
 			mav.addObject("freevo", freevo);
+			mav.addObject("membervo", mvo);
 		}
 		mav.setViewName("community/freeboard/freeDetail");
 		log.info("selectfreeboarddDetail함수 끝>>>");
@@ -125,16 +132,49 @@ public class FreeBoardController {
 	
 	//자유게시판 상세정보조회(수정,삭제일경우->수정,삭제 게시판으로 이동)
 	@RequestMapping("selectfreeboardUD")
-	public ModelAndView selectFreeBoardUD(@ModelAttribute FreeVO param) {
+	public ModelAndView selectFreeBoardUD(@ModelAttribute FreeVO param, HttpSession session) {
 		log.info("selectfreeboardUD함수 시작>>>");
+		
+		MemberVO mvo = null;
+		mvo=(MemberVO) session.getAttribute("user");
+		
 		ModelAndView mav = new ModelAndView();
 		log.info("fbno>>>"+param.getFbno());
+		log.info("member_mno"+ mvo.getMno());
+		log.info("freevo.membermno>>>"+param.getMember_mno());
+		
+		String mno = mvo.getMno();
+		String fmno = param.getMember_mno();
+		
+		log.info("mno>>>"+mno);
+		log.info("fmno>>>"+fmno);
+		
+		if(mno.equals(fmno)) {
+			if(param.getFbno().length()>0 && param.getFbno()!=null) {
+				FreeVO freevo = freeService.selectFreeBoard(param);
+				mav.addObject("freevo", freevo);
+				mav.setViewName("community/freeboard/updateFreeBoard");
+			}
+		}else {
+			if(param.getFbno().length()>0 && param.getFbno()!=null) {
+				log.info("회원님이 쓰신 글이 아닙니다.");
+				FreeVO freevo = freeService.selectFreeBoard(param);
+				log.info("frevo.getMember_mno>>>"+freevo.getMember_mno());
+				mav.addObject("freevo", freevo);
+				mav.addObject("membervo", mvo);
+				mav.setViewName("community/freeboard/freeDetail");
+				
+			}
 			
-		if(param.getFbno().length()>0 && param.getFbno()!=null) {
-			FreeVO freevo = freeService.selectFreeBoard(param);
-			mav.addObject("freevo", freevo);
 		}
-		mav.setViewName("community/freeboard/updateFreeBoard");
+		
+//		if(param.getFbno().length()>0 && param.getFbno()!=null) {
+//			
+//			FreeVO freevo = freeService.selectFreeBoard(param);
+//			
+//			mav.addObject("freevo", freevo);
+//		}
+//		mav.setViewName("community/freeboard/updateFreeBoard");
 		log.info("selectfreeboardUD함수 끝>>>");
 		return mav;
 	}
@@ -256,6 +296,7 @@ public class FreeBoardController {
 		String fbimg = null;
 		String resultStr = "";
 		
+		
 		if(request.getContentType().toLowerCase().startsWith("multipart/form-data")) {
 			log.info("파일 업로드");
 			
@@ -277,10 +318,12 @@ public class FreeBoardController {
 				fbcontent = mr.getParameter("fbcontent");
 				resultStr="";
 				
+				
 				log.info("fbno>>>"+fbno);
 				log.info("fbsubject>>>"+fbsubject);
 				log.info("fbname>>>"+fbname);
 				log.info("fbcontent>>>"+fbcontent);
+				
 				
 				Enumeration<String> en = mr.getFileNames();
 				List<String> list = new ArrayList<String>();
@@ -329,7 +372,7 @@ public class FreeBoardController {
 		}
 		else {
 			resultStr="update";
-			log.info("수정 실패");
+			log.info("수정 실패 or 본인이 쓴 글이 아닙니다.");
 		}
 		
 		mav.addObject("result", resultStr);

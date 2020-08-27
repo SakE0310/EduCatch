@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kosmo.educatch.vo.FreeVO"  %>
+<%@ page import="com.kosmo.educatch.vo.MemberVO"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,11 +68,20 @@
 	</jsp:include>
 </head>
 <body>
+<%
+HttpSession hs = request.getSession(false);
+MemberVO mvo = null;
+if(hs != null){
+	mvo = (MemberVO)hs.getAttribute("user");
+}
+%>
 	<!-- action/document/location -->
 	<!-- enctype="multipart/form-data" -->
 	<form id="edit" name="edit">
+	
 		<table style="margin-left: auto; margin-right: auto;" border="1" width="50%">
 		<% 
+		
 			Object obj = request.getAttribute("freevo"); 
 			if(obj!=null){
 				FreeVO freevo = (FreeVO)obj;
@@ -85,11 +95,6 @@
 				<td style="width: 100px">제목</td>
 				<td><input type="text" id="fbsubject" name="fbsubject"
 					style="width: 98%" value=<%=freevo.getFbsubject() %> /></td>
-			</tr>
-			<tr>
-				<td style="width: 100px">작성자</td>
-				<td><input type="text" id="fbname" name="fbname"
-					style="width: 98%" value=<%=freevo.getFbname() %> /></td>
 			</tr>
 
 			<tr>

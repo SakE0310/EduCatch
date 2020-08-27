@@ -37,12 +37,12 @@
 			display: none;
 		}
 		.nice-select{
-		    width: 50px;
+		    width: 30px;
 		    height: 35px;
 		    padding-left: 0px;
 		}
 		#keyword{
-			width: 90px;
+		    width: 70px;
 			height: 32px;
 		}
 		.btn_light {
@@ -135,7 +135,7 @@
 		    padding-left: 0px;
 		}
 		 #media_mobile{
-	 	width: 1100px;
+	 	width: 1180px;
 	 	margin: auto;
 	 }
 	 	#mfont{
@@ -208,7 +208,7 @@
 	#keyword{
 			height:30px;
 			border: 1px solid #140C40;
-			 border-radius: 0.5em;
+			border-radius: 0.5em;
 		}
 	
 		
@@ -359,11 +359,11 @@
 	
 	Object obj = request.getAttribute("freeboardlist"); 
 	
-	HttpSession hs = request.getSession(false);
-	MemberVO mvo = null;
-	if(hs != null){
-		mvo = (MemberVO)hs.getAttribute("user");
-	}
+	//HttpSession hs = request.getSession(false);
+//	MemberVO mvo = null;
+	//if(hs != null){
+	//	mvo = (MemberVO)hs.getAttribute("user");
+	//}
 	
 	if(obj!=null){
 		List<FreeVO> list = (List<FreeVO>)obj;
