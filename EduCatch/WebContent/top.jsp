@@ -156,7 +156,7 @@ if (request.getProtocol().equals("HTTP/1.1"))
                                                 <img width="25px"src="assets/img/login/mypage.png" alt="마이페이지" /> 내정보
                                             </div>
                                             <ul class="submenu">
-                                        		<li><a href="myReview.ec">마이페이지</a></li>
+                                        		<li><a href="listMyPage.ec">마이페이지</a></li>
                                                 <li><a href="logout.ec">로그아웃</a></li>
                                             </ul>
                                         </li>

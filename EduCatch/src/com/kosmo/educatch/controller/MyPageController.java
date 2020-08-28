@@ -29,23 +29,44 @@ public class MyPageController {
 	
 	//============마이페이지 조회=========================
 	@RequestMapping("listMyPage.ec")
-	public ModelAndView selectMyPage(@ModelAttribute MemberVO param) {
+	public ModelAndView selectMyPage(HttpServletRequest request,
+			 @ModelAttribute ReviewVO rvo, HttpSession session) {
 		log.info("MyPageController selectMyPage 시작 >>>");
 		
-		MemberVO mvo = mypageService.selectMyPage(param);
+		MemberVO mvo = null;
+		String member_mno ="";
+		if(session != null){
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mno =mvo.getMno();
+		}	
 		
-		log.info("mvo.getMno()>>>"+mvo.getMno());
-		log.info("mvo.getMid()>>>"+mvo.getMid());
-		log.info("mvo.getMpw()>>>"+mvo.getMpw());
-		log.info("mvo.getMname()>>>"+mvo.getMname());
-		log.info("mvo.getMtel()>>>"+mvo.getMtel());
-		log.info("mvo.getMaddrno()>>>"+mvo.getMaddrno());
-		log.info("mvo.getMaddr1()>>>"+mvo.getMaddr1());
-		log.info("mvo.getMaddr2()>>>"+mvo.getMaddr2());
-		log.info("mvo.getMimg()>>>"+mvo.getMimg());
+		rvo.setMember_mno(member_mno);
+		List<ReviewVO> list = mypageService.myReview(rvo);	
+		log.info("MyPageController myReview list.size()>>>" + list.size());
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("MemberVO", mvo);
+		for (int i = 0; i < list.size(); i++) {
+			// list를 VO로 형변환해준다.
+			ReviewVO rvo1 = (ReviewVO) list.get(i);
+			
+			log.info("getRbno			>>"+rvo1.getRbno());
+			log.info("getRbsubject		>>"+rvo1.getRbsubject());
+			log.info("getRbname			>>"+rvo1.getRbname());
+			log.info("getRbimg			>>"+rvo1.getRbimg());
+			log.info("getRbcontent		>>"+rvo1.getRbcontent());
+			log.info("getAcademy_ano	>>"+rvo1.getAcademy_ano());
+			log.info("getMember_mno		>>"+rvo1.getMember_mno());
+			log.info("getRbgrade		>>"+rvo1.getRbgrade());
+			log.info("getRbdeleteyn		>>"+rvo1.getRbdeleteyn());
+			log.info("getRbinsertdate	>>"+rvo1.getRbinsertdate());
+			log.info("getRbupdatedate	>>"+rvo1.getRbupdatedate());
+
+		}
+		
+		MemberVO mvov = mypageService.selectMyPage(mvo);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("ReviewVO", list);
+		mav.addObject("MemberVO", mvov);
 		mav.setViewName("/mypage/mypageMain");
 		
 		log.info("MyPageController selectMyPage 끝 >>>");

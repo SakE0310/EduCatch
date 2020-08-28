@@ -23,75 +23,184 @@
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style type="text/css">
+/* Mobile Device (가로폭 767px 이하) */
+	@media all and (max-width:767px) {
+		#full{
+	       width : 350px;
+	       height: 700px;
+  		 }
+  		 #sideBanner-mypage {
+		   display: none;
+		    }
+		 #sideBanner-mypage{
+	         width:350px;
+	         height: 700px;
+     		 } 
+      .sideBox{
+         width: 300px;
+	    height: 180px;
+	    background-color: #ffffff;
+	    margin-top: 15px;
+	    font-size: 20px;
+	    margin-left: 10px;
+  	 }   
+  	  #mypage_subject{
+  	 	text-align: center;
+  	 	width: 350px;
+  	 }
+  	  #font_id{
+      font-size: 30px;
+  	 }
+  	   #container_div{
+	   	    width: 320px;
+		    height: 500px;
+		}
+		.media_mobile_table{
+			display: none;
+		}
+	}
+	/* Tablet (가로폭 768px 이상, 1023px 이하) */
+	@media all and (min-width:768px) and (max-width:1023px) {
+	/* 브라우저 가로폭이 768~1023px일때 적용될 css (태블릿) */
+		 #full{
+	       width : 750px;
+	       height: 700px;
+  		 }
+  		.container-mypage {
+		    width: 500px;
+		    height: 700px;
+		    margin: auto;
+		    margin-left: 230px;
+		    }
+  		 .table_insertdate{
+  		 display: none;
+  		 }
+  		 
+  		  #container_div{
+	   	 width: 500px; 
+	   	 height: 570px; 
+	   }
+	   #sideBanner-mypage{
+         width:225px;
+         height: 700px;
+      } 
+      .sideBox{
+      width:200px;
+      height:180px;
+      background-color: #ffffff;
+      margin-top: 15px;
+      font-size: 20px;
+   }   
+    #mypage_subject{
+  	 	text-align: left;
+  	 	width: 500px;
+  	 }
+  	  #font_id{
+      font-size: 25px;
+  	 }
+	}
+	/* PC Desktop (가로폭 1024 이상) */
+	@media all and (min-width:1024px) {
+		 #full{
+	       width : 1200px;
+	       height: 700px;
+  		 }
+ 		.container-mypage {
+	       width: 700px;
+	       height: 700px;
+	       margin :auto;
+	 	  }
+		   
+  		 #container_div{
+	   	 width: 800px; 
+	   	 height: 570px; 
+	   }
+	   #sideBanner-mypage{
+         width:225px;
+         height: 700px;
+      } 
+      .sideBox{
+      width:200px;
+      height:180px;
+      background-color: #ffffff;
+      margin-top: 15px;
+      font-size: 20px;
+  	 }   
+  	 #mypage_subject{
+  	 	text-align: left;
+  	 	width: 800px;
+  	 }
+  	 #font_id{
+      font-size: 25px;
+  	 }
+	}
+/*-----------------------------------------------*/
+   #full{
+       margin :auto;
+       align :center;
+   }
+  
+   #sideBanner-mypage{
+         position: absolute;
+         /* width:225px;
+         height: 700px; */
+         margin :auto;
+         padding-left: 12px;
+         padding-right: 12px;
+      } 
+   
+   .btn_light {
+       display: inline-block;
+       text-align: center;
+       background: #ffffff;
+       color: #555;
+       vertical-align: middle;
+       cursor: pointer;
+       border: 0px solid #e5e5e5;
+       height: 40px;
+       font-size: 20px;
+      }
+   .btn_box_01 {
+       width: auto;
+       padding: 3px 10px;
+       
+       }
+       
+       .shadow {
+          box-shadow: -100px 100px 100px -90px #000000,
+              60px 0px 100px -90px #000000;
+         border-radius: 0.5em;     
+      }
 
-	#full{
-		 margin :auto;
-		 align :center;
-		 width : 1200px;
-		 height: 700px;
-	}
-	.container-mypage {
-	
-	    width: 700px;
-	    height: 700px;
-	    margin :auto;
-	   /*  margin-left: 710px; */
-	   /*background-color: #f5f5f0;*/
-	}
-	#sideBanner-mypage{
-			position: absolute;
-			/* left:0px; */
-			width:225px;
-			height: 700px;
-			/* background: #140C40; */
-			 margin :auto;
-			/* margin-left: 490px; */
-			padding-left: 12px;
-			padding-right: 12px;
-		} 
-		
-	.sideBox{
-		width:200px;
-		height:180px;
-		background-color: #ffffff;
-		margin-top: 15px;
-		
-	}	
-	
-	.btn_light {
+   a{
+         color:black;
+      }
+   
+   i{
+      color : #140C40;
+   }
+   #font_id{
+      font-family: 'Do Hyeon', sans-serif;
+   }
+   #container_div{
+   	 overflow:auto;
+   }
+   .btn_light_bb {
 	    display: inline-block;
 	    text-align: center;
-	    background: #ffffff;
-	    color: #555;
+	    background: #140C40;
+	    color: #ffffff;
 	    vertical-align: middle;
 	    cursor: pointer;
-	    border: 0px solid #e5e5e5;
-	    height: 40px;
-	    font-size: 20px;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
 		}
-	.btn_box_01 {
+	.btn_box_01_bb {
 	    width: auto;
 	    padding: 3px 10px;
-	    
-	    }
-	    
-	    .shadow {
-		    box-shadow: -100px 100px 100px -90px #000000,
-		        60px 0px 100px -90px #000000;
-		   border-radius: 0.5em;     
-		}
-
-	#a{
-			color:black;
-		}
-	
-	i{
-		color : #140C40;
-	}
-	#font_id{
-		font-family: 'Do Hyeon', sans-serif;
-		font-size: 30px;
-	}
+	}	
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -181,10 +290,10 @@
 	<form id= "clickForm" name = "clickForm">
 		<div align ="center">
 		<br>
-			<h1 style="color : ; font-size: 30px;">마이페이지</h1>
+			<h1 style="color :font-size: 30px;">마이페이지</h1>
 			<hr>
 		</div>
-		<div class ="sideBox shadow" style="font-size: 20px;">
+		<div class ="sideBox shadow" >
 <%-- 		<input type="hidden" id="mno" name ="mno" value="<%=mvo.getMno()%>">  --%>
 
 			<%=mvo.getMname() %>님 
@@ -220,13 +329,13 @@
 %>
 	<div class = "container-mypage ">
 		<div align="center">
-		<div align="left">
+		<div id="mypage_subject">
 		<br>
 		<br>
 			<h4 id ="font_id">학원 상담 내역 </h4>
 			<hr>
 		</div>
-		<div class="container shadow"  style="width: 800px; height: 570px; overflow:auto;" id ="container_div">
+		<div class="container shadow"  id ="container_div">
 		<br>
 			<table align ="center" class="table">
 			 	<colgroup>
@@ -236,10 +345,10 @@
 					<col width="100px"/>
 				</colgroup>
 				<thead id="table_head">
-					<td align="center">글번호</td>
+					<td align="center" class="media_mobile_table">글번호</td>
 					<td align="center">학원명</td>
 					<td align="center">제목</td>
-					<td align="center">작성일</td>
+					<td align="center" class="media_mobile_table">작성일</td>
 				</thead>
 				<tbody>
 <%
@@ -249,10 +358,10 @@
 
 %>					
 			<tr align="center">
-				<td><%=cvo.getCbno() %></td>
-				<td><%=cvo.getAname()%></td>
-				<td><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>" id="cvo_no"><%=cvo.getCbsubject() %></td>
-				<td><%=cvo.getCinsertdate()%></td>
+				<td class="media_mobile_table"><%=cvo.getCbno() %></td>
+				<td><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>" id="cvo_no"><%=cvo.getAname()%></a></td>
+				<td><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>" id="cvo_no"><%=cvo.getCbsubject() %></a></td>
+				<td class="media_mobile_table"><%=cvo.getCinsertdate()%></td>
 			</tr>
 <%			
 				}//end of for

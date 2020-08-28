@@ -95,6 +95,7 @@
                     
      )AAA
      WHERE AAA.MNO=#{member_mno, jdbcType=VARCHAR}
+     ORDER BY 1 DESC
 	</select>
 	
 	<select id="myReview" parameterType="review" resultType="review">

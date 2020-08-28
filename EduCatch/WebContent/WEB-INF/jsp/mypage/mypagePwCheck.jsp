@@ -12,7 +12,24 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
- 
+ <style type="text/css">
+ .btn_light_bb {
+	    display: inline-block;
+	    text-align: center;
+	    background: #140C40;
+	    color: #ffffff;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
+		}
+	.btn_box_01_bb {
+	    width: auto;
+	    padding: 3px 10px;
+	}	
+ </style>
 <script type="text/javascript">
 	$(document).ready(function() {
 		
@@ -62,8 +79,8 @@
 			</tr>
 		</table>
 		<div align="center">
-		<input type="button" value="확인" id ="checkPW">
-		<input type="button" value="닫기" id ="closePW">
+		<input type="button" value="확인" id ="checkPW" class=" btn_light_bb btn_box_01_bb">
+		<input type="button" value="닫기" id ="closePW" class=" btn_light_bb btn_box_01_bb">
 		</div>
 	</form>
 <%		

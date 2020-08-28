@@ -23,79 +23,184 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- 아이콘 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <style type="text/css">
+	/* Mobile Device (가로폭 767px 이하) */
+	@media all and (max-width:767px) {
+		#full{
+	       width : 350px;
+	       height: 700px;
+  		 }
+  		 #sideBanner-mypage {
+		   display: none;
+		    }
+		 #sideBanner-mypage{
+	         width:350px;
+	         height: 700px;
+     		 } 
+      .sideBox{
+         width: 300px;
+	    height: 180px;
+	    background-color: #ffffff;
+	    margin-top: 15px;
+	    font-size: 20px;
+	    margin-left: 10px;
+  	 }   
+  	  #mypage_subject{
+  	 	text-align: center;
+  	 	width: 350px;
+  	 }
+  	  #font_id{
+      font-size: 30px;
+  	 }
+	}
+	/* Tablet (가로폭 768px 이상, 1023px 이하) */
+	@media all and (min-width:768px) and (max-width:1023px) {
+	/* 브라우저 가로폭이 768~1023px일때 적용될 css (태블릿) */
+		 #full{
+	       width : 750px;
+	       height: 700px;
+  		 }
+  		.container-mypage {
+		    width: 500px;
+		    height: 700px;
+		    margin: auto;
+		    margin-left: 230px;
+		    }
+  		 .table_insertdate{
+  		 display: none;
+  		 }
+  		 
+  		  #container_div{
+	   	 width: 500px; 
+	   	 height: 570px; 
+	   }
+	   #sideBanner-mypage{
+         width:225px;
+         height: 700px;
+      } 
+      .sideBox{
+      width:200px;
+      height:180px;
+      background-color: #ffffff;
+      margin-top: 15px;
+      font-size: 20px;
+   }   
+    #mypage_subject{
+  	 	text-align: left;
+  	 	width: 500px;
+  	 }
+  	  #font_id{
+      font-size: 25px;
+  	 }
+	}
+	/* PC Desktop (가로폭 1024 이상) */
+	@media all and (min-width:1024px) {
+		 #full{
+	       width : 1200px;
+	       height: 700px;
+  		 }
+ 		.container-mypage {
+	       width: 700px;
+	       height: 700px;
+	       margin :auto;
+	 	  }
+		   
+  		 #container_div{
+	   	 width: 800px; 
+	   	 height: 570px; 
+	   }
+	   #sideBanner-mypage{
+         width:225px;
+         height: 700px;
+      } 
+      .sideBox{
+      width:200px;
+      height:180px;
+      background-color: #ffffff;
+      margin-top: 15px;
+      font-size: 20px;
+  	 }   
+  	 #mypage_subject{
+  	 	text-align: left;
+  	 	width: 800px;
+  	 }
+  	 #font_id{
+      font-size: 25px;
+  	 }
+	}
+/*-----------------------------------------------*/
+   #full{
+       margin :auto;
+       align :center;
+   }
+  
+   #sideBanner-mypage{
+         position: absolute;
+         /* width:225px;
+         height: 700px; */
+         margin :auto;
+         padding-left: 12px;
+         padding-right: 12px;
+      } 
+   
+   .btn_light {
+       display: inline-block;
+       text-align: center;
+       background: #ffffff;
+       color: #555;
+       vertical-align: middle;
+       cursor: pointer;
+       border: 0px solid #e5e5e5;
+       height: 40px;
+       font-size: 20px;
+      }
+   .btn_box_01 {
+       width: auto;
+       padding: 3px 10px;
+       
+       }
+       
+       .shadow {
+          box-shadow: -100px 100px 100px -90px #000000,
+              60px 0px 100px -90px #000000;
+         border-radius: 0.5em;     
+      }
 
-	#full{
-		 margin :auto;
-		 align :center;
-		 width : 1200px;
-		 height: 700px;
-	}
-	.container-mypage {
-	
-	    width: 700px;
-	    height: 700px;
-	    margin :auto;
-	   /*  margin-left: 710px; */
-	   /*background-color: #f5f5f0;*/
-	}
-	#sideBanner-mypage{
-			position: absolute;
-			/* left:0px; */
-			width:225px;
-			height: 700px;
-			/* background: #140C40; */
-			 margin :auto;
-			/* margin-left: 490px; */
-			padding-left: 12px;
-			padding-right: 12px;
-		} 
-		
-	.sideBox{
-		width:200px;
-		height:180px;
-		background-color: #ffffff;
-		margin-top: 15px;
-		
-	}	
-	
-	.btn_light {
+   #a{
+         color:black;
+      }
+   
+   i{
+      color : #140C40;
+   }
+   #font_id{
+      font-family: 'Do Hyeon', sans-serif;
+   }
+   #container_div{
+   	 overflow:auto;
+   }
+   .required{
+   	color: red;
+   }
+   .btn_light_bb {
 	    display: inline-block;
 	    text-align: center;
-	    background: #ffffff;
-	    color: #555;
+	    background: #140C40;
+	    color: #ffffff;
 	    vertical-align: middle;
 	    cursor: pointer;
-	    border: 0px solid #e5e5e5;
-	    height: 40px;
-	    font-size: 20px;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
 		}
-	.btn_box_01 {
+	.btn_box_01_bb {
 	    width: auto;
 	    padding: 3px 10px;
-	    
-	    }
-	    
-	    .shadow {
-		    box-shadow: -100px 100px 100px -90px #000000,
-		        60px 0px 100px -90px #000000;
-		        border-radius: 0.5em;
-		}
-	
-	.required{
-		color : red;
-	}
-	.form-label {
-    display: block;
-    text-transform: uppercase;
-    font-size: 80%;
-    font-weight: 500;
-    }
-    
-    i{
-		color : #140C40;
-	}
+	}	
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -132,15 +237,13 @@
 
 		$("#freeBoard").click(function() {
 			console.log("freeBoard >>> ");
-
 			$("#clickForm").attr("action","myFree.ec");
 			$("#clickForm").attr("method","POST");
 			$("#clickForm").submit();	
 		})
-
+		
 		$("#reviewBoard").click(function() {
 			console.log("reviewBoard >>> ");
-
 			$("#clickForm").attr("action","myReview.ec");
 			$("#clickForm").attr("method","POST");
 			$("#clickForm").submit();	
@@ -308,50 +411,50 @@
 %>
 	<div id ="full">
 	<div id="sideBanner-mypage">
-	<form id= "clickForm" name = "clickForm">
-		<div align ="center">
-		<br>
-			<h1 style="color : ; font-size: 30px;">마이페이지</h1>
-			<hr>
-		</div>
-		<div class ="sideBox shadow" style="font-size: 20px;">
-<%-- 		<input type="hidden" id="mno" name ="mno" value="<%=mvo.getMno()%>">  --%>
+   <form id= "clickForm" name = "clickForm">
+      <div align ="center">
+      <br>
+         <h1 style="color :  font-size: 30px;">마이페이지</h1>
+         <hr>
+      </div>
+      <div class ="sideBox shadow">
+<%--       <input type="hidden" id="mno" name ="mno" value="<%=mvo.getMno()%>">  --%>
 
-			<%=mvo.getMname() %>님 
-			<br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-user-cog col-2 p-0"></i><input type ="button" id="pwCheck" class ="btn_light btn_box_01" value="개인정보 변경"><br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-key"></i><input type ="button" id="pwEdit" class ="btn_light btn_box_01" value="  비밀번호 변경"><br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-user-slash"></i><input type ="button" id="memOut" class ="btn_light btn_box_01" value=" 회원탈퇴"><br>
-			
-		<input type="hidden" id ="mid" name ="mid" value="<%=mvo.getMid()%>">
-		</div>
-		<div class ="sideBox shadow">
-			즐겨찾기<br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-hand-pointer"></i><input type ="button" id="bookmark" class ="btn_light btn_box_01" value="  관심학원"><br>
-		</div>
-		<div class ="sideBox shadow">
-			내 컨텐츠<br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-file-alt"></i><input type ="button" id="freeboard" class ="btn_light btn_box_01" value="  내가 쓴 글"><br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="consultSearch" class ="btn_light btn_box_01" value="  작성한 상담"><br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="reviewboard" class ="btn_light btn_box_01" value="  작성한 후기"><br>
-		</div>
-	</form>	
-	</div>
+         <%=mvo.getMname() %>님 
+         <br>
+         &nbsp;&nbsp;&nbsp;<i class="fas fa-user-cog"></i><input type ="button" id="pwCheck" class ="btn_light btn_box_01" value="개인정보 변경"><br>
+         &nbsp;&nbsp;&nbsp;<i class="fas fa-key"></i><input type ="button" id="pwEdit" class ="btn_light btn_box_01" value=" 비밀번호 변경"><br>
+         &nbsp;&nbsp;&nbsp;<i class="fas fa-user-slash"></i><input type ="button" id="memOut" class ="btn_light btn_box_01" value="회원탈퇴"><br>
+         
+      <input type="hidden" id ="mid" name ="mid" value="<%=mvo.getMid()%>">
+      </div>
+      <div class ="sideBox shadow">
+         즐겨찾기<br>
+         &nbsp;&nbsp;&nbsp;<i class="fas fa-hand-pointer"></i><input type ="button" id="bookmark" class ="btn_light btn_box_01" value=" 관심학원"><br>
+      </div>
+      <div class ="sideBox shadow">
+         내 컨텐츠<br>
+         &nbsp;&nbsp;&nbsp;<i class="fas fa-file-alt "></i><input type ="button" id="freeBoard" class ="btn_light btn_box_01" value="  내가 쓴 글"><br>
+         &nbsp;&nbsp;&nbsp;<i class="fas fa-edit"></i><input type ="button" id="consultSearch" class ="btn_light btn_box_01" value=" 작성한 상담"><br>
+         &nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="reviewBoard" class ="btn_light btn_box_01" value=" 작성한 후기"><br>
+      </div>
+   </form>   
+   </div>
 	<div class = "container-mypage ">
 		<div align="center">
-		<div align="left">
+		<div id="mypage_subject">
 		<br>
 		<br>
-			<h4>프로필 수정</h4>
+			<h4 id="font_id">프로필 수정</h4>
 			<hr>
 		</div>
-		<div class="container shadow" style="width: 800px; height: 570px;">
+		<div class="container shadow" id ="container_div">
 		<br>
 		<form id="mypageEditForm" name="mypageEditForm">
 		<input type="hidden" id="mno" name="mno" value="<%=mvo.getMno()%>">
 			<table  class="table">
 				<tr>
-					<div class="col-xs-5" align="left">
+					<div class="col-xs-7" align="left">
 						<label>아이디</label>
 						<input  class="form-control" type="text" id="mid" name="mid" value="<%=mvo.getMid() %>" readOnly/>
 					</div>
@@ -360,7 +463,7 @@
 				</tr>
 				<tr>
 					<td>
-					<div class="col-xs-5" align="left">
+					<div class="col-xs-7" align="left">
 						<label><span class="required">*</span>이름</label>
 						<input class="form-control" type="text" id="mname" name="mname" value="<%=mvo.getMname() %>"/></br>
 					</div>
@@ -387,22 +490,22 @@
 						<option value="017"<%if(ret1.equals("017")){%>selected="selected"<%} %>>017</option>
 						<option value="016"<%if(ret1.equals("016")){%>selected="selected"<%} %>>016</option>
 					</select> 
-					<div class="col-xs-2" >
+					<div class="col-xs-3" >
 						 <input class="form-control" type="text" id="mtel2" name="mtel2"/>
 					</div> 
-					<div class="col-xs-2" >
+					<div class="col-xs-3" >
 						 <input class="form-control" type="text" id="mtel3" name="mtel3"/>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					 <div class="col-xs-9">
+					 <div class="col-xs-11">
 				<label><span class="required">*</span>주소</label><br>
 					<div class="col-xs-6">
 					<input  class="form-control"  type="text" id="maddrno" name="maddrno" size=6 value="<%= mvo.getMaddrno()%>"/>
 					</div>
-					 <input type="button" value="우편번호 찾기" id="addrCheck"/>(도로명주소)<br>
+					 <input type="button" value="우편번호 찾기" id="addrCheck" class=" btn_light_bb btn_box_01_bb"/>(도로명주소)<br>
 					 <br>
 					 <input  class="form-control" type="text" id="maddr1" name="maddr1" size=35 value="<%=mvo.getMaddr1() %>" /><br>							 
 					 <input class="form-control" type="text" id="maddr2" name="maddr2" size=35 value="<%=mvo.getMaddr2() %>" /><br>
@@ -412,7 +515,7 @@
 			</div>
 			<tr>						
 				<td colspan=2 align="center">
-					<input type="button" id="mypageEdit" value="저장" >
+					<input type="button" id="mypageEdit" class=" btn_light_bb btn_box_01_bb" value="저장" >
 				</td>
 			</tr>
 <%		
