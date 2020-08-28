@@ -153,9 +153,11 @@ function listClick(){
 			</tbody>
 		</table>
 	</div>
-		<!-- ========== 댓글 =========================================== -->
+		<!-- ========== 댓글 ================param은 id속성이 없다. -->
 			<jsp:include page="reply.jsp">
 				<jsp:param name="freeboard_fbno" value="<%=freeboard_fbno  %>"/>
+				<jsp:param name="fbname" value="<%=freevo.getFbname()  %>"/>
+				<jsp:param name="mname" value="<%=mvo.getMname()  %>"/>
 			</jsp:include>
 		<table style="margin-left: auto; margin-right: 400px;" border="0">
 			<tr align="center">

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.kosmo.educatch.vo.MemberVO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -14,16 +15,37 @@
 </head>
 
 <%
-
+	
+	HttpSession hs = request.getSession(false);
+	System.out.println("hs >>> "+hs);
+	
+	MemberVO mvo = null;
+	if(hs != null){
+		mvo = (MemberVO)hs.getAttribute("user");
+	
+		System.out.println("현재 로그인한 회원이름 >>>>>>>>>>> "+mvo.getMname());
+	
+	}	
 	String freeboard_fbno = request.getParameter("fbno");
+	String fbname = request.getParameter("fbname");
+	//댓글을 다는 이름...
+	String mname = request.getParameter("mname");
+	String reno =request.getParameter("reno");
+	String recontent =request.getParameter("recontent");
 	String member_mno = request.getParameter("member_mno");
-	String reno = request.getParameter("reno");
-	String recontent = request.getParameter("recontent");
+	
+	System.out.println("freeboard_fbno>>>"+freeboard_fbno);
+	System.out.println("fbname>>>"+fbname);
+	System.out.println("mname>>>"+mname);
+	System.out.println("reno>>>"+reno);
+	System.out.println("recontent>>>"+recontent);
+	System.out.println("member_mno>>>"+member_mno);
+	
 %>
 <style type="text/css">
 .btn_box_02 {
-    width: 100px;
-    padding: 17px 20px;
+    /*width: 100px;*/
+    /*padding: 17px 20px;*/
     margin-bottom: 50px;
 }
 .btn_light {
@@ -53,11 +75,13 @@
 		src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <script type="text/javascript">
-
+//로그인 한 놈이랑 댓글을 단 놈이랑 빡치기해서 같은경우 댓글 수정 삭제 가능!
 	var freeboard_fbno = "<%=freeboard_fbno%>";
-	var member_mno = "<%=member_mno%>";
-	var reno = "<%=reno%>";
-	var recontent = "<%=recontent%>";
+	var sessionID = "<%=mvo.getMname() %>";
+	var member_mno = "<%=mvo.getMno() %>";
+	var mname = "<%=mname%>";
+	var reno ="<%=reno%>";
+	var recontent ="<%=recontent%>";
 	
 	$(document).ready(function(){
 		
@@ -74,7 +98,8 @@
 				type:"post",
 				dataType:"html",
 				data:{
-					//member_mno: member_mno,
+					rewriter: mname,
+					member_mno: member_mno,
 					freeboard_fbno: freeboard_fbno,
 					recontent: recontent
 				},
@@ -148,7 +173,8 @@
 			dataType:"html",
 			data: {
 				reno: reno,
-				recontent: recontent
+				recontent: recontent,
+				member_mno: member_mno
 			},
 				success:function(updateResult){
 				console.log("댓글수정 ajax 성공 >>> updateResult : " + updateResult);
@@ -175,7 +201,8 @@
 				type: "post",
 				dataType: "html",
 				data: {
-					reno: reno
+					reno: reno,
+					member_mno: member_mno
 				},
 				success:function(deleteResult){
 					console.log("댓글삭제 ajax 성공 >>> deleteResult : " + deleteResult);
@@ -203,7 +230,6 @@
 			dataType:"JSON",
 			data:{
 				freeboard_fbno: freeboard_fbno,
-				//member_mno: member_mno
 				reno: reno
 			},
 			success:function(map){
@@ -232,7 +258,7 @@
 			var reinsertdate = replyList[i].reinsertdate;
 			var recontent = replyList[i].recontent;
 			
-			console.log('replyList['+i+'] >>>\nreno : ' + reno + ', rewriter : ' + rewriter + ', reinsertdate : ' + reinsertdate + ', recontent : ' + recontent );
+			console.log('replyList['+i+'] >>>\nreno : ' + reno +'member_mno>>'+member_mno+', rewriter : ' + rewriter + ', reinsertdate : ' + reinsertdate + ', recontent : ' + recontent );
 			
 			//var replyWriterBool = replyWriterI_no == i_no;
 			//var replyMasterBool = i_no.indexOf("M") == 0;
@@ -271,12 +297,12 @@
 			//if(replyWriterBool || replyMasterBool){		
 				// 수정폼 출력버튼
 				var updateForm_btn_input = $("<input>");
-				updateForm_btn_input.attr({"type":"button","id":"updateForm_btn","value":"수정"});
+				updateForm_btn_input.attr({"type":"button","id":"updateForm_btn","value":"수정",  "class":"btn_light btn_box_02"});
 				updateForm_btn_input.addClass("reply_btn");
 
 				// 삭제버튼
 				var delete_btn_input = $("<input>");
-				delete_btn_input.attr({"type":"button","id":"delete_btn","value":"삭제"});
+				delete_btn_input.attr({"type":"button","id":"delete_btn","value":"삭제",  "class":"btn_light btn_box_02"});
 				delete_btn_input.addClass("reply_btn");
 			//}	
 			
@@ -285,11 +311,18 @@
 			bm_recontext_p.addClass("marT5 marL5 marB5");
 			bm_recontext_p.html(recontent);
 			
-			// 조립하기
-			info_p.append(num_span).append(i_nameKr_span).append(bm_reinsertdate_span).append(updateForm_btn_input).append(delete_btn_input)
-			newRe_td.append(info_p).append(bm_recontext_p)
-			newRe_li.append(newRe_td);
-			$("#replyList_ul").append(newRe_li);
+			if(rewriter == sessionID){
+				info_p.append(i_nameKr_span).append(bm_reinsertdate_span).append(updateForm_btn_input).append(delete_btn_input)
+				newRe_td.append(info_p).append(bm_recontext_p)
+				newRe_li.append(newRe_td);
+				$("#replyList_ul").append(newRe_li);
+			}else{
+				// 조립하기
+				info_p.append(i_nameKr_span).append(bm_reinsertdate_span)
+				newRe_td.append(info_p).append(bm_recontext_p)
+				newRe_li.append(newRe_td);
+				$("#replyList_ul").append(newRe_li);
+			}
 			
 		} // end of for
 	} // end of addNewReply 함수

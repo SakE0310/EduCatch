@@ -37,6 +37,13 @@ function joinCommit(){
 		alert("이름을 입력해주세요");
 		document.getElementById("mname").focus();
 		return false;
+	}else{
+		var name = /^[가-힣]{2,4}$/;
+		if(!name.test(document.amemberjoin.mname.value)){
+			alert("이름 형식이 올바르지 않습니다");
+			document.getElementById("mname").focus();
+			return false;
+		}
 	}
 	
 	//아이디(이메일)
@@ -44,6 +51,15 @@ function joinCommit(){
 		alert("아이디를 입력해주세요");
 		document.getElementById("memail0").focus();
 		return false;
+	}else{
+		var email = document.amemberjoin.memail0.value+'@'+document.amemberjoin.memail.value;
+		console.log(email);
+		var exp = /^[a-zA-Z0-9_-]+\@[a-zA-Z]+\.[a-zA-Z]+$/;
+		if (!exp.test(email)) {
+			alert("이메일 형식이 올바르지 않습니다.");
+			document.getElementById("memail1").focus();
+			return false;
+		}
 	}
 
 	//비밀번호
@@ -51,6 +67,13 @@ function joinCommit(){
 		alert("비밀번호를 입력하세요");
 		document.getElementById("mpw").focus();
 		return false;
+	}else{
+		var regex =/^.*(?=^.{6,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+		if(!regex.test(document.amemberjoin.mpw.value)){
+			alert("비밀번호형식에 맞게 입력해주세요");
+			document.getElementById("mpw").focus();
+			return false;
+		}
 	}
 	
 	if(document.amemberjoin.mpw_r.value==""){
@@ -80,6 +103,15 @@ function joinCommit(){
 		alert("핸드폰 번호를 입력하세요");
 		document.getElementById("mtel2").focus();
 		return false;
+	}else{
+		var mtel = document.amemberjoin.mtel1.value+'-'+document.amemberjoin.mtel2.value+'-'+document.amemberjoin.mtel3.value;	
+		console.log(mtel);
+		var regExp =/^\d{3}-\d{3,4}-\d{4}$/;
+		if(!regExp.test(mtel)){
+			alert("핸드폰 번호를 제대로 입력해주세요");
+			documemt.getElementById("mtel2").value();
+			return false;
+		}
 	}
 	//주소
 	if(document.amemberjoin.maddrno.value.length==0){
@@ -124,10 +156,10 @@ function addrCheck(){
 
 function pwCheck(){
 	//비밀번호 확인
-	var mpw = document.getElementById("mpw");
-	var mpw_r = document.getElementById("mpw_r");
-	//if(document.memberjoin.mpw.value != document.memberjoin.mpw_r.value){
-	if(mpw != mpw_r){
+	//var mpw = document.getElementById("mpw");
+	//var mpw_r = document.getElementById("mpw_r");
+	if(document.amemberjoin.mpw.value != document.amemberjoin.mpw_r.value){
+	//if(mpw != mpw_r){
 		alert("비밀번호가 일치하지 않습니다. 다시 입력해주세요");
 		document.getElementById("mpw").focus();
 		mpw.value = "";
@@ -244,18 +276,18 @@ function idCheck(){
 					<td>
 					<div class=row>
 					<div class="col-xs-2">
-						<input type="text"  class="form-control" id="mpw" name="mpw" />
+						<input type="password"  class="form-control" id="mpw" name="mpw" />
 					</div>
 					</div>
 					<div class="row">
 					<div class="col-xs-2">
- 						<input type="text" class="form-control" id="mpw_r" name="mpw_r"/>
+ 						<input type="password" class="form-control" id="mpw_r" name="mpw_r"/>
 					</div>
 					<div class="col-xs-2">
 						<input type="button" value="비밀번호확인" onclick="pwCheck()" />
 					</div>
 					</div>
-						<p>4자 이상 12자 이내의 영문/숫자 조합</p>
+						<p>문자,숫자,특수기호 포함 6~12자리를 입력하세요</p>
 					</td>
 			</tr>
 			<tr>
