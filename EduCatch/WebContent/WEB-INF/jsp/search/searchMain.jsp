@@ -305,7 +305,7 @@
 						console.log("nice-select click");
 						var list = $('.list');
 						console.log("list >>> "+list);
-						list.css("overflow","scroll");
+						list.css("overflow","auto");
 						
 						var mql1 = window.matchMedia("screen and (min-width: 767px) and (max-width: 1023px)");
 						var mql2 = window.matchMedia("screen and (min-width: 321px) and (max-width: 480px)");
@@ -375,7 +375,7 @@
 						console.log("nice-select click");
 						var list = $('.list');
 						console.log("list >>> "+list);
-						list.css("overflow","scroll");
+						list.css("overflow","auto");
 						
 						var mql1 = window.matchMedia("screen and (min-width: 767px) and (max-width: 1023px)");
 						var mql2 = window.matchMedia("screen and (min-width: 321px) and (max-width: 480px)");
