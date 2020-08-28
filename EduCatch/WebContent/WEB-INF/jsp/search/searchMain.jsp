@@ -154,6 +154,20 @@
 					});
 				}//selectDesc
 				
+				//학원명으로 엔터키 검색
+				$('#aname').keypress(function(event){
+					
+					console.log("enter click >>> ");
+					var setAname = $('#aname').val();
+					
+					if(event.which == 13){
+						console.log("aname >>> "+setAname);
+						ajaxGetAname(setAname);
+					}else {
+						alert("학원명을 입력하세요");
+					}
+				});
+				
 				//학원명으로 검색
 				$('#search-aname').click(function(){
 					var setAname = $('#aname').val();
