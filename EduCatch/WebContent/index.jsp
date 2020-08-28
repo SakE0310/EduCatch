@@ -355,13 +355,11 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
-                                <h4>Company</h4>
+                                <h4>학원찾5조</h4>
                                 <ul>
-                                    <li><a href="#">Why choose us</a></li>
-                                    <li><a href="#"> Review</a></li>
-                                    <li><a href="#">Customers</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">Carrier</a></li>
+                                    <li>김한결   남시현</li>
+                                    <li>김기남   손성호</li>
+                                    <li>이주연   송채민   박혜미</li>
                                 </ul>
                             </div>
                         </div>
@@ -369,12 +367,13 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
-                                <h4>Production</h4>
+                                <h4>EduCatch</h4>
                                 <ul>
-                                    <li><a href="#">Technology</a></li>
-                                    <li><a href="#">Products</a></li>
-                                    <li><a href="#">Quality</a></li>
-                                    <li><a href="#">Sales geography</a></li>
+                                    <li>학원검색</li>
+                                    <li>커뮤니티</li>
+                                    <li>통계페이지</li>
+                                    <li>공지사항</li>
+                                    <li>마이페이지</li>
                                 </ul>
                             </div>
                         </div>
@@ -382,14 +381,14 @@
                     <div class="col-xl-3 col-lg-4 col-md-5 col-sm-8">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
-                                <h4>Contact Us</h4>
+                                <h4>연락하기</h4>
                                 <div class="footer-pera">
-                                    <p class="info1">Address: 789/A green avenue Dhanmondi, Dhaka</p>
+                                    <p class="info1">Address: http://www.ikosmo.co.kr</p>
                                 </div>
                             </div>
                             <div class="footer-number">
-                                <p>Phone: +10 783 3674 356</p>
-                                <p>Email: company@gmail.com</p>
+                                <p>Phone: +82 6677 0249</p>
+                                <p>Email: educatch2020@gmail.com</p>
                             </div>
                         </div>
                     </div>
