@@ -15,5 +15,6 @@
 		<typeAlias type="com.kosmo.educatch.vo.ConvenienceVO" alias="convenience"/>
 		<typeAlias type="com.kosmo.educatch.vo.TimetableVO" alias="timetable"/>
 		<typeAlias type="com.kosmo.educatch.vo.ReplyVO" alias="reply"/>
+		<typeAlias type="com.kosmo.educatch.vo.ReserVO" alias="reser"/>
 	</typeAliases>
 </configuration>

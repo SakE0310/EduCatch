@@ -139,4 +139,83 @@
 		
 	</select>
 	
+	<select id="selectReser" parameterType="academyview" resultType="reser">
+	<if test="member_mno != null">
+	SELECT TTNO, TTTIME, TTDATE, TTPEOPLE, NVL(PE,0) AS NOW,ROWNUM, NVL(CHK,0) AS CHK
+	FROM (  SELECT  A.TTNO, 
+	                A.ACADEMY_ANO, 
+	                TO_CHAR(A.TTDATE,'YYYY-MM-DD') AS TTDATE, 
+	                A.TTTIME, 
+	                A.TTPEOPLE, 
+	                B.PE ,
+	                C.CHK
+	        FROM    TIMETABLE A, 
+	                (   SELECT COUNT(A.RENO) AS PE, 
+	                            B.TTNO
+	                    FROM    RESERVATION A, 
+	                            TIMETABLE B
+	                    WHERE   A.TIME_TTNO = B.TTNO
+	                    GROUP BY B.TTNO) B,
+	                    (SELECT COUNT(A.RENO) AS CHK, 
+	                            A.TIME_TTNO AS TTNO
+	                    FROM    RESERVATION A, 
+	                            TIMETABLE B 
+	                    WHERE   A.TIME_TTNO = B.TTNO 
+	                    AND     A.MEMBER_MNO = #{member_mno}
+	                    group by a.time_ttno) C
+	        WHERE   A.TTNO = B.TTNO(+)
+	        AND     A.TTNO = C.TTNO(+)
+	        AND     A.ACADEMY_ANO = #{ano}
+	        AND     A.TTDATE > TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+	        ORDER BY A.TTDATE)
+    <![CDATA[WHERE   ROWNUM <= 5 ]]>
+	</if>
+	<if test="member_mno == null">
+	SELECT TTNO, TTTIME, TTDATE, TTPEOPLE, NVL(PE,0) AS NOW, ROWNUM
+	FROM (  SELECT  A.TTNO, 
+	                A.ACADEMY_ANO, 
+	                TO_CHAR(A.TTDATE,'YYYY-MM-DD') AS TTDATE, 
+	                A.TTTIME, 
+	                A.TTPEOPLE, 
+	                B.PE 
+	        FROM    TIMETABLE A, 
+	                (   SELECT COUNT(A.RENO) AS PE, 
+	                            B.TTNO
+	                    FROM    RESERVATION A, 
+	                            TIMETABLE B
+	                    WHERE   A.TIME_TTNO = B.TTNO
+	                    GROUP BY B.TTNO) B
+	        WHERE   A.TTNO = B.TTNO(+)
+	        AND     A.ACADEMY_ANO = #{ano}
+	        AND     A.TTDATE > TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+	        ORDER BY A.TTDATE)
+    <![CDATA[WHERE   ROWNUM <= 5 ]]>
+	</if>
+	</select>
+	
+	<insert id="inReser" parameterType="reser">
+		<selectKey keyProperty="rno" resultType="String" order="BEFORE">
+		SELECT    /*+ INDEX_DESC(SYS_C0012155) */        
+		          'RE'||LPAD(
+		              (NVL(MAX(SUBSTR(RENO,-4)),0)+1),5,'0' 
+		          )RNO
+		FROM RESERVATION A
+		</selectKey>
+	    INSERT INTO RESERVATION(
+	    	RENO,
+	    	MEMBER_MNO,
+	    	TIME_TTNO
+	    )VALUES(
+	    	#{rno},
+	    	#{mno},
+	    	#{ttno}
+	    )
+	</insert>
+	
+	<delete id="delReser" parameterType="reser">
+		DELETE 
+		FROM 	RESERVATION
+		WHERE 	MEMBER_MNO = #{mno}
+		AND 	TIME_TTNO = #{ttno}
+	</delete>
 </mapper>

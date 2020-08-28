@@ -17,7 +17,7 @@ public class AjaxLoginCheckInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
+		log.info("AjaxLoginCheckInterceptor Check >>> ");
 		MemberVO mvo = (MemberVO)request.getSession().getAttribute("user");
 		String id = null;
 		if(mvo != null) {
@@ -25,6 +25,7 @@ public class AjaxLoginCheckInterceptor extends HandlerInterceptorAdapter{
 		}
 		log.info("id : "+id);
 		if (id==null) {
+			log.info("id null >>> ");
 			//로그인 안했을 때
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html; charset=UTF-8");

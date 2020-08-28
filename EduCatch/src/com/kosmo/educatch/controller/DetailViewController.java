@@ -19,6 +19,7 @@ import com.kosmo.educatch.service.DetailViewService;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.ReserVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SubjectVO;
 
@@ -170,12 +171,60 @@ public class DetailViewController {
 		return map;
 	}
 	
-	@RequestMapping("cal")
-	public ModelAndView getCalendar() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("search/calendar");
+	@ResponseBody
+	@RequestMapping("selReser")
+	public Map<String, List<ReserVO>> selectReser(HttpServletRequest request){
+		AcademyVO avo = new AcademyVO();
+		avo.setAno(request.getParameter("ano"));
+		avo.setMember_mno(request.getParameter("mno"));
+		log.info("selReser mno >>> " + avo.getMember_mno());
+		List<ReserVO> list = detailViewService.selectReser(avo);
+		Map<String, List<ReserVO>> map = new HashMap<String, List<ReserVO>>();
+		map.put("result", list);
+		return map;
+	};
+	
+	@ResponseBody
+	@RequestMapping("inReser.ec")
+	public Map<String, String> inReser(HttpServletRequest request,HttpSession session){
+		ReserVO rvo = new ReserVO();
+		rvo.setTtno(request.getParameter("ttno"));
+		if(session != null) {
+			MemberVO mvo = (MemberVO)session.getAttribute("user");
+			rvo.setMno(mvo.getMno());
+		}
 		
-		return mv;
+		
+		int i = 0;
+		i = detailViewService.inReser(rvo);
+		Map<String, String> map = new HashMap<String, String>();
+		if(i > 0) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("delReser.ec")
+	public Map<String, String> delReser(HttpServletRequest request,HttpSession session){
+		ReserVO rvo = new ReserVO();
+		rvo.setTtno(request.getParameter("ttno"));
+		if(session != null) {
+			MemberVO mvo = (MemberVO)session.getAttribute("user");
+			rvo.setMno(mvo.getMno());
+		}
+		
+		int i = 0;
+		i = detailViewService.delReser(rvo);
+		Map<String, String> map = new HashMap<String, String>();
+		if(i > 0) {
+			map.put("result", "success");
+		}else {
+			map.put("result", "fail");
+		}
+		return map;
 	}
 	
 }

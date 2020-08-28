@@ -17,7 +17,7 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
+		log.info("Login Check >>> ");
 		MemberVO mvo = (MemberVO)request.getSession().getAttribute("user");
 		String id = null;
 		if(mvo != null) {

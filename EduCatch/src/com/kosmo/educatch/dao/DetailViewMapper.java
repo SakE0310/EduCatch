@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
-import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.ReserVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SubjectVO;
 
@@ -17,4 +17,7 @@ public interface DetailViewMapper {
 	public int insertBookmark(AcademyVO param);
 	public int deleteBookmark(AcademyVO param);
 	public List<AcademyVO> selectBookmark(AcademyVO param);
+	public List<ReserVO> selectReser(AcademyVO avo);
+	public int inReser(ReserVO rvo);
+	public int delReser(ReserVO rvo);
 }

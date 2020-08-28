@@ -7,6 +7,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.ReserVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SubjectVO;
 
@@ -61,6 +62,21 @@ public class DetailViewMapperImpl extends SqlSessionDaoSupport implements Detail
 	@Override
 	public List<AcademyVO> selectBookmark(AcademyVO param) {
 		return getSqlSession().selectList("DetailViewMapper.selectBookmark");
+	}
+
+	@Override
+	public List<ReserVO> selectReser(AcademyVO avo) {
+		return getSqlSession().selectList("DetailViewMapper.selectReser", avo);
+	}
+
+	@Override
+	public int inReser(ReserVO rvo) {
+		return getSqlSession().insert("DetailViewMapper.inReser", rvo);
+	}
+
+	@Override
+	public int delReser(ReserVO rvo) {
+		return getSqlSession().delete("DetailViewMapper.delReser", rvo);
 	}
 	
 

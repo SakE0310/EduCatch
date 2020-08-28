@@ -39,6 +39,8 @@
         	<bean id="managerInterceptor" class="com.kosmo.educatch.manager.ManagerCheckInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
+        	<mvc:mapping path="/delReser.ec/**"/>
+        	<mvc:mapping path="/inReser.ec/**"/>
         	<mvc:mapping path="/insertBookmark.ec"/>
         	<mvc:mapping path="/deleteBookmark.ec"/>
         	<bean id="ajaxInterceptor" class="com.kosmo.educatch.manager.AjaxLoginCheckInterceptor"/>

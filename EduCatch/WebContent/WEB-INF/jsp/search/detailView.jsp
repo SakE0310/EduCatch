@@ -9,7 +9,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<% 
+	Object obj4 = session.getAttribute("user");
+	MemberVO memberVO = new MemberVO();
+	if(obj4!=null){
+		memberVO = (MemberVO)obj4;
+	}
+%>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="/EduCatch/assets/img/favicon-96x96.png"
@@ -650,7 +656,6 @@ body {
 
 	$(document).ready(function(){
 		
-		
 		$('#addrev').click(function(){
 			 $("#pageForm").attr("action","inserttDisplay.ec");
 	         $("#pageForm").attr("method","POST");
@@ -767,7 +772,17 @@ body {
 	          $("a[href='#" + id + "']", $menu).addClass("isactive");
 	        }
 	      });
-	      
+	      ajaxGetReser();
+	      <%
+	      	if(memberVO.getMno() != null){
+	      %>
+	      ajaxGetBookmark();
+	      <%
+	      	}
+	      %>
+	      $('.reser').on('click', '[name=addCancle]',function(e) {
+	  		ajaxSetValue(e);
+	  	});
 	    });
 	
 	function ajaxGetBookmark(){
@@ -793,6 +808,78 @@ body {
 			
 		});
 	}
+	function ajaxGetReser(){
+		var ano = $('#ano').val();
+		var mno = $('#member_mno').val();
+		$.ajax({
+			url : "selReser.ec",
+			type : "post",
+			data : {
+				"ano" : ano,
+				"mno" : mno
+				},
+		}).done(function(resultParam){
+			console.log("success");
+			$('.reser > tbody').remove();
+			$('.reser').append('<tbody></tbody>');
+			if(resultParam.result.length > 0){
+				for(i in resultParam.result){
+					$('.reser > tbody').append("<tr>");
+					$('.reser > tbody').append("<td>"+resultParam.result[i].ttdate+"</td>");
+					$('.reser > tbody').append("<td>"+resultParam.result[i].tttime+"</td>");
+					$('.reser > tbody').append("<td>"+resultParam.result[i].ttpeople+"</td>");
+					$('.reser > tbody').append("<td>"+resultParam.result[i].now+"</td>");
+					if(resultParam.result[i].chk>0){
+						$('.reser > tbody').append("<td><input id='btn"+resultParam.result[i].ttno+"' name='addCancle' type='button' value='취소' class='btn1 addCancle'/></td>");	
+					}else{
+						$('.reser > tbody').append("<td><input id='btn"+resultParam.result[i].ttno+"' name='addCancle' type='button' value='신청' class='btn1 addCancle'/></td>");
+					}
+					$('.reser > tbody').append("</tr>");
+				}
+			}else{
+				$('.reser > tbody').append("<tr><td colspan=5>학원에서 예약정보를 올린것이 없습니다.</td></tr>");
+			}
+		}).fail(function(resultParam){
+			
+		});
+	}
+	
+	function ajaxSetValue(v){
+		console.log(v.target);
+		var url1 = null;
+		var mno = $('#member_mno').val();
+		var ttno = v.target.id.split("btn")[1];
+		if(v.target.value =="취소"){
+			url1 = "delReser.ec";
+		}else{
+			url1 = "inReser.ec"
+		}
+		console.log(url1);
+		
+		$.ajax({
+			url : url1,
+			type : "post",
+			data : {
+				"ttno" : ttno,
+				"mno" : mno
+			},
+			dataType : "json"
+		}).done(function(resultParam){
+			if(resultParam.result != "success"){
+				
+			}else{
+				alert("정상적으로 "+v.target.value+"되었습니다.");
+			ajaxGetReser();
+			}
+		}).fail(function(resultParam){
+			console.log(resultParam);
+			if(resultParam.readyState == 4){
+				alert(resultParam.responseText);
+			}else{
+				alert("추가시 DB연결에 문제가 발생하였습니다.");	
+			}
+		});
+	}
 	</script>
 </head>
 <body>
@@ -805,19 +892,12 @@ body {
 		Object obj1 = request.getAttribute("avo");
 		Object obj2 = request.getAttribute("cvo");
 		Object obj3 = request.getAttribute("gvo");
-		Object obj4 = session.getAttribute("user");
 		Object listobj1 = request.getAttribute("subjectList"); 
 		Object listobj2 = request.getAttribute("reviewlist"); 
 
 		AcademyVO avo = (AcademyVO)obj1;
 		ConvenienceVO cvo = (ConvenienceVO)obj2;
 		AcademyVO gvo = (AcademyVO)obj3;
-		MemberVO memberVO = new MemberVO();
-		if(obj4!=null){
-			memberVO = (MemberVO)obj4;
-		}
-		System.out.println(memberVO.getMno());	
-		
 		ArrayList subjectlist = (ArrayList)listobj1;
 		ArrayList reviewlist = (ArrayList)listobj2;
 		
@@ -1124,9 +1204,9 @@ body {
     <section id="section-2">
     	<hr id="hhr">
     	<div class="container">
-			  <table class="table table-condensed" id="actb">
        			 <h1>수업 정보</h1>
        			 <br><br>
+			  <table class="table table-condensed" id="actb">
 			    <thead>
 			      <tr>
 			        <th>과목명</th>
@@ -1180,7 +1260,7 @@ body {
 					        <td><%=avo.getAname() %></td>
 					        <td>연락처</td>
 					        <td><%=avo.getAtel() %></td>
-					        <td><input id="addCalcle" name="addCalcle" type="button" value="신청" class="btn1" /></td>
+					        
 					      </tr>
 				      </tbody>
 				  </table>
@@ -1252,10 +1332,10 @@ body {
     <section id="section-4">
     <hr id="hhr">
     	<div class="container">
-			  <table class="table table-condensed" id="actb">
        			 <h1>수강후기</h1>
        			 	<input id="addrev" name="addrev" type="button" value="후기작성" class="btn1" />
        			 <br><br>
+			  <table class="table table-condensed" id="actb">
 			    <thead>
 			      <tr>
 			        <th>작성자</th>
@@ -1292,7 +1372,7 @@ body {
 <form id="pageForm" name="pageForm">
       <input type="hidden" id="rbno" name="rbno"/>
       <input type="hidden" id="aname" name="aname" value="<%=avo.getAname() %>"/>
-      <input type="hidden" id="ano" name="ano" value="<%=avo.getAno() %>"/>
+      <input type="hidden" id="ano" name="ano" value="<%= avo.getAno()%>"/>
 </form>
 <div class="modal" id="applyRes" role="dialog">
 		<div class="modal-dialog">

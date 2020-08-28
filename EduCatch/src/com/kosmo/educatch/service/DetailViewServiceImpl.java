@@ -13,6 +13,7 @@ import com.kosmo.educatch.dao.DetailViewMapper;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
 import com.kosmo.educatch.vo.MemberVO;
+import com.kosmo.educatch.vo.ReserVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.SubjectVO;
 
@@ -124,5 +125,32 @@ public class DetailViewServiceImpl implements DetailViewService {
 		
 		return list;
 	}//end of deleteBookmark
+
+	@Override
+	public List<ReserVO> selectReser(AcademyVO avo) {
+		log.info("DetailViewServiceImpl selectReser 시작 >>>> ");
+		List<ReserVO> list = new ArrayList<ReserVO>();
+		list = detailViewMapper.selectReser(avo);
+		log.info("DetailViewServiceImpl selectReser 끝 >>>> ");
+		return list;
+	}
+
+	@Override
+	public int inReser(ReserVO rvo) {
+		log.info("DetailViewServiceImpl inReser 시작 >>>> ");
+		int i = 0;
+		i = detailViewMapper.inReser(rvo);
+		log.info("DetailViewServiceImpl inReser 끝 >>>> ");
+		return i;
+	}
+
+	@Override
+	public int delReser(ReserVO rvo) {
+		log.info("DetailViewServiceImpl delReser 시작 >>>> ");
+		int i = 0;
+		i = detailViewMapper.delReser(rvo);
+		log.info("DetailViewServiceImpl delReser 끝 >>>> ");
+		return i;
+	}
 
 }
