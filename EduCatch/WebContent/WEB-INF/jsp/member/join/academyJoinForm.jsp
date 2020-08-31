@@ -12,6 +12,15 @@
   <script type="text/javascript"
 		        src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style type="text/css">
+@media all and (max-width:767px) {
+	
+}
+@media all and (min-width:768px) and (max-width:1023px) {
+	
+}
+@media all and (min-width:1024px) {
+	
+}
 	.required{
 		color:red;
 	}
@@ -28,6 +37,14 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 <script type="text/javascript">
+
+$(document).ready(function(){
+	//비밀번호값이 바뀌면 다시 비밀번호 확인이 필요
+	$(".pw").on('change',function(){
+		console.log("비밀번호 확인필요");
+		$("#pw_check").val("N");
+	});
+});
 
 function joinCommit(){
 	console.log("joinCommit함수 진입");
@@ -51,7 +68,9 @@ function joinCommit(){
 		alert("아이디를 입력해주세요");
 		document.getElementById("memail0").focus();
 		return false;
-	}else{
+	}
+	/*
+	else{
 		var email = document.amemberjoin.memail0.value+'@'+document.amemberjoin.memail.value;
 		console.log(email);
 		var exp = /^[a-zA-Z0-9_-]+\@[a-zA-Z]+\.[a-zA-Z]+$/;
@@ -60,6 +79,13 @@ function joinCommit(){
 			document.getElementById("memail1").focus();
 			return false;
 		}
+	}
+	*/
+	
+	//아이디 중복체크 버튼 누를때
+	if(document.memberjoin.id_check.value != "idcheckY"){
+		alert("아이디 중복체크를 확인해주세요");
+		return false;
 	}
 
 	//비밀번호
@@ -168,6 +194,7 @@ function pwCheck(){
 		return false;
 	}else{
 		alert("비밀번호가 일치합니다.");
+		document.amemberjoin.pw_check.value = "pw_checkY";
 		return true;
 	}
 	
@@ -207,9 +234,10 @@ function idCheck(){
 			console.log(data);
 			if(data==0){
 				alert("사용가능한 아이디입니다");
-				$("#memail0").attr("readonly",true);
-				$("#memail1").attr("readonly",true);
-				$("#idcheck").hide();
+				//$("#memail0").attr("readonly",true);
+				//$("#memail1").attr("readonly",true);
+				//$("#idcheck").hide();
+				$("#id_check").val("idcheckY");
 				$("#ajaxResData").html("중복체크 완료");
 				
 			}else{
@@ -264,6 +292,7 @@ function idCheck(){
 						<option>naver.com</option>
 						<option>gmail.com</option>
 					</select>
+					<input type="hidden" id="id_check" name="id_check">
 					<div>&nbsp;&nbsp;<input type="button" value="아이디 중복확인" onclick="idCheck()"/></br></div>
 				</div>
 				</div>
@@ -284,6 +313,7 @@ function idCheck(){
  						<input type="password" class="form-control" id="mpw_r" name="mpw_r"/>
 					</div>
 					<div class="col-xs-2">
+						<input type="hidden" id="pw_check" name="pw_check" value ="N">
 						<input type="button" value="비밀번호확인" onclick="pwCheck()" />
 					</div>
 					</div>

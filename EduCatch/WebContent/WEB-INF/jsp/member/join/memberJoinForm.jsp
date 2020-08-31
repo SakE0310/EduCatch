@@ -6,7 +6,21 @@
 <meta charset="UTF-8">
 <title>회원가입 폼</title>
 <style type="text/css">
-
+@media all and (max-width:767px) {
+	#memail0{
+		width:30px;
+	}
+	.nice-select{
+		width:100px;
+		height: 40px;
+		line-height: 30px;
+	}
+	.current{
+		font-size: 10px;
+	}
+}
+@media all and (min-width:1024px) {
+}
 .required {
 	color: red;
 }
@@ -25,8 +39,13 @@
 <script type="text/javascript"
 		        src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
-var clickYN = 0;
-
+$(document).ready(function(){
+	//비밀번호값이 바뀌면 다시 비밀번호 확인이 필요
+	$(".pw").on('change',function(){
+		console.log("비밀번호 확인필요");
+		$("#pw_check").val("N");
+	});
+});
 function joinCommit(){
 	console.log("joinCommit함수 진입");
 	
@@ -36,13 +55,22 @@ function joinCommit(){
 		document.getElementById("mname").focus();
 		return false;
 	}
-	
+	else{
+		var name = /^[가-힣]{2,4}$/;
+		if(!name.test(document.memberjoin.mname.value)){
+			alert("이름 형식이 올바르지 않습니다");
+			document.getElementById("mname").focus();
+			return false;
+		}
+	}
 	//아이디(이메일)
 	if(document.memberjoin.memail0.value==""){
 		alert("아이디를 입력해주세요");
 		document.getElementById("memail0").focus();
 		return false;
-	}else{
+	}
+	/*
+	else{
 		var email = document.memberjoin.memail0.value+'@'+document.memberjoin.memail.value;
 		console.log(email);
 		var exp = /^[a-zA-Z0-9_-]+\@[a-zA-Z]+\.[a-zA-Z]+$/;
@@ -52,19 +80,31 @@ function joinCommit(){
 			return false;
 		}
 	}
-
+	*/
+	
+	//아이디 중복체크 버튼 누를때
+	if(document.memberjoin.id_check.value != "idcheckY"){
+		alert("아이디 중복체크를 확인해주세요");
+		return false;
+	}
+    
 	//비밀번호
 	if(document.memberjoin.mpw.value==""){
 		alert("비밀번호를 입력하세요");
 		document.getElementById("mpw").focus();
 		return false;
 	}else{
-		var regex =/^[A-Za-z0-9]{6,12}$/;
+		var regex =/^.*(?=^.{6,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 		if(!regex.test(document.memberjoin.mpw.value)){
 			alert("비밀번호형식에 맞게 입력해주세요");
 			document.getElementById("mpw").focus();
 			return false;
 		}
+	}
+	//비밀번호 확인버튼
+	if(document.memberjoin.pw_check.value != "pw_checkY"){
+		alert("비밀번호 확인 버튼을 눌러주세요");
+		return false;
 	}
 	
 	if(document.memberjoin.mpw_r.value==""){
@@ -180,6 +220,7 @@ function pwCheck(){
 		return false;
 	}else{
 		alert("비밀번호가 일치합니다.");
+		document.memberjoin.pw_check.value = "pw_checkY";
 		return true;
 	}
 	
@@ -222,6 +263,7 @@ function idCheck(){
 				//$("#memail0").attr("readonly",true);
 				//$("#memail1").attr("readonly",true);
 				//$("#idcheck").hide();
+				$("#id_check").val("idcheckY");
 				$("#ajaxResData").html("중복체크 완료");
 				
 			}else{
@@ -295,6 +337,7 @@ function idCheck(){
 								<option>naver.com</option>
 								<option>gmail.com</option>
 							</select>
+							<input type="hidden" id="id_check" name="id_check">
 							<div>&nbsp;&nbsp;<input type="button" value="아이디 중복확인" id="idcheck" onclick="idCheck()" /></div>
 						</div>
 					</div>
@@ -308,18 +351,19 @@ function idCheck(){
 					<td>
 					<div class=row>
 					<div class="col-xs-2">
-						<input type="password"  class="form-control" id="mpw" name="mpw" />
+						<input type="password"  class="form-control pw" id="mpw" name="mpw" />
 					</div>
 					</div>
 					<div class="row">
 					<div class="col-xs-2">
- 						<input type="password" class="form-control" id="mpw_r" name="mpw_r"/>
+ 						<input type="password" class="form-control pw" id="mpw_r" name="mpw_r"/>
 					</div>
 					<div class="col-xs-2">
+						<input type="hidden" id="pw_check" name="pw_check" value ="N">
 						<input type="button" value="비밀번호확인" onclick="pwCheck()" />
 					</div>
 					</div>
-						<p>문자,숫자 포함 6~12자리를 입력하세요</p>
+						<p>문자,숫자,특수기호 포함 6~12자리를 입력하세요</p>
 					</td>
 				</tr>
 				<tr>
