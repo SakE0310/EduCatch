@@ -231,7 +231,7 @@
 	.gj-textbox-md {
    			height: 30px;
 		}
-	.gj-datepicker-md [role="right-icon"] {
+	.gj-datepicker-md [role="right-icon"] {2
 	    left: 3px;
    		top: 3px;
   	 }
@@ -241,6 +241,10 @@
 	 	height: 10px;
 	 }
 	 /*---------------------------------*/
+	 
+	 a{
+	 	color: black;
+	 }
 	 
 	
 </style>
@@ -337,6 +341,8 @@
 	if(hs != null){
 		mvo = (MemberVO)hs.getAttribute("user");
 	}
+	
+	System.out.println("mvo.getMname() >>>> "+mvo.getMname());
 
 	if(obj !=null){
 		ArrayList listConsult=(ArrayList)obj;
@@ -415,18 +421,31 @@ if(listConsult !=null && nCnt>0){
 		System.out.println("cvo.getGroupsize()"+cvo.getGroupsize());
 		System.out.println("cvo.getCurpage()"+cvo.getCurpage());
 		System.out.println("cvo.getTotalcount()"+cvo.getTotalcount());
-		
-	
 %>
 					<tr align="center">
 						<td class="media_mobile_td"><%= cvo.getCbno() %></td>
 						<td class="media_mobile_td_font"><%= cvo.getAname() %></td>
-						<td class="media_mobile_td_font"><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
+
+						<td class="media_mobile_td_font">
+<% 		
+		if(mvo !=null){
+			if(cvo.getCbname().equals(mvo.getMname()) || mvo.getMauth().equals("3") 
+			   || cvo.getAcademy_ano().equals(mvo.getAcademy_ano())){
+		
+%>
+						<a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa">
+<%
+			}
+%>
+
+						<%= cvo.getCbsubject() %></a>
+						</td>
 						<td class="media_mobile_td_font"><%= cvo.getCbname() %></td>
 						<td class="media_mobile_td"><%= cvo.getCinsertdate() %></td>
 					</tr>
-<%
-				}	
+<%					
+				}
+			}
 		}else{
 		
 %>	

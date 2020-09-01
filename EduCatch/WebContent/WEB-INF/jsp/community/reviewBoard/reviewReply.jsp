@@ -428,7 +428,7 @@ textarea {
          <form id="replyInsertForm">  
             <table class="reply_insert_wrap" align="center" width="1100" height="100">
                <tr class="marT5 marL5 marB5">
-                  <td>
+                  <td class="tdd">
                	  <div style="weight: 300; height: 50;">
                      <textarea name="recontent" id="recontent" style="padding:10px; min-width: 260px;" placeHolder="댓글을 입력해주세요."></textarea>
                      <input type="button" class="btn_light btn_box_02" id="replyInsert" value="등록" style="vertical-align:middle;"/>
