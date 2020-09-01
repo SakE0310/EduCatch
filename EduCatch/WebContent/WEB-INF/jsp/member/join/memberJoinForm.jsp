@@ -8,16 +8,64 @@
 <style type="text/css">
 @media all and (max-width:767px) {
 	#memail0{
-		width:30px;
+		width:68px;
+		margin-right:0px;
+	}
+	#memail1{
+		width:68px;
+	}
+	.gol{
+		margin-left:38px;
 	}
 	.nice-select{
-		width:100px;
-		height: 40px;
-		line-height: 30px;
+		width:78px;
+		height: 30px;
+		line-height: 50px;
 	}
 	.current{
-		font-size: 10px;
+		font-size: 11px;
+		margin-right:18px;
+		margin-bottom:18px;
 	}
+	#idcheck{
+		font-size:11px;
+		width:100px;
+	}
+	#pw{
+		font-size:11px;
+		width:100px;
+		margin-left:50px;
+	}
+	#mname{
+		width:89px;
+	}
+	#mtel2{
+		width:45px;
+	}
+	#mtel3{
+		margin-left:20px;
+		width:45px;
+	}	
+	
+	#maddrno{
+		width:68px;
+	}
+	#mpw, #mpw_r{
+		width:89px;
+	}
+	
+	#addrfind{
+		font-size:11px;
+		width:90px;
+		margin-left:55px;
+	}
+	.mem{
+		font-size:14px;
+	}
+	p{
+		font-size:10px;
+	}
+	
 }
 @media all and (min-width:1024px) {
 }
@@ -27,6 +75,9 @@
 .memberin{
 	margin-top:44px;
 	margin-bottom:40px;
+}
+#memail0{
+	margin-right:3px;
 }
 
 
@@ -316,7 +367,9 @@ function idCheck(){
 						<div class="col-xs-2">
 								<input type="text" id="memail0" name="memail0" value="${param.emailname }" title="" class="form-control" readonly />
 						</div>
+						<div class="gol">
 								@
+						</div>		
 						<div class="col-xs-2">
 							<input type="text" id="memail1" name="memail1" value="${param.emailaddr }" title="" class="form-control" readonly />
 						</div>
@@ -325,7 +378,9 @@ function idCheck(){
 						<div class="col-xs-2">
 								<input type="text" id="memail0" name="memail0" value="" size=10 onfocus="this.value=''" title="" class="form-control" />
 						</div>
+						<div class="gol">
 								@
+						</div>
 						<div class="col-xs-2">
 							<input type="text" id="memail1" name="memail1" value="" size=10 title="" class="form-control" />
 						</div>
@@ -360,7 +415,7 @@ function idCheck(){
 					</div>
 					<div class="col-xs-2">
 						<input type="hidden" id="pw_check" name="pw_check" value ="N">
-						<input type="button" value="비밀번호확인" onclick="pwCheck()" />
+						<input type="button" value="비밀번호확인" onclick="pwCheck()" id="pw" />
 					</div>
 					</div>
 						<p>문자,숫자,특수기호 포함 6~12자리를 입력하세요</p>
@@ -408,7 +463,7 @@ function idCheck(){
 					<div class="col-xs-2">
 						<input type="text" id="maddrno" name="maddrno" title="우편번호" size=6 class="form-control" />
 					</div>
-						<input type="button" value="우편번호 찾기" onclick="addrCheck()" />
+						<input type="button" value="우편번호 찾기" onclick="addrCheck()" id="addrfind" />
 						<br/>
 					</div>
 					<div class="row">	

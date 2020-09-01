@@ -72,8 +72,9 @@ public class FreeReplyController {
 	@RequestMapping("replyFreeUpdate.ec")
 	public String replyUpdate(@ModelAttribute ReplyVO param,
 							  HttpServletRequest request) {
-		log.info("ReplyController replyList >>> 댓글 수정 성공");
+		log.info("ReplyController replyList >>> 댓글 수정");
 		
+		log.info("회원번호>>>"+param.getMember_mno());
 		
 		int nCntReplyUpdate = freereplyService.replyFreeUpdate(param);
 		
@@ -98,7 +99,9 @@ public class FreeReplyController {
 	@ResponseBody
 	@RequestMapping("replyFreeDelete")
 	public String replyDelete(@ModelAttribute ReplyVO param) {
-		log.info("ReplyController replyDelete >>> 댓글 수정 성공");
+		log.info("ReplyController replyDelete >>> 댓글 삭제");
+		
+		log.info("회원번호>>"+param.getMember_mno());
 		
 		int nCntReplyDelete = freereplyService.replyFreeDelete(param);
 		String deleteResult = "";
