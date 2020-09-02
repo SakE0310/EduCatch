@@ -53,7 +53,7 @@ public class FreeBoardController {
 					
 		}
 		
-		String papeSize = "5";
+		String papeSize = "10";
 		String curPage = "1";
 		String groupSize = "5";
 		String totalCount = "0"; 

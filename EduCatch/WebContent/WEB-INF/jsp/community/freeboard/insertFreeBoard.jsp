@@ -6,15 +6,43 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<jsp:include page="../../../../top.jsp" flush="true">
+<jsp:param value="" name=""/>
+</jsp:include>
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
 <script type="text/javascript"
 	src="/EduCatch/assets/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 
 <!-- jQuery를 사용하기위해 jQuery라이브러리 추가 -->
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+<!-- 테이블 부트스트랩 -->
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<!-- function 함수 짜야함 -->
+<style type="text/css">
+
+	.btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #140C40;
+	    color: #ffffff;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
+		}
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	}	
+	#margin_div{
+		margin-bottom:38px; 
+	}
+</style>
 
 <script type="text/javascript">
 	
@@ -55,9 +83,6 @@
 		});
 	});
 </script>
-	<jsp:include page="../../../../top.jsp" flush="true">
-	<jsp:param value="" name=""/>
-	</jsp:include>
 </head>
 <body>
 <%
@@ -74,11 +99,18 @@ if(hs != null){
 %>
 	<!-- action/document/location -->
 	<!-- enctype="multipart/form-data" -->
+	<div class="container">
 	<form id="edit" name="edit">
 	<input type="hidden" id ="mid" name="mid" value="<%=mvo.getMid() %>">
 	<input type="hidden" id ="mno" name="mno" value="<%=mvo.getMno() %>">
 	<input type="hidden" id ="mname" name="mname" value="<%=mvo.getMname() %>">
-		<table style="margin-left: auto; margin-right: auto;" border="1" width="50%">
+		<table border="0" cellpadding="1" cellspacing="1" align="center" >
+			<tr>
+				<td align="center"><h1>자유게시판</h1></td>
+			</tr>
+			</table>
+			<hr>
+		<table style="width: 90%" border="1" align="center"class="table">
 			<!--tr>
 				<td style="width: 100px">글번호</td>
 				<td><input type="text" id="fbno" name="fbno"
@@ -110,11 +142,13 @@ if(hs != null){
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="insertcommit" value="등록완료" onclick="insertCommit()" />
+				 <input type="button" id="insertcommit" value="등록" onclick="insertCommit()" class=" btn_light btn_box_01" /> 
+				  <input type="reset" value="취소" class=" btn_light btn_box_01" /> 
 				</td>
 			</tr>
 		</table>
 	</form>
+	</div>
 	<jsp:include page="../../../../footer.jsp" flush="true">
 	<jsp:param value="" name=""/>
 	</jsp:include>

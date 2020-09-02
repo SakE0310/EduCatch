@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<jsp:include page="../../../../top.jsp" flush="true">
+	<jsp:param value="" name=""/>
+	</jsp:include>
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
 <script type="text/javascript"
 	src="/EduCatch/assets/dist/js/service/HuskyEZCreator.js" charset="utf-8"></script>
@@ -15,8 +18,34 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 
-<!-- function 함수 짜야함 -->
+<!-- 테이블 부트스트랩 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<style type="text/css">
+.btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #140C40;
+	    color: #ffffff;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
+		}
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	}	
+	#margin_div{
+		margin-bottom:38px; 
+	}
+
+</style>
 <script type="text/javascript">
 	
 	function deleteCommit(){
@@ -63,9 +92,7 @@
 		});
 	});
 </script>
-	<jsp:include page="../../../../top.jsp" flush="true">
-	<jsp:param value="" name=""/>
-	</jsp:include>
+
 </head>
 <body>
 <%
@@ -77,9 +104,17 @@ if(hs != null){
 %>
 	<!-- action/document/location -->
 	<!-- enctype="multipart/form-data" -->
+	<div class="container">
 	<form id="edit" name="edit">
-	
-		<table style="margin-left: auto; margin-right: auto;" border="1" width="50%">
+		<div>
+			<table border="0" cellpadding="1" cellspacing="1" align="center">
+			<tr>
+				<td align="center"><h1>자유게시판</h1></td>
+			</tr>
+			</table>
+			<hr>
+		</div>
+		<table style="margin-left: auto; margin-right: auto;" border="1" width="50%"class="table">
 		<% 
 		
 			Object obj = request.getAttribute("freevo"); 
@@ -113,8 +148,8 @@ if(hs != null){
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="updatecommit" value="수정완료" onclick="updateCommit()" />
-				 <input type="button" id="deletecommit" value="삭제완료" onclick="deleteCommit()" />
+				 <input type="button" id="updatecommit" value="수정" onclick="updateCommit()"  class=" btn_light btn_box_01" /> 
+				 <input type="button" id="deletecommit" value="삭제" onclick="deleteCommit()" class=" btn_light btn_box_01" /> 
 				 <!-- input type="button" id="save" value="임시저장" / -->
 				</td>
 			</tr>
@@ -123,6 +158,7 @@ if(hs != null){
 			%>
 		</table>
 	</form>
+	</div>
 	<jsp:include page="../../../../footer.jsp" flush="true">
 	<jsp:param value="" name=""/>
 	</jsp:include>

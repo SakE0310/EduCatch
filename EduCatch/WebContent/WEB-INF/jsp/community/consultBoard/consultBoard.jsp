@@ -34,7 +34,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <style type="text/css">
-/*미디어 쿼리*/
+	/*미디어 쿼리*/
 	/* Mobile Device (가로폭 767px 이하) */
 	@media all and (max-width:767px) {
 		thead {
@@ -90,6 +90,12 @@
 		.media_mobile_td_font{
 			font-size: 13px;
 		}
+		#consultForm_div{
+	    padding: 0px;
+		}
+		#consultForm{
+	 	padding-bottom: 300px;
+	 }	
 	}
 	
 
@@ -121,6 +127,9 @@
     	height: 35px;
 	    padding-left: 10px;
 	}
+	#consultForm{
+	 	padding-bottom: 400px;
+	 }	
 	}
 	
 	/* PC Desktop (가로폭 1024 이상) */
@@ -141,7 +150,7 @@
 		    padding-left: 0px;
 		}
 		 #media_mobile{
-	 	width: 1100px;
+	 	width: 1150px;
 	 	margin: auto;
 	 }
 	 	#mfont{
@@ -154,6 +163,12 @@
 			width: 130px;
 			font-size: 15px;
 		}
+		#consultForm_div{
+	    margin-bottom: 154px;
+	}
+	#consultForm{
+	 	padding-bottom: 216px;
+	 }	
 	}
 	
 	/* --------------------------------------------- */
@@ -239,6 +254,9 @@
 	
 	 #c{
 	 	height: 10px;
+	 }
+	 #h3_margin{
+	 	margin-top: 2px;
 	 }
 	 /*---------------------------------*/
 	 
@@ -365,11 +383,11 @@
 			<tr>
 			<td width="500">
 		         <div class="row" id="c">
-		         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		         &nbsp;&nbsp;&nbsp;
 		            <div class="col-md-1.8">
 						<input type="text" name="startDate" id="startDate">
 		            </div>
-		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		              <h3 id="h3_margin"> &nbsp;&nbsp;- &nbsp;</h3>
 		            <div class="col-md-1.5">
 	      		 		<input type="text" name="endDate" id="endDate"> 
 		            </div>
@@ -385,7 +403,7 @@
 		
 	<form id="consultForm" name="consultForm">
 		<input type="hidden" id="cbno" name="cbno"/>
-		<div class="container" class="table">
+		<div class="container" id="consultForm_div" style="height: 390px;" >
 		<table align="center" class="table">
 			<colgroup>
 				<col width="120px"/>

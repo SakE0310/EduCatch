@@ -87,10 +87,20 @@
 			font-size: 10px;
 		}
 		.media_mobile_td{
-			display: none;
+			display: table-column-group;
 		}
-		
+		.media_mobile_td_font{
+			font-size: 13px;
+		}
+		#pageForm_div{
+	    padding: 0px;
+		}
+		#pageForm{
+	 	padding-bottom: 300px;
+	 }	
 	}
+	
+
 	
 	/* Tablet (가로폭 768px 이상, 1023px 이하) */
 	@media all and (min-width:768px) and (max-width:1023px) {
@@ -119,6 +129,9 @@
     	height: 35px;
 	    padding-left: 10px;
 	}
+	#pageForm{
+	 	padding-bottom: 400px;
+	 }	
 	}
 	
 	/* PC Desktop (가로폭 1024 이상) */
@@ -139,7 +152,7 @@
 		    padding-left: 0px;
 		}
 		 #media_mobile{
-	 	width: 1100px;
+	 	width: 1140px;
 	 	margin: auto;
 	 }
 	 	#mfont{
@@ -151,9 +164,15 @@
 	.gj-textbox-md {
 			width: 130px;
 			font-size: 15px;
-		}
+		
 	}
-	
+	#pageForm_div{
+	    margin-bottom: 154px;
+	}
+	#pageForm{
+	 	padding-bottom: 216px;
+	 }	
+	}	
 	/* --------------------------------------------- */
 
 	#nno_color{
@@ -219,12 +238,13 @@
 	/*데이트 피커*/
 	.gj-textbox-md{ 
 		border: 1px solid #140C40;
-		
+		height: 30px;
 	}
 	
-	.gj-icon{
-			color : #140C40;
-		}
+	.gj-icon {
+	    color: #140C40;
+	    margin-left: 7px;
+	}
 		
 	.gj-textbox-md {
    			height: 30px;
@@ -238,8 +258,18 @@
 	 #c{
 	 	height: 10px;
 	 }
+	  #h3_margin{
+	 	margin-top: 2px;
+	 }
+	  #media_mobile_td_margin{
+	 	padding-left: 0px;
+	 }
+	
 	 /*---------------------------------*/
 	 
+	 a{
+	 	color: black;
+	 }
 	
 </style>
 
@@ -361,11 +391,11 @@
 			<tr>
 				<td width="500">
 		         <div class="row" id="c">
-		         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		         &nbsp;&nbsp;&nbsp;
 		            <div class="col-md-1.8">
 						<input type="text" name="startDate" id="startDate">
 		            </div>
-		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		             <h3 id="h3_margin"> &nbsp;&nbsp;- &nbsp;</h3>
 		            <div class="col-md-1.5">
 	      		 		<input type="text" name="endDate" id="endDate"> 
 		            </div>
@@ -381,13 +411,13 @@
 
 	<form id="pageForm" name="pageForm">
       <input type="hidden" id="rbno" name="rbno"/>
-	  <div  class="container" style="height: 390px;">
+	  <div  class="container" id="pageForm_div" style="height: 390px;">
       	<table align="center" class="table">
          <colgroup>
 	            <col width="120px"/>
 	            <col width="120px"/>
 	            <col width="600px"/>
-	            <col width="120px"/>
+	            <col width="150px"/>
 	            <col width="120px"/>
          </colgroup>
          <thead id="table_head">   
@@ -485,8 +515,6 @@
       	</table>
    </div>
 </form>
-</div>
-<div style="height: 900px">
 </div>
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>

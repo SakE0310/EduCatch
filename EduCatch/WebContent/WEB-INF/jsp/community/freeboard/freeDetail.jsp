@@ -14,7 +14,6 @@ if(hs != null){
 }
 %>
 <meta charset="UTF-8">
-<title>상세정보조회</title>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -159,9 +158,9 @@ function listClick(){
 				<jsp:param name="fbname" value="<%=freevo.getFbname()  %>"/>
 				<jsp:param name="mname" value="<%=mvo.getMname()  %>"/>
 			</jsp:include>
-		<table style="margin-left: auto; margin-right: 400px;" border="0">
+		<table align="center" border="0">
 			<tr align="center">
-				<td colspan="3" align="right">
+				<td colspan="3" align="center">
 				<%
 					if(mvo !=null){
 						if(mvo.getMno().equals(freevo.getMember_mno())){

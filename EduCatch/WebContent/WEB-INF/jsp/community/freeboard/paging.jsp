@@ -99,7 +99,7 @@
 %>
 <!-- 2번 페이지를 누를 경우 이 경로로 넘어간다 /testServlet/lmc?ISUD_TYPE=SALL&curPage=2 
 2번페이지를 누른다고 가정하면 쿼리스트링 curPage는 2와 SALL을 가지고 controller에 SALL로 이동-->
-	[<a href="<%=url%>?curPage=<%=linkPage%>&pno=P001&startDate=<%=startDate%>&endDate=<%=endDate%>&searchFilter=<%=searchFilter%>&keyword=<%=keyword%>" style="color:black;"><%=linkPage%></a>]&nbsp;
+	<a href="<%=url%>?curPage=<%=linkPage%>&pno=P001&startDate=<%=startDate%>&endDate=<%=endDate%>&searchFilter=<%=searchFilter%>&keyword=<%=keyword%>" style="color:black;"><%=linkPage%></a>&nbsp;
 <%
 		}
 		

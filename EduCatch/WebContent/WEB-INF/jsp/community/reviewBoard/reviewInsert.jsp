@@ -20,11 +20,10 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <!-- 테이블 부트스트랩 -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
 	.starR1{
 	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
@@ -46,6 +45,26 @@
 	}
 	.starR1.on{background-position:0 0;}
 	.starR2.on{background-position:-15px 0;}
+	
+	.btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #140C40;
+	    color: #ffffff;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
+		}
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	}	
+	#margin_div{
+		margin-bottom:38px; 
+	}
 </style>
 <!-- SmartEditor를 사용하기 위해서 다음 js파일을 추가 (경로 확인) -->
 <script src ="/EduCatch/assets/js/service/HuskyEZCreator.js"></script>
@@ -154,12 +173,12 @@
 		<input type="hidden" id="mno" name="mno" value="<%= mvo.getMno()%>">
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
-				<td align="center"><h1>REVIEW</h1></td>
+				<td align="center"><h1>후기게시판</h1></td>
 			</tr>
 			</table>
 			<hr>
 		</div>
-		<table style="width: 90%" border="1" align="center" class="table">
+		<table style="width: 90%" border="1" align="center"class="table">
 			<tr>
 				<td style="width: 100px">제목</td>
 				<td><input type="text" id="rbsubject" name="rbsubject" placeholder="제목을 입력하세요"
@@ -205,7 +224,7 @@
 				%>
 				<td><input type="text"  id="aname" name="aname" placeholder="학원명을 입력하세요"
 					style="width: 90%" />
-					<input type="button"  id="searchAcademy" value="검색" />
+					<input type="button"  id="searchAcademy" value="검색" class=" btn_light btn_box_01" />
 				</td>
 				<%
 					//}
@@ -225,8 +244,8 @@
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="save" value="등록" />
-				 <input type="reset" value="취소" /> 
+				 <input type="button" id="save" value="등록" class=" btn_light btn_box_01" />
+				 <input type="reset" value="취소" class=" btn_light btn_box_01" /> 
 				</td>
 			</tr>
 		</table>

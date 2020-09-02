@@ -27,6 +27,28 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<style type="text/css">
+.btn_light {
+	    display: inline-block;
+	    text-align: center;
+	    background: #140C40;
+	    color: #ffffff;
+	    vertical-align: middle;
+	    cursor: pointer;
+	    border: 1px solid #140C40;
+	    height: 30px;
+	    font-size: 15px;
+	     border-radius: 0.5em;
+		}
+	.btn_box_01 {
+	    width: auto;
+	    padding: 3px 10px;
+	}	
+	#margin_div{
+		margin-bottom:38px; 
+	}
+
+</style>
 <script type="text/javascript">
 	var oEditors = [];
 	$(function() {
@@ -86,7 +108,7 @@
 		<div>
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
 			<tr>
-				<td align="center"><h1>REVIEW</h1></td>
+				<td align="center"><h1>후기게시판</h1></td>
 			</tr>
 			</table>
 			<hr>
@@ -128,8 +150,8 @@
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
-				 <input type="button" id="save" value="수정" />
-				 <input type="reset" value="취소" /> 
+				 <input type="button" id="save" value="수정" class=" btn_light btn_box_01" /> 
+				 <input type="reset" value="취소" class=" btn_light btn_box_01" /> 
 				</td>
 			</tr>
 		</table>

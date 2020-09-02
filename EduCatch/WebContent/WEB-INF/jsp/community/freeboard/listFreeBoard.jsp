@@ -9,6 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <title>자유게시판 목록</title>
+<jsp:include page="../../../../top.jsp" flush="true">
+		<jsp:param value="" name=""/>
+	</jsp:include>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,12 +40,12 @@
 			display: none;
 		}
 		.nice-select{
-		    width: 30px;
+		    width: 50px;
 		    height: 35px;
 		    padding-left: 0px;
 		}
 		#keyword{
-		    width: 70px;
+			width: 90px;
 			height: 32px;
 		}
 		.btn_light {
@@ -81,12 +84,20 @@
 			font-size: 10px;
 		}
 		.media_mobile_td{
-			display: none;
+			display: table-column-group;
 		}
-		#media_mobile_td_margin{
-			width: 50px;
+		.media_mobile_td_font{
+			font-size: 13px;
 		}
+		#pageForm_div{
+	    padding: 0px;
+		}
+		#freeBoardForm{
+	 	padding-bottom: 300px;
+	 }	
 	}
+	
+
 	
 	/* Tablet (가로폭 768px 이상, 1023px 이하) */
 	@media all and (min-width:768px) and (max-width:1023px) {
@@ -115,6 +126,9 @@
     	height: 35px;
 	    padding-left: 10px;
 	}
+	#freeBoardForm{
+	 	padding-bottom: 400px;
+	 }	
 	}
 	
 	/* PC Desktop (가로폭 1024 이상) */
@@ -131,11 +145,11 @@
 		}
 		.nice-select{
 		    width: 70px;
-		   height: 32px;
+		    height: 35px;
 		    padding-left: 0px;
 		}
 		 #media_mobile{
-	 	width: 1180px;
+	 	width: 1140px;
 	 	margin: auto;
 	 }
 	 	#mfont{
@@ -144,15 +158,21 @@
 	 #keyword{
 			width:200px; 
 	}
-	
 	.gj-textbox-md {
 			width: 130px;
 			font-size: 15px;
-		}
+		
 	}
-	/*-----------------------------------*/
+	#pageForm_div{
+	    margin-bottom: 154px;
+	}
+	#freeBoardForm{
+	 	padding-bottom: 290px;
+	 }	
+	}	
+	/* --------------------------------------------- */
 
-	#nno_color{
+	#fbno_color{
 		color: black;
 	}
 	
@@ -170,7 +190,7 @@
 	    border: 1px solid #140C40;
 	    height: 30px;
 	    font-size: 15px;
-	    border-radius: 0.5em;
+	     border-radius: 0.5em;
 		}
 	.btn_box_01 {
 	    width: auto;
@@ -180,6 +200,7 @@
 	    float: right;
 	    margin: 20px 0px 0;
 	    text-align: left;
+	   
 	}
 	.bbs-link {
    	 position: relative;
@@ -208,18 +229,22 @@
 	#keyword{
 			height:30px;
 			border: 1px solid #140C40;
-			border-radius: 0.5em;
+			 border-radius: 0.5em;
 		}
-	
 		
 	/*데이트 피커*/
-	.gj-icon{
-			color : #140C40;
-		}
+	.gj-textbox-md{ 
+		border: 1px solid #140C40;
+		height: 30px;
+	}
+	
+	.gj-icon {
+	    color: #140C40;
+	   margin-left: 7px;
+	}
 		
 	.gj-textbox-md {
    			height: 30px;
-   			border: 1px solid #140C40;
 		}
 	.gj-datepicker-md [role="right-icon"] {
 	    left: 3px;
@@ -230,8 +255,26 @@
 	 #c{
 	 	height: 10px;
 	 }
+	  #h3_margin{
+	 	margin-top: 2px;
+	 	font-weight: bold;
+	 }
+	  #media_mobile_td_margin{
+	 	padding-left: 0px;
+	 }
 	
-		
+	 /*---------------------------------*/
+	 
+	 a{
+	 	color: black;
+	 }
+	 #td_width {
+    width: 500px;
+    height: 70px;
+    }
+   th {
+    text-align: center; 
+    }
 	
 </style>
 
@@ -346,9 +389,7 @@
   });//end of ready()
 	
 </script>
-	<jsp:include page="../../../../top.jsp" flush="true">
-		<jsp:param value="" name=""/>
-	</jsp:include>
+	
 </head>
 <body>
 <%	
@@ -374,19 +415,19 @@
 	<form id="searchForm" name="searchForm">
 		<table border="0" cellpadding="1" cellspacing="1" align="left">
 			<tr>	
-				<td align="center" id = "mfont">자유게시판</h4>
+				<td align="center" id = "mfont"><h4>자유게시판</h4>
 				<br>
 				<br>
 				</td>
 			</tr>
 			<tr>
-				<td width="500">
+				<td id="td_width">
 		         <div class="row" id="c">
-		            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		            &nbsp;&nbsp;&nbsp;
 		            <div class="col-md-1.8">
 						<input type="text" name="startDate" id="startDate">
 		            </div>
-		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		            <h3 id="h3_margin"> &nbsp;&nbsp;- &nbsp;</h3>	
 		            <div class="col-md-1.5">
 	      		 		<input type="text" name="endDate" id="endDate"> 
 		            </div>
@@ -397,8 +438,6 @@
 			</tr>
 		</table>
 		</form>
-		<br>
-		<br>	
 	</div>	
 <form id="freeBoardForm" name="freeBoardForm" >
 	<div class="container" style="height: 390px;">
@@ -410,12 +449,12 @@
 				<col width="100px"/>
 			</colgroup>
 			<thead id="table_head">
-				<tr>
-					<th>글번호</th>
-					<th>제목</th>
-					<th>작성자</th>
+				<tr align="center">
+					<th align="center"class ="table_head_font">글번호</th>
+					<th align="center" class ="table_head_font">제목</th>
+					<th align="center" class ="table_head_font">작성자</th>
 					<!-- th>첨부파일</th> -->
-					<th>작성일</th>
+					<th align="center" class ="table_head_font">작성일</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -437,7 +476,7 @@
 			%>
 					<tr>			
 						<td align="center"><%=freevo.getFbno() %></td>					
-						<td align="center"><a href="selectfreeboardDetail.ec?fbno=<%=freevo.getFbno() %>" style="color:blue;"><%=freevo.getFbsubject() %></a></td>
+						<td align="center"><a href="selectfreeboardDetail.ec?fbno=<%=freevo.getFbno() %>" id="fbno_color"><%=freevo.getFbsubject() %></a></td>
 						<td align="center"><%=freevo.getFbname() %></td>
 						<!-- td align="center"><%=freevo.getFbcontent() %></td -->
 						<!-- td align="center"><%=freevo.getFbimg() %></td> -->
@@ -487,7 +526,7 @@
 					
 					<td colspan="2" align="right">
 					<input type="button" id="insertboard" name="insertboard" class=" btn_light btn_box_01"
-					value="[글쓰기]"/>
+					value="글쓰기"/>
 					</td>
 			</tr>
 			</tbody>
@@ -495,33 +534,7 @@
 		</div>
 	</form>
 		<br>
-		<!-- 검색 폼  -->
-		<!-- 
-	<div>
-		<form id="searchForm" name="searchForm">
-		<div id="mainWrapper" align="center">
-		<div align = "center" style="width:700px">	
-			<table border="0" cellpadding="1" cellspacing="1" align="center">
-			<tr>
-			<td width="500">
-				<div class="row">
-					<div class="col-md-1.8">
-						<input type="text" name="startDate" id="startDate">
-					</div>
-					 <h3> &nbsp;&nbsp;- &nbsp;</h3>
-					 <div class="col-md-1.5">
-					 	<input type="text" name="endDate" id="endDate">
-					 </div>
-					  &nbsp;&nbsp; <input type="button" id="searchPiker" value="검색">
-				</div>
-			</td>
-			</tr>
-			</table>
-		</div>
-		</div>
-		</form>
-	</div>
-	 -->
+		
 		<br><br><br>
 	<jsp:include page="../../../../footer.jsp" flush="true">
 	<jsp:param value="" name=""/>

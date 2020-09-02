@@ -431,7 +431,7 @@ textarea {
                   <td class="tdd">
                	  <div style="weight: 300; height: 50;">
                      <textarea name="recontent" id="recontent" style="padding:10px; min-width: 260px;" placeHolder="댓글을 입력해주세요."></textarea>
-                     <input type="button" class="btn_light btn_box_02" id="replyInsert" value="등록" style="vertical-align:middle;"/>
+                     <input type="button" class="btn_light btn_box_02" id="replyInsert" value="등록" style="vertical-align:middle; margin-bottom: 50px;" />
                      <input type="hidden" id="reno" name="reno"/>
                   </div>
                   </td>

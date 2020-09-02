@@ -85,10 +85,20 @@
 			font-size: 10px;
 		}
 		.media_mobile_td{
-			display: none;
+			display: table-column-group;
 		}
-		
+		.media_mobile_td_font{
+			font-size: 13px;
+		}
+		#consultForm_div{
+	    padding: 0px;
+		}
+		#consultForm{
+	 	padding-bottom: 300px;
+	 }	
 	}
+	
+
 	
 	/* Tablet (가로폭 768px 이상, 1023px 이하) */
 	@media all and (min-width:768px) and (max-width:1023px) {
@@ -117,6 +127,9 @@
     	height: 35px;
 	    padding-left: 10px;
 	}
+	#consultForm{
+	 	padding-bottom: 400px;
+	 }	
 	}
 	
 	/* PC Desktop (가로폭 1024 이상) */
@@ -137,7 +150,7 @@
 		    padding-left: 0px;
 		}
 		 #media_mobile{
-	 	width: 1100px;
+	 	width: 1150px;
 	 	margin: auto;
 	 }
 	 	#mfont{
@@ -150,6 +163,12 @@
 			width: 130px;
 			font-size: 15px;
 		}
+		#consultForm_div{
+	    margin-bottom: 154px;
+	}
+	#consultForm{
+	 	padding-bottom: 216px;
+	 }	
 	}
 	
 	/* --------------------------------------------- */
@@ -227,7 +246,7 @@
 	.gj-textbox-md {
    			height: 30px;
 		}
-	.gj-datepicker-md [role="right-icon"] {
+	.gj-datepicker-md [role="right-icon"] {2
 	    left: 3px;
    		top: 3px;
   	 }
@@ -236,7 +255,14 @@
 	 #c{
 	 	height: 10px;
 	 }
+	 #h3_margin{
+	 	margin-top: 2px;
+	 }
 	 /*---------------------------------*/
+	 
+	 a{
+	 	color: black;
+	 }
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -353,11 +379,11 @@
 			<tr>
 			<td width="500">
 		         <div class="row" id="c">
-		         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		         &nbsp;&nbsp;&nbsp;
 		            <div class="col-md-1.8">
 						<input type="text" name="startDate" id="startDate">
 		            </div>
-		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		              <h3 id="h3_margin"> &nbsp;&nbsp;- &nbsp;</h3>
 		            <div class="col-md-1.5">
 	      		 		<input type="text" name="endDate" id="endDate"> 
 		            </div>
@@ -373,7 +399,7 @@
 		
 	<form id="consultForm" name="consultForm">
 		<input type="hidden" id="cbno" name="cbno"/>
-		<div class="container" class="table">
+		<div class="container" id="consultForm_div" style="height: 390px;" >
 		<table align="center" class="table">
 			<colgroup>
 				<col width="120px"/>

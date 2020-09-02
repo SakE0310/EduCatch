@@ -124,6 +124,9 @@
     	height: 35px;
 	    padding-left: 10px;
 	}
+	#noticeForm{
+	 	padding-bottom: 270px;
+	 }	 
 	}
 	
 	/* PC Desktop (가로폭 1024 이상) */
@@ -224,16 +227,14 @@
 	/*데이트 피커*/
 	.gj-textbox-md{ 
 		border: 1px solid #140C40;
-		
+			height: 30px;
 	}
 	
-	.gj-icon{
-			color : #140C40;
-		}
+	.gj-icon {
+	    color: #140C40;
+	    margin-left: 7px;
+	}
 		
-	.gj-textbox-md {
-   			height: 30px;
-		}
 	.gj-datepicker-md [role="right-icon"] {
 	    left: 3px;
    		top: 3px;
@@ -404,7 +405,7 @@
 			<tr>
 				<td width="500">
 		         <div class="row" id="c">
-		            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		            &nbsp;&nbsp;&nbsp;
 		            <div class="col-md-1.8">
 						<input type="text" name="startDate" id="startDate">
 		            </div>

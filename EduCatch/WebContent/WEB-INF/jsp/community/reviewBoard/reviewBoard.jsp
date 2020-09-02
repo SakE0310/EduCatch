@@ -92,6 +92,12 @@
 		.media_mobile_td_font{
 			font-size: 13px;
 		}
+		#pageForm_div{
+	    padding: 0px;
+		}
+		#pageForm{
+	 	padding-bottom: 300px;
+	 }	
 	}
 	
 
@@ -123,6 +129,9 @@
     	height: 35px;
 	    padding-left: 10px;
 	}
+	#pageForm{
+	 	padding-bottom: 400px;
+	 }	
 	}
 	
 	/* PC Desktop (가로폭 1024 이상) */
@@ -143,7 +152,7 @@
 		    padding-left: 0px;
 		}
 		 #media_mobile{
-	 	width: 1100px;
+	 	width: 1140px;
 	 	margin: auto;
 	 }
 	 	#mfont{
@@ -155,15 +164,17 @@
 	.gj-textbox-md {
 			width: 130px;
 			font-size: 15px;
-		}
+		
 	}
-	
+	#pageForm_div{
+	    margin-bottom: 154px;
+	}
+	#pageForm{
+	 	padding-bottom: 216px;
+	 }	
+	}	
 	/* --------------------------------------------- */
 
-	#nno_color{
-		color: black;
-	}
-	
 	#table_head{
 		border-collapse: collapse;
 		background-color: #F5F5F5;
@@ -223,12 +234,13 @@
 	/*데이트 피커*/
 	.gj-textbox-md{ 
 		border: 1px solid #140C40;
-		
+		height: 30px;
 	}
 	
-	.gj-icon{
-			color : #140C40;
-		}
+	.gj-icon {
+	    color: #140C40;
+	    margin-left: 7px;
+	}
 		
 	.gj-textbox-md {
    			height: 30px;
@@ -242,6 +254,13 @@
 	 #c{
 	 	height: 10px;
 	 }
+	  #h3_margin{
+	 	margin-top: 2px;
+	 }
+	  #media_mobile_td_margin{
+	 	padding-left: 0px;
+	 }
+	
 	 /*---------------------------------*/
 	 
 	 a{
@@ -368,11 +387,11 @@
 			<tr>
 				<td width="500">
 		         <div class="row" id="c">
-		         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		        &nbsp;&nbsp;&nbsp;
 		            <div class="col-md-1.8">
 						<input type="text" name="startDate" id="startDate">
 		            </div>
-		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
+		             <h3 id="h3_margin"> &nbsp;&nbsp;- &nbsp;</h3>	
 		            <div class="col-md-1.5">
 	      		 		<input type="text" name="endDate" id="endDate"> 
 		            </div>
@@ -388,13 +407,13 @@
 
 	<form id="pageForm" name="pageForm">
       <input type="hidden" id="rbno" name="rbno"/>
-	  <div  class="container" class="table">
+	  <div  class="container"id="pageForm_div" style="height: 390px;" >
       	<table align="center" class="table">
          <colgroup>
 	            <col width="120px"/>
 	            <col width="400px"/>
 	            <col width="600px"/>
-	            <col width="120px"/>
+	            <col width="150px"/>
 	            <col width="120px"/>
          </colgroup>
          <thead id="table_head">   
@@ -467,7 +486,7 @@
 		
 %>
 	<tr id ="media_mobile_tr">
-		<td colspan="3" align="left">
+		<td colspan="3" align="left"  id ="media_mobile_td_margin" >
          <select name="searchFilter" id ="searchFilter">
             <option value="제목">제목</option>
             <option value="내용">내용</option>
