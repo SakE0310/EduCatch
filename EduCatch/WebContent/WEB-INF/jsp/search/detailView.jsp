@@ -99,6 +99,12 @@
   color: #fff;
   padding: 20px;
 }
+#section-5 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
 
 #actb{
 	font-size: 12px;
@@ -116,7 +122,7 @@
 }
 .nav-menu-item {
     display: block;
-    padding: 0 17px;
+    padding: 0 3px;
     color: #fff;
     text-decoration: none;          
 }
@@ -202,6 +208,12 @@
   color: #fff;
   padding: 20px;
 }
+#section-5 {
+  height: auto;
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+}
 #actb{
 }
 .nav {
@@ -217,7 +229,7 @@
 }
 .nav-menu-item {
     display: block;
-    padding: 0 106px;
+    padding: 0 79px;
     color: #fff;
     text-decoration: none;          
 }
@@ -958,8 +970,9 @@ body {
 		        <ul class="nav-menu">
 		            <li><a class="nav-menu-item" href="#section-1">기본정보</a></li>
 		            <li><a class="nav-menu-item" href="#section-2">수업정보</a></li>
-		            <li><a class="nav-menu-item" href="#section-3">편의기능</a></li>
-		            <li><a class="nav-menu-item" href="#section-4">수강후기</a></li>
+		            <li><a class="nav-menu-item" href="#section-3">학원예약</a></li>
+		            <li><a class="nav-menu-item" href="#section-4">편의기능</a></li>
+		            <li><a class="nav-menu-item" href="#section-5">수강후기</a></li>
 		        </ul>
 		    </nav>
 
@@ -1240,7 +1253,7 @@ body {
 			</div>
     </section>
     <%-- 본문내용예약 --%>
-    <section id="section-4">
+    <section id="section-3">
     <hr id="hhr">
         <h1>학원예약</h1><br><br>
         <div class="container">
@@ -1269,7 +1282,7 @@ body {
     </section>
 	
 	<%-- 탭 본문내용3 div --%>
-    <section id="section-3">
+    <section id="section-4">
     <hr id="hhr">
         <h1>편의기능</h1>
 			<br><br>
@@ -1329,7 +1342,7 @@ body {
     
     
     <%-- 탭 본문내용4 div --%>
-    <section id="section-4">
+    <section id="section-5">
     <hr id="hhr">
     	<div class="container">
        			 <h1>수강후기</h1>
