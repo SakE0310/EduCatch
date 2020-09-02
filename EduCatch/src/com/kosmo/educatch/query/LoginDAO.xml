@@ -24,10 +24,10 @@
 							
 		FROM MEMBER A
 		WHERE A.MID = #{mid} and A.MDELETEYN='N'
-		<if test="msnsid !=''">
+		<if test="msnsid !=null and msnsid !=''">
 			<![CDATA[AND A.MSNSID=#{msnsid,jdbcType=VARCHAR}]]>
 		</if>
-		<if test="msnsid == ''">
+		<if test="msnsid == null">
 			<![CDATA[AND A.MPW=#{mpw,jdbcType=VARCHAR}]]>
 		</if>
 	</select>
