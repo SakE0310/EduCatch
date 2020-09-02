@@ -14,7 +14,6 @@
 	$(document).ready(function(){
 		$("#join").click(function(){
 			
-			alert("일반 회원가입");
 			$("#loginForm").attr("action","joinCheckForm.ec")
 			$("#loginForm").submit();
 			
@@ -22,7 +21,6 @@
 		
 		$("#academymem").click(function(){
 			
-			alert("관리자 회원가입");
 			$("#loginForm").attr("action","academyJoinForm.ec")
 			$("#loginForm").submit();
 			
@@ -255,8 +253,10 @@
 										url : '/v2/user/me',
 										success : function(res) {
 											alert(JSON.stringify(res))
+											console.log(res.id);
 											console.log(res.properties.nickname);
 											console.log(res.kakao_account.email);
+											id = res.id;
 											name = res.properties.nickname;
 											email = res.kakao_account.email;
 											$
@@ -265,6 +265,7 @@
 														type : "GET",
 														dataType : "JSON",
 														data : {
+															msnsid : id,
 															mid : email
 														},
 														success : function(data) {
@@ -272,17 +273,21 @@
 															if (data > 0) {
 																//이미 회원이 있음
 																alert("이미 회원이십니다.");
+																location.href = "http://localhost:8088/EduCatch/loginCheck.ec?msnsid="+id+"&mid="+email
+																				+"&msnstype=k"
 															} else {
 																// 회원이 없음
 																var emailSplit = email
 																		.split('@');
 																location.href = "http://localhost:8088/EduCatch/memberjoinform.ec?mname="
 																		+ name
+																		+ "&msnsid="
+																		+ id
 																		+ "&emailname="
 																		+ emailSplit[0]
 																		+ "&emailaddr="
 																		+ emailSplit[1]
-																		+"&msnstype=k"
+																		+ "&msnstype=k"
 															}
 														},
 														error : function(request,

@@ -13,6 +13,8 @@
 	INSERT INTO MEMBER(
 		MNO,
 		MID,
+		MSNSTYPE,
+		MSNSID,
 		MPW,             
         MNAME,            
         MTEL,             
@@ -30,6 +32,8 @@
 	)VALUES(
 		#{mno, jdbcType=VARCHAR},
 		#{mid, jdbcType=VARCHAR},
+		#{msnstype, jdbcType=VARCHAR},
+		#{msnsid, jdbcType=VARCHAR},
 		#{mpw, jdbcType=VARCHAR},
 		#{mname, jdbcType=VARCHAR},
 		#{mtel, jdbcType=VARCHAR},
@@ -51,16 +55,20 @@
 <update id="memberUpdate" parameterType="member">
 	UPDATE MEMBER
 	SET MEMAILCHK='Y'
-	<![CDATA[
 	WHERE MDELETEYN='N'
 	AND MEMAILCHK=#{memailchk}
 	AND MID=#{mid}
-	]]>
+	<if test="msnsid !=''">
+		<![CDATA[AND MSNSID=#{msnsid,jdbcType=VARCHAR}]]>
+	</if>
 </update>
 
 <select id="memberCheck" parameterType="member" resultType="member">
 	SELECT * FROM MEMBER
 		WHERE MID = #{mid,jdbcType=VARCHAR}
-		AND   MDELETEYN = 'N'
+		AND MDELETEYN = 'N'
+		<if test="msnsid !='' and msnstype=='k'">
+			<![CDATA[AND MSNSID=#{msnsid,jdbcType=VARCHAR}]]>
+		</if>
 </select>
 </mapper>

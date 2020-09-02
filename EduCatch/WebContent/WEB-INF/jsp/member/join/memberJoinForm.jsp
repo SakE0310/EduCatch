@@ -349,6 +349,8 @@ function idCheck(){
 <br><br><br>
 	<div class="container">
 	<form name="memberjoin" id="memberjoin" method="get">
+	<input type="hidden" id="msnsid" name="msnsid" value="${param.msnsid}">
+	<input type="hidden" id="msnstype" name="msnstype" value="${param.msnstype}">
 		<table align="center"  class="table table-condensed">
 				<div align="center">
 					<h1 class="memberin">회원가입</h1>

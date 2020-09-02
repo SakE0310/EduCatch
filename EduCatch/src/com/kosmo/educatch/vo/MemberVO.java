@@ -5,6 +5,7 @@ public class MemberVO extends AcademyVO{
 		//로그인
 		private String mno;
 		private String msnstype;
+		private String msnsid;
 		private String mid;
 		private String mpw;
 		private String mname;
@@ -20,10 +21,8 @@ public class MemberVO extends AcademyVO{
 		private String mdeleteyn;
 		private String minsertdate;
 		private String mupdatedate;
+
 		
-
-
-
 		public MemberVO() {
 		}
 
@@ -32,8 +31,6 @@ public class MemberVO extends AcademyVO{
 			
 		}
 		
-	
-
 		public void setMno(String mno) {
 			this.mno = mno;
 			
@@ -47,6 +44,16 @@ public class MemberVO extends AcademyVO{
 			this.msnstype = msnstype;
 		}
 		
+		
+		
+		public String getMsnsid() {
+			return msnsid;
+		}
+
+		public void setMsnsid(String msnsid) {
+			this.msnsid = msnsid;
+		}
+
 		
 		public String getMid() {
 			return mid;

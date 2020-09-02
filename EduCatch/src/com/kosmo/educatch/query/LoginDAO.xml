@@ -23,7 +23,13 @@
 			A.MUPDATEDATE AS MUPDATEDATE
 							
 		FROM MEMBER A
-		WHERE A.MID = #{mid} and A.MPW = #{mpw} and A.MDELETEYN='N'
+		WHERE A.MID = #{mid} and A.MDELETEYN='N'
+		<if test="msnsid !=''">
+			<![CDATA[AND A.MSNSID=#{msnsid,jdbcType=VARCHAR}]]>
+		</if>
+		<if test="msnsid == ''">
+			<![CDATA[AND A.MPW=#{mpw,jdbcType=VARCHAR}]]>
+		</if>
 	</select>
 	
 	<select id="emailCheckID" parameterType="member" resultType="String">

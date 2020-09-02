@@ -69,7 +69,12 @@ public class MemberJoinController {
 		String mid = memail0 +"@"+ memail1;
 		param.setMid(mid);
 		
+		String msnsid = param.getMsnsid();
+		String msnstype = param.getMsnstype();
+		
 		log.info("회원번호"+param.getMno());
+		log.info("**snsid"+msnsid);
+		log.info("**snstype"+msnstype);
 		log.info("아이디(이메일)"+param.getMid());
 		log.info("비밀번호"+param.getMpw());
 		log.info("회원이름"+param.getMname());
@@ -91,7 +96,7 @@ public class MemberJoinController {
 		log.info("result>>"+result);
 		
 		//이메일 발송
-		sendAuthMail(mid, memailchk, mid);
+		sendAuthMail(memailchk, mid, msnsid, msnstype);
 		
 		//난수 발생 및 이메일 발송
 		//String memailchk = sendAuthMail(mid, memailchk);
@@ -152,19 +157,19 @@ public class MemberJoinController {
 //		return sb.toString();
 //	}
 	//인증메일 보내기
-	public void sendAuthMail(String email, String memailchk, String mid){
+	public void sendAuthMail(String memailchk, String mid, String msnsid, String msnstype){
 		log.info("이메일보내기함수 sendAuthMail() 시작");
 		
 		
 		String mailcontent = "<h1>[이메일 인증]</h1><br>" +
 				"<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>"+
-				"<a href='http://localhost:8088/EduCatch/memberupdate.ec?memailchk="+memailchk+"&mid="+mid+"'>이메일 인증확인</a>";
+				"<a href='http://localhost:8088/EduCatch/memberupdate.ec?memailchk="+memailchk+"&mid="+mid+"&msnsid="+msnsid+"&msnstype="+msnstype+"'>이메일 인증확인</a>";
 		try {
 			MimeMessage mailmessage = mailSender.createMimeMessage();
 			MimeMessageHelper helper;
 			helper = new MimeMessageHelper(mailmessage, true,"utf-8");
 			helper.setFrom(new InternetAddress("educatch2020@gmail.com"));
-			helper.setTo(new InternetAddress(email));
+			helper.setTo(new InternetAddress(mid));
 			helper.setSubject("[EduCatch]회원가입 이메일인증");
 			helper.setText(mailcontent,true);
 			mailSender.send(mailmessage);
@@ -202,6 +207,7 @@ public class MemberJoinController {
 	public int memberCheck(@ModelAttribute MemberVO param) {
 		log.info("memberCheck함수 진입");
 		log.info("email/mid>>>" + param.getMid());
+		log.info("msnsid>>>" + param.getMsnsid());
 		List<MemberVO> mcList = memberjoinservice.memberCheck(param);
 		log.info("조회된 개수>>>" + mcList.size());
 		Map<String, Object> m = new HashMap<String, Object>();
