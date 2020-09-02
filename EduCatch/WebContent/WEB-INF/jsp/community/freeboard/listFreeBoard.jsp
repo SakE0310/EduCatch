@@ -8,10 +8,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판 목록</title>
 <jsp:include page="../../../../top.jsp" flush="true">
-		<jsp:param value="" name=""/>
-	</jsp:include>
+<jsp:param value="" name=""/>
+</jsp:include>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -536,8 +535,8 @@
 		<br>
 		
 		<br><br><br>
-	<jsp:include page="../../../../footer.jsp" flush="true">
-	<jsp:param value="" name=""/>
-	</jsp:include>
+<jsp:include page="../../../../footer.jsp" flush="true">
+<jsp:param value="" name=""/>
+</jsp:include>
 </body>
 </html>

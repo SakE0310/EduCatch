@@ -140,7 +140,7 @@
 		     padding-left: 14px;
 		}
 		 #media_mobile{
-	 	width: 1140px;
+	 	width: 1150px;
 	 	margin: auto;
 	 }
 	 	#mfont{
@@ -228,6 +228,7 @@
 	
 	.gj-icon{
 			color : #140C40;
+			  margin-left: 7px;
 		}
 		
 	.gj-textbox-md {
