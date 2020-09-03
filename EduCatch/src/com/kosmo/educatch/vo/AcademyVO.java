@@ -17,6 +17,16 @@ public class AcademyVO extends SearchVO{
 	private String ainsertdate;
 	private String aupdatedate;
 	private String agrade;
+	private String scrollPage;
+	
+	
+	public String getScrollPage() {
+		return scrollPage;
+	}
+	
+	public void setScrollPage(String scrollPage) {
+		this.scrollPage = scrollPage;
+	}
 	
 	public String getAgrade() {
 		return agrade;

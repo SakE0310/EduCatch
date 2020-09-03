@@ -97,7 +97,12 @@ public class SearchController {
 		String cminor = req.getParameter("cminor");
 		String aname = req.getParameter("aname");
 		String setDesc = req.getParameter("setDesc");
+		String scrollPage = req.getParameter("scrollPage");
 		
+		if(scrollPage!=null) {
+			log.info("search controller getAcaList scrollPage >>> "+scrollPage);
+		}
+		//필터 설정
 		if(setDesc!=null) {
 			log.info("search controller getAcaList setDesc not null >>> ");
 			if(setDesc.equals("리뷰 많은순")) {

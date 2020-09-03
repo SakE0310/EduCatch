@@ -22,7 +22,24 @@
  	</select>
 	
 	<select id="getAcaList" parameterType="academyview" resultType="academyview">
-	SELECT  COUNT(C.ANO) OVER() AS LISTCOUNT
+    SELECT
+            E.PAGENO AS PAGENO
+           ,E.LISTCOUNT AS LISTCOUNT
+           ,E.ANO AS ANO
+		   ,E.ANAME AS ANAME
+		   ,E.ATEL AS ATEL
+		   ,E.AADDR1 AS AADDR1
+		   ,E.AADDR2 AS AADDR2
+		   ,E.ALOGO AS ALOGO
+           ,E.AGRADE AS AGRADE
+		   ,E.CMAJOR AS CMAJOR
+		   ,E.CMINOR AS CMINOR
+		   ,E.AINSERTDATE AS AINSERTDATE
+		   ,E.AUPDATEDATE AS AUPDATEDATE
+           ,E.RVCOUNT AS RVCOUNT
+    FROM   (SELECT      
+            COUNT(C.ANO) OVER() AS LISTCOUNT
+           ,CEIL(ROW_NUMBER() OVER(ORDER BY C.ANO) / 10 ) AS PAGENO
 		   ,C.ANO AS ANO
 		   ,C.ANAME AS ANAME
 		   ,C.ATEL AS ATEL
@@ -69,6 +86,10 @@
 	<if test="aname!=null">
 	AND
 	<![CDATA[ C.ANAME LIKE '%'||#{aname}||'%' ]]>
+	</if>
+	) E
+    <if test="scrollPage!=null">
+	WHERE   E.PAGENO = #{scrollPage}
 	</if>
 	<if test="agrade!=null">
 	ORDER BY AGRADE DESC

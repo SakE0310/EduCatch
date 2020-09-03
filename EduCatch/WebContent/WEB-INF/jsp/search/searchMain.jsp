@@ -21,6 +21,13 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
+				
+				var start = {
+				        param : {
+				            scrollPage : 1,
+				        },
+					}
+				
 				//지역 함수
 				ajaxGetDistrict();
 				//카테고리 함수
@@ -49,16 +56,21 @@
 					var setCmajor = $('#cmajor').val(); //언어
 					var setCminor = $('#cminor').val(); //언어전체
 					var setAname = $('#aname').val(); //언어전체
+					var setDesc = "필터 설정";
 					console.log("click setDistrict >>> "+setDistrict);
 					console.log("click setCity >>> "+setCity);
 					console.log("click setCmajor >>> "+setCmajor);
 					console.log("click setCminor >>> "+setCminor);
 					console.log("click setAname >>> "+setAname);
-					ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor,setAname);
+					//스크롤 카운트 초기화
+					start.param.scrollPage = 1;
+					scrollPage = start.param.scrollPage;
+					console.log("start.param.scrollPage >>> "+scrollPage);
+					ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc,scrollPage);
 				});//search button function
 				
 				//call 함수호출 
-				function ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc){
+				function ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc,scrollPage){
 					console.log("ajaxGetAcaList setDistrict >>> "+setDistrict);
 					console.log("ajaxGetAcaList setCity >>> "+setCity);
 					console.log("ajaxGetAcaList setCmajor >>> "+setCmajor);
@@ -73,6 +85,7 @@
 							,"cminor" : setCminor
 							,"aname" : setAname
 							,"setDesc" : setDesc
+							,"scrollPage" : scrollPage
 							};
 					console.log("urls >>> "+urls);
 					console.log("datas >>> "+datas);
@@ -128,18 +141,85 @@
 							st += "</a>";
 							st += "</div>";
 						}
-					}//학원명이 없을시 if
+						//무한스크롤
+						$(window).on("scroll", function() {
+							var scrollHeight = $(document).height();
+							var scrollPosition = $(window).height() + $(window).scrollTop();		
+							var setAname = $("#aname").val();
+							console.log("aname >>> "+setAname);
+							if (scrollPosition > scrollHeight - 1) {
+								start.param.scrollPage++;
+								var scrollPage = start.param.scrollPage;
+								console.log(scrollPage);
+								ajaxScroll(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc,scrollPage);
+							}
+						});//무한스크롤
+					}//학원명이 있을시 if
 						$('.acaList').html(st);
 						$('.acaList').niceSelect('update');
 						console.log("done end >>> "+resParam);
-						selectDesc(setDistrict,setCity,setCmajor,setCminor,setAname);
+						selectDesc(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc,scrollPage);
 					}).fail(function(resParam){
 						alert("에러");
 					});					
 				}//ajaxGetAcaList
-
+				
+				//무한스크롤 ajax
+				function ajaxScroll(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc,scrollPage){
+					console.log("scroll setAname >>> "+setAname);
+					console.log("scroll setDesc >>> "+setDesc);
+					console.log("scroll scrollPage >>> "+scrollPage);
+					urls = "getAcaList.ec";
+					datas = {
+							 "district" : setDistrict
+							,"city" : setCity
+							,"cmajor" : setCmajor
+							,"cminor" : setCminor
+							,"aname" : setAname
+							,"setDesc" : setDesc
+							,"scrollPage" : scrollPage
+					};
+					$.ajax({
+						 data : datas
+					    ,url : urls
+					}).done(function(resParam){
+						console.log("done start >>> "+resParam);
+						var st = "";
+						console.log("acaList >>> "+resParam.acaList);
+						for(i in resParam.acaList){
+							var cmajor = resParam.acaList[i].cmajor;
+							var cminor = resParam.acaList[i].cminor;
+							var ano = resParam.acaList[i].ano;
+							var aname = resParam.acaList[i].aname;
+							var	alogo = resParam.acaList[i].alogo;
+							var aaddr1 = resParam.acaList[i].aaddr1;
+							var aaddr2 = resParam.acaList[i].aaddr2;
+							var agrade = resParam.acaList[i].agrade;
+							var rvcount = resParam.acaList[i].rvcount;
+							st += "<div class='panel panel-default'>";
+							st += "<a href='listDetailView.ec?ano="+ano+"' style='text-decoration:none'>";
+							st += "<div class='media'>";
+							st += "<div class='media-left'>";
+							st += "<img src='assets/img/academyLogo/"+alogo+"' class='media-object' style='width:125px; height:125px'>";
+							st += "</div>";
+							st += "<div class='media-body'>";
+							st += "<br><div class='title'><h4 class='media-heading'>"+aname+"</h4>&nbsp;&nbsp;&nbsp;<h5>#"+cmajor+"&nbsp;#"+cminor+"</h5></div>";
+							st += "<div><h5><img src='assets/img/Icon_location.png' style='width:15px; height:15px'>"+aaddr1+"</h5></div>";
+							st += "<div class='title'>&nbsp;<h4>평점 "+agrade+"</h4>";
+							st += "&nbsp;<h5>(평가  "+rvcount+"개)</h5></div>";
+							st += "</div>";
+							st += "</div>";
+							st += "</a>";
+							st += "</div>";
+							}
+						$('.acaList').append(st);
+						$('.acaList').niceSelect('update');
+					}).fail(function(resParam){
+						alert("scroll error");
+					});
+				}
 				//필터 설정
-				function selectDesc(setDistrict,setCity,setCmajor,setCminor,setAname){
+				function selectDesc(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc,setScrollPage){
 					console.log("selectDesc setDistrict >>> "+setDistrict);
 					console.log("selectDesc setCity >>> "+setCity);
 					console.log("selectDesc setCmajor >>> "+setCmajor);
@@ -150,42 +230,49 @@
 						console.log("select-desc selectDesc >>> "+selectDesc.setDistrict);
 						var setDesc = $('#desc').val();
 						console.log("setDesc >>> "+setDesc);
-						ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc);
+						ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc,setScrollPage);
 					});
 				}//selectDesc
 				
 				//학원명으로 엔터키 검색
-				$('#aname').keypress(function(event){
-					
-					console.log("enter click >>> ");
-					var setAname = $('#aname').val();
-					
-					if(event.which == 13){
+				$('#aname').keypress(function(key){
+					if(key.which == 13 && setAname!=""){
+						var setAname = $('#aname').val();
+						var setDesc = "필터 설정";
 						console.log("aname >>> "+setAname);
-						ajaxGetAname(setAname);
-					}else {
-						alert("학원명을 입력하세요");
+						//스크롤 카운트 초기화
+						start.param.scrollPage = 1;
+						scrollPage = start.param.scrollPage;
+						console.log("start.param.scrollPage >>> "+scrollPage);
+						ajaxGetAname(setAname,setDesc,scrollPage);
 					}
-				});
+				});//search enter
 				
 				//학원명으로 검색
 				$('#search-aname').click(function(){
 					var setAname = $('#aname').val();
+					var setDesc = "필터 설정";
 					if(setAname==""){
 						alert("학원명을 입력하세요");
 					}else{
 					console.log("aname >>> "+setAname);
-					ajaxGetAname(setAname);
+					//스크롤 카운트 초기화
+					start.param.scrollPage = 1;
+					scrollPage = start.param.scrollPage;
+					console.log("start.param.scrollPage >>> "+scrollPage);
+					ajaxGetAname(setAname,setDesc,scrollPage);
 					}//학원명 입력 유무
 				});//search aname button function
 				
-				function ajaxGetAname(setAname,setDesc){
+				function ajaxGetAname(setAname,setDesc,scrollPage){
 					console.log("ajaxGetAname setAname >>> "+setAname);
 					console.log("ajaxGetAname setDesc >>> "+setDesc);
+					console.log("ajaxGetAname scrollPage >>> "+scrollPage);
 					urls = "getAcaList.ec";
 					datas = {
-							"aname" : setAname,
-							"setDesc" : setDesc
+							"aname" : setAname
+						   ,"setDesc" : setDesc
+						   ,"scrollPage" : scrollPage
 							};
 					console.log("urls >>> "+urls);
 					console.log("datas >>> "+datas);
@@ -240,7 +327,20 @@
 							st += "</a>";
 							st += "</div>";
 							}
-						}//검색한 학원이 있을때 if
+						//무한스크롤
+						$(window).on("scroll", function() {
+							var scrollHeight = $(document).height();
+							var scrollPosition = $(window).height() + $(window).scrollTop();		
+							var setAname = $("#aname").val();
+							console.log("aname >>> "+setAname);
+							if (scrollPosition > scrollHeight - 1) {
+								start.param.scrollPage++;
+								var scrollPage = start.param.scrollPage;
+								console.log(scrollPage);
+								ajaxGetScroll(setAname,setDesc,scrollPage);
+							}
+						});//무한스크롤
+						}//검색한 학원이 있을때
 						$('.acaList').html(st);
 						$('.acaList').niceSelect('update');
 						console.log("done end >>> "+resParam);
@@ -249,6 +349,57 @@
 						alert("에러");
 					});
 				}//ajaxGetAname
+				
+				//무한스크롤 ajaxAname
+				function ajaxGetScroll(setAname,setDesc,scrollPage){
+					console.log("scroll setAname >>> "+setAname);
+					console.log("scroll setDesc >>> "+setDesc);
+					console.log("scroll scrollPage >>> "+scrollPage);
+					urls = "getAcaList.ec";
+					datas = {
+							 "aname" : setAname
+							,"setDesc" : setDesc
+							,"scrollPage" : scrollPage
+					};
+					$.ajax({
+						 data : datas
+					    ,url : urls
+					}).done(function(resParam){
+						console.log("done start >>> "+resParam);
+						var st = "";
+						console.log("acaList >>> "+resParam.acaList);
+						for(i in resParam.acaList){
+							var cmajor = resParam.acaList[i].cmajor;
+							var cminor = resParam.acaList[i].cminor;
+							var ano = resParam.acaList[i].ano;
+							var aname = resParam.acaList[i].aname;
+							var	alogo = resParam.acaList[i].alogo;
+							var aaddr1 = resParam.acaList[i].aaddr1;
+							var aaddr2 = resParam.acaList[i].aaddr2;
+							var agrade = resParam.acaList[i].agrade;
+							var rvcount = resParam.acaList[i].rvcount;
+							st += "<div class='panel panel-default'>";
+							st += "<a href='listDetailView.ec?ano="+ano+"' style='text-decoration:none'>";
+							st += "<div class='media'>";
+							st += "<div class='media-left'>";
+							st += "<img src='assets/img/academyLogo/"+alogo+"' class='media-object' style='width:125px; height:125px'>";
+							st += "</div>";
+							st += "<div class='media-body'>";
+							st += "<br><div class='title'><h4 class='media-heading'>"+aname+"</h4>&nbsp;&nbsp;&nbsp;<h5>#"+cmajor+"&nbsp;#"+cminor+"</h5></div>";
+							st += "<div><h5><img src='assets/img/Icon_location.png' style='width:15px; height:15px'>"+aaddr1+"</h5></div>";
+							st += "<div class='title'>&nbsp;<h4>평점 "+agrade+"</h4>";
+							st += "&nbsp;<h5>(평가  "+rvcount+"개)</h5></div>";
+							st += "</div>";
+							st += "</div>";
+							st += "</a>";
+							st += "</div>";
+							}
+						$('.acaList').append(st);
+						$('.acaList').niceSelect('update');
+					}).fail(function(resParam){
+						alert("scroll error");
+					});
+				}
 				
 				//리스트 정렬 이름으로
 				function selectDescName(setAname){
