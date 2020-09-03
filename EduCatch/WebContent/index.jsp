@@ -84,6 +84,14 @@
 		a:hover {
 		    color: black;
 		}
+		.footer-number{
+			text-align: center;
+		
+		}
+		.footer-pera {
+			align: center;
+		}
+		
 </style>
 <script type="text/javascript">
 	function call(){
@@ -155,6 +163,7 @@
 		 ajaxGetPopup();
 		 
 	});//end of ready()
+	
 </script>
 </head>
 <body>
@@ -169,7 +178,7 @@
                             <div class="col-xl-7 col-lg-9 col-md-8 col-sm-9">
                                 <div class="hero__caption">
                                     <h1 data-animation="fadeInLeft" data-delay="0.2s">우리동네 학원찾기</h1>
-                                    <p data-animation="fadeInLeft" data-delay="0.4s">EduCatch에서 우리동네 학원과 후기를 살펴보세요</p>
+                                    <p data-animation="fadeInLeft" data-delay="0.4s">&nbsp;&nbsp;EduCatch에서 우리동네 학원과 후기를 살펴보세요</p>
                                 </div>
                             </div>
                         </div>
@@ -182,7 +191,7 @@
                             <div class="col-xl-7 col-lg-9 col-md-8 col-sm-9">
                                 <div class="hero__caption">
                                     <h1 data-animation="fadeInLeft" data-delay="0.2s">우리동네 학원찾기</h1>
-                                    <p data-animation="fadeInLeft" data-delay="0.4s">EduCatch에서 우리동네 학원과 후기를 살펴보세요</p>
+                                    <p data-animation="fadeInLeft" data-delay="0.4s">&nbsp;EduCatch에서 우리동네 학원과 후기를 살펴보세요</p>
                                 </div>
                             </div>
                         </div>
@@ -200,21 +209,19 @@
                             <!-- Section Tittle -->
                             <div class="section-tittle mb-35">
                                 <span class="element">About Us</span>
-                                <h2>We have all your needs, from micro macro1</h2>
+                                <h2>저는 INDEX 페이지가 싫어욧</h2>
                             </div>
-                            <p>We collect and analyze information about your general usage of the website, products, services, and courses. We might track your usage patterns to see what features of the website you commonly use, website traffic volume, frequency of visits, type and time of transactions, type of browser, browser language.</p>
+                            <p>다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어</p>
                         </div>
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                 <div class="experience">
-                                    <span>454 m</span>
-                                    <p>Delivery Packages</p>
+                                    
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                 <div class="experience">
-                                    <span>127</span>
-                                    <p>Countries Covered</p>
+                               
                                 </div>
                             </div>
                         </div>
@@ -222,11 +229,12 @@
                     <div class="col-xl-5 col-lg-6 col-md-9 offset-md-1 offset-sm-1">
                         <div class="about-right-cap">
                             <div class="about-right-img">
-                                <img src="assets/img/gallery/about1.png" alt="">
+                                <img src="assets/img/gallery/phone.jpg;" alt="">
                             </div>
-                            <div class="img-cap">
-                                <span>20</span>
-                                <p>Years of experience</p>
+                            <div class="img-cap" style ="weight : 150px;">
+                            	<a href="searchMain.ec" ><img src="/EduCatch/assets/img/gallery/analyze.png" width ="90px" height ="90px" ></a><br>
+<!--                                 <span><a style = "font-size : 30px;" href="searchMain.ec" >학원찾기</a></span> -->
+                                <p><a style="font-size : 15px; font-weight: 100;"  href ="searchMain.ec">클릭하여 빠른 학원 찾기</a></p>
                             </div>
                         </div>
                     </div>
@@ -240,9 +248,10 @@
                 <div class="row no-gutters">
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="single-gallery text-center">
-                            <div class="gallery-img" style="background-image: url(assets/img/gallery/g1.jpg);"></div>
+                            <div class="gallery-img" style="background-image: url(assets/img/gallery/background.png);"></div>
                             <div class="thumb-content-box">
                                 <div class="thumb-content">
+                                    <img src="/EduCatch/assets/img/gallery/search.png" width ="110px" height ="110px"><br><br>
                                     <h3>쉬운 학원찾기</h3>
                                     <p>직접 학원에 전화를 하거나, 방문할 필요없이 언제 어디서나 간편하게 주변 학원정보를 찾아보세요.</p>
                                 </div>
@@ -251,9 +260,10 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="single-gallery no-margin text-center">
-                            <div class="gallery-img" style="background-image: url(assets/img/gallery/g2.jpg);"></div>
+                            <div class="gallery-img" style="background-image: url(assets/img/gallery/background.png);"></div>
                             <div class="thumb-content-box">
                                 <div class="thumb-content">
+                                	<img src="/EduCatch/assets/img/gallery/document.png" width ="110px" height ="110px"><br><br>
                                     <h3>필요한 정보를 한 페이지에</h3>
                                     <p>학원에 대한 정보를 한 페이지에서 제공합니다. 다른곳에서 정보를 찾아 헤맬 필요가 없습니다.</p>
                                 </div>
@@ -262,9 +272,10 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-6">
                         <div class="single-gallery text-center">
-                            <div class="gallery-img" style="background-image: url(assets/img/gallery/g3.jpg);"></div>
+                            <div class="gallery-img" style="background-image: url(assets/img/gallery/background.png);"></div>
                             <div class="thumb-content-box">
                                 <div class="thumb-content">
+                                	<img src="/EduCatch/assets/img/gallery/thums.png" width ="110px" height ="110px"><br><br>
                                     <h3>믿을 수 있는 학원 정보</h3>
                                     <p>학원 QnA와 회원들의 후기를 통해 궁금점을 해결 하세요. 학원 QnA는 학원 담당자들이 답변을 달아줍니다.</p>
                                 </div>
@@ -275,66 +286,7 @@
             </div>
         </div>
         <!-- Gallery Area End -->
-        <!--? Categories Area Start -->
-        <div class="categories-area section-padding40 gray-bg">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-8">
-                        <div class="section-tittle text-center mb-100">
-                            <span class="element">Features</span>
-                            <h2>To increase productivity and cost effectiveness on the market.</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat">
-                            <div class="cat-icon">
-                                <img src="assets/img/gallery/icon1.png" alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="services.html">Quality</a></h5>
-                                <p>We collect and analyze information about your general usage of the website, products, services, and courses.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat">
-                            <div class="cat-icon">
-                                <img src="assets/img/gallery/icon2.png" alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="services.html">Reliablity</a></h5>
-                                <p>We collect and analyze information about your general usage of the website, products, services, and courses.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat">
-                            <div class="cat-icon">
-                                <img src="assets/img/gallery/icon3.png" alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="services.html">Experience</a></h5>
-                                <p>We collect and analyze information about your general usage of the website, products, services, and courses.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat">
-                            <div class="cat-icon">
-                                <img src="assets/img/gallery/icon4.png" alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5><a href="services.html">Manufacturing</a></h5>
-                                <p>We collect and analyze information about your general usage of the website, products, services, and courses.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- cat End -->
+        
         <!-- Services Area start -->
         <!-- Services Area End -->
         <!-- Want To work -->
@@ -348,7 +300,7 @@
         <!-- Want To work End 2-->
     </main>
     <footer>
-        <!-- Footer Start-->
+     <!-- Footer Start-->
         <div class="footer-area footer-padding">
             <div class="container">
                 <div class="row d-flex justify-content-between">
@@ -382,9 +334,6 @@
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
                                 <h4>연락하기</h4>
-                                <div class="footer-pera">
-                                    <p class="info1">Address: http://www.ikosmo.co.kr</p>
-                                </div>
                             </div>
                             <div class="footer-number">
                                 <p>Phone: +82 6677 0249</p>

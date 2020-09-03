@@ -214,12 +214,12 @@ h6 {
 
 /* line 24, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_common.scss */
 p {
-  font-family: "Muli", sans-serif;
+  font-family: 'Jua', sans-serif;
   color: #10285d;
-  font-size: 16px;
+  font-size: 19px;
   line-height: 30px;
   margin-bottom: 15px;
-  font-weight: normal;
+  font-weight: 540;
 }
 
 /* line 35, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_common.scss */
@@ -344,6 +344,8 @@ h6 a {
 ul {
   margin: 0px;
   padding: 0px;
+  font-family: 'Jua', sans-serif;
+  font-size : 25px;
 }
 
 /* line 118, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_common.scss */
@@ -3313,11 +3315,11 @@ hr {
 
 /* line 75, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_headerMenu.scss */
 .main-header .main-menu ul li a {
-  color: #0d2d3e;
+  color: #072366;
   font-weight: 600;
   padding: 33px 2px;
   display: block;
-  font-size: 16px;
+  font-size: 21px;
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
   -o-transition: 0.3s;
@@ -3385,9 +3387,10 @@ hr {
 
 /* line 129, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_headerMenu.scss */
 .main-header .main-menu ul ul.submenu > li > a {
-  padding: 6px 10px !important;
-  font-size: 15px;
-  color: #fdfdfd;
+    padding: 6px 10px !important;
+    font-size: 18px;
+    color: #fdfdfd;
+    font-weight: 200;
 }
 
 /* line 133, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_headerMenu.scss */
@@ -3668,20 +3671,22 @@ hr {
 
 /* line 58, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_h1-hero.scss */
 .slider-area .hero__caption span {
-  font-family: "Muli", sans-serif;
+  font-family: 'Do Hyeon', sans-serif;
   font-weight: 800;
   display: block;
 }
 
 /* line 63, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_h1-hero.scss */
 .slider-area .hero__caption h1 {
-  font-size: 70px;
-  font-weight: 700;
+  font-size: 95px;
+  font-weight: 500;
   margin-bottom: 14px;
   color: #fff;
   line-height: 1.2;
   margin-bottom: 29px;
   text-transform: capitalize;
+  font-family: 'Jua', sans-serif;
+  text-shadow: 2px 0 black, 0 3px black, -1px 0 black, 0 2px black;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -3711,7 +3716,7 @@ hr {
 @media (max-width: 575px) {
   /* line 63, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_h1-hero.scss */
   .slider-area .hero__caption h1 {
-    font-size: 29px;
+    font-size: 45px;
     line-height: 1.5;
   }
 }
@@ -3720,8 +3725,9 @@ hr {
 .slider-area .hero__caption p {
   font-size: 27px;
   color: #fff;
-  font-family: "Muli", sans-serif;
+  font-family: 'Jua', sans-serif;
   margin-bottom: 50px;
+  text-shadow: 2px 0 black, 0 3px black, -1px 0 black, 0 2px black;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -4091,8 +4097,10 @@ hr {
 
 /* line 109, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_about.scss */
 .about-low-area .about-right-cap .img-cap p {
-  color: #fff;
-  font-size: 15px;
+    color: #fff;
+    font-size: 12px;
+    padding-left: 10px;
+    padding-right: inherit;
 }
 
 /* line 114, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_about.scss */
@@ -4218,9 +4226,10 @@ hr {
 
 /* line 50, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_gallery.scss */
 .gallery-area .single-gallery .thumb-content-box .thumb-content h3 {
-  color: #ffffff;
+  color: #072366;
   font-weight: 800;
-  font-size: 22px;
+  font-size: 32px;
+  font-family: 'Jua', sans-serif;
   margin-bottom: 26px;
   text-transform: uppercase;
 }
@@ -4228,7 +4237,9 @@ hr {
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
   /* line 50, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_gallery.scss */
   .gallery-area .single-gallery .thumb-content-box .thumb-content h3 {
-    font-size: 25px;
+    font-size: 32px;
+    font-family: 'Jua', sans-serif;
+    font-weight: 800;
   }
 }
 
@@ -4236,20 +4247,23 @@ hr {
   /* line 50, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_gallery.scss */
   .gallery-area .single-gallery .thumb-content-box .thumb-content h3 {
     font-size: 32px;
+    font-weight: 800;
   }
 }
 
 @media (max-width: 575px) {
   /* line 50, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_gallery.scss */
   .gallery-area .single-gallery .thumb-content-box .thumb-content h3 {
-    font-size: 32px;
+    font-size: 28px;
+    font-family: 'Jua', sans-serif;
   }
 }
 
 /* line 66, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_gallery.scss */
 .gallery-area .single-gallery .thumb-content-box .thumb-content p {
-  font-size: 16px;
-  color: #ffff;
+  font-family: 'Jua', sans-serif;
+  font-size: 20px;
+  color: #77838f;
   padding: 0 82px;
   line-height: 1.6;
 }
@@ -4265,7 +4279,7 @@ hr {
 .gallery-area .single-gallery .thumb-content-box .thumb-content a {
   color: #fff;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 540;
   text-decoration: underline;
 }
 
@@ -5221,14 +5235,17 @@ hr {
 /* line 22, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_footer.scss */
 .footer-area .footer-tittle h4 {
   color: #072366;
-  font-size: 22px;
+  font-size: 30px;
   margin-bottom: 29px;
   font-weight: 700;
+  font-family: 'Jua', sans-serif;
+  text-align: center;
 }
 
 /* line 29, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_footer.scss */
 .footer-area .footer-tittle ul li {
   margin-bottom: 15px;
+  text-align: center;
 }
 
 /* line 31, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_footer.scss */
@@ -5246,6 +5263,7 @@ hr {
 /* line 42, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_footer.scss */
 .footer-area .footer-tittle p {
   color: #3B4855;
+  text-align: center;
 }
 
 /* line 46, C:/Users/HP/Desktop/jun-2020/280.Industrial_HTML/assets/scss/_footer.scss */
@@ -5301,7 +5319,7 @@ hr {
 .footer-bottom-area .footer-copy-right p {
   color: #fff;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 21px;
   line-height: 2;
   margin-bottom: 12px;
 }

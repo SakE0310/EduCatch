@@ -38,13 +38,15 @@ if (request.getProtocol().equals("HTTP/1.1"))
 	<link rel="stylesheet" href="/EduCatch/assets/css/slick.css">
 	<link rel="stylesheet" href="/EduCatch/assets/css/nice-select.css">
 	<link rel="stylesheet" href="/EduCatch/assets/css/style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<style type="text/css">
 	.login{
-		color: #0d2d3e;
+		color: #072366;
 		font-weight: 600;
 		display: block;
-		font-size: 16px;
+		font-size: 21px;
 		-webkit-transition: 0.3s;
 		-moz-transition: 0.3s;
 		-o-transition: 0.3s;
