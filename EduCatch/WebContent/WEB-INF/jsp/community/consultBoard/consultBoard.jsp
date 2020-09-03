@@ -342,6 +342,11 @@
 		})
 	});
 	 
+	 function clickBtn(){
+		 
+		 alert("로그인 후 이용해주세요!");ㄴ
+	 }
+	 
 </script>
 <body>
 <%
@@ -360,7 +365,6 @@
 		mvo = (MemberVO)hs.getAttribute("user");
 	}
 	
-	System.out.println("mvo.getMname() >>>> "+mvo.getMname());
 
 	if(obj !=null){
 		ArrayList listConsult=(ArrayList)obj;
@@ -439,29 +443,41 @@ if(listConsult !=null && nCnt>0){
 		System.out.println("cvo.getGroupsize()"+cvo.getGroupsize());
 		System.out.println("cvo.getCurpage()"+cvo.getCurpage());
 		System.out.println("cvo.getTotalcount()"+cvo.getTotalcount());
+		if(mvo !=null){
 %>
 					<tr align="center">
 						<td class="media_mobile_td"><%= cvo.getCbno() %></td>
 						<td class="media_mobile_td_font"><%= cvo.getAname() %></td>
-
 						<td class="media_mobile_td_font">
-<% 		
-		if(mvo !=null){
+<%
 			if(cvo.getCbname().equals(mvo.getMname()) || mvo.getMauth().equals("3") 
 			   || cvo.getAcademy_ano().equals(mvo.getAcademy_ano())){
-		
 %>
 						<a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa">
 <%
 			}
 %>
-
 						<%= cvo.getCbsubject() %></a>
 						</td>
 						<td class="media_mobile_td_font"><%= cvo.getCbname() %></td>
 						<td class="media_mobile_td"><%= cvo.getCinsertdate() %></td>
 					</tr>
 <%					
+					
+				}else{
+		
+%>
+					<tr align="center">
+						<td class="media_mobile_td"><%= cvo.getCbno() %></td>
+						<td class="media_mobile_td_font"><%= cvo.getAname() %></td>
+						<td class="media_mobile_td_font">
+						<a href="javascript:clickBtn()" id="aa">
+						<%= cvo.getCbsubject() %></a>
+						</td>
+						<td class="media_mobile_td_font"><%= cvo.getCbname() %></td>
+						<td class="media_mobile_td"><%= cvo.getCinsertdate() %></td>
+					</tr>
+<% 				
 				}
 			}
 		}else{

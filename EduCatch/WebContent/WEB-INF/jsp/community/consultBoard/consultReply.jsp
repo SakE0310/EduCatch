@@ -101,6 +101,14 @@ textarea {
 .hrColor{
 	border: solid 0.5px white;
 }
+
+.brGap{
+	margin-right: 10px;
+}
+
+.marL10{
+	font-size: 10px;
+}
 </style>
 
 <script type="text/javascript"
