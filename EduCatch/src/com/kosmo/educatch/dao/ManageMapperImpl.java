@@ -1,5 +1,6 @@
 package com.kosmo.educatch.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -135,6 +136,11 @@ public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapp
 	public List<AcademyVO> getAcaListManage(AcademyVO param) {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectList("ManagerMapper.getAcaListManage", param);
+	}
+
+	@Override
+	public List<HashMap<String, String>> getAvgPrice() {
+		return getSqlSession().selectList("ManagerMapper.getAvgPrice");
 	}
 
 }

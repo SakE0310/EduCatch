@@ -10,64 +10,123 @@
 <jsp:param value="" name=""/>
 </jsp:include>
 <main>
+<div class="container" style="height: 390px;">
 <canvas id="myChart"></canvas>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script type="text/javascript">
-var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-	type: 'bar',
-    data: {
-      labels: ["언어","예체능","보습","평생교육"],
-      datasets: [{
-        label: "평균학원비",
-        fill : false,
-        backgroundColor: ["rgba(255, 99, 132, 0.2)","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)"],
-        borderColor: ["rgb(255, 99, 132)","rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)"],
-        borderwidth : 1,
-        data: ['50', '60', '55', '70']
-      }]
-    },
-    options: {
-      maintainAspectRatio: false,
-      legend: {
-        display: false
-      },
-      tooltips: {
-        intersect: false,
-        callbacks: {
-          label: function(tooltipItem, data) {
-              var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-              if (label) {
-                  label += ' : ';
-              }
-              label += Math.round(tooltipItem.yLabel * 100) / 100;
-              label += '만원';
-              return label;
-          }
-        }
-      },
-      scales: {
-        yAxes: [{
-          gridLines: {
-            display: true
-          },
-          stacked: false,
-          ticks: {
-        	beginAtZero:true,
-            stepSize: 10
-          }
-        }],
-        xAxes: [{
-          barPercentage: .75,
-          categoryPercentage: .5,
-          stacked: false
-        }]
-      }
-    }
+var chart;
+document.addEventListener("DOMContentLoaded", function(event) {
+	chart = new Chart(document.getElementById("myChart"), {
+		type: 'bar',
+	    data: {
+	      labels: ["언어","예체능","보습","평생교육"],
+	      datasets: [{
+	        label: "평균학원비",
+	        fill : false,
+	        backgroundColor: [	"rgba(255, 99, 132, 0.2)",
+	        					"rgba(255, 159, 64, 0.2)",
+	        					"rgba(255, 205, 86, 0.2)",
+	        					"rgba(75, 192, 192, 0.2)",
+	        					"rgba(54, 162, 235, 0.2)",
+	        					"rgba(153, 102, 255, 0.2)",
+	        					"rgba(201, 203, 207, 0.2)",
+	        					"rgba(255, 99, 132, 0.2)",
+	        					"rgba(255, 159, 64, 0.2)",
+	        					"rgba(255, 205, 86, 0.2)",
+	        					"rgba(75, 192, 192, 0.2)",
+	        					"rgba(54, 162, 235, 0.2)",
+	        					"rgba(153, 102, 255, 0.2)",
+	        					"rgba(201, 203, 207, 0.2)"],
+	        borderColor: [	"rgb(255, 99, 132)",
+	        				"rgb(255, 159, 64)",
+	        				"rgb(255, 205, 86)",
+	        				"rgb(75, 192, 192)",
+	        				"rgb(54, 162, 235)",
+	        				"rgb(153, 102, 255)",
+	        				"rgb(201, 203, 207)",
+	        				"rgb(255, 99, 132)",
+	        				"rgb(255, 159, 64)",
+	        				"rgb(255, 205, 86)",
+	        				"rgb(75, 192, 192)",
+	        				"rgb(54, 162, 235)",
+	        				"rgb(153, 102, 255)",
+	        				"rgb(201, 203, 207)"],
+	        borderwidth : 1,
+	        data: ['50', '60', '55', '70']
+	      }]
+	    },
+	    options: {
+	      maintainAspectRatio: false,
+	      legend: {
+	        display: false
+	      },
+	      tooltips: {
+	        callbacks: {
+	          label: function(tooltipItem, data) {
+	              var label = data.datasets[tooltipItem.datasetIndex].label || '';
+	
+	              if (label) {
+	                  label += ' : ';
+	              }
+	              label += Math.round(tooltipItem.yLabel * 100) / 100;
+	              label += '만원';
+	              return label;
+	          }
+	        }
+	      },
+	      scales: {
+	        yAxes: [{
+	          gridLines: {
+	            display: true
+	          },
+	          stacked: false,
+	          ticks: {
+	        	beginAtZero:false,
+	            stepSize: 5
+	          }
+	        }],
+	        xAxes: [{
+	          barPercentage: .75,
+	          categoryPercentage: .5,
+	          stacked: false
+	        }]
+	      }
+	    }
+	});
 });
+$(document).ready(function(){
+	ajaxGetAvgPrice();
+});
+
+function ajaxGetAvgPrice(){
+	$.ajax({
+		url : "getAvgPrice.ec",
+		type :"post"
+	}).done(function(result){
+		console.log(result);
+		setData(result.avgList)
+	}).fail(function(result){
+		console.log("fail");
+		console.log(result);
+	})
+}
+function setData(value){
+	console.log(value);
+	chart.config.data.labels =[];
+	chart.config.data.datasets[0].data = [];
+	for(var i in value){
+		var data = value[i].CMAJOR;
+		var price = value[i].AVG;
+		
+		chart.config.data.labels.push(data);
+		chart.config.data.datasets[0].data.push(price);
+	}
+	
+	chart.update();
+}
 </script>
-<img src="/EduCatch/assets/img/favicon.ico" alt="이미지당" />
 </main>
 <jsp:include page="../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>

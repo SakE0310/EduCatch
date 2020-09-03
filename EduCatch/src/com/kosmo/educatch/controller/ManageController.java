@@ -614,4 +614,16 @@ public class ManageController {
 		log.info("ManageController getAcaListManager <<< ");
 		return map;
 	}
+	
+	@ResponseBody
+	@RequestMapping("getAvgPrice")
+	public Map<String, List<HashMap<String,String>>> getAvgPrice(){
+		log.info("Manager getAvgPrice >>> ");
+		List<HashMap<String,String>> list = manageService.getAvgPrice();
+		Map<String, List<HashMap<String,String>>> map = new HashMap<String, List<HashMap<String,String>>>();
+		map.put("avgList", list);
+		log.info("list >>> " + list);
+		log.info("Manager getAvgPrice <<< ");
+		return map;
+	}
 }

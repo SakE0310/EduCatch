@@ -1,6 +1,7 @@
 package com.kosmo.educatch.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -204,6 +205,14 @@ public class ManageServiceImpl implements ManageService {
 		log.info("ManagerserviceImpl getAcaList >>> ");
 		List<AcademyVO> list = manageMapper.getAcaListManage(param);
 		log.info("ManagerserviceImpl getAcaList end >>> ");
+		return list;
+	}
+
+	@Override
+	public List<HashMap<String, String>> getAvgPrice() {
+		log.info("ManagerserviceImpl getAvgPrice >>> ");
+		List<HashMap<String, String>> list = manageMapper.getAvgPrice();
+		log.info("ManagerserviceImpl getAvgPrice end >>> ");
 		return list;
 	}
 

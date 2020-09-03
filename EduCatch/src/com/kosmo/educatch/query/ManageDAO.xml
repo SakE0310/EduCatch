@@ -311,4 +311,14 @@
 	ORDER BY 2
 	</select>
 	
+	<select id="getAvgPrice" resultType="hashMap">
+	SELECT 	C.CMAJOR, ROUND(AVG(B.SPRICE/10000),1) AS AVG
+	FROM 	ACADEMY A, SUBJECT B, CATEGORY C
+	WHERE 	A.ANO = B.ACADEMY_ANO
+	AND 	A.CATEGORY_CNO = C.CNO
+	AND 	B.SDELETEYN = 'N'
+	AND 	A.ADELETEYN = 'N'
+	GROUP BY C.CMAJOR
+	</select>
+	
 </mapper>

@@ -1,5 +1,6 @@
 package com.kosmo.educatch.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.kosmo.educatch.vo.AcademyVO;
@@ -29,4 +30,5 @@ public interface ManageService {
 	public int deleteSubject(SubjectVO svo);
 	public ConvenienceVO selectOneConvenience(String ano);
 	public List<AcademyVO> getAcaListManage(AcademyVO param);
+	public List<HashMap<String, String>> getAvgPrice();
 }

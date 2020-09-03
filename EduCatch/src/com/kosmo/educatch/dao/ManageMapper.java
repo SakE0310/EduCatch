@@ -1,5 +1,6 @@
 package com.kosmo.educatch.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -31,4 +32,5 @@ public interface ManageMapper {
 	public int deleteSubject(SubjectVO svo);
 	public ConvenienceVO selectOneConvenience(String ano);
 	public List<AcademyVO> getAcaListManage(AcademyVO param);
+	public List<HashMap<String, String>> getAvgPrice();
 }
