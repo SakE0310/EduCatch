@@ -51,6 +51,7 @@
 				
 				//검색시 AcaList호출
 				$('#search').click(function(){
+					$(window).off("scroll");
 					var setDistrict = $('#district').val(); //서울
 					var setCity = $('#city').val(); //서울전체
 					var setCmajor = $('#cmajor').val(); //언어
@@ -141,8 +142,10 @@
 							st += "</a>";
 							st += "</div>";
 						}
+						
 						//무한스크롤
 						$(window).on("scroll", function() {
+							console.log("acaList scroll");
 							var scrollHeight = $(document).height();
 							var scrollPosition = $(window).height() + $(window).scrollTop();		
 							var setAname = $("#aname").val();
@@ -237,6 +240,7 @@
 				//학원명으로 엔터키 검색
 				$('#aname').keypress(function(key){
 					if(key.which == 13 && setAname!=""){
+						$(window).off("scroll");
 						var setAname = $('#aname').val();
 						var setDesc = "필터 설정";
 						console.log("aname >>> "+setAname);
@@ -250,6 +254,7 @@
 				
 				//학원명으로 검색
 				$('#search-aname').click(function(){
+					$(window).off("scroll");
 					var setAname = $('#aname').val();
 					var setDesc = "필터 설정";
 					if(setAname==""){
@@ -329,6 +334,7 @@
 							}
 						//무한스크롤
 						$(window).on("scroll", function() {
+							console.log("aname scroll");
 							var scrollHeight = $(document).height();
 							var scrollPosition = $(window).height() + $(window).scrollTop();		
 							var setAname = $("#aname").val();
@@ -697,13 +703,13 @@
 						<input type="button" id="search" class="genric-btn primary" value="검색">
 					</div>
 						<form id="detailViewForm" name="detailViewForm">
-								<div class="acaList"><p id="show">검색조건을 입력하세요<p></div>
+							<div class="acaList"><p id="show">검색조건을 입력하세요<p></div>
 						</form>
-						</div>
 					</div>
 				</div>
 			</div>
-		</main>
+		</div>
+	</main>
 		<jsp:include page="../../../footer.jsp" flush="true">
 			<jsp:param value="" name=""/>
 		</jsp:include>
