@@ -245,7 +245,6 @@ public class ManageServiceImpl implements ManageService {
 	public List<CountVO> getMonConCnt(CountVO cvo) {
 		log.info("ManagerserviceImpl getMonConCnt >>> ");
 		List<CountVO> list = manageMapper.getMonConCnt(cvo);
-		log.info(list);
 		log.info("ManagerserviceImpl getMonConCnt end >>> ");
 		return list;
 	}
@@ -254,7 +253,6 @@ public class ManageServiceImpl implements ManageService {
 	public List<CountVO> getMonResCnt(CountVO cvo) {
 		log.info("ManagerserviceImpl getMonResCnt >>> ");
 		List<CountVO> list = manageMapper.getMonResCnt(cvo);
-		log.info(list);
 		log.info("ManagerserviceImpl getMonResCnt end >>> ");
 		return list;
 	}
@@ -263,7 +261,6 @@ public class ManageServiceImpl implements ManageService {
 	public List<CountVO> getMonGrade(CountVO cvo) {
 		log.info("ManagerserviceImpl getMonGrade >>> ");
 		List<CountVO> list = manageMapper.getMonGrade(cvo);
-		log.info(list);
 		log.info("ManagerserviceImpl getMonGrade end >>> ");
 		return list;
 	}

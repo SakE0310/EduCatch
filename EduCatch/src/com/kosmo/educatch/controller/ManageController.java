@@ -684,10 +684,10 @@ public class ManageController {
 		List<CountVO> monConCnt = manageService.getMonConCnt(cvo);
 		List<CountVO> monResCnt = manageService.getMonResCnt(cvo);	
 		List<CountVO> monGraCnt = manageService.getMonGrade(cvo);
-		String[] str = makeStringArray(end);
-		List<String> monConList = setDataString(monConCnt, str);
-		List<String> monResList = setDataString(monResCnt, str);
-		List<String> monGraCList = setDataString(monGraCnt, str);
+		
+		List<String> monConList = setDataString(monConCnt, end);
+		List<String> monResList = setDataString(monResCnt, end);
+		List<String> monGraCList = setDataString(monGraCnt, end);
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
 		map.put("monConCnt", monConList);
 		map.put("monResCnt", monResList);
@@ -697,9 +697,14 @@ public class ManageController {
 		return map;
 		
 	}
-	public List<String> setDataString(List<CountVO> vo, String[] str) {
+	public List<String> setDataString(List<CountVO> vo, int end) {
+		String[] str = new String[end];
+		for(int i = 0; i < str.length; i++) {
+			str[i] = "0";
+		}
 		for(int i = 0; i < vo.size(); i++) {
 			int v = Integer.parseInt(vo.get(i).getDat());
+			log.info(">>> " + vo.get(i).getCnt());
 			str[v-1] = vo.get(i).getCnt();
 		}
 		List<String> list = Arrays.asList(str);
