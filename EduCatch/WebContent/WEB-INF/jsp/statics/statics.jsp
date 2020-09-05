@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-</head>
-<body>
 <jsp:include page="../../../top.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>
+</head>
+<body>
 <main>
 <div class="container" style="height: 390px;">
 <canvas id="myChart"></canvas>
