@@ -13,6 +13,7 @@ import com.kosmo.educatch.dao.ManageMapper;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
+import com.kosmo.educatch.vo.CountVO;
 import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.SubjectVO;
 import com.kosmo.educatch.vo.TimetableVO;
@@ -213,6 +214,57 @@ public class ManageServiceImpl implements ManageService {
 		log.info("ManagerserviceImpl getAvgPrice >>> ");
 		List<HashMap<String, String>> list = manageMapper.getAvgPrice();
 		log.info("ManagerserviceImpl getAvgPrice end >>> ");
+		return list;
+	}
+
+	@Override
+	public List<HashMap<String, String>> getMemType() {
+		log.info("ManagerserviceImpl getMemType >>> ");
+		List<HashMap<String, String>> list = manageMapper.getMemType();
+		log.info("ManagerserviceImpl getMemType end >>> ");
+		return list;
+	}
+
+	@Override
+	public List<HashMap<String, String>> getAcaStat() {
+		log.info("ManagerserviceImpl getAcaStat >>> ");
+		List<HashMap<String, String>> list = manageMapper.getAcaStat();
+		log.info("ManagerserviceImpl getAcaStat end >>> ");
+		return list;
+	}
+
+	@Override
+	public List<HashMap<String, String>> getPostCnt() {
+		log.info("ManagerserviceImpl getPostCnt >>> ");
+		List<HashMap<String, String>> list = manageMapper.getPostCnt();
+		log.info("ManagerserviceImpl getPostCnt end >>> ");
+		return list;
+	}
+
+	@Override
+	public List<CountVO> getMonConCnt(CountVO cvo) {
+		log.info("ManagerserviceImpl getMonConCnt >>> ");
+		List<CountVO> list = manageMapper.getMonConCnt(cvo);
+		log.info(list);
+		log.info("ManagerserviceImpl getMonConCnt end >>> ");
+		return list;
+	}
+
+	@Override
+	public List<CountVO> getMonResCnt(CountVO cvo) {
+		log.info("ManagerserviceImpl getMonResCnt >>> ");
+		List<CountVO> list = manageMapper.getMonResCnt(cvo);
+		log.info(list);
+		log.info("ManagerserviceImpl getMonResCnt end >>> ");
+		return list;
+	}
+
+	@Override
+	public List<CountVO> getMonGrade(CountVO cvo) {
+		log.info("ManagerserviceImpl getMonGrade >>> ");
+		List<CountVO> list = manageMapper.getMonGrade(cvo);
+		log.info(list);
+		log.info("ManagerserviceImpl getMonGrade end >>> ");
 		return list;
 	}
 

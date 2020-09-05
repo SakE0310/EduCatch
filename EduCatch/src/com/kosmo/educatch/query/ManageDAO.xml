@@ -321,4 +321,54 @@
 	GROUP BY C.CMAJOR
 	</select>
 	
+	<select id="getMemType" resultType="hashMap">
+	SELECT 	A.일반회원, B.학원관리자 
+	FROM    (SELECT COUNT(MNO) AS 일반회원 FROM MEMBER WHERE MDELETEYN = 'N' AND MAUTH = '1') A,
+        	(SELECT COUNT(MNO) AS 학원관리자 FROM MEMBER WHERE MDELETEYN = 'N' AND MAUTH = '2') B
+	</select>
+	
+	<select id="getAcaStat" resultType="hashMap">
+	SELECT  A.등록학원, B.활성학원
+	FROM    (SELECT COUNT(ANO) AS 등록학원 FROM ACADEMY) A,(SELECT COUNT(ANO) AS 활성학원 FROM ACADEMY WHERE ADELETEYN='N') B
+	</select>
+	
+	<select id="getPostCnt" resultType="hashMap">
+	SELECT  A.자유게시판, B.상담게시판, C.후기게시판 
+	FROM    (SELECT COUNT(A.FBNO) AS 자유게시판 FROM FREEBOARD A WHERE A.FBDELETEYN = 'N') A,
+	        (SELECT COUNT(B.CBNO) AS 상담게시판 FROM CONSULTBOARD B WHERE B.CDELETEYN = 'N') B,
+	        (SELECT COUNT(C.RBNO) AS 후기게시판 FROM REVIEWBOARD C WHERE C.RBDELETEYN = 'N') C
+	</select>
+	
+	<select id="getMonConCnt" parameterType="cnt" resultType="cnt">
+	SELECT  COUNT(B.CBNO) AS CNT, TO_CHAR(B.CINSERTDATE,'MM') AS DAT
+	FROM    CONSULTBOARD B 
+	WHERE   B.ACADEMY_ANO = #{ano}
+	AND     B.CDELETEYN = 'N'
+	<![CDATA[ AND TO_CHAR(B.CINSERTDATE,'YYYY-MM') >= #{startDate} ]]>
+	<![CDATA[ AND TO_CHAR(B.CINSERTDATE,'YYYY-MM') <= #{endDate} ]]>
+	GROUP BY TO_CHAR(B.CINSERTDATE,'MM')
+	ORDER BY DAT
+	</select>
+	
+	<select id="getMonResCnt" parameterType="cnt" resultType="cnt">
+	SELECT  COUNT(RENO) AS CNT, TO_CHAR(B.TTDATE,'MM') AS DAT
+	FROM    RESERVATION A, TIMETABLE B
+	WHERE   A.TIME_TTNO = B.TTNO
+	AND     B.ACADEMY_ANO = #{ano}
+	<![CDATA[ AND TO_CHAR(B.TTDATE,'YYYY-MM') >= #{startDate} ]]>
+	<![CDATA[ AND TO_CHAR(B.TTDATE,'YYYY-MM') <= #{endDate} ]]>
+	GROUP BY TO_CHAR(B.TTDATE,'MM')
+	ORDER BY DAT
+	</select>
+	
+	<select id="getMonGrade" parameterType="cnt" resultType="cnt">
+	SELECT NVL(TRUNC(AVG(RBGRADE),2),0) AS CNT, TO_CHAR(RBINSERTDATE,'MM') AS DAT
+	FROM REVIEWBOARD
+	WHERE RBDELETEYN = 'N'
+	AND ACADEMY_ANO = #{ano}
+	<![CDATA[ AND TO_CHAR(RBINSERTDATE,'YYYY-MM') >= #{startDate} ]]>
+	<![CDATA[ AND TO_CHAR(RBINSERTDATE,'YYYY-MM') <= #{endDate} ]]>
+	GROUP BY TO_CHAR(RBINSERTDATE,'MM')
+	ORDER BY DAT
+	</select>
 </mapper>

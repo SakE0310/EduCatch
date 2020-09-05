@@ -10,11 +10,10 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
+import com.kosmo.educatch.vo.CountVO;
 import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.SubjectVO;
 import com.kosmo.educatch.vo.TimetableVO;
-
-import sun.security.action.GetLongAction;
 
 public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapper {
 	
@@ -141,6 +140,36 @@ public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapp
 	@Override
 	public List<HashMap<String, String>> getAvgPrice() {
 		return getSqlSession().selectList("ManagerMapper.getAvgPrice");
+	}
+
+	@Override
+	public List<HashMap<String, String>> getMemType() {
+		return getSqlSession().selectList("ManagerMapper.getMemType");
+	}
+
+	@Override
+	public List<HashMap<String, String>> getAcaStat() {
+		return getSqlSession().selectList("ManagerMapper.getAcaStat");
+	}
+
+	@Override
+	public List<HashMap<String, String>> getPostCnt() {
+		return getSqlSession().selectList("ManagerMapper.getPostCnt");
+	}
+
+	@Override
+	public List<CountVO> getMonConCnt(CountVO cvo) {
+		return getSqlSession().selectList("ManagerMapper.getMonConCnt");
+	}
+
+	@Override
+	public List<CountVO> getMonResCnt(CountVO cvo) {
+		return getSqlSession().selectList("ManagerMapper.getMonResCnt");
+	}
+
+	@Override
+	public List<CountVO> getMonGrade(CountVO cvo) {
+		return getSqlSession().selectList("ManagerMapper.getMonGrade");
 	}
 
 }

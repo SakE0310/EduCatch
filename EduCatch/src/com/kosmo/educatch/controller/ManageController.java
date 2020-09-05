@@ -1,5 +1,8 @@
 package com.kosmo.educatch.controller;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -10,9 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.ManageService;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
+import com.kosmo.educatch.vo.CountVO;
 import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.SubjectVO;
 import com.kosmo.educatch.vo.TimetableVO;
@@ -625,5 +627,82 @@ public class ManageController {
 		log.info("list >>> " + list);
 		log.info("Manager getAvgPrice <<< ");
 		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("getMemType")
+	public Map<String, List<HashMap<String, String>>> getMemType(){
+		log.info("Manager getMemType >>> ");
+		List<HashMap<String,String>> list = manageService.getMemType();
+		Map<String, List<HashMap<String,String>>> map = new HashMap<String, List<HashMap<String,String>>>();
+		map.put("memType", list);
+		log.info("list >>> " + list);
+		log.info("Manager getMemType <<< ");
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("getAcaStat")
+	public Map<String, List<HashMap<String, String>>> getAcaStat(){
+		log.info("Manager getAcaStat >>> ");
+		List<HashMap<String,String>> list = manageService.getAcaStat();
+		Map<String, List<HashMap<String,String>>> map = new HashMap<String, List<HashMap<String,String>>>();
+		map.put("acaStat", list);
+		log.info("list >>> " + list);
+		log.info("Manager getAcaStat <<< ");
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("getPostCnt")
+	public Map<String, List<HashMap<String, String>>> getPostCnt(){
+		log.info("Manager getPostCnt >>> ");
+		List<HashMap<String,String>> list = manageService.getPostCnt();
+		Map<String, List<HashMap<String,String>>> map = new HashMap<String, List<HashMap<String,String>>>();
+		map.put("getPostCnt", list);
+		log.info("list >>> " + list);
+		log.info("Manager getPostCnt <<< ");
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("getMonCnt")
+	public Map<String, List<String>> getMonConCnt(HttpServletRequest request) {
+		log.info("ManageController getMonConCnt >>> ");
+		String ano = request.getParameter("ano");
+		String date = String.valueOf(LocalDate.now().getYear());
+		int end = LocalDate.now().getMonth().getValue();
+		CountVO cvo = new CountVO();
+		if(end/10 != 1) {
+			cvo.setEndDate(date+"-0"+end);
+		}else {
+			cvo.setEndDate(date+"-"+end);
+		}
+		cvo.setAno(ano);
+		cvo.setStartDate(date+"-01");
+		log.info("date >>> " + date);
+		List<CountVO> monConCnt = manageService.getMonConCnt(cvo);
+		List<CountVO> monResCnt = manageService.getMonResCnt(cvo);	
+		List<CountVO> monGraCnt = manageService.getMonGrade(cvo);
+		List<String> monConList = setDataString(monConCnt);
+		List<String> monResList = setDataString(monResCnt);
+		List<String> monGraCList = setDataString(monGraCnt);
+		Map<String, List<String>> map = new HashMap<String, List<String>>();
+		map.put("monConCnt", monConList);
+		map.put("monResCnt", monResList);
+		map.put("monGraCnt", monGraCList);
+		
+		log.info("ManageController selectReservation end >>> ");
+		return map;
+		
+	}
+	public List<String> setDataString(List<CountVO> vo) {
+		String[] str = {"0","0","0","0","0","0","0","0","0","0","0","0"};
+		for(int i = 0; i < vo.size(); i++) {
+			int v = Integer.parseInt(vo.get(i).getDat());
+			str[v-1] = vo.get(i).getCnt();
+		}
+		List<String> list = Arrays.asList(str);
+		return list;
 	}
 }

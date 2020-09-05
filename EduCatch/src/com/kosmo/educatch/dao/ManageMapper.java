@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConvenienceVO;
+import com.kosmo.educatch.vo.CountVO;
 import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.SubjectVO;
 import com.kosmo.educatch.vo.TimetableVO;
@@ -33,4 +34,10 @@ public interface ManageMapper {
 	public ConvenienceVO selectOneConvenience(String ano);
 	public List<AcademyVO> getAcaListManage(AcademyVO param);
 	public List<HashMap<String, String>> getAvgPrice();
+	public List<HashMap<String, String>> getMemType();
+	public List<HashMap<String, String>> getAcaStat();
+	public List<HashMap<String, String>> getPostCnt();
+	public List<CountVO> getMonConCnt(CountVO cvo);
+	public List<CountVO> getMonResCnt(CountVO cvo);
+	public List<CountVO> getMonGrade(CountVO cvo);
 }
