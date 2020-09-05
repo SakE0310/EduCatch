@@ -157,7 +157,7 @@
 					<div class="col-md-12">
 						<div class="card mb-1">
 							<div class="card-header">
-								<i class="fas fa-table mr-1"></i> 학원정보
+								<i class="fas fa-table mr-1"></i> 상담일정
 							</div>
 							<div class="card-body">
 								<div id="calendar"></div>
@@ -417,6 +417,7 @@
 			%>
 		});
 		function drawCalendar(){
+			$('#calendar').empty();
 			var calendarEl = document.getElementById('calendar');
 			var calendar = new FullCalendar.Calendar(calendarEl, {
 				initialView : 'dayGridMonth',

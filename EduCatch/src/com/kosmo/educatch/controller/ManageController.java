@@ -684,9 +684,10 @@ public class ManageController {
 		List<CountVO> monConCnt = manageService.getMonConCnt(cvo);
 		List<CountVO> monResCnt = manageService.getMonResCnt(cvo);	
 		List<CountVO> monGraCnt = manageService.getMonGrade(cvo);
-		List<String> monConList = setDataString(monConCnt);
-		List<String> monResList = setDataString(monResCnt);
-		List<String> monGraCList = setDataString(monGraCnt);
+		String[] str = makeStringArray(end);
+		List<String> monConList = setDataString(monConCnt, str);
+		List<String> monResList = setDataString(monResCnt, str);
+		List<String> monGraCList = setDataString(monGraCnt, str);
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
 		map.put("monConCnt", monConList);
 		map.put("monResCnt", monResList);
@@ -696,13 +697,20 @@ public class ManageController {
 		return map;
 		
 	}
-	public List<String> setDataString(List<CountVO> vo) {
-		String[] str = {"0","0","0","0","0","0","0","0","0","0","0","0"};
+	public List<String> setDataString(List<CountVO> vo, String[] str) {
 		for(int i = 0; i < vo.size(); i++) {
 			int v = Integer.parseInt(vo.get(i).getDat());
 			str[v-1] = vo.get(i).getCnt();
 		}
 		List<String> list = Arrays.asList(str);
 		return list;
+	}
+	
+	public String[] makeStringArray(int end) {
+		String[] str = new String[end];
+		for(int i = 0; i < str.length; i++) {
+			str[i] = "0";
+		}
+		return str;
 	}
 }
