@@ -6,6 +6,15 @@
 <jsp:param value="" name=""/>
 </jsp:include>
 <style type="text/css">
+	
+	.footer-tittle{
+		font-family: 'Jua', sans-serif;
+		margin: 0px;
+		padding: 0px;
+  		font-size : 20px;
+  		font-weight : bold;
+	}
+	
 	/*미디어 쿼리*/
 	/* Mobile Device (가로폭 767px 이하) */
 	@media all and (max-width:767px) {
@@ -209,9 +218,9 @@
                             <!-- Section Tittle -->
                             <div class="section-tittle mb-35">
                                 <span class="element">About Us</span>
-                                <h2>저는 INDEX 페이지가 싫어욧</h2>
+                                <h2>원하는 학원을 찾기 힘드셨나요?</h2>
                             </div>
-                            <p>다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어 다아직안했어</p>
+                            <p>Educatch 는 원하는 학원을 시간의 제약을 받지않고 쉽고 빠르게 찾을 수 있습니다. 또한 타 사이트와 차별화된 예약상담 기능을 이용을 하여 직접 방문하지 않아도 학원의 정보를 얻을 수 있습니다. </p>
                         </div>
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
@@ -227,14 +236,14 @@
                         </div>
                     </div>
                     <div class="col-xl-5 col-lg-6 col-md-9 offset-md-1 offset-sm-1">
-                        <div class="about-right-cap">
+                        <div class="about-right-cap"style=" cursor: pointer;"  onclick="location.href='searchMain.ec'">
                             <div class="about-right-img">
                                 <img src="assets/img/gallery/phone.jpg;" alt="">
                             </div>
                             <div class="img-cap" style ="weight : 150px;">
-                            	<a href="searchMain.ec" ><img src="/EduCatch/assets/img/gallery/analyze.png" width ="90px" height ="90px" ></a><br>
-<!--                                 <span><a style = "font-size : 30px;" href="searchMain.ec" >학원찾기</a></span> -->
-                                <p><a style="font-size : 15px; font-weight: 100;"  href ="searchMain.ec">클릭하여 빠른 학원 찾기</a></p>
+                            	<a href="searchMain.ec" ><img src="/EduCatch/assets/img/gallery/analyze.png" width ="95px" height ="95px" title ="클릭하여 빠른 학원검색" ></a><br>
+<!--                                 <span><a style = "font-size : 30px;" href="searchMain.ec" >학원찾기</a></span> --><br>
+                                <p><a style="font-size : 18px; font-weight: 100;"  href ="searchMain.ec">클릭하여 빠른 학원 찾기</a></p>
                             </div>
                         </div>
                     </div>
@@ -321,11 +330,11 @@
                             <div class="footer-tittle">
                                 <h4>EduCatch</h4>
                                 <ul>
-                                    <li>학원검색</li>
-                                    <li>커뮤니티</li>
-                                    <li>통계페이지</li>
-                                    <li>공지사항</li>
-                                    <li>마이페이지</li>
+                                    <li><a href="searchMain.ec">학원찾기</a></li>
+                                    <li><a href="freeboardlist.ec">커뮤니티</a></li>
+                                    <li><a href="statics.ec">통계페이지</a></li>
+                                    <li><a href="listNotice.ec">공지사항</a></li>
+<!--                                <li><a href="listMyPage.ec">마이페이지</a></li> -->
                                 </ul>
                             </div>
                         </div>

@@ -52,6 +52,7 @@
 			text-align : left;
 			width:350px;
 			margin-top : 55px;
+			font-family: 'Jua', sans-serif;
 				
 		}
 		

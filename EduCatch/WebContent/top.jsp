@@ -52,9 +52,18 @@ if (request.getProtocol().equals("HTTP/1.1"))
 		-o-transition: 0.3s;
 		transition: 0.3s;
 		text-transform: capitalize;
+		font-family: 'Jua', sans-serif;
 	}
 	.login:hover{
 		color: #FF3514;
+	}
+	.navigation{
+		margin: 0px;
+   	 	padding: 0px;
+   		font-family: 'Jua', sans-serif;
+    	font-size: 25px;
+}
+	
 	}
 	</style>
 <script type="text/javascript">
@@ -110,7 +119,7 @@ if (request.getProtocol().equals("HTTP/1.1"))
                                     <!-- Main-menu -->
                                     <div class="main-menu d-none d-lg-block">
                                         <nav> 
-                                            <ul id="navigation">                                                                                          
+                                            <ul id="navigation" class="navigation">                                                                                          
                                                 <li><a href="index.jsp">홈</a></li>
                                                 <li><a href="searchMain.ec">학원찾기</a></li>
                                                 <li><a href="freeboardlist.ec">커뮤니티</a>
@@ -150,7 +159,7 @@ if (request.getProtocol().equals("HTTP/1.1"))
                             <input type="hidden" id="mm" value="1"/>
                            <div class="col-lg-2">
                            <div class="main-menu d-none d-lg-block">
-                                <!-- 로그인버튼 예정  -->
+                                <!-- 로그인버튼   -->
                                 <div class="search d-none d-lg-block">
                                     <ul class="login">
                                         <li>
