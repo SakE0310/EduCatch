@@ -229,7 +229,7 @@
 }
 .nav-menu-item {
     display: block;
-    padding: 0 79px;
+    padding: 0 74px;
     color: #fff;
     text-decoration: none;          
 }
