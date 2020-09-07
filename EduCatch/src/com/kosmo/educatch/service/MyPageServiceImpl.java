@@ -54,10 +54,7 @@ public class MyPageServiceImpl implements MyPageService{
 	@Override
 	public MemberVO checkPW(MemberVO param) {
 		log.info("MyPageServiceImpl checkPW 시작>>>");
-		
-		MemberVO mvo = new MemberVO();
-		mvo = mypageMapper.checkPW(param);
-		
+		MemberVO mvo = mypageMapper.checkPW(param);
 		log.info("MyPageServiceImpl checkPW 끝>>>");
 		return mvo;
 	}//end of checkPW

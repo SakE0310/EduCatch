@@ -199,6 +199,9 @@
 	    width: auto;
 	    padding: 3px 10px;
 	}	
+	 #mypageMain{
+      text-decoration :none; 
+    }
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -206,11 +209,8 @@
 		//======프로필 수정버튼을 누르면 실행 -> 비밀번호 확인 창
 		$("#pwCheck").click(function() {
 			console.log("프로필 수정버튼 누름");
-			
-			window.open("","pop","width=480, height=330");
-			$("#clickForm").attr("action","selectPW.ec");
+			$("#clickForm").attr("action","listMyPage.ec");
 			$("#clickForm").attr("method","POST");
-			$("#clickForm").attr("target","pop");
 			$("#clickForm").submit();
 		})//end of myPageMemUpdate
 		
@@ -280,8 +280,8 @@
 	<form id= "clickForm" name = "clickForm">
 		<div align ="center">
 		<br>
-			<h1 style="color : font-size: 30px;">마이페이지</h1>
-			<hr>
+			 <h1 style="color : ; font-size: 30px;"><a href="listMyPage.ec" id="mypageMain">마이페이지</a></h1>
+				<hr>
 		</div>
 		<div class ="sideBox shadow">
 <%-- 		<input type="hidden" id="mno" name ="mno" value="<%=mvo.getMno()%>">  --%>
@@ -328,6 +328,7 @@
 				<hr>
 			</div>
 			<div class="container shadow" id ="container_div">
+			 <br>
 				<table align ="center" class="table">
 				 	<colgroup>
 						<col width="100px"/>

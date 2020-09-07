@@ -196,6 +196,9 @@
 	    width: auto;
 	    padding: 3px 10px;
 	}	
+	 #mypageMain{
+      text-decoration :none; 
+    }
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -204,10 +207,8 @@
 		$("#pwCheck").click(function() {
 			console.log("프로필 수정버튼 누름");
 			
-			window.open("","pop","width=480, height=330");
-			$("#clickForm").attr("action","selectPW.ec");
+			$("#clickForm").attr("action","listMyPage.ec");
 			$("#clickForm").attr("method","POST");
-			$("#clickForm").attr("target","pop");
 			$("#clickForm").submit();
 		})//end of myPageMemUpdate
 		
@@ -280,65 +281,98 @@
 	}	
 	if(obj != null){
 		
-		/* String NowPW = mvo.getMpw();
+		 /* String NowPW = mvo.getMpw();
 		System.out.println("NowPW>>>"+NowPW);//1234 */
 		
 %>
 		//==== 비밀번호 변경 : 비밀번호 변경 버튼 누르면 실행
-		$("#updatePW").click(function() {
-			console.log("비밀번호 변경버튼 누름");
+		$("#pwNO").show();
+		$("#pwYES").hide();
+		$("#newPW").hide();
+		
+		$('#mpw').keyup(function(){
+			var setPassword = $("#mpw").val();
+			console.log("setPassword>>>"+setPassword);
+			ajaxGetMypageEdit(setPassword);
+		  });
+	
+	    function ajaxGetMypageEdit(setPassword) {
 			
-			var DBpw = "<%= mvo.getMpw()%>";
+			urls = "checkPW.ec";
+			datas = {"mpw" : setPassword};
+			console.log("urls>>>"+urls);
+			console.log("data>>>"+datas);
+			
+			$.ajax({
+				url : urls,
+				data : datas
+			}).done(function(resParam) {
+				console.log(resParam);
+				if(resParam == "YES"){
+					console.log("현재비밀번호 일치");
+					$("#pwYES").show();
+					$("#pwNO").hide(); 
+					checkPW();
+				}else{
+					console.log("현재비밀번호가 일치하지 않습니다");
+				 	$("#pwNO").show(); 
+				 	$("#pwYES").hide();
+				}
+				
+			}).fail(function(resParam) {
+				alert('에러');
+			})
+			
+		}//ajaxGetMypageEdit
+		
+		$('#mpw_new').keyup(function(){
+			var regex =/^.*(?=^.{6,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+			if(!regex.test(document.pwEditForm.mpw_new.value)){
+				$("#newPW").show();
+				console.log("형식 틀림");
+			}else{
+				$("#newPW").hide();
+			}//end of if
+		});
+		
+		function checkPW() {
 			var NowPW = $("#mpw").val();
 			var NewPW = $("#mpw_new").val();
-			var NewPWRe = $("#mpw_new_R").val();
+			var NewPWRe = $("#mpw_new_R").val(); 
 			
-			//현재 비밀번호 체크
-			if(NowPW !='' ){
-				if(NowPW == DBpw ){
-					console.log("현재비밀번호 일치");
-					
-					if(NewPW != '' || NewPWRe !='' ){
-						
-						//새비밀번호 : 비밀번호 확인
-						if(NewPW == NewPWRe ){
-							 var length= document.pwEditForm.mpw_new.value.length;
-							 if(length <6 || length >12){
-								alert("비밀번호 오류- 6자 이상 12자 이하");
-								$("#mpw_new").val('');
-								$("#mpw_new_R").val('');
-								return false; 
-							}//end of if((length <6 || length >12))
-							console.log("새비밀번호 : 비밀번호  일치 \n 수정가능");
-							alert("비밀번호 수정 성공");
-							$("#pwEditForm").attr("action","updatePW.ec");
-							$("#pwEditForm").attr("method","POST");
-							$("#pwEditForm").submit(); 
-							
-						}else{
-							alert("비밀번호가 일치하지 않습니다.");
-							$("#mpw_new").val('');
-							$("#mpw_new_R").val('');
-						}//end of if(NewPW == NewPWRe)
-					}else{
-						alert("새 비밀번호를 입력하세요");
-					}//end of (NewPW != '' || NewPWRe !='' )
-					
-				}else{
-					alert("현재비밀번호가 일치하지 않습니다.");
-					$("#mpw").val('');
-				}//end of if-else(NowPW == DBpw )
-			}else{
-				alert("현재 비밀번호를 입력하세요");
-			}//end of if-else(NowPW !='' )
+			var regex =/^.*(?=^.{6,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+			if(!regex.test(document.pwEditForm.mpw_new.value)){
+				$("#newPW").show();
 				
+				console.log("형식 틀림zzz");
+				$("#mpw_new").val('');
+				$("#mpw_new_R").val('');
+				$("#mpw_new").focus();
+				return false;
+			}else{
+				$("#newPW").hide();
+			}//end of if 
 			
+			if(NewPW != NewPWRe ){
+				alert("새비밀번호와 새비밀번호가 같지 않습니다.");
+				$("#mpw_new").val('');
+				$("#mpw_new_R").val('');
+				$("#mpw_new").focus();
+				return false;
+			}
+			 $("#pwEditForm").attr("action","updatePW.ec");
+			$("#pwEditForm").attr("method","POST");
+			$("#pwEditForm").submit();  
 			
+		}
+		
+		$("#updatePW").click(function() {
+			console.log("비밀번호 변경버튼 누름");
+			var setPassword = $("#mpw").val();
+		    ajaxGetMypageEdit(setPassword);
 		})//end of updatePW
-	
-			
-			
-			
+		
+		
 	});//end of ready()
 </script>
 </head>
@@ -348,8 +382,8 @@
 	<form id= "clickForm" name = "clickForm">
 		<div align ="center">
 		<br>
-			<h1 style="color :  font-size: 30px;">마이페이지</h1>
-			<hr>
+			 <h1 style="color : ; font-size: 30px;"><a href="listMyPage.ec" id="mypageMain">마이페이지</a></h1>
+        	<hr>
 		</div>
 		<div class ="sideBox shadow">
 <%-- 		<input type="hidden" id="mno" name ="mno" value="<%=mvo.getMno()%>">  --%>
@@ -357,20 +391,20 @@
 			<%=mvo.getMname() %>님 
 			<br>
 			&nbsp;&nbsp;&nbsp;<i class="fas fa-user-cog "></i><input type ="button" id="pwCheck" class ="btn_light btn_box_01" value="개인정보 변경"><br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-key"></i><input type ="button" id="pwEdit" class ="btn_light btn_box_01" value="  비밀번호 변경"><br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-user-slash"></i><input type ="button" id="memOut" class ="btn_light btn_box_01" value=" 회원탈퇴"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-key"></i><input type ="button" id="pwEdit" class ="btn_light btn_box_01" value=" 비밀번호 변경"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-user-slash"></i><input type ="button" id="memOut" class ="btn_light btn_box_01" value="회원탈퇴"><br>
 			
 		<input type="hidden" id ="mid" name ="mid" value="<%=mvo.getMid()%>">
 		</div>
 		<div class ="sideBox shadow">
 			즐겨찾기<br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-hand-pointer"></i><input type ="button" id="bookmark" class ="btn_light btn_box_01" value="  관심학원"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-hand-pointer"></i><input type ="button" id="bookmark" class ="btn_light btn_box_01" value=" 관심학원"><br>
 		</div>
 		<div class ="sideBox shadow">
 			내 컨텐츠<br>
 			&nbsp;&nbsp;&nbsp;<i class="fas fa-file-alt"></i><input type ="button" id="freeBoard" class ="btn_light btn_box_01" value="  내가 쓴 글"><br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="consultSearch" class ="btn_light btn_box_01" value="  작성한 상담"><br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="reviewBoard" class ="btn_light btn_box_01" value="  작성한 후기"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="consultSearch" class ="btn_light btn_box_01" value=" 작성한 상담"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="reviewBoard" class ="btn_light btn_box_01" value=" 작성한 후기"><br>
 		</div>
 	</form>	
 	</div>
@@ -382,7 +416,7 @@
 			<div id="mypage_subject">
 			<br>	
 			<br>	
-				<h4 id="font_id">비밀번호 설정</h4>
+				<h4 id="font_id">비밀번호 변경</h4>
 				<hr>
 			</div>
 				<div class="container shadow"  id ="container_div">
@@ -392,8 +426,12 @@
 						<td>기존 비밀번호</td>
 						<td>
 							<div class="col-xs-9">
-								<input class="form-control" type ="password" id="mpw" name="mpw"/>
+								<input class="form-control" type ="password" id="mpw" name="mpw" />
+								<div id="pwNO" style="color: red;">비밀번호가 일치하지 않습니다</div>	
+								<div id="pwYES">비밀번호가 일치합니다</div>
 							</div>
+						</td>
+						<td>
 						</td>
 					</tr>
 					<tr>
@@ -401,7 +439,8 @@
 						<td>
 							<div class="col-xs-9">
 								<input class="form-control" type ="password" id="mpw_new" name="mpw_new"/>
-								<span id ="passCheck">*6자 이상 12자 이하</span>
+								<span class ="required">*</span>문자,숫자,특수기호 포함 6~12자리를 입력하세요
+								<div id="newPW" style="color: red;">형식에 맞게 입력해주세요</div>
 							</div>
 						</td>	
 					</tr>

@@ -101,6 +101,7 @@ public class NoticeServiceImpl implements NoticeService {
 		return nCnt;
 	}//end of deleteNotice
 
+	
 	@Override
 	public List<EventVO> eventPop(EventVO param) {
 		log.info("NoticeServiceImpl eventPop 시작>>>");
@@ -108,6 +109,7 @@ public class NoticeServiceImpl implements NoticeService {
 		log.info("NoticeServiceImpl eventPop 끝>>>");
 		return list;
 	}
+
 
 
 

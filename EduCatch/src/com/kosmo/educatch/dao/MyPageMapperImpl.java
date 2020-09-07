@@ -31,8 +31,7 @@ public class MyPageMapperImpl extends SqlSessionDaoSupport implements MyPageMapp
 	//=======프로필 수정 : 비밀번호 검사 : 검사============
 	@Override
 	public MemberVO checkPW(MemberVO param) {
-		MemberVO mvo = new MemberVO();
-		mvo = getSqlSession().selectOne("checkPW");
+		MemberVO mvo = getSqlSession().selectOne("checkPW");
 		return mvo;
 	}//end of checkPW
 

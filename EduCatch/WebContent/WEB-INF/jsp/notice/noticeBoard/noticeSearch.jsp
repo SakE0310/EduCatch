@@ -45,18 +45,22 @@
 		thead {
 			display: none;
 		}
+		
 		.nice-select{
 		    width: 50px;
 		    height: 35px;
 		    padding-left: 0px;
 		}
+		
 		#keyword{
-			width: 90px;
-			height: 32px;
+			width : 96px; 
+			height : 32px;
 		}
+		
 		.btn_light {
 		  height: 30px;
 		}
+		
 		.gj-textbox-md{
 			width: 100px;
     		height: 40px;
@@ -69,23 +73,25 @@
 		    top: 10px;
 		    font-size: 24px;
 		}
+		
 		#b{
 			width: 300px;
 		}
+		
 		#nfont{
 			display: none;
 		}
+		
 		#mfont{
 			font-size: 30px;
 		}
+		
 		#media_mobile{
 			width: 330px;
     		height: 130px;
 		}
-		 #keyword{
-			width:96px; 
-	}
-	.gj-textbox-md {
+		
+		.gj-textbox-md {
 			width: 100px;
 			font-size: 10px;
 		}
@@ -93,45 +99,56 @@
 			display: none;
 		}
 		 #noticeForm{
-	 	padding-bottom: 0px;
+	 	padding-bottom: 150px;
 	 }
+	/*★*/	 .nice-select .option {
+	    padding-left: 11px;
+	    padding-right: 11px;
+   	 }
+   	 #count{
+   	 display:  none;}
 	}
 	
 	/* Tablet (가로폭 768px 이상, 1023px 이하) */
 	@media all and (min-width:768px) and (max-width:1023px) {
-	
 	/* 브라우저 가로폭이 768~1023px일때 적용될 css (태블릿) */
 	#media_mobile{
-	 	width: 400px;
-   		 height: 180px;
+	 	width: 680px;
+    height: 192px;
 	 }
 	 
 	 #keyword{
 			width:200px; 
-	}
+	 }
+	 
 	.gj-textbox-md {
 			width: 130px;
 			font-size: 15px;
-		}
+	}
+	
 	#nfont{
 			display: none;
-		}
+	}
+		
 	#mfont{
 			font-size: 50px;
-		}
+	}
+		
 	.nice-select{
 	    width: 60px;
     	height: 35px;
 	    padding-left: 10px;
 	}
+	#noticeForm{
+	 	padding-bottom: 270px;
+	 }	
+	 #table_size{
+	 width: 700px;
+	 } 
 	}
 	
 	/* PC Desktop (가로폭 1024 이상) */
 	@media all and (min-width:1024px) {
-	
-		body {
-		}
-		
 		#b{
 			width: 700px;
 		}
@@ -142,6 +159,7 @@
 		}
 		 #media_mobile{
 	 	width: 1140px;
+	 /*★*/ height: 180px;
 	 	margin: auto;
 	 }
 	 	#mfont{
@@ -157,6 +175,9 @@
 	 #noticeForm{
 	 	padding-bottom: 370px;
 	 }	
+/*★*/	 .nice-select .option {
+    padding-right: 25px;
+    }
 	}
 	
 	/* --------------------------------------------- */
@@ -167,12 +188,12 @@
 	
 	#table_head{
 		border-collapse: collapse;
-		background-color: #F5F5F5;
+	/*★*/	background-color: #21146b;
 	}
 	.btn_light {
 	    display: inline-block;
 	    text-align: center;
-	    background: #140C40;
+	  /*★*/  background: #21146b;
 	    color: #ffffff;
 	    vertical-align: middle;
 	    cursor: pointer;
@@ -213,10 +234,11 @@
 	} 	
 	.table_head_font{
 		font-family: 'Do Hyeon', sans-serif;
+	/*★*/	color:white;
 	}
 	
 	#keyword{
-			height:30px;
+	/*★*/		height:32px;
 			border: 1px solid #140C40;
 			 border-radius: 0.5em;
 		}
@@ -224,16 +246,14 @@
 	/*데이트 피커*/
 	.gj-textbox-md{ 
 		border: 1px solid #140C40;
-		
+			height: 30px;
 	}
 	
-	.gj-icon{
-			color : #140C40;
-		}
+	.gj-icon {
+	    color: #140C40;
+	    margin-left: 7px;
+	}
 		
-	.gj-textbox-md {
-   			height: 30px;
-		}
 	.gj-datepicker-md [role="right-icon"] {
 	    left: 3px;
    		top: 3px;
@@ -248,11 +268,11 @@
 	 }
 	 #media_mobile_td_margin{
 	 	padding-left: 0px;
+	/*★*/  	padding-top: 13px;
 	 }
-	
-	 /*---------------------------------*/
-	 
-
+	/*★*/ li{
+	 	font-size: 16px;
+	 }
 </style>
 
 <script type="text/javascript">
@@ -389,39 +409,51 @@
 	if(obj != null){
 		ArrayList list = (ArrayList)obj;
 		int nCnt = list.size();
+		NoticeVO vo = (NoticeVO)list.get(0);
+		String count =vo.getTotalcount();
+		
 %>
 
 	<div id="mainWrapper" align = "center">
 		<div  id="media_mobile" >
 	<form id="searchFormNotice" name="searchFormNotice" >
-			<table border="0" cellpadding="1" cellspacing="1" align="left">
+			<table border="0" cellpadding="1" cellspacing="1" align="center" id="table_size">
 			<tr>	
-				<td align="center" id = "mfont">공지사항</h4>
+				<td align="center" id = "mfont" colspan="2">공지사항</h4>
 				<br>
 				<br>
 				</td>
 			</tr>
 			<tr>
-				<td width="500">
-		         <div class="row" id="c">
-		            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		            <div class="col-md-1.8">
+			 <!-- ★ --><td width="1200" align="center" id = "nfont" colspan="2"><br><h1>공지사항</h1>
+			 <br>
+				<br></td>
+			
+			</tr>
+			<tr style="width: 1140px;">
+			 <td  align="left" id="count">
+			 <br>
+		      	총 <%=count %>개의 게시물이 있습니다
+		      </td> 
+				<td width="360" align="right">
+		         <div class="row" id="c" style="padding-right: 0px;">
+		            &nbsp;&nbsp;&nbsp;
+		            <div class="col-md-1.8" align="right">
 						<input type="text" name="startDate" id="startDate">
 		            </div>
 		             <h3 id="h3_margin"> &nbsp;&nbsp;- &nbsp;</h3>
-		            <div class="col-md-1.5">
+		            <div class="col-md-1.5" align="right">
 	      		 		<input type="text" name="endDate" id="endDate"> 
 		            </div>
 	      				&nbsp;&nbsp; <input class=" btn_light btn_box_01" type="button" id="searchPiker" value="검색">
 		      </div>
 		      </td>
-				<td align="center" id = "nfont"><h1>공지사항</h1></td>
 			</tr>
 			</table>
 	</form>	
 		</div>
 	<form id="noticeForm" name="noticeForm">
-		<div  class="container" style="height: 390px;">
+		<div  class="container" style="height: 390px; ">
 			<table align="center" class="table">
 			<colgroup>
 				<col width="120px"/>
@@ -456,7 +488,7 @@
 %>
 				<tr align="center">
 					<td><%=nvo.getNno() %></td>
-					<td>
+					<!-- ★ --><td align="left" style="padding-left: 40px;">
 					<a href="selectNotice.ec?nno=<%=nvo.getNno() %>" id="nno_color"><%=nvo.getNsubject() %></a></td>
 					<td class ="media_mobile_td"><%=nvo.getNname() %></td>
 					<td class ="media_mobile_td"><%=nvo.getNinsertdate()%></td>

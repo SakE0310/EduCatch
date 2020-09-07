@@ -70,14 +70,19 @@
 		//==관리자가 등록버튼 클릭시 form 전송========
 		$("#save").click(function() {
 			oEditors.getById["ncontent"].exec("UPDATE_CONTENTS_FIELD", []);
-			
-			if($('#nimg').val() != null && $('#nimg').val() != ""){
-				$("#edit").attr("enctype","multipart/form-data");
+			var nsubject = $('#nsubject').val();
+			console.log("nsubject>>>>"+nsubject);
+			if(nsubject == null || nsubject == ""){
+				alert("제목을 입력해주시기 바랍니다.");
+				return false;
 			}
-			
-			$("#edit").attr("action","insertNotice.ec");
-			$("#edit").attr("method","POST");
-			$("#edit").submit();
+				if($('#nimg').val() != null && $('#nimg').val() != ""){
+					$("#edit").attr("enctype","multipart/form-data");
+				}
+				
+				$("#edit").attr("action","insertNotice.ec");
+				$("#edit").attr("method","POST");
+				$("#edit").submit(); 
 		});
 		
 		//===관리자가 취소버튼을 누르면 실행========

@@ -1,6 +1,8 @@
 package com.kosmo.educatch.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.educatch.manager.LoggerManager;
@@ -18,6 +21,7 @@ import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.ReviewVO;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.ConsultVO;
+import com.kosmo.educatch.vo.EventVO;
 import com.kosmo.educatch.vo.FreeVO;
 
 @Controller
@@ -40,32 +44,32 @@ public class MyPageController {
 			member_mno =mvo.getMno();
 		}	
 		
-		rvo.setMember_mno(member_mno);
-		List<ReviewVO> list = mypageService.myReview(rvo);	
-		log.info("MyPageController myReview list.size()>>>" + list.size());
-		
-		for (int i = 0; i < list.size(); i++) {
-			// list를 VO로 형변환해준다.
-			ReviewVO rvo1 = (ReviewVO) list.get(i);
-			
-			log.info("getRbno			>>"+rvo1.getRbno());
-			log.info("getRbsubject		>>"+rvo1.getRbsubject());
-			log.info("getRbname			>>"+rvo1.getRbname());
-			log.info("getRbimg			>>"+rvo1.getRbimg());
-			log.info("getRbcontent		>>"+rvo1.getRbcontent());
-			log.info("getAcademy_ano	>>"+rvo1.getAcademy_ano());
-			log.info("getMember_mno		>>"+rvo1.getMember_mno());
-			log.info("getRbgrade		>>"+rvo1.getRbgrade());
-			log.info("getRbdeleteyn		>>"+rvo1.getRbdeleteyn());
-			log.info("getRbinsertdate	>>"+rvo1.getRbinsertdate());
-			log.info("getRbupdatedate	>>"+rvo1.getRbupdatedate());
-
-		}
-		
+		/*
+		 * rvo.setMember_mno(member_mno); List<ReviewVO> list =
+		 * mypageService.myReview(rvo);
+		 * log.info("MyPageController myReview list.size()>>>" + list.size());
+		 * 
+		 * for (int i = 0; i < list.size(); i++) { // list를 VO로 형변환해준다. ReviewVO rvo1 =
+		 * (ReviewVO) list.get(i);
+		 * 
+		 * log.info("getRbno			>>"+rvo1.getRbno());
+		 * log.info("getRbsubject		>>"+rvo1.getRbsubject());
+		 * log.info("getRbname			>>"+rvo1.getRbname());
+		 * log.info("getRbimg			>>"+rvo1.getRbimg());
+		 * log.info("getRbcontent		>>"+rvo1.getRbcontent());
+		 * log.info("getAcademy_ano	>>"+rvo1.getAcademy_ano());
+		 * log.info("getMember_mno		>>"+rvo1.getMember_mno());
+		 * log.info("getRbgrade		>>"+rvo1.getRbgrade());
+		 * log.info("getRbdeleteyn		>>"+rvo1.getRbdeleteyn());
+		 * log.info("getRbinsertdate	>>"+rvo1.getRbinsertdate());
+		 * log.info("getRbupdatedate	>>"+rvo1.getRbupdatedate());
+		 * 
+		 * }
+		 */
 		MemberVO mvov = mypageService.selectMyPage(mvo);
 		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("ReviewVO", list);
+		//mav.addObject("ReviewVO", list);
 		mav.addObject("MemberVO", mvov);
 		mav.setViewName("/mypage/mypageMain");
 		
@@ -94,31 +98,41 @@ public class MyPageController {
 	}//end of selectPW
 	
 	//=========프로필 수정 : 비밀번호 검사 : 검사
+	@ResponseBody
 	@RequestMapping("checkPW.ec")
-	public ModelAndView checkPW(@ModelAttribute MemberVO param) {
+	public String checkPW(HttpServletRequest request,HttpSession session) {
 		log.info("MyPageController checkPW 시작 >>>");
+		String str = "";
+		MemberVO mvo = null;
+		String member_mid ="";
+		if(session != null){
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mid =mvo.getMid();
+		}	
+		String mpw = request.getParameter("mpw");
+		log.info("mpw>>>>"+mpw);
+		log.info("mid>>>>"+member_mid);
 		
-		log.info("param.getMid()>>>"+param.getMid());
-		log.info("param.getMpw()>>>"+param.getMpw());
+		mvo.setMpw(mpw);
 		
-		MemberVO mvo = mypageService.checkPW(param);
-		log.info("mvo>>>"+mvo);
+		log.info(mvo.getMid());
+		log.info(mvo.getMpw());
 		
-		ModelAndView mav = new ModelAndView();
+		//Map<String,List<MemberVO>> map = new HashMap<String, List<MemberVO>>();
 		
-		if(mvo == null) {
-			mav.setViewName("/mypage/mypagePwCheckForm");
-		}else {
-			
-			log.info("mvo.getMid()>>>"+mvo.getMid());
-			log.info("mvo.getMpw()>>>"+mvo.getMpw());
-			
-			mav.addObject("MemberVO", mvo);
-			mav.setViewName("/mypage/mypagePwCheckForm");
-		}
-		
-		log.info("MyPageController checkPW 끝 >>>");
-		return mav;
+		MemberVO mvov =mypageService.checkPW(mvo);
+		log.info("list>>>"+mvo);
+		 if(mvov == null) {
+			 str = "NO";
+		 }else {
+			 str = "YES"; 
+		 }
+		 log.info("str>>>"+str);
+		// map.put("eventPop",list);
+		 //log.info("map>>>"+map);
+		 log.info("MyPageController checkPW 끝 >>>");
+		 
+		return str;
 	}//end of checkPW
 	
 	//====== 프로필 수정페이지로 이동

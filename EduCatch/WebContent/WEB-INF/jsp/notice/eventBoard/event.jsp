@@ -91,8 +91,8 @@
 		.media_mobile_td{
 			display: none;
 		}
-		 #noticeForm{
-	 	padding-bottom: 0px;
+		 #eventForm{
+	 	padding-bottom: 150px;
 	 }
 	}
 	
@@ -123,14 +123,13 @@
     	height: 35px;
 	    padding-left: 10px;
 	}
+	 #eventForm{
+	 	padding-bottom: 150px;
+	 }
 	}
 	
 	/* PC Desktop (가로폭 1024 이상) */
 	@media all and (min-width:1024px) {
-	
-		body {
-		}
-		
 		#b{
 			width: 700px;
 		}

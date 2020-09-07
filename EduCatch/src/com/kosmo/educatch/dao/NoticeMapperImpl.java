@@ -54,11 +54,13 @@ public class NoticeMapperImpl extends SqlSessionDaoSupport implements NoticeMapp
 		return nCnt;
 	}//end of deleteNotice
 
+	
 	@Override
 	public List<EventVO> eventPop(EventVO param) {
 		List<EventVO> list = getSqlSession().selectOne("eventPop");
 		return list;
 	}
+
 
 
 }

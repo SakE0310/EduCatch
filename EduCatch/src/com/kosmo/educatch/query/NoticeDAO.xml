@@ -73,22 +73,6 @@
             ORDER BY 1 DESC       
         )
 	WHERE PAGENO =#{curpage, jdbcType=VARCHAR}
-	        
-	<!-- <if test="startDate!=null and startDate!='' and startDate!='null' and endDate!=null and endDate!='' and endDate!='null'">
-		<![CDATA[AND TO_CHAR(A.NINSERTDATE,'YYYY-MM-DD') >= #{startDate,jdbcType=VARCHAR}]]>
-		<![CDATA[AND TO_CHAR(A.NINSERTDATE,'YYYY-MM-DD') <= #{endDate,jdbcType=VARCHAR}]]>
-	</if>
-	<if test = "searchFilter=='제목'">
-		<![CDATA[AND NSUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>	
-	</if>
-	<if test="searchFilter=='내용'">
-		<![CDATA[AND NCONTENT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
-	</if>
-	<if test="searchFilter=='제목+내용'">
-		<![CDATA[AND NSUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
-		<![CDATA[OR NCONTENT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>			
-	</if>       -->  
-	        
 	</select>
 	
 	<!-- 공지사항 조회 -->
@@ -132,7 +116,7 @@
 	VALUES(
 					         #{nno, jdbcType=VARCHAR}
 					        ,#{nsubject, jdbcType=VARCHAR}             
-					        ,'관리자'             
+					        ,#{nname, jdbcType=VARCHAR}              
 					        ,#{nimg, jdbcType=VARCHAR}             
 					        ,#{ncontent, jdbcType=VARCHAR}             
 					        ,'N'

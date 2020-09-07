@@ -201,6 +201,9 @@
 	    width: auto;
 	    padding: 3px 10px;
 	}	
+	 #mypageMain{
+      text-decoration :none; 
+    }
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -210,10 +213,8 @@
 		$("#pwCheck").click(function() {
 			console.log("프로필 수정버튼 누름");
 			
-			window.open("","pop","width=480, height=330");
-			$("#clickForm").attr("action","selectPW.ec");
+			$("#clickForm").attr("action","listMyPage.ec");
 			$("#clickForm").attr("method","POST");
-			$("#clickForm").attr("target","pop");
 			$("#clickForm").submit();
 		})//end of myPageMemUpdate
 		
@@ -288,7 +289,7 @@
 	<form id= "clickForm" name = "clickForm">
 		<div align ="center">
 		<br>
-			<h1 style="color :  font-size: 30px;">마이페이지</h1>
+			 <h1 style="color : ; font-size: 30px;"><a href="listMyPage.ec" id="mypageMain">마이페이지</a></h1>
 			<hr>
 		</div>
 		<div class ="sideBox shadow" >
@@ -308,9 +309,9 @@
 		</div>
 		<div class ="sideBox shadow">
 			내 컨텐츠<br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-file-alt "></i><input type ="button" id="" class ="btn_light btn_box_01" value="  내가 쓴 글"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-file-alt "></i><input type ="button" id="freeBoard" class ="btn_light btn_box_01" value="  내가 쓴 글"><br>
 			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit"></i><input type ="button" id="consultSearch" class ="btn_light btn_box_01" value=" 작성한 상담"><br>
-			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="" class ="btn_light btn_box_01" value=" 작성한 후기"><br>
+			&nbsp;&nbsp;&nbsp;<i class="fas fa-edit "></i><input type ="button" id="reviewBoard" class ="btn_light btn_box_01" value=" 작성한 후기"><br>
 		</div>
 	</form>	
 <%		

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.NoticeService;
 import com.kosmo.educatch.vo.EventVO;
+import com.kosmo.educatch.vo.MemberVO;
 import com.kosmo.educatch.vo.NoticeVO;
 import com.kosmo.educatch.vo.PagingVO;
 import com.oreilly.servlet.MultipartRequest;
@@ -60,18 +62,7 @@ public class NoticeController {
 		if(startDate == null && endDate == null) {
 			startDate = "";
 			endDate ="";
-		}else {
-			/*
-			 * startDate = startDate.replace("/", "-"); endDate = endDate.replace("/", "-");
-			 * log.info("startDate>>>"+startDate); log.info("endDate>>>"+endDate);
-			 */
 		}
-		
-		/*
-		 * //페이징 변수 초기화..? if() {
-		 * 
-		 * }
-		 */
 		
 		if(request.getParameter("curpage") !=null) {
 			curpage=request.getParameter("curpage");
@@ -109,9 +100,9 @@ public class NoticeController {
 			log.info("curpage >>> "+nvo.getCurpage());
 			log.info("totalcount >>> "+nvo.getTotalcount());
 		}
-
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("noticeList", list);
+		//공지사항 검색페이지로 이동
 		mav.setViewName("notice/noticeBoard/noticeSearch");
 		
 		log.info("NoticeController searchNotice 끝 >>>");
@@ -123,6 +114,7 @@ public class NoticeController {
 	public ModelAndView listNotice(HttpServletRequest request, @ModelAttribute NoticeVO param, EventVO eParam) {
 		log.info("NoticeController listNotice 시작 >>>");
 
+		//검색기능 키워드 가져옴
 		log.info("param.getKeyword()>>" + param.getKeyword());
 		log.info("param.getSearchFilter()>>>" + param.getSearchFilter());
 		log.info("param.getStartDate()>>>" + param.getStartDate());
@@ -144,17 +136,13 @@ public class NoticeController {
 		if(startDate == null && endDate == null) {
 			startDate = "";
 			endDate ="";
-		}else {
-			startDate = startDate.replace("/", "-");
-			endDate = endDate.replace("/", "-");
-			log.info("startDate>>>"+startDate);
-			log.info("endDate>>>"+endDate);
 		}
 		
 		if(request.getParameter("curpage") !=null) {
 			curpage=request.getParameter("curpage");
 		}
-
+		
+		//VO에 값 바인딩
 		param.setPno(pno);
 		param.setPagesize(pagesize);
 		param.setGroupsize(groupsize);
@@ -167,10 +155,9 @@ public class NoticeController {
 		log.info("param.getTotalcount()>>>"+param.getTotalcount());
 
 		List<NoticeVO> list = noticeService.listNotice(param);
+		
 		log.info("NoticeController listNotice list.size()>>>" + list.size());
 		
-		
-
 		for (int i = 0; i < list.size(); i++) {
 			// list를 VO로 형변환해준다.
 			NoticeVO nvo = (NoticeVO) list.get(i);
@@ -192,14 +179,13 @@ public class NoticeController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("noticeList", list);
-	
 		mav.setViewName("notice/noticeBoard/notice");
 
 		log.info("NoticeController listNotice 끝 >>>");
 		return mav;
 	}// end of listNotice
 
-	// ===============공지사항 관리자모드 : 조회================================
+	// ===============공지사항 관리자모드 : 상세조회================================
 	@RequestMapping("selectNotice.ec")
 	public ModelAndView selectNotice(@ModelAttribute NoticeVO param) {
 		String nno = (String) param.getNno();
@@ -237,14 +223,25 @@ public class NoticeController {
 
 	// ===============공지사항 관리자모드 : 등록================================
 	@RequestMapping("/insertNotice.ec")
-	public ModelAndView insertNotice(HttpServletRequest request, @ModelAttribute NoticeVO param) {
+	public ModelAndView insertNotice(HttpServletRequest request, @ModelAttribute NoticeVO param
+									, HttpSession session) {
 		log.info("NoticeController insertNotice 시작 >>>");
 		log.info("contenttype >>> " + request.getContentType());
 
+		//변수 초기화
 		String nsubject = null;
 		String nimg = null;
 		String ncontent = null;
+		String nname = null;
 
+		//세션을 통해 로그인 된 이름을 가져옴
+		MemberVO mvo = null;
+		String member_mame ="";
+		if(session != null){
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mame =mvo.getMname();
+		}	
+		
 		ModelAndView mav = new ModelAndView();
 		String resultStr = "";
 
@@ -257,20 +254,22 @@ public class NoticeController {
 			
 			try {
 				MultipartRequest multi = new MultipartRequest(request, path, size, "UTF-8",
-						new DefaultFileRenamePolicy());
+																new DefaultFileRenamePolicy());
 
 				nsubject = multi.getParameter("nsubject");
 				nimg = multi.getParameter("nimg");
 				ncontent = multi.getParameter("ncontent");
+				
 				log.info("multi >>> " + multi);
-
 				log.info("nsubject>>>" + nsubject);
 				log.info("nimg>>>" + nimg);
 				log.info("ncontent>>>" + ncontent);
+				log.info("nname>>>" + nname);
 
 				Enumeration<String> et = multi.getFileNames();
 				List<String> list = new ArrayList<String>();
-
+				
+				//파일을 가져와서 list에 대입
 				while (et.hasMoreElements()) {
 					String file = et.nextElement();
 					list.add(multi.getFilesystemName(file));
@@ -280,6 +279,7 @@ public class NoticeController {
 				param.setNsubject(nsubject);
 				param.setNimg(list.get(0));
 				param.setNcontent(ncontent);
+				param.setNname(member_mame);
 
 			} catch (Exception e) {
 				log.info("에러>>>>" + e.getMessage());
@@ -294,6 +294,7 @@ public class NoticeController {
 
 			param.setNsubject(nsubject);
 			param.setNcontent(ncontent);
+			param.setNname(member_mame);
 
 		}
 
@@ -383,7 +384,6 @@ public class NoticeController {
 				} // end of while
 
 				param.setNno(nno);
-				;
 				param.setNsubject(nsubject);
 				param.setNimg(list.get(0));
 				param.setNcontent(ncontent);

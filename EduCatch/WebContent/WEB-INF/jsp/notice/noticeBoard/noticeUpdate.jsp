@@ -76,6 +76,12 @@
 		$("#updateData").click(function() {
 			oEditors.getById["ncontent"].exec("UPDATE_CONTENTS_FIELD", []);
 			
+			var nsubject = $('#nsubject').val();
+			console.log("nsubject>>>>"+nsubject);
+			if(nsubject == null || nsubject == ""){
+				alert("제목을 입력해주시기 바랍니다.");
+				return false;
+			}
 			if($('#nimg2').val() != null && $('#nimg2').val() != ""){
 				$("#edit").attr("enctype","multipart/form-data");
 			}
