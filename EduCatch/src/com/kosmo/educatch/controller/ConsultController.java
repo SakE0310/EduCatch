@@ -235,7 +235,7 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		String cbno=(String)param.getCbno();
 		ModelAndView mav=new ModelAndView();
 		
-		mav.addObject("ConsultVO", consultService.selectConsult(cbno));
+		mav.addObject("ConsultVO", consultService.selectConsult(param));
 		mav.setViewName("community/consultBoard/detailConsult");
 		
 		log.info("ConsultController selectConsult >>> 끝");
@@ -254,7 +254,7 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		String cbno=(String)param.getCbno();
 		ModelAndView mav=new ModelAndView();
 		
-		mav.addObject("ConsultVOO", consultService.selectUpdate1(cbno));
+		mav.addObject("ConsultVOO", consultService.selectUpdate1(param));
 		mav.setViewName("community/consultBoard/updateConsult");
 		
 		log.info("ConsultController selectUpdate1 >>> 끝");
@@ -298,7 +298,7 @@ private static Logger log=Logger.getLogger(ReviewController.class);
 		String isSuccess="";
 		String cbno=(String)param.getCbno();
 		
-		int nCnt=consultService.deleteConsult(cbno);
+		int nCnt=consultService.deleteConsult(param);
 		
 		ModelAndView mav=new ModelAndView();
 		

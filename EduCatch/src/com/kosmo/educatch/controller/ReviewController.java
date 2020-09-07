@@ -43,6 +43,7 @@ public class ReviewController {
 		log.info(param.getMember_mno());
 		log.info(param.getRbcontent());
 
+		// 페이지 사이즈, 그룹사이즈, 현재페이지, 전체 게시물 수를 선언
 		String pagesize = "10";
 		String groupsize = "5";
 		String curpage = "1";
@@ -53,10 +54,13 @@ public class ReviewController {
 		String endDate = param.getEndDate();
 
 		// 시작일 종료일 날짜형식 변환
+		// startDate와 endDate가 null이면
 		if (startDate == null && endDate == null) {
 			startDate = "";
 			endDate = "";
-		} else {
+		} 
+		// startDate와 endDate가 null이 아니면
+		else {
 			startDate = startDate.replace("/", "-");
 			endDate = endDate.replace("/", "-");
 			log.info("startDate>>>" + startDate);
@@ -186,7 +190,7 @@ public class ReviewController {
 
 	// 글쓰기 버튼 눌렀을때
 	@RequestMapping("/insertDisplay.ec")
-	public ModelAndView insertDisplay(@ModelAttribute ReviewVO param, @ModelAttribute AcademyVO param1) {
+	public ModelAndView insertDisplay(@ModelAttribute ReviewVO param, AcademyVO param1) {
 
 		log.info("aname1 >>>> " + param1.getAname());
 		log.info("ReviewController insertDisplay >>> 호출 성공 ");
@@ -202,7 +206,7 @@ public class ReviewController {
 
 	// 상세페이지에서 후기 글쓰기 버튼 눌렀을때
 	@RequestMapping("/inserttDisplay.ec")
-	public ModelAndView inserttDisplay(@ModelAttribute ReviewVO param, @ModelAttribute AcademyVO param1) {
+	public ModelAndView inserttDisplay(@ModelAttribute ReviewVO param, AcademyVO param1) {
 
 		log.info("getAname >>>> " + param1.getAname());
 		log.info("getAno >>>> " + param1.getAno());
@@ -222,7 +226,7 @@ public class ReviewController {
 	// 등록 버튼 눌렀을 때
 	@RequestMapping("insertReview.ec")
 	public ModelAndView insertReview(HttpServletRequest request, @ModelAttribute ReviewVO param,
-			@ModelAttribute AcademyVO avo, @ModelAttribute MemberVO mvo) {
+			AcademyVO avo,  MemberVO mvo) {
 		log.info("ReviewController insertReview >>> 호출 성공 ");
 
 		log.info("membervo.getmid >>> " + mvo.getMid());
@@ -344,7 +348,7 @@ public class ReviewController {
 		String rbno = (String) param.getRbno();
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("ReviewVO", reviewService.selectReview(rbno));
+		mav.addObject("ReviewVO", reviewService.selectReview(param));
 		mav.setViewName("community/reviewBoard/detailReview");
 
 		log.info("ReviewController selectReview >>> 끝");
@@ -361,7 +365,7 @@ public class ReviewController {
 		String rbno = (String) param.getRbno();
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("ReviewVOO", reviewService.selectUpdate(rbno));
+		mav.addObject("ReviewVOO", reviewService.selectUpdate(param));
 		mav.setViewName("community/reviewBoard/updateReview");
 
 		log.info("ReviewController selectUpdate >>> 끝");
@@ -401,7 +405,7 @@ public class ReviewController {
 		String isSuccess = "";
 		String rbno = (String) param.getRbno();
 
-		int nCnt = reviewService.deleteReview(rbno);
+		int nCnt = reviewService.deleteReview(param);
 
 		ModelAndView mav = new ModelAndView();
 		if (nCnt > 0) {

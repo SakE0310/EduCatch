@@ -48,15 +48,15 @@ public class ConsultServiceImpl implements ConsultService{
 	}
 
 	@Override
-	public ConsultVO selectConsult(String cbno) {
+	public ConsultVO selectConsult(ConsultVO param) {
 		// TODO Auto-generated method stub
-		return consultMapper.selectConsult(cbno);
+		return consultMapper.selectConsult(param);
 	}
 
 	@Override
-	public ConsultVO selectUpdate1(String cbno) {
+	public ConsultVO selectUpdate1(ConsultVO param) {
 		// TODO Auto-generated method stub
-		return consultMapper.selectUpdate1(cbno);
+		return consultMapper.selectUpdate1(param);
 	}
 
 	@Override
@@ -66,9 +66,9 @@ public class ConsultServiceImpl implements ConsultService{
 	}
 
 	@Override
-	public int deleteConsult(String cbno) {
+	public int deleteConsult(ConsultVO param) {
 		// TODO Auto-generated method stub
-		return consultMapper.deleteConsult(cbno);
+		return consultMapper.deleteConsult(param);
 	}
 
 	@Override

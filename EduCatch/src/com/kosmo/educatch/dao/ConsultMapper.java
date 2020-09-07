@@ -13,9 +13,9 @@ public interface ConsultMapper {
 	public List<AcademyVO> cacademyList(AcademyVO param);
 	public int insertConsult(ConsultVO param);
 	public int updateConsult(ConsultVO param);
-	public int deleteConsult(String cbno);
-	public ConsultVO selectConsult(String cbno);
-	public ConsultVO selectUpdate1(String cbno);
+	public int deleteConsult(ConsultVO param);
+	public ConsultVO selectConsult(ConsultVO param);
+	public ConsultVO selectUpdate1(ConsultVO param);
 	public AcademyVO academyAno(AcademyVO ano);
 	public MemberVO memberMno(MemberVO param);
 }

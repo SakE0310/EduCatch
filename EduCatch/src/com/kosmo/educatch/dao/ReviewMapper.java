@@ -13,10 +13,10 @@ public interface ReviewMapper {
 	public List<AcademyVO> academyList(AcademyVO param);
 	public int insertReview(ReviewVO param);
 	public int updateReview(ReviewVO param);
-	public int deleteReview(String rbno);
+	public int deleteReview(ReviewVO param);
 	public int insertDisplay(ReviewVO param);
-	public ReviewVO selectReview(String rbno);
-	public ReviewVO selectUpdate(String rbno);
+	public ReviewVO selectReview(ReviewVO param);
+	public ReviewVO selectUpdate(ReviewVO param);
 	public AcademyVO academyAno(AcademyVO param);
 	public MemberVO memberMno(MemberVO param);
 }

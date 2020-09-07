@@ -90,7 +90,7 @@
 		if(linkPage == curpage)
 		{
 %>
-	<%=linkPage%>
+	<strong style="color: #140C40;"><%=linkPage%></strong>
 <%
 		}
 		else

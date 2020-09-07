@@ -33,7 +33,7 @@ public class ReviewMapperImpl extends SqlSessionDaoSupport implements ReviewMapp
 
 	//상세 조회
 	@Override
-	public ReviewVO selectReview(String rbno) {
+	public ReviewVO selectReview(ReviewVO param) {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("selectReview");
 	}
@@ -45,13 +45,13 @@ public class ReviewMapperImpl extends SqlSessionDaoSupport implements ReviewMapp
 	}
 
 	@Override
-	public ReviewVO selectUpdate(String rbno) {
+	public ReviewVO selectUpdate(ReviewVO param) {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("selectUpdate");
 	}
 
 	@Override
-	public int deleteReview(String rbno) {
+	public int deleteReview(ReviewVO param) {
 		// TODO Auto-generated method stub
 		return getSqlSession().update("deleteReview");
 	}

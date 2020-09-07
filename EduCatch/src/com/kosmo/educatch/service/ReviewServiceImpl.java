@@ -50,16 +50,16 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public ReviewVO selectReview(String rbno) {
+	public ReviewVO selectReview(ReviewVO param) {
 		// TODO Auto-generated method stub
-		return reviewMapper.selectReview(rbno);
+		return reviewMapper.selectReview(param);
 	}
 
 	
 	@Override
-	public ReviewVO selectUpdate(String rbno) {
+	public ReviewVO selectUpdate(ReviewVO param) {
 		// TODO Auto-generated method stub
-		return reviewMapper.selectUpdate(rbno);
+		return reviewMapper.selectUpdate(param);
 	}
 	
 	
@@ -70,9 +70,9 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public int deleteReview(String rbno) {
+	public int deleteReview(ReviewVO param) {
 		// TODO Auto-generated method stub
-		return reviewMapper.deleteReview(rbno);
+		return reviewMapper.deleteReview(param);
 	}
 
 	//학원명 조회
