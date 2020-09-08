@@ -142,12 +142,29 @@ if(hs != null){
 				</td>
 			</tr>
 			<tr>
-				<td>첨부파일</td>
+				<td>기존파일</td>
 				<td>
-					현재 이미지:<img src = "/EduCatch/assets/img/freeImg/<%=freevo.getFbimg() %>" border=0 width="100" height="100"><br>
-					<input type="hidden" name="fbimg" id="fbimg" value=<%=freevo.getFbimg() %> />
-					수정할 이미지 파일:<input type="file" name="img" id="img" />
+<%
+					String img = freevo.getFbimg();
+					if(img != null){
+%>
+						<input type="text" id="fbimg" name="fbimg" value="<%=freevo.getFbimg()%>" readOnly>
+<%								
+					}else{
+%>						
+						<input type="text" id="fbimg" name="fbimg" value="" readOnly>
+<%						
+					}//end of if(img)
+%>      				
 				</td>
+			</tr>
+			<tr>
+				<td> 첨부파일</td>
+				<td>
+					<input type="file"id="img" name="img" /><br> 
+						
+				</td>
+			</tr>
 			</tr>
 			<tr>
 				<td colspan="3" align="right">
