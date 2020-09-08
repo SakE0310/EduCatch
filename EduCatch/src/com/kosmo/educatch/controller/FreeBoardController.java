@@ -125,6 +125,7 @@ public class FreeBoardController {
 		if(param.getFbno().length()>0 && param.getFbno()!=null) {
 			FreeVO freevo = freeService.selectFreeBoard(param);
 			log.info("frevo.getMember_mno>>>"+freevo.getMember_mno());
+			log.info("첨부파일>>"+freevo.getFbimg());
 			mav.addObject("freevo", freevo);
 			mav.addObject("membervo", mvo);
 		}

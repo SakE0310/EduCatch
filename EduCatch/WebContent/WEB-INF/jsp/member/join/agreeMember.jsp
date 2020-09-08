@@ -52,6 +52,7 @@ $(document).ready(function(){
 	</jsp:include>
 </head>
 <body>
+<br><br>
 	<div>
 	<form id="agreement" name="agreement" method="get">
 	<div id="divAgree" class="join-box tab-cont" align="center">
