@@ -447,7 +447,7 @@
 		</div>
 	<form id="eventForm" name="eventForm">
 		<div  class="container" style="height: 390px;">
-			<table align="center" class="table">
+			<table align="center" class="table" >
 			<colgroup>
 				<col width="120px"/>
 				<col width="600px"/>

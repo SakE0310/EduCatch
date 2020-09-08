@@ -47,7 +47,7 @@ public class EventController {
 		
 		//페이징 변수
 		String pno="P004";
-		String pagesize="5";
+		String pagesize="10";
 		String groupsize="5";
 		String curpage="1";
 		String totalcount="0";
@@ -106,7 +106,7 @@ public class EventController {
 		
 		//페이징 변수
 		String pno="P005";
-		String pagesize="5";
+		String pagesize="10";
 		String groupsize="5";
 		String curpage="1";
 		String totalcount="0";
