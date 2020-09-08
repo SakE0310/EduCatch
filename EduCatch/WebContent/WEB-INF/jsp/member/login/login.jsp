@@ -264,7 +264,7 @@
 									.request({
 										url : '/v2/user/me',
 										success : function(res) {
-											alert(JSON.stringify(res))
+											//alert(JSON.stringify(res))
 											console.log(res.id);
 											console.log(res.properties.nickname);
 											console.log(res.kakao_account.email);
@@ -284,7 +284,6 @@
 															console.log(data);
 															if (data > 0) {
 																//이미 회원이 있음
-																alert("이미 회원이십니다.");
 																location.href = "http://localhost:8088/EduCatch/loginCheck.ec?msnsid="+id+"&mid="+email
 																				+"&msnstype=k"
 															} else {
