@@ -84,7 +84,7 @@ textarea {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 
-    width: 506%;
+    width: 504%;
 }
 
 .marT5 marL5 marB5{
@@ -97,7 +97,7 @@ textarea {
 	border: solid 0.5px #737373;
 }
 hr{
-	width:506%;
+	width:504%;
 }
 .table>tbody>tr>td{
 	border-top:1px solid #737373;
