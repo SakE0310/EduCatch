@@ -28,10 +28,10 @@ public class ManageServiceImpl implements ManageService {
 	private ManageMapper manageMapper;
 	
 	@Override
-	public List<MemberVO> getAcaAccept(MemberVO vo) {
+	public List<MemberVO> getAcaAccept() {
 		log.info("ManagerServiceImpl getAcaAccept >>> ");
 		List<MemberVO> list = null;
-		list = manageMapper.getAcaAccept(vo);
+		list = manageMapper.getAcaAccept();
 		log.info("ManagerServiceImpl getAcaAccept end >>> ");
 		return list;
 	}

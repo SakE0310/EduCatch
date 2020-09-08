@@ -20,7 +20,7 @@ public class ManageMapperImpl extends SqlSessionDaoSupport implements ManageMapp
 	private Logger log = LoggerManager.getInstance().getLogger(ManageMapperImpl.class);
 
 	@Override
-	public List<MemberVO> getAcaAccept(MemberVO vo) {
+	public List<MemberVO> getAcaAccept() {
 		log.info("ManageMapperImpl getAcaAccept >>> ");
 		return getSqlSession().selectList("ManageMapper.getAcaAccept");
 	}
