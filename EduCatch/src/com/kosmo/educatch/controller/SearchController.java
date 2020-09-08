@@ -18,14 +18,16 @@ import com.kosmo.educatch.service.SearchService;
 import com.kosmo.educatch.vo.AcademyVO;
 import com.kosmo.educatch.vo.SearchVO;
 
+//controller를 사용하기 위한 annotation
 @Controller
 public class SearchController {
+	//SearchService 자동주입 annotation
 	@Autowired
 	private SearchService searchService;
-	
+
 	Logger log = Logger.getLogger(SearchController.class);
 	
-	//검색페이지 이동
+	//학원검색 페이지로 이동
 	@RequestMapping("searchMain")
 	public ModelAndView searchMain() {
 		log.info("search controller searchMain start >>> ");
@@ -37,6 +39,9 @@ public class SearchController {
 	}//end searchMain
 	
 	//지역 대분류
+	//json데이터를 사용하기 위해서 ResponseBody annotation을 사용
+	//지역 데이터는 서울을 최상단에 올리기 위해서 DB를 통하지 않고 직접 세팅했다
+	//ArrayList 값을 Map안에 넣어서 ajax에서 데이터를 꺼내서 씀
 	@ResponseBody
 	@RequestMapping("getDistrict")
 	public Map<String,ArrayList<String>>getDistrict(SearchVO param){
@@ -68,15 +73,20 @@ public class SearchController {
 	}//getDistrict
 	
 	//지역 소분류
+	//지역 소분류 또한 json데이터를 이용해서 ajax에서 출력하여 데이터를 사용한다
 	@ResponseBody
 	@RequestMapping("getCity")
 	public Map<String,List<SearchVO>>getCity(SearchVO param,
 											HttpServletRequest req){
 		log.info("search controller getCity start >>> ");
+		//district값을 getParamater로 받아온다
 		String district = req.getParameter("district");
 		log.info("search controller getCity district >>> "+district);
 		Map<String,List<SearchVO>>map = new HashMap<String,List<SearchVO>>();
+		
+		//district값을 DB로 보내서 현재 district row값에 맞는 city 값을 가져온다
 		List<SearchVO>list = searchService.getCity(param);
+		//그 값을 mpa.put을 하여 key : cityList , value : list값을 반환 한다
 		map.put("cityList",list);
 		log.info("search controller getCity list >>> "+list);
 		log.info("search controller getCity map >>> "+map);
@@ -84,25 +94,39 @@ public class SearchController {
 		return map;
 	}//getCity
 	
+	//카테고리 대분류,소분류를 가져오는 controller 함수는 AcademyRequestController에 있다
+	
 	//학원리스트 받아오기
+	//json데이터를 사용하여 ajax와 통신했다
 	@ResponseBody
 	@RequestMapping("getAcaList")
 	public Map<String,List<AcademyVO>>getAcaList(AcademyVO param,
 											     HttpServletRequest req){
 		log.info("search controller getAcaList start >>> ");
 		log.info("search controller getAcaList param >>> "+param);
+		//학원리스트 출력에 필요한 값들을 받아오게 세팅 해놓고 사용했다
+		//지역 대분류
 		String district = req.getParameter("district");
+		//지역 소분류
 		String city = req.getParameter("city");
+		//카테고리 대분류
 		String cmajor = req.getParameter("cmajor");
+		//카테코리 소분류
 		String cminor = req.getParameter("cminor");
+		//학원명
 		String aname = req.getParameter("aname");
+		//필터설정
 		String setDesc = req.getParameter("setDesc");
+		//무한스크롤 현재 페이지
 		String scrollPage = req.getParameter("scrollPage");
 		
+		//모든 getParameter의 값들은 if문을 거쳐서 사용하게 만들었다
 		if(scrollPage!=null) {
 			log.info("search controller getAcaList scrollPage >>> "+scrollPage);
 		}
 		//필터 설정
+		//필터 설정은 리뷰순, 평점순 두가지가 있다 select box value값이
+		//넘어오는것에 따라서 세팅되는 vo값이 달라진다
 		if(setDesc!=null) {
 			log.info("search controller getAcaList setDesc not null >>> ");
 			if(setDesc.equals("리뷰 많은순")) {
@@ -117,7 +141,11 @@ public class SearchController {
 			}
 		}
 		//지역, 카테고리 검색
+		//지역 2개와 케티고리 2개 값이 모두 넘어올 경우
 		if(district!=null && city!=null && cmajor!=null && cminor!=null) {
+		//split함수는 서울 전체값을 가져오기 위한 함수이다 
+		//city값에서 "서울 전체" 값이 반환될 시 가운데 공백을 기점으로
+		//나누기 한뒤 index[0]값을 가져와서 DB로 보낸다
 		String[] cityArr = city.split(" ");
 		String cityStr = cityArr[0];
 		String cminorAdd = cminor+" "+"split";
@@ -157,6 +185,7 @@ public class SearchController {
 		log.info("search controller getAcaList param.getAname() >>> "+param.getAname());
 		}
 		Map<String,List<AcademyVO>>map = new HashMap<String,List<AcademyVO>>();
+		//getParameter에서 거쳐진 값들을 service로 보낸다
 		List<AcademyVO>list = searchService.getAcaList(param);
 		map.put("acaList",list);
 		log.info("search controller getAcaList list >>> "+list);

@@ -28,9 +28,9 @@
 				            scrollPage : 1,
 				        },
 					}
-				//지역 함수
+				//초기 지역 함수 
 				ajaxGetDistrict();
-				//카테고리 함수
+				//초기 카테고리 함수
 				ajaxGetMajor();
 				
 				//지역 대분류 변경시 지역소 분류 자동 변경
@@ -51,6 +51,10 @@
 				
 				//검색시 AcaList호출
 				$('#search').click(function(){
+					//학원 리스트 출력에는 2개의 ajax가 있다
+					//학원명 검색과 지역/카테고리 검색이다
+					//새로고침없이 둘다 사용하게 되면 ajax가 쌓이므로 
+					//무한스크롤 ajax실행시 scrollPage를 초기화 시켜주기 위한 함수이다
 					$(window).off("scroll");
 					var setDistrict = $('#district').val(); //서울
 					var setCity = $('#city').val(); //서울전체
@@ -106,6 +110,9 @@
 							st = "<p>";
 							st+= "<div class='sidebar'><h5>"+listcount+"개의 학원이 조회되었습니다</h5>";
 							st+= "<span class='select-desc'><select id='desc' style='height:25px;'>";
+							//필터설정 select box의 option을 변경할때마다 ajax를 다시 실행하게 됨으로 
+							//option값이 계속 초기화가 된다 그래서 if문을 이용해서 선택한 option값을 상단에 띄우고
+							//나머지 option값을 일일히 세팅했다
 							if(setDesc=="평점 높은순"){
 							st+= "<option id='filter'>"+setDesc+"</option>";	
 							st+= "<option id='filter'>기본순</option>";
@@ -152,14 +159,19 @@
 						//무한스크롤
 						$(window).on("scroll", function() {
 							console.log("acaList scroll");
+							//document의 높이
 							var scrollHeight = $(document).height();
+							//window의 높이 + window의 현재 scroll위치
 							var scrollPosition = $(window).height() + $(window).scrollTop();		
 							var setAname = $("#aname").val();
 							console.log("aname >>> "+setAname);
+							//스크롤이 페이지 최하단에 닿았을 시
 							if (scrollPosition > scrollHeight - 1) {
+								//변수 scrollPage를 ++해준다
 								start.param.scrollPage++;
 								var scrollPage = start.param.scrollPage;
 								console.log(scrollPage);
+								//scrollPag를 스크롤ajax함수로 보내준다
 								ajaxScroll(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc,scrollPage);
 							}
 						});//무한스크롤
@@ -167,6 +179,7 @@
 						$('.acaList').html(st);
 						$('.acaList').niceSelect('update');
 						console.log("done end >>> "+resParam);
+						//지역,카테고리,학원명,필터설정,현재스크롤값
 						selectDesc(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc,scrollPage);
 					}).fail(function(resParam){
 						alert("에러");
@@ -174,6 +187,7 @@
 				}//ajaxGetAcaList
 				
 				//무한스크롤 ajax
+				//스크롤이 페이지의 최하단에 닿을시 위에 선언한 함수에서 ajaxScroll()을 call하게 된다
 				function ajaxScroll(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc,scrollPage){
 					console.log("scroll setAname >>> "+setAname);
 					console.log("scroll setDesc >>> "+setDesc);
@@ -221,6 +235,7 @@
 							st += "</a>";
 							st += "</div>";
 							}
+						//데이터를 더하기 위해 append를 사용했다
 						$('.acaList').append(st);
 						$('.acaList').niceSelect('update');
 					}).fail(function(resParam){
@@ -235,10 +250,9 @@
 					console.log("selectDesc setCminor >>> "+setCminor);
 					console.log("selectDesc setAname >>> "+setAname);
 					$('.select-desc').on('change','select',function(selectDesc){
-						console.log("select-desc");
 						console.log("select-desc selectDesc >>> "+selectDesc.setDistrict);
+						//선택된 option값을 setDesc에 넣어서 함수로 보낸다
 						var setDesc = $('#desc').val();
-// 						$('.select-desc').text(setDesc);
 						console.log("setDesc >>> "+setDesc);
 						ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc,setScrollPage);
 					});
@@ -276,6 +290,7 @@
 					}//학원명 입력 유무
 				});//search aname button function
 				
+				//학원명 리스트출력 ajax
 				function ajaxGetAname(setAname,setDesc,scrollPage){
 					console.log("ajaxGetAname setAname >>> "+setAname);
 					console.log("ajaxGetAname setDesc >>> "+setDesc);
@@ -347,7 +362,6 @@
 							}
 						//무한스크롤
 						$(window).on("scroll", function() {
-							console.log("aname scroll");
 							var scrollHeight = $(document).height();
 							var scrollPosition = $(window).height() + $(window).scrollTop();		
 							var setAname = $("#aname").val();
@@ -449,6 +463,8 @@
 						$('select#district').html(st);
 						$('select#district').niceSelect('update');
 						console.log("ajaxGetDistrict end >>>");
+						//ajaxGetCity함수에 district의 값을 보내서 
+						//같은 row의 city값을 세팅해주기 위함
 						ajaxGetCity(resParam.districtList[0]);
 					}).fail(function(resParam){
 						alert("오류");
@@ -456,6 +472,7 @@
 				}//getDistrict
 				
 				//지역 소분류
+				//ajaxGetCity함수에 값 district를 갖고와서 controller로 보낸다
 				function ajaxGetCity(param){
 					console.log("ajaxGetCity param(setDistrict) >>> "+param);
 					urls = "getCity.ec"; //controller 지역 소분류
@@ -474,7 +491,8 @@
 						}
 						$('select#city').html(st);
 						$('select#city').niceSelect('update');
-						//call scroll
+						//call select box scroll
+						//select box값이 많아서 scroll을 넣었다
 						callNiceSelect(resParam);
 						console.log("ajaxGetCity end >>>");
 					}).fail(function(resParam){
@@ -482,15 +500,18 @@
 					});
 				}//getCity 
 				
-				//scroll function
+				//select box scorll
 				function callNiceSelect(resParam){
 					console.log("callNiceSelect >>> "+resParam.cityList[0].city);
+					//select box가 bootstram으로 되어있다
+					//select box인 nice-select 클릭시 
+					//option 값인 list를 변수 선언하여 list에 css를 추가했다
 					$('.nice-select').click(function(){
 						console.log("nice-select click");
 						var list = $('.list');
 						console.log("list >>> "+list);
 						list.css("overflow","auto");
-						
+						//select box option size media query별로 설정
 						var mql1 = window.matchMedia("screen and (min-width: 767px) and (max-width: 1023px)");
 						var mql2 = window.matchMedia("screen and (min-width: 321px) and (max-width: 480px)");
 						
