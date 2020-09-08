@@ -26,7 +26,7 @@
 			if(success =="true"){
 %>
 				<script>
-					alert("수정성공");
+					console.log("수정성공");
 					//수정한 글 상세보기로 이동
 					location.href="selectNotice.ec?nno=<%=nvo.getNno() %>";
 				</script>
@@ -35,7 +35,7 @@
 			}else{
 %>
 				<script>
-					alert("수정실패");
+					console.log("수정실패");
 					//수정 실패한 글 상세보기로 이동
 					location.href="selectNotice.ec?nno=<%=nvo.getNno() %>";
 				</script>
@@ -48,7 +48,7 @@
 			if(success =="true"){
 %>
 				<script>
-					alert("삭제성공");
+					console.log("삭제성공");
 					//공지사항 전체조회로 이동
 					location.href='listNotice.ec';
 				</script>
@@ -57,7 +57,7 @@
 			}else{
 %>
 				<script>
-					alert("삭제실패");
+					console.log("삭제실패");
 					//공지사항 전체조회로 이동
 					location.href='listNotice.ec';
 				</script>

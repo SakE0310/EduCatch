@@ -358,8 +358,8 @@ public class NoticeController {
 			log.info("multipart/form-data true");
 
 			int size = 10 * 1024 * 1024;
-			String path = "C://Users//user//git//EduCatch//EduCatch//WebContent//assets//img//notice";
-
+			String path = request.getServletContext().getRealPath("")+"//assets//img//notice";
+			
 			try {
 				MultipartRequest multi = new MultipartRequest(request, path, size, "UTF-8",
 						new DefaultFileRenamePolicy());

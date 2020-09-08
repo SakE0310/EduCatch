@@ -105,7 +105,7 @@
 	    padding-left: 11px;
 	    padding-right: 11px;
    	 }
-   	 #count{
+   	 #count_td{
    	 display:  none;}
 	}
 	
@@ -145,6 +145,9 @@
 	 #table_size{
 	 width: 700px;
 	 } 
+	 #count_td{
+	  width: 310px;
+	 }
 	}
 	
 	/* PC Desktop (가로폭 1024 이상) */
@@ -431,7 +434,7 @@
 			
 			</tr>
 			<tr style="width: 1140px;">
-			 <td  align="left" id="count">
+			 <td  align="left" id="count_td">
 			 <br>
 		      	총 <%=count %>개의 게시물이 있습니다
 		      </td> 

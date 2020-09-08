@@ -80,6 +80,7 @@
 			console.log("nsubject>>>>"+nsubject);
 			if(nsubject == null || nsubject == ""){
 				alert("제목을 입력해주시기 바랍니다.");
+				$("#nsubject").focus();
 				return false;
 			}
 			if($('#nimg2').val() != null && $('#nimg2').val() != ""){
@@ -151,7 +152,7 @@
 			<tr>
 				<td> 첨부파일</td>
 				<td>
-					<input type="file" value="찾아보기" id="nimg2" name="nimg2" /><br> 
+					<input type="file"id="nimg2" name="nimg2" /><br> 
 						
 				</td>
 			</tr>

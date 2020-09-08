@@ -5,6 +5,7 @@ import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.EventService;
 
 import com.kosmo.educatch.vo.EventVO;
+import com.kosmo.educatch.vo.MemberVO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -208,12 +210,22 @@ public class EventController {
 	//===============이벤트 관리자모드 : 등록================================
 	@RequestMapping("insertEvent.ec")
 	public ModelAndView insertEvent(HttpServletRequest request
-									,@ModelAttribute EventVO param) {
+									,@ModelAttribute EventVO param
+									, HttpSession session) {
 		log.info("EventController insertEvent 시작 >>>");
 		
 		String esubject=null;
 		String eimg=null;
 		String econtent=null;
+		String ename = null;
+		
+		//세션을 통해 로그인 된 이름을 가져옴
+		MemberVO mvo = null;
+		String member_mame ="";
+		if(session != null){
+			mvo = (MemberVO)session.getAttribute("user");
+			member_mame =mvo.getMname();
+		}	
 		
 		ModelAndView mav = new ModelAndView();
 		String resultStr="";
@@ -254,6 +266,7 @@ public class EventController {
 				param.setEsubject(esubject);
 				param.setEimg(list.get(0));
 				param.setEcontent(econtent);
+				param.setEname(member_mame);
 				
 			} catch (Exception e) {
 				log.info("에러>>>>"+e.getMessage());
@@ -268,6 +281,7 @@ public class EventController {
 			
 			param.setEsubject(esubject);
 			param.setEcontent(econtent);
+			param.setEname(member_mame);
 		}//end of if-else
 		
 		int nCnt = eventService.insertEvent(param);
@@ -332,7 +346,7 @@ public class EventController {
 			log.info("multipart/form-data true");
 			
 			int size = 10*1024*1024;
-			String path = "C://Users//user//git//EduCatch//EduCatch//WebContent//assets//img//event";
+			String path = request.getServletContext().getRealPath("")+"//assets//img//event";
 			
 			try {
 				MultipartRequest multi = new MultipartRequest(request 

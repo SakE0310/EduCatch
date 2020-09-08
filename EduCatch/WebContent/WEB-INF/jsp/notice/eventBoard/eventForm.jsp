@@ -26,7 +26,7 @@
 			if(success =="true"){
 %>
 				<script>
-					alert("수정성공");
+					console.log("수정성공");
 					//수정한 글 상세보기로 이동
 					location.href="selectEvent.ec?eno=<%=evo.getEno() %>";
 				</script>
@@ -48,7 +48,7 @@
 			if(success =="true"){
 %>
 				<script>
-					alert("삭제성공");
+					console.log("삭제성공");
 					//공지사항 전체조회로 이동
 					location.href='listEvent.ec';
 				</script>

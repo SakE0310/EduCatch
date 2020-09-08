@@ -50,7 +50,8 @@
 
 	#table_head{
 		border-collapse: collapse;
-		background-color: #F5F5F5;
+		background-color: #21146b;
+		color: white;
 	}
 	
 	#contentDIV{
@@ -105,9 +106,14 @@
 			$("#deleteData").click(function() {
 				console.log("삭제버튼 누름");
 				
-				$("#noticeSelForm").attr("action","deleteNotice.ec");
-				$("#noticeSelForm").attr("method","POST");
-				$("#noticeSelForm").submit();
+				var result = confirm("게시글을 삭제하시겠습니까?");
+				if(result){
+					$("#noticeSelForm").attr("action","deleteNotice.ec");
+					$("#noticeSelForm").attr("method","POST");
+					$("#noticeSelForm").submit();
+				}else{
+					
+				}
 				
 			})//end of deleteData
 			
@@ -175,7 +181,6 @@
          	<tr>
          		<td>
          			<div id="contentDIV" align="center">
-         				<%=nvo.getNcontent()%>
 <%
 							String img = nvo.getNimg();
 							if(img != null){
@@ -185,6 +190,10 @@
 							}//end of if(img)
 %>         				
          			</div>
+         		<div>
+         		<br>
+         				<%=nvo.getNcontent()%>
+         		</div> 
          		</td>
          	</tr>
 <%			

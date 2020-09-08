@@ -74,6 +74,7 @@
 			console.log("nsubject>>>>"+nsubject);
 			if(nsubject == null || nsubject == ""){
 				alert("제목을 입력해주시기 바랍니다.");
+				$("#nsubject").focus();
 				return false;
 			}
 				if($('#nimg').val() != null && $('#nimg').val() != ""){

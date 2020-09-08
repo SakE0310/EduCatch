@@ -48,7 +48,8 @@
 
 	#table_head{
 		border-collapse: collapse;
-		background-color: #F5F5F5;
+		background-color: #21146b;
+		color: white;
 	}
 	
 	#contentDIV{
@@ -78,7 +79,7 @@
 	    padding: 3px 10px;
 	}	
 	#eventSelForm{
-		
+			margin-bottom: 178px;
 	}
 	
 </style>
@@ -92,7 +93,6 @@ $(document).ready(function() {
 		console.log("수정버튼 누름");
 		
 		//수정페이지로 이동
-		//$("#esubject").val();//?????
 		$("#eventSelForm").attr("action","updateDisplayEvent.ec");
 		$("#eventSelForm").attr("method","POST");
 		$("#eventSelForm").submit();
@@ -104,9 +104,14 @@ $(document).ready(function() {
 	$("#deleteData").click(function() {
 		console.log("삭제버튼 누름");
 		
+		var result = confirm("게시글을 삭제하시겠습니까?");
+		if(result){
 		$("#eventSelForm").attr("action","deleteEvent.ec");
 		$("#eventSelForm").attr("method","POST");
 		$("#eventSelForm").submit();
+		}else{
+			
+		}
 		
 	})//end of deleteData
 	
@@ -170,17 +175,20 @@ $(document).ready(function() {
 			         	</tr>
 			         	<tr>
 			         		<td>
-			         			<div id="contentDIV" align="center" >
-			         				<%=evo.getEcontent()%>
+			         		
+			         			<div id="contentDIV" align="center"  >
 			<%
 										String img = evo.getEimg();
 										if(img != null){
 			%>
-			         						<img src="/EduCatch/assets/img/event/<%=evo.getEimg()%>" alt="사진업음"/><br>
+			         						<img src="/EduCatch/assets/img/event/<%=evo.getEimg()%>" alt="사진업음" /><br>
 			<%								
 										}//end of if(img)
 			%>         				
 			         			</div>
+			         			<div>
+			         				<%=evo.getEcontent()%>
+			         		</div>
 			         		</td>
 			         	</tr>
 			<%			

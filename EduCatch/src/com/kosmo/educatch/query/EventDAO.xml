@@ -106,7 +106,7 @@
 		VALUES(
 		                    #{eno, jdbcType=VARCHAR}         
 		                    ,#{esubject, jdbcType=VARCHAR}    
-		                    ,'관리자'       
+		                    ,#{ename, jdbcType=VARCHAR}        
 		                    ,#{eimg, jdbcType=VARCHAR}        
 		                    ,#{econtent, jdbcType=VARCHAR}    
 		                    ,'N'   

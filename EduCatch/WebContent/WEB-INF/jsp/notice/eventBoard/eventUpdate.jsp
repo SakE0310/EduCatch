@@ -75,7 +75,16 @@
 		$("#updateData").click(function() {
 			oEditors.getById["econtent"].exec("UPDATE_CONTENTS_FIELD", []);
 			
-			if($('#eimg2').val() != null && $('#nimg2').val() != ""){
+			var esubject = $('#esubject').val();
+			console.log("esubject>>>>"+esubject);
+			if(esubject == null || esubject == ""){
+				alert("제목을 입력해주시기 바랍니다.");
+				$("#esubject").focus();
+				return false;
+			}
+			console.log("eimg2>>>"+$('#eimg2').val());
+			
+			if($('#eimg2').val() != null && $('#eimg2').val() != ""){
 				$("#edit").attr("enctype","multipart/form-data");
 			}
 			
@@ -134,14 +143,24 @@
 			<tr>
 				<td>기존파일</td>
 				<td>
+<%
+				String img = evo.getEimg();
+				if(img != null){
+%>					
 				<input type="text" id="eimg1" name="eimg1" value="<%=evo.getEimg()%>" readOnly>
-					<%-- <img src="/EduCatch/assets/img/notice/<%=nvo.getNimg()%>" alt="사진업음"/><br> --%>
+<%	
+				}else{
+%>					
+					<input type="text" id="eimg1" name="eimg1" value="" readOnly>
+<%						
+				}
+%>				
 				</td>
 			</tr>
 			<tr>
 				<td> 첨부파일</td>
 				<td>
-					<input type="file" value="찾아보기" id="eimg2" name="eimg2" /><br> 
+					<input type="file" id="eimg2" name="eimg2" /><br> 
 						
 				</td>
 			</tr>
