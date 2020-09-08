@@ -81,7 +81,7 @@
 			width: 330px;
     		height: 130px;
 		}
-	.gj-textbox-md {
+	   .gj-textbox-md {
 			width: 100px;
 			font-size: 10px;
 		}
@@ -89,14 +89,15 @@
 			display: none;
 		}
 		 #eventForm{
-	 	padding-bottom: 150px;
+	 		padding-bottom: 150px;
 	 }
 	  .nice-select .option {
-	    padding-left: 11px;
-	    padding-right: 11px;
+		    padding-left: 11px;
+		    padding-right: 11px;
    	 }
 	 #count_td{
-   	 display:  none;}
+   	 		display:  none;
+   	 		}
 	}
 	
 	/* Tablet (가로폭 768px 이상, 1023px 이하) */
@@ -122,38 +123,38 @@
 			font-size: 50px;
 		}
 	.nice-select{
-	    width: 60px;
-    	height: 35px;
-	    padding-left: 10px;
+		    width: 60px;
+	    	height: 35px;
+		    padding-left: 10px;
 	}
 	 #eventForm{
-	 	padding-bottom: 270px;
+	 		padding-bottom: 270px;
 	 }
-	  #table_size{
-	 width: 700px;
+	 #table_size{
+			 width: 700px;
 	 } 
 	 #count_td{
-	  width: 325px;
+	  		width: 325px;
 	 }
 	}
 	
 	/* PC Desktop (가로폭 1024 이상) */
 	@media all and (min-width:1024px) {
-		#b{
+	#b{
 			width: 700px;
 		}
-		.nice-select{
+	.nice-select{
 		    width: 70px;
 		    height: 35px;
-		     padding-left: 14px;
+		    padding-left: 14px;
 		}
-		 #media_mobile{
-	 	width: 1140px;
-	 	height: 180px;
-	 	margin: auto;
+	#media_mobile{
+		 	width: 1140px;
+		 	height: 180px;
+		 	margin: auto;
 	 }
-	 	#mfont{
-	 	display: none;
+	 #mfont{
+	 		display: none;
 	 }
 	 #keyword{
 			width:200px; 
@@ -163,71 +164,71 @@
 			font-size: 15px;
 		}
 	 #eventForm{
-	 	padding-bottom: 370px;
+	 		padding-bottom: 370px;
 	 }	
 	 .nice-select .option {
-    padding-right: 25px;
+    		padding-right: 25px;
     }
 	}
 	
 	/* --------------------------------------------- */
 
 	#nno_color{
-		color: black;
+		c	olor: black;
 	}
 	
 	#table_head{
-		border-collapse: collapse;
-		background-color: #21146b;
+			border-collapse: collapse;
+			background-color: #21146b;
 	}
 	.btn_light {
-	    display: inline-block;
-	    text-align: center;
-	    background: #21146b;
-	    color: #ffffff;
-	    vertical-align: middle;
-	    cursor: pointer;
-	    border: 1px solid #140C40;
-	    height: 30px;
-	    font-size: 15px;
-	     border-radius: 0.5em;
+		    display: inline-block;
+		    text-align: center;
+		    background: #21146b;
+		    color: #ffffff;
+		    vertical-align: middle;
+		    cursor: pointer;
+		    border: 1px solid #140C40;
+		    height: 30px;
+		    font-size: 15px;
+		    border-radius: 0.5em;
 		}
 	.btn_box_01 {
-	    width: auto;
-	    padding: 3px 10px;
+		    width: auto;
+		    padding: 3px 10px;
 	}	
 	.bbs-link-btm {
-	    float: right;
-	    margin: 20px 0px 0;
-	    text-align: left;
-	   
+		    float: right;
+		    margin: 20px 0px 0;
+		    text-align: left;
 	}
 	.bbs-link {
-   	 position: relative;
+   			 position: relative;
 	}
 	
 	#sForm{
-    width: 350px;
-  	height: 100px;
-  	margin: auto;
+		    width: 350px;
+		  	height: 100px;
+		  	margin: auto;
 	}
 	#row-magin{
-		margin-bottom: 185px;
+			margin-bottom: 185px;
 	}	
 	
 	 #nfont, #mfont{
-	 	font-family: 'Do Hyeon', sans-serif;
+	 		font-family: 'Do Hyeon', sans-serif;
 	  }
 		
 	#mainWrapper{
-		font-family: 'Gothic A1', sans-serif;
+			font-family: 'Gothic A1', sans-serif;
 	} 	
 	.table_head_font{
-		font-family: 'Do Hyeon', sans-serif;
-		color:white;
+			font-family: 'Do Hyeon', sans-serif;
+			color:white;
 	}
 	
 	#keyword{
+			margin-left: 4px;
 			height:32px;
 			border: 1px solid #140C40;
 			 border-radius: 0.5em;
@@ -235,35 +236,37 @@
 		
 	/*데이트 피커*/
 	.gj-textbox-md{ 
-		border: 1px solid #140C40;
+			border: 1px solid #140C40;
 		
 	}
 	
 	.gj-icon{
 			color : #140C40;
-			  margin-left: 7px;
+			 margin-left: 7px;
 		}
 		
 	.gj-textbox-md {
    			height: 30px;
 		}
 	.gj-datepicker-md [role="right-icon"] {
-	    left: 3px;
-   		top: 3px;
+		    left: 3px;
+	   		top: 3px;
   	 }
-   		 
-	
 	 #c{
-	 	height: 10px;
+	 		height: 10px;
 	 }
 	 #h3_margin{
-	 	margin-top: 2px;
+	 		margin-top: 2px;
 	 }
 	 #media_mobile_td_margin{
-	 	padding-left: 0px; 	padding-top: 13px;
+	 		padding-left: 0px; 
+	 		padding-top: 13px;
 	 }
 	li{
-	 	font-size: 16px;
+	 		font-size: 16px;
+	 }
+	 a{
+	 	color:black;
 	 }
 	
 	 /*---------------------------------*/
@@ -505,7 +508,7 @@
 			<tr>
 			<td colspan="4">
 			<jsp:include page="eventPaging.jsp" flush="true">
-				<jsp:param name="url" value="searchEvent.ec"/>
+				<jsp:param name="url" value="listEvent.ec"/>
 				<jsp:param name="str" value=""/>
 				<jsp:param name="pagesize" value="<%= pagesize %>"/>
 				<jsp:param name="groupsize" value="<%= groupsize %>"/>

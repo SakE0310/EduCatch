@@ -99,22 +99,23 @@
 			display: none;
 		}
 		 #noticeForm{
-	 	padding-bottom: 150px;
-	 }
-	/*★*/	 .nice-select .option {
-	    padding-left: 11px;
-	    padding-right: 11px;
-   	 }
+	 		padding-bottom: 150px;
+	 	}
+	 .nice-select .option {
+		    padding-left: 11px;
+		    padding-right: 11px;
+   		 }
    	 #count_td{
-   	 display:  none;}
+   	 		display:  none;
+   	 	}
 	}
 	
 	/* Tablet (가로폭 768px 이상, 1023px 이하) */
 	@media all and (min-width:768px) and (max-width:1023px) {
 	/* 브라우저 가로폭이 768~1023px일때 적용될 css (태블릿) */
 	#media_mobile{
-	 	width: 680px;
-    height: 192px;
+		 	width: 680px;
+	    	height: 192px;
 	 }
 	 
 	 #keyword{
@@ -135,52 +136,57 @@
 	}
 		
 	.nice-select{
-	    width: 60px;
-    	height: 35px;
-	    padding-left: 10px;
+		    width: 60px;
+	    	height: 35px;
+		    padding-left: 10px;
 	}
 	#noticeForm{
-	 	padding-bottom: 270px;
+	 		padding-bottom: 270px;
 	 }	
 	 #table_size{
-	 width: 700px;
+	 		width: 700px;
 	 } 
 	 #count_td{
-	  width: 310px;
+	  		width: 310px;
 	 }
 	}
 	
 	/* PC Desktop (가로폭 1024 이상) */
 	@media all and (min-width:1024px) {
-		#b{
+	#b{
 			width: 700px;
-		}
-		.nice-select{
+	}
+	.nice-select{
 		    width: 70px;
 		    height: 35px;
-		     padding-left: 14px;
-		}
-		 #media_mobile{
-	 	width: 1140px;
-	 /*★*/ height: 180px;
-	 	margin: auto;
+		    padding-left: 14px;
+	}
+	#media_mobile{
+		 	width: 1140px;
+			height: 180px;
+		 	margin: auto;
 	 }
-	 	#mfont{
-	 	display: none;
+	 
+	 #mfont{
+	 		display: none;
 	 }
+	 
 	 #keyword{
 			width:200px; 
-	}
+	 }
+	 
 	.gj-textbox-md {
 			width: 130px;
 			font-size: 15px;
-		}
+	}
+	
 	 #noticeForm{
-	 	padding-bottom: 370px;
+	 		padding-bottom: 370px;
 	 }	
-/*★*/	 .nice-select .option {
-    padding-right: 25px;
-    }
+	 
+	 .nice-select .option {
+    		padding-right: 25px;
+     }
 	}
 	
 	/* --------------------------------------------- */
@@ -191,12 +197,12 @@
 	
 	#table_head{
 		border-collapse: collapse;
-	/*★*/	background-color: #21146b;
+		background-color: #21146b;
 	}
 	.btn_light {
 	    display: inline-block;
 	    text-align: center;
-	  /*★*/  background: #21146b;
+		background: #21146b;
 	    color: #ffffff;
 	    vertical-align: middle;
 	    cursor: pointer;
@@ -216,13 +222,13 @@
 	   
 	}
 	.bbs-link {
-   	 position: relative;
+   	 	position: relative;
 	}
 	
 	#sForm{
-    width: 350px;
-  	height: 100px;
-  	margin: auto;
+	    width: 350px;
+	  	height: 100px;
+	  	margin: auto;
 	}
 	#row-magin{
 		margin-bottom: 185px;
@@ -237,19 +243,20 @@
 	} 	
 	.table_head_font{
 		font-family: 'Do Hyeon', sans-serif;
-	/*★*/	color:white;
+		color:white;
 	}
 	
 	#keyword{
-	/*★*/		height:32px;
-			border: 1px solid #140C40;
-			 border-radius: 0.5em;
-		}
+		margin-left: 4px;
+		height:32px;
+		border: 1px solid #140C40;
+		border-radius: 0.5em;
+	}
 		
 	/*데이트 피커*/
 	.gj-textbox-md{ 
 		border: 1px solid #140C40;
-			height: 30px;
+		height: 30px;
 	}
 	
 	.gj-icon {
@@ -261,7 +268,6 @@
 	    left: 3px;
    		top: 3px;
   	 }
-   		 
 	
 	 #c{
 	 	height: 10px;
@@ -271,9 +277,9 @@
 	 }
 	 #media_mobile_td_margin{
 	 	padding-left: 0px;
-	/*★*/  	padding-top: 13px;
+	 	padding-top: 13px;
 	 }
-	/*★*/ li{
+	 li{
 	 	font-size: 16px;
 	 }
 </style>
@@ -428,7 +434,7 @@
 				</td>
 			</tr>
 			<tr>
-			 <!-- ★ --><td width="1200" align="center" id = "nfont" colspan="2"><br><h1>공지사항</h1>
+			<td width="1200" align="center" id = "nfont" colspan="2"><br><h1>공지사항</h1>
 			 <br>
 				<br></td>
 			
@@ -491,7 +497,7 @@
 %>
 				<tr align="center">
 					<td><%=nvo.getNno() %></td>
-					<!-- ★ --><td align="left" style="padding-left: 40px;">
+					<td align="left" style="padding-left: 40px;">
 					<a href="selectNotice.ec?nno=<%=nvo.getNno() %>" id="nno_color"><%=nvo.getNsubject() %></a></td>
 					<td class ="media_mobile_td"><%=nvo.getNname() %></td>
 					<td class ="media_mobile_td"><%=nvo.getNinsertdate()%></td>
@@ -559,36 +565,6 @@
 		</div>
 	</form>
 	</div>	
-	
-	
-	<!-- 검색 폼  -->
-<!-- 	<div id ="a">
-		<form id="searchFormNotice" name="searchFormNotice">
-		 <div id="mainWrapper" align = "center">
-		<div align = "center"   id="b">
-			<table border="0" cellpadding="1" cellspacing="1" align="center">
-			<tr>
-			<td width="500">
-		         <div class="row" id="c">
-		            <div class="col-md-1.8">
-						<input type="text" name="startDate" id="startDate">
-		            </div>
-		             <h3> &nbsp;&nbsp;- &nbsp;</h3>
-		            <div class="col-md-1.5">
-	      		 		<input type="text" name="endDate" id="endDate"> 
-		            </div>
-	      				&nbsp;&nbsp; <input class=" btn_light btn_box_01" type="button" id="searchPiker" value="검색">
-		      </div>
-		      
-				<td>
-			</tr>
-			</table>
-			<hr>
-		</div>
-		</div> 
-		</form>
-	</div> -->
- 
 <jsp:include page="../../../../footer.jsp" flush="true">
 <jsp:param value="" name=""/>
 </jsp:include>

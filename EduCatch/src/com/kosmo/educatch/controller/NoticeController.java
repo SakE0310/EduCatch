@@ -180,6 +180,7 @@ public class NoticeController {
 			log.info("curpage >>> "+nvo.getCurpage());
 			log.info("totalcount >>> "+nvo.getTotalcount());
 		}
+		
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("noticeList", list);
