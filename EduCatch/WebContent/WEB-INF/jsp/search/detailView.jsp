@@ -122,9 +122,10 @@
 }
 .nav-menu-item {
     display: block;
-    padding: 0 3px;
+    padding: 0 6px;
     color: #fff;
-    text-decoration: none;          
+    text-decoration: none;  
+    font-size: 14px;        
 }
 .nav-menu-item:hover,
 .isactive {
