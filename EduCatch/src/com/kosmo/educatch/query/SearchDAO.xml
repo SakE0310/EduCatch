@@ -23,7 +23,8 @@
 	
 	<select id="getAcaList" parameterType="academyview" resultType="academyview">
     SELECT
-            E.PAGENO AS PAGENO				--페이지번호
+            E.RBDELETEYN AS RBDELETEYN
+           ,E.PAGENO AS PAGENO				--페이지번호
            ,E.LISTCOUNT AS LISTCOUNT		--검색된 학원 개수
            ,E.ANO AS ANO					--학원번호
 		   ,E.ANAME AS ANAME				--학원이름
@@ -52,6 +53,7 @@
 		   ,C.AINSERTDATE AS AINSERTDATE
 		   ,C.AUPDATEDATE AS AUPDATEDATE
            ,C.RVCOUNT AS RVCOUNT
+           ,NVL(C.RBDELETEYN,'N') AS RBDELETEYN
 	FROM   (SELECT  NVL(AVG(B.RBGRADE),0) AS AGRADE --RBGRADE(리뷰)를 모두가져옴 NVL를 사용해서 0인 값도 가져오게 함
 	               ,A.CATEGORY_CNO AS CNO
 	               ,A.ANO AS ANO
@@ -64,11 +66,12 @@
 	               ,TO_CHAR(AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
 	               ,COUNT(A.ANO) OVER() AS LISTCOUNT 
                    ,COUNT(B.ACADEMY_ANO) AS RVCOUNT 
+                   ,B.RBDELETEYN AS RBDELETEYN 
 	        FROM   ACADEMY A, REVIEWBOARD B
 	        WHERE  B.ACADEMY_ANO(+) = A.ANO
 	        AND    A.ADELETEYN = 'N'
 	        GROUP BY A.CATEGORY_CNO,A.ANAME,A.ANO,A.ATEL,A.AADDR1,A.AADDR2,A.ALOGO,AINSERTDATE
-	        		,AUPDATEDATE,TO_CHAR(AINSERTDATE,'YYYY-MM-DD') ,TO_CHAR(AUPDATEDATE,'YYYY-MM-DD')) C, 
+	        		,AUPDATEDATE,TO_CHAR(AINSERTDATE,'YYYY-MM-DD') ,TO_CHAR(AUPDATEDATE,'YYYY-MM-DD'), RBDELETEYN) C, 
 	        CATEGORY D
 	WHERE C.CNO = D.CNO
 	<!-- 검색기능 -->
@@ -89,9 +92,10 @@
 	<![CDATA[ C.ANAME LIKE '%'||#{aname}||'%' ]]>
 	</if>
 	) E
+	WHERE E.RBDELETEYN = 'N'
 	<!-- 무한스크롤 -->
     <if test="scrollPage!=null">
-	WHERE   E.PAGENO = #{scrollPage}
+	AND   E.PAGENO = #{scrollPage}
 	</if>
 	<!-- 필터설정 평점순 -->
 	<if test="agrade!=null">
