@@ -36,7 +36,10 @@
 		width:20%;
 		
 		}
-
+	.hrColor{
+			border: solid 0.5px #737373;
+			width: 33%;
+		}
 	}
 	/* PC Desktop (가로폭 1024 이상) */
 	@media all and (min-width:1024px) {
@@ -48,11 +51,11 @@
 	}
 
 .btn_box_02 {
-    width: auto;
+/*     width: auto; */
     margin-bottom: 50px;
 }
 .btn_light {
-	margin-top: 40px;
+/* 	margin-top: 40px; */
 	margin-right: 5px;
     display: inline-block;
     *display: inline;
@@ -99,7 +102,8 @@ textarea {
 }
 
 .hrColor{
-	border: solid 0.5px white;
+	border: solid 0.5px #737373;
+	
 }
 
 .brGap{
@@ -117,10 +121,12 @@ textarea {
 
 	var consultboard_cbno = "<%=consultboard_cbno%>";
 	var member_mno = "<%=mvo.getMno()%>";
+	var member_mno2 = "<%=mvo.getMno()%>";
 	var reno = "<%=reno%>";
 	var recontent = "<%=recontent%>";
 	var rewriter = "<%=mvo.getMname()%>";
 	var sessionID = "<%=mvo.getMname()%>";
+	var mauth = "<%= mvo.getMauth()%>";
 	
 	$(document).ready(function(){
 		
@@ -182,7 +188,7 @@ textarea {
 		// 댓글수정폼 데이터 뿌려서 출력
 		var data = "<textarea name='bm_recontextUp' id='bm_recontextUp'>" + recontent + "</textarea>";
 	      data += "<input type='button' id='update_btn' value='등록' class='btn_light btn_box_02'>";
-	      data += "<input type='button' id='updateReset_btn' value='취소' class='btn_light btn_box_02'>";
+	      //data += "<input type='button' id='updateReset_btn' value='취소' class='btn_light btn_box_02'>";
 		bm_recontext_p.html(data);
 		
 	});	// end of 수정버튼 수정폼 출력 이벤트
@@ -359,7 +365,7 @@ textarea {
 		         console.log(rewriter);
 		         console.log(sessionID);
 
-		         if(rewriter == sessionID){
+		         if(member_mno == member_mno2 || mauth == 3){
 		     		// 조립하기
 		        	info_p.append(i_nameKr_span).append(bm_reinsertdate_span).append(updateForm_btn_input).append(delete_btn_input)
 		            newRe_td.append(info_p).append(bm_recontext_p).append(hr)
@@ -382,10 +388,42 @@ textarea {
 	function dataReset(){
 		$("#recontent").val("");
 	}
+	
+	 //댓글 바이트 수 제한
+	   function fnChkByte(obj,maxByte){
+	      var str = obj.value;
+	      var str_len = str.length;
+	      
+	      var rbyte=0;
+	      var rlen=0;
+	      var one_char="";
+	      var str2="";
+	      
+	      for(var i=0; i<str_len; i++){
+	         one_char=str.charAt(i);
+	         if(escape(one_char).length>4){
+	            rbyte+=2;
+	         }else{
+	            rbyte++;
+	         }
+	         if(rbyte<=maxByte){
+	            rlen=i+1;
+	         }
+	      }
+	      if(rbyte>maxByte){
+	         alert("한글"+(maxByte/2)+"자/영문"+maxByte+"자를 초과 입력할 수 없습니다.");
+	         str2=str.substr(0,rlen);
+	         obj.value=str2;
+	         fbChkByte(obj,maxByte);
+	      }else{
+	         document.getElementById("byteInfo").innerText=rbyte;
+	      }
+	   }
+	   
 </script>
 <body>
 	<div class="container">
-		<div class="table_wrap">
+		<div class="table_wrap" style="border: solid 0.5px #737373;">
 			<!-- =================== 댓글 입력폼 ==================== -->						
 				<table style="width: 1140px;">
 					<thead>
@@ -404,12 +442,13 @@ textarea {
 				<table class="reply_insert_wrap" align="center" width="1100" height="100">
 					<tr class="marT5 marL5 marB5">
 						<td>
-							<textarea name="recontent" id="recontent" style="padding:10px; min-width: 260px;" placeHolder="댓글을 입력해주세요."></textarea>
+							<textarea name="recontent" id="recontent" style="padding:10px; min-width: 260px; border: 0;"  onKeyUp="javascript:fnChkByte(this,'200')"
+                     placeHolder="댓글을 입력해주세요."></textarea><span id="byteInfo">0</span>(200Byte)
 <%
 		if(mvo != null){
 			if( mvo.getMauth().equals("2") || mvo.getMauth().equals("3")){
 %>
-							<input type="button" class="btn_light btn_box_02" id="replyInsert" value="등록" style="vertical-align:middle;"/>
+							<input type="button" class="btn_light btn_box_02" id="replyInsert" value="등록" style="vertical-align:middle; margin-bottom: 50px;"/>
 							<input type="hidden" id="reno" name="reno"/>
 						</td>
 					</tr>

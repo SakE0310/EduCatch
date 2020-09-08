@@ -81,8 +81,8 @@
 		}
 		 #keyword{
 			width:96px; 
-	}
-	.gj-textbox-md {
+		}
+		.gj-textbox-md {
 			width: 100px;
 			font-size: 10px;
 		}
@@ -98,6 +98,13 @@
 		#pageForm{
 	 	padding-bottom: 300px;
 	 }	
+	 
+/*★*/	 .nice-select .option {
+	    padding-left: 11px;
+	    padding-right: 11px;
+   	 }
+   	 #count{
+   	 display:  none;}
 	}
 	
 
@@ -107,8 +114,8 @@
 	
 	/* 브라우저 가로폭이 768~1023px일때 적용될 css (태블릿) */
 	#media_mobile{
-	 	width: 400px;
-   		 height: 180px;
+	 	width: 680px;
+    	height: 192px;
 	 }
 	 
 	 #keyword{
@@ -130,8 +137,12 @@
 	    padding-left: 10px;
 	}
 	#pageForm{
-	 	padding-bottom: 400px;
+	 	padding-bottom: 270px;
 	 }	
+	 
+	#table_size{
+	 width: 700px;
+	 } 
 	}
 	
 	/* PC Desktop (가로폭 1024 이상) */
@@ -153,6 +164,7 @@
 		}
 		 #media_mobile{
 	 	width: 1140px;
+  /*★*/ height: 180px;
 	 	margin: auto;
 	 }
 	 	#mfont{
@@ -172,21 +184,21 @@
 	#pageForm{
 	 	padding-bottom: 216px;
 	 }	
+	 
+	 /*★*/.nice-select .option {
+    padding-right: 25px;
+    }
 	}	
 	/* --------------------------------------------- */
 
-	#nno_color{
-		color: black;
-	}
-	
 	#table_head{
 		border-collapse: collapse;
-		background-color: #F5F5F5;
+		background-color: #21146b;
 	}
 	.btn_light {
 	    display: inline-block;
 	    text-align: center;
-	    background: #140C40;
+	    background: #21146b;
 	    color: #ffffff;
 	    vertical-align: middle;
 	    cursor: pointer;
@@ -227,10 +239,11 @@
 	} 	
 	.table_head_font{
 		font-family: 'Do Hyeon', sans-serif;
+		color:white;
 	}
 	
 	#keyword{
-			height:30px;
+			height:32px;
 			border: 1px solid #140C40;
 			 border-radius: 0.5em;
 		}
@@ -263,8 +276,11 @@
 	 }
 	  #media_mobile_td_margin{
 	 	padding-left: 0px;
+	 	padding-top: 13px;
 	 }
-	
+	 li{
+	 	font-size: 16px;
+	 }
 	 /*---------------------------------*/
 	 
 	 a{
@@ -288,6 +304,14 @@
    			dateFormat : 'yy-mm-dd'
    			
    		});
+ 		
+   	$("#startDate").focus(function(event){
+        var dim = $(this).offset();
+        $("#ui-datepicker-div").offset({
+            top     :   dim.top - 180,
+            left    :   dim.left + 150
+        });
+    });
       
       $("#endDate").datepicker({
          showOn: "button",
@@ -375,13 +399,14 @@
       
       int nCnt=searchList.size();
       
-      
+      ReviewVO rvo1=(ReviewVO)searchList.get(0);
+      String count =rvo1.getTotalcount(); 
    
 %>
 	<div id="mainWrapper" align = "center">
 		<div  id="media_mobile" >
 		<form id="searchForm" name="searchForm">
-			<table border="0" cellpadding="1" cellspacing="1" align="left">
+			<table border="0" cellpadding="1" cellspacing="1"  align="center" id="table_size">
 			<tr>	
 				<td align="center" id = "mfont">후기 게시판</h4>
 				<br>
@@ -389,21 +414,30 @@
 				</td>
 			</tr>
 			<tr>
-				<td width="500">
-		         <div class="row" id="c">
-		         &nbsp;&nbsp;&nbsp;
-		            <div class="col-md-1.8">
+			 <!-- ★ --><td width="1200" align="center" id = "nfont" colspan="2"><br><h1>후기 게시판</h1>
+			 <br>
+				<br></td>
+			
+			</tr>
+			<tr style="width: 1140px;">
+			 <td  align="left" id="count">
+			 <br>
+		      	총 <%=count %>개의 게시물이 있습니다
+		      </td> 
+				<td width="360" align="right">
+		         <div class="row" id="c" style="padding-right: 0px;">
+		        &nbsp;&nbsp;&nbsp;
+		            <div class="col-md-1.8" align="right">
 						<input type="text" name="startDate" id="startDate">
 		            </div>
-		             <h3 id="h3_margin"> &nbsp;&nbsp;- &nbsp;</h3>
-		            <div class="col-md-1.5">
+		             <h3 id="h3_margin"> &nbsp;&nbsp;- &nbsp;</h3>	
+		            <div class="col-md-1.5" align="right">
 	      		 		<input type="text" name="endDate" id="endDate"> 
 		            </div>
 	      				  &nbsp;&nbsp; <input type="button" id="searchPiker" value="검색"
 	      				  				class=" btn_light btn_box_01">	  
 		      	</div>
 				</td>
-				<td align="center" id = "nfont"><h1>후기 게시판</h1></td>
 			</tr>
 			</table>
 		</form>
@@ -411,11 +445,11 @@
 
 	<form id="pageForm" name="pageForm">
       <input type="hidden" id="rbno" name="rbno"/>
-	  <div  class="container" id="pageForm_div" style="height: 390px;">
+	  <div  class="container" style="height: 390px; ">
       	<table align="center" class="table">
          <colgroup>
 	            <col width="120px"/>
-	            <col width="120px"/>
+	            <col width="400px"/>
 	            <col width="600px"/>
 	            <col width="150px"/>
 	            <col width="120px"/>
@@ -450,11 +484,13 @@
 %>
 
                <tr align="center">
-                  <td class="cc media_mobile_td"><%= rvo.getRbno() %></td>
-                  <td class="cc"><%= rvo.getAname() %></td>
-                  <td class="cc"><a href="selectReview.ec?rbno=<%= rvo.getRbno() %>"  id="aa"><%= rvo.getRbsubject() %></a></td>
-                  <td class="cc"><%= rvo.getRbname() %></td>
-                  <td class="cc"><%= rvo.getRbinsertdate() %></td>
+                  <td class=" media_mobile_td"><%= rvo.getRbno() %></td>
+                  <td class="media_mobile_td_font"><%= rvo.getAname() %>
+                  <input type="hidden" id="aname" name="aname" value="<%= rvo.getAname()%>"/></td>
+                  <td class="media_mobile_td_font" align="left" style="padding-left: 40px;">
+                  <a href="selectReview.ec?rbno=<%= rvo.getRbno() %>"  id="aa"><%= rvo.getRbsubject() %></a></td>
+                  <td class="media_mobile_td_font"><%= rvo.getRbname() %></td>
+                  <td class=" media_mobile_td"><%= rvo.getRbinsertdate() %></td>
                </tr>
 <%
       }
@@ -474,7 +510,7 @@
          <tr>
          <td colspan="5">
          <jsp:include page="memberPaging.jsp" flush="true">
-            <jsp:param name="url" value="searchReview.ec"/>
+            <jsp:param name="url" value="searchList.ec"/>
             <jsp:param name="str" value=""/>
                <jsp:param name="pagesize" value="<%= pagesize %>"/>
                <jsp:param name="groupsize" value="<%= groupsize %>"/>
@@ -489,7 +525,7 @@
 		
 %>
 	<tr id ="media_mobile_tr">
-		<td colspan="3" align="left">
+		<td colspan="3" align="left"  id ="media_mobile_td_margin" >
          <select name="searchFilter" id ="searchFilter">
             <option value="제목">제목</option>
             <option value="내용">내용</option>
@@ -504,7 +540,8 @@
 %>
 
 			<td colspan="2" align="right">
-               <input type="button" value="글쓰기" id="insertPage" class=" btn_light btn_box_01"/>
+               <input type="button" value="글쓰기" id="insertPage" 
+                class=" btn_light btn_box_01"/>
 			</td>
 <%	
 						}
@@ -516,8 +553,8 @@
    </div>
 </form>
 </div>
-<jsp:include page="../../../../footer.jsp" flush="true">
-<jsp:param value="" name=""/>
-</jsp:include>
+	<jsp:include page="../../../../footer.jsp" flush="true">
+		<jsp:param value="" name=""/>
+	</jsp:include>
 </body>
 </html>

@@ -169,21 +169,25 @@
 		SELECT
 		     ANO,
 		     ANAME,
-		     AADDR1
+		     AADDR1,
+		     ADELETEYN
 		FROM 
 		      ACADEMY
 		WHERE ANAME LIKE '%' ||#{aname, jdbcType=VARCHAR}||'%'
+		AND	  ADELETEYN = 'N'
 	</select>
 	
 	<select id="academyAno" parameterType="String" resultType="academyview">
 		SELECT
 		     ANO,
 		     ANAME,
-		     AADDR1
+		     AADDR1,
+		     ADELETEYN
 		FROM 
 		      ACADEMY A
 		WHERE ANO = #{ano, jdbcType=VARCHAR}
 		AND   ANAME=#{aname, jdbcType=VARCHAR}
+		AND   ADELETEYN = 'N'
 	</select>
 	
 	<select id="memberMno" parameterType="String" resultType="member">

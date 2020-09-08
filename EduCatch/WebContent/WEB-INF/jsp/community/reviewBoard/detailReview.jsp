@@ -30,6 +30,7 @@
 		border-collapse: collapse;
 		background-color: #F5F5F5;
 	}
+
 	
 	.btn_light {
 	    display: inline-block;
@@ -85,6 +86,7 @@
 	}
 
 	String reviewboard_rbno = "";
+	
 	
 
 	Object obj=request.getAttribute("ReviewVO");
@@ -151,7 +153,7 @@
 			<jsp:param name="rbwt" value="<%=rvo.getMname() %>"/>
 		</jsp:include>
 <%
-	if( rvo.getRbname().equals(mvo.getMname()) || mvo.getMauth().equals("3")){
+	if( rvo.getMember_mno().equals(mvo.getMno()) || mvo.getMauth().equals("3")){
 %>
 	<table style="margin-left: auto; margin-right: auto;" border="0">
 			<tr align="center">

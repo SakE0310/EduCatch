@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosmo.educatch.manager.FilePathManager;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.AcademyAddService;
 import com.kosmo.educatch.service.LoginService;
@@ -33,6 +34,9 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
+	
+	// 파일경로 바꿔주는 싱글톤 객체
+	private FilePathManager fManager = FilePathManager.getInstance();
 
 	// 전체조회
 	@RequestMapping("listReview.ec")
@@ -254,7 +258,7 @@ public class ReviewController {
 
 			int size = 10 * 1024 * 1024;
 			// 파일 경로
-			String uploadPath = request.getServletContext().getRealPath("") + "//assets//img//reviewImg";
+			String uploadPath = request.getServletContext().getRealPath("") + "/assets/img/reviewImg";
 
 			try {
 				MultipartRequest mr = new MultipartRequest(request, uploadPath, size, "UTF-8",
@@ -361,7 +365,7 @@ public class ReviewController {
 	public ModelAndView selectUpdate(@ModelAttribute ReviewVO param, AcademyVO avo) {
 		// value="rbno", required=false
 		log.info("ReviewController selectUpdate >>> 호출 성공");
-
+		
 		String rbno = (String) param.getRbno();
 		ModelAndView mav = new ModelAndView();
 
@@ -375,9 +379,97 @@ public class ReviewController {
 
 	// 수정 버튼 눌렀을 때
 	@RequestMapping("/updateReview.ec")
-	public ModelAndView updateReview(@ModelAttribute ReviewVO param) {
+	public ModelAndView updateReview(HttpServletRequest request, @ModelAttribute ReviewVO param) {
 		log.info("ReviewController updateReview >>> 호출 성공");
 		String resultStr = "";
+
+		String rbno = null;
+		String rbsubject = null;
+		String rbname = null;
+		String rbimg = null;
+		String rbcontent = null;
+		String academy_ano = null;
+		String member_mno = null;
+		String rbgrade = null;
+		String rbdeleteyn = null;
+		String rbinsertdate = null;
+		String rbupdatedate = null;
+		
+		if (request.getContentType().toLowerCase().startsWith("multipart/form-data")) {
+			log.info("multipart/form-data true");
+
+			int size = 10 * 1024 * 1024;
+			// 파일 경로
+			String uploadPath = request.getServletContext().getRealPath("") + "/assets/img/reviewImg";
+
+			try {
+				MultipartRequest mr = new MultipartRequest(request, uploadPath, size, "UTF-8",
+						new DefaultFileRenamePolicy());
+
+				rbno = mr.getParameter("rbno");
+				rbsubject = mr.getParameter("rbsubject");
+				rbname = mr.getParameter("rbname");
+				rbimg = mr.getParameter("rbimg2");
+				rbcontent = mr.getParameter("rbcontent");
+				academy_ano = mr.getParameter("academy_ano");
+				member_mno = mr.getParameter("member_mno");
+				rbgrade = mr.getParameter("rbgrade");
+				rbdeleteyn = mr.getParameter("rbdeleteyn");
+				rbinsertdate = mr.getParameter("rbinsertdate");
+				rbupdatedate = mr.getParameter("rbupdatedate");
+
+				Enumeration<String> en = mr.getFileNames();
+				List<String> list = new ArrayList<String>();
+
+				while (en.hasMoreElements()) {
+					String file1 = en.nextElement();
+					list.add(mr.getFilesystemName(file1));
+
+					log.info("fileName >>> " + rbimg);
+				}
+
+				param.setRbno(rbno);
+				param.setRbsubject(rbsubject);
+				param.setRbname(rbname);
+				param.setRbimg(list.get(0));
+				param.setRbcontent(rbcontent);
+				param.setAcademy_ano(academy_ano);
+				param.setMember_mno(member_mno);
+				param.setRbgrade(rbgrade);
+				param.setRbdeleteyn(rbdeleteyn);
+				param.setRbinsertdate(rbinsertdate);
+				param.setRbupdatedate(rbupdatedate);
+
+			} catch (Exception e) {
+				log.info("Exception >>> " + e);
+			}
+		} else {
+			log.info("multipart/form-data false");
+			rbno = request.getParameter("rbno");
+			rbsubject = request.getParameter("rbsubject");
+			rbname = request.getParameter("rbname");
+			rbimg = request.getParameter("rbimg1");
+			rbcontent = request.getParameter("rbcontent");
+			academy_ano = request.getParameter("academy_ano");
+			member_mno = request.getParameter("member_mno");
+			rbgrade = request.getParameter("rbgrade");
+			rbdeleteyn = request.getParameter("rbdeleteyn");
+			rbinsertdate = request.getParameter("rbinsertdate");
+			rbupdatedate = request.getParameter("rbupdatedate");
+			
+			param.setRbno(rbno);
+			param.setRbsubject(rbsubject);
+			param.setRbname(rbname);
+			param.setRbimg(rbimg);
+			param.setRbcontent(rbcontent);
+			param.setAcademy_ano(academy_ano);
+			param.setMember_mno(member_mno);
+			param.setRbgrade(rbgrade);
+			param.setRbdeleteyn(rbdeleteyn);
+			param.setRbinsertdate(rbinsertdate);
+			param.setRbupdatedate(rbupdatedate);
+		}
+
 		int nCnt = reviewService.updateReview(param);
 
 		ModelAndView mav = new ModelAndView();
@@ -445,6 +537,7 @@ public class ReviewController {
 			log.info("avo.getAaddr1()	>>" + avo.getAaddr1());
 			log.info("avo.getAno()		>>" + avo.getAno());
 			log.info("avo.getAname()	>>" + avo.getAname());
+			log.info("avo.getAdeleteyn()	>>" + avo.getAdeleteyn());
 		}
 
 		ModelAndView mav = new ModelAndView();
