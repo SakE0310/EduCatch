@@ -106,13 +106,19 @@
 							st = "<p>";
 							st+= "<div class='sidebar'><h5>"+listcount+"개의 학원이 조회되었습니다</h5>";
 							st+= "<span class='select-desc'><select id='desc' style='height:25px;'>";
-							if(setDesc!=null){
-								st+= "<option id='filter'>"+setDesc+"</option>";	
+							if(setDesc=="평점 높은순"){
+							st+= "<option id='filter'>"+setDesc+"</option>";	
+							st+= "<option id='filter'>기본순</option>";
+							st+= "<option id='heightReview' value='리뷰 많은순'>리뷰 많은순</option>";
+							}else if(setDesc=="리뷰 많은순"){
+							st+= "<option id='filter'>"+setDesc+"</option>";	
+							st+= "<option id='filter'>기본순</option>";
+							st+= "<option id='heightGrade' value='평점 높은순'>평점 높은순</option>";
 							}else{
-								st+= "<option id='filter'>필터 설정</option>";
-							}
+							st+= "<option id='filter'>기본순</option>";
 							st+= "<option id='heightGrade' value='평점 높은순'>평점 높은순</option>";
 							st+= "<option id='heightReview' value='리뷰 많은순'>리뷰 많은순</option>";
+							}
 							st+= "</select></span>";
 							st+= "</div>";
 							st+= "</p>";
@@ -232,6 +238,7 @@
 						console.log("select-desc");
 						console.log("select-desc selectDesc >>> "+selectDesc.setDistrict);
 						var setDesc = $('#desc').val();
+// 						$('.select-desc').text(setDesc);
 						console.log("setDesc >>> "+setDesc);
 						ajaxGetAcaList(setDistrict,setCity,setCmajor,setCminor,setAname,setDesc,setScrollPage);
 					});
@@ -296,13 +303,19 @@
 							st = "<p>";
 							st+= "<div class='sidebar'><h5>"+listcount+"개의 학원이 조회되었습니다</h5>";
 							st+= "<span class='select-desc'><select id='desc' style='height:25px;'>";
-							if(setDesc!=null){
-								st+= "<option id='filter'>"+setDesc+"</option>";	
+							if(setDesc=="평점 높은순"){
+							st+= "<option id='filter'>"+setDesc+"</option>";	
+							st+= "<option id='filter'>기본순</option>";
+							st+= "<option id='heightReview' value='리뷰 많은순'>리뷰 많은순</option>";
+							}else if(setDesc=="리뷰 많은순"){
+							st+= "<option id='filter'>"+setDesc+"</option>";	
+							st+= "<option id='filter'>기본순</option>";
+							st+= "<option id='heightGrade' value='평점 높은순'>평점 높은순</option>";
 							}else{
-								st+= "<option id='filter'>필터 설정</option>";
-							}
+							st+= "<option id='filter'>기본순</option>";
 							st+= "<option id='heightGrade' value='평점 높은순'>평점 높은순</option>";
 							st+= "<option id='heightReview' value='리뷰 많은순'>리뷰 많은순</option>";
+							}
 							st+= "</select></span>";
 							st+= "</div>";
 							st+= "</p>";
