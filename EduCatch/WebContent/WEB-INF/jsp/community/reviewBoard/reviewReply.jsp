@@ -477,7 +477,7 @@ p{
                  <td>
                      <textarea name="recontent" id="recontent" style="padding:10px; min-width: 260px; border: 0;"  onKeyUp="javascript:fnChkByte(this,'200')"
                      placeHolder="댓글을 입력해주세요."></textarea><span id="byteInfo">0</span>(200Byte)
-                     <input type="button" class="btn_light btn_box_02" id="replyFreeInsert" value="등록" style="vertical-align:middle; margin-bottom: 50px; margin-right:0px;"/>
+                     <input type="button" class="btn_light btn_box_02" id="replyInsert" value="등록" style="vertical-align:middle; margin-bottom: 50px; margin-right:0px;"/>
                      <input type="hidden" id="reno" name="reno"/>
                   </td>
                </tr>
