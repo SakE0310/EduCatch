@@ -20,14 +20,14 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
+		
+			//무한스크롤 현재페이지 변수 선언 함수
 			$(document).ready(function(){
-				
 				var start = {
 				        param : {
 				            scrollPage : 1,
 				        },
 					}
-				
 				//지역 함수
 				ajaxGetDistrict();
 				//카테고리 함수
@@ -659,6 +659,7 @@
 				width:300px;		
 			}
 		}
+		/* 한줄에 2개의 태그  */
 		.title h4, .title h5 {
 			display:inline;
 			
@@ -671,6 +672,14 @@
  		    height:300px; 
  		    width:140px;
 		} 
+		/* 무한스크롤 footer고정 */
+		.footer-bottom-area {
+			width: 100%;
+		    height: auto;
+		    bottom: 0;
+		    left: 0;
+	    	position: fixed;
+		}
 		.main {
 			margin : 0 auto;
 		}
