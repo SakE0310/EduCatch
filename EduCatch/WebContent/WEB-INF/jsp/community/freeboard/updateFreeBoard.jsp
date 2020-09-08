@@ -82,7 +82,6 @@
 		$("#updatecommit").click(function() {
 			oEditors.getById["fbcontent"].exec("UPDATE_CONTENTS_FIELD", []);
 			console.log("updateCommit함수 진입");
-			alert("수정을 완료하시겠습니까??");
 			
 			if($("#img").val()!=null && $("#img").val()!=""){
 				$("#edit").attr("enctype","multipart/form-data");
@@ -124,7 +123,7 @@ if(hs != null){
 		</div>
 		<table style="margin-left: auto; margin-right: auto;" border="1" width="50%"class="table">
 			<input type="hidden" id="fbno" name="fbno" value="<%= freevo.getFbno() %>"/> 
-			<input type="hidden" id="member_mno" name="member_mno" value="<%= mvo.getMno() %>"/> 
+			<input type="hidden" id="mno" name="mno" value="<%= mvo.getMno() %>"/> 
 			<tr>
 				<td style="width: 100px">글번호</td>
 				<td><input type="text" id="fbno" name="fbno"

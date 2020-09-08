@@ -132,7 +132,7 @@
 			<jsp:param name="consultboard_cbno" value="<%=consultboard_cbno %>"/>
 		</jsp:include>
 <%
-	if( cvo.getCbname().equals(mvo.getMname()) || mvo.getMauth().equals("3")){
+	if( cvo.getMember_mno().equals(mvo.getMno()) || mvo.getMauth().equals("3")){
 %>
 		<table style="margin-left: auto; margin-right: auto;" border="0">
 			<tr align="center">

@@ -37,14 +37,12 @@ if(obj!=null){
 %>
 function updateClick(){
 	console.log("updateClick함수 진입");
-	alert("수정");
 	$("#edit").attr("action","selectfreeboardUD.ec");
 	$("#edit").attr("method","POST");
 	$("#edit").submit();
 }
 function deleteClick(){
 	console.log("deleteClick함수 진입");
-	alert("삭제");
 	$("#edit").attr("action","deletefreeboard.ec");
 	$("#edit").attr("method","POST");
 	$("#edit").submit();
@@ -55,7 +53,6 @@ function deleteClick(){
 %>
 function listClick(){
 	console.log("listClick함수 진입");
-	alert("목록");
 	$("#edit").attr("action","freeboardlist.ec");
 	$("#edit").attr("method","POST");
 	$("#edit").submit();
@@ -177,6 +174,10 @@ function listClick(){
 			%>
 		</table>
 	</form>
+	</div>
+	<br>
+		<br><br><br>
+	
 	<jsp:include page="../../../../footer.jsp" flush="true">
 	<jsp:param value="" name=""/>
 	</jsp:include>

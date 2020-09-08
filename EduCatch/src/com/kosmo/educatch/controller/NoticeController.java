@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosmo.educatch.manager.FilePathManager;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.NoticeService;
 import com.kosmo.educatch.vo.EventVO;
@@ -36,6 +37,9 @@ public class NoticeController {
 
 	@Autowired
 	private NoticeService noticeService;
+
+	// 파일경로 바꿔주는 싱글톤 객체
+	private FilePathManager fManager = FilePathManager.getInstance();
 
 	// ============ 공지사항 게시판 검색 조회===================================
 	@RequestMapping("searchNotice")
@@ -176,6 +180,7 @@ public class NoticeController {
 			log.info("curpage >>> "+nvo.getCurpage());
 			log.info("totalcount >>> "+nvo.getTotalcount());
 		}
+		
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("noticeList", list);
@@ -250,7 +255,7 @@ public class NoticeController {
 
 			int size = 10 * 1024 * 1024;
 			//String path = "C://Users//user//git//EduCatch//EduCatch//WebContent//assets//img//notice";
-			String path = request.getServletContext().getRealPath("")+"//assets//img//notice";
+			String path = request.getServletContext().getRealPath("")+"/assets/img/notice";
 			
 			try {
 				MultipartRequest multi = new MultipartRequest(request, path, size, "UTF-8",
@@ -358,7 +363,7 @@ public class NoticeController {
 			log.info("multipart/form-data true");
 
 			int size = 10 * 1024 * 1024;
-			String path = request.getServletContext().getRealPath("")+"//assets//img//notice";
+			String path = request.getServletContext().getRealPath("")+"/assets/img/notice";
 			
 			try {
 				MultipartRequest multi = new MultipartRequest(request, path, size, "UTF-8",

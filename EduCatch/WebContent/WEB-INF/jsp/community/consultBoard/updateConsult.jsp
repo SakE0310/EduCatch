@@ -54,14 +54,39 @@
 		});
 		//저장버튼 클릭시 form 전송
 		$("#save").click(function() {
-			alert("수정하시겠습니까?");
+			
+			if(!validateForm())
+				return;
+			
+			if(confirm('수정하시겠습니까?')){
 			oEditors.getById["cbcontent"].exec("UPDATE_CONTENTS_FIELD", []);
 			$("#edit").attr("action","updateConsult.ec");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
+			}
+		});
+		
+		//취소버튼 클릭시 form 전송
+		$("#cancel").click(function() {
+
+			$("#edit").attr("action","listConsult.ec");
+			$("#edit").attr("method","POST");
+			$("#edit").submit();
 		});
 	});
+	
+	function validateForm(){
+		if($("#cbsubject").val().replace(/\s/g,"")==""){
+			alert('제목을 입력해주세요.');
+			return false;
+		}
+// 		if($("#rbcontent").val().replace(/\s/g,"")==""){
+// 			alert('내용을 입력해주세요.');
+// 			return false;
+// 		}
 
+		return true;
+	}
 </script>
 <body>
 <%
@@ -103,7 +128,7 @@
 			<tr>
 				<td colspan="3" align="right">
 				 <input type="button" id="save" value="수정" />
-				 <input type="reset" value="취소" /> 
+				 <input type="button" id="cancel" value="취소" /> 
 				</td>
 			</tr>
 		</table>

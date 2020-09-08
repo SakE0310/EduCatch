@@ -96,6 +96,12 @@
 		#consultForm{
 	 	padding-bottom: 300px;
 	 }	
+	 	/*★*/	 .nice-select .option {
+	    padding-left: 11px;
+	    padding-right: 11px;
+   	 }
+   	 #count{
+   	 display:  none;}
 	}
 	
 
@@ -151,6 +157,7 @@
 		}
 		 #media_mobile{
 	 	width: 1150px;
+ /*★*/ height: 180px;
 	 	margin: auto;
 	 }
 	 	#mfont{
@@ -169,6 +176,9 @@
 	#consultForm{
 	 	padding-bottom: 216px;
 	 }	
+/*★*/	 .nice-select .option {
+    padding-right: 25px;
+    	}
 	}
 	
 	/* --------------------------------------------- */
@@ -179,12 +189,12 @@
 	
 	#table_head{
 		border-collapse: collapse;
-		background-color: #F5F5F5;
+		background-color: #21146b;
 	}
 	.btn_light {
 	    display: inline-block;
 	    text-align: center;
-	    background: #140C40;
+	    background: #21146b;
 	    color: #ffffff;
 	    vertical-align: middle;
 	    cursor: pointer;
@@ -225,10 +235,11 @@
 	} 	
 	.table_head_font{
 		font-family: 'Do Hyeon', sans-serif;
+/*★*/	color:white;
 	}
 	
 	#keyword{
-			height:30px;
+	/*★*/		height:32px;
 			border: 1px solid #140C40;
 			 border-radius: 0.5em;
 		}
@@ -259,10 +270,18 @@
 	 	margin-top: 2px;
 	 }
 	 /*---------------------------------*/
-	 
+	 	 #media_mobile_td_margin{
+	 	padding-left: 0px;
+	/*★*/  	padding-top: 13px;
+	 }
+	/*★*/ li{
+	 	font-size: 16px;
+	 }
 	 a{
 	 	color: black;
 	 }
+	 
+	
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -278,6 +297,14 @@
 			dateFormat : 'yy-mm-dd'
 			
 		});
+		
+	 	$("#startDate").focus(function(event){
+	        var dim = $(this).offset();
+	        $("#ui-datepicker-div").offset({
+	            top     :   dim.top - 180,
+	            left    :   dim.left + 150
+	        });
+	    });
 		
 		$("#endDate").datepicker({
 			showOn: "button",
@@ -340,6 +367,11 @@
 		})
 	});
 	 
+	 function clickBtn(){
+		 
+		 alert("로그인 후 이용해주세요!");ㄴ
+	 }
+	 
 </script>
 <body>
 <%
@@ -357,30 +389,42 @@
 	if(hs != null){
 		mvo = (MemberVO)hs.getAttribute("user");
 	}
+	
 
 	if(obj !=null){
 		ArrayList searchConsult=(ArrayList)obj;
 		
 		int nCnt=searchConsult.size();
-	
+		ConsultVO vo=(ConsultVO)searchConsult.get(0);
+		String count=vo.getTotalcount();
 %>
 
 
 	<div id="mainWrapper" align = "center">
 		<div  id="media_mobile" >
 		<form id="searchForm" name="searchForm">
-			<table border="0" cellpadding="1" cellspacing="1" align="left">
+			<table border="0" cellpadding="1" cellspacing="1" align="center" id="table_size">
 			<tr>	
-				<td align="center" id = "mfont">후기 게시판</h4>
+				<td align="center" id = "mfont">상담 게시판</h4>
 				<br>
 				<br>
 				</td>
 			</tr>
 			<tr>
-			<td width="500">
-		         <div class="row" id="c">
+			 <!-- ★ --><td width="1200" align="center" id = "nfont" colspan="2"><br><h1>상담 게시판</h1>
+			 <br>
+				<br></td>
+			
+			</tr>
+			<tr style="width: 1140px;">
+			 <td  align="left" id="count">
+			 <br>
+		      	총 <%=count %>개의 게시물이 있습니다
+		      </td> 
+				<td width="360" align="right">
+		         <div class="row" id="c" style="padding-right: 0px;">
 		         &nbsp;&nbsp;&nbsp;
-		            <div class="col-md-1.8">
+		            <div class="col-md-1.8" align="right">
 						<input type="text" name="startDate" id="startDate">
 		            </div>
 		              <h3 id="h3_margin"> &nbsp;&nbsp;- &nbsp;</h3>
@@ -391,7 +435,6 @@
 	      							  class=" btn_light btn_box_01">
 		      </div>
 		      </td>
-			  <td align="center" id = "nfont"><h1>상담 게시판</h1></td>
 			</tr>
 			</table>
 		</form>
@@ -399,13 +442,13 @@
 		
 	<form id="consultForm" name="consultForm">
 		<input type="hidden" id="cbno" name="cbno"/>
-		<div class="container" id="consultForm_div" style="height: 390px;" >
+		<div  class="container" style="height: 390px; ">
 		<table align="center" class="table">
 			<colgroup>
 				<col width="120px"/>
-				<col width="120px"/>
-				<col width="600px"/>
-				<col width="120px"/>
+				<col width="400px"/>
+				<col width="500px"/>
+				<col width="200px"/>
 				<col width="120px"/>
 			</colgroup>
 			<thead id="table_head">	
@@ -435,18 +478,43 @@ if(searchConsult !=null && nCnt>0){
 		System.out.println("cvo.getGroupsize()"+cvo.getGroupsize());
 		System.out.println("cvo.getCurpage()"+cvo.getCurpage());
 		System.out.println("cvo.getTotalcount()"+cvo.getTotalcount());
-		
-	
+		if(mvo !=null){
 %>
 					<tr align="center">
-						<td class="cc media_mobile_td"><%= cvo.getCbno() %></td>
-						<td class="cc"><%= cvo.getAname() %></td>
-						<td class="cc"><a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa"><%= cvo.getCbsubject() %></a></td>
-						<td class="cc"><%= cvo.getCbname() %></td>
-						<td class="cc"><%= cvo.getCinsertdate() %></td>
-					</tr>
+						<td class="media_mobile_td"><%= cvo.getCbno() %></td>
+						<td class="media_mobile_td_font"><%= cvo.getAname() %></td>
+						<td class="media_mobile_td_font" align="left" style="padding-left: 40px;">
 <%
-				}	
+			if(cvo.getCbname().equals(mvo.getMname()) || mvo.getMauth().equals("3") 
+			   || cvo.getAcademy_ano().equals(mvo.getAcademy_ano())){
+%>
+						<a href="selectConsult.ec?cbno=<%= cvo.getCbno() %>"  id="aa">
+<%
+			}
+%>
+						<%= cvo.getCbsubject() %></a>
+						</td>
+						<td class="media_mobile_td_font"><%= cvo.getCbname() %></td>
+						<td class="media_mobile_td"><%= cvo.getCinsertdate() %></td>
+					</tr>
+<%					
+					
+				}else{
+		
+%>
+					<tr align="center">
+						<td class="media_mobile_td"><%= cvo.getCbno() %></td>
+						<td class="media_mobile_td_font"><%= cvo.getAname() %></td>
+						<td class="media_mobile_td_font">
+						<a href="javascript:clickBtn()" id="aa">
+						<%= cvo.getCbsubject() %></a>
+						</td>
+						<td class="media_mobile_td_font"><%= cvo.getCbname() %></td>
+						<td class="media_mobile_td"><%= cvo.getCinsertdate() %></td>
+					</tr>
+<% 				
+				}
+			}
 		}else{
 		
 %>	
@@ -463,7 +531,7 @@ if(searchConsult !=null && nCnt>0){
 %>			
 			</tbody>
 			<tr>
-			<td colspan="18">
+			<td colspan="5">
 			<jsp:include page="memberPaging.jsp" flush="true">
 				<jsp:param name="url" value="searchConsult.ec"/>
 				<jsp:param name="str" value=""/>
@@ -491,7 +559,7 @@ if(searchConsult !=null && nCnt>0){
 		</td>
 <%
 		if(mvo != null){
-			if( mvo.getMauth().equals("1")){
+			if( mvo.getMauth().equals("1") || mvo.getMauth().equals("3")){
 %>
 		
 			<td colspan="2" align="right">

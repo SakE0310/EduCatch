@@ -1,5 +1,7 @@
 package com.kosmo.educatch.service;
 
+import java.security.SecureRandom;
+
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
@@ -28,6 +30,7 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	private JavaMailSender mailSender;
 
+
 	
 	@Override
 	public MemberVO loginCheck(MemberVO mvo) {
@@ -35,6 +38,7 @@ public class LoginServiceImpl implements LoginService {
 		log.info("result" + result );
 		return result;
 	}
+	
 	
 	/*
 	 * 비밀번호 변경 전 이메일 확인
@@ -45,6 +49,11 @@ public class LoginServiceImpl implements LoginService {
 	public String passwordReset(MemberVO param) {
 		String result = "";
 		String email = param.getMid();
+		log.info("email >>>" + email);
+		MemberVO getFindPwVO = loginMapper.memberLoginInfo(param);
+		String findpw = getFindPwVO.getFindpw();
+		log.info("findpw >>>" + findpw);
+		
 		log.info("password change > " + email);
 		if(email != null) {
 			String checkMember = loginMapper.emailCheckID(param);
@@ -54,7 +63,7 @@ public class LoginServiceImpl implements LoginService {
 				return result;
 			} else {
 				try {
-					sendAuthMail(email);
+					sendAuthMail(email, findpw);
 				}catch(Exception e) {
 					log.error(e);
 					result = "이메일 전송중 오류가 발생했습니다.";
@@ -67,7 +76,7 @@ public class LoginServiceImpl implements LoginService {
 		}
 		
 		return result;
-	}
+	} 
 
 	/*
 	 * Email 인증 완료 후 링크로 비밀번호 변경Page 들어온 경우
@@ -75,16 +84,19 @@ public class LoginServiceImpl implements LoginService {
 	 */
 	@Override
 	public String passwordChange(MemberVO param) {
-		loginMapper.passwordChange(param);
+		MemberVO resultVO = loginMapper.getMidByFindPw(param);
+		resultVO.setMpw(param.getMpw());
 		
-		String result = param.getMid() + "의 비밀번호가 변경되었습니다.";
+		loginMapper.passwordChange(resultVO);
+		
+		String result = resultVO.getMid() + "의 비밀번호가 변경되었습니다.";
 		return result;	
 	}
 	
 	// 인증메일 보내기
-	public void sendAuthMail(String email) throws Exception {
+	public void sendAuthMail(String email, String findpw ) throws Exception {
 		String mailcontent = "<h1>[비밀번호 변경]</h1><br>" + "<p>아래 링크를 클릭하시고 비밀번호를 변경해주세요.</p>"
-				+ "<a href='http://localhost:8088/EduCatch/passwdChangePage.ec?mid=" + email
+				+ "<a href='http://localhost:8088/EduCatch/passwdChangePage.ec?findpw="+findpw
 				+ "'>이메일 인증확인</a>";
 		MimeMessage mailmessage = mailSender.createMimeMessage();
 		MimeMessageHelper helper;

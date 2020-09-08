@@ -39,6 +39,12 @@ public class LoginMapperImpl implements LoginMapper{
 	public void passwordChange(MemberVO param) {
 		session.update("passwordChange",param);
 	}
+
+	@Override
+	public MemberVO getMidByFindPw(MemberVO param) {
+		MemberVO member = session.selectOne("getMidByFindPw", param);
+		return member;
+	}
 		
 }
 	

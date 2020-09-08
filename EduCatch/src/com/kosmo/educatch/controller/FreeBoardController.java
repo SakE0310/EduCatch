@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosmo.educatch.manager.FilePathManager;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.FreeService;
 import com.kosmo.educatch.vo.FreeVO;
@@ -24,6 +25,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @Controller
 public class FreeBoardController {
 	private Logger log = LoggerManager.getInstance().getLogger(FreeBoardController.class);
+	// 파일경로 바꿔주는 싱글톤 객체
+	private FilePathManager fManager = FilePathManager.getInstance();
 	
 	@Autowired
 	private FreeService freeService;
@@ -198,8 +201,13 @@ public class FreeBoardController {
 		if(request.getContentType().toLowerCase().startsWith("multipart/form-data")) {
 			log.info("multipart/form-data 파일 업로드");
 			
+			// file삽입경로 (변경필수)
+			String uploadPath = request.getServletContext().getRealPath("") + "/assets/img/freeImg";
+			uploadPath = fManager.changePath(uploadPath);
+			log.info("upload Path Test >>> " + uploadPath);
+			
 			int size=10*1024*1024;
-			String uploadPath =request.getServletContext().getRealPath("")+"//assets//img//freeImg";
+			//String uploadPath =request.getServletContext().getRealPath("")+"//assets//img//freeImg";
 			//String uploadPath = "C://Users//ekfri//git//EduCatch//EduCatch//WebContent//assets//img//freeImg";
 			
 			ModelAndView mav = new ModelAndView();
@@ -294,14 +302,20 @@ public class FreeBoardController {
 		String fbname = null;
 		String fbcontent=null;
 		String fbimg = null;
+		//String member_mno= null;
 		String resultStr = "";
 		
 		
 		if(request.getContentType().toLowerCase().startsWith("multipart/form-data")) {
 			log.info("파일 업로드");
 			
+			// file삽입경로 (변경필수)
+			String uploadPath = request.getServletContext().getRealPath("") + "/assets/img/freeImg";
+			uploadPath = fManager.changePath(uploadPath);
+			log.info("upload Path Test >>> " + uploadPath);
+			
 			int size=10*1024*1024;
-			String uploadPath = request.getServletContext().getRealPath("")+"//assets//img//freeImg";
+			//String uploadPath = request.getServletContext().getRealPath("")+"//assets//img//freeImg";
 			//String uploadPath = "C://Users//ekfri//git//EduCatch//EduCatch//WebContent//assets//img//freeImg";
 			
 			ModelAndView mav = new ModelAndView();
@@ -316,6 +330,7 @@ public class FreeBoardController {
 				fbsubject = mr.getParameter("fbsubject");
 				fbname =mr.getParameter("fbname");
 				fbcontent = mr.getParameter("fbcontent");
+				//member_mno = mr.getParameter("mno");
 				resultStr="";
 				
 				
@@ -323,6 +338,7 @@ public class FreeBoardController {
 				log.info("fbsubject>>>"+fbsubject);
 				log.info("fbname>>>"+fbname);
 				log.info("fbcontent>>>"+fbcontent);
+				//log.info("mno>>>"+member_mno);
 				
 				
 				Enumeration<String> en = mr.getFileNames();
@@ -345,17 +361,20 @@ public class FreeBoardController {
 			fbname = request.getParameter("fbname");
 			fbcontent = request.getParameter("fbcontent");
 			fbimg = request.getParameter("fbimg");
+			//member_mno = request.getParameter("mno");
 		}
 		param.setFbno(fbno);
 		param.setFbsubject(fbsubject);
 		param.setFbname(fbname);
 		param.setFbcontent(fbcontent);
 		param.setFbimg(fbimg);
+		//param.setMember_mno(member_mno);
 		
 		log.info("글번호"+param.getFbno());
 		log.info("제목"+param.getFbsubject());
 		log.info("작성자"+param.getFbname());
 		log.info("내용"+param.getFbcontent());
+		log.info("회원번호"+param.getMember_mno());
 		log.info("첨부파일"+param.getFbimg());
 		log.info("삭제여부"+param.getFbdeleteyn());
 		log.info("입력일"+param.getFbinsertdate());

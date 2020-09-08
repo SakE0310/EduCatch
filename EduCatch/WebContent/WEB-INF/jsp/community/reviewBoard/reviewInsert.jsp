@@ -99,19 +99,26 @@
 		});
 		//저장버튼 클릭시 form 전송
 		$("#save").click(function() {
-			alert("<<<>>>");
 			oEditors.getById["rbcontent"].exec("UPDATE_CONTENTS_FIELD", []);
+			if(!validateForm())
+				return;
 			$("#edit").attr("action","insertReview.ec");
 			$("#edit").attr("enctype","multipart/form-data");
 			$("#edit").attr("method","POST");
 			$("#edit").submit();
 		});
+		
+		//취소버튼 클릭시
+		$("#cancel").click(function() {
 
+			$("#edit").attr("action","listReview.ec");
+			$("#edit").attr("method","POST");
+			$("#edit").submit();
+		});
 		
 		
 		$("#searchAcademy").click(function(){
 			
-			alert("searchAcademy >>>");
 			$("#ano").val(ano);
 			window.open("","pop","width=480 height=250");
 			$("#edit").attr("action","academyList.ec");
@@ -141,6 +148,29 @@
 	      //document.getElementById("ano").value = ano;
 	      
 
+	}
+	
+	function validateForm(){
+
+		if($("#rbsubject").val()==""){
+			alert('제목을 입력해주세요.');
+			return false;
+		}
+		if($("#rbgrade").val()==""){
+			alert('평점을 입력해주세요.');
+			return false;
+		}
+		if($("#aname").val()==""){
+			alert('학원명을 입력해주세요.');
+			return false;
+		}
+        if($("#rbcontent").val()=="<p><br></p>" || $("#rbcontent").val() == ""){
+            alert('내용을 입력해주세요');
+            document.getElementById("rbcontent").focus();
+            return false;
+         }
+
+		return true;
 	}
 
 
@@ -189,7 +219,7 @@
 				<td>
 				 <input type="hidden" id="rbgrade" name="rbgrade" /> 
 					<div class="starRev">
-					  <span class="starR1 on">별1_왼쪽</span>
+					  <span class="starR1">별1_왼쪽</span>
 					  <span class="starR2">별1_오른쪽</span>
 					  <span class="starR1">별2_왼쪽</span>
 					  <span class="starR2">별2_오른쪽</span>
@@ -245,7 +275,7 @@
 			<tr>
 				<td colspan="3" align="right">
 				 <input type="button" id="save" value="등록" class=" btn_light btn_box_01" />
-				 <input type="reset" value="취소" class=" btn_light btn_box_01" /> 
+				 <input type="button" id="cancel" value="취소" class=" btn_light btn_box_01" /> 
 				</td>
 			</tr>
 		</table>

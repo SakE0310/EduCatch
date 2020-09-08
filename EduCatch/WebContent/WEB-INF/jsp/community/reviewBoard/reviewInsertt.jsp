@@ -78,9 +78,11 @@
 			},
 			fCreator : "createSEditor2"
 		});
+		
 		//저장버튼 클릭시 form 전송
 		$("#save").click(function() {
-			alert("<<<>>>");
+			if(!validateForm())
+				return;
 			oEditors.getById["rbcontent"].exec("UPDATE_CONTENTS_FIELD", []);
 			$("#edit").attr("action","insertReview.ec");
 			$("#edit").attr("enctype","multipart/form-data");
@@ -88,6 +90,13 @@
 			$("#edit").submit();
 		});
 
+		//취소버튼 클릭시
+		$("#cancel").click(function() {
+
+			$("#edit").attr("action","listReview.ec");
+			$("#edit").attr("method","POST");
+			$("#edit").submit();
+		});
 		
 		
 		$("#searchAcademy").click(function(){
@@ -120,10 +129,29 @@
 	      document.getElementById("aname").value = aname1[0];
 	      document.getElementById("ano").value = aname1[1];
 	      //document.getElementById("ano").value = ano;
-	      
-
 	}
+	
+	function validateForm(){
+		if($("#rbsubject").val().replace(/\s/g,"")==""){
+			alert('제목을 입력해주세요.');
+			return false;
+		}
+		if($("#rbgrade").val().replace(/\s/g,"")==""){
+			alert('평점을 입력해주세요.');
+			return false;
+		}
+		if($("#aname").val().replace(/\s/g,"")==""){
+			alert('학원명을 입력해주세요.');
+			return false;
+		}
+		
+// 		if($("#rbcontent").val().replace(/\s/g,"")==""){
+// 			alert('내용을 입력해주세요.');
+// 			return false;
+// 		}
 
+		return true;
+	}
 
 
 </script>
@@ -222,7 +250,7 @@
 			<tr>
 				<td colspan="3" align="right">
 				 <input type="button" id="save" value="등록" />
-				 <input type="reset" value="취소" /> 
+				 <input type="button" id="cancel" value="취소" /> 
 				</td>
 			</tr>
 		</table>

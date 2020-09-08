@@ -28,7 +28,8 @@
         MEMAILCHK,        
         MDELETEYN,       
         MINSERTDATE,    
-        MUPDATEDATE      
+        MUPDATEDATE,
+        FINDPW      
 	)VALUES(
 		#{mno, jdbcType=VARCHAR},
 		#{mid, jdbcType=VARCHAR},
@@ -47,7 +48,8 @@
 		#{memailchk, jdbcType=VARCHAR},
 		'N',
 		SYSDATE,
-		SYSDATE
+		SYSDATE,
+		#{findpw, jdbcType=VARCHAR}
 	)
 	
 </insert>

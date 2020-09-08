@@ -24,7 +24,6 @@
 		if(result == "update"){
 %>
 	<script>
-		alert("수정완료");
 		location.href="selectfreeboardDetail.ec?fbno=<%= fbvo.getFbno() %>";
 	</script>
 <% 
@@ -32,7 +31,6 @@
 			if(isSuccess=="true"){
 %>
 			<script>
-				alert("삭제완료");
 				location.href="freeboardlist.ec";
 			</script>
 <%

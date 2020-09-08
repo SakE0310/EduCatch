@@ -52,7 +52,7 @@ $(document).ready(function(){
 	</jsp:include>
 </head>
 <body>
-
+	<div>
 	<form id="agreement" name="agreement" method="get">
 	<div id="divAgree" class="join-box tab-cont" align="center">
 	<p class="title-p" align="right" margin-right="320px">EduCatch 회원으로 가입하기 위해서는 이용약관, 개인정보처리방침에 동의하셔야 합니다.</p>
@@ -222,10 +222,12 @@ $(document).ready(function(){
 		<input type="button" id="backbutton" onclick="backButton()" value="취소" class="icon_btn_write2" tabindex="0">
 	</div>
 </div>
+<br><br><br><br>
 	</form>
-	<br>
+	</div>
+		<br><br><br>
 	<jsp:include page="../../../../footer.jsp" flush="true">
-	<jsp:param value="" name=""/>
+		<jsp:param value="" name="" />
 	</jsp:include>
 </body>
 </html>

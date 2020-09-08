@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosmo.educatch.manager.FilePathManager;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.AmemberJoinService;
 import com.kosmo.educatch.service.MemberJoinService;
@@ -30,6 +31,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @Controller
 public class AmemberJoinController {
 	private Logger log = LoggerManager.getInstance().getLogger(MemberJoinController.class);
+	// 파일경로 바꿔주는 싱글톤 객체
+	private FilePathManager fManager = FilePathManager.getInstance();
 	
 	@Autowired
 	private AmemberJoinService amemberjoinservice;
@@ -67,8 +70,13 @@ public class AmemberJoinController {
 		String mimg = "";
 		String resultStr = "";
 
+		// file삽입경로 (변경필수)
+		String uploadPath = request.getServletContext().getRealPath("") + "/assets/img/amemimg";
+		uploadPath = fManager.changePath(uploadPath);
+		log.info("upload Path Test >>> " + uploadPath);
+		
 		int size=10*1024*1024;
-		String uploadPath = request.getServletContext().getRealPath("")+"//assets//img//amemimg";
+		//String uploadPath = request.getServletContext().getRealPath("")+"//assets//img//amemimg";
 		//String uploadPath = "C://Users//ekfri//git//EduCatch//EduCatch//WebContent//assets//img//amemimg";
 		
 		try {

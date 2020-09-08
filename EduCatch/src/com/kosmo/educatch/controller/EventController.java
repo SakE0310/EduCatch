@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosmo.educatch.manager.FilePathManager;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.EventService;
 
@@ -30,6 +31,8 @@ public class EventController {
 	@Autowired
 	private EventService eventService;
 	
+	// 파일경로 바꿔주는 싱글톤 객체
+	private FilePathManager fManager = FilePathManager.getInstance();
 	
 	//============ 이벤트 게시판 검색 조회===================================
 	@RequestMapping("searchEvent.ec")
@@ -235,7 +238,7 @@ public class EventController {
 			log.info("multipart/form-data true");
 			int size = 10*1024*1024;
 			//String path = "C://Users//user//git//EduCatch//EduCatch//WebContent//assets//img//event";
-			String path = request.getServletContext().getRealPath("")+"//assets//img//event";
+			String path = request.getServletContext().getRealPath("")+"/assets/img/event";
 			
 			try {
 				MultipartRequest multi = new MultipartRequest(request 
@@ -346,7 +349,7 @@ public class EventController {
 			log.info("multipart/form-data true");
 			
 			int size = 10*1024*1024;
-			String path = request.getServletContext().getRealPath("")+"//assets//img//event";
+			String path = request.getServletContext().getRealPath("")+"/assets/img/event";
 			
 			try {
 				MultipartRequest multi = new MultipartRequest(request 
