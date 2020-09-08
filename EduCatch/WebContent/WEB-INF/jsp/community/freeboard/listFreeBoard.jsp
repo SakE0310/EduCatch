@@ -418,8 +418,8 @@
 	if(obj!=null){
 		List<FreeVO> list = (List<FreeVO>)obj;
 		int nCnt =list.size();
-		//FreeVO fvo = (FreeVO)list.get(0);
-		//String count = fvo.getTotalcount();
+		FreeVO fvo = (FreeVO)list.get(0);
+		String count = fvo.getTotalcount();
 %>
 	<div id="mainWrapper" align = "center">
 	<div  id="media_mobile" >
@@ -440,7 +440,7 @@
 			<tr style="width: 1140px;">
 			<td  align="left" id="count">
 			 <br>
-		      
+		      	총 <%=count %>개의 게시물이 있습니다
 		      </td>
 				<td width="360" align="right">
 		         <div class="row" id="c" style="padding-right: 0px;">
