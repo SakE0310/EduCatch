@@ -15,8 +15,9 @@
 		if(nCnt>0){
 			System.out.println("삭제된 건 수"+nCnt+"건");
 %>	
+		
 		<script>
-			location.href="index.jsp";
+			location.href="logout.ec";
 		</script>
 <%
 		}

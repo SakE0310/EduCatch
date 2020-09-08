@@ -137,6 +137,8 @@
 		}
 		#media_mobile{
 			width: 700px;
+			height: 180px;
+			margin:auto;
 		}
 		
 		#b{
@@ -168,6 +170,9 @@
 	#freeBoardForm{
 	 	padding-bottom: 290px;
 	 }	
+	 .nice-select .option {
+    padding-right: 25px;
+    }
 	}	
 	/* --------------------------------------------- */
 
@@ -177,12 +182,12 @@
 	
 	#table_head{
 		border-collapse: collapse;
-		background-color: #F5F5F5;
+		background-color: #21146b;
 	}
 	.btn_light {
 	    display: inline-block;
 	    text-align: center;
-	    background: #140C40;
+	    background: #21146b;
 	    color: #ffffff;
 	    vertical-align: middle;
 	    cursor: pointer;
@@ -220,13 +225,15 @@
 		
 	#mainWrapper{
 		font-family: 'Gothic A1', sans-serif;
+		
 	} 	
 	.table_head_font{
 		font-family: 'Do Hyeon', sans-serif;
+		color:white;
 	}
 	
 	#keyword{
-			height:30px;
+			height:32px;
 			border: 1px solid #140C40;
 			 border-radius: 0.5em;
 		}
@@ -260,8 +267,11 @@
 	 }
 	  #media_mobile_td_margin{
 	 	padding-left: 0px;
+	 	padding-top: 13px;
 	 }
-	
+	li{
+	 	font-size: 16px;
+	 }
 	 /*---------------------------------*/
 	 
 	 a{
@@ -408,6 +418,8 @@
 	if(obj!=null){
 		List<FreeVO> list = (List<FreeVO>)obj;
 		int nCnt =list.size();
+		FreeVO fvo = (FreeVO)list.get(0);
+		String count = fvo.getTotalcount();
 %>
 	<div id="mainWrapper" align = "center">
 	<div  id="media_mobile" >
@@ -420,8 +432,18 @@
 				</td>
 			</tr>
 			<tr>
-				<td id="td_width">
-		         <div class="row" id="c">
+			 <!-- ★ --><td width="1200" align="center" id = "nfont" colspan="2"><br><h1>자유게시판</h1>
+			 <br>
+				<br></td>
+			
+			</tr>
+			<tr style="width: 1140px;">
+			<td  align="left" id="count">
+			 <br>
+		      	총 <%=count %>개의 게시물이 있습니다
+		      </td>
+				<td width="360" align="right">
+		         <div class="row" id="c" style="padding-right: 0px;">
 		            &nbsp;&nbsp;&nbsp;
 		            <div class="col-md-1.8">
 						<input type="text" name="startDate" id="startDate">
@@ -433,7 +455,6 @@
 	      				&nbsp;&nbsp; <input class="btn_light btn_box_01" type="button" id="searchPiker" value="검색">
 		      </div>
 		      </td>
-				<td align="center" id ="nfont"><h1>자유게시판</h1></td>
 			</tr>
 		</table>
 		</form>
@@ -475,7 +496,7 @@
 			%>
 					<tr>			
 						<td align="center"><%=freevo.getFbno() %></td>					
-						<td align="center"><a href="selectfreeboardDetail.ec?fbno=<%=freevo.getFbno() %>" id="fbno_color"><%=freevo.getFbsubject() %></a></td>
+						<td align="left" style="padding-left: 40px;"><a href="selectfreeboardDetail.ec?fbno=<%=freevo.getFbno() %>" id="fbno_color"><%=freevo.getFbsubject() %></a></td>
 						<td align="center"><%=freevo.getFbname() %></td>
 						<!-- td align="center"><%=freevo.getFbcontent() %></td -->
 						<!-- td align="center"><%=freevo.getFbimg() %></td> -->
@@ -532,6 +553,7 @@
 		</table>
 		</div>
 	</form>
+	</div>
 		<br>
 		
 		<br><br><br>

@@ -26,6 +26,9 @@ function agreeCommit(){
 	}
 	
 }
+function backButton(){
+	window.history.go(-1);
+}
 $(document).ready(function(){
 	$('#checkAll').click(function(){
 		if($("input:checkbox[id='checkAll']").prop("checked")){
@@ -37,8 +40,13 @@ $(document).ready(function(){
 	
 });
 
-
 </script>
+<style type="text/css">
+	p{
+		margin-left: 320px;
+		margin-right:320px;
+	}
+</style>
 	<jsp:include page="../../../../top.jsp" flush="true">
 		<jsp:param value="" name=""/>
 	</jsp:include>
@@ -47,9 +55,9 @@ $(document).ready(function(){
 
 	<form id="agreement" name="agreement" method="get">
 	<div id="divAgree" class="join-box tab-cont" align="center">
-	<p class="title-p">EduCatch 회원으로 가입하기 위해서는 이용약관, 개인정보처리방침에 동의하셔야 합니다.</p>
+	<p class="title-p" align="right" margin-right="320px">EduCatch 회원으로 가입하기 위해서는 이용약관, 개인정보처리방침에 동의하셔야 합니다.</p>
 	<h4 class="mt20"> 이용약관</h4>
-<div style="height: 170px; padding:0 20px 20px 20px; overflow-y : auto; width: 70%; box-sizing: border-box;border: 1px solid #ccc;margin: 10px; line-height: 20px;" tabindex="0">
+<div align="left" style="height: 170px; padding:0 20px 20px 20px; overflow-y : auto; width: 70%; box-sizing: border-box;border: 1px solid #ccc;margin: 10px; line-height: 20px;" tabindex="0">
 
 		<br>제 1장 총칙<br>
 		
@@ -169,14 +177,15 @@ $(document).ready(function(){
 		<b style="font-size: 14px; color: #007dcd;">국가공간정보포털과 이용자간에 발생한 서비스 이용에 관한 분쟁에 대하여는 대한민국 법을 적용하며, 본 분쟁으로 인한 소는 민사소송법상의 관할법원에 제기합니다.</b><br>
 		부 칙 1. (시행일) 본 약관은 2016년 1월 1일부터 시행됩니다.<br>
 	</div>
-	
+	<div align="left">
 	<p class="join-agreement">
 		<input type="checkbox" name="agree1" id="agree1" value="1" title="이용약관동의 체크"/>위의 <span class="blue-txt">이용약관</span>에 동의합니다.
 	</p>
+	</div>
 
 	<!-- 개인정보 수집 및 이용에 대한 안내 -->
 	<h4 class="mt20"> 개인정보 수집 및 이용에 대한 안내</h4>
-	<div style="height: 170px; padding: 20px; overflow-y : auto; width: 70%;box-sizing: border-box;border: 1px solid #ccc;margin: 10px; line-height: 22px;" tabindex="0">
+	<div align="left" style="height: 170px; padding: 20px; overflow-y : auto; width: 70%;box-sizing: border-box;border: 1px solid #ccc;margin: 10px; line-height: 22px;" tabindex="0">
 		<b>가. 개인정보의 수집 및 이용 목적</b><br>
 		① 국가공간정보포털은 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 개인정보 보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.<br>
 		<b style="font-size: 17px; color: #007dcd;">1. 국가공간정보포털 서비스 제공을 위한 회원관리</b><br>
@@ -196,11 +205,13 @@ $(document).ready(function(){
 		위 개인정보의 수집 및 이용에 대한 동의를 거부할 수 있으나, 동의를 거부할 경우 회원 가입이 제한됩니다.<br>
 	</div>
 	
+	<div align="left">
 	<p class="join-agreement">
 		<input type="checkbox" id="agree2" name="agree2" value="1" tabindex="0" title="개인정보수집동의 체크"/>위의 <span class="blue-txt">개인정보 수집 및 이용에 대한 안내</span>에 동의합니다.
 	</p>
+	</div>
 
-	<div class="all-agreement">
+	<div class="all-agreement" align="left">
 		<p class="join-agreement">
 			<input type="checkbox" name="checkAll" id="checkAll" title="이용약관동의 및 개인정보수집동의 체크"/><span class="blue-txt">전체 필수 약관에 동의합니다.</span>
 		</p>
@@ -208,7 +219,7 @@ $(document).ready(function(){
 	
 	<div class="list_btn_c">
 		<input type="button" class="icon_btn_write" id="submit_b" value="확인" tabindex="0" onclick="agreeCommit()">
-		<input type="reset" value="취소" class="icon_btn_write2" tabindex="0">
+		<input type="button" id="backbutton" onclick="backButton()" value="취소" class="icon_btn_write2" tabindex="0">
 	</div>
 </div>
 	</form>

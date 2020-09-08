@@ -158,6 +158,11 @@ function joinCommit(){
 		alert("*학원관리자를 등록 할 경우 해당 이미지파일(명함,재직증명서,사업자등록증)을 올려주셔야합니다.");
 	}
 }
+
+function backButton(){
+	history.go(-1);
+}
+
 //주소(우편번호 찾기)
 function addrCheck(){
 	alert("addrCheck함수진입");
@@ -385,7 +390,7 @@ function idCheck(){
 			<tr>						
 				<td colspan=2 align="center">
 					<input type="button" id="joincommit" value="등록" onclick="joinCommit()">
-					<input type="reset" value="다시">
+					<input type="button" id="backbutton" value="이전" onclick="backButton()">
 				</td>
 			</tr>	
 		</table>

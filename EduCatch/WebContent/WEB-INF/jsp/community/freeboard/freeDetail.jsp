@@ -45,7 +45,7 @@ function updateClick(){
 function deleteClick(){
 	console.log("deleteClick함수 진입");
 	alert("삭제");
-	$("#edit").attr("action","selectfreeboardUD.ec");
+	$("#edit").attr("action","deletefreeboard.ec");
 	$("#edit").attr("method","POST");
 	$("#edit").submit();
 }
@@ -100,8 +100,6 @@ function listClick(){
 	<div class="container">
 	<form id="edit" name="edit">
 		<table style="margin-left: auto; margin-right: auto;" class="table" >
-			
-		
 			<input type="hidden" id="fbno" name="fbno" value="<%= freevo.getFbno() %>"/> 
 		 	<input type="hidden" id="fbname" name="fbname" value="<%= freevo.getFbname() %>"/> 
 		 	<input type="hidden" id="fbinsertdate" name="fbinsertdate" value="<%= freevo.getFbinsertdate() %>"/> 

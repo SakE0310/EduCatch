@@ -96,6 +96,12 @@ $(document).ready(function(){
 		console.log("비밀번호 확인필요");
 		$("#pw_check").val("N");
 	});
+	
+	//아이디 변경시 다시 버튼확인
+	$(".id").on('change',function(){
+		console.log("아이디 중복체크 확인필요");
+		$("#id_check").val("N");
+	});
 });
 function joinCommit(){
 	console.log("joinCommit함수 진입");
@@ -197,10 +203,16 @@ function joinCommit(){
 	}
 		
 		
-	//주소
+	//우편번호
 	if(document.memberjoin.maddrno.value.length==0){
 		alert("우편번호를 입력하세요");
 		document.getElementById("maddrno").focus();
+		return false;
+	}
+	//기본주소
+	if(document.memberjoin.maddr1.value.length==0){
+		alert("기본주소를 입력하세요");
+		document.getElementById("maddr1").focus();
 		return false;
 	}
 	
@@ -212,6 +224,9 @@ function joinCommit(){
 
 }
 
+function backButton(){
+	history.go(-1);
+}
 /*
 $(document).ready(function(){
 	console.log(">>>>");
@@ -270,9 +285,16 @@ function pwCheck(){
 		mpw.focus();
 		return false;
 	}else{
-		alert("비밀번호가 일치합니다.");
-		document.memberjoin.pw_check.value = "pw_checkY";
-		return true;
+		var regex =/^.*(?=^.{6,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+		if(!regex.test(document.memberjoin.mpw.value)){
+			alert("비밀번호형식에 맞게 입력해주세요");
+			document.getElementById("mpw").focus();
+			return false;
+		}else{
+			alert("비밀번호가 일치합니다.");
+			document.memberjoin.pw_check.value = "pw_checkY";
+			return true;
+		}
 	}
 	
 }
@@ -378,13 +400,13 @@ function idCheck(){
 							</c:if>
 							<c:if test="${param.emailname eq null }">
 						<div class="col-xs-2">
-								<input type="text" id="memail0" name="memail0" value="" size=10 onfocus="this.value=''" title="" class="form-control" />
+								<input type="text" id="memail0" name="memail0" value="" size=10 onfocus="this.value=''" title="" class="form-control id" />
 						</div>
 						<div class="gol">
 								@
 						</div>
 						<div class="col-xs-2">
-							<input type="text" id="memail1" name="memail1" value="" size=10 title="" class="form-control" />
+							<input type="text" id="memail1" name="memail1" value="" size=10 title="" class="form-control id" />
 						</div>
 							</c:if>
 						<div class="col-md-6">
@@ -394,7 +416,7 @@ function idCheck(){
 								<option>naver.com</option>
 								<option>gmail.com</option>
 							</select>
-							<input type="hidden" id="id_check" name="id_check">
+							<input type="hidden" id="id_check" name="id_check" value="N">
 							<div>&nbsp;&nbsp;<input type="button" value="아이디 중복확인" id="idcheck" onclick="idCheck()" /></div>
 						</div>
 					</div>
@@ -482,7 +504,7 @@ function idCheck(){
 				<tr>
 					<td colspan=2 align="center">
 						<input type="button" id="joincommit" value="등록" onclick="joinCommit()">
-						<input type="reset" value="다시">
+						<input type="button" id="backbutton" value="이전" onclick="backButton()">
 					</td>
 				</tr>
 		</table>

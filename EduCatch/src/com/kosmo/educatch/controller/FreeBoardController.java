@@ -384,30 +384,49 @@ public class FreeBoardController {
 	
 	//자유게시판 삭제
 	@RequestMapping("deletefreeboard")
-	public ModelAndView deleteFreeBoard(@ModelAttribute FreeVO param) {
+	public ModelAndView deleteFreeBoard(@ModelAttribute FreeVO param, HttpSession session) {
 		log.info("deleteFreeBoard함수 시작");
 		log.info("글번호"+param.getFbno());
+		log.info("회원번호"+param.getMember_mno());
 		
 		String deleteStr = "";
 		String isSuccess="";
-		
-		int result = freeService.deleteFreeBoard(param);
-		
+
 		ModelAndView mav = new ModelAndView();
-		if(result>0) {
-			deleteStr = "delete";
-			isSuccess="true";
-			log.info("삭제완료");
+		
+		MemberVO mvo = null;
+		mvo=(MemberVO) session.getAttribute("user");
+
+		
+		String mno = mvo.getMno();
+		log.info("현재 로그인한 회원번호"+mno);
+		String fbmno = param.getMember_mno();
+		log.info("글쓴 사람 회원번호"+fbmno);
+		
+		if(mno.equals(fbmno)) {
+			int result = freeService.deleteFreeBoard(param);
+			if(result>0) {
+				deleteStr = "delete";
+				isSuccess="true";
+				log.info("삭제완료");
+			}else {
+				deleteStr = "delete";
+				isSuccess="false";
+				log.info("삭제실패");
+			}
+			mav.addObject("result", deleteStr);
+			mav.addObject("isSuccess", isSuccess);
+			mav.setViewName("community/freeboard/result");
+			
 		}else {
-			deleteStr = "delete";
-			isSuccess="false";
-			log.info("삭제실패");
+			log.info("회원님이 쓰신 글이 아닙니다.");
+			FreeVO freevo = freeService.selectFreeBoard(param);
+			log.info("frevo.getMember_mno>>>"+freevo.getMember_mno());
+			mav.addObject("freevo", freevo);
+			mav.addObject("membervo", mvo);
+			mav.setViewName("community/freeboard/freeDetail");
 		}
-		
-		mav.addObject("result", deleteStr);
-		mav.addObject("isSuccess", isSuccess);
-		mav.setViewName("community/freeboard/result");
-		
+
 		log.info("deleteFreeBoard함수 끝");
 		return mav;
 	}

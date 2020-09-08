@@ -73,7 +73,18 @@
 		$("#insertcommit").click(function() {
 			oEditors.getById["fbcontent"].exec("UPDATE_CONTENTS_FIELD", []);
 			console.log("insertCommit함수 진입");
-			alert("글쓰기 등록을 완료하시겠습니까??");
+			
+			if($("#fbsubject").val() == ""){
+				alert("제목을 입력해주세요");
+				document.getElementById("fbsubject").focus();
+				return false;
+			}
+			 
+			if($("#fbcontent").val()=="<p><br></p>" || $("#fbcontent").val() == ""){
+				alert("내용을 입력해주세요");
+				document.getElementById("fbcontent").focus();
+				return false;
+			}
 			if($("#fbimg").val()!=null && $("#fbimg").val() !=""){
 				$("#edit").attr("enctype","multipart/form-data");
 			}
@@ -82,6 +93,10 @@
 			$("#edit").submit();
 		});
 	});
+	function backButton(){
+		console.log("취소버튼 클릭");
+		window.history.go(-1);
+	}
 </script>
 </head>
 <body>
@@ -104,7 +119,7 @@ if(hs != null){
 	<input type="hidden" id ="mid" name="mid" value="<%=mvo.getMid() %>">
 	<input type="hidden" id ="mno" name="mno" value="<%=mvo.getMno() %>">
 	<input type="hidden" id ="mname" name="mname" value="<%=mvo.getMname() %>">
-		<table border="0" cellpadding="1" cellspacing="1" align="center" >
+		<table border="0"cellpadding="1" cellspacing="1"  align="center" >
 			<tr>
 				<td align="center"><h1>자유게시판</h1></td>
 			</tr>
@@ -143,7 +158,7 @@ if(hs != null){
 			<tr>
 				<td colspan="3" align="right">
 				 <input type="button" id="insertcommit" value="등록" onclick="insertCommit()" class=" btn_light btn_box_01" /> 
-				  <input type="reset" value="취소" class=" btn_light btn_box_01" /> 
+				  <input type="button" id="backbutton" onclick="backButton()" value="취소" class=" btn_light btn_box_01" /> 
 				</td>
 			</tr>
 		</table>

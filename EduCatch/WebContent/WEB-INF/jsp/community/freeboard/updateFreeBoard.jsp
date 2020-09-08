@@ -47,13 +47,14 @@
 
 </style>
 <script type="text/javascript">
-	
+	/*
 	function deleteCommit(){
 		console.log("deleteCommit함수 진입");
 		alert("삭제하시겠습니까??");
 		$("#edit").attr("action","deletefreeboard.ec");
 		$("#edit").submit();
 	}
+	*/
 	var oEditors = [];
 	$(function() {
 		nhn.husky.EZCreator.createInIFrame({
@@ -102,9 +103,16 @@ if(hs != null){
 	mvo = (MemberVO)hs.getAttribute("user");
 }
 %>
+
 	<!-- action/document/location -->
 	<!-- enctype="multipart/form-data" -->
 	<div class="container">
+	<% 
+		
+			Object obj = request.getAttribute("freevo"); 
+			if(obj!=null){
+				FreeVO freevo = (FreeVO)obj;
+			%>
 	<form id="edit" name="edit">
 		<div>
 			<table border="0" cellpadding="1" cellspacing="1" align="center">
@@ -115,12 +123,8 @@ if(hs != null){
 			<hr>
 		</div>
 		<table style="margin-left: auto; margin-right: auto;" border="1" width="50%"class="table">
-		<% 
-		
-			Object obj = request.getAttribute("freevo"); 
-			if(obj!=null){
-				FreeVO freevo = (FreeVO)obj;
-			%>
+			<input type="hidden" id="fbno" name="fbno" value="<%= freevo.getFbno() %>"/> 
+			<input type="hidden" id="member_mno" name="member_mno" value="<%= mvo.getMno() %>"/> 
 			<tr>
 				<td style="width: 100px">글번호</td>
 				<td><input type="text" id="fbno" name="fbno"
@@ -149,7 +153,7 @@ if(hs != null){
 			<tr>
 				<td colspan="3" align="right">
 				 <input type="button" id="updatecommit" value="수정" onclick="updateCommit()"  class=" btn_light btn_box_01" /> 
-				 <input type="button" id="deletecommit" value="삭제" onclick="deleteCommit()" class=" btn_light btn_box_01" /> 
+				 <!-- input type="button" id="deletecommit" value="삭제" onclick="deleteCommit()" class=" btn_light btn_box_01" / --> 
 				 <!-- input type="button" id="save" value="임시저장" / -->
 				</td>
 			</tr>
