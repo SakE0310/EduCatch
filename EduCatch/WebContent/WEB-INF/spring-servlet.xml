@@ -45,6 +45,22 @@
         	<mvc:mapping path="/deleteBookmark.ec"/>
         	<bean id="ajaxInterceptor" class="com.kosmo.educatch.manager.AjaxLoginCheckInterceptor"/>
         </mvc:interceptor>
+        <mvc:interceptor>
+        	<mvc:mapping path="/insertDisplayNotice.ec"/>
+        	<mvc:mapping path="/insertNotice.ec"/>
+        	<mvc:mapping path="/updateDisplayNotice.ec"/>
+        	<mvc:mapping path="/updateNotice.ec"/>
+        	<mvc:mapping path="/deleteNotice.ec"/>
+        	<bean id ="NoticeInterceptor" class="com.kosmo.educatch.manager.NoticeCheckInterceptor"/>
+        </mvc:interceptor>
+         <mvc:interceptor>
+        	<mvc:mapping path="/insertDisplayEvent.ec"/>
+        	<mvc:mapping path="/insertEvent.ec"/>
+        	<mvc:mapping path="/updateDisplayEvent.ec"/>
+        	<mvc:mapping path="/updateEvent.ec"/>
+        	<mvc:mapping path="/deleteEvent.ec"/>
+        	<bean id ="EventInterceptor" class="com.kosmo.educatch.manager.EventCheckInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 	
 	<import resource="servlet-context.xml" />
