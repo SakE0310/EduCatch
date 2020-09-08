@@ -88,6 +88,8 @@ public class MemberJoinController {
 		//인증번호 생성(난수 발생)
 		//String memailchk = getKey(6);
 		String memailchk = getKey();
+		String findpw = getKey();
+		param.setFindpw(findpw);
 		param.setMemailchk(memailchk);
 		log.info("memailchk난수>>>"+memailchk);
 		

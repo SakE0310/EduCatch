@@ -107,10 +107,9 @@ public class LoginController {
 		return mav;
 
 	}
-
 	@RequestMapping("/passwordReset.ec")
 	public ModelAndView pwReset(@ModelAttribute MemberVO param){
-		log.info("pwRest() start " + param.getMid());
+		log.info("pwReset() start " + param.getMid()); 
 		ModelAndView mav = new ModelAndView();
 		
 		String complete = loginService.passwordReset(param);
@@ -131,7 +130,7 @@ public class LoginController {
 	@RequestMapping("/passwdChangePage")
 	public ModelAndView passwordChangePage(@ModelAttribute MemberVO param) {
 		ModelAndView mav = new ModelAndView();
-		log.info("URL Parameter : " + param.getMid());
+		log.info("URL Parameter : " + param.getFindpw());
 		mav.addObject("MemberVO",param);
 		mav.setViewName("member/login/pwChange");
 		return mav;
@@ -140,7 +139,7 @@ public class LoginController {
 	@RequestMapping("/passwdChange")
 	public ModelAndView passwordChange(@ModelAttribute MemberVO param) {
 		ModelAndView result = new ModelAndView();
-		log.info("change Password ID : " + param.getMid() + " password : " + param.getMpw());
+		log.info("change pw : " + param.getMpw());
 		String changeCheck = loginService.passwordChange(param);
 		result.addObject("resultMsg",changeCheck);
 		result.setViewName("member/login/pwResultPage");
@@ -148,6 +147,7 @@ public class LoginController {
 		return result;
 	}
 	
+// ==================== 로그아웃 ============================
 	@RequestMapping("logout")
 	public ModelAndView logout(HttpSession session) {
 		if(session != null)

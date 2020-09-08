@@ -9,6 +9,8 @@ public interface LoginMapper {
 	public MemberVO memberLoginInfo(MemberVO param);
 
 	public void passwordChange(MemberVO param);
+
+	public MemberVO getMidByFindPw(MemberVO param);
 		
 }
 

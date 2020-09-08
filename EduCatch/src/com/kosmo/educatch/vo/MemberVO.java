@@ -21,7 +21,7 @@ public class MemberVO extends AcademyVO{
 		private String mdeleteyn;
 		private String minsertdate;
 		private String mupdatedate;
-
+		private String findpw;
 		
 		public MemberVO() {
 		}
@@ -222,6 +222,14 @@ public class MemberVO extends AcademyVO{
 
 		public void setMupdatedate(String mupdatedate) {
 			this.mupdatedate = mupdatedate;
+		}
+
+		public String getFindpw() {
+			return findpw;
+		}
+
+		public void setFindpw(String findpw) {
+			this.findpw = findpw;
 		}
 		
 }

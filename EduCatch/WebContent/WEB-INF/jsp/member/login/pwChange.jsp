@@ -80,7 +80,7 @@
 		MemberVO memberVO = (MemberVO) request.getAttribute("MemberVO");			
 	%>
 		<div align = "center">
-		<h2 align = "center" id ="fpw">비밀번호찾기</h2></div>
+		<h2 align = "center" id ="fpw">비밀번호변경</h2></div>
 						
 		<div align = "center">	
 			<hr style=" height:3.5px;
@@ -123,7 +123,7 @@
 			
 				</div>
 
-				<input type="hidden" id="mid" name="mid" value="<%=memberVO.getMid()%>"></input>
+				<input type="hidden" id="findpw" name="findpw" value="<%=memberVO.getFindpw()%>"></input>
 			</form>
 
 
