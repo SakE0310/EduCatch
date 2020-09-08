@@ -104,6 +104,7 @@
 		AND A.RBDELETEYN = 'N'
 		AND B.ADELETEYN = 'N'
 		AND B.ANO = #{ano, jdbcType=VARCHAR}
+		 <![CDATA[AND   ROWNUM <= 5 ]]>
 		ORDER BY 1 DESC
 	</select>
 	
