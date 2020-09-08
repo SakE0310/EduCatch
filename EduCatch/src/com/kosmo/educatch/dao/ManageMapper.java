@@ -13,7 +13,7 @@ import com.kosmo.educatch.vo.SubjectVO;
 import com.kosmo.educatch.vo.TimetableVO;
 
 public interface ManageMapper {
-	public List<MemberVO> getAcaAccept(MemberVO vo);
+	public List<MemberVO> getAcaAccept();
 	public int setAcceptAcaMem(MemberVO vo);
 	public int delAcaMem(MemberVO vo);
 	public List<TimetableVO> selectReservation(MemberVO vo);

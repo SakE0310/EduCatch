@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class StaticController {
 	Logger log = Logger.getLogger(StaticController.class);
 	
+	// 통계페이지 접근
 	@RequestMapping("statics")
 	public ModelAndView getChart() {
 		log.info("StaticController getChart() 진입 >>> ");

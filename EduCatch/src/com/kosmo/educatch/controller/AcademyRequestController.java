@@ -220,6 +220,7 @@ public class AcademyRequestController {
 		return map;
 	}
 	
+	//minor 얻어와 json으로 변환 전송
 	@ResponseBody
 	@RequestMapping(value="/getCminor")
 	public Map<String, List<SearchVO>> getCminor(HttpServletRequest request){

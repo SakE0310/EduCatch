@@ -40,6 +40,7 @@ public class ManageController {
 	@Autowired
 	private ManageService manageService;
 
+	// manage 홈연결
 	@RequestMapping("manage")
 	public ModelAndView getManagePage() {
 		log.info("ManageController getManagePage >>> ");
@@ -50,6 +51,7 @@ public class ManageController {
 		return mv;
 	}
 
+	// 학원관리 페이지 조회
 	@RequestMapping("manageAca")
 	public ModelAndView getManageAcaPage(@ModelAttribute AcademyVO avo, HttpSession session, SubjectVO svo, ConvenienceVO cvo, HttpServletRequest request) {
 		log.info("ManageController getManagePage >>> ");
@@ -78,6 +80,7 @@ public class ManageController {
 		return mv;
 	}
 	
+	// 학원관리 페이지
 	@RequestMapping("acmb.ec")
 	public ModelAndView getManageAcaPage1(@ModelAttribute AcademyVO avo, HttpSession session, SubjectVO svo, ConvenienceVO cvo) {
 		log.info("ManageController getManagePage >>> ");
@@ -105,6 +108,7 @@ public class ManageController {
 
 		return mv;
 	}
+	// 학원관리 페이지
 	@RequestMapping("acmb2.ec")
 	public ModelAndView getManageAcaPage2(@ModelAttribute AcademyVO avo, HttpSession session, SubjectVO svo, ConvenienceVO cvo, HttpServletRequest request) {
 		log.info("ManageController getManagePage >>> ");
@@ -129,6 +133,7 @@ public class ManageController {
 		return mv;
 	}
 
+	// 학원관리 과목정보 등록 ajax 연결부분
 	@ResponseBody
 	@RequestMapping("manageInsertSubject.ec")
 	public Map<String, String> manageInsertSubject(HttpServletRequest request, SubjectVO svo) {
@@ -156,6 +161,7 @@ public class ManageController {
 		return map;
 	}
 	
+	// 학원관리 과목정보 수정 ajax 연결부분
 	@ResponseBody
 	@RequestMapping("manageUpdateSubject")
 	public Map<String, String> manageUpdateSubject(HttpServletRequest request, SubjectVO svo) {
@@ -181,6 +187,7 @@ public class ManageController {
 		return map;
 	}
 	
+	// 학원관리 과목정보 삭제 ajax 연결부분
 	@ResponseBody
 	@RequestMapping("manageDeleteSubject")
 	public Map<String, String> manageDeleteSubject(HttpServletRequest request, SubjectVO svo) {
@@ -202,6 +209,7 @@ public class ManageController {
 		return map;
 	}
 
+	// 학원관리 학원정보 수정 ajax 연결부분
 	@ResponseBody
 	@RequestMapping("manageUpdateAcademy")
 	public Map<String, Boolean> manageUpdateAcademy(AcademyVO avo, HttpServletRequest request) {
@@ -313,7 +321,7 @@ public class ManageController {
 	}
 	
 	
-	
+	// 학원관리 학원편의기능 수정 ajax 연결부분
 	@ResponseBody
 	@RequestMapping("manageUpdateConvenience")
 	public Map<String, String> manageUpdateConvenience(ConvenienceVO cvo, HttpServletRequest request) {
@@ -358,6 +366,7 @@ public class ManageController {
 
 	}
 	
+	// 학원관리 학원과목 조회 ajax 연결부분
 	@ResponseBody
 	@RequestMapping("selectOneSubject")
 	public Map<String, SubjectVO> selectOneSubject(HttpServletRequest request) {
@@ -376,6 +385,7 @@ public class ManageController {
 		return map;
 	}
 	
+	// 학원관리 학원편의기능 조회 ajax 연결부분
 	@ResponseBody
 	@RequestMapping("selectOneConvenienice")
 	public Map<String, ConvenienceVO> selectOneConvenience(HttpServletRequest request) {
@@ -394,6 +404,7 @@ public class ManageController {
 		return map;
 	}
 
+	// 상담예약관리 페이지 연결부분
 	@RequestMapping("manageReserChk")
 	public ModelAndView getManageReserChkPage() {
 		log.info("ManageController getManagePage >>> ");
@@ -404,6 +415,8 @@ public class ManageController {
 		return mv;
 	}
 
+	
+	// 학원회원 승인 페이지 연결
 	@RequestMapping("manageAcaMem")
 	public ModelAndView getManageAcaMemPage() {
 		log.info("ManageController getManagePage >>> ");
@@ -413,7 +426,7 @@ public class ManageController {
 
 		return mv;
 	}
-
+	// 학원정보등록 페이지 연결
 	@RequestMapping("addAca")
 	public ModelAndView getAddAcaPage() {
 		log.info("ManageController getAddAcaPage >>> ");
@@ -424,19 +437,19 @@ public class ManageController {
 		return mv;
 	}
 
+	// 학원회원 승인 데이터 ajax 연결부분
 	@ResponseBody
 	@RequestMapping("getAcaMem")
 	public Map<String, List<MemberVO>> getAcademyMember() {
 		Map<String, List<MemberVO>> map = new HashMap<String, List<MemberVO>>();
 		MemberVO mvo = new MemberVO();
-
-		// 세션 적용하면 바꿔야함
-		mvo.setAno("A00001");
-		List<MemberVO> list = manageService.getAcaAccept(mvo);
+		
+		List<MemberVO> list = manageService.getAcaAccept();
 		map.put("vo", list);
 		return map;
 	}
 
+	// 학원회원승인 부분 
 	@ResponseBody
 	@RequestMapping("acceptAca")
 	public Map<String, String> acceptAcaMember(@RequestBody String json) {
@@ -472,6 +485,7 @@ public class ManageController {
 		return rmap;
 	}
 
+	// 학원회원 거절부분
 	@ResponseBody
 	@RequestMapping("rejectAca")
 	public Map<String, String> rejectAcaMember(@RequestBody String json) {
@@ -508,6 +522,7 @@ public class ManageController {
 		return rmap;
 	}
 
+	// 학원예약 정보 부분
 	@ResponseBody
 	@RequestMapping("selectReser")
 	public Map<String, List<TimetableVO>> selectReservation(HttpServletRequest request) {
@@ -525,6 +540,7 @@ public class ManageController {
 		return map;
 	}
 
+	// 학원예약 상세보기 회원부분
 	@ResponseBody
 	@RequestMapping("selectMemList")
 	public Map<String, List<MemberVO>> selectMemberList(HttpServletRequest request) {
@@ -537,6 +553,7 @@ public class ManageController {
 		return map;
 	}
 
+	// 학원예약 시간 추가 부분
 	@ResponseBody
 	@RequestMapping("insertTimeTable")
 	public Map<String, String> insertTimeTable(HttpServletRequest request) {
@@ -559,6 +576,7 @@ public class ManageController {
 		return map;
 	}
 
+	// 학원예약 시간 수정부분
 	@ResponseBody
 	@RequestMapping("updateTimeTable")
 	public Map<String, String> updateTimeTable(HttpServletRequest request) {
@@ -579,6 +597,7 @@ public class ManageController {
 		return map;
 	}
 
+	// 학원예약 시간 삭제부분
 	@ResponseBody
 	@RequestMapping("deleteTimeTable")
 	public Map<String, String> deleteTimeTable(HttpServletRequest request) {
@@ -597,6 +616,7 @@ public class ManageController {
 		return map;
 	}
 	
+	//학원관리 학원리스트 조회
 	@ResponseBody
 	@RequestMapping("getAcaListManage")
 	public Map<String,List<AcademyVO>> getAcademyList(HttpServletRequest request){
@@ -617,6 +637,7 @@ public class ManageController {
 		return map;
 	}
 	
+	//학원 평균 수강료
 	@ResponseBody
 	@RequestMapping("getAvgPrice")
 	public Map<String, List<HashMap<String,String>>> getAvgPrice(){
@@ -629,6 +650,7 @@ public class ManageController {
 		return map;
 	}
 	
+	// 회원타입
 	@ResponseBody
 	@RequestMapping("getMemType")
 	public Map<String, List<HashMap<String, String>>> getMemType(){
@@ -665,6 +687,7 @@ public class ManageController {
 		return map;
 	}
 	
+	// 월별 평점 및 상담현황
 	@ResponseBody
 	@RequestMapping("getMonCnt")
 	public Map<String, List<String>> getMonConCnt(HttpServletRequest request) {
@@ -697,6 +720,8 @@ public class ManageController {
 		return map;
 		
 	}
+	
+	// 데이터 세팅
 	public List<String> setDataString(List<CountVO> vo, int end) {
 		String[] str = new String[end];
 		for(int i = 0; i < str.length; i++) {
@@ -711,6 +736,7 @@ public class ManageController {
 		return list;
 	}
 	
+	// 어레이만들기
 	public String[] makeStringArray(int end) {
 		String[] str = new String[end];
 		for(int i = 0; i < str.length; i++) {
