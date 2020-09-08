@@ -153,7 +153,7 @@ function joinCommit(){
 	}else{
 		var regex =/^.*(?=^.{6,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 		if(!regex.test(document.memberjoin.mpw.value)){
-			alert("비밀번호형식에 맞게 입력해주세요");
+			alert("비밀번호 형식에 맞게 입력해주세요");
 			document.getElementById("mpw").focus();
 			return false;
 		}
@@ -216,7 +216,6 @@ function joinCommit(){
 		return false;
 	}
 	
-	alert("회원가입을 완료하시겠습니까?");
 	$("#memberjoin").attr("action","memberinsert.ec");
 	$("#memberjoin").attr("method","get");
 	$("#memberjoin").submit();
@@ -253,7 +252,6 @@ $(document).ready(function(){
 */
 //주소(우편번호 찾기)
 function addrCheck(){
-	alert("addrCheck함수진입");
 	var width = 500;
 	var height = 600;
 	daum.postcode.load(function(){
@@ -301,9 +299,7 @@ function pwCheck(){
 	
 //이메일 select박스 클릭시	
 function emailCheck(){
-	alert(" emailCheck 함수 진입");
 	var eVal = document.memberjoin.memail.options[document.memberjoin.memail.selectedIndex].value;
-	alert("eVal >>> : " + eVal);				
 	if (eVal == '0'){								
 		document.memberjoin.memail1.readOnly = true;
 		document.memberjoin.memail1.value = "";

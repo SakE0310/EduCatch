@@ -44,6 +44,11 @@ $(document).ready(function(){
 		console.log("비밀번호 확인필요");
 		$("#pw_check").val("N");
 	});
+	//아이디 변경시 다시 버튼확인
+	$(".id").on('change',function(){
+		console.log("아이디 중복체크 확인필요");
+		$("#id_check").val("N");
+	});
 });
 
 function joinCommit(){
@@ -149,7 +154,6 @@ function joinCommit(){
 	//이미지 파일
 	if($("#mimg").val()!=null && $("#mimg").val() !=""){
 		alert("정상적인 이미지 첨부가 되지않을 시 관리자 가입이 거부될 수 있습니다");
-		alert("학원관리자가입을 완료하시겠습니까?");
 		$("#amemberjoin").attr("enctype","multipart/form-data");
 		$("#amemberjoin").attr("action","amemberinsert.ec");
 		$("#amemberjoin").attr("method","post");
@@ -165,7 +169,6 @@ function backButton(){
 
 //주소(우편번호 찾기)
 function addrCheck(){
-	alert("addrCheck함수진입");
 	var width = 500;
 	var height = 600;
 	daum.postcode.load(function(){
@@ -207,9 +210,7 @@ function pwCheck(){
 	
 //이메일 select박스 클릭시	
 function emailCheck(){
-	alert(" emailCheck 함수 진입");
 	var eVal = document.amemberjoin.memail.options[document.amemberjoin.memail.selectedIndex].value;
-	alert("eVal >>> : " + eVal);				
 	if (eVal == '0'){								
 		document.amemberjoin.memail1.readOnly = true;
 		document.amemberjoin.memail1.value = "";
@@ -284,11 +285,11 @@ function idCheck(){
 				<td>
 				<div class="row">
 					<div class="col-xs-2">
-					<input type="text" id="memail0" name="memail0" value="이메일"size=10 onfocus="this.value=''" class="form-control" /> 
+					<input type="text" id="memail0" name="memail0" value="이메일"size=10 onfocus="this.value=''" class="form-control id" /> 
 					</div>
 					@
 					<div class="col-xs-2">
-					<input type="text" id="memail1" name="memail1" value="" size=10 class="form-control" /> 
+					<input type="text" id="memail1" name="memail1" value="" size=10 class="form-control id" /> 
 					</div>
 					<div class="col-xs-4">
 					<select name="memail" onchange="emailCheck()">
@@ -297,7 +298,7 @@ function idCheck(){
 						<option>naver.com</option>
 						<option>gmail.com</option>
 					</select>
-					<input type="hidden" id="id_check" name="id_check">
+					<input type="hidden" id="id_check" name="id_check" value="N">
 					<div>&nbsp;&nbsp;<input type="button" value="아이디 중복확인" onclick="idCheck()"/></br></div>
 				</div>
 				</div>
