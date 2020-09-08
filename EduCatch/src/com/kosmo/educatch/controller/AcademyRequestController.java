@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kosmo.educatch.manager.FilePathManager;
 import com.kosmo.educatch.manager.LoggerManager;
 import com.kosmo.educatch.service.CategoryService;
 import com.kosmo.educatch.vo.AcademyVO;
@@ -31,6 +32,8 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 public class AcademyRequestController {
 	
 	private Logger log = LoggerManager.getInstance().getLogger(AcademyRequestController.class);
+	// 파일경로 바꿔주는 싱글톤 객체
+	private FilePathManager fManager = FilePathManager.getInstance();
 	
 	@Autowired
 	private CategoryService categoryService;
@@ -85,7 +88,9 @@ public class AcademyRequestController {
 			log.info("multipart/form-data true");
 			
 			// file삽입경로 (변경필수)
-			String uploadPath = "/Users/k/git/EduCatch/EduCatch/WebContent/assets/img/sendMail";
+			String uploadPath = request.getServletContext().getRealPath("") + "/assets/img/sendMail";
+			uploadPath = fManager.changePath(uploadPath);
+			log.info("upload Path Test >>> " + uploadPath);
 			// file 최대크기
 			int size = 10 * 1024 * 1024;
 			// multipart로 파일을 업로드 후 각 데이터셋팅
