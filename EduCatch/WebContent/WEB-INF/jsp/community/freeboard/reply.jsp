@@ -84,8 +84,9 @@ textarea {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 
-    width: 504%;
+    width: 100%;
 }
+
 
 .marT5 marL5 marB5{
 	margin: 0px;
@@ -96,9 +97,7 @@ textarea {
 .hrColor{
 	border: solid 0.5px #737373;
 }
-hr{
-	width:504%;
-}
+
 .table>tbody>tr>td{
 	border-top:1px solid #737373;
 }
@@ -418,7 +417,7 @@ hr{
 	<div class="container">
 		<div class="table_wrap">
 			<!-- =================== 댓글 입력폼 ==================== -->						
-				<table>
+				<table style="width:1140px;">
 					<thead>
 						<tr>
 							<th class="alignL total"></th>

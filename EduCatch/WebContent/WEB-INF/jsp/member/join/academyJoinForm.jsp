@@ -83,7 +83,7 @@ function joinCommit(){
 	*/
 	
 	//아이디 중복체크 버튼 누를때
-	if(document.memberjoin.id_check.value != "idcheckY"){
+	if(document.amemberjoin.id_check.value != "idcheckY"){
 		alert("아이디 중복체크를 확인해주세요");
 		return false;
 	}

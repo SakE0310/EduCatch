@@ -96,8 +96,7 @@ SELECT * FROM(
 		FBUPDATEDATE=SYSDATE
 	<![CDATA[
 	WHERE FBDELETEYN='N' AND 
-	FBNO=#{fbno} AND
-	MEMBER_MNO =#{member_mno}
+	FBNO=#{fbno}
 	]]>
 </update>
 <update id="deleteFreeBoard" parameterType="freeboard">
