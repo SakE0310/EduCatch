@@ -24,7 +24,8 @@ public class LoginController {
 
 	// =================== 로그인 화면으로  =================
 
-	@RequestMapping(value = "/login.ec", method = RequestMethod.GET)
+	@RequestMapping("login")
+
 	public ModelAndView listNotice() {
 		log.info("LoginController login 시작 >>>");
 		ModelAndView mav = new ModelAndView();

@@ -27,18 +27,30 @@
 		});
 		
 		$("#login").click(function(){
-	
-// 			alert("로그인");
-			$("#loginForm").attr("action","loginCheck.ec")
-			$("#loginForm").submit();
+// 			if(emailCheck()){
+				$("#loginForm").attr("action","loginCheck.ec")
+				$("#loginForm").submit();				
+// 			}
+		});		
+   });
+	function emailCheck(){
+		// 아이디 길이가 1 미만이면 false 
+		if(document.loginForm.mid.value.length<1){
+			alert("아이디를 입력해주세요");
+			document.getElementById("mid").focus();
+			return false;
+		}else{
 		
-		});
-		
-
-			
-	});
-		
-
+			var mail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+			if(!mail.test($('#mid').val())){
+				alert("이메일 형식에 맞지 않습니다.");
+				document.getElementById("mid").focus();
+				return false;
+			}else{
+				return true;
+			}
+		}
+	}
 
 </script>
 <style type="text/css">
@@ -197,24 +209,23 @@
 	     				<p align = "center"><img src="https://ssl.nx.com/S2/p3/login/2016/img_tpa.gif" width="350" height="10" alt="또는"/>
 	     				
 	     				
-				<!-- ============== 소셜 로그인	 ============== -->
+				<!-- ============== 소셜 로그인 ============== -->
 	     			<div class = "snslogin" align = "center"  >	
-	     			 		
-	     			 		<a href ="https://www.naver.com">
-	     			 		<img src = "/EduCatch/assets/img/login/naver.png" alt = "naver" id = "naver" >
+	     			 		<a href =#>
+	     			 		<img src = "/EduCatch/assets/img/login/naver.png" style="cursor:hand" onclick="alert('서비스 준비중입니다.')" id = "naver" >
 	     			 		</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								
-							<a href ="https://www.facebook.com">
-							<img src = "/EduCatch/assets/img/login/facebook.png" alt = "facebook" id ="facebook" >
+							
+							<a href =#>
+							<img src = "/EduCatch/assets/img/login/facebook.png" style="cursor:hand" onclick="alert('서비스 준비중입니다.')" id ="facebook" >
 							</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							
 							
-							<a >	
-							<img src="/EduCatch/assets/img/login/kakao.png" alt="kakao" id="kakao">
+							<a href ="#">
+							<img src="/EduCatch/assets/img/login/kakao.png" style="cursor:hand" alt="kakao" id="kakao">
 							</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								
-							<a href ="https://www.google.co.kr">
-							<img src = "/EduCatch/assets/img/login/google.png" alt = "google" id= "google">
+							<a href =#>
+							<img src = "/EduCatch/assets/img/login/google.png"  style="cursor:hand" onclick="alert('서비스 준비중입니다.')" id= "google">
 							</a>
 							
 	     			
