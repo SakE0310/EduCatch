@@ -23,36 +23,36 @@
 	
 	<select id="getAcaList" parameterType="academyview" resultType="academyview">
     SELECT
-            E.PAGENO AS PAGENO
-           ,E.LISTCOUNT AS LISTCOUNT
-           ,E.ANO AS ANO
-		   ,E.ANAME AS ANAME
-		   ,E.ATEL AS ATEL
-		   ,E.AADDR1 AS AADDR1
-		   ,E.AADDR2 AS AADDR2
-		   ,E.ALOGO AS ALOGO
-           ,E.AGRADE AS AGRADE
-		   ,E.CMAJOR AS CMAJOR
-		   ,E.CMINOR AS CMINOR
-		   ,E.AINSERTDATE AS AINSERTDATE
-		   ,E.AUPDATEDATE AS AUPDATEDATE
-           ,E.RVCOUNT AS RVCOUNT
+            E.PAGENO AS PAGENO				--페이지번호
+           ,E.LISTCOUNT AS LISTCOUNT		--검색된 학원 개수
+           ,E.ANO AS ANO					--학원번호
+		   ,E.ANAME AS ANAME				--학원이름
+		   ,E.ATEL AS ATEL					--학원전화번호
+		   ,E.AADDR1 AS AADDR1				--학원주소
+		   ,E.AADDR2 AS AADDR2				--학원상세주소
+		   ,E.ALOGO AS ALOGO				--학원로고
+           ,E.AGRADE AS AGRADE				--학원평점
+		   ,E.CMAJOR AS CMAJOR				--학원 카테고리 대분류
+		   ,E.CMINOR AS CMINOR				--학원 카테고리 소분류
+		   ,E.AINSERTDATE AS AINSERTDATE	--학원 입력일
+		   ,E.AUPDATEDATE AS AUPDATEDATE	--학원 수정일
+           ,E.RVCOUNT AS RVCOUNT			--학원 리뷰 개수
     FROM   (SELECT      
-            COUNT(C.ANO) OVER() AS LISTCOUNT
-           ,CEIL(ROW_NUMBER() OVER(ORDER BY C.ANO) / 10 ) AS PAGENO
+            COUNT(C.ANO) OVER() AS LISTCOUNT --학원번호의 개수를 가져와서 가상의 컬럼 LISTCOUNT(학원개수)를 만듬
+           ,CEIL(ROW_NUMBER() OVER(ORDER BY C.ANO) / 10 ) AS PAGENO --학원번호 10개씩 묶은 값을 가상의 컬럼 PAGENO(페이지번호)를 만듬
 		   ,C.ANO AS ANO
 		   ,C.ANAME AS ANAME
 		   ,C.ATEL AS ATEL
 		   ,C.AADDR1 AS AADDR1
 		   ,C.AADDR2 AS AADDR2
 		   ,C.ALOGO AS ALOGO
-		   ,TRUNC(C.AGRADE,2) AS AGRADE
+		   ,TRUNC(C.AGRADE,2) AS AGRADE --학원의 평점을 소수점 .00까지 포함하여 만듬
 		   ,D.CMAJOR AS CMAJOR
 		   ,D.CMINOR AS CMINOR
 		   ,C.AINSERTDATE AS AINSERTDATE
 		   ,C.AUPDATEDATE AS AUPDATEDATE
            ,C.RVCOUNT AS RVCOUNT
-	FROM   (SELECT  NVL(AVG(B.RBGRADE),0) AS AGRADE
+	FROM   (SELECT  NVL(AVG(B.RBGRADE),0) AS AGRADE --RBGRADE(리뷰)를 모두가져옴 NVL를 사용해서 0인 값도 가져오게 함
 	               ,A.CATEGORY_CNO AS CNO
 	               ,A.ANO AS ANO
 	               ,A.ANAME AS ANAME
@@ -62,8 +62,8 @@
 	               ,A.ALOGO AS ALOGO
 	               ,TO_CHAR(AINSERTDATE,'YYYY-MM-DD') AS AINSERTDATE
 	               ,TO_CHAR(AUPDATEDATE,'YYYY-MM-DD') AS AUPDATEDATE
-	               ,COUNT(A.ANO) OVER() AS LISTCOUNT
-                   ,COUNT(B.ACADEMY_ANO) AS RVCOUNT
+	               ,COUNT(A.ANO) OVER() AS LISTCOUNT 
+                   ,COUNT(B.ACADEMY_ANO) AS RVCOUNT 
 	        FROM   ACADEMY A, REVIEWBOARD B
 	        WHERE  B.ACADEMY_ANO(+) = A.ANO
 	        AND    A.ADELETEYN = 'N'
@@ -71,6 +71,7 @@
 	        		,AUPDATEDATE,TO_CHAR(AINSERTDATE,'YYYY-MM-DD') ,TO_CHAR(AUPDATEDATE,'YYYY-MM-DD')) C, 
 	        CATEGORY D
 	WHERE C.CNO = D.CNO
+	<!-- 검색기능 -->
 	<if test="district!=null or city!=null or cmajor!=null or cminor!=null">
     AND
     <![CDATA[ C.AADDR1 LIKE '%'||#{district}||'%' ]]>
@@ -88,12 +89,15 @@
 	<![CDATA[ C.ANAME LIKE '%'||#{aname}||'%' ]]>
 	</if>
 	) E
+	<!-- 무한스크롤 -->
     <if test="scrollPage!=null">
 	WHERE   E.PAGENO = #{scrollPage}
 	</if>
+	<!-- 필터설정 평점순 -->
 	<if test="agrade!=null">
 	ORDER BY AGRADE DESC
 	</if>
+	<!-- 필터설정 리뷰순 -->
 	<if test="rvcount!=null">
 	ORDER BY RVCOUNT DESC	
 	</if>
