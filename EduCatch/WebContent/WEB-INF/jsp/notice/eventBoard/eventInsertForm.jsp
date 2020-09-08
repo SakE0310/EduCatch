@@ -23,7 +23,6 @@
 			
 		}else{
 			out.println("<script>\n");
-			out.println("alert('등록성공');");
 			out.println("location.href='listEvent.ec'");
 			out.println("</script>\n");
 		}

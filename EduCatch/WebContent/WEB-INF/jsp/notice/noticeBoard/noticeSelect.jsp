@@ -180,6 +180,9 @@
          	</tr>
          	<tr>
          		<td>
+         		<div>
+         				<%=nvo.getNcontent()%>
+         		</div> 
          			<div id="contentDIV" align="center">
 <%
 							String img = nvo.getNimg();
@@ -190,10 +193,7 @@
 							}//end of if(img)
 %>         				
          			</div>
-         		<div>
-         		<br>
-         				<%=nvo.getNcontent()%>
-         		</div> 
+         		
          		</td>
          	</tr>
 <%			
