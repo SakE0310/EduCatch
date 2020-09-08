@@ -95,6 +95,9 @@ function ajaxGetMajor(){
 		}
 		$('select#cmajor').html(str);
 		$('select#cmajor').niceSelect('update');
+		
+		
+		callNiceSelect(resultParam);
 		ajaxGetMinor(resultParam.major[0].cmajor);
 		var a = resultParam.major;
 	}).fail(function(resultParam){
@@ -121,11 +124,34 @@ function ajaxGetMinor(param){
 		}
 		$('select#cminor').html(str);
 		$('select#cminor').niceSelect('update');
+		callNiceSelect(resultParam);
 	}).fail(function(resultParam){
 		alert("초기화에 문제가 발생하였습니다.");
 	});
 
 }
+
+//scroll function
+function callNiceSelect(resParam){
+	$('.nice-select').click(function(){
+		console.log("nice-select click");
+		var list = $('.list');
+		console.log("list >>> "+list);
+		list.css("max-height","150px");
+		list.css("overflow","scroll");
+		
+		var mql1 = window.matchMedia("screen and (min-width: 767px) and (max-width: 1023px)");
+		var mql2 = window.matchMedia("screen and (min-width: 321px) and (max-width: 480px)");
+		
+		if(mql1.matches){
+			list.css("width","600px");		
+		}else if(mql2.matches){
+			list.css("width","350px");
+		}else{
+			list.css("width","");
+		}
+	});
+};
 </script>
 </head>
 <body>
