@@ -158,9 +158,10 @@ public class LoginController {
 			log.info("snstype>>>"+mvo.getMsnstype());
 			
 			ModelAndView mav = new ModelAndView();
-			if(mvo.getMsnstype().equals("k")) {
-				mav.addObject("mvo",mvo);
-				mav.setViewName("member/join/logoutKakao");
+			if(mvo.getMsnstype() != null) {
+				if(mvo.getMsnstype().equals("k")) {
+					mav.setViewName("member/join/logoutKakao");
+				}
 			}else {
 				if(session != null)
 				{
@@ -168,8 +169,8 @@ public class LoginController {
 					{
 						session.removeAttribute("user");
 					}
+					session.invalidate();
 				}
-				session.invalidate();
 				mav.setViewName("member/login/logout");
 			}
 			
