@@ -24,7 +24,8 @@ public class LoginController {
 
 	// =================== 로그인 화면으로  =================
 
-	@RequestMapping(value = "/login.ec", method = RequestMethod.GET)
+	@RequestMapping("login")
+
 	public ModelAndView listNotice() {
 		log.info("LoginController login 시작 >>>");
 		ModelAndView mav = new ModelAndView();
@@ -147,21 +148,49 @@ public class LoginController {
 		return result;
 	}
 	
-// ==================== 로그아웃 ============================
-	@RequestMapping("logout")
-	public ModelAndView logout(HttpSession session) {
-		if(session != null)
-		{
-			if(session.getAttribute("user") != null)
-			{
-				session.removeAttribute("user");
+	// ==================== 로그아웃 ============================
+		@RequestMapping("logout")
+		public ModelAndView logout(HttpSession session) {
+			
+			MemberVO mvo = null;
+			mvo=(MemberVO) session.getAttribute("user");
+			
+			log.info("snstype>>>"+mvo.getMsnstype());
+			
+			ModelAndView mav = new ModelAndView();
+			if(mvo.getMsnstype().equals("k")) {
+				mav.addObject("mvo",mvo);
+				mav.setViewName("member/join/logoutKakao");
+			}else {
+				if(session != null)
+				{
+					if(session.getAttribute("user") != null)
+					{
+						session.removeAttribute("user");
+					}
+				}
+				session.invalidate();
+				mav.setViewName("member/login/logout");
 			}
+			
+			return mav;
 		}
-		session.invalidate();
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("member/login/logout");
-		return mav;
-	}
+		//====================카카오 로그아웃==================================
+		@RequestMapping("logoutk")
+		public ModelAndView logoutk(HttpSession session) {
+			log.info("카카오 로그아웃 세션 지우기");
+			if(session != null)
+			{
+				if(session.getAttribute("user") != null)
+				{
+					session.removeAttribute("user");
+				}
+			}
+			session.invalidate();
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("member/login/logout");
+			return mav;
+		}
 		
 	
 }

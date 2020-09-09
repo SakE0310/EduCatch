@@ -6,6 +6,7 @@
 	<select id="memberLoginInfo" parameterType="member" resultType="member">
 		SELECT
 			A.MNO AS MNO,
+			A.MSNSTYPE AS MSNSTYPE,
 			A.MID AS MID,
 			A.MPW AS MPW,
 			A.MNAME AS MNAME,
