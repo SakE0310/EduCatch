@@ -118,6 +118,7 @@
                         REVIEWBOARD A ,ACADEMY C
                 WHERE 
                         C.ANO = A.ACADEMY_ANO
+                AND		A.RBDELETEYN = 'N'
                       ) AA , MEMBER B
          WHERE
                         AA.MEMBER_MNO = B.MNO
@@ -142,6 +143,7 @@
                         ,TO_CHAR(A.FBUPDATEDATE,'YYYY-MM-DD')         AS  FBUPDATEDATE       
                 FROM    
                         FREEBOARD A
+                WHERE	FBDELETEYN = 'N'
                       ) AA , MEMBER B
          WHERE
                         AA.MEMBER_MNO = B.MNO
