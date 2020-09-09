@@ -395,8 +395,6 @@
 		ArrayList searchConsult=(ArrayList)obj;
 		
 		int nCnt=searchConsult.size();
-		ConsultVO vo=(ConsultVO)searchConsult.get(0);
-		String count=vo.getTotalcount();
 %>
 
 
@@ -419,7 +417,19 @@
 			<tr style="width: 1140px;">
 			 <td  align="left" id="count">
 			 <br>
+<%
+	if(nCnt !=0){
+		ConsultVO vo=(ConsultVO)searchConsult.get(0);
+		String count=vo.getTotalcount();
+%>
 		      	총 <%=count %>개의 게시물이 있습니다
+<%
+	}else{
+%>
+		총 0개의 게시물이 있습니다
+<% 
+	}
+%>
 		      </td> 
 				<td width="360" align="right">
 		         <div class="row" id="c" style="padding-right: 0px;">
@@ -520,7 +530,7 @@ if(searchConsult !=null && nCnt>0){
 %>	
 					<tr>
 						<td colspan="7" align="center">
-						등록된 게시물이 없습니다.
+						조회된 게시물이 없습니다.
 						</td>
 					</tr>
 <%
