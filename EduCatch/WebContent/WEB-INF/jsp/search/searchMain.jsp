@@ -617,6 +617,17 @@
 		   		width: 90px;
 		   		border: 1px solid transparent;
  			}
+ 			/* 무한스크롤 footer고정 */
+			.footer-bottom-area {
+				width: 100%;
+			    height: auto;
+			    bottom: 0;
+			    left: 0;
+		    	position: fixed;
+			}
+			.acaList {
+				padding-bottom: 40px;
+			}
 		}
 		/* 테블릿 */
 		@media screen and (max-width: 1023px) {
@@ -693,14 +704,6 @@
  		    height:300px; 
  		    width:140px;
 		} 
-		/* 무한스크롤 footer고정 */
-		.footer-bottom-area {
-			width: 100%;
-		    height: auto;
-		    bottom: 0;
-		    left: 0;
-	    	position: fixed;
-		}
 		.main {
 			margin : 0 auto;
 		}
