@@ -264,7 +264,7 @@
 									.request({
 										url : '/v2/user/me',
 										success : function(res) {
-											alert(JSON.stringify(res))
+											console.log(JSON.stringify(res));
 											console.log(res.id);
 											console.log(res.properties.nickname);
 											console.log(res.kakao_account.email);
